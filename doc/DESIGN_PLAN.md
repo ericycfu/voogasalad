@@ -58,7 +58,7 @@ Real-Time Strategy defines a genre of games in which a player manipulates their 
     
 
     
-[!Image 1] (image1.jpg)
+[Image 1] (image1.jpg)
 
 *   Game Engine
     -   The game engine will provide a framework for the game and interactions between units. Units/buildings/obstacles in the game will be all instances of GameObject; the GameObject is responsible for handling all interactions between GameObjects (e.g. attacking, resource gathering). The game engine will also provide a framework for maps with a certain number players, initial state of the map (starting buildings, starting units) and certain win conditions per player.
@@ -79,12 +79,13 @@ Real-Time Strategy defines a genre of games in which a player manipulates their 
 
 ### Game Player UI:
 * The GamePlayer user interface contains the following components: the TopPanel, the Display, the MiniMap and the InfoDisplay. The TopPanel contains a list of buttons (the Menu, the Help and the Score) and a list of texts (the Time, the Gold and the Wood). The Menu button pops up the menu when it gets clicked, the Help button pops up the text field in which the game information is written, and the Score button pops the list of all players enrolled in this game and their scores. The Display contains all of the visualization for the Game Objects that are visible to the user at his/her current location. The MiniMap contains all of the explored terrains, and all of the Game Object units on the terrains in a simplified format (e.g., colored dots). Upon mouse click actions, the MiniMap should be able to reflect the click actions on the big map (i.e., the corresponding coordinates). The InfoDisplay contains the information visualization of the currently selected unit. The UnitInfo under the InfoDisplay shows the unit's image and basic properties (health, mana, armor, etc.), and the UnitSkill under the InfoDisplay shows the unit's abilities and skills, which can be clicked to initialize commands.
-[!Image 2](image2.jpg)
+
+[Image 2](image2.jpg)
 ### GameAuthoring UI
 
 -   The starting window will have two buttons, Make Game and Play Game. Make Game button will open up a game authoring environment that lets you make a new game and edit created games. Play Game button goes to choose game and then to game player with the chosen game. The constructed game will be visualized.  The authoring environment has two tabs: Design and Place.Under the Design tab, there are different panels such as image, attribute setting, interaction setting, and a panel that shows created objects. The purpose of this tab is the creation, edit, and display of units. The user should be able to set settings of the units and most of the game’s functionality should be created here. The user interface of the tabs are shown in the image. Under the Place tab, there will be the map of the game as well as the  created objects. Possible errors to show the users are incorrect parameters for game settings, failure to save the game, and confirmation messages when the user tries to destroy data. The errors will be shown by JavaFX dialogs.
     
-[!Image 3](image3.jpg)
+[Image 3](image3.jpg)
 # Design Details
 
 
