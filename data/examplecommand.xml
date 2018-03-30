@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command>
+	<selected>
+		<unit id = "092"> </unit>
+	</selected>
+	<action><move> 2,3 </move> </action>
+</command>
