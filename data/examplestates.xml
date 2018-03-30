@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tank>
+	<xposition> 5 </xposition>
+	<yposition> 100 </yposition>
+	<direction> n </direction>
+	<action> <moving> n </moving </action>
+</tank>
+
+<tank>
+	<xposition> 200 </xposition>
+	<yposition> 100 </yposition>
+	<direction> s </direction>
+	<action> <attacking> 250,95 </attacking> </action>
+</tank>
+
+<soldier>
+	<xposition> 4 </xposition>
+	<yposition> 100 </yposition>
+	<direction> n </direction>
+	<action> <none> </none> </action>
+</soldier>
