@@ -1,4 +1,6 @@
-package game_engine;
+package interactions;
+
+import game_object.GameObject;
 
 /**
  * 
@@ -27,7 +29,7 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute() {
+	public void Execute(GameObject obj) {
 		
 		
 	}
