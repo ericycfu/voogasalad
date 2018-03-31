@@ -33,7 +33,7 @@ public class Transform {
 	 */
 	public Vector2 getDistance(Transform target)
 	{
-		return position.SubtractVector(target.getPosition(), this.getPosition());
+		return target.getPosition().SubtractVector(this.getPosition());
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Transform {
 	 */
 	public Vector2 getDistance(Transform origin, Transform target)
 	{
-		return position.SubtractVector(target.getPosition(), origin.getPosition());
+		return target.getPosition().SubtractVector(origin.getPosition());
 	}
 	
 

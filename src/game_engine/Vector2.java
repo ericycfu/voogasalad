@@ -51,12 +51,12 @@ public class Vector2 {
 	 * @param a
 	 * @param b
 	 * @return
-	 * to Calculate the difference of two vectors, does not need the fields in this class to work
-	 * returns a - b
+	 * to Calculate the difference of two vectors, 
+	 * returns current - a
 	 */
-	public Vector2 SubtractVector(Vector2 a, Vector2 b)
+	public Vector2 SubtractVector(Vector2 b)
 	{
-		return new Vector2(a.getX() - b.getX(), a.getY() - b.getY());
+		return new Vector2(x - b.getX(), y - b.getY());
 	}
 	
 	/**
@@ -67,9 +67,9 @@ public class Vector2 {
 	 * To calculate the sum of two vectors
 	 * returns a + b
 	 */
-	public Vector2 AddVector(Vector2 a, Vector2 b)
+	public Vector2 AddVector(Vector2 b)
 	{
-		return new Vector2(a.getX() + b.getX(), a.getY() + b.getY());
+		return new Vector2(x + b.getX(), y + b.getY());
 	}
 	
 	/**
@@ -80,9 +80,9 @@ public class Vector2 {
 	 * Divides a vector by a scalar
 	 * returns a / divisor
 	 */
-	public Vector2 DivideVector(Vector2 a, double divisor)
+	public Vector2 DivideVector(double divisor)
 	{
-		return new Vector2(a.getX() / divisor, a.getY() / divisor);
+		return new Vector2(x / divisor,  y / divisor);
 	}
 	
 	/**
@@ -92,8 +92,8 @@ public class Vector2 {
 	 * @return
 	 * Multiplies a vector by a scalar
 	 */
-	public Vector2 MultiplyVector(Vector2 a, double multiple)
+	public Vector2 MultiplyVector(double multiple)
 	{
-		return new Vector2(a.getX() * multiple, a.getY() * multiple);
+		return new Vector2(x * multiple, y * multiple);
 	}
 }

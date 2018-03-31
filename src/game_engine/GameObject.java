@@ -1,13 +1,23 @@
 package game_engine;
 /**
- * Represents an object that exists in the game
+ * 
  * @author andrew, Rayan
+ * 
+ * Any object that will be shown on the world screen will be of the GameObject type. 
+ * 
+ * Has a Transform object for operations relating to positioning world space
  *
  */
-public class GameObject {
+public class GameObject implements IGameObject{
+	
 	
 	Transform transform;
 	String tag;
+	
+	public GameObject()
+	{
+		this.transform = new Transform(new Vector2(0,0));
+	}
 	
 	public GameObject(Vector2 startingPosition)
 	{
