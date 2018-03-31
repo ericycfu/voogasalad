@@ -41,6 +41,11 @@ public class Vector2 {
 		this.y = y;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * get magnitude of the vector
+	 */
 	public double getMagnitude()
 	{
 		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
@@ -48,52 +53,83 @@ public class Vector2 {
 	
 	/**
 	 * 
-	 * @param a
-	 * @param b
 	 * @return
-	 * to Calculate the difference of two vectors, does not need the fields in this class to work
-	 * returns a - b
+	 * Returns the square of the magnitude. Can be used for optimization purposes since it avoid the costly
+	 * Math.sqrt in Java. Can be used as e.g. while(position.getSquaredMagnitude() < maxDistance * maxDistance)
 	 */
-	public Vector2 SubtractVector(Vector2 a, Vector2 b)
+	public double getSquaredMagnitude()
 	{
-		return new Vector2(a.getX() - b.getX(), a.getY() - b.getY());
+		return Math.pow(x, 2) + Math.pow(y, 2);
 	}
 	
 	/**
 	 * 
-	 * @param a
+	 * @return
+	 * Returns a normalized version of the vector
+	 */
+	public Vector2 getNormalized()
+	{
+		return new Vector2(x / this.getMagnitude(), y / this.getMagnitude());
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @return
+	 * to Calculate the difference of two vectors, 
+	 * returns this - a
+	 */
+	public Vector2 SubtractVector(Vector2 b)
+	{
+		return new Vector2(x - b.getX(), y - b.getY());
+	}
+	
+	/**
+	 * 
 	 * @param b
 	 * @return
 	 * To calculate the sum of two vectors
-	 * returns a + b
+	 * returns this + b
 	 */
-	public Vector2 AddVector(Vector2 a, Vector2 b)
+	public Vector2 AddVector(Vector2 b)
 	{
-		return new Vector2(a.getX() + b.getX(), a.getY() + b.getY());
+		return new Vector2(x + b.getX(), y + b.getY());
 	}
 	
 	/**
 	 * 
-	 * @param a
 	 * @param divisor
 	 * @return
 	 * Divides a vector by a scalar
-	 * returns a / divisor
+	 * returns this / divisor
 	 */
-	public Vector2 DivideVector(Vector2 a, double divisor)
+	public Vector2 DivideVector(double divisor)
 	{
-		return new Vector2(a.getX() / divisor, a.getY() / divisor);
+		return new Vector2(x / divisor,  y / divisor);
 	}
 	
 	/**
 	 * 
-	 * @param a
 	 * @param multiple
 	 * @return
 	 * Multiplies a vector by a scalar
+	 * return this * multiple
 	 */
-	public Vector2 MultiplyVector(Vector2 a, double multiple)
+	public Vector2 MultiplyVector(double multiple)
 	{
-		return new Vector2(a.getX() * multiple, a.getY() * multiple);
+		return new Vector2(x * multiple, y * multiple);
 	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @return
+	 * Get dot product with another vector.
+	 */
+	public double getDotProduct(Vector2 b)
+	{
+		return (x * b.getX() + y * b.getY());
+	}
+	
+	
 }

@@ -33,7 +33,7 @@ public class Transform {
 	 */
 	public Vector2 getDistance(Transform target)
 	{
-		return position.SubtractVector(target.getPosition(), this.getPosition());
+		return target.getPosition().SubtractVector(this.getPosition());
 	}
 	
 	/**
@@ -44,7 +44,30 @@ public class Transform {
 	 */
 	public Vector2 getDistance(Transform origin, Transform target)
 	{
-		return position.SubtractVector(target.getPosition(), origin.getPosition());
+		return target.getPosition().SubtractVector(origin.getPosition());
+	}
+	
+	/**
+	 * 
+	 * @param target
+	 * @return
+	 * unsigned angle between the current object and another
+	 */
+	public double getAngle(Transform target)
+	{
+		return Math.acos(position.getDotProduct(target.getPosition()) / (position.getMagnitude() * target.getPosition().getMagnitude()));	
+	}
+	
+	/**
+	 * 
+	 * @param origin
+	 * @param target
+	 * @return
+	 * unsigned angle between two gameobjects
+	 */
+	public double getAngle(Transform origin, Transform target)
+	{
+		return Math.acos(origin.position.getDotProduct(target.getPosition()) / (origin.getPosition().getMagnitude() * target.getPosition().getMagnitude()));
 	}
 	
 
