@@ -1,4 +1,7 @@
 package game_engine;
+
+import game_object.GameObject;
+
 /**
  * The GameInfo is responsible for storing information about the Game
  * @author andrew

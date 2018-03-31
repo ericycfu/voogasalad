@@ -1,7 +1,10 @@
-package game_engine;
+package game_object;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import transform_library.Transform;
+import transform_library.Vector2;
 
 /**
  * 
@@ -9,18 +12,19 @@ import java.util.Map;
  * 
  * Any object that will be shown on the world screen will be of the GameObject type. 
  * 
- * Has a Transform object for operations relating to positioning world space
+ * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements IGameObject{
+public class GameObject implements InterfaceGameObject{
 	
 	public static final String EMPTY = "empty";
 	
 	private Transform transform;
+	private ObjectAttributes attributes;
+	
 	private String name;
 	private String tag;
 	
-	public Map<String, Double> variableList;
 	
 	/**
 	 * To be used in case object who's position doesn't matter or doesn't need to be set yet
@@ -28,20 +32,18 @@ public class GameObject implements IGameObject{
 	public GameObject()
 	{
 		this.transform = new Transform(new Vector2(0,0));
-		variableList = new HashMap<>();
 	}
 	
 	/**
 	 *
 	 * @param startingPosition
-	 * To be used in case setting up static objects that do not interact with the environment, hence tag or name
+	 * To be used in case setting up static objects that do not interact with the environment or users, hence tag or name
 	 * is not needed.
 	 * 
 	 */
 	public GameObject(Vector2 startingPosition)
 	{
 		this.transform = new Transform(startingPosition);
-		variableList = new HashMap<>();
 
 	}
 	
@@ -57,7 +59,7 @@ public class GameObject implements IGameObject{
 		this.transform = new Transform(startingPosition);
 		this.name = name;
 		this.tag = tag;
-		variableList = new HashMap<>();
+		this.attributes = new ObjectAttributes();
 	}
 	
 	public Transform getTransform() {

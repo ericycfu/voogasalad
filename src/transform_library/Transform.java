@@ -1,9 +1,9 @@
-package game_engine;
+package transform_library;
 
 /**
  * 
  * @author Rayan
- *	This class will handle movement data and functions. Must be declared inside a GameObject.
+ *	This class will handle transformation in world space for any object.
  */
 
 public class Transform {
@@ -69,6 +69,5 @@ public class Transform {
 	{
 		return Math.acos(origin.position.getDotProduct(target.getPosition()) / (origin.getPosition().getMagnitude() * target.getPosition().getMagnitude()));
 	}
-	
 
 }
