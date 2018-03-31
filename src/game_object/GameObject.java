@@ -19,9 +19,7 @@ public class GameObject implements InterfaceGameObject{
 	
 	public static final String EMPTY = "empty";
 	
-	private Transform transform;
-	private ObjectAttributes attributes;
-	
+	private Transform transform;	
 	private String name;
 	private String tag;
 	
@@ -59,7 +57,6 @@ public class GameObject implements InterfaceGameObject{
 		this.transform = new Transform(startingPosition);
 		this.name = name;
 		this.tag = tag;
-		this.attributes = new ObjectAttributes();
 	}
 	
 	public Transform getTransform() {
@@ -91,4 +88,5 @@ public class GameObject implements InterfaceGameObject{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 }

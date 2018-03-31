@@ -1,4 +1,6 @@
-package game_engine;
+package interactions;
+
+import game_object.GameObject;
 
 /**
  * 
@@ -10,6 +12,6 @@ package game_engine;
 
 public interface CustomFunction {
 
-	public void Execute();
-	
+	public void Execute(GameObject obj);
+
 }
