@@ -1,6 +1,8 @@
-package game_engine;
+package game_object;
 
-public interface IGameObject {
+import transform_library.Transform;
+
+public interface InterfaceGameObject {
 
 	public Transform getTransform();
 	public void setTransform(Transform transform);
