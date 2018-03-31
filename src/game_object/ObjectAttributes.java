@@ -35,31 +35,31 @@ public class ObjectAttributes {
 	 * 
 	 * @param attribute
 	 * @param newValue
-	 * @throws NullPropertyException
+	 * @throws PropertyNotFoundException
 	 * Set the attribute value for a unit. Attribute must have been created beforehand to be able to change it.
 	 * This prevents the engine for creating and changing a mistyped attribute that may not be used or seen.
 	 */
-	public void SetAttributeValue(String attribute, double newValue) throws NullPropertyException
+	public void SetAttributeValue(String attribute, double newValue) throws PropertyNotFoundException
 	{
 		if(attributes.containsKey(attribute))
 			attributes.put(attribute, newValue);
 		
-		throw new NullPropertyException("Cannot change non-existent property for unit");
+		throw new PropertyNotFoundException("Cannot change non-existent property for unit");
 	}
 	
 	/**
 	 * 
 	 * @param attribute
 	 * @return
-	 * @throws NullPropertyException
+	 * @throws PropertyNotFoundException
 	 * 
 	 * Change attributes for a game unit. Ensures that non existent attributes are not accessed
 	 */
-	public double getAttribute(String attribute) throws NullPropertyException
+	public double getAttribute(String attribute) throws PropertyNotFoundException
 	{
 		if(attributes.containsKey(attribute))
 			return attributes.get(attribute);
 		
-		throw new NullPropertyException("Property does not exist for object");
+		throw new PropertyNotFoundException("Property does not exist for object");
 	}
 }
