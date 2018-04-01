@@ -1,6 +1,8 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.ObjectLogic;
+import game_object.PropertyNotFoundException;
 
 /**
  * 
@@ -29,8 +31,20 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute(GameObject obj) {
+	public void Execute(ObjectLogic obj) {
 		
+		//largely placeholder implementation, will have to take care of rate
+		double prevVal;
+		
+		try 
+		{
+			prevVal = obj.accessAttributes().getAttribute(variable);
+			obj.accessAttributes().SetAttributeValue(variable, prevVal + delta);
+		} 
+		catch (PropertyNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 		
 	}
 

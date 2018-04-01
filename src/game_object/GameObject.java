@@ -20,17 +20,11 @@ public class GameObject implements InterfaceGameObject{
 	public static final String EMPTY = "empty";
 	
 	private Transform transform;	
+	private ObjectLogic objectLogic;
+	
 	private String name;
 	private String tag;
 	
-	
-	/**
-	 * To be used in case object who's position doesn't matter or doesn't need to be set yet
-	 */
-	public GameObject()
-	{
-		this.transform = new Transform(new Vector2(0,0));
-	}
 	
 	/**
 	 *
@@ -42,7 +36,6 @@ public class GameObject implements InterfaceGameObject{
 	public GameObject(Vector2 startingPosition)
 	{
 		this.transform = new Transform(startingPosition);
-
 	}
 	
 	/**
@@ -55,18 +48,26 @@ public class GameObject implements InterfaceGameObject{
 	public GameObject(Vector2 startingPosition, String tag, String name)
 	{
 		this.transform = new Transform(startingPosition);
+		this.objectLogic = new ObjectLogic();
 		this.name = name;
 		this.tag = tag;
 	}
 	
 	public Transform getTransform() {
-		return transform;
+		return this.transform;
 	}
 
 	public void setTransform(Transform transform) {
 		this.transform = transform;
 	}
-
+	
+	public ObjectLogic accessLogic() throws UnmodifiableGameObjectException
+	{
+		if(objectLogic != null)
+			return this.objectLogic;
+		throw new UnmodifiableGameObjectException("Null object logic unit");
+	} 
+	
 	public String getTag() {
 		if(tag == null)
 			return EMPTY;
