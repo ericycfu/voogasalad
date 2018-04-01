@@ -15,5 +15,9 @@ public class Interaction {
 	 * This list will probably be moved into a class and a container class created.
 	 */
 	private List<CustomFunction> customFunctions;
+	
+	public Interaction() {}
+	
+	
  	
 }

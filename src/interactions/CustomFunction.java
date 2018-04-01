@@ -1,6 +1,6 @@
 package interactions;
 
-import game_object.GameObject;
+import game_object.ObjectLogic;
 
 /**
  * 
@@ -12,6 +12,6 @@ import game_object.GameObject;
 
 public interface CustomFunction {
 
-	public void Execute(GameObject obj);
+	public void Execute(ObjectLogic obj);
 
 }

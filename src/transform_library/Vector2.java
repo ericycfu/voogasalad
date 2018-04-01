@@ -65,7 +65,7 @@ public class Vector2 {
 	/**
 	 * 
 	 * @return
-	 * Returns a normalized version of the vector
+	 * Returns a normalized version of the vector 
 	 */
 	public Vector2 getNormalized()
 	{
