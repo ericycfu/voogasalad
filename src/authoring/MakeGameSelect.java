@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MakeGameSelect {
+	public static final String STYLE_PATH = "game_view/text/style_properties.css";
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final int NUM_GAMES = 6;
 	private BorderPane myPane;
@@ -31,6 +32,7 @@ public class MakeGameSelect {
 		myPane = new BorderPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 		myScene = new Scene(myPane);
+		myScene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(myScene);
 	}
 	
@@ -55,8 +57,4 @@ public class MakeGameSelect {
 		myPane.setCenter(box);
 	}
 	
-	private Button newGameSelect(int index) {
-		Button b = new Button("Testing " + index);
-		return b;
-	}
 }

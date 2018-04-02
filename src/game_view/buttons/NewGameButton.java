@@ -16,8 +16,6 @@ public class NewGameButton extends Button {
 	
 	private void setupText(int i) {
 		this.setText("New Game " + i);
+		this.getStyleClass().add("new_game_button");
 	}
-
-	
-
 }

@@ -13,12 +13,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartScreen {
+	public static final String STYLE_PATH = "game_view/text/style_properties.css";
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	private Stage myStage;
 	private 	StackPane myPane;
-	private Scene myScene;
+	private Scene myScene; 
 
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
@@ -31,13 +32,13 @@ public class StartScreen {
 		myPane = new StackPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 		myScene = new Scene(myPane);
+		myScene.getStylesheets().add(STYLE_PATH);
 	}
 	
 	private void setupContent() {
 		VBox box = new VBox();
 		box.getChildren().addAll(
 				new StartScreenText(), 
-//				new MakeGameButton(),
 				new MakeGameButton(myStage),
 				new PlayGameButton());
 		box.setAlignment(Pos.CENTER);

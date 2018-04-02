@@ -12,5 +12,4 @@ public class CreatedObjects extends TabPane {
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
 	}
-	
 }

@@ -2,7 +2,7 @@ package game_view.buttons;
 
 import javafx.scene.control.Button;
 
-public class PlayGameButton extends Button {
+public class PlayGameButton extends ImageButton {
 	public PlayGameButton() {
 		setupText();
 	}

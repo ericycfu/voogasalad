@@ -4,6 +4,6 @@ import javafx.scene.control.Tab;
 
 public class DesignTab extends Tab {
 	public DesignTab() {
-		this.setText("Design");
+		this.setText("Object Design");
 	}
 }
