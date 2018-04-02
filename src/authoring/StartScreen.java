@@ -1,8 +1,8 @@
 package authoring;
 
-import game_view.buttons.MakeGameButton;
-import game_view.buttons.PlayGameButton;
-import game_view.text.StartScreenText;
+import gui_elements.buttons.MakeGameButton;
+import gui_elements.buttons.PlayGameButton;
+import gui_elements.texts.StartScreenText;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -17,7 +17,7 @@ public class StartScreen {
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	private Stage myStage;
-	private 	StackPane myPane;
+	private StackPane myPane;
 	private Scene myScene;
 
 	public StartScreen(Stage primaryStage) {
@@ -49,6 +49,5 @@ public class StartScreen {
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
 		myStage.show();
-	}
-	
+	}	
 }
