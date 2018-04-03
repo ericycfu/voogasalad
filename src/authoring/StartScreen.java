@@ -1,8 +1,8 @@
 package authoring;
 
-import game_view.buttons.MakeGameButton;
-import game_view.buttons.PlayGameButton;
-import game_view.text.StartScreenText;
+import gui_elements.buttons.MakeGameButton;
+import gui_elements.buttons.PlayGameButton;
+import gui_elements.texts.StartScreenText;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 public class StartScreen {
 	public static final String STYLE_PATH = "game_view/text/style_properties.css";
+	public static final String TITLE = "Rap Tilt Swagger";
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
@@ -47,9 +48,9 @@ public class StartScreen {
 	
 	private void setupStage() {
 		myStage.setScene(myScene);
+		myStage.setTitle(TITLE);
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
 		myStage.show();
-	}
-	
+	}	
 }

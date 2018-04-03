@@ -1,4 +1,4 @@
-package game_view.text;
+package gui_elements.texts;
 
 import javafx.scene.text.Text;
 

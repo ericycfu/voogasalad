@@ -1,7 +1,7 @@
 package authoring;
 
-import game_view.buttons.NewGameButton;
-import game_view.text.MakeGameText;
+import gui_elements.buttons.NewGameButton;
+import gui_elements.texts.MakeGameText;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
