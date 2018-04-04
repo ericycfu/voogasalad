@@ -23,6 +23,7 @@ public class Vector2 {
 	{
 		this.x = x;
 		this.y = y;
+		
 	}
 
 	public double getX() {
@@ -138,6 +139,7 @@ public class Vector2 {
 	public Vector2 MultiplyVector(double multiple)
 	{
 		return new Vector2(x * multiple, y * multiple);
+		
 	}
 	
 	/**
