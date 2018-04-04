@@ -21,6 +21,7 @@ public class GameObject implements InterfaceGameObject{
 	
 	private Transform transform;	
 	private ObjectLogic objectLogic;
+	private Renderer renderer;
 	
 	private String name;
 	private String tag;
@@ -36,6 +37,7 @@ public class GameObject implements InterfaceGameObject{
 	public GameObject(Vector2 startingPosition)
 	{
 		this.transform = new Transform(startingPosition);
+		this.renderer = new Renderer();
 	}
 	
 	/**
@@ -49,8 +51,22 @@ public class GameObject implements InterfaceGameObject{
 	{
 		this.transform = new Transform(startingPosition);
 		this.objectLogic = new ObjectLogic();
+		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
+	}
+	
+	/**
+	 * This function will be called at each step. Any type of object handling must be made here
+	 */
+	public void Update()
+	{
+		/**
+		 *  TIMELINE: 
+		 *  1. Update Transform data
+		 *  2. Act upon logic data
+		 *  3. Update renderer data
+		 */
 	}
 	
 	public Transform getTransform() {
@@ -88,6 +104,14 @@ public class GameObject implements InterfaceGameObject{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Renderer getRenderer() {
+		return renderer;
+	}
+
+	public void setRenderer(Renderer renderer) {
+		this.renderer = renderer;
 	}
 	
 }
