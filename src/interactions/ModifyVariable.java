@@ -13,18 +13,44 @@ import game_object.PropertyNotFoundException;
 
 public class ModifyVariable implements CustomFunction {
 
+	public final String VARIABLE = "Variable";
+	public final String DELTA = "Delta";
+	public final String RATE = "Rate";
+	
+	private CustomFunctionParameterFormat format;
+	
 	private String variable;
 	private double delta;
+	
+	//reconsider rate, maybe add a limit to simulate a for loop? and couple that with rate?
 	private double rate;
 	
 	public ModifyVariable()
-	{}
-	
-	public void setParameters(String variable, double delta, double rate)
 	{
-		this.variable = variable;
-		this.delta = delta;
-		this.rate = rate;
+		setParameterFormatFields();
+		format = new CustomFunctionParameterFormat();
+	}
+	
+	
+	// make seperate container object for parameter data? 
+	
+	public void setParameters(CustomFunctionParameterFormat format)
+	{
+		try 
+		{
+			this.variable = format.getParameterValue(VARIABLE);
+			this.delta = Double.parseDouble(format.getParameterValue(DELTA));
+		} 
+		catch (PropertyNotFoundException e) 
+		{
+			e.printStackTrace();
+			System.out.println("Improper custom function variable assignment");
+		}
+		catch (NumberFormatException e)
+		{
+			e.printStackTrace();
+			System.out.println("Improper format for variable");
+		}
 	}
 	
 	/**
@@ -47,5 +73,26 @@ public class ModifyVariable implements CustomFunction {
 		}
 		
 	}
+
+	
+	
+	@Override
+	public CustomFunctionParameterFormat getParameterFormat() {
+		
+		return format;
+		
+	}
+
+
+	@Override
+	public void setParameterFormatFields() {
+		
+		format.addHelpText("This function allows you to change a variable in another object when the "
+				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place.");
+		format.addStringField(VARIABLE);
+		format.addStringField(DELTA);
+		format.addStringField(RATE);		
+	}
+	
 
 }

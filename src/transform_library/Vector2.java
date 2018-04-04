@@ -23,6 +23,7 @@ public class Vector2 {
 	{
 		this.x = x;
 		this.y = y;
+		
 	}
 
 	public double getX() {
@@ -39,6 +40,26 @@ public class Vector2 {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public Vector2 Up()
+	{
+		return new Vector2(0, 1);
+	}
+	
+	public Vector2 Down()
+	{
+		return new Vector2(0, -1);
+	}
+	
+	public Vector2 Right()
+	{
+		return new Vector2(1, 0);
+	}
+	
+	public Vector2 Left()
+	{
+		return new Vector2(-1, 0);
 	}
 	
 	/**
@@ -118,6 +139,7 @@ public class Vector2 {
 	public Vector2 MultiplyVector(double multiple)
 	{
 		return new Vector2(x * multiple, y * multiple);
+		
 	}
 	
 	/**
