@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author Rayan
+ * All the attributes of the game object are managed here. Variable must be created before it can be changed or set.
+ */
+
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;

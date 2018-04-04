@@ -1,6 +1,8 @@
 package interactions;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Codes for an action that occurs in the game. Different actions might simulate a GameObject acting on itself or acting on another object
@@ -11,13 +13,21 @@ public class Interaction {
 	
 	private List<String> targetTags;
 	
-	/**
-	 * This list will probably be moved into a class and a container class created.
-	 */
-	private List<CustomFunction> customFunctions;
+	//store functions by id
+	private Map<Integer, CustomFunction> customFunctions;
 	
-	public Interaction() {}
+	public Interaction() {
+		customFunctions = new TreeMap<>();
+	}
 	
+	public void addCustomFunction(String type)
+	{
+		CustomFunctionFactory factory = new CustomFunctionFactory();
+			
+		//this is where i need to make it better
+		CustomFunction function = factory.getCustomFunction(type);
+		
+	}
 	
  	
 }

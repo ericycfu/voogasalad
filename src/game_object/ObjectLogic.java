@@ -33,4 +33,5 @@ public class ObjectLogic
 	public List<Interaction> accessInteractions() {
 		return interactions;
 	}
+	
 }
