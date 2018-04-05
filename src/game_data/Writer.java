@@ -3,6 +3,7 @@ package game_data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
@@ -17,11 +18,11 @@ public class Writer {
 	public void write(String location, List<Object> data) throws IOException {
 		XStream xstream = new XStream();
 		File file = new File(location);
-		@SuppressWarnings("resource")
-		FileWriter writer= new FileWriter(file);
+		FileWriter writer = new FileWriter(file);
+		ObjectOutputStream out = xstream.createObjectOutputStream(writer);
 		for(Object datum: data) {
-			String xml = xstream.toXML(datum);
-			writer.write(xml);
+			out.writeObject(datum);
 		}
+		out.close();
 	}
 }
