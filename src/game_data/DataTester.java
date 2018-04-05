@@ -12,9 +12,9 @@ public class DataTester {
 		stuff.add("hi");
 		stuff.add(3);
 		try {
-			myWriter.write("src/game_data/test", stuff);
+			myWriter.write("&$@*#%(", stuff);
 		} catch (IOException e) {
-			System.out.println();
+			System.out.println("hello");
 		}
 		List<Object> recovery = new ArrayList<>();
 		recovery = myReader.read("src/game_data/test");
@@ -22,8 +22,8 @@ public class DataTester {
 			System.out.println(obj);
 		}
 		List<Object> selectiveRecovery = new ArrayList<>();
-		recovery = myReader.read("src/game_data/test","java.lang.String");
-		for(Object obj: recovery) {
+		selectiveRecovery = myReader.read("src/game_data/test","java.lang.String");
+		for(Object obj: selectiveRecovery) {
 			System.out.println(obj);
 		}
 	}
