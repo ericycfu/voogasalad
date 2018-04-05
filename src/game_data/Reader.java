@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Reader {
 	/**
@@ -20,7 +20,7 @@ public class Reader {
 	 * @throws ClassNotFoundException 
 	 */
 	public List<Object> read(String location) throws IOException, ClassNotFoundException{
-		XStream xstream = new XStream(new StaxDriver());
+		XStream xstream = new XStream(new DomDriver());
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
@@ -44,7 +44,7 @@ public class Reader {
 	 * @throws ClassNotFoundException 
 	 */
 	public List<Object> read(String location, String category) throws ClassNotFoundException, IOException{
-		XStream xstream = new XStream(new StaxDriver());
+		XStream xstream = new XStream(new DomDriver());
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
