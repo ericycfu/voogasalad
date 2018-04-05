@@ -13,12 +13,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartScreen {
-	public static final Color INITIAL_COLOR = Color.WHITE;
-	public static final int INITIAL_SCENE_WIDTH = 1200;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
+	private static final Color INITIAL_COLOR = Color.WHITE;
+	private static final int INITIAL_SCENE_WIDTH = 1200;
+	private static final int INITIAL_SCENE_HEIGHT = 700;
+	private static final String TITLE = "RapTiltSwagger";
 	private Stage myStage;
 	private StackPane myPane;
 	private Scene myScene;
+	
 
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
@@ -46,6 +48,7 @@ public class StartScreen {
 	
 	private void setupStage() {
 		myStage.setScene(myScene);
+		myStage.setTitle(TITLE);
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
 		myStage.show();
