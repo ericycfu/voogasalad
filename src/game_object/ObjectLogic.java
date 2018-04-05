@@ -30,5 +30,8 @@ public class ObjectLogic
 		return attributes;
 	}
 	
+	public List<Interaction> accessInteractions() {
+		return interactions;
+	}
 	
 }

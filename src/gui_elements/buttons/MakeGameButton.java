@@ -1,10 +1,11 @@
 package gui_elements.buttons;
 
-import authoring.MakeGameSelect;
+import authoring.view.MakeGameSelect;
+import game_view.buttons.ImageButton;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class MakeGameButton extends Button {
+public class MakeGameButton extends ImageButton {
 	public MakeGameButton() {
 		setupText();
 	}
@@ -16,6 +17,7 @@ public class MakeGameButton extends Button {
 	
 	private void setupText() {
 		this.setText("Make Game");
+
 	}
 	
 	

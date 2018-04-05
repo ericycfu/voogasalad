@@ -1,4 +1,4 @@
-package authoring;
+package authoring.view;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -28,7 +28,7 @@ public class MakeGameScreen {
 	private void setupScreen() {
 		myPane = new SplitPane(
 				new MakeGameTabs(),
-				new CreatedObjects());
+				new CreatedObjectsTabs());
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 		myScene = new Scene(myPane);
 		myStage.setScene(myScene);
