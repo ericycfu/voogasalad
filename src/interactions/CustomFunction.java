@@ -13,5 +13,6 @@ import game_object.ObjectLogic;
 public interface CustomFunction {
 
 	public void Execute(ObjectLogic obj);
-
+	public CustomFunctionParameterFormat getParameterFormat();
+	public void setParameterFormatFields();
 }
