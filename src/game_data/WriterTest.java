@@ -34,8 +34,8 @@ public class WriterTest {
 		stuff.add(3);
 		try {
 			w.write("\\\\/:*AAAAA?\\\"<>|3*7.pdf", stuff);
+			fail("we fucked up");
 		} catch (IOException e) {
-			e.printStackTrace();
 			return;
 		}
 		fail("we fucked up");
