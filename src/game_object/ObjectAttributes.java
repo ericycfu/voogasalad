@@ -14,7 +14,6 @@ public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
 	
-	
 	public List<String> GetAttributeNames()
 	{
 		List<String> list = new ArrayList<>();
