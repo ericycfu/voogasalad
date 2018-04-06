@@ -40,7 +40,7 @@ public class UnitDisplay implements VisualUpdate {
 	
 	private void initializeUnitDisplayComponents() {
 		myInfoDisp = new UnitInfoDisplay(myInfoDispXcoor, myInfoDispYcoor);
-		myActionDisp = new UnitActionDisplay(myActionDispXcoor, myActionDispYcoor. myUnitSkillsMap, mySkillImagesMap);
+		myActionDisp = new UnitActionDisplay(myActionDispXcoor, myActionDispYcoor, myUnitSkillsMap, mySkillImagesMap);
 	}
 
 	@Override
