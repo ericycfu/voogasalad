@@ -49,24 +49,25 @@ public class MiniMap implements Element, VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> allGameObjects) {
+		myVisibleUnits.getChildren().clear();
 		currentVisibleUnits = filter(allGameObjects);
-		display(currentVisibleUnits);
+		displayUnits(currentVisibleUnits);
 	}
 	
 	private List<GameObject> filter(List<GameObject> gameObjects) {
 		List<GameObject> minimapObjects = new ArrayList<GameObject>();
 		for (GameObject object : gameObjects) {
-			if (object.isOnExploredTerrian()) { // if the unit is on the terrain THIS player has explored (THIS player's units have been on this terrain 
+			/*if (object.isOnExploredTerrian()) { // if the unit is on the terrain THIS player has explored (THIS player's units have been on this terrain 
 				minimapObjects.add(object);
-			}
+			}*/
 		}
 		return minimapObjects;
 	}
 	
-	private displayUnits(List<GameObject> currentVisibleUnits) {
+	private void displayUnits(List<GameObject> currentVisibleUnits) {
 		for (GameObject object: currentVisibleUnits) {
 			Rectangle unitSquare = new Rectangle(myWidth*unitMapRatio, myWidth*unitMapRatio);
-			unitSquare.setFill(object.getPlayerColor());
+			//unitSquare.setFill(object.getPlayerColor());
 			myVisibleUnits.getChildren().add(unitSquare);
 		}
 	}
