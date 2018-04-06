@@ -2,6 +2,7 @@ package game_data;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,16 @@ public class ReaderTest {
 	}
 	@Test
 	public void testNoFileFound() {
-		
+		Reader r = new Reader();
+		try {
+			r.read("hi");
+			fail("we fucked up");
+		} catch (ClassNotFoundException e) {
+			fail("we fucked up");
+		} catch (FileNotFoundException e) {
+			return;
+		} catch(IOException e) {
+			fail("we fucked up");
+		}
 	}
 }
