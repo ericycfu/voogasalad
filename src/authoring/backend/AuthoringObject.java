@@ -1,19 +1,16 @@
 package authoring.backend;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
-
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
 import interactions.Interaction;
 import javafx.scene.image.Image;
-
 public class AuthoringObject {
-	public static final String TEST_IMAGE = "images/station.png";
-	public static final String TEST_IMAGE_2 = "";
+	public static final String TEST_IMAGE = "/images/station.png";
+	public static final String TEST_IMAGE2 = "./src/resources/images/station.png";
 	private Image myImage;
+	private String myName;
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private List<Interaction> myInteractions;
@@ -25,6 +22,7 @@ public class AuthoringObject {
 	
 	private void defaultObject() {
 		myImage = null;
+		myName = "";
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
@@ -32,7 +30,7 @@ public class AuthoringObject {
 	
 	private void testObject() {
 		myImage = new Image(getClass().getResourceAsStream(TEST_IMAGE));
-		// OBJECT ATTRIBUTES: INITIALIZE MAP OF ATTRIBUTES
+		myName = "Station";
 //		myAttributes.CreateAttribute("Health");
 //		try {
 //			myAttributes.SetAttributeValue("Health", 50);
@@ -40,11 +38,17 @@ public class AuthoringObject {
 //			myAttributes.CreateAttribute("Health");
 //			System.err.print("Retry setting health");
 //		}
-		myInteractions.add(null);
 //		System.out.print(myAttributes.toString());
+		myInteractions.add(null);
 		System.out.print(myInteractions.toString());
-
 	}
 	
+	public Image getImage() {
+		return myImage;
+	}
 	
+	public String getName() {
+		return myName;
+	}
 }
+
