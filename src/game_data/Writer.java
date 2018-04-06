@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Writer {
 	/**
@@ -16,7 +17,7 @@ public class Writer {
 	 * @throws IOException 
 	 */
 	public void write(String location, List<Object> data) throws IOException {
-		XStream xstream = new XStream();
+		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);
 		ObjectOutputStream out = xstream.createObjectOutputStream(writer);
