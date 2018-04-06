@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
  * @author Siyuan Chen
  *
  */
-public class UnitDisplay implements Element, VisualUpdate {
+public class UnitDisplay implements VisualUpdate {
 	private UnitInfoDisplay myInfoDisp;
 	private UnitActionDisplay myActionDisp;
 	private Map<String, List<String>> myUnitSkillsMap;
@@ -47,42 +47,6 @@ public class UnitDisplay implements Element, VisualUpdate {
 	public void update(List<GameObject> selectedGameObjects) {
 		myInfoDisp.update(selectedGameObjects);
 		myInfoDisp.update(selectedGameObjects);
-	}
-	
-	@Override
-	public void setX(double x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setWidth(double w) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setHeight(double h) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Pane getPane() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addNode(Node n) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
