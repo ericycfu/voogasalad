@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Tank>
+	<Visual>
+		<Image> images/tank.jpg </Image>
+		<Animation> animation/tank.gif </Animation> 
+	</Visual>
+	<Attributes>
+		<Width> 2 </Width>
+		<Length> 1 </Length>
+		<Damage> 50 </Damage>
+		<Health> 100 </Health>
+		<Range> 40 </Range>
+	</Attributes>
+	<Interactions>
+		<Attack> Enemy </Attack>
+		<Heal> Self </Heal>
+	</Interactions>
+</Tank>
+<House>
+	<Visual>
+		<Image> images/house.jpg </Image> 
+	</Visual>
+	<Attributes>
+		<Width> 4 </Width>
+		<Length> 4 </Length>
+		<Health> 300 </Health>
+	</Attributes>
+	<Interactions>
+		<Heal> Soldier </Heal>
+	</Interactions>
+</House>
