@@ -1,4 +1,4 @@
-package authoring;
+package authoring.view;
 
 import game_view.tabs.DesignTab;
 import game_view.tabs.GameSettingsTab;

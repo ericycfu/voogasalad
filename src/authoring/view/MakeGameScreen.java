@@ -1,4 +1,4 @@
-package authoring;
+package authoring.view;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
