@@ -1,6 +1,6 @@
 package gui_elements.buttons;
 
-import authoring.MakeGameScreen;
+import authoring.view.MakeGameScreen;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -16,8 +16,6 @@ public class NewGameButton extends Button {
 	
 	private void setupText(int i) {
 		this.setText("New Game " + i);
+		this.getStyleClass().add("new_game_button");
 	}
-
-	
-
 }

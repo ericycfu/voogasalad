@@ -1,6 +1,6 @@
 package main;
 
-import authoring.StartScreen;
+import authoring.view.StartScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
