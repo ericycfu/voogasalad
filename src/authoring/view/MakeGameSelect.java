@@ -1,4 +1,4 @@
-package authoring;
+package authoring.view;
 
 import gui_elements.buttons.NewGameButton;
 import gui_elements.texts.MakeGameText;
@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MakeGameSelect {
-	public static final String STYLE_PATH = "game_view/text/style_properties.css";
+	public static final String STYLE_PATH = "gui_elements/texts/style_properties.css";
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final int NUM_GAMES = 6;
 	private BorderPane myPane;
