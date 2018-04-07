@@ -42,7 +42,7 @@ public class UnitDisplay implements Element, VisualUpdate {
 		myInfoDisp = new UnitInfoDisplay(myInfoDispXcoor, myInfoDispYcoor);
 		myActionDisp = new UnitActionDisplay(myActionDispXcoor, myActionDispYcoor, myUnitSkillsMap, mySkillImagesMap);
 	}
-
+	
 	@Override
 	public void update(List<GameObject> selectedGameObjects) {
 		myInfoDisp.update(selectedGameObjects);
