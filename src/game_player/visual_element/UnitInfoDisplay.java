@@ -92,7 +92,7 @@ public class UnitInfoDisplay implements Element, VisualUpdate {
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
-			myHealthManaInfo.setText(currentUnit.getHealth() + "\n" + currentUnit.getMana());
+			//myHealthManaInfo.setText(currentUnit.getHealth() + "\n" + currentUnit.getMana());
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class UnitInfoDisplay implements Element, VisualUpdate {
 			myStatusInfo.setText(DefaultStatus);
 		}
 		else {
-			myStatusInfo.setText("Damage: " + currentUnit.getDamage() + "\n" + "Armor: " + currentUnit.getArmor());
+			//myStatusInfo.setText("Damage: " + currentUnit.getDamage() + "\n" + "Armor: " + currentUnit.getArmor());
 		}
 	}
 	
