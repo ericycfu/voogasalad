@@ -62,13 +62,26 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		filterDisplayGameObjects(gameobject);
-		myTopPanel.update();
-		myMiniMap.update(myGameObjects);
-		myUnitDisplay.update();
+		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
+		myTopPanel.update(displayGameObjects);
+		myMiniMap.update(displayGameObjects);
+		myUnitDisplay.update(displayGameObjects);
 	}
 	
-	private void filterDisplayGameObjects(List<GameObject> gameobject) {
+	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
+		List<GameObject> ret = new ArrayList<>();
+		for (GameObject go : gameobjects) {
+			if (go.getTransform().getPosition().getX())
+		}
+		
+		return ret;
+	}
+	
+	private boolean isXInWindow(double x) {
+		
+	}
+	
+	private boolean isYInWindow(double y) {
 		
 	}
 	
