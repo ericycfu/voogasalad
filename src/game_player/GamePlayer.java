@@ -93,15 +93,17 @@ public class GamePlayer {
 	}
 	
 	private void updateCurrentWindow() {
-		// four arrow buttons
+		
 	}
 	
 	private double translateX(double x) {
-		
+		// TO-DO
+		return 0;
 	}
 	
 	private double translateY(double y) {
-		
+		// TO-DO
+		return 0;
 	}
 	
 }
