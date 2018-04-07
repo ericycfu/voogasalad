@@ -5,13 +5,14 @@ import java.util.Map;
 
 import game_object.GameObject;
 import game_player.Element;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 /**
  * 
- * @author Siyuan Chen
+ * @author Siyuan Chen, Frank Yin
  *
  */
 public class UnitDisplay implements VisualUpdate {
@@ -48,5 +49,14 @@ public class UnitDisplay implements VisualUpdate {
 		myInfoDisp.update(selectedGameObjects);
 		myInfoDisp.update(selectedGameObjects);
 	}
+
+	@Override
+	public Node getNodes() {
+		Group group = new Group();
+		group.getChildren().add(myActionDisp.getNodes());
+		group.getChildren().add(myInfoDisp.getNodes());
+		return group;
+	}
+	
 	
 }

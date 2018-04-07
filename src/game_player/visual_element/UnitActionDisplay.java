@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -65,6 +67,17 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	public String getCurrentAction() {
 		return myCurrentAction;
+	}
+	
+	@Override
+	public Node getNodes() {
+		Group group = new Group();
+		for (int i = 0; i < myActionsGrid.length; i++) {
+			for (int j = 0; j < myActionsGrid[0].length; j++) {
+				group.getChildren().add(myActionsGrid[i][j]);
+			}
+		}
+		return group;
 	}
 	
 }
