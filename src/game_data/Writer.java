@@ -26,4 +26,17 @@ public class Writer {
 		}
 		out.close();
 	}
+	/**
+	 * writes data to location without overwriting previous data
+	 * @param location
+	 * @param data
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 */
+	public void writeNoOverwrite(String location, List<Object> data) throws ClassNotFoundException, IOException {
+		Reader reader = new Reader();
+		List<Object> prevData= reader.read(location);
+		data.addAll(prevData);
+		write(location, data);
+	}
 }
