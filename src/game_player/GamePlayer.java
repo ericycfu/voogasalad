@@ -71,18 +71,25 @@ public class GamePlayer {
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
 		List<GameObject> ret = new ArrayList<>();
 		for (GameObject go : gameobjects) {
-			if (go.getTransform().getPosition().getX())
+			if (isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY())) {
+				ret.add(go);
+			}
 		}
-		
 		return ret;
 	}
 	
 	private boolean isXInWindow(double x) {
-		
+		if (x>myCurrentXCoor & x<myCurrentXCoor+SCENE_SIZE_X) {
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean isYInWindow(double y) {
-		
+		if (y>myCurrentYCoor & y<myCurrentYCoor+SCENE_SIZE_Y*0.8) {
+			return true;
+		}
+		return false;
 	}
 	
 	private void updateCurrentWindow() {
