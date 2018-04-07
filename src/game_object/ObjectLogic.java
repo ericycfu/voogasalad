@@ -17,6 +17,8 @@ import transform_library.Vector2;
 public class ObjectLogic  
 {
 	ObjectAttributes attributes;
+	
+	//interactions should probably be stored in a container object like objectattributes
 	List<Interaction> interactions;
 	
 	public ObjectLogic()

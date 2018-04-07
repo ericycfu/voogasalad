@@ -27,8 +27,8 @@ public class ModifyVariable implements CustomFunction {
 	
 	public ModifyVariable()
 	{
-		setParameterFormatFields();
 		format = new CustomFunctionParameterFormat();
+		setParameterFormatFields();
 	}
 	
 	

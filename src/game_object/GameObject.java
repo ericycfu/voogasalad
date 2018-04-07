@@ -3,6 +3,7 @@ package game_object;
 import java.util.HashMap;
 import java.util.Map;
 
+import game_engine.GameObjectManager;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -19,13 +20,13 @@ public class GameObject implements InterfaceGameObject{
 	
 	public static final String EMPTY = "empty";
 	
+	private int id;
 	private Transform transform;	
 	private ObjectLogic objectLogic;
 	private Renderer renderer;
 	
 	private String name;
 	private String tag;
-	
 	
 	/**
 	 *
@@ -67,6 +68,17 @@ public class GameObject implements InterfaceGameObject{
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
+	}
+	
+	/**
+	 * 
+	 * @param manager
+	 * Assigns an id to the game object based on the game objects inside the game. Also assigns it to the object manager
+	 * which will then allow the game player to access functions on that game object
+	 */
+	public void addToGameObjectManager(GameObjectManager manager)
+	{
+		setID(manager.addGameObjectToManager(this));
 	}
 	
 	public Transform getTransform() {
@@ -114,4 +126,13 @@ public class GameObject implements InterfaceGameObject{
 		this.renderer = renderer;
 	}
 	
+	private void setID(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getID()
+	{
+		return id;
+	}
 }
