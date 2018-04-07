@@ -1,7 +1,10 @@
 package gui_elements.labels;
 
-import javafx.scene.control.Label;
+public class ComponentHealthLabel extends LabelProperties {
 
-public class ComponentHealthLabel extends Label {
-
+	private static final String FILENAME = "component_health_label.properties";
+	
+	public ComponentHealthLabel() {
+		super(FILENAME);
+	}
 }

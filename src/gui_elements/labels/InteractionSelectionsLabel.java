@@ -1,7 +1,10 @@
 package gui_elements.labels;
 
-import javafx.scene.control.Label;
+public class InteractionSelectionsLabel extends LabelProperties {
 
-public class InteractionSelectionsLabel extends Label {
-
+	private static final String FILENAME = "interaction_selections_label.properties";
+	
+	public InteractionSelectionsLabel() {
+		super(FILENAME);
+	}
 }

@@ -3,7 +3,14 @@ package gui_elements.tabs;
 import java.util.ArrayList;
 
 import gui_elements.labels.ComponentHealthLabel;
-import gui_elements.labels.ComponentTypeLabel;
+import gui_elements.labels.ComponentImageChooserLabel;
+import gui_elements.labels.ComponentNameLabel;
+import gui_elements.labels.ComponentProductionCostLabel;
+import gui_elements.labels.ComponentTagLabel;
+import gui_elements.labels.ComponentVisionRangeLabel;
+import gui_elements.labels.InteractionAutomaticLabel;
+import gui_elements.labels.InteractionComponentPropertyLabel;
+import gui_elements.labels.InteractionComponentTagLabel;
 import gui_elements.labels.InteractionQuantityLabel;
 import gui_elements.labels.InteractionSelectedLabel;
 import gui_elements.labels.InteractionSelectionsLabel;
@@ -22,6 +29,7 @@ public class DesignTab extends Tab {
 	private Group design_root;
 	
 	public DesignTab() {
+		System.out.println("Hello");
 		initialize();
 	}
 	
@@ -48,12 +56,19 @@ public class DesignTab extends Tab {
 	}
 	
 	private void setLabels() {
-		design_root.getChildren().addAll(new ComponentTypeLabel(),
-										 new ComponentHealthLabel(),
-										 new InteractionTypeLabel(),
-										 new InteractionQuantityLabel(),
-										 new InteractionSelectionsLabel(),
-										 new InteractionSelectedLabel());
+		design_root.getChildren().addAll(new ComponentNameLabel().getLabel(),
+										 new ComponentHealthLabel().getLabel(),
+										 new ComponentVisionRangeLabel().getLabel(),
+										 new ComponentImageChooserLabel().getLabel(),
+										 new ComponentProductionCostLabel().getLabel(),
+										 new ComponentTagLabel().getLabel(),
+										 new InteractionTypeLabel().getLabel(),
+										 new InteractionComponentPropertyLabel().getLabel(),
+										 new InteractionAutomaticLabel().getLabel(),
+										 new InteractionComponentTagLabel().getLabel(),
+										 new InteractionQuantityLabel().getLabel(),
+										 new InteractionSelectionsLabel().getLabel(),
+										 new InteractionSelectedLabel().getLabel());
 	}
 	
 	private void setComboBoxes() {
