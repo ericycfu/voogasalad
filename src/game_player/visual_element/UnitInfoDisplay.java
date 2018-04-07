@@ -8,7 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public class UnitInfoDisplay implements Element, VisualUpdate {
-	private 
+	private double myUnitInfoDisplayXcoor; 
+	private double myUnitInfoDisplayYcoor; 
+	public UnitInfoDisplay(double xcoor, double ycoor) {
+		
+	}
+	
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		// TODO Auto-generated method stub
