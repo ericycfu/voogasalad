@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_player.visual_element.DynamicDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitDisplay;
@@ -30,6 +31,7 @@ public class GamePlayer {
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
+	private DynamicDisplay myMainDisplay;
 	private Group myRoot;
 	private Map<String, List<String>> myUnitSkills;
 	private Map<String, Image> mySkillImages;
@@ -51,6 +53,7 @@ public class GamePlayer {
 		myTopPanel = new TopPanel();
 		myMiniMap = new MiniMap(0, 0.85*SCENE_SIZE_Y,0.15*SCENE_SIZE_X,0.15*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
 		//myUnitDisplay = new UnitDisplay(0.15*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, 0.85*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		myMainDisplay = new DynamicDisplay();
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		//myRoot.getChildren().add(myMiniMap.getNodes());
 		//myRoot.getChildren().add(myUnitDisplay.getNodes());
@@ -66,6 +69,7 @@ public class GamePlayer {
 		myTopPanel.update(displayGameObjects);
 		myMiniMap.update(displayGameObjects);
 		myUnitDisplay.update(displayGameObjects);
+		myMainDisplay.update(displayGameObjects);
 	}
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {

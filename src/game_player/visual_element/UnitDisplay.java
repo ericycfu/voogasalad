@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
-import game_player.Element;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

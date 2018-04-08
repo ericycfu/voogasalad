@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
-import game_player.Element;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -15,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class UnitInfoDisplay implements Element, VisualUpdate {
+public class UnitInfoDisplay implements VisualUpdate {
 	private static final Paint StrokeColor = Color.BLACK; 
 	private static final Image DefaultImage = new Image("images/default_unit.jpg");
 	private static final String DefaultHealthMana = "0/0\n0/0";
@@ -113,39 +112,9 @@ public class UnitInfoDisplay implements Element, VisualUpdate {
 	}
 
 	@Override
-	public void setX(double x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setWidth(double w) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setHeight(double h) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Pane getPane() {
+	public Node getNodes() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void addNode(Node n) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
