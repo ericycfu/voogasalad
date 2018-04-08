@@ -1,7 +1,7 @@
 package game_object;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import transform_library.Transform;
 import transform_library.Vector2;
@@ -20,11 +20,12 @@ public class GameObject implements InterfaceGameObject{
 	public static final String EMPTY = "empty";
 	
 	private Transform transform;	
-	private ObjectLogic objectLogic;
+	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
 	
+	
 	private String name;
-	private String tag;
+	private List<String> tag;
 	
 	
 	/**
@@ -47,10 +48,10 @@ public class GameObject implements InterfaceGameObject{
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
-	public GameObject(Vector2 startingPosition, String tag, String name)
+	public GameObject(Vector2 startingPosition, List<String> tag, String name)
 	{
 		this.transform = new Transform(startingPosition);
-		this.objectLogic = new ObjectLogic();
+		this.myObjectLogic = new ObjectLogic();
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
@@ -79,19 +80,19 @@ public class GameObject implements InterfaceGameObject{
 	
 	public ObjectLogic accessLogic() throws UnmodifiableGameObjectException
 	{
-		if(objectLogic != null)
-			return this.objectLogic;
+		if(myObjectLogic != null)
+			return this.myObjectLogic;
 		throw new UnmodifiableGameObjectException("Null object logic unit");
 	} 
 	
-	public String getTag() {
+	public List<String> getTags() {
 		if(tag == null)
-			return EMPTY;
+			return new ArrayList<String>();
 		else
 			return tag;
 	}
 
-	public void setTag(String tag) {
+	public void setTags(List<String> tag) {
 		this.tag = tag;
 	}
 	
