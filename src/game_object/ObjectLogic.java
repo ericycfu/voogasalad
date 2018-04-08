@@ -32,5 +32,15 @@ public class ObjectLogic
 		return attributes;
 	}
 	
+	public void executeInteractions(GameObject current, GameObject interactionTarget)
+	{
+		for(Interaction interaction : interactions)
+		{
+			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= interaction.getRange())
+			{
+				interaction.executeCustomFunctions(current, interactionTarget);
+			}
+		}
+	}
 	
 }

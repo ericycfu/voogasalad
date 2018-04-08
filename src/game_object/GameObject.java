@@ -28,6 +28,9 @@ public class GameObject implements InterfaceGameObject{
 	private String name;
 	private String tag;
 	
+	private boolean isInteractionQueued;
+	private GameObject interactionTarget;
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -48,13 +51,16 @@ public class GameObject implements InterfaceGameObject{
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
-	public GameObject(Vector2 startingPosition, String tag, String name)
+	public GameObject(Vector2 startingPosition, String tag, String name, GameObjectManager manager)
 	{
 		this.transform = new Transform(startingPosition);
 		this.objectLogic = new ObjectLogic();
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
+		addToGameObjectManager(manager);
+		isInteractionQueued = false;
+		interactionTarget = null;
 	}
 	
 	/**
@@ -68,6 +74,27 @@ public class GameObject implements InterfaceGameObject{
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
+		if(isInteractionQueued)
+		{
+			 objectLogic.executeInteractions(this, interactionTarget);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * gives the signal to the gameobject that an interaction is queued
+	 */
+	public void queueInteraction(GameObject other)
+	{
+		isInteractionQueued = true;
+		interactionTarget = other;
+	}
+	
+	public void dequeueInteraction()
+	{
+		isInteractionQueued = false;
+		interactionTarget = null;
 	}
 	
 	/**
