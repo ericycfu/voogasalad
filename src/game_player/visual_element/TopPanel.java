@@ -1,11 +1,14 @@
 package game_player.visual_element;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
@@ -16,92 +19,98 @@ import javafx.scene.layout.GridPane;
 public class TopPanel implements VisualUpdate {
 	
 	public static final String MENU = "Menu";
-	public static final String SCORE = "Score";
-	protected static final String[] MENUITEMS = {"Start", "Pause", "Load", "Save"};
+	public static final String START = "Start";
+	public static final String PAUSE = "Pause";
+	public static final String SAVE = "Save";
+	public static final String LOAD = "Load";
+	public static final String TIME = "Time";
+	public static final String SCORE = "Scores";
+	protected static final String[] SCORES = {"Player1: ", "Player2: "};
+	public static final String COLON = ": ";
 	
 	private GridPane gp;
-	private ComboBox<String> menu;
+	private MenuButton menu;
+	private List<TextArea> myTA;
 	private TextArea time;
-	private TextArea score;
+	private ComboBox<String> scores;
 	private TextArea r1;
 	private TextArea r2;
 	private String r1Name;
 	private String r2Name;
 	
 	private int menuSpan;
-	private double timeValue;
-	private int scoreValue;
-	private int r1Amount;
-	private int r2Amount;
 	
 	public TopPanel() {
 		gp = new GridPane();
 		menuSpan = 0;
-		timeValue = 0;
-		scoreValue = 0;
-		r1Amount = 0;
-		r2Amount = 0;
 		
 		setupMenu();
-		setupTime();
-		setupScore();
-		setupResources();
+		setupScores();
+		time = new TextArea(TIME + COLON + 0);
+		r1 = new TextArea(r1Name + COLON + 0);
+		r2 = new TextArea(r2Name + COLON + 0);
+		TextArea[] tas = {time, r1, r2};
+		myTA = Arrays.asList(tas);
+		myTA.forEach(ta -> {
+			ta.setEditable(false);
+			ta.setPrefColumnCount(1);
+			ta.setMaxHeight(10);
+			ta.setPrefWidth(160);
+			addToPane(ta);
+		});
 	}
 
 	private void setupMenu() {
-		menu = new ComboBox<>();
-		menu.setPromptText(MENU);
-		menu.getItems().addAll(MENUITEMS);
+		MenuItem menuItem1 = new MenuItem(START);
+		menuItem1.setOnAction(e -> {});
+		MenuItem menuItem2 = new MenuItem(PAUSE);
+		menuItem1.setOnAction(e -> {});
+		MenuItem menuItem3 = new MenuItem(SAVE);
+		menuItem1.setOnAction(e -> save());
+		MenuItem menuItem4 = new MenuItem(LOAD);
+		menuItem1.setOnAction(e -> load());
+		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
+		menu.setMinHeight(40);
 		addToPane(menu);
 	}
 
-	private void setupTime() {
-		time = new TextArea();
-		time.setText(timeValue + "");
-		time.setEditable(false);
+	private void setupScores() {
+		scores = new ComboBox<>();
+		scores.setPromptText(SCORE);
+		scores.getItems().addAll(SCORES);
+		scores.setMinHeight(40);
+		addToPane(scores);
 	}
 	
-	private void setupScore() {
-		score = new TextArea();
-		score.setText(SCORE + ": " + scoreValue);
-		score.setEditable(false);
-	}
-	
-	private void setupResources() {
-		setupResource(r1, r1Name, r1Amount);
-		setupResource(r2, r2Name, r2Amount);
-	}
-	
-	private void setupResource(TextArea ta, String type, int amount) {
-		ta = new TextArea();
-		ta.setEditable(false);
-		ta.setText(type + ": " + amount);
-		addToPane(ta);
-	}
-
 	private void addToPane(Node n) {
 		gp.add(n, menuSpan, 0);
 		menuSpan++;
 	}
-
+	
+	private void save() {
+		
+	}
+	
+	private void load() {
+		
+	}
+	
 	/**
 	 * allow the game player to set the resources amounts displayed in the top panel
 	 * @param amount1 amount for first resource
 	 * @param amount2 amount for second resource
 	 */
 	public void setResourcesAmount(int amount1, int amount2) {
-		r1Amount = amount1;
-		r2Amount = amount2;
-		r1.setText(r1Name + ": " + r1Amount);
-		r2.setText(r2Name + ": " + r2Amount);
+		r1.setText(r1Name + COLON + amount1);
+		r2.setText(r2Name + COLON + amount2);
 	}
 	
 	/**
 	 * allow the game player to set the time displayed in the top panel
 	 * @param time current time
 	 */
-	public void setTime(double time) {
-		timeValue = time;
+	public void setTime(double timeValue) {
+		time.setText(TIME + COLON + timeValue);
 	}
 	
 	/**
