@@ -23,7 +23,7 @@ public class GameObject implements InterfaceGameObject{
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
-	
+	private String owner;
 	
 	private String name;
 	private List<String> tag;
@@ -165,5 +165,8 @@ public class GameObject implements InterfaceGameObject{
 	public int getID()
 	{
 		return id;
+	}
+	public String getOwner() {
+		return owner;
 	}
 }

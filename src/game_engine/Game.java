@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 public class Game {
-	public List<GridMap> myGameMaps;
+	public List<String> myGameMaps;
 	public GameInfo possibleUnits;
 	
 	/**
@@ -21,7 +21,9 @@ public class Game {
 	 * Creates and runs a new GameInstance and GamePlayer for the map
 	 * @param index
 	 */
-	public void runMap(int index) {
-		
+	public void runMap(String s) {
+		if(!myGameMaps.contains(s))
+			throw new IllegalArgumentException("Bad map name");
+		new GameInstance(possibleUnits,s);
 	}
 }

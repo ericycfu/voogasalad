@@ -55,4 +55,8 @@ public class ObjectLogic
 		}
 	}
 	
+	public boolean getFulFillsLossCondition() {
+		return this.fulfillsLossCondition;
+	}
+	
 }

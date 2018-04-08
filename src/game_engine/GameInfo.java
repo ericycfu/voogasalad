@@ -28,7 +28,7 @@ public class GameInfo {
 					hasTags = false;
 					break;
 				}
-			if(hasTags)
+			if(hasTags || tag.contains(go.getName()))
 				toReturn.add(go);
 		}
 		return toReturn;
@@ -38,7 +38,7 @@ public class GameInfo {
 			if(go.getName().equals(objectName))
 				return go;
 		}
-		return null;
+		throw new IllegalArgumentException("Unit does not exist");
 	}
 	/**
 	 * Retrieve the possible interactions for a particular GameObject
