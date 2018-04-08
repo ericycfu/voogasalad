@@ -16,7 +16,10 @@ import transform_library.Vector2;
 
 public class ObjectLogic  
 {
+	private boolean fulfillsLossCondition;
 	ObjectAttributes attributes;
+	
+	//interactions should probably be stored in a container object like objectattributes
 	List<Interaction> interactions;
 	
 	public ObjectLogic()
@@ -32,6 +35,24 @@ public class ObjectLogic
 	
 	public List<Interaction> accessInteractions() {
 		return interactions;
+	}
+	
+	/**
+	 * 
+	 * @param current
+	 * @param interactionTarget
+	 * 
+	 * Executes interaction if within the given range
+	 */
+	public void executeInteractions(GameObject current, GameObject interactionTarget)
+	{
+		for(Interaction interaction : interactions)
+		{
+			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= interaction.getRange())
+			{
+				interaction.executeCustomFunctions(current, interactionTarget);
+			}
+		}
 	}
 	
 }

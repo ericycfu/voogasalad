@@ -1,7 +1,6 @@
 package interactions;
 
-import game_object.ObjectLogic;
-
+import game_object.GameObject;
 /**
  * 
  * @author Rayan
@@ -12,7 +11,7 @@ import game_object.ObjectLogic;
 
 public interface CustomFunction {
 
-	public void Execute(ObjectLogic obj);
+	public void Execute(GameObject current, GameObject other);
 	public CustomFunctionParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 }

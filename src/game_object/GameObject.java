@@ -19,6 +19,7 @@ public class GameObject implements InterfaceGameObject{
 	
 	public static final String EMPTY = "empty";
 	
+	private int id;
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
@@ -27,6 +28,8 @@ public class GameObject implements InterfaceGameObject{
 	private String name;
 	private List<String> tag;
 	
+	private boolean isInteractionQueued;
+	private GameObject interactionTarget;
 	
 	/**
 	 *
@@ -48,13 +51,16 @@ public class GameObject implements InterfaceGameObject{
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
-	public GameObject(Vector2 startingPosition, List<String> tag, String name)
+	public GameObject(Vector2 startingPosition, List<String> tag, String name, GameObjectManager manager)
 	{
 		this.transform = new Transform(startingPosition);
 		this.myObjectLogic = new ObjectLogic();
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
+		addToGameObjectManager(manager);
+		isInteractionQueued = false;
+		interactionTarget = null;
 	}
 	
 	/**
@@ -68,6 +74,42 @@ public class GameObject implements InterfaceGameObject{
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
+		if(isInteractionQueued)
+		{
+			 myObjectLogic.executeInteractions(this, interactionTarget);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * gives the signal to the gameobject that an interaction is queued
+	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
+	 */
+	public void queueInteraction(GameObject other)
+	{
+		isInteractionQueued = true;
+		interactionTarget = other;
+	}
+	
+	/**
+	 * Interaction dequeued after it is completed or cancelled
+	 */
+	public void dequeueInteraction()
+	{
+		isInteractionQueued = false;
+		interactionTarget = null;
+	}
+	
+	/**
+	 * 
+	 * @param manager
+	 * Assigns an id to the game object based on the game objects inside the game. Also assigns it to the object manager
+	 * which will then allow the game player to access functions on that game object
+	 */
+	public void addToGameObjectManager(GameObjectManager manager)
+	{
+		setID(manager.addElementToManager(this));
 	}
 	
 	public Transform getTransform() {
@@ -115,4 +157,13 @@ public class GameObject implements InterfaceGameObject{
 		this.renderer = renderer;
 	}
 	
+	private void setID(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getID()
+	{
+		return id;
+	}
 }

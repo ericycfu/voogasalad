@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 public class Game {
-	public List<GameMap> myGameMaps;
+	public List<GridMap> myGameMaps;
 	public GameInfo possibleUnits;
 	
 	/**

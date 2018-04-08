@@ -15,7 +15,7 @@ import game_object.UnmodifiableGameObjectException;
 public class GameInfo {
 	public List<GameObject> ListOfGameObjs;
 	/**
-	 * Retrieve the possible units associated with a particular player
+	 * Retrieve the possible units with the given tags
 	 * @param commander
 	 */
 	public List<GameObject> getUnits(List<String> tag) {
@@ -32,6 +32,13 @@ public class GameInfo {
 				toReturn.add(go);
 		}
 		return toReturn;
+	}
+	public GameObject get(String objectName) {
+		for(GameObject go: ListOfGameObjs) {
+			if(go.getName().equals(objectName))
+				return go;
+		}
+		return null;
 	}
 	/**
 	 * Retrieve the possible interactions for a particular GameObject
