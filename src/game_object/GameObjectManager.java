@@ -47,6 +47,13 @@ public class GameObjectManager implements ElementManager<GameObject>{
 
 	}
 	
+	@Override
+	public void removeElement(GameObject element) {
+		
+		objectMap.remove(element.getID());
+	}
+	
+	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop
 	 */
@@ -73,6 +80,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 		
 		return Collections.unmodifiableList(transformList);
 	}
+
 	
 
 }

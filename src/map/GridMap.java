@@ -15,7 +15,6 @@ import transform_library.Transform;
 public class GridMap {
 
 	private boolean[][] mapGrid;
-	private Map<Integer[]>
 	
 	public void GridMap(int width, int height)
 	{

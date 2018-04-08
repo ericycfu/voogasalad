@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_object.ObjectLogic;
 import transform_library.Transform;
 
@@ -16,16 +17,19 @@ import transform_library.Transform;
  */
 public class Interaction {
 	
+	private int id;
 	private List<String> targetTags;
+	
 	
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
 	
-	public Interaction() {
+	public Interaction(InteractionManager manager) {
 		
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
+		addToInteractionManager(manager);
 	}
 	
 	public void addCustomFunction(String type)
@@ -50,6 +54,11 @@ public class Interaction {
 		}
 	}
 	
+	public void addToInteractionManager(InteractionManager manager)
+	{
+		setID(manager.addElementToManager(this));
+	}
+	
 	public void setRange(double range)
 	{
 		this.range = range;
@@ -60,5 +69,13 @@ public class Interaction {
 		return range;
 	}
 	
+ 	public void setID(int id)
+ 	{
+ 		this.id = id;
+ 	}
  	
+ 	public int getID()
+ 	{
+ 		return id;
+ 	}
 }
