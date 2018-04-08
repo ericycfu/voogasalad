@@ -7,14 +7,24 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 
 public class MainDisplay implements VisualUpdate {
-	
+	private Group myDisplayWindow;
 	private Group myTerrains;
 	private Group myUnits;
-
+	
+	public MainDisplay() {
+		myDisplayWindow = new Group();
+		myTerrains = new Group();
+		myUnits = new Group();
+		myDisplayWindow.getChildren().addAll(myTerrains, myUnits);
+	}
+	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		// TODO Auto-generated method stub
-		
+		myUnits.getChildren().clear();
+		myTerrains.getChildren().clear();
+		for (GameObject unit : gameObjects) {
+			myUnits.getChildren().add(unit.getRenderer());
+		}
 	}
 
 	@Override
