@@ -39,7 +39,8 @@ public class Interaction {
 	
 	
 	/**
-	 * Runs all the custom functions in the interaction
+	 * Runs all the custom functions in the interactions
+	 * Each custom function can affect the other game object
 	 */
 	public void executeCustomFunctions(GameObject current, GameObject other)
 	{

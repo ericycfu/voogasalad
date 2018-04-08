@@ -3,7 +3,6 @@ package game_object;
 import java.util.HashMap;
 import java.util.Map;
 
-import game_engine.GameObjectManager;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -84,6 +83,7 @@ public class GameObject implements InterfaceGameObject{
 	 * 
 	 * @param other
 	 * gives the signal to the gameobject that an interaction is queued
+	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
 	 */
 	public void queueInteraction(GameObject other)
 	{
@@ -91,6 +91,9 @@ public class GameObject implements InterfaceGameObject{
 		interactionTarget = other;
 	}
 	
+	/**
+	 * Interaction dequeued after it is completed or cancelled
+	 */
 	public void dequeueInteraction()
 	{
 		isInteractionQueued = false;

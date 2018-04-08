@@ -32,6 +32,14 @@ public class ObjectLogic
 		return attributes;
 	}
 	
+	
+	/**
+	 * 
+	 * @param current
+	 * @param interactionTarget
+	 * 
+	 * Executes interaction if within the given range
+	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
 		for(Interaction interaction : interactions)

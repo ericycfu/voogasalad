@@ -1,9 +1,13 @@
-package game_engine;
+package game_object;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import game_object.GameObject;
+import game_engine.ElementManager;
+import transform_library.Transform;
 
 /**
  * 
@@ -12,7 +16,7 @@ import game_object.GameObject;
  * Allows the game engine to restrict access of gameobjects from the game player
  */
 
-public class GameObjectManager {
+public class GameObjectManager implements ElementManager<GameObject>{
 	
 	private Map<Integer, GameObject> objectMap;
 	
@@ -27,7 +31,7 @@ public class GameObjectManager {
 	 * @return
 	 * Adds a gameobject to the manager and assigns an ID to it based on the objects already inside
 	 */
-	public int addGameObjectToManager(GameObject object)
+	public int addElementToManager(GameObject object)
 	{
 		int id = 1;
 		if(objectMap.isEmpty())
@@ -52,6 +56,22 @@ public class GameObjectManager {
 		{
 			entry.getValue().Update();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * Returns positional information about each object. Can be used to populate grid for pathfinding
+	 */
+	public List<Transform> accessGameObjectTransforms()
+	{
+		List<Transform> transformList = new ArrayList<>();
+		for(Map.Entry<Integer, GameObject> entry: objectMap.entrySet())
+		{
+			transformList.add(entry.getValue().getTransform());
+		}
+		
+		return Collections.unmodifiableList(transformList);
 	}
 	
 
