@@ -3,6 +3,7 @@ package game_object;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.image.Image;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -26,6 +27,20 @@ public class GameObject implements InterfaceGameObject{
 	private String name;
 	private String tag;
 	
+	private Image img;
+	// SHOULD BE IN GAME OBJECT MANAGER
+	private boolean isSelected;
+	private boolean isTarget;
+	/**
+	 *		myDisp.setOnMouseClicked(e -> {
+			if (e.isPrimaryButtonDown()) {
+				
+			}
+			if (e.isSecondaryButtonDown()) {
+				
+			}
+		});
+	 */
 	
 	/**
 	 *
@@ -37,7 +52,7 @@ public class GameObject implements InterfaceGameObject{
 	public GameObject(Vector2 startingPosition)
 	{
 		this.transform = new Transform(startingPosition);
-		this.renderer = new Renderer();
+		this.renderer = new Renderer(img);
 	}
 	
 	/**
@@ -51,7 +66,7 @@ public class GameObject implements InterfaceGameObject{
 	{
 		this.transform = new Transform(startingPosition);
 		this.objectLogic = new ObjectLogic();
-		this.renderer = new Renderer();
+		this.renderer = new Renderer(img);
 		this.name = name;
 		this.tag = tag;
 	}
@@ -113,5 +128,7 @@ public class GameObject implements InterfaceGameObject{
 	public void setRenderer(Renderer renderer) {
 		this.renderer = renderer;
 	}
+	
+	
 	
 }

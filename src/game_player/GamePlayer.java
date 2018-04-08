@@ -25,7 +25,7 @@ public class GamePlayer {
 	public static final int SCENE_SIZE_X = 1000;
 	public static final int SCENE_SIZE_Y = 1000;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; 
+	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private List<GameObject> myGameObjects;
 	private List<GameObject> mySelectedGameObjects;
 	private TopPanel myTopPanel;
@@ -66,9 +66,9 @@ public class GamePlayer {
 	
 	public void update(List<GameObject> gameobject) {
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(displayGameObjects);
+		myTopPanel.update(displayGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(displayGameObjects);
+		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
 		myMainDisplay.update(displayGameObjects);
 	}
 	
