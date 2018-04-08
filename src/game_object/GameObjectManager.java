@@ -31,6 +31,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	 * @return
 	 * Adds a gameobject to the manager and assigns an ID to it based on the objects already inside
 	 */
+	@Override
 	public int addElementToManager(GameObject object)
 	{
 		int id = 1;
