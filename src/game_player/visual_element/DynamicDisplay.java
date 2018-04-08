@@ -12,8 +12,20 @@ import javafx.scene.Node;
  * @author
  *
  */
-public class DynamicDisplay  {
+public class DynamicDisplay implements VisualUpdate {
+	private Group myTerrains;
+	private Group myUnits;
 	
+	@Override
+	public void update(List<GameObject> gameObjects) {
+		// TODO Auto-generated method stub
+		
+	}
 
-
+	@Override
+	public Node getNodes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
