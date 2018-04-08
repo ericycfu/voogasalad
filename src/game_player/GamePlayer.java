@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitDisplay;
@@ -24,12 +25,13 @@ public class GamePlayer {
 	public static final int SCENE_SIZE_X = 1000;
 	public static final int SCENE_SIZE_Y = 1000;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; 
+	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private List<GameObject> myGameObjects;
 	private List<GameObject> mySelectedGameObjects;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
+	private MainDisplay myMainDisplay;
 	private Group myRoot;
 	private Map<String, List<String>> myUnitSkills;
 	private Map<String, Image> mySkillImages;
@@ -51,6 +53,7 @@ public class GamePlayer {
 		myTopPanel = new TopPanel();
 		myMiniMap = new MiniMap(0, 0.85*SCENE_SIZE_Y,0.15*SCENE_SIZE_X,0.15*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
 		//myUnitDisplay = new UnitDisplay(0.15*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, 0.85*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		myMainDisplay = new MainDisplay();
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		//myRoot.getChildren().add(myMiniMap.getNodes());
 		//myRoot.getChildren().add(myUnitDisplay.getNodes());
@@ -63,9 +66,10 @@ public class GamePlayer {
 	
 	public void update(List<GameObject> gameobject) {
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(displayGameObjects);
+		myTopPanel.update(displayGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(displayGameObjects);
+		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
+		myMainDisplay.update(displayGameObjects);
 	}
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
