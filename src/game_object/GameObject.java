@@ -108,7 +108,7 @@ public class GameObject implements InterfaceGameObject{
 	 */
 	public void addToGameObjectManager(GameObjectManager manager)
 	{
-		setID(manager.addGameObjectToManager(this));
+		setID(manager.addElementToManager(this));
 	}
 	
 	public Transform getTransform() {
