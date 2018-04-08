@@ -9,24 +9,11 @@ import javafx.scene.Node;
 /**
  * The GUI component that displays the dynamic information in the top panel (current resources and time) to 
  * the player.
- * @author Siyuan, Frank and Eddie
+ * @author
  *
  */
-public class DynamicDisplay implements VisualUpdate {
+public class DynamicDisplay  {
 	
-	private Group myTerrains;
-	private Group myUnits;
 
-	@Override
-	public void update(List<GameObject> gameObjects) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Node getNodes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
