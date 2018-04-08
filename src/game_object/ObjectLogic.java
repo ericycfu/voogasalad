@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interactions.Interaction;
+import interactions.InteractionManager;
 import transform_library.Vector2;
 
 
@@ -18,13 +19,12 @@ public class ObjectLogic
 {
 	ObjectAttributes attributes;
 	
-	//interactions should probably be stored in a container object like objectattributes
-	List<Interaction> interactions;
+	InteractionManager interactions;
 	
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
-		interactions = new ArrayList<>();
+		interactions = new InteractionManager();
 	}
 	
 	public ObjectAttributes accessAttributes()
@@ -42,7 +42,7 @@ public class ObjectLogic
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		for(Interaction interaction : interactions)
+		for(Interaction interaction : interactions.getElements())
 		{
 			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= interaction.getRange())
 			{

@@ -1,5 +1,8 @@
 package game_engine;
 
+import java.util.List;
+import java.util.Map.Entry;
+
 /**
  * 
  * @author Rayan
@@ -27,6 +30,12 @@ public interface ElementManager<E> {
 	 */
 	public void removeElement(E element);
 	
+	/**
+	 * 
+	 * @return
+	 * Returns a list of key value pairs from the manager which can be accessed 
+	 */
+	public List<E> getElements();
 	
 
 }

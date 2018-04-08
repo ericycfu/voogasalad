@@ -31,6 +31,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
 	
+	private boolean isDead;
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -42,6 +44,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
+		isDead = false;
 	}
 	
 	/**
@@ -61,6 +64,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		addToManager(manager);
 		isInteractionQueued = false;
 		interactionTarget = null;
+		isDead = false;
 	}
 	
 	/**
@@ -78,6 +82,17 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 objectLogic.executeInteractions(this, interactionTarget);
 		}
+	}
+	
+	
+	public void setIsDead(boolean isDead)
+	{
+		this.isDead = isDead;
+	}	
+	
+	public boolean isDead()
+	{
+		return isDead;
 	}
 	
 	/**

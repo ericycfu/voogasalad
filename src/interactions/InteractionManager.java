@@ -1,9 +1,15 @@
 package interactions;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 
 import game_engine.ElementManager;
+import game_engine.Team;
 
 public class InteractionManager implements ElementManager<Interaction> {
 	
@@ -37,7 +43,19 @@ public class InteractionManager implements ElementManager<Interaction> {
 		interactionMap.remove(element.getID());
 		
 	}
-	
-	
+
+	@Override
+	public List<Interaction> getElements() {
+
+		List<Interaction> interactionList = new ArrayList<>();
+		
+		for(Map.Entry<Integer, Interaction> var : interactionMap.entrySet())
+		{
+			interactionList.add(var.getValue());
+		}
+		
+		return Collections.unmodifiableList(interactionList);
+		
+	}	
 
 }

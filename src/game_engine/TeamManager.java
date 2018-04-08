@@ -1,7 +1,15 @@
 package game_engine;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import game_object.GameObject;
+
 import java.util.TreeMap;
+import java.util.AbstractMap.SimpleEntry;
 
 public class TeamManager implements ElementManager<Team>{
 
@@ -32,6 +40,20 @@ public class TeamManager implements ElementManager<Team>{
 		
 		teamMap.remove(element.getID());
 	}
-	
+
+	@Override
+	public List<Team> getElements() {
+		
+		List<Team> teamObjectList = new ArrayList<>();
+		
+		for(Map.Entry<Integer, Team> var : teamMap.entrySet())
+		{
+			teamObjectList.add(var.getValue());
+		}
+		
+		return Collections.unmodifiableList(teamObjectList);
+	}
+
+
 
 }

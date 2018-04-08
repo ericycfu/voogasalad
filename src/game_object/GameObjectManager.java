@@ -2,9 +2,12 @@ package game_object;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.AbstractMap.SimpleEntry;
 
 import game_engine.ElementManager;
 import transform_library.Transform;
@@ -56,14 +59,26 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	
 	
 	/**
-	 *  This will allow the game player to cycle through all the objects and runs their game loop
+	 *  This will allow the game player to cycle through all the objects and runs their game loop.
+	 *  Also removes dead elements at the start of every cycle.
 	 */
 	public void runGameObjectLoop()
 	{
-		for(Map.Entry<Integer, GameObject> entry: objectMap.entrySet())
+		Iterator<Map.Entry<Integer, GameObject>> iter = objectMap.entrySet().iterator();
+		while(iter.hasNext())
 		{
-			entry.getValue().Update();
+			Map.Entry<Integer, GameObject> entry = iter.next();
+			if(entry.getValue().isDead())
+			{
+				iter.remove();
+			}
 		}
+		
+		for(GameObject obj : getElements())
+		{
+			obj.Update();
+		}
+		
 	}
 	
 	/**
@@ -74,12 +89,29 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	public List<Transform> accessGameObjectTransforms()
 	{
 		List<Transform> transformList = new ArrayList<>();
-		for(Map.Entry<Integer, GameObject> entry: objectMap.entrySet())
+		
+		for(GameObject g : getElements())
 		{
-			transformList.add(entry.getValue().getTransform());
+			transformList.add(g.getTransform());
 		}
 		
 		return Collections.unmodifiableList(transformList);
+		
+		
+	}
+
+	
+	@Override
+	public List<GameObject> getElements() {
+		
+		List<GameObject> gameObjectList = new ArrayList<>();
+		
+		for(Map.Entry<Integer, GameObject> var : objectMap.entrySet())
+		{
+			gameObjectList.add(var.getValue());
+		}
+		
+		return Collections.unmodifiableList(gameObjectList);
 	}
 
 	
