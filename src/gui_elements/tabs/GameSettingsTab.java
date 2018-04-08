@@ -1,4 +1,4 @@
-package game_view.tabs;
+package gui_elements.tabs;
 
 import javafx.scene.control.Tab;
 

@@ -1,6 +1,6 @@
 package gui_elements.labels;
 
-public class InteractionTypeLabel extends LabelProperties {
+public class InteractionTypeLabel extends MainLabel {
 
 	private static final String FILENAME = "interaction_type_label.properties";
 	
