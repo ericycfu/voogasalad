@@ -16,7 +16,7 @@ public class DynamicDisplay implements VisualUpdate {
 	
 	private Group myTerrains;
 	private Group myUnits;
-
+	
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		// TODO Auto-generated method stub
