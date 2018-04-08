@@ -3,6 +3,7 @@ package game_object;
 import java.util.HashMap;
 import java.util.Map;
 
+import game_engine.EngineObject;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -15,7 +16,7 @@ import transform_library.Vector2;
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject{
+public class GameObject implements InterfaceGameObject, EngineObject<GameObjectManager>{
 	
 	public static final String EMPTY = "empty";
 	
@@ -57,7 +58,7 @@ public class GameObject implements InterfaceGameObject{
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
-		addToGameObjectManager(manager);
+		addToManager(manager);
 		isInteractionQueued = false;
 		interactionTarget = null;
 	}
@@ -106,7 +107,8 @@ public class GameObject implements InterfaceGameObject{
 	 * Assigns an id to the game object based on the game objects inside the game. Also assigns it to the object manager
 	 * which will then allow the game player to access functions on that game object
 	 */
-	public void addToGameObjectManager(GameObjectManager manager)
+	@Override
+	public void addToManager(GameObjectManager manager)
 	{
 		setID(manager.addElementToManager(this));
 	}
@@ -161,8 +163,10 @@ public class GameObject implements InterfaceGameObject{
 		this.id = id;
 	}
 	
+	@Override
 	public int getID()
 	{
 		return id;
 	}
+
 }

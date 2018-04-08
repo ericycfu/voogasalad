@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.ObjectLogic;
@@ -15,7 +16,7 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction {
+public class Interaction implements EngineObject<InteractionManager>{
 	
 	private int id;
 	private List<String> targetTags;
@@ -29,7 +30,7 @@ public class Interaction {
 		
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
-		addToInteractionManager(manager);
+		addToManager(manager);
 	}
 	
 	public void addCustomFunction(String type)
@@ -54,11 +55,6 @@ public class Interaction {
 		}
 	}
 	
-	public void addToInteractionManager(InteractionManager manager)
-	{
-		setID(manager.addElementToManager(this));
-	}
-	
 	public void setRange(double range)
 	{
 		this.range = range;
@@ -69,7 +65,7 @@ public class Interaction {
 		return range;
 	}
 	
- 	public void setID(int id)
+ 	private void setID(int id)
  	{
  		this.id = id;
  	}
@@ -78,4 +74,11 @@ public class Interaction {
  	{
  		return id;
  	}
+
+	@Override
+	public void addToManager(InteractionManager manager) {
+		
+		setID(manager.addElementToManager(this));
+
+	}
 }
