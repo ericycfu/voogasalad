@@ -6,6 +6,7 @@ import java.util.Map;
 
 import game_object.GameObject;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -23,14 +24,15 @@ public class TopPanel implements VisualUpdate {
 	public static final String SAVE = "Save";
 	public static final String LOAD = "Load";
 	public static final String TIME = "Time";
-	public static final String SCORE = "Score";
+	public static final String SCORE = "Scores";
+	protected static final String[] SCORES = {"Player1: ", "Player2: "};
 	public static final String COLON = ": ";
 	
 	private GridPane gp;
 	private MenuButton menu;
 	private List<TextArea> myTA;
 	private TextArea time;
-	private TextArea score;
+	private ComboBox<String> scores;
 	private TextArea r1;
 	private TextArea r2;
 	private String r1Name;
@@ -43,11 +45,11 @@ public class TopPanel implements VisualUpdate {
 		menuSpan = 0;
 		
 		setupMenu();
+		setupScores();
 		time = new TextArea(TIME + COLON + 0);
-		score = new TextArea(SCORE + COLON + 0);
 		r1 = new TextArea(r1Name + COLON + 0);
 		r2 = new TextArea(r2Name + COLON + 0);
-		TextArea[] tas = {time, score, r1, r2};
+		TextArea[] tas = {time, r1, r2};
 		myTA = Arrays.asList(tas);
 		myTA.forEach(ta -> {
 			ta.setEditable(false);
@@ -64,19 +66,35 @@ public class TopPanel implements VisualUpdate {
 		MenuItem menuItem2 = new MenuItem(PAUSE);
 		menuItem1.setOnAction(e -> {});
 		MenuItem menuItem3 = new MenuItem(SAVE);
-		menuItem1.setOnAction(e -> {});
+		menuItem1.setOnAction(e -> save());
 		MenuItem menuItem4 = new MenuItem(LOAD);
-		menuItem1.setOnAction(e -> {});
+		menuItem1.setOnAction(e -> load());
 		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
 		menu.setMinHeight(40);
 		addToPane(menu);
 	}
 
+	private void setupScores() {
+		scores = new ComboBox<>();
+		scores.setPromptText(SCORE);
+		scores.getItems().addAll(SCORES);
+		scores.setMinHeight(40);
+		addToPane(scores);
+	}
+	
 	private void addToPane(Node n) {
 		gp.add(n, menuSpan, 0);
 		menuSpan++;
 	}
-
+	
+	private void save() {
+		
+	}
+	
+	private void load() {
+		
+	}
+	
 	/**
 	 * allow the game player to set the resources amounts displayed in the top panel
 	 * @param amount1 amount for first resource
