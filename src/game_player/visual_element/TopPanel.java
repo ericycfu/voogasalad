@@ -25,8 +25,11 @@ public class TopPanel implements VisualUpdate {
 	public static final String LOAD = "Load";
 	public static final String TIME = "Time";
 	public static final String SCORE = "Scores";
-	protected static final String[] SCORES = {"Player1: "};
+	public static final String[] SCORES = {"Player1: "};
 	public static final String COLON = ": ";
+	public static final double TAWIDTH = 0.25;
+	public static final double MENUWIDTH = 0.125;
+	public static final double SBWIDTH = 0.125;
 	
 	private GridPane gp;
 	private MenuButton menu;
@@ -44,8 +47,8 @@ public class TopPanel implements VisualUpdate {
 		gp = new GridPane();
 		menuSpan = 0;
 		
-		setupMenu();
-		setupScores();
+		setupMenu(xsize, ysize);
+		setupScores(xsize, ysize);
 		time = new TextArea(TIME + COLON + 0);
 		r1 = new TextArea(r1Name + COLON + 0);
 		r2 = new TextArea(r2Name + COLON + 0);
@@ -53,14 +56,13 @@ public class TopPanel implements VisualUpdate {
 		myTA = Arrays.asList(tas);
 		myTA.forEach(ta -> {
 			ta.setEditable(false);
-			ta.setPrefColumnCount(1);
-			ta.setMaxHeight(10);
-			ta.setPrefWidth(160);
+			ta.setPrefWidth(xsize * TAWIDTH);
+			ta.setMaxHeight(ysize);
 			addToPane(ta);
 		});
 	}
 
-	private void setupMenu() {
+	private void setupMenu(double xsize, double ysize) {
 		MenuItem menuItem1 = new MenuItem(START);
 		menuItem1.setOnAction(e -> {
 			//todo: communicate with GAE
@@ -74,15 +76,17 @@ public class TopPanel implements VisualUpdate {
 		MenuItem menuItem4 = new MenuItem(LOAD);
 		menuItem4.setOnAction(e -> load());
 		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
-		menu.setMinHeight(40);
+		menu.setPrefWidth(xsize * MENUWIDTH);
+		menu.setMinHeight(ysize);
 		addToPane(menu);
 	}
 
-	private void setupScores() {
+	private void setupScores(double xsize, double ysize) {
 		scoreboard = new ComboBox<>();
 		scoreboard.setPromptText(SCORE);
 		scoreboard.getItems().addAll(SCORES);
-		scoreboard.setMinHeight(40);
+		scoreboard.setPrefWidth(xsize * SBWIDTH);
+		scoreboard.setMinHeight(ysize);
 		addToPane(scoreboard);
 	}
 	
