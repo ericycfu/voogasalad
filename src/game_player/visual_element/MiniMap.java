@@ -41,6 +41,7 @@ public class MiniMap implements VisualUpdate {
 		myMiniMapDisplay.setY(ycoor);
 		myMiniMapDisplay.setFill(background);
 		myMiniMapDisplay.setStroke(stroke);
+		myMiniMap.getChildren().add(myMiniMapDisplay);
 	}
 	
 	@Override
@@ -53,9 +54,7 @@ public class MiniMap implements VisualUpdate {
 	private List<GameObject> filter(List<GameObject> gameObjects) {
 		List<GameObject> minimapObjects = new ArrayList<GameObject>();
 		for (GameObject object : gameObjects) {
-			/*if (object.isOnExploredTerrian()) { // if the unit is on the terrain THIS player has explored (THIS player's units have been on this terrain 
-				minimapObjects.add(object);
-			}*/
+			minimapObjects.add(object);
 		}
 		return minimapObjects;
 	}
