@@ -50,13 +50,13 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
-		myTopPanel = new TopPanel(SCENE_SIZE_X, 0.05*SCENE_SIZE_Y);
+		//myTopPanel = new TopPanel(SCENE_SIZE_X, 0.05*SCENE_SIZE_Y);
 		myMiniMap = new MiniMap(0, 0.75*SCENE_SIZE_Y,0.25*SCENE_SIZE_X,0.25*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
-		//myUnitDisplay = new UnitDisplay(0.15*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, 0.85*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		myUnitDisplay = new UnitDisplay(0.25*SCENE_SIZE_X, 0.75*SCENE_SIZE_Y, 0.50*SCENE_SIZE_X, 0.25*SCENE_SIZE_Y, 0.75*SCENE_SIZE_X, 0.75*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
 		//myMainDisplay = new MainDisplay();
-		myRoot.getChildren().add(myTopPanel.getNodes());
+		//myRoot.getChildren().add(myTopPanel.getNodes());
 		myRoot.getChildren().add(myMiniMap.getNodes());
-		//myRoot.getChildren().add(myUnitDisplay.getNodes());
+		myRoot.getChildren().add(myUnitDisplay.getNodes());
 	}
 
 	public Scene setScene(Stage gpStage) {

@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 
 public class UnitInfoDisplay implements VisualUpdate {
 	private static final Paint StrokeColor = Color.BLACK; 
-	private static final Image DefaultImage = new Image("images/default_unit.jpg");
+	private static final Image DefaultImage = new Image("default_unit.jpg");
 	private static final String DefaultHealthMana = "0/0\n0/0";
 	private static final String DefaultStatus = "Damage: N/A\nArmor: N/A";
 	private double myUnitInfoDisplayXcoor; 
@@ -113,8 +113,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 
 	@Override
 	public Node getNodes() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.myUnitInfoDisplay;
 	}
 	
 }
