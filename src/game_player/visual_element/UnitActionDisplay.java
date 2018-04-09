@@ -36,7 +36,7 @@ public class UnitActionDisplay implements VisualUpdate{
 		myActionsGrid = new SkillButton[ACTION_GRID_LENGTH][ACTION_GRID_WIDTH];
 		for (int i = 0; i < myActionsGrid.length; i++) {
 			for (int j = 0; j < myActionsGrid[0].length; j++) {
-				Image img = new Image("images/default_icon.png");
+				Image img = new Image("attack_icon.png");
 				SkillButton cell = new SkillButton();
 				cell.setGraphic(new ImageView(img));
 				cell.setLayoutX(myLeftCornerXCoor + 50*i);

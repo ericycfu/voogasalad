@@ -15,8 +15,6 @@ public class TestMain extends Application {
 
 
 	public static final String TITLE = "Gameplayer";
-	public static final int INIT_X_SIZE = 600;
-	public static final int INIT_Y_SIZE = 600;
 	
 	@Override
 	public void start(Stage gpStage) throws Exception {	
