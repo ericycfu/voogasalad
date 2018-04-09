@@ -24,25 +24,22 @@ public class MiniMap implements VisualUpdate {
 	private Rectangle myMiniMapDisplay;
 	private Group myVisibleUnits;
 	private List<GameObject> currentVisibleUnits;
-	private double myLength;
-	private double myWidth; 
+	private double myWidth;
+	private double myHeight; 
 	
-	public MiniMap(double xcoor, double ycoor, double length, double width, Paint stroke, Paint background) {
+	public MiniMap(double width, double height) {
+		myWidth = width;
+		myHeight = height;
 		myMiniMap = new Group();
 		myVisibleUnits = new Group();
 		currentVisibleUnits = new ArrayList<GameObject>();
-		initializeMiniMapBackground(xcoor, ycoor, length, width, stroke, background);
-		myLength = length;
-		myWidth = width;
+		initializeMiniMapBackground();
 	}
 	
-	private void initializeMiniMapBackground(double xcoor, double ycoor, double length, double width, Paint stroke, Paint background) {
-		myMiniMapDisplay = new Rectangle(length, width);
-		myMiniMapDisplay.setFill(Color.BLACK);
-		myMiniMapDisplay.setX(xcoor);
-		myMiniMapDisplay.setY(ycoor);
-		myMiniMapDisplay.setFill(background);
-		myMiniMapDisplay.setStroke(stroke);
+	private void initializeMiniMapBackground() {
+		myMiniMapDisplay = new Rectangle(myWidth, myHeight);
+		myMiniMapDisplay.setFill(Color.BEIGE);
+		myMiniMapDisplay.setStroke(Color.BLACK);
 		myMiniMap.getChildren().add(myMiniMapDisplay);
 	}
 	
