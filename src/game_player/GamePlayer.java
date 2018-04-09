@@ -13,7 +13,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 /**
  * 
