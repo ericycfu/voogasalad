@@ -3,6 +3,7 @@ package game_object;
 import java.util.ArrayList;
 import java.util.List;
 
+import conditions.ConditionManager;
 import interactions.Interaction;
 import interactions.InteractionManager;
 import transform_library.Vector2;
@@ -21,11 +22,13 @@ public class ObjectLogic
 	ObjectAttributes attributes;
 	
 	InteractionManager interactions;
+	ConditionManager conditions;
 	
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
 		interactions = new InteractionManager();
+		conditions = new ConditionManager();
 	}
 	
 	public ObjectAttributes accessAttributes()
@@ -35,6 +38,11 @@ public class ObjectLogic
 	
 	public InteractionManager accessInteractions() {
 		return interactions;
+	}
+	
+	public ConditionManager accessConditions()
+	{
+		return conditions;
 	}
 	
 	/**

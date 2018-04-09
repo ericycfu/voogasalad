@@ -6,6 +6,7 @@ public class DeathFunction implements CustomFunction{
 	private CustomFunctionParameterFormat format;
 	@Override
 	public void Execute(GameObject current, GameObject other) {
+		
 		other.setIsDead(true);
 		
 	}

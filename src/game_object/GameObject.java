@@ -84,12 +84,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
-		try {
-			if(myObjectLogic.accessAttributes().getAttribute("health") <= 0)
-				setIsDead(true);
-		} catch (PropertyNotFoundException e) {
-			throw new IllegalArgumentException ("Undefined health");
-		}
+		
 	}
 	
 	
