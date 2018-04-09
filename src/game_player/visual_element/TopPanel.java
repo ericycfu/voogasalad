@@ -25,14 +25,14 @@ public class TopPanel implements VisualUpdate {
 	public static final String LOAD = "Load";
 	public static final String TIME = "Time";
 	public static final String SCORE = "Scores";
-	protected static final String[] SCORES = {"Player1: ", "Player2: "};
+	protected static final String[] SCORES = {"Player1: "};
 	public static final String COLON = ": ";
 	
 	private GridPane gp;
 	private MenuButton menu;
 	private List<TextArea> myTA;
 	private TextArea time;
-	private ComboBox<String> scores;
+	private ComboBox<String> scoreboard;
 	private TextArea r1;
 	private TextArea r2;
 	private String r1Name;
@@ -40,7 +40,7 @@ public class TopPanel implements VisualUpdate {
 	
 	private int menuSpan;
 	
-	public TopPanel() {
+	public TopPanel(double xsize, double ysize) {
 		gp = new GridPane();
 		menuSpan = 0;
 		
@@ -62,24 +62,28 @@ public class TopPanel implements VisualUpdate {
 
 	private void setupMenu() {
 		MenuItem menuItem1 = new MenuItem(START);
-		menuItem1.setOnAction(e -> {});
+		menuItem1.setOnAction(e -> {
+			//todo: communicate with GAE
+		});
 		MenuItem menuItem2 = new MenuItem(PAUSE);
-		menuItem1.setOnAction(e -> {});
+		menuItem2.setOnAction(e -> {
+			//todo: communicate with GAE
+		});
 		MenuItem menuItem3 = new MenuItem(SAVE);
-		menuItem1.setOnAction(e -> save());
+		menuItem3.setOnAction(e -> save());
 		MenuItem menuItem4 = new MenuItem(LOAD);
-		menuItem1.setOnAction(e -> load());
+		menuItem4.setOnAction(e -> load());
 		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
 		menu.setMinHeight(40);
 		addToPane(menu);
 	}
 
 	private void setupScores() {
-		scores = new ComboBox<>();
-		scores.setPromptText(SCORE);
-		scores.getItems().addAll(SCORES);
-		scores.setMinHeight(40);
-		addToPane(scores);
+		scoreboard = new ComboBox<>();
+		scoreboard.setPromptText(SCORE);
+		scoreboard.getItems().addAll(SCORES);
+		scoreboard.setMinHeight(40);
+		addToPane(scoreboard);
 	}
 	
 	private void addToPane(Node n) {
@@ -118,7 +122,13 @@ public class TopPanel implements VisualUpdate {
 	 * @param scores current scores for each player
 	 */
 	public void setScores(Map<String, Integer> scores) {
-		
+		int counter = 0;
+		if(scores.keySet().size() > scoreboard.getItems().size()) {
+			int diff = scores.keySet().size() - scoreboard.getItems().size();
+		}
+		for(String s: scores.keySet()) {
+			
+		}
 	}
 
 	@Override
