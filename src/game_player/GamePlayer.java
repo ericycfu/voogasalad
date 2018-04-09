@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class GamePlayer {
 	
 	public static final int SCENE_SIZE_X = 1000;
-	public static final int SCENE_SIZE_Y = 1000;
+	public static final int SCENE_SIZE_Y = 600;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private List<GameObject> myGameObjects;
@@ -51,11 +51,13 @@ public class GamePlayer {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
 		myTopPanel = new TopPanel();
-		myMiniMap = new MiniMap(0, 0.85*SCENE_SIZE_Y,0.15*SCENE_SIZE_X,0.15*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
+		myMiniMap = new MiniMap(0, 0.75*SCENE_SIZE_Y,0.25*SCENE_SIZE_X,0.25*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
 		//myUnitDisplay = new UnitDisplay(0.15*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, 0.85*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
-		myMainDisplay = new MainDisplay();
+		//myMainDisplay = new MainDisplay();
 		myRoot.getChildren().add(myTopPanel.getNodes());
-		//myRoot.getChildren().add(myMiniMap.getNodes());
+		System.out.println(myMiniMap.getNodes());
+		myRoot.getChildren().add(myMiniMap.getNodes());
+		System.out.println(((Group)myMiniMap.getNodes()).getChildren().get(0));
 		//myRoot.getChildren().add(myUnitDisplay.getNodes());
 	}
 

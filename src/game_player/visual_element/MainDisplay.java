@@ -6,7 +6,6 @@ import java.util.List;
 import game_object.GameObject;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,29 +39,30 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private void initializeMoveButtons() {
+		myMoveWindowButtons = new Group();
 		Button right = new Button();
-		right.setGraphic(new ImageView(new Image("images/arrow_right")));
+		right.setGraphic(new ImageView(new Image("arrow_right.png")));
 		right.setOnMousePressed(e -> {
 			myCurrentXCoor += 1;
 		});
 		myMoveWindowButtons.getChildren().add(right);
 		
 		Button left = new Button();
-		left.setGraphic(new ImageView(new Image("images/arrow_left")));
+		left.setGraphic(new ImageView(new Image("arrow_left.png")));
 		left.setOnMousePressed(e -> {
 			myCurrentXCoor -= 1;
 		});
 		myMoveWindowButtons.getChildren().add(left);
 		
 		Button up = new Button();
-		up.setGraphic(new ImageView(new Image("images/arrow_up")));
+		up.setGraphic(new ImageView(new Image("arrow_up.png")));
 		up.setOnMousePressed(e -> {
 			myCurrentYCoor -= 1;
 		});
 		myMoveWindowButtons.getChildren().add(up);
 		
 		Button down = new Button();
-		down.setGraphic(new ImageView(new Image("images/arrow_down")));
+		down.setGraphic(new ImageView(new Image("arrow_down.png")));
 		down.setOnMousePressed(e -> {
 			myCurrentYCoor += 1;
 		});
@@ -73,7 +73,6 @@ public class MainDisplay implements VisualUpdate {
 
 	}
 	
-	
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		select();
@@ -81,8 +80,10 @@ public class MainDisplay implements VisualUpdate {
 
 	@Override
 	public Node getNodes() {
-		// TODO Auto-generated method stub
-		return null;
+		Group group = new Group();
+		group.getChildren().add(this.myDisplayables);
+		group.getChildren().add(this.myMoveWindowButtons);
+		return group;
 	}
 	
 	public List<GameObject> getSelectedUnits(){

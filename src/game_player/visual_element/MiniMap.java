@@ -6,6 +6,7 @@ import java.util.List;
 import game_object.GameObject;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -37,10 +38,12 @@ public class MiniMap implements VisualUpdate {
 	
 	private void initializeMiniMapBackground(double xcoor, double ycoor, double length, double width, Paint stroke, Paint background) {
 		myMiniMapDisplay = new Rectangle(length, width);
+		myMiniMapDisplay.setFill(Color.BLACK);
 		myMiniMapDisplay.setX(xcoor);
 		myMiniMapDisplay.setY(ycoor);
 		myMiniMapDisplay.setFill(background);
 		myMiniMapDisplay.setStroke(stroke);
+		myMiniMap.getChildren().add(myMiniMapDisplay);
 	}
 	
 	@Override
@@ -72,15 +75,9 @@ public class MiniMap implements VisualUpdate {
 	 * returns the current mini-map to 
 	 * @return
 	 */
-	
-	public Group getCurrentMiniMapDisplay() {
-		return myMiniMap;
-	}
-
 	@Override
 	public Node getNodes() {
-		// TODO Auto-generated method stub
-		return null;
+		return myMiniMap;
 	}
 	
 }
