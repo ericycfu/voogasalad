@@ -23,8 +23,8 @@ import javafx.stage.Stage;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 800;
-	public static final int SCENE_SIZE_Y = 400;
+	public static final int SCENE_SIZE_X = 1000;
+	public static final int SCENE_SIZE_Y = 600;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.50;
