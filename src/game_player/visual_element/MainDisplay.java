@@ -22,6 +22,9 @@ public class MainDisplay implements VisualUpdate {
 	
 	public MainDisplay() {
 		initialize();
+		myDisplayables.setOnMousePressed(e -> {
+			
+		});
 	}
 	
 	private void initialize() {
