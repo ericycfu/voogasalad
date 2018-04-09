@@ -23,7 +23,7 @@ public class MainDisplay implements VisualUpdate {
 	public MainDisplay() {
 		initialize();
 	}
-
+	
 	private void initialize() {
 		initializeMoveButtons();
 		display();
@@ -70,7 +70,7 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private void select() {
-
+		
 	}
 	
 	@Override

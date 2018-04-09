@@ -25,7 +25,7 @@ public class TestMain extends Application {
 		Map<String, List<String>> unitSkills = new HashMap<>();
 		Map<String, Image> skillImages = new HashMap<>();	
 		GamePlayer gp = new GamePlayer(go, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        Scene scene = gp.setScene(gpStage);  
+        Scene scene = gp.getScene();  
         gpStage.setScene(scene);
         gpStage.show();
 	}
