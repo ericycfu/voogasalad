@@ -44,12 +44,10 @@ public class ModifyVariable implements CustomFunction {
 		} 
 		catch (PropertyNotFoundException e) 
 		{
-			e.printStackTrace();
 			System.out.println("Improper custom function variable assignment");
 		}
 		catch (NumberFormatException e)
 		{
-			e.printStackTrace();
 			System.out.println("Improper format for variable");
 		}
 	}
@@ -71,16 +69,14 @@ public class ModifyVariable implements CustomFunction {
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
-			e.printStackTrace();
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		
 	}
 	
 	@Override
 	public CustomFunctionParameterFormat getParameterFormat() {
-		
 		return format;
-		
 	}
 
 

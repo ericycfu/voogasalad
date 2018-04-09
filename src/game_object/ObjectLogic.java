@@ -17,6 +17,7 @@ import transform_library.Vector2;
 
 public class ObjectLogic  
 {
+	private boolean fulfillsLossCondition;
 	ObjectAttributes attributes;
 	
 	InteractionManager interactions;
@@ -32,6 +33,9 @@ public class ObjectLogic
 		return attributes;
 	}
 	
+	public InteractionManager accessInteractions() {
+		return interactions;
+	}
 	
 	/**
 	 * 
@@ -49,6 +53,10 @@ public class ObjectLogic
 				interaction.executeCustomFunctions(current, interactionTarget);
 			}
 		}
+	}
+	
+	public boolean getFulFillsLossCondition() {
+		return this.fulfillsLossCondition;
 	}
 	
 }

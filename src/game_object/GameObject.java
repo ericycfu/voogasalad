@@ -1,9 +1,10 @@
 package game_object;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import game_engine.EngineObject;
+import game_engine.Team;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -22,11 +23,12 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	private int id;
 	private Transform transform;	
-	private ObjectLogic objectLogic;
+	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
+	private Team owner;
 	
 	private String name;
-	private String tag;
+	private List<String> tag;
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
@@ -54,10 +56,10 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
-	public GameObject(Vector2 startingPosition, String tag, String name, GameObjectManager manager)
+	public GameObject(Vector2 startingPosition, List<String> tag, String name, GameObjectManager manager)
 	{
 		this.transform = new Transform(startingPosition);
-		this.objectLogic = new ObjectLogic();
+		this.myObjectLogic = new ObjectLogic();
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
@@ -80,7 +82,13 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		 */
 		if(isInteractionQueued)
 		{
-			 objectLogic.executeInteractions(this, interactionTarget);
+			 myObjectLogic.executeInteractions(this, interactionTarget);
+		}
+		try {
+			if(myObjectLogic.accessAttributes().getAttribute("health") <= 0)
+				setIsDead(true);
+		} catch (PropertyNotFoundException e) {
+			throw new IllegalArgumentException ("Undefined health");
 		}
 	}
 	
@@ -138,19 +146,19 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	public ObjectLogic accessLogic() throws UnmodifiableGameObjectException
 	{
-		if(objectLogic != null)
-			return this.objectLogic;
+		if(myObjectLogic != null)
+			return this.myObjectLogic;
 		throw new UnmodifiableGameObjectException("Null object logic unit");
 	} 
 	
-	public String getTag() {
+	public List<String> getTags() {
 		if(tag == null)
-			return EMPTY;
+			return new ArrayList<String>();
 		else
 			return tag;
 	}
 
-	public void setTag(String tag) {
+	public void setTags(List<String> tag) {
 		this.tag = tag;
 	}
 	
@@ -183,5 +191,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		return id;
 	}
-
+	public Team getOwner() {
+		return owner;
+	}
 }
