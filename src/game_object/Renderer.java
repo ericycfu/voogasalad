@@ -1,5 +1,10 @@
 package game_object;
 
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import transform_library.Vector2;
+
 /**
  * 
  * @author Rayan
@@ -8,6 +13,16 @@ package game_object;
  */
 
 public class Renderer {
+	
+	private ImageView myDisp;
+	
 
-	public Renderer(){}
+	public Renderer(Image img){
+		myDisp = new ImageView(img);
+	}
+	
+	public ImageView getDisp() {
+		return myDisp;
+	}
+
 }

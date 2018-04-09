@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game_object.GameObject;
-import game_player.Element;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -21,7 +18,7 @@ import javafx.scene.shape.Rectangle;
  * @author FY
  *
  */
-public class MiniMap implements Element, VisualUpdate {
+public class MiniMap implements VisualUpdate {
 	private static double unitMapRatio = 1/100;
 	private Group myMiniMap;
 	private Rectangle myMiniMapDisplay;
@@ -41,10 +38,12 @@ public class MiniMap implements Element, VisualUpdate {
 	
 	private void initializeMiniMapBackground(double xcoor, double ycoor, double length, double width, Paint stroke, Paint background) {
 		myMiniMapDisplay = new Rectangle(length, width);
+		myMiniMapDisplay.setFill(Color.BLACK);
 		myMiniMapDisplay.setX(xcoor);
 		myMiniMapDisplay.setY(ycoor);
 		myMiniMapDisplay.setFill(background);
 		myMiniMapDisplay.setStroke(stroke);
+		myMiniMap.getChildren().add(myMiniMapDisplay);
 	}
 	
 	@Override
@@ -76,45 +75,9 @@ public class MiniMap implements Element, VisualUpdate {
 	 * returns the current mini-map to 
 	 * @return
 	 */
-	
-	public Group getCurrentMiniMapDisplay() {
+	@Override
+	public Node getNodes() {
 		return myMiniMap;
-	}
-	
-	@Override
-	public void setX(double x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setWidth(double w) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setHeight(double h) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Pane getPane() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addNode(Node n) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

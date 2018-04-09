@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
-import game_player.Element;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -22,25 +21,29 @@ public class UnitDisplay implements VisualUpdate {
 	private Map<String, Image> mySkillImagesMap;
 	private double myInfoDispXcoor;
 	private double myInfoDispYcoor;
+	private double myInfoDispLength;
+	private double myInfoDispWidth;
 	private double myActionDispXcoor;
 	private double myActionDispYcoor;
 	
-	public UnitDisplay(double infoDispXcoor, double infoDispYcoor, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
-		initializeUnitDisplayVariables(infoDispXcoor, infoDispYcoor, actionDispXcoor, actionDispYcoor, unitSkills, skillImages);
+	public UnitDisplay(double infoDispXcoor, double infoDispYcoor, double infoDispLength, double infoDispWidth, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+		initializeUnitDisplayVariables(infoDispXcoor, infoDispYcoor, infoDispLength, infoDispWidth, actionDispXcoor, actionDispYcoor, unitSkills, skillImages);
 		initializeUnitDisplayComponents();
 	}
 	
-	private void initializeUnitDisplayVariables(double infoDispXcoor, double infoDispYcoor, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+	private void initializeUnitDisplayVariables(double infoDispXcoor, double infoDispYcoor, double infoDispLength, double infoDispWidth, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
 		myUnitSkillsMap = unitSkills;
 		mySkillImagesMap = skillImages;
 		myInfoDispXcoor = infoDispXcoor;
 		myInfoDispYcoor = infoDispYcoor;
 		myActionDispXcoor = actionDispXcoor;
 		myActionDispYcoor = actionDispYcoor;
+		myInfoDispLength = infoDispLength;
+		myInfoDispWidth = infoDispWidth;
 	}
 	
 	private void initializeUnitDisplayComponents() {
-		myInfoDisp = new UnitInfoDisplay(myInfoDispXcoor, myInfoDispYcoor);
+		myInfoDisp = new UnitInfoDisplay(myInfoDispXcoor, myInfoDispYcoor, myInfoDispLength, myInfoDispWidth);
 		myActionDisp = new UnitActionDisplay(myActionDispXcoor, myActionDispYcoor, myUnitSkillsMap, mySkillImagesMap);
 	}
 	
