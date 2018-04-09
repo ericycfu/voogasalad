@@ -3,6 +3,8 @@ package game_object;
 import java.util.ArrayList;
 import java.util.List;
 
+import game_engine.EngineObject;
+import game_engine.Team;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -15,7 +17,7 @@ import transform_library.Vector2;
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject{
+public class GameObject implements InterfaceGameObject, EngineObject<GameObjectManager>{
 	
 	public static final String EMPTY = "empty";
 	
@@ -23,13 +25,15 @@ public class GameObject implements InterfaceGameObject{
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
-	private String owner;
+	private Team owner;
 	
 	private String name;
 	private List<String> tag;
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
+	
+	private boolean isDead;
 	
 	/**
 	 *
@@ -42,6 +46,7 @@ public class GameObject implements InterfaceGameObject{
 	{
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
+		isDead = false;
 	}
 	
 	/**
@@ -58,9 +63,10 @@ public class GameObject implements InterfaceGameObject{
 		this.renderer = new Renderer();
 		this.name = name;
 		this.tag = tag;
-		addToGameObjectManager(manager);
+		addToManager(manager);
 		isInteractionQueued = false;
 		interactionTarget = null;
+		isDead = false;
 	}
 	
 	/**
@@ -78,6 +84,23 @@ public class GameObject implements InterfaceGameObject{
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
+		try {
+			if(myObjectLogic.accessAttributes().getAttribute("health") <= 0)
+				setIsDead(true);
+		} catch (PropertyNotFoundException e) {
+			throw new IllegalArgumentException ("Undefined health");
+		}
+	}
+	
+	
+	public void setIsDead(boolean isDead)
+	{
+		this.isDead = isDead;
+	}	
+	
+	public boolean isDead()
+	{
+		return isDead;
 	}
 	
 	/**
@@ -107,7 +130,8 @@ public class GameObject implements InterfaceGameObject{
 	 * Assigns an id to the game object based on the game objects inside the game. Also assigns it to the object manager
 	 * which will then allow the game player to access functions on that game object
 	 */
-	public void addToGameObjectManager(GameObjectManager manager)
+	@Override
+	public void addToManager(GameObjectManager manager)
 	{
 		setID(manager.addElementToManager(this));
 	}
@@ -162,11 +186,12 @@ public class GameObject implements InterfaceGameObject{
 		this.id = id;
 	}
 	
+	@Override
 	public int getID()
 	{
 		return id;
 	}
-	public String getOwner() {
+	public Team getOwner() {
 		return owner;
 	}
 }

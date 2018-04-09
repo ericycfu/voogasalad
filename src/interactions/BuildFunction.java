@@ -1,6 +1,7 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.PropertyNotFoundException;
 
 public class BuildFunction implements CustomFunction {
 	private double buildTime;
@@ -12,6 +13,14 @@ public class BuildFunction implements CustomFunction {
 		} catch (InterruptedException e) {}
 		current.dequeueInteraction();
 		
+	}
+	public void setParameters(CustomFunctionParameterFormat toFormat) {
+		try {
+			buildTime = Double.parseDouble(toFormat.getParameterValue("buildTime"));
+		} catch (NumberFormatException | PropertyNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
