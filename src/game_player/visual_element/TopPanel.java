@@ -3,7 +3,6 @@ package game_player.visual_element;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import game_object.GameObject;
 import javafx.scene.Node;
@@ -15,7 +14,7 @@ import javafx.scene.layout.GridPane;
 
 /**
  * the interface that all top panel UI elements implement
- * 
+ * @author Eddie
  */
 public class TopPanel implements VisualUpdate {
 	
