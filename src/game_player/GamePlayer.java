@@ -24,6 +24,11 @@ public class GamePlayer {
 	
 	public static final int SCENE_SIZE_X = 1000;
 	public static final int SCENE_SIZE_Y = 600;
+	public static final double BOTTOM_HEIGHT = 0.25;
+	public static final double MINIMAP_WIDTH = 0.25;
+	public static final double INFO_DISPLAY_WIDTH = 0.50;
+	public static final double ACTION_DISPLAY_WIDTH = 0.25;
+	public static final double TOP_HEIGHT = 0.05;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private List<GameObject> myGameObjects;
@@ -50,11 +55,11 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
-		//myTopPanel = new TopPanel(SCENE_SIZE_X, 0.05*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(SCENE_SIZE_X, 0.05*SCENE_SIZE_Y);
 		myMiniMap = new MiniMap(0, 0.75*SCENE_SIZE_Y,0.25*SCENE_SIZE_X,0.25*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
 		myUnitDisplay = new UnitDisplay(0.25*SCENE_SIZE_X, 0.75*SCENE_SIZE_Y, 0.50*SCENE_SIZE_X, 0.25*SCENE_SIZE_Y, 0.75*SCENE_SIZE_X, 0.75*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
 		//myMainDisplay = new MainDisplay();
-		//myRoot.getChildren().add(myTopPanel.getNodes());
+		myRoot.getChildren().add(myTopPanel.getNodes());
 		myRoot.getChildren().add(myMiniMap.getNodes());
 		myRoot.getChildren().add(myUnitDisplay.getNodes());
 	}

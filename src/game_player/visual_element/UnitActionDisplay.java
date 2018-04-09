@@ -12,34 +12,37 @@ import javafx.scene.image.ImageView;
 
 public class UnitActionDisplay implements VisualUpdate{
 	
-	public static final int ACTION_GRID_LENGTH = 4;
-	public static final int ACTION_GRID_WIDTH = 3;
-	private double myLeftCornerXCoor;
-	private double myLeftCornerYCoor;
+	public static final int ACTION_GRID_WIDTH = 4;
+	public static final int ACTION_GRID_HEIGHT = 3;
+	private double myCellWidth;
+	private double myCellHeight;
 	private String myCurrentAction;
 	SkillButton[][] myActionsGrid;
 	Map<String, List<String>> myUnitSkills;
 	Map<String, Image> mySkillImages;
 	
-	public UnitActionDisplay(double xcoor, double ycoor, Map<String, List<String>> unitSkills, 
+	public UnitActionDisplay(double width, double height, Map<String, List<String>> unitSkills, 
 			Map<String, Image> skillImages) {
 		mySkillImages = skillImages;
 		myUnitSkills = unitSkills;
-		myLeftCornerXCoor = xcoor;
-		myLeftCornerYCoor = ycoor;
+		myCellWidth = width/ACTION_GRID_WIDTH;
+		myCellHeight = height/ACTION_GRID_HEIGHT;
 		initialize();
 	}
 	
 	private void initialize() {
 		myCurrentAction = "";
-		myActionsGrid = new SkillButton[ACTION_GRID_LENGTH][ACTION_GRID_WIDTH];
+		myActionsGrid = new SkillButton[ACTION_GRID_WIDTH][ACTION_GRID_HEIGHT];
 		for (int i = 0; i < myActionsGrid.length; i++) {
 			for (int j = 0; j < myActionsGrid[0].length; j++) {
 				Image img = new Image("attack_icon.png");
 				SkillButton cell = new SkillButton();
-				cell.setGraphic(new ImageView(img));
-				cell.setLayoutX(myLeftCornerXCoor + 50*i);
-				cell.setLayoutY(myLeftCornerYCoor + 50*j);
+				ImageView imgv = new ImageView(img);
+				imgv.setFitHeight(myCellHeight);
+				imgv.setFitWidth(myCellWidth);
+				cell.setGraphic(imgv);
+				cell.setLayoutX(myCellWidth*i);
+				cell.setLayoutY(myCellHeight*j);
 				myActionsGrid[i][j] = cell;
 			}
 		}
