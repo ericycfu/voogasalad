@@ -14,7 +14,6 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	public static final int ACTION_GRID_LENGTH = 4;
 	public static final int ACTION_GRID_WIDTH = 3;
-	public static final int CELL_SIZE = 50;
 	private double myLeftCornerXCoor;
 	private double myLeftCornerYCoor;
 	private String myCurrentAction;
