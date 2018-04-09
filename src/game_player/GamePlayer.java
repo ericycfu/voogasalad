@@ -21,8 +21,8 @@ import javafx.stage.Stage;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 1000;
-	public static final int SCENE_SIZE_Y = 1000;
+	public static final int SCENE_SIZE_X = 800;
+	public static final int SCENE_SIZE_Y = 600;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; 
 	private List<GameObject> myGameObjects;
