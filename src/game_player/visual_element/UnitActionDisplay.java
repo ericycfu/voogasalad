@@ -38,8 +38,8 @@ public class UnitActionDisplay implements VisualUpdate{
 				Image img = new Image("attack_icon.png");
 				SkillButton cell = new SkillButton();
 				ImageView imgv = new ImageView(img);
-				imgv.setFitHeight(myCellHeight);
-				imgv.setFitWidth(myCellWidth);
+				imgv.setFitHeight(myCellHeight*0.8);
+				imgv.setFitWidth(myCellWidth*0.65);
 				cell.setGraphic(imgv);
 				cell.setLayoutX(myCellWidth*i);
 				cell.setLayoutY(myCellHeight*j);

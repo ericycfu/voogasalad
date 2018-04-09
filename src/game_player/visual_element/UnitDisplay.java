@@ -25,6 +25,7 @@ public class UnitDisplay implements VisualUpdate {
 	}
 	
 	private void initializeUnitDisplayComponents(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+		myUnitDisplay = new Group();
 		myUnitSkillsMap = unitSkills;
 		mySkillImagesMap = skillImages;
 		myInfoDisp = new UnitInfoDisplay(infoDispWidth, infoDispHeight);
