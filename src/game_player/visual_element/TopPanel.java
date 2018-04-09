@@ -3,6 +3,7 @@ package game_player.visual_element;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import game_object.GameObject;
 import javafx.scene.Node;
@@ -27,9 +28,9 @@ public class TopPanel implements VisualUpdate {
 	public static final String SCORE = "Scores";
 	public static final String[] SCORES = {"Player1: "};
 	public static final String COLON = ": ";
-	public static final double TAWIDTH = 0.25;
 	public static final double MENUWIDTH = 0.125;
 	public static final double SBWIDTH = 0.125;
+	public static final double TAWIDTH = 0.25;
 	
 	private GridPane gp;
 	private MenuButton menu;
@@ -127,11 +128,9 @@ public class TopPanel implements VisualUpdate {
 	 */
 	public void setScores(Map<String, Integer> scores) {
 		int counter = 0;
-		if(scores.keySet().size() > scoreboard.getItems().size()) {
-			int diff = scores.keySet().size() - scoreboard.getItems().size();
-		}
 		for(String s: scores.keySet()) {
-			
+			scoreboard.getItems().set(counter, s + COLON + scores.get(s));
+			counter++;
 		}
 	}
 
