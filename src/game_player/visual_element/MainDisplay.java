@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class MainDisplay implements VisualUpdate {
-	
+
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; 
 	private List<GameObject> myTerrains;
@@ -22,8 +22,11 @@ public class MainDisplay implements VisualUpdate {
 	
 	public MainDisplay() {
 		initialize();
+		myDisplayables.setOnMousePressed(e -> {
+			
+		});
 	}
-
+	
 	private void initialize() {
 		initializeMoveButtons();
 		display();
@@ -70,7 +73,7 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private void select() {
-
+		
 	}
 	
 	@Override
@@ -89,4 +92,5 @@ public class MainDisplay implements VisualUpdate {
 	public List<GameObject> getSelectedUnits(){
 		return Collections.unmodifiableList(mySelectedUnits);
 	}
+	
 }

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -21,7 +22,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private static final String DefaultStatus = "Damage: N/A\nArmor: N/A";
 	private double myHeight; 
 	private double myWidth; 
-	private Group myUnitInfoDisplay;
+	private GridPane myUnitInfoDisplay;
 	private Group myUnitProfilePic;
 	private Group myUnitStatus;
 	private ImageView myCurrentUnitImageView;
@@ -31,7 +32,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private Map<String, Image> UnitProfileMap;
 	
 	public UnitInfoDisplay(double width, double height) {
-		myUnitInfoDisplay = new Group();
+		myUnitInfoDisplay = new GridPane();
 		myUnitProfilePic = new Group();
 		myUnitStatus = new Group();
 		myUnitInfoDisplay.getChildren().add(myUnitProfilePic);
@@ -59,6 +60,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myUnitProfilePic.getChildren().add(myCurrentUnitImageView);
+		myUnitInfoDisplay.add(myCurrentUnitImageView, 0, 0, 1, 1);
 	}
 	
 	private void initializeHealthManaInfo() {
@@ -68,7 +70,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 		myHealthManaInfo.setLayoutX(myWidth/4 - myHealthManaInfo.getWidth());
 		myHealthManaInfo.setLayoutY(myHeight*(3/4) - myHealthManaInfo.getHeight());
 		myHealthManaInfo.setEditable(false);
-		myUnitInfoDisplay.getChildren().add(myHealthManaInfo);
+		myUnitInfoDisplay.add(myHealthManaInfo, 0, 1, 1, 1);
 	}
 	
 	private void initializeStatusInfo() {
@@ -78,7 +80,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 		myStatusInfo.setLayoutX(myWidth*(3/4) - myStatusInfo.getWidth());
 		myStatusInfo.setLayoutY(myWidth/4 - myStatusInfo.getHeight());
 		myStatusInfo.setEditable(false);
-		myUnitInfoDisplay.getChildren().add(myStatusInfo);
+		myUnitInfoDisplay.add(myStatusInfo, 1, 0, 1, 2);
 	}
 	
 	private void updateProfilePic(Image profile) {

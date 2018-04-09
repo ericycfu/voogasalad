@@ -42,6 +42,7 @@ public class GamePlayer {
 	private Map<String, Image> mySkillImages;
 	private Map<String, Image> myUnitInfoImg;
 	private Map<String, Image> myUnitDispImg;
+	private Scene thisScene;
 	
 	public GamePlayer(List<GameObject> gameobjects, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameObjects = gameobjects;
@@ -67,11 +68,11 @@ public class GamePlayer {
 		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(unitDisp);
+		thisScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 
-	public Scene setScene(Stage gpStage) {
-		Scene scene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
-		return scene;
+	public Scene getScene() {
+		return thisScene;
 	}
 	
 	public void update(List<GameObject> gameobject) {
