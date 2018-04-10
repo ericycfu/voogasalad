@@ -1,9 +1,13 @@
 package game_player.visual_element;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import game_data.Reader;
+import game_data.Writer;
 import game_object.GameObject;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -11,6 +15,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * the interface that all top panel UI elements implement
@@ -42,7 +48,8 @@ public class TopPanel implements VisualUpdate {
 	private String r2Name;
 	
 	private int menuSpan;
-	
+	private Reader myReader;
+	private Writer myWriter;
 	public TopPanel(double xsize, double ysize) {
 		gp = new GridPane();
 		menuSpan = 0;
@@ -96,11 +103,32 @@ public class TopPanel implements VisualUpdate {
 	}
 	
 	private void save() {
+		FileChooser fc = new FileChooser();
+		Stage stage = new Stage();
+		fc.setInitialDirectory(new File("data/"));
+		fc.setTitle("Save Game");
+		File file = fc.showSaveDialog(stage);
+		//for writing
+		//myWriter.write(file.getCanonicalPath(), **INSERT GAMEOBJECT ARRAY HERE**);
+
 		
 	}
 	
 	private void load() {
-		
+		FileChooser fc = new FileChooser();
+		Stage stage = new Stage();
+		fc.setInitialDirectory(new File("data/"));
+		fc.setTitle("Load Game");
+		File file = fc.showOpenDialog(stage);
+		try {
+			List<Object> gameObjects= myReader.read(file.getCanonicalPath());
+		} catch (ClassNotFoundException e) {
+			// TODO deal with this error
+			
+		} catch (IOException e) {
+			// TODO deal with this error
+
+		}
 	}
 	
 	/**
