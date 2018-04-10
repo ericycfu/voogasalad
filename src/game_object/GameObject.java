@@ -2,6 +2,7 @@ package game_object;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import game_engine.EngineObject;
 import game_engine.Team;
@@ -33,6 +34,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
 	
+	private Map<String,Double> costs; 
 	private boolean isDead;
 	
 	/**
@@ -56,7 +58,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
-	public GameObject(Vector2 startingPosition, List<String> tag, String name, GameObjectManager manager)
+	public GameObject(Vector2 startingPosition, List<String> tag, String name, GameObjectManager manager, Team t, Map<String,Double> unitcost)
 	{
 		this.transform = new Transform(startingPosition);
 		this.myObjectLogic = new ObjectLogic();
@@ -64,6 +66,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		this.name = name;
 		this.tag = tag;
 		addToManager(manager);
+		costs = unitcost;
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
@@ -84,12 +87,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
-		try {
-			if(myObjectLogic.accessAttributes().getAttribute("health") <= 0)
-				setIsDead(true);
-		} catch (PropertyNotFoundException e) {
-			throw new IllegalArgumentException ("Undefined health");
-		}
+		
+
 	}
 	
 	
@@ -193,5 +192,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	}
 	public Team getOwner() {
 		return owner;
+	}
+	public Map<String,Double> getCosts(){
+		return costs;
 	}
 }

@@ -18,7 +18,7 @@ public class ModifyVariable implements CustomFunction {
 	public final String DELTA = "Delta";
 	public final String RATE = "Rate";
 	
-	private CustomFunctionParameterFormat format;
+	private CustomComponentParameterFormat format;
 	
 	private String variable;
 	private double delta;
@@ -28,14 +28,14 @@ public class ModifyVariable implements CustomFunction {
 	
 	public ModifyVariable()
 	{
-		format = new CustomFunctionParameterFormat();
+		format = new CustomComponentParameterFormat();
 		setParameterFormatFields();
 	}
 	
 	
 	// make seperate container object for parameter data? 
 	
-	public void setParameters(CustomFunctionParameterFormat format)
+	public void setParameters(CustomComponentParameterFormat format)
 	{
 		try 
 		{
@@ -75,7 +75,7 @@ public class ModifyVariable implements CustomFunction {
 	}
 	
 	@Override
-	public CustomFunctionParameterFormat getParameterFormat() {
+	public CustomComponentParameterFormat getParameterFormat() {
 		return format;
 	}
 

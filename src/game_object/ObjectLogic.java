@@ -1,5 +1,11 @@
 package game_object;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import conditions.Condition;
+import conditions.ConditionManager;
 import interactions.Interaction;
 import interactions.InteractionManager;
 
@@ -18,11 +24,13 @@ public class ObjectLogic
 	ObjectAttributes attributes;
 	
 	InteractionManager interactions;
+	ConditionManager conditions;
 	
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
 		interactions = new InteractionManager();
+		conditions = new ConditionManager();
 	}
 	
 	public ObjectAttributes accessAttributes()
@@ -32,6 +40,11 @@ public class ObjectLogic
 	
 	public InteractionManager accessInteractions() {
 		return interactions;
+	}
+	
+	public ConditionManager accessConditions()
+	{
+		return conditions;
 	}
 	
 	/**
@@ -48,9 +61,19 @@ public class ObjectLogic
 			currentInteraction.executeCustomFunctions(current, interactionTarget);
 		}
 	}
+
 	public void setCurrentInteraction(Interaction i) {
 		currentInteraction = i;
 	}
+	
+	public void checkConditions(GameObject current)
+	{
+		for(Condition condition : conditions.getElements())
+		{
+			condition.execute();
+		}
+	}
+	
 	public boolean getFulFillsLossCondition() {
 		return fulfillsLossCondition;
 	}

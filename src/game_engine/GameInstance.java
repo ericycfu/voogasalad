@@ -24,7 +24,7 @@ public class GameInstance {
 	private boolean running;
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
-	private TeamManager myTeamManager;
+	private List<TeamManager> myTeamManager;
 	private SceneManager mySceneManager;
 	private Reader myReader;
 	private Writer myWriter;
@@ -33,11 +33,10 @@ public class GameInstance {
 		myReader = new Reader();
 		myWriter = new Writer();
 		myGameInfo = g;
+		TeamManager myTeamManager = new TeamManager();
 		setUp(filepath);
-		TeamManager teamManage1 = new TeamManager();
-		TeamManager teamManage2 = new TeamManager();
-		GamePlayer player1 = new GamePlayer(myGameInfo, myObjectManager, teamManage1);
-		GamePlayer player2 = new GamePlayer(myGameInfo, myObjectManager, teamManage2);
+		GamePlayer player1 = new GamePlayer(myGameInfo, myObjectManager, myTeamManager.get(1));
+		GamePlayer player2 = new GamePlayer(myGameInfo, myObjectManager, myTeamManager.get(2));
 		play();
 	}
 	public void setUp(String filepath) {

@@ -53,6 +53,9 @@ public class TeamManager implements ElementManager<Team>{
 		
 		return Collections.unmodifiableList(teamObjectList);
 	}
+	public Team get(int team_id) {
+		return teamMap.get(team_id);
+	}
 
 
 
