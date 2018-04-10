@@ -4,6 +4,9 @@ import game_object.GameObject;
 
 public class DeathFunction implements CustomFunction{
 	private CustomFunctionParameterFormat format;
+	public DeathFunction() {
+		setParameterFormatFields();
+	}
 	@Override
 	public void Execute(GameObject current, GameObject other) {
 		other.setIsDead(true);
