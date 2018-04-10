@@ -32,7 +32,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
-	
+		
 	private boolean isDead;
 	
 	/**
@@ -84,6 +84,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
+		myObjectLogic.checkConditions(this);
+		
 		
 
 	}
