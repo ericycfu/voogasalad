@@ -14,8 +14,8 @@ import transform_library.Vector2;
  * attributes and interactions
  */
 
-public class ObjectLogic  
-{
+public class ObjectLogic {
+	
 	ObjectAttributes attributes;
 	List<Interaction> interactions;
 	
@@ -32,6 +32,5 @@ public class ObjectLogic
 	
 	public List<Interaction> accessInteractions() {
 		return interactions;
-	}
-	
+	}	
 }

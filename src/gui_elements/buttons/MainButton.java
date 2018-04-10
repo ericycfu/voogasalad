@@ -24,6 +24,10 @@ public abstract class MainButton extends Button {
 		setAction();
 	}
 	
+	public MainButton(String filename, boolean noExplicitSetAction) {
+		assignProperties(DIRECTORY_STRING + filename);
+	}
+	
 	private void assignProperties(String full_filename) {
 		properties = new Properties();
 		input = null;
