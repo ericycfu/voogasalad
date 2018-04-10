@@ -3,6 +3,7 @@ package game_object;
 import java.util.ArrayList;
 import java.util.List;
 
+import conditions.Condition;
 import conditions.ConditionManager;
 import interactions.Interaction;
 import interactions.InteractionManager;
@@ -60,6 +61,14 @@ public class ObjectLogic
 			{
 				interaction.executeCustomFunctions(current, interactionTarget);
 			}
+		}
+	}
+	
+	public void checkConditions(GameObject current)
+	{
+		for(Condition condition : conditions.getElements())
+		{
+			condition.execute();
 		}
 	}
 	
