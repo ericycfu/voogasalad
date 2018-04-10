@@ -75,6 +75,7 @@ public class GameInstance {
 	public void loop() {
 		while(running) {
 			myObjectManager.runGameObjectLoop();
+			mySceneManager.update();
 		}
 	}
 	public void play() {

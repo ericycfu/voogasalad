@@ -12,6 +12,9 @@ import game_object.GameObject;
  */
 public class GameInfo {
 	public List<GameObject> ListOfGameObjs;
+	public void addReferenceGameObject(GameObject go) {
+		ListOfGameObjs.add(go);
+	}
 	/**
 	 * Retrieve the possible units with the given tags
 	 * @param commander
