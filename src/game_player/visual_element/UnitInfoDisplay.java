@@ -55,8 +55,8 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeProfilePic() {
 		myCurrentUnitImageView = new ImageView(DefaultImage);
-		myCurrentUnitImageView.setFitHeight(myHeight/3);
-		myCurrentUnitImageView.setFitWidth(myHeight/3);
+		myCurrentUnitImageView.setFitHeight(myHeight);
+		myCurrentUnitImageView.setFitWidth(myWidth/3);
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myUnitProfilePic.getChildren().add(myCurrentUnitImageView);
@@ -65,22 +65,22 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeHealthManaInfo() {
 		myHealthManaInfo = new TextArea();
-		myHealthManaInfo.setPrefHeight(myHeight/8);
-		myHealthManaInfo.setPrefWidth(myWidth/4);
+		myHealthManaInfo.setPrefHeight(myHeight);
+		myHealthManaInfo.setPrefWidth(myWidth/3);
 		myHealthManaInfo.setLayoutX(myWidth/4 - myHealthManaInfo.getWidth());
 		myHealthManaInfo.setLayoutY(myHeight*(3/4) - myHealthManaInfo.getHeight());
 		myHealthManaInfo.setEditable(false);
-		myUnitInfoDisplay.add(myHealthManaInfo, 0, 1, 1, 1);
+		myUnitInfoDisplay.add(myHealthManaInfo, 1, 0, 1, 2);
 	}
 	
 	private void initializeStatusInfo() {
 		myStatusInfo = new TextArea();
-		myStatusInfo.setPrefHeight(myHeight/2);
+		myStatusInfo.setPrefHeight(myHeight);
 		myStatusInfo.setPrefWidth(myWidth/3);
 		myStatusInfo.setLayoutX(myWidth*(3/4) - myStatusInfo.getWidth());
 		myStatusInfo.setLayoutY(myWidth/4 - myStatusInfo.getHeight());
 		myStatusInfo.setEditable(false);
-		myUnitInfoDisplay.add(myStatusInfo, 1, 0, 1, 2);
+		myUnitInfoDisplay.add(myStatusInfo, 2, 0, 1, 2);
 	}
 	
 	private void updateProfilePic(Image profile) {
