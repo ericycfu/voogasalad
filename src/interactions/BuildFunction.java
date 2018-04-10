@@ -5,7 +5,7 @@ import game_object.PropertyNotFoundException;
 
 public class BuildFunction implements CustomFunction {
 	private double buildTime;
-	private CustomFunctionParameterFormat format;
+	private CustomComponentParameterFormat format;
 	@Override
 	public void Execute(GameObject current, GameObject other) {
 		try {
@@ -14,7 +14,7 @@ public class BuildFunction implements CustomFunction {
 		current.dequeueInteraction();
 		
 	}
-	public void setParameters(CustomFunctionParameterFormat toFormat) {
+	public void setParameters(CustomComponentParameterFormat toFormat) {
 		try {
 			buildTime = Double.parseDouble(toFormat.getParameterValue("buildTime"));
 		} catch (NumberFormatException | PropertyNotFoundException e) {
@@ -24,7 +24,7 @@ public class BuildFunction implements CustomFunction {
 	}
 
 	@Override
-	public CustomFunctionParameterFormat getParameterFormat() {
+	public CustomComponentParameterFormat getParameterFormat() {
 		return format;
 	}
 

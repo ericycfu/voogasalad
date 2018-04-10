@@ -12,6 +12,6 @@ import game_object.GameObject;
 public interface CustomFunction {
 
 	public void Execute(GameObject current, GameObject other);
-	public CustomFunctionParameterFormat getParameterFormat();
+	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 }

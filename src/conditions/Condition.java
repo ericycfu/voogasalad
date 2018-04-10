@@ -8,9 +8,16 @@ import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import interactions.CustomFunction;
-import interactions.CustomFunctionFactory;
-import interactions.InteractionManager;
+
+
+/**
+ * 
+ * @author Rayan
+ * A condition is created by the designer to trigger functions when a variable in the gameobject reaches 
+ * a certain level. Each condition can have a list of custom conditions that will be triggered when the condition returns true.
+ * Conditions only act upon the object they are assigned to. A condition object must be constructed by giving it the gameobject 
+ * to act upon, the comparator to use, and the values to compare.
+ */
 
 public class Condition implements EngineObject<ConditionManager> {
 
@@ -22,6 +29,9 @@ public class Condition implements EngineObject<ConditionManager> {
 	private String var2;
 	private int comparatorID;
 	
+	private List<CustomCondition> customConditions;
+
+	
 	public Condition(GameObject object, ConditionManager manager, int comparatorID, String var1, String var2)
 	{
 		comparatorManager = new ComparatorManager();
@@ -32,6 +42,14 @@ public class Condition implements EngineObject<ConditionManager> {
 		this.comparatorID = comparatorID;
 	}
 
+	
+	public CustomCondition addCustomCondition(String type)
+	{
+		CustomConditionFactory factory = new CustomConditionFactory();
+		CustomCondition cc = factory.getCustomCondition(type);
+		customConditions.add(cc);
+		return cc;
+	}
 
 	@Override
 	public int getID() {
@@ -39,9 +57,15 @@ public class Condition implements EngineObject<ConditionManager> {
 	}
 
 
+	public void setID(int id)
+	{
+		this.id = id;
+	}
+	
 	@Override
 	public void addToManager(ConditionManager manager) {
-		// TODO Auto-generated method stub
+		
+		setID(manager.addElementToManager(this));
 		
 	}
 	
@@ -51,7 +75,10 @@ public class Condition implements EngineObject<ConditionManager> {
 		{
 			if(comparatorManager.getComparatorResult(comparatorID, getVariableVal(var1), getVariableVal(var2)))
 			{
-				//execute custom conditionals
+				for(CustomCondition c : customConditions)
+				{
+					c.Execute(host);
+				}
 			}
 		} 
 		catch (PropertyNotFoundException e) {
@@ -75,4 +102,5 @@ public class Condition implements EngineObject<ConditionManager> {
 		
 		return host.accessLogic().accessAttributes().getAttribute(var);
 	}
+	
 }

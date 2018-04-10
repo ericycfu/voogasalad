@@ -3,7 +3,7 @@ package interactions;
 import game_object.GameObject;
 
 public class DeathFunction implements CustomFunction{
-	private CustomFunctionParameterFormat format;
+	private CustomComponentParameterFormat format;
 	@Override
 	public void Execute(GameObject current, GameObject other) {
 		
@@ -12,14 +12,14 @@ public class DeathFunction implements CustomFunction{
 	}
 
 	@Override
-	public CustomFunctionParameterFormat getParameterFormat() {
+	public CustomComponentParameterFormat getParameterFormat() {
 		// TODO Auto-generated method stub
 		return format;
 	}
 
 	@Override
 	public void setParameterFormatFields() {
-		format = new CustomFunctionParameterFormat();
+		format = new CustomComponentParameterFormat();
 		format.addHelpText("This function allows you to instantly destroy a unit");
 		
 	}

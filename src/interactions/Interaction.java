@@ -33,13 +33,14 @@ public class Interaction implements EngineObject<InteractionManager>{
 		addToManager(manager);
 	}
 	
-	public void addCustomFunction(String type)
+	public CustomFunction addCustomFunction(String type)
 	{
 		CustomFunctionFactory factory = new CustomFunctionFactory();
 			
 		//this is where i need to make it better
 		CustomFunction function = factory.getCustomFunction(type);
 		customFunctions.add(function);
+		return function;
 	}
 	
 	
