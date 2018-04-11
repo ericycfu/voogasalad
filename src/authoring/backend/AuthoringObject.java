@@ -11,6 +11,8 @@ public class AuthoringObject {
 	public static final String TEST_IMAGE2 = "./src/resources/images/station.png";
 	private Image myImage;
 	private String myName;
+	private double myX;
+	private double myY;
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private List<Interaction> myInteractions;
@@ -23,6 +25,8 @@ public class AuthoringObject {
 	private void defaultObject() {
 		myImage = null;
 		myName = "";
+		myX = 0;
+		myY = 0;
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
@@ -49,6 +53,22 @@ public class AuthoringObject {
 	
 	public String getName() {
 		return myName;
+	}
+	
+	public double getX() {
+		return myX;
+	}
+	
+	public double getY() {
+		return myY;
+	}
+	
+	public void changeX(double newX) {
+		myX = newX;
+	}
+	
+	public void changeY(double newY) {
+		myY = newY;
 	}
 }
 
