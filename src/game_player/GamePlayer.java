@@ -124,8 +124,4 @@ public class GamePlayer {
 		return false;
 	}
 	
-	private void updateCurrentWindow() {
-		
-	}
-	
 }
