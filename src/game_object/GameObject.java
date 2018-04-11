@@ -92,8 +92,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
 			{
-				isMovementQueued = false;
-				movementWaypoint = null;
+				dequeueMovement();
 			}
 		}
 		

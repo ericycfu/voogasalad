@@ -21,6 +21,7 @@ public class ObjectLogic
 {
 	private boolean fulfillsLossCondition;
 	private Interaction currentInteraction;
+	
 	ObjectAttributes attributes;
 	
 	InteractionManager interactions;
@@ -53,13 +54,20 @@ public class ObjectLogic
 	 * @param interactionTarget
 	 * 
 	 * Executes interaction if within the given range
+	 * 
+	 * for now it executes all interactions, later it must be specific interactions
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		if(currentInteraction != null && current.getTransform().getDisplacement(interactionTarget.getTransform()) >= currentInteraction.getRange())
+		for(Interaction inter : interactions.getElements())
 		{
-			currentInteraction.executeCustomFunctions(current, interactionTarget);
+			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
+			{
+				inter.executeCustomFunctions(current, interactionTarget);
+			}
 		}
+		current.dequeueInteraction();
+		
 	}
 
 	public void setCurrentInteraction(Interaction i) {
