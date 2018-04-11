@@ -43,6 +43,7 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private void initialize() {
+		myDisplayables = new Group();
 		initializeMoveButtons();
 		display();
 	}
