@@ -15,9 +15,11 @@ public class PlaceTab extends Tab {
 	private DraggableScrollPane myScroll;
 	private Group place_root;
 	private AuthoringController ac;
+	private GameEntity game;
 
-	public PlaceTab(AuthoringController ac) {
+	public PlaceTab(AuthoringController ac, GameEntity game) {
 		this.ac = ac;
+		this.game = game;
 		initialize();
 	}
 	
@@ -35,7 +37,7 @@ public class PlaceTab extends Tab {
 	private void setText() {
 		this.setText("Place");
 		myScroll = new DraggableScrollPane(ac, game);
-		this.setContent(myScroll);
+		place_root.getChildren().add(myScroll);
 	}
 	
 	private void setButtons() {
