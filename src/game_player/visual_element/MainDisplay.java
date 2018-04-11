@@ -18,8 +18,6 @@ public class MainDisplay implements VisualUpdate {
 	private double myCurrentYCoor = 0; 
 	private double myWidth;
 	private double myHeight;
-	private List<GameObject> myTerrains = new ArrayList<>();
-	private List<GameObject> myUnits = new ArrayList<>();
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private SelectedUnitManager mySelectedUnitManager;
@@ -45,16 +43,6 @@ public class MainDisplay implements VisualUpdate {
 	private void initialize() {
 		myDisplayables = new Group();
 		initializeMoveButtons();
-		display();
-	}
-	
-	private void display() {
-		for (GameObject go: myTerrains) {
-			myDisplayables.getChildren().add(go.getRenderer().getDisp());
-		}
-		for (GameObject go: myUnits) {
-			myDisplayables.getChildren().add(go.getRenderer().getDisp());
-		}
 	}
 	
 	private void initializeMoveButtons() {
@@ -98,7 +86,14 @@ public class MainDisplay implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		//TO-DO
+		myDisplayables.getChildren().clear();
+		for (GameObject go : gameObjects) {
+			double xloc = translateX(go.getTransform().getPosition().getX());
+			double yloc = translateY(go.getTransform().getPosition().getY());
+			go.getRenderer().getDisp().setX(xloc);
+			go.getRenderer().getDisp().setY(yloc);
+			myDisplayables.getChildren().add(go.getRenderer().getDisp());
+		}
 	}
 
 	@Override
