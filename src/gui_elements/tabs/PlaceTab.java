@@ -5,7 +5,9 @@ import gui_elements.buttons.SaveGameButton;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
 import authoring.backend.AuthoringController;
+import authoring.backend.CreatedMaps;
 import authoring.backend.DraggableScrollPane;
+import authoring.backend.GameEntity;
 import javafx.scene.control.Tab;
 
 public class PlaceTab extends Tab {
@@ -32,7 +34,7 @@ public class PlaceTab extends Tab {
 	
 	private void setText() {
 		this.setText("Place");
-		myScroll = new DraggableScrollPane(ac);
+		myScroll = new DraggableScrollPane(ac, game);
 		this.setContent(myScroll);
 	}
 	
