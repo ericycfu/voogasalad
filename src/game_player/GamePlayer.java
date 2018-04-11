@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
@@ -31,7 +32,7 @@ public class GamePlayer {
 	public static final double TOP_HEIGHT = 0.05;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
-	private List<GameObject> myGameObjects;
+	private GameObjectManager myGameManager;
 	private List<GameObject> mySelectedGameObjects;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
@@ -46,21 +47,33 @@ public class GamePlayer {
 	private Scene myScene;
 	private String myCurrentAction;
 	
-	public GamePlayer(List<GameObject> gameobjects, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
-		myGameObjects = gameobjects;
+	public GamePlayer(GameObjectManager gameManager, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
+		myGameManager = gameManager;
 		myUnitInfoImg = unitInfoImgs;
 		myUnitDispImg = unitDispImgs;
 		myUnitSkills = unitSkills;
 		mySkillImages = skillImages;
 		mySelectedUnitManager = new SelectedUnitManager();
 		initialize();
+		initializeSingleUnitSelect();
+	}
+	
+	private void initializeSingleUnitSelect() {
+		for (GameObject go : myGameManager.getElements()) {
+			go.getRenderer().getDisp().setOnMouseClicked(e-> {
+				if (e.isPrimaryButtonDown()) {
+					mySelectedUnitManager.clear();
+					mySelectedUnitManager.add(go);
+				}
+			});
+		}
 	}
 	
 	private void initialize() {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
 		
-		myMainDisplay = new MainDisplay(SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myMainDisplay = new MainDisplay(mySelectedUnitManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);
