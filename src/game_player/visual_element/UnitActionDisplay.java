@@ -71,6 +71,10 @@ public class UnitActionDisplay implements VisualUpdate{
 		return myCurrentAction;
 	}
 	
+	public void setDefault() {
+		myCurrentAction = "";
+	}
+	
 	@Override
 	public Node getNodes() {
 		Group group = new Group();

@@ -9,6 +9,7 @@ import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitDisplay;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,8 +22,8 @@ import javafx.scene.image.Image;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 1000;
-	public static final int SCENE_SIZE_Y = 600;
+	public static final int SCENE_SIZE_X = 1200;
+	public static final int SCENE_SIZE_Y = 700;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.50;
@@ -41,7 +42,8 @@ public class GamePlayer {
 	private Map<String, Image> mySkillImages;
 	private Map<String, Image> myUnitInfoImg;
 	private Map<String, Image> myUnitDispImg;
-	private Scene thisScene;
+	private Scene myScene;
+	private String myCurrentAction;
 	
 	public GamePlayer(List<GameObject> gameobjects, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameObjects = gameobjects;
@@ -67,19 +69,25 @@ public class GamePlayer {
 		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(unitDisp);
-		thisScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
+		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 
 	public Scene getScene() {
-		return thisScene;
+		return myScene;
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		myCurrentAction = ""; // returns action selection to default
+		
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
 		myTopPanel.update(displayGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
 		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
-		myMainDisplay.update(displayGameObjects);
+		//myMainDisplay.update(displayGameObjects);
+		
+		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
+		myScene.setCursor(Cursor.CROSSHAIR);
+		myUnitDisplay.getUnitActionDisp().setDefault();
 	}
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
