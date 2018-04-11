@@ -60,6 +60,13 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 
 	}
 	
+	
+	public GameObject(Transform transform, ObjectLogic logic)
+	{
+		this.transform = transform;
+		this.myObjectLogic = logic;
+	}
+	
 	/**
 	 * 
 	 * @param startingPosition

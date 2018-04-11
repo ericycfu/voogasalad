@@ -30,6 +30,7 @@ public class GameInstance {
 	private Writer myWriter;
 	
 	public GameInstance(GameInfo g, String filepath) {
+		
 		myReader = new Reader();
 		myWriter = new Writer();
 		myGameInfo = g;
