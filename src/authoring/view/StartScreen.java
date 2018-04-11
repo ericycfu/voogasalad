@@ -40,8 +40,9 @@ public class StartScreen {
 		VBox box = new VBox();
 		box.getChildren().addAll(
 				new StartScreenText(), 
-				new MakeGameButton(myStage),
-				new PlayGameButton());
+				new MakeGameButton(myStage)
+//				new PlayGameButton()
+				);
 		box.setAlignment(Pos.CENTER);
 		myPane.getChildren().add(box);
 	}
