@@ -72,7 +72,8 @@ public class AuthoringObject {
 	}
 	
 	public void setImage(String image_filename) {
-		myImage = new Image(getClass().getClassLoader().getResourceAsStream(image_filename));
+		Image img = new Image(getClass().getClassLoader().getResourceAsStream(image_filename));
+		myDragImage = new DraggableImageView(this, img);
 	}
 	
 	public String getName() {
