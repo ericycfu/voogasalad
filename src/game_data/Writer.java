@@ -16,7 +16,7 @@ public class Writer {
 	 * @param data
 	 * @throws IOException 
 	 */
-	public void write(String location, List<Object> data) throws IOException {
+	public void write(String location, List<? extends Object> data) throws IOException {
 		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);
