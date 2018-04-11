@@ -36,16 +36,31 @@ public class TestMain extends Application {
 		myGOM = gom;
 		
 		GameObject go = new GameObject(new Vector2(100,100));
+		go.accessLogic().accessAttributes().createAttribute("Health");
+		go.accessLogic().accessAttributes().createAttribute("Mana");
+		go.accessLogic().accessAttributes().createAttribute("Attack");
+		go.accessLogic().accessAttributes().createAttribute("Armor");
+		go.accessLogic().accessAttributes().setAttributeValue("Health", 200);
+		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
+		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
+		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
 		go.setMovementSpeed(10);
-		Renderer renderer = new Renderer(new Image("ghoul.png"));
+		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
 		GameObject go2 = new GameObject(new Vector2(50,100));
+		go2.accessLogic().accessAttributes().createAttribute("Health");
+		go2.accessLogic().accessAttributes().createAttribute("Mana");
+		go2.accessLogic().accessAttributes().createAttribute("Attack");
+		go2.accessLogic().accessAttributes().createAttribute("Armor");
+		go2.accessLogic().accessAttributes().setAttributeValue("Health", 100);
+		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
+		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
+		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
+
 		go2.setMovementSpeed(10);
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
-		
-		
 		
 		gom.addElementToManager(go);
 		gom.addElementToManager(go2);

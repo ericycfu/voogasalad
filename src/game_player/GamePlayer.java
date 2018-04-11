@@ -64,7 +64,6 @@ public class GamePlayer {
 	private void initializeSingleUnitSelect() {
 		for (GameObject go : myGameManager.getElements()) {
 			go.getRenderer().getDisp().toFront();
-			System.out.println(go.getRenderer().getDisp());
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				//if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
@@ -111,7 +110,7 @@ public class GamePlayer {
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
 		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
+		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits()); // selection TO-DO
 		myMainDisplay.update(displayGameObjects);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();

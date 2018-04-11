@@ -48,7 +48,7 @@ public class ObjectAttributes {
 	 */
 	public void createAttribute(String attribute)
 	{
-		attributes.put(attribute, null);
+		attributes.put(attribute, 0.0);
 	}
 	
 	/**
@@ -63,8 +63,10 @@ public class ObjectAttributes {
 	{
 		if(attributes.containsKey(attribute))
 			attributes.put(attribute, newValue);
-		
-		throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		else
+		{
+			throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		}
 	}
 	
 	/**

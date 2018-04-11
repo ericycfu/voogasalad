@@ -30,4 +30,7 @@ public class SelectedUnitManager {
 		
 	}
 	
+	public List<GameObject> getSelectedUnits(){
+		return this.selectedUnits;
+	}
 }

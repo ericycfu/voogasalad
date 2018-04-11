@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_object.PropertyNotFoundException;
+import game_object.UnmodifiableGameObjectException;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -92,7 +94,14 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
-			//myHealthManaInfo.setText(currentUnit.getHealth() + "\n" + currentUnit.getMana());
+			try {
+				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(0);
+				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
+				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
+						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				//DO NOTHING
+			}
 		}
 	}
 	
@@ -101,14 +110,21 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myStatusInfo.setText(DefaultStatus);
 		}
 		else {
-			//myStatusInfo.setText("Damage: " + currentUnit.getDamage() + "\n" + "Armor: " + currentUnit.getArmor());
+			try {
+				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(2);
+				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(3);
+				myStatusInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
+						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				//DO NOTHING
+			}
 		}
 	}
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) return;
-		updateProfilePic(UnitProfileMap.get(gameObjects.get(0).getName()));
+		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());
 		updateHealthManaInfo(gameObjects.get(0));
 		updateStatusInfo(gameObjects.get(0));
 	}
