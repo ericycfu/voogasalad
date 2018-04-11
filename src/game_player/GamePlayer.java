@@ -57,18 +57,26 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
+		
+		myMainDisplay = new MainDisplay(SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		Node mainDisp = myMainDisplay.getNodes();
+		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
+		myRoot.getChildren().add(mainDisp);
+		
 		myTopPanel = new TopPanel(SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
-		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
-		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
-		//myMainDisplay = new MainDisplay();
 		myRoot.getChildren().add(myTopPanel.getNodes());
+		
+		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
 		Node minimap = myMiniMap.getNodes();
 		minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(minimap);
+		
+		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
 		Node unitDisp = myUnitDisplay.getNodes();
 		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(unitDisp);
+		
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 
@@ -86,7 +94,9 @@ public class GamePlayer {
 		//myMainDisplay.update(displayGameObjects);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
-		myScene.setCursor(Cursor.CROSSHAIR);
+		if (!myCurrentAction.equals("")) {
+			myScene.setCursor(Cursor.CROSSHAIR);
+		}
 		myUnitDisplay.getUnitActionDisp().setDefault();
 	}
 	
@@ -108,7 +118,7 @@ public class GamePlayer {
 	}
 	
 	private boolean isYInWindow(double y) {
-		if (y>myCurrentYCoor & y<myCurrentYCoor+SCENE_SIZE_Y*0.8) {
+		if (y>myCurrentYCoor & y<myCurrentYCoor+SCENE_SIZE_Y*(1-TOP_HEIGHT-BOTTOM_HEIGHT)) {
 			return true;
 		}
 		return false;
@@ -116,16 +126,6 @@ public class GamePlayer {
 	
 	private void updateCurrentWindow() {
 		
-	}
-	
-	private double translateX(double x) {
-		// TO-DO
-		return 0;
-	}
-	
-	private double translateY(double y) {
-		// TO-DO
-		return 0;
 	}
 	
 }
