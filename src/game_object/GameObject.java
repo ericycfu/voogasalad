@@ -232,4 +232,12 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	public void setMovementQueued(boolean isMovementQueued) {
 		this.isMovementQueued = isMovementQueued;
 	}
+
+	public double getMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public void setMovementSpeed(double movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
 }
