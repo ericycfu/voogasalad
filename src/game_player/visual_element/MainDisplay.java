@@ -23,15 +23,14 @@ public class MainDisplay implements VisualUpdate {
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private List<GameObject> mySelectedUnits;
-	private double currentPressedLocation; 
-	private MouseEvent mouseEvent;
+	private double myCurrentPressedLocation; 
 	
 	public MainDisplay(double width, double height) {
 		myWidth = width;
 		myHeight = height;
 		initialize();
 		myDisplayables.setOnMousePressed(e -> {
-			currentPressedLocation = e.getSceneX();
+			myCurrentPressedLocation = e.getSceneX();
 		});
 	}
 	
@@ -88,13 +87,9 @@ public class MainDisplay implements VisualUpdate {
 		myMoveWindowButtons.getChildren().add(down);
 	}
 	
-	private void select() {
-		
-	}
-	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		select();
+		//TO-DO
 	}
 
 	@Override
