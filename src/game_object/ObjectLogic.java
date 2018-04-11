@@ -1,10 +1,13 @@
 package game_object;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import conditions.Condition;
+import conditions.ConditionManager;
 import interactions.Interaction;
-import transform_library.Vector2;
+import interactions.InteractionManager;
 
 
 /**
@@ -14,15 +17,21 @@ import transform_library.Vector2;
  * attributes and interactions
  */
 
-public class ObjectLogic {
+public class ObjectLogic  
+{
+	private boolean fulfillsLossCondition;
+	private Interaction currentInteraction;
 	
 	ObjectAttributes attributes;
-	List<Interaction> interactions;
+	
+	InteractionManager interactions;
+	ConditionManager conditions;
 	
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
-		interactions = new ArrayList<>();
+		interactions = new InteractionManager();
+		conditions = new ConditionManager();
 	}
 	
 	public ObjectAttributes accessAttributes()
@@ -30,7 +39,51 @@ public class ObjectLogic {
 		return attributes;
 	}
 	
-	public List<Interaction> accessInteractions() {
+	public InteractionManager accessInteractions() {
 		return interactions;
-	}	
+	}
+	
+	public ConditionManager accessConditions()
+	{
+		return conditions;
+	}
+	
+	/**
+	 * 
+	 * @param current
+	 * @param interactionTarget
+	 * 
+	 * Executes interaction if within the given range
+	 * 
+	 * for now it executes all interactions, later it must be specific interactions
+	 */
+	public void executeInteractions(GameObject current, GameObject interactionTarget)
+	{
+		for(Interaction inter : interactions.getElements())
+		{
+			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
+			{
+				inter.executeCustomFunctions(current, interactionTarget);
+			}
+		}
+		current.dequeueInteraction();
+		
+	}
+
+	public void setCurrentInteraction(Interaction i) {
+		currentInteraction = i;
+	}
+	
+	public void checkConditions(GameObject current)
+	{
+		for(Condition condition : conditions.getElements())
+		{
+			condition.execute();
+		}
+	}
+	
+	public boolean getFulFillsLossCondition() {
+		return fulfillsLossCondition;
+	}
+	
 }

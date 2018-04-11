@@ -25,4 +25,8 @@ public class Renderer {
 		return myDisp;
 	}
 
+	public Renderer()
+	{
+		
+	}
 }
