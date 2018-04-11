@@ -36,6 +36,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private boolean isDead;
 	
 	private double movementSpeed = 0;
+	private boolean isMovementQueued;
+	private Transform movementWaypoint;
 	
 	/**
 	 *
@@ -82,6 +84,16 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
+		
+		if(isMovementQueued && movementWaypoint != null)
+		{
+			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
+			{
+				isMovementQueued = false;
+				movementWaypoint = null;
+			}
+		}
+		
 		if(isInteractionQueued)
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
@@ -122,6 +134,18 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		isInteractionQueued = false;
 		interactionTarget = null;
+	}
+	
+	public void queueMovement(Vector2 target)
+	{
+		isMovementQueued = true;
+		movementWaypoint = new Transform(target);
+	}
+	
+	public void dequeueMovement()
+	{
+		isMovementQueued = false;
+		movementWaypoint = null;
 	}
 	
 	/**
@@ -201,5 +225,13 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 
 	public void setMovementSpeed(double movementSpeed) {
 		this.movementSpeed = movementSpeed;
+	}
+
+	public boolean isMovementQueued() {
+		return isMovementQueued;
+	}
+
+	public void setMovementQueued(boolean isMovementQueued) {
+		this.isMovementQueued = isMovementQueued;
 	}
 }

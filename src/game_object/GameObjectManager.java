@@ -92,11 +92,11 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	 * @param target
 	 * @return
 	 * Game player can use this to move a specific game object to a position on the map 
-	 */
-	public Vector2 queueMovement(GameObject obj, Vector2 target)
+	
+	public void queueMovement(GameObject obj, Vector2 target)
 	{
-		
-	}
+		obj.queueMovement(target);
+	} */
 	
 	/**
 	 * 

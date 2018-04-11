@@ -10,6 +10,7 @@ public class Transform {
 	
 	private Vector2 position;
 	private double rotation;
+
 	
 	public Transform(Vector2 position)
 	{
@@ -127,11 +128,17 @@ public class Transform {
 	 * @param stepDistance: the distance to be moved at every step
 	 * 
 	 * Moves the current object towards a new object. 
+	 * Returns false if the gameobject reaches the target
 	 */
-	public void MoveTowards(Transform target, double stepDistance)
+	public boolean MoveTowards(Transform target, double stepDistance)
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
 		position = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
+		if(getDisplacement(this, target) <= 0.1)
+		{
+			return false;
+		}
+		return true;
 	}
 	
 }
