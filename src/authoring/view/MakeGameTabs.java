@@ -1,9 +1,8 @@
 package authoring.view;
 
-import game_view.tabs.DesignTab;
-import game_view.tabs.GameSettingsTab;
-import game_view.tabs.PlaceTab;
-
+import gui_elements.tabs.DesignTab;
+import gui_elements.tabs.GameSettingsTab;
+import gui_elements.tabs.PlaceTab;
 import javafx.scene.control.TabPane;
 
 public class MakeGameTabs extends TabPane {
