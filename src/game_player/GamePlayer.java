@@ -103,7 +103,7 @@ public class GamePlayer {
 		myCurrentAction = ""; // returns action selection to default
 		
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(displayGameObjects); //resources
+		myTopPanel.update(myGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
 		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
 		//myMainDisplay.update(displayGameObjects);
