@@ -1,7 +1,6 @@
 package gui_elements.buttons;
 
 import authoring.view.MakeGameSelect;
-import game_view.buttons.ImageButton;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

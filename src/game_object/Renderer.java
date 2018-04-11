@@ -19,6 +19,7 @@ public class Renderer {
 
 	public Renderer(Image img){
 		myDisp = new ImageView(img);
+		myDisp.setOnMouseClicked(e -> System.out.println("s"));
 	}
 	
 	public ImageView getDisp() {
