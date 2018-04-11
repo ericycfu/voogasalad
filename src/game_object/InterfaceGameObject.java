@@ -12,5 +12,5 @@ public interface InterfaceGameObject {
 
 	public Transform getTransform();
 	public void setTransform(Transform transform);
-
+	
 }
