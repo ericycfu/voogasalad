@@ -1,22 +1,25 @@
 package authoring.view;
 
+import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.DraggableScrollPane;
+import authoring.backend.SelectionImageView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class CreatedObjectsView extends DraggableScrollPane {
+public class CreatedObjectsView extends DraggableScrollPane implements AuthoringView {
 	public static final int THUMBNAIL_WIDTH = 200;
 	public static final int THUMBNAIL_HEIGHT = 200;
 	private CreatedObjects createdobjects;
-	private DraggableImageView dragimage;
+	private DraggableScrollPane map;
 	
-	public CreatedObjectsView(CreatedObjects cb) {
+	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		createdobjects = cb;
+		map = ac.getMap();
 		setupBox();
 	}
 	
@@ -31,13 +34,13 @@ public class CreatedObjectsView extends DraggableScrollPane {
 	
 	private VBox setupIndivBox(AuthoringObject obj) {
 		VBox box = new VBox();
-//		box.getChildren().add(extractImage(obj));
+		box.getChildren().add(extractImage(obj));
 		box.getChildren().add(new Text(extractName(obj)));
 		return box;
 	}
 	
-	private ImageView extractImage(AuthoringObject obj) {
-		DraggableImageView imgview = new DraggableImageView(obj, obj.getImage());
+	private SelectionImageView extractImage(AuthoringObject obj) {
+		SelectionImageView imgview = new SelectionImageView(obj);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 //		this.addDropOutHandling(obj, imgview);
@@ -47,4 +50,6 @@ public class CreatedObjectsView extends DraggableScrollPane {
 	private String extractName(AuthoringObject obj) {
 		return obj.getName();
 	}
+	
+//	public void 
 }

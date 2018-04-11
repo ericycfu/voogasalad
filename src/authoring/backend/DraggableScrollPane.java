@@ -9,6 +9,7 @@ import authoring.backend.DraggableImageView;
 public class DraggableScrollPane extends ScrollPane {
 	public DraggableScrollPane() {
 		super();
+		this.autosize();
 	}
 
 }
