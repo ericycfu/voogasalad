@@ -61,6 +61,8 @@ public class TopPanel implements VisualUpdate {
 		
 		setupMenu(xsize, ysize);
 		setupScores(xsize, ysize);
+		r1Name = "Gold";
+		r2Name = "Wood";
 		time = new TextArea(TIME + COLON + 0);
 		r1 = new TextArea(r1Name + COLON + 0);
 		r2 = new TextArea(r2Name + COLON + 0);
