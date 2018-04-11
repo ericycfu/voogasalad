@@ -44,7 +44,7 @@ public class GamePlayer {
 	private Map<String, Image> myUnitInfoImg;
 	private Map<String, Image> myUnitDispImg;
 	private Scene thisScene;
-	
+	private SelectedUnitManager selectedObjectManager;
 	public GamePlayer(List<GameObject> gameobjects, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameObjects = gameobjects;
 		myUnitInfoImg = unitInfoImgs;
