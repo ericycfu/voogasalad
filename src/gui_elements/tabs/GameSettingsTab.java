@@ -10,16 +10,20 @@ import game_object.ObjectAttributes;
 import gui_elements.buttons.AddResourceButton;
 import gui_elements.buttons.ResourceApplyButton;
 import gui_elements.combo_boxes.ChooseAmountComboBox;
+import gui_elements.combo_boxes.ChooseAmountComboBox1;
 import gui_elements.combo_boxes.ChooseResourceComboBox;
+import gui_elements.combo_boxes.ChooseResourceComboBox1;
 import gui_elements.combo_boxes.LossConditionComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.combo_boxes.NumPlayerComboBox;
 import gui_elements.labels.ChooseResourceLabel;
+import gui_elements.labels.ChooseResourceLabel1;
 import gui_elements.labels.CreateResourceLabel;
 import gui_elements.labels.GameSettingsLabel;
 import gui_elements.labels.LossConditionLabel;
 import gui_elements.labels.NumPlayersLabel;
 import gui_elements.labels.StartingAmountLabel;
+import gui_elements.labels.StartingAmountLabel1;
 import gui_elements.panes.MainPane;
 import gui_elements.panes.ResourceAmountPane;
 import gui_elements.panes.ResourceNamePane;
@@ -36,12 +40,13 @@ public class GameSettingsTab extends Tab {
 
 	private Group design_root;
 	private Label game_settings_label, num_players_label, loss_condition_label, 
-	create_resource_label, choose_resource_label, starting_amount_label;
+	create_resource_label, choose_resource_label, starting_amount_label
+	, choose_resource_label1, starting_amount_label1;
 	private GridPane setting_pane;
 	private MainPane resource_name_pane, resource_amount_pane;
 	private ObjectAttributes objAttr;
 	private MainComboBox num_players_cb, loss_condition_cb, create_resource_cb,
-	choose_resource_cb, choose_amount_cb;
+	choose_resource_cb, choose_amount_cb, choose_resource_cb1, choose_amount_cb1;
 	private Stage stage;
 
 	public GameSettingsTab() {
@@ -60,7 +65,7 @@ public class GameSettingsTab extends Tab {
 	}
 
 	private void setText(){
-		this.setText("GAME SETTING");
+		this.setText("Game Setting");
 	}
 
 	private void setGroup() {
@@ -85,9 +90,15 @@ public class GameSettingsTab extends Tab {
 		create_resource_label = new CreateResourceLabel().getLabel();
 		choose_resource_label = new ChooseResourceLabel().getLabel();
 		starting_amount_label = new StartingAmountLabel().getLabel();
+		
+		choose_resource_label1 = new ChooseResourceLabel1().getLabel();
+		starting_amount_label1 = new StartingAmountLabel1().getLabel();
 
+		
+		
 		design_root.getChildren().addAll(game_settings_label, num_players_label,loss_condition_label,
-				create_resource_label, choose_resource_label, starting_amount_label);
+				create_resource_label, choose_resource_label, starting_amount_label,
+				choose_resource_label1, starting_amount_label1);
 	}
 
 	private void setComboBoxes() {
@@ -132,9 +143,19 @@ public class GameSettingsTab extends Tab {
 						);
 		choose_amount_cb.getItems().addAll(amount_options);
 
+		choose_resource_cb1 = new ChooseResourceComboBox1();
+		choose_resource_cb1.setValue("silver");
+		choose_resource_cb1.getItems().addAll(resource_options);
+		
+		
+		choose_amount_cb1 = new ChooseAmountComboBox1();
+		choose_amount_cb1.setValue("10");
+		choose_amount_cb1.getItems().addAll(amount_options);
+		
 		design_root.getChildren().addAll(num_players_cb.getComboBox(), 
 				loss_condition_cb.getComboBox(), choose_resource_cb.getComboBox(),
-				choose_amount_cb.getComboBox());
+				choose_amount_cb.getComboBox(), choose_resource_cb1.getComboBox(),
+				choose_amount_cb1.getComboBox());
 
 
 

@@ -13,7 +13,7 @@ public class AddResourceButton extends MainButton {
 	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
 	
 	public AddResourceButton(Pane attribute_names_pane, Pane attribute_values_pane) {
-		super(FILENAME);
+		super(FILENAME, true);
 		this.attribute_names_pane = (FlowPane) attribute_names_pane;
 		this.attribute_values_pane = (FlowPane) attribute_values_pane;
 	}
