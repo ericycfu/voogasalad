@@ -8,12 +8,24 @@ import java.util.Properties;
 import game_object.ObjectAttributes;
 import gui_elements.buttons.AddAttributeButton;
 import gui_elements.buttons.AttributeApplyAndOkButton;
+import gui_elements.combo_boxes.ComponentTagComboBox;
+import gui_elements.combo_boxes.InteractionComponentTagComboBox;
+import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.AttributeNameLabel;
 import gui_elements.labels.AttributeValueLabel;
 import gui_elements.labels.ComponentAttributesTitleLabel;
+import gui_elements.labels.ComponentInteractionsTitleLabel;
+import gui_elements.labels.InteractionComponentTagLabel;
+import gui_elements.labels.InteractionNameLabel;
+import gui_elements.labels.InteractionSelectedLabel;
+import gui_elements.labels.InteractionSelectionsLabel;
+import gui_elements.labels.InteractionVisionRangeLabel;
 import gui_elements.panes.AttributeNamesPane;
 import gui_elements.panes.AttributeValuesPane;
 import gui_elements.panes.MainPane;
+import gui_elements.text_fields.InteractionNameTextField;
+import gui_elements.text_fields.InteractionVisionRangeTextField;
+import gui_elements.text_fields.MainTextField;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,9 +37,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ComponentAddAttributesScreen implements AuthoringView {
+public class ComponentAddInteractionsScreen {
 	private final Paint BACKGROUND = Color.BLACK;
-    private final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
+    private final String PROPERTY_FILENAME = "data/component_add_interactions_screen.properties";
     private final String TITLE_PROPERTY = "title";
     private final String WIDTH_PROPERTY = "width";
     private final String HEIGHT_PROPERTY = "height";
@@ -36,12 +48,14 @@ public class ComponentAddAttributesScreen implements AuthoringView {
     private Stage stage;
     private ObjectAttributes objAttributesInstance;
     private MainPane attribute_names_pane, attribute_values_pane;
+    private MainComboBox interaction_component_tag_cb;
+    private MainTextField interaction_name_tf, interaction_vision_range_tf;
 
-	// Additional setup for the add-attributes screen.
+	// Additional setup for the add-interactions screen.
     private Scene myScene;
     private static Group root;
     
-    public ComponentAddAttributesScreen(ObjectAttributes objAttributesInstance) {
+    public ComponentAddInteractionsScreen(ObjectAttributes objAttributesInstance) {
     	this.objAttributesInstance = objAttributesInstance;
     	initialize();
     }
@@ -62,7 +76,7 @@ public class ComponentAddAttributesScreen implements AuthoringView {
 	}
 
 	/**
-	 * Sets the stage for the add-attributes screen.
+	 * Sets the stage for the add-interactions screen.
 	 */
 	private void setStage() {
 		stage = new Stage();
@@ -106,34 +120,50 @@ public class ComponentAddAttributesScreen implements AuthoringView {
     	setComboBoxes();
     	setRadioButtons();
     	setButtons();
+    	setTextFields();
     }
     
     private void setLabels() {
-    	root.getChildren().addAll(new ComponentAttributesTitleLabel().getLabel(),
-    					   	      new AttributeNameLabel().getLabel(),
-    						      new AttributeValueLabel().getLabel());
+    	root.getChildren().addAll(new ComponentInteractionsTitleLabel().getLabel(),
+    							  new InteractionNameLabel().getLabel(),
+    							  new InteractionComponentTagLabel().getLabel(),
+    							  new InteractionVisionRangeLabel().getLabel(),
+  								  new InteractionSelectionsLabel().getLabel(),
+  								  new InteractionSelectedLabel().getLabel());    							  
     }
     
     private void setPanes() {
-    	attribute_names_pane = new AttributeNamesPane(objAttributesInstance);
-    	attribute_values_pane = new AttributeValuesPane(objAttributesInstance);
-    	    	
-    	root.getChildren().addAll(attribute_names_pane.getPane(),
-    							  attribute_values_pane.getPane());
+//    	attribute_names_pane = new AttributeNamesPane(objAttributesInstance);
+//    	attribute_values_pane = new AttributeValuesPane(objAttributesInstance);
+//    	    	
+//    	root.getChildren().addAll(attribute_names_pane.getPane(),
+//    							  attribute_values_pane.getPane());
     }
     
     private void setComboBoxes() {
+		interaction_component_tag_cb = new InteractionComponentTagComboBox();
+//		interaction_component_property_cb = new InteractionComponentPropertyComboBox();
+		
+		root.getChildren().addAll(interaction_component_tag_cb.getComboBox());
     }
     
     private void setRadioButtons() {
     }
         
     private void setButtons() {
-    	root.getChildren().addAll(new AddAttributeButton(attribute_names_pane.getPane(), 
-    												     attribute_values_pane.getPane()),
-    						   new AttributeApplyAndOkButton(attribute_names_pane.getPane(),
-    								   						 attribute_values_pane.getPane(),
-    								   						 stage,
-    								   						 objAttributesInstance));
+//    	root.getChildren().addAll(new AddAttributeButton(attribute_names_pane.getPane(), 
+//    												     attribute_values_pane.getPane()),
+//    						   new AttributeApplyAndOkButton(attribute_names_pane.getPane(),
+//    								   						 attribute_values_pane.getPane(),
+//    								   						 stage,
+//    								   						 objAttributesInstance));
+    }
+    
+    private void setTextFields() {
+		interaction_name_tf = new InteractionNameTextField();
+		interaction_vision_range_tf = new InteractionVisionRangeTextField();
+		
+		root.getChildren().addAll(interaction_name_tf.getTextField(),
+								  interaction_vision_range_tf.getTextField());
     }
 }

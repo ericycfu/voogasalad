@@ -9,14 +9,14 @@ import javafx.scene.control.TabPane;
 public class MakeGameTabs extends TabPane implements AuthoringView {
 	private PlaceTab myPlaceTab;
 	public MakeGameTabs(AuthoringController ac) {
-		myPlaceTab = new PlaceTab();
+		myPlaceTab = new PlaceTab(ac);
 		
 		this.getTabs().addAll(
 				new GameSettingsTab(),
 				new DesignTab(),
 				myPlaceTab);
 		ac.addToAuthorController(this);
-		ac.addToAuthorController(myPlaceTab.getMap());
+//		ac.addToAuthorController(myPlaceTab.getMap());
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	}
 	
