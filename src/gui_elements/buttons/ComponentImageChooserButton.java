@@ -14,9 +14,10 @@ public class ComponentImageChooserButton extends MainButton {
 	private FileChooser filechooser;
 	private File file;
 	private ComponentImageChoiceTextLabel component_image_choice_text_label;
+	private static final boolean EXPLICIT_SET_ACTION = true;
 	
 	public ComponentImageChooserButton(MainLabel component_image_choice_text_label) {
-		super(FILENAME);
+		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.component_image_choice_text_label = (ComponentImageChoiceTextLabel) component_image_choice_text_label;
 		setAction();
 	}
@@ -33,5 +34,9 @@ public class ComponentImageChooserButton extends MainButton {
 						file.toString().substring(file.toString().lastIndexOf("\\") + 1));
 			}
 		});
+	}
+	
+	public String getFileName() {
+		return file.toString();
 	}
 }
