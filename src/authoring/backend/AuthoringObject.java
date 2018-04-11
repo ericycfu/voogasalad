@@ -50,5 +50,8 @@ public class AuthoringObject {
 	public String getName() {
 		return myName;
 	}
+	
+	public ObjectAttributes getObjectAttributesInstance() {
+		return myAttributes;
+	}
 }
-
