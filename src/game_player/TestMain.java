@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -28,7 +29,7 @@ public class TestMain extends Application {
 		ArrayList<GameObject> go = new ArrayList<>();
 		Map<String, List<String>> unitSkills = new HashMap<>();
 		Map<String, Image> skillImages = new HashMap<>();	
-		GamePlayer gp = new GamePlayer(go, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+		GamePlayer gp = new GamePlayer(new GameObjectManager(), unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
         myGP = gp;
 		Scene scene = gp.getScene();  
         gpStage.setScene(scene);
