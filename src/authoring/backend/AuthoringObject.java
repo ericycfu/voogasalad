@@ -54,4 +54,8 @@ public class AuthoringObject {
 	public ObjectAttributes getObjectAttributesInstance() {
 		return myAttributes;
 	}
+	
+	public ObjectLogic getObjectLogic() {
+		return myObjectLogic;
+	}
 }
