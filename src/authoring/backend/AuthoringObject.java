@@ -11,6 +11,7 @@ public class AuthoringObject {
 	public static final String TEST_IMAGE = "/images/station.png";
 	public static final String TEST_IMAGE2 = "./src/resources/images/station.png";
 	private Image myImage;
+	private DraggableImageView myDragImage;
 	private String myName;
 	private double myX;
 	private double myY;
