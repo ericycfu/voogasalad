@@ -4,15 +4,18 @@ import gui_elements.buttons.PlayGameButton;
 import gui_elements.buttons.SaveGameButton;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
+import authoring.backend.AuthoringController;
 import authoring.backend.DraggableScrollPane;
 import javafx.scene.control.Tab;
 
 public class PlaceTab extends Tab {
 
-	private DraggableScrollPane myMap;
+	private DraggableScrollPane myScroll;
 	private Group place_root;
+	private AuthoringController ac;
 
-	public PlaceTab() {
+	public PlaceTab(AuthoringController ac) {
+		this.ac = ac;
 		initialize();
 	}
 	
@@ -29,8 +32,8 @@ public class PlaceTab extends Tab {
 	
 	private void setText() {
 		this.setText("Place");
-		myMap = new DraggableScrollPane();
-		this.setContent(myMap);
+		myScroll = new DraggableScrollPane(ac);
+		this.setContent(myScroll);
 	}
 	
 	private void setButtons() {
@@ -38,7 +41,7 @@ public class PlaceTab extends Tab {
 										new PlayGameButton().getButton());
 	}
 
-	public DraggableScrollPane getMap() {
-		return myMap;
+	public DraggableScrollPane getScroll() {
+		return myScroll;
 	}	
 }

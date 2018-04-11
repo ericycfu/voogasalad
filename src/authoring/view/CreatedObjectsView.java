@@ -5,17 +5,18 @@ import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.DraggableScrollPane;
+import authoring.backend.MapEntity;
 import authoring.backend.SelectionImageView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class CreatedObjectsView extends DraggableScrollPane implements AuthoringView {
+public class CreatedObjectsView extends ScrollPane implements AuthoringView {
 	public static final int THUMBNAIL_WIDTH = 200;
 	public static final int THUMBNAIL_HEIGHT = 200;
 	private CreatedObjects createdobjects;
-	private DraggableScrollPane map;
+	private MapEntity map;
 	
 	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		createdobjects = cb;
@@ -40,7 +41,7 @@ public class CreatedObjectsView extends DraggableScrollPane implements Authoring
 	}
 	
 	private SelectionImageView extractImage(AuthoringObject obj) {
-		SelectionImageView imgview = new SelectionImageView(obj);
+		SelectionImageView imgview = new SelectionImageView(obj, map);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 //		this.addDropOutHandling(obj, imgview);

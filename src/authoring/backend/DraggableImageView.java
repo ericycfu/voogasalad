@@ -12,7 +12,8 @@ public class DraggableImageView extends ImageView {
     private double mouseY;
     
     public DraggableImageView(AuthoringObject obj, Image image) {
-    		super(image);
+    		super();
+    		this.setImage(image);
     		this.setOnMousePressed(e -> {
         		mouseX = e.getSceneX();
         		mouseY = e.getSceneY();
