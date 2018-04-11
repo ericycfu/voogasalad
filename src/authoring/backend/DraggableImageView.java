@@ -20,7 +20,6 @@ public class DraggableImageView extends ImageView {
         });
     		
     		this.setOnMouseDragged(event -> {
-        		System.out.print("drag detected!");
     			   double deltaX = event.getSceneX() - mouseX ;
     			   double deltaY = event.getSceneY() - mouseY ;
     			   obj.changeX(obj.getX() + deltaX);
