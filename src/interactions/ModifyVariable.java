@@ -71,7 +71,6 @@ public class ModifyVariable implements CustomFunction {
 		{
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		
 	}
 	
 	@Override

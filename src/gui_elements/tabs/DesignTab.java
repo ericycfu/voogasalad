@@ -65,9 +65,9 @@ public class DesignTab extends Tab {
 	private void initialize() {
 		setGroup();
 		setLabels();
-		setButtons();
 		setTextFields();
 		setComboBoxes();
+		setButtons();
 		setText();
 	}
 	
@@ -97,19 +97,7 @@ public class DesignTab extends Tab {
 //										 new InteractionComponentTagLabel().getLabel(),
 //										 new InteractionQuantityLabel().getLabel(),
 	}
-	
-	private void setButtons() {
-		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
 		
-		design_root.getChildren().addAll(
-//										 new AddInteractionButton().getButton(),
-										 component_image_chooser_button.getButton(),
-//										 new CreateComponentButton(null, authoring_object).getButton(),
-										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
-										 new CreateInteractionsButton(authoring_object.getObjectAttributesInstance()).getButton(),
-										 new CreateConditionsButton().getButton());
-	}
-	
 	private void setTextFields() {
 //		component_health_tf = new ComponentHealthTextField();
 		component_name_tf = new ComponentNameTextField();
@@ -132,5 +120,21 @@ public class DesignTab extends Tab {
 		
 		design_root.getChildren().addAll(component_tag_cb.getComboBox());
 //										 interaction_component_property_cb.getComboBox(),
+	}
+	
+	private void setButtons() {
+		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
+		
+		design_root.getChildren().addAll(
+//										 new AddInteractionButton().getButton(),
+										 component_image_chooser_button.getButton(),
+										 new CreateComponentButton(authoring_object,
+												 component_name_tf.getTextField(),
+												 component_tag_cb.getComboBox(),
+												 component_image_choice_text_label.getLabel(),
+												 component_movement_speed_tf.getTextField()).getButton(),
+										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
+										 new CreateInteractionsButton(authoring_object.getObjectAttributesInstance()).getButton(),
+										 new CreateConditionsButton().getButton());
 	}
 }
