@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.AbstractMap.SimpleEntry;
 
 import game_engine.ElementManager;
 import map.GridMap;
@@ -120,9 +118,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	
 	@Override
 	public List<GameObject> getElements() {
-		
 		List<GameObject> gameObjectList = new ArrayList<>();
-		
 		for(Map.Entry<Integer, GameObject> var : objectMap.entrySet())
 		{
 			gameObjectList.add(var.getValue());
@@ -130,7 +126,9 @@ public class GameObjectManager implements ElementManager<GameObject>{
 		
 		return Collections.unmodifiableList(gameObjectList);
 	}
-
+	public GameObject get(int id) {
+		return objectMap.get(id);
+	}
 	
 
 }
