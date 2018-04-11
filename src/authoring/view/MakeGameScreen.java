@@ -1,6 +1,7 @@
 package authoring.view;
 
 import authoring.backend.AuthoringController;
+import authoring.backend.GameEntity;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,17 +22,19 @@ public class MakeGameScreen implements AuthoringView {
 	private Stage myStage;
 	private Scene myScene;
 	private SplitPane myPane;
+	private GameEntity myGame;
 	private AuthoringController myAuthoringController;
-	public MakeGameScreen (Stage stage) {
+	public MakeGameScreen (Stage stage, GameEntity game) {
 		myStage = stage;
+		myGame = game;
 		setupScreen();
 	}
 	
 	private void setupScreen() {
 		myAuthoringController = new AuthoringController();
 		myPane = new SplitPane(
-				new MakeGameTabs(myAuthoringController),
-				new CreatedObjectsTabs(myAuthoringController));
+				new MakeGameTabs(myAuthoringController, myGame),
+				new CreatedObjectsTabs(myAuthoringController, myGame));
 		
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 		myScene = new Scene(myPane);

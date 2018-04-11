@@ -16,8 +16,10 @@ public class SelectionImageView extends ImageView {
 	
 	public void actionImgToScrollPane(AuthoringObject obj, MapEntity pane) {
 		this.setOnMouseClicked(e -> {
-			DraggableImageView dragimgview = new DraggableImageView(obj, this.getImage());
+			DraggableImageView dragimgview = obj.getDragImage();
 			pane.getChildren().add(dragimgview);
+//			AuthoringObject newobj = new AuthoringObject();
+//			pane.getChildren().add(newobj);
 		});
 	}
 }
