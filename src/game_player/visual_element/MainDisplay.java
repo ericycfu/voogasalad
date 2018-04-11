@@ -1,16 +1,16 @@
 package game_player.visual_element;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import game_object.GameObject;
+import game_player.SelectedUnitManager;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
 
@@ -22,16 +22,24 @@ public class MainDisplay implements VisualUpdate {
 	private List<GameObject> myUnits = new ArrayList<>();
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
-	private List<GameObject> mySelectedUnits;
-	private double myCurrentPressedLocation; 
+	private SelectedUnitManager mySelectedUnitManager;
+	//private double currentPressedLocation; 
+	private Group myMainDisplay;
 	
-	public MainDisplay(double width, double height) {
+	public MainDisplay(SelectedUnitManager selectedUnitManager, double width, double height) {
+		mySelectedUnitManager = selectedUnitManager;
+		myMainDisplay = new Group();
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myDisplayables.setOnMousePressed(e -> {
-			myCurrentPressedLocation = e.getSceneX();
+		myMainDisplay.setOnMouseClicked(e -> {
+			if (e.isSecondaryButtonDown()) {
+				double mouseX = e.getX();
+				double mouseY = e.getY();
+				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+			}
 		});
+		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
 	}
 	
 	private void initialize() {
@@ -94,14 +102,7 @@ public class MainDisplay implements VisualUpdate {
 
 	@Override
 	public Node getNodes() {
-		Group group = new Group();
-		//group.getChildren().add(this.myDisplayables);
-		group.getChildren().add(this.myMoveWindowButtons);
-		return group;
-	}
-	
-	public List<GameObject> getSelectedUnits(){
-		return Collections.unmodifiableList(mySelectedUnits);
+		return myMainDisplay;
 	}
 	
 	private double translateX(double x) {
@@ -112,6 +113,14 @@ public class MainDisplay implements VisualUpdate {
 	private double translateY(double y) {
 		double retY = y - myCurrentYCoor;
 		return retY;
+	}
+	
+	private double detranslateX(double x){
+		return x + myCurrentXCoor;
+	}
+	
+	private double detranslateY(double y){
+		return y + myCurrentYCoor;
 	}
 	
 	private void updateCurrentWindow() {
