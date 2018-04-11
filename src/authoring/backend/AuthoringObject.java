@@ -47,6 +47,10 @@ public class AuthoringObject {
 		return myImage;
 	}
 	
+	public void setImage(String image_filename) {
+		myImage = new Image(getClass().getClassLoader().getResourceAsStream(image_filename));
+	}
+	
 	public String getName() {
 		return myName;
 	}

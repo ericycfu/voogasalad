@@ -65,7 +65,7 @@ public class ModifyVariable implements CustomFunction {
 		try 
 		{
 			prevVal = obj.accessAttributes().getAttribute(variable);
-			obj.accessAttributes().SetAttributeValue(variable, prevVal + delta);
+			obj.accessAttributes().setAttributeValue(variable, prevVal + delta);
 		} 
 		catch (PropertyNotFoundException e) 
 		{
