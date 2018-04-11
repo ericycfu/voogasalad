@@ -3,6 +3,7 @@ package interactions;
 import game_object.GameObject;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
+import game_object.UnmodifiableGameObjectException;
 
 /**
  * 
@@ -17,7 +18,7 @@ public class ModifyVariable implements CustomFunction {
 	public final String DELTA = "Delta";
 	public final String RATE = "Rate";
 	
-	private CustomFunctionParameterFormat format;
+	private CustomComponentParameterFormat format;
 	
 	private String variable;
 	private double delta;
@@ -27,14 +28,14 @@ public class ModifyVariable implements CustomFunction {
 	
 	public ModifyVariable()
 	{
+		format = new CustomComponentParameterFormat();
 		setParameterFormatFields();
-		format = new CustomFunctionParameterFormat();
 	}
 	
 	
 	// make seperate container object for parameter data? 
 	
-	public void setParameters(CustomFunctionParameterFormat format)
+	public void setParameters(CustomComponentParameterFormat format)
 	{
 		try 
 		{
@@ -43,12 +44,10 @@ public class ModifyVariable implements CustomFunction {
 		} 
 		catch (PropertyNotFoundException e) 
 		{
-			e.printStackTrace();
 			System.out.println("Improper custom function variable assignment");
 		}
 		catch (NumberFormatException e)
 		{
-			e.printStackTrace();
 			System.out.println("Improper format for variable");
 		}
 	}
@@ -57,30 +56,27 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute(ObjectLogic obj) {
+	public void Execute(GameObject current, GameObject other) {
 		
 		//largely placeholder implementation, will have to take care of rate
 		double prevVal;
 		
 		try 
 		{
-			prevVal = obj.accessAttributes().getAttribute(variable);
-			obj.accessAttributes().setAttributeValue(variable, prevVal + delta);
+			prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
+			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + delta);
+			current.dequeueInteraction();
 		} 
-		catch (PropertyNotFoundException e) 
+		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
-			e.printStackTrace();
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		
 	}
-
-	
 	
 	@Override
-	public CustomFunctionParameterFormat getParameterFormat() {
-		
+	public CustomComponentParameterFormat getParameterFormat() {
 		return format;
-		
 	}
 
 

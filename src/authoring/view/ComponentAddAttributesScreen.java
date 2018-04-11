@@ -25,7 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ComponentAddAttributesScreen {
+public class ComponentAddAttributesScreen implements AuthoringView {
 	private final Paint BACKGROUND = Color.BLACK;
     private final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
     private final String TITLE_PROPERTY = "title";
