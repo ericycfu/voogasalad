@@ -15,12 +15,12 @@ public class AttributeApplyAndOkButton extends MainButton {
 	private FlowPane attribute_names_pane, attribute_values_pane;
 	private Stage stage;
 	private ObjectAttributes objAttributesInstance;
-	private static final boolean NO_EXPLICIT_SET_ACTION = false;
+	private static final boolean EXPLICIT_SET_ACTION = false;
 	private static final double DEFAULT_ATTRIBUTE_VALUE = 0.0;
 	
 	public AttributeApplyAndOkButton(Pane attribute_names_pane, Pane attribute_values_pane,
 			Stage stage, ObjectAttributes objAttributesInstance) {
-		super(FILENAME, NO_EXPLICIT_SET_ACTION);
+		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.attribute_names_pane = (FlowPane) attribute_names_pane;
 		this.attribute_values_pane = (FlowPane) attribute_values_pane;
 		this.stage = stage;
