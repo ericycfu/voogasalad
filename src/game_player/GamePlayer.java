@@ -106,7 +106,7 @@ public class GamePlayer {
 		myTopPanel.update(displayGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
 		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
-		//myMainDisplay.update(displayGameObjects);
+		myMainDisplay.update(displayGameObjects);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
 		if (!myCurrentAction.equals("")) {
