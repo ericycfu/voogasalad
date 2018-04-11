@@ -1,4 +1,4 @@
-package game_view.buttons;
+package gui_elements.buttons;
 
 import javafx.scene.control.Button;
 
