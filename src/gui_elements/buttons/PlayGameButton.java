@@ -1,13 +1,16 @@
 package gui_elements.buttons;
 
-import javafx.scene.control.Button;
+public class PlayGameButton extends MainButton {
+	
+	private static final String FILENAME = "play_game_button.properties";
+	private static final boolean EXPLICIT_SET_ACTION = true;
 
-public class PlayGameButton extends ImageButton {
 	public PlayGameButton() {
-		setupText();
+		super(FILENAME, EXPLICIT_SET_ACTION);
 	}
+
+	@Override
+	protected void setAction() {
 		
-	private void setupText() {
-		this.setText("Play Game");
 	}
 }

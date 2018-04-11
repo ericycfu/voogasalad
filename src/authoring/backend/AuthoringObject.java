@@ -18,8 +18,10 @@ public class AuthoringObject {
 
 	private DraggableImageView myDragImage;
 	private String myName;
+	private String myTag;
 	private double myX;
 	private double myY;
+	private double myMovementSpeed;
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private InteractionManager myInteractions;
@@ -69,8 +71,32 @@ public class AuthoringObject {
 		myDragImage.setY(myY);
 	}
 	
+	public void setImage(String image_filename) {
+		myImage = new Image(getClass().getClassLoader().getResourceAsStream(image_filename));
+	}
+	
 	public String getName() {
 		return myName;
+	}
+	
+	public void setName(String name) {
+		myName = name;
+	}
+	
+	public double getMovementSpeed() {
+		return myMovementSpeed;
+	}
+	
+	public void setMovementSpeed(double movementSpeed) {
+		myMovementSpeed = movementSpeed;
+	}
+	
+	public String getTag() {
+		return myTag;
+	}
+	
+	public void setTag(String tag) {
+		myTag = tag;
 	}
 	
 	public double getX() {

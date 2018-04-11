@@ -11,9 +11,10 @@ public class AddAttributeButton extends MainButton {
 	private FlowPane attribute_names_pane, attribute_values_pane;
 	private static final int TEXTFIELD_SIZE = 10;
 	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
+	private static final boolean EXPLICIT_SET_ACTION = true;
 	
 	public AddAttributeButton(Pane attribute_names_pane, Pane attribute_values_pane) {
-		super(FILENAME);
+		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.attribute_names_pane = (FlowPane) attribute_names_pane;
 		this.attribute_values_pane = (FlowPane) attribute_values_pane;
 	}
