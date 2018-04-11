@@ -6,6 +6,8 @@ import java.util.Map;
 
 import game_engine.EngineObject;
 import game_engine.Team;
+
+import javafx.scene.image.Image;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -40,6 +42,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private double movementSpeed = 0;
 	private boolean isMovementQueued;
 	private Transform movementWaypoint;
+
+	private Image img;
 	
 	/**
 	 *
@@ -53,6 +57,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
 		isDead = false;
+
 	}
 	
 	/**
@@ -67,6 +72,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		this.transform = new Transform(startingPosition);
 		this.myObjectLogic = new ObjectLogic();
 		this.renderer = new Renderer();
+
 		this.name = name;
 		this.tag = tag;
 		addToManager(manager);
@@ -218,19 +224,12 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		return id;
 	}
+	
 	public Team getOwner() {
 		return owner;
 	}
 	public Map<String,Double> getCosts(){
 		return costs;
-	}
-
-	public boolean isMovementQueued() {
-		return isMovementQueued;
-	}
-
-	public void setMovementQueued(boolean isMovementQueued) {
-		this.isMovementQueued = isMovementQueued;
 	}
 
 	public double getMovementSpeed() {
@@ -240,4 +239,5 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	public void setMovementSpeed(double movementSpeed) {
 		this.movementSpeed = movementSpeed;
 	}
+
 }

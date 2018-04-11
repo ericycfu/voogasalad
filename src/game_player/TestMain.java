@@ -15,8 +15,6 @@ public class TestMain extends Application {
 
 
 	public static final String TITLE = "Gameplayer";
-	public static final int INIT_X_SIZE = 1000;
-	public static final int INIT_Y_SIZE = 1000;
 	
 	@Override
 	public void start(Stage gpStage) throws Exception {	
@@ -25,7 +23,7 @@ public class TestMain extends Application {
 		Map<String, List<String>> unitSkills = new HashMap<>();
 		Map<String, Image> skillImages = new HashMap<>();	
 		GamePlayer gp = new GamePlayer(go, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        Scene scene = gp.setScene(gpStage);  
+        Scene scene = gp.getScene();  
         gpStage.setScene(scene);
         gpStage.show();
 	}
