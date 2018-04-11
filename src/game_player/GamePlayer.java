@@ -42,6 +42,7 @@ public class GamePlayer {
 	private Map<String, Image> mySkillImages;
 	private Map<String, Image> myUnitInfoImg;
 	private Map<String, Image> myUnitDispImg;
+	private SelectedUnitManager selectedObjectManager;
 	private Scene myScene;
 	private String myCurrentAction;
 	
