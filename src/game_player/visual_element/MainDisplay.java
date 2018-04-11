@@ -10,6 +10,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
@@ -30,13 +34,20 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMainDisplay.setOnMouseClicked(e -> {
-			if (e.isSecondaryButtonDown()) {
+		Rectangle rect = new Rectangle();
+		rect.setWidth(myWidth);
+		rect.setHeight(myHeight);
+		rect.setFill(Color.GREEN);
+		rect.setOnMouseClicked(e -> {
+			if (e.getButton()==MouseButton.SECONDARY) {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+				System.out.println("move");
 			}
 		});
+		rect.toBack();
+		myMainDisplay.getChildren().add(rect);
 		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
 	}
 	
