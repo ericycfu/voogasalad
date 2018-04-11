@@ -14,8 +14,8 @@ import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
 
-	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; 
+	private double myCurrentXCoor = 0; // current MAP-x-coordinate of window left corner
+	private double myCurrentYCoor = 0; 
 	private double myWidth;
 	private double myHeight;
 	private List<GameObject> myTerrains = new ArrayList<>();

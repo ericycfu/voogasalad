@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.visual_element.MainDisplay;
@@ -103,7 +104,7 @@ public class GamePlayer {
 		myCurrentAction = ""; // returns action selection to default
 		
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(myGameObjects); //resources
+		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(displayGameObjects);
 		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
 		//myMainDisplay.update(displayGameObjects);

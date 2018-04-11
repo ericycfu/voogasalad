@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import game_data.Reader;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.Renderer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -14,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import transform_library.Vector2;
 
 public class TestMain extends Application {
 
@@ -26,10 +29,14 @@ public class TestMain extends Application {
 	@Override
 	public void start(Stage gpStage) throws Exception {	
 		// Test
-		ArrayList<GameObject> go = new ArrayList<>();
 		Map<String, List<String>> unitSkills = new HashMap<>();
 		Map<String, Image> skillImages = new HashMap<>();	
-		GamePlayer gp = new GamePlayer(new GameObjectManager(), unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+		GameObjectManager gom = new GameObjectManager();
+		GameObject go = new GameObject(new Vector2(100,100));
+		Renderer renderer = new Renderer(new Image("ghoul.png"));
+		go.setRenderer(renderer);
+		gom.addElementToManager(go);
+		GamePlayer gp = new GamePlayer(gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
         myGP = gp;
 		Scene scene = gp.getScene();  
         gpStage.setScene(scene);
