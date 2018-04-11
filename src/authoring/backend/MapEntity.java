@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapEntity {
+import javafx.scene.layout.Pane;
+
+public class MapEntity extends Pane {
 	/**
 	 * size, background image, locations of various objects
 	 */
