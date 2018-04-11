@@ -1,107 +1,152 @@
 package game_player.visual_element;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import game_data.Reader;
+import game_data.Writer;
 import game_object.GameObject;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * the interface that all top panel UI elements implement
- * 
+ * @author Eddie
  */
 public class TopPanel implements VisualUpdate {
 	
 	public static final String MENU = "Menu";
-	public static final String SCORE = "Score";
-	protected static final String[] MENUITEMS = {"Start", "Pause", "Load", "Save"};
+	public static final String START = "Start";
+	public static final String PAUSE = "Pause";
+	public static final String SAVE = "Save";
+	public static final String LOAD = "Load";
+	public static final String TIME = "Time";
+	public static final String SCORE = "Scores";
+	public static final String[] SCORES = {"Player1: "};
+	public static final String COLON = ": ";
+	public static final double MENUWIDTH = 0.125;
+	public static final double SBWIDTH = 0.125;
+	public static final double TAWIDTH = 0.25;
 	
 	private GridPane gp;
-	private ComboBox<String> menu;
+	private MenuButton menu;
+	private List<TextArea> myTA;
 	private TextArea time;
-	private TextArea score;
+	private ComboBox<String> scoreboard;
 	private TextArea r1;
 	private TextArea r2;
 	private String r1Name;
 	private String r2Name;
 	
 	private int menuSpan;
-	private double timeValue;
-	private int scoreValue;
-	private int r1Amount;
-	private int r2Amount;
-	
-	public TopPanel() {
+	private Reader myReader;
+	private Writer myWriter;
+	public TopPanel(double xsize, double ysize) {
 		gp = new GridPane();
 		menuSpan = 0;
-		timeValue = 0;
-		scoreValue = 0;
-		r1Amount = 0;
-		r2Amount = 0;
 		
-		setupMenu();
-		setupTime();
-		setupScore();
-		setupResources();
+		setupMenu(xsize, ysize);
+		setupScores(xsize, ysize);
+		time = new TextArea(TIME + COLON + 0);
+		r1 = new TextArea(r1Name + COLON + 0);
+		r2 = new TextArea(r2Name + COLON + 0);
+		TextArea[] tas = {time, r1, r2};
+		myTA = Arrays.asList(tas);
+		myTA.forEach(ta -> {
+			ta.setEditable(false);
+			ta.setPrefWidth(xsize * TAWIDTH);
+			ta.setMaxHeight(ysize);
+			addToPane(ta);
+		});
 	}
 
-	private void setupMenu() {
-		menu = new ComboBox<>();
-		menu.setPromptText(MENU);
-		menu.getItems().addAll(MENUITEMS);
+	private void setupMenu(double xsize, double ysize) {
+		MenuItem menuItem1 = new MenuItem(START);
+		menuItem1.setOnAction(e -> {
+			//todo: communicate with GAE
+		});
+		MenuItem menuItem2 = new MenuItem(PAUSE);
+		menuItem2.setOnAction(e -> {
+			//todo: communicate with GAE
+		});
+		MenuItem menuItem3 = new MenuItem(SAVE);
+		menuItem3.setOnAction(e -> save());
+		MenuItem menuItem4 = new MenuItem(LOAD);
+		menuItem4.setOnAction(e -> load());
+		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
+		menu.setPrefWidth(xsize * MENUWIDTH);
+		menu.setMinHeight(ysize);
 		addToPane(menu);
 	}
 
-	private void setupTime() {
-		time = new TextArea();
-		time.setText(timeValue + "");
-		time.setEditable(false);
+	private void setupScores(double xsize, double ysize) {
+		scoreboard = new ComboBox<>();
+		scoreboard.setPromptText(SCORE);
+		scoreboard.getItems().addAll(SCORES);
+		scoreboard.setPrefWidth(xsize * SBWIDTH);
+		scoreboard.setMinHeight(ysize);
+		addToPane(scoreboard);
 	}
 	
-	private void setupScore() {
-		score = new TextArea();
-		score.setText(SCORE + ": " + scoreValue);
-		score.setEditable(false);
-	}
-	
-	private void setupResources() {
-		setupResource(r1, r1Name, r1Amount);
-		setupResource(r2, r2Name, r2Amount);
-	}
-	
-	private void setupResource(TextArea ta, String type, int amount) {
-		ta = new TextArea();
-		ta.setEditable(false);
-		ta.setText(type + ": " + amount);
-		addToPane(ta);
-	}
-
 	private void addToPane(Node n) {
 		gp.add(n, menuSpan, 0);
 		menuSpan++;
 	}
+	
+	private void save() {
+		FileChooser fc = new FileChooser();
+		Stage stage = new Stage();
+		fc.setInitialDirectory(new File("data/"));
+		fc.setTitle("Save Game");
+		File file = fc.showSaveDialog(stage);
+		//for writing
+		//myWriter.write(file.getCanonicalPath(), **INSERT GAMEOBJECT ARRAY HERE**);
 
+		
+	}
+	
+	private void load() {
+		FileChooser fc = new FileChooser();
+		Stage stage = new Stage();
+		fc.setInitialDirectory(new File("data/"));
+		fc.setTitle("Load Game");
+		File file = fc.showOpenDialog(stage);
+		try {
+			List<Object> gameObjects= myReader.read(file.getCanonicalPath());
+		} catch (ClassNotFoundException e) {
+			// TODO deal with this error
+			
+		} catch (IOException e) {
+			// TODO deal with this error
+
+		}
+	}
+	
 	/**
 	 * allow the game player to set the resources amounts displayed in the top panel
 	 * @param amount1 amount for first resource
 	 * @param amount2 amount for second resource
 	 */
 	public void setResourcesAmount(int amount1, int amount2) {
-		r1Amount = amount1;
-		r2Amount = amount2;
-		r1.setText(r1Name + ": " + r1Amount);
-		r2.setText(r2Name + ": " + r2Amount);
+		r1.setText(r1Name + COLON + amount1);
+		r2.setText(r2Name + COLON + amount2);
 	}
 	
 	/**
 	 * allow the game player to set the time displayed in the top panel
 	 * @param time current time
 	 */
-	public void setTime(double time) {
-		timeValue = time;
+	public void setTime(double timeValue) {
+		time.setText(TIME + COLON + timeValue);
 	}
 	
 	/**
@@ -109,7 +154,11 @@ public class TopPanel implements VisualUpdate {
 	 * @param scores current scores for each player
 	 */
 	public void setScores(Map<String, Integer> scores) {
-		
+		int counter = 0;
+		for(String s: scores.keySet()) {
+			scoreboard.getItems().set(counter, s + COLON + scores.get(s));
+			counter++;
+		}
 	}
 
 	@Override

@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitDisplay;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 /**
  * 
@@ -22,19 +22,26 @@ import javafx.stage.Stage;
 public class GamePlayer {
 	
 	public static final int SCENE_SIZE_X = 1000;
-	public static final int SCENE_SIZE_Y = 1000;
+	public static final int SCENE_SIZE_Y = 600;
+	public static final double BOTTOM_HEIGHT = 0.25;
+	public static final double MINIMAP_WIDTH = 0.25;
+	public static final double INFO_DISPLAY_WIDTH = 0.50;
+	public static final double ACTION_DISPLAY_WIDTH = 0.25;
+	public static final double TOP_HEIGHT = 0.05;
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; 
+	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private List<GameObject> myGameObjects;
 	private List<GameObject> mySelectedGameObjects;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
+	private MainDisplay myMainDisplay;
 	private Group myRoot;
 	private Map<String, List<String>> myUnitSkills;
 	private Map<String, Image> mySkillImages;
 	private Map<String, Image> myUnitInfoImg;
 	private Map<String, Image> myUnitDispImg;
+	private Scene thisScene;
 	
 	public GamePlayer(List<GameObject> gameobjects, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameObjects = gameobjects;
@@ -48,24 +55,31 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		mySelectedGameObjects = new ArrayList<GameObject>();
-		myTopPanel = new TopPanel();
-		myMiniMap = new MiniMap(0, 0.85*SCENE_SIZE_Y,0.15*SCENE_SIZE_X,0.15*SCENE_SIZE_X, Color.BLACK, Color.GREENYELLOW);
-		//myUnitDisplay = new UnitDisplay(0.15*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, 0.85*SCENE_SIZE_X, 0.85*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		myTopPanel = new TopPanel(SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
+		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		//myMainDisplay = new MainDisplay();
 		myRoot.getChildren().add(myTopPanel.getNodes());
-		//myRoot.getChildren().add(myMiniMap.getNodes());
-		//myRoot.getChildren().add(myUnitDisplay.getNodes());
+		Node minimap = myMiniMap.getNodes();
+		minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myRoot.getChildren().add(minimap);
+		Node unitDisp = myUnitDisplay.getNodes();
+		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
+		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myRoot.getChildren().add(unitDisp);
+		thisScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 
-	public Scene setScene(Stage gpStage) {
-		Scene scene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
-		return scene;
+	public Scene getScene() {
+		return thisScene;
 	}
 	
 	public void update(List<GameObject> gameobject) {
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(displayGameObjects);
+		myTopPanel.update(displayGameObjects); //resources
 		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(displayGameObjects);
+		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
+		myMainDisplay.update(displayGameObjects);
 	}
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
