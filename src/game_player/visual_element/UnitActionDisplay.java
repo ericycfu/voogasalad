@@ -9,11 +9,13 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 public class UnitActionDisplay implements VisualUpdate{
 	
 	public static final int ACTION_GRID_WIDTH = 4;
 	public static final int ACTION_GRID_HEIGHT = 3;
+	private GridPane myGridPane;
 	private double myCellWidth;
 	private double myCellHeight;
 	private String myCurrentAction;
@@ -31,6 +33,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	}
 	
 	private void initialize() {
+		myGridPane = new GridPane();
 		myCurrentAction = "";
 		myActionsGrid = new SkillButton[ACTION_GRID_WIDTH][ACTION_GRID_HEIGHT];
 		for (int i = 0; i < myActionsGrid.length; i++) {
@@ -71,6 +74,10 @@ public class UnitActionDisplay implements VisualUpdate{
 		return myCurrentAction;
 	}
 	
+	public void setDefault() {
+		myCurrentAction = "";
+	}
+	
 	@Override
 	public Node getNodes() {
 		Group group = new Group();
@@ -81,5 +88,7 @@ public class UnitActionDisplay implements VisualUpdate{
 		}
 		return group;
 	}
+	
+	
 	
 }

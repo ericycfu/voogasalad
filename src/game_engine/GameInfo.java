@@ -1,5 +1,8 @@
 package game_engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import game_object.GameObject;
 
 /**
@@ -7,15 +10,35 @@ import game_object.GameObject;
  * @author andrew
  *
  */
-public interface GameInfo {
+public class GameInfo {
+	public List<GameObject> ListOfGameObjs;
+	public void addReferenceGameObject(GameObject go) {
+		ListOfGameObjs.add(go);
+	}
 	/**
-	 * Retrieve the possible units associated with a particular player
+	 * Retrieve the possible units with the given tags
 	 * @param commander
 	 */
-	public void getUnits(String commander);
-	/**
-	 * Retrieve the possible interactions for a particular GameObject
-	 * @param g
-	 */
-	public void getPossibleInteractions(GameObject g);
+	public List<GameObject> getUnits(List<String> tag) {
+		List<GameObject> toReturn = new ArrayList<GameObject>();
+		for(GameObject go: ListOfGameObjs) {
+			boolean hasTags = true;
+			List<String> objectTags = go.getTags();
+			for(String s: tag)
+				if(!objectTags.contains(s)) {
+					hasTags = false;
+					break;
+				}
+			if(hasTags || tag.contains(go.getName()))
+				toReturn.add(go);
+		}
+		return toReturn;
+	}
+	public GameObject get(String objectName) {
+		for(GameObject go: ListOfGameObjs) {
+			if(go.getName().equals(objectName))
+				return go;
+		}
+		throw new IllegalArgumentException("Unit does not exist");
+	}
 }

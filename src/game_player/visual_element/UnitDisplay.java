@@ -47,5 +47,9 @@ public class UnitDisplay implements VisualUpdate {
 		return myUnitDisplay;
 	}
 	
+	public UnitActionDisplay getUnitActionDisp() {
+		return myActionDisp;
+	}
+	
 	
 }

@@ -14,14 +14,14 @@ import game_object.PropertyNotFoundException;
  * to create the fields it needs. Alsos stores the parameter values and how they need to be passed to the backend
  */
 
-public class CustomFunctionParameterFormat {
+public class CustomComponentParameterFormat {
 
 	private String helpText;
 	private Map<String, String> parameterFields;
 	
 	//will also include any text help we need to add
 	
-	public CustomFunctionParameterFormat()
+	public CustomComponentParameterFormat()
 	{
 		parameterFields = new HashMap<>();
 	}

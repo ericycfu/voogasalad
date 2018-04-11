@@ -16,7 +16,7 @@ public class Writer {
 	 * @param data
 	 * @throws IOException 
 	 */
-	public void write(String location, List<Object> data) throws IOException {
+	public void write(String location, List<? extends Object> data) throws IOException {
 		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);
@@ -33,10 +33,14 @@ public class Writer {
 	 * @throws ClassNotFoundException 
 	 * @throws IOException 
 	 */
-	public void writeNoOverwrite(String location, List<Object> data) throws ClassNotFoundException, IOException {
+	public void writeNoOverwrite(String location, List<Object> data) throws IOException {
 		Reader reader = new Reader();
-		List<Object> prevData= reader.read(location);
-		data.addAll(prevData);
-		write(location, data);
+		try {
+			List<Object> prevData= reader.read(location);
+			data.addAll(prevData);
+		}
+		catch (ClassNotFoundException e) {
+			write(location, data);
+		}
 	}
 }
