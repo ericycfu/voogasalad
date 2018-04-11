@@ -119,4 +119,8 @@ public class MainDisplay implements VisualUpdate {
 		return retY;
 	}
 	
+	private void updateCurrentWindow() {
+		
+	}
+	
 }
