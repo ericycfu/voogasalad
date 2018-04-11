@@ -33,6 +33,14 @@ public class Interaction implements EngineObject<InteractionManager>{
 		addToManager(manager);
 	}
 	
+	
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 * Adds a custom function to the interaction.
+	 * need to add the functionality that only the variables related to those tags can be changed etc.
+	 */
 	public CustomFunction addCustomFunction(String type)
 	{
 		CustomFunctionFactory factory = new CustomFunctionFactory();
