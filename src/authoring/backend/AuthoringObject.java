@@ -70,5 +70,8 @@ public class AuthoringObject {
 	public void changeY(double newY) {
 		myY = newY;
 	}
-}
 
+	public ObjectAttributes getObjectAttributesInstance() {
+		return myAttributes;
+	}
+}

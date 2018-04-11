@@ -1,7 +1,10 @@
 package gui_elements.labels;
 
-import javafx.scene.control.Label;
+public class InteractionQuantityLabel extends MainLabel {
 
-public class InteractionQuantityLabel extends Label {
-
+	private static final String FILENAME = "interaction_quantity_label.properties";
+	
+	public InteractionQuantityLabel() {
+		super(FILENAME);
+	}
 }

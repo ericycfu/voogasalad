@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
-import game_player.Element;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 
 /**
  * 
@@ -20,28 +18,22 @@ public class UnitDisplay implements VisualUpdate {
 	private UnitActionDisplay myActionDisp;
 	private Map<String, List<String>> myUnitSkillsMap;
 	private Map<String, Image> mySkillImagesMap;
-	private double myInfoDispXcoor;
-	private double myInfoDispYcoor;
-	private double myActionDispXcoor;
-	private double myActionDispYcoor;
+	private Group myUnitDisplay;
 	
-	public UnitDisplay(double infoDispXcoor, double infoDispYcoor, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
-		initializeUnitDisplayVariables(infoDispXcoor, infoDispYcoor, actionDispXcoor, actionDispYcoor, unitSkills, skillImages);
-		initializeUnitDisplayComponents();
+	public UnitDisplay(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+		initializeUnitDisplayComponents(infoDispWidth, infoDispHeight, actionDispWidth, actionDispHeight, unitSkills, skillImages);
 	}
 	
-	private void initializeUnitDisplayVariables(double infoDispXcoor, double infoDispYcoor, double actionDispXcoor, double actionDispYcoor, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+	private void initializeUnitDisplayComponents(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+		myUnitDisplay = new Group();
 		myUnitSkillsMap = unitSkills;
 		mySkillImagesMap = skillImages;
-		myInfoDispXcoor = infoDispXcoor;
-		myInfoDispYcoor = infoDispYcoor;
-		myActionDispXcoor = actionDispXcoor;
-		myActionDispYcoor = actionDispYcoor;
-	}
-	
-	private void initializeUnitDisplayComponents() {
-		myInfoDisp = new UnitInfoDisplay(myInfoDispXcoor, myInfoDispYcoor);
-		myActionDisp = new UnitActionDisplay(myActionDispXcoor, myActionDispYcoor, myUnitSkillsMap, mySkillImagesMap);
+		myInfoDisp = new UnitInfoDisplay(infoDispWidth, infoDispHeight);
+		myActionDisp = new UnitActionDisplay(actionDispWidth, actionDispHeight, myUnitSkillsMap, mySkillImagesMap);
+		myUnitDisplay.getChildren().add(myInfoDisp.getNodes());
+		Node actionDisp = myActionDisp.getNodes();
+		actionDisp.setLayoutX(infoDispWidth);
+		myUnitDisplay.getChildren().add(actionDisp);
 	}
 	
 	@Override
@@ -52,10 +44,7 @@ public class UnitDisplay implements VisualUpdate {
 
 	@Override
 	public Node getNodes() {
-		Group group = new Group();
-		group.getChildren().add(myActionDisp.getNodes());
-		group.getChildren().add(myInfoDisp.getNodes());
-		return group;
+		return myUnitDisplay;
 	}
 	
 	
