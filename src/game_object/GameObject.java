@@ -37,6 +37,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private Map<String,Double> costs; 
 	private boolean isDead;
 	
+	private double movementSpeed = 0;
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -87,6 +89,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
+		myObjectLogic.checkConditions(this);
+		
 		
 
 	}

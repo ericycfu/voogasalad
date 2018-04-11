@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import map.GridMap;
+import map.Pathfinder;
 import transform_library.Transform;
+import transform_library.Vector2;
 
 /**
  * 
@@ -20,10 +23,13 @@ import transform_library.Transform;
 public class GameObjectManager implements ElementManager<GameObject>{
 	
 	private Map<Integer, GameObject> objectMap;
+	private Pathfinder pathfinder;
+	private GridMap gridMap;
 	
 	public GameObjectManager()
 	{
 		objectMap = new TreeMap<>();
+		pathfinder = new Pathfinder(gridMap);
 	}
 	
 	/**
@@ -76,6 +82,17 @@ public class GameObjectManager implements ElementManager<GameObject>{
 		{
 			obj.Update();
 		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param target
+	 * @return
+	 * Game player can use this to move a specific game object to a position on the map 
+	 */
+	public Vector2 queueMovement(GameObject obj, Vector2 target)
+	{
 		
 	}
 	
