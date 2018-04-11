@@ -98,8 +98,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
 			{
-				isMovementQueued = false;
-				movementWaypoint = null;
+				dequeueMovement();
 			}
 		}
 		
@@ -107,7 +106,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
-		myObjectLogic.checkConditions(this);
+		//myObjectLogic.checkConditions(this);
 		
 		
 
