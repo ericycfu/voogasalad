@@ -8,11 +8,13 @@ public class BuildFunction implements CustomFunction {
 	private CustomComponentParameterFormat format;
 	@Override
 	public void Execute(GameObject current, GameObject other) {
-		try {
-			Thread.sleep((long) (buildTime * 1000));
-		} catch (InterruptedException e) {}
+		if(current.getOwner().checkEnoughResources(other.getCosts())) {
+			current.getOwner().changeMultipleResources(other.getCosts());
+			try {
+				Thread.sleep((long) (buildTime * 1000));
+			} catch (InterruptedException e) {}
+			}
 		current.dequeueInteraction();
-		
 	}
 	public void setParameters(CustomComponentParameterFormat toFormat) {
 		try {

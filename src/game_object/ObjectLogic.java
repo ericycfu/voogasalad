@@ -1,5 +1,6 @@
 package game_object;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import conditions.Condition;
 import conditions.ConditionManager;
 import interactions.Interaction;
 import interactions.InteractionManager;
-import transform_library.Vector2;
 
 
 /**
@@ -20,6 +20,7 @@ import transform_library.Vector2;
 public class ObjectLogic  
 {
 	private boolean fulfillsLossCondition;
+	private Interaction currentInteraction;
 	ObjectAttributes attributes;
 	
 	InteractionManager interactions;
@@ -55,13 +56,14 @@ public class ObjectLogic
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		for(Interaction interaction : interactions.getElements())
+		if(currentInteraction != null && current.getTransform().getDisplacement(interactionTarget.getTransform()) >= currentInteraction.getRange())
 		{
-			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= interaction.getRange())
-			{
-				interaction.executeCustomFunctions(current, interactionTarget);
-			}
+			currentInteraction.executeCustomFunctions(current, interactionTarget);
 		}
+	}
+
+	public void setCurrentInteraction(Interaction i) {
+		currentInteraction = i;
 	}
 	
 	public void checkConditions(GameObject current)
@@ -73,7 +75,7 @@ public class ObjectLogic
 	}
 	
 	public boolean getFulFillsLossCondition() {
-		return this.fulfillsLossCondition;
+		return fulfillsLossCondition;
 	}
 	
 }

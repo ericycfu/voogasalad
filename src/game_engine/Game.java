@@ -15,7 +15,7 @@ public class Game {
 	 * Sets up the Game from the specified game file
 	 */
 	public void setUp(String filepath) {
-		
+		possibleUnits = new GameInfo();
 	}
 	/**
 	 * Creates and runs a new GameInstance and GamePlayer for the map

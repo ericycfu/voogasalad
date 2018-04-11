@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game_object.GameObject;
-import game_object.ObjectLogic;
-import game_object.UnmodifiableGameObjectException;
 
 /**
  * The GameInfo is responsible for storing information about the Game
@@ -14,6 +12,9 @@ import game_object.UnmodifiableGameObjectException;
  */
 public class GameInfo {
 	public List<GameObject> ListOfGameObjs;
+	public void addReferenceGameObject(GameObject go) {
+		ListOfGameObjs.add(go);
+	}
 	/**
 	 * Retrieve the possible units with the given tags
 	 * @param commander
@@ -39,13 +40,5 @@ public class GameInfo {
 				return go;
 		}
 		throw new IllegalArgumentException("Unit does not exist");
-	}
-	/**
-	 * Retrieve the possible interactions for a particular GameObject
-	 * @param g
-	 * @throws UnmodifiableGameObjectException 
-	 */
-	public ObjectLogic getPossibleInteractions(GameObject g) throws UnmodifiableGameObjectException {
-		return g.accessLogic();
 	}
 }

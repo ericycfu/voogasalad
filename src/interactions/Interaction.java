@@ -75,6 +75,16 @@ public class Interaction implements EngineObject<InteractionManager>{
  	{
  		return id;
  	}
+ 	public List<String> getTargetTags(){
+ 		return targetTags;
+ 	}
+ 	public void addTag(String newTag) {
+ 		if(!targetTags.contains(newTag))
+ 			targetTags.add(newTag);
+ 	}
+ 	public void removeTag(String oldTag) {
+ 		targetTags.remove(oldTag);
+ 	}
 
 	@Override
 	public void addToManager(InteractionManager manager) {
