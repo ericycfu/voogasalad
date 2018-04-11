@@ -10,7 +10,7 @@ public class Transform {
 	
 	private Vector2 position;
 	private double rotation;
-
+	
 	public Transform(Vector2 position)
 	{
 		this.position = position;

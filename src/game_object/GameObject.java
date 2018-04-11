@@ -35,6 +35,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		
 	private boolean isDead;
 	
+	private double movementSpeed = 0;
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -191,5 +193,13 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	}
 	public Team getOwner() {
 		return owner;
+	}
+
+	public double getMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public void setMovementSpeed(double movementSpeed) {
+		this.movementSpeed = movementSpeed;
 	}
 }

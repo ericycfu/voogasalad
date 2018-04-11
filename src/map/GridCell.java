@@ -20,6 +20,12 @@ public class GridCell {
 	
 	private int movementCost = 1;
 	
+	public GridCell(int r, int c)
+	{
+		row = r;
+		column = c;
+	}
+	
 	public void updateGVal(int val)
 	{
 		gVal = val;
@@ -35,6 +41,11 @@ public class GridCell {
 		hVal = (Math.abs(column - cell.getColumn()) + Math.abs(row - cell.getRow())) * this.movementCost;
 	}
 	
+	public int getFVal()
+	{
+		return gVal + hVal;
+	}
+	
 	public int getGVal()
 	{
 		return gVal;
@@ -45,11 +56,6 @@ public class GridCell {
 		return hVal;
 	}
 	
-	public GridCell(int r, int c)
-	{
-		row = r;
-		c = column;
-	}
 	
 	public void setObstacle(boolean val)
 	{
@@ -66,5 +72,10 @@ public class GridCell {
 	}
 	public int getColumn() {
 		return column;
+	}
+	
+	public boolean matches(GridCell other)
+	{
+		return(this.row == other.row && this.column == other.column);
 	}
 }
