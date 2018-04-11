@@ -2,6 +2,12 @@ package game_engine;
 
 import java.util.Map;
 
+/**
+ * 
+ * @author Rayan
+ *
+ */
+
 public class Team implements EngineObject<TeamManager>{
 
 	private int id;
