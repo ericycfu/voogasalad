@@ -26,8 +26,8 @@ public class AuthoringObject {
 	
 	public AuthoringObject() {
 		defaultObject();
-//		addTestObject();
-		addDuvall();
+		addTestObject();
+//		addDuvall();
 	}
 	
 	private void defaultObject() {
