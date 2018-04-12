@@ -47,7 +47,6 @@ public class MiniMap implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> allGameObjects) {
-		System.out.println(myMiniMap.getChildren());
 		myVisibleUnits.getChildren().clear();
 		currentVisibleUnits = filter(allGameObjects);
 		displayUnits(currentVisibleUnits);
