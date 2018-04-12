@@ -56,6 +56,8 @@ public class TopPanel implements VisualUpdate {
 	private Writer myWriter;
 	
 	public TopPanel(double xsize, double ysize) {
+		myWriter = new Writer();
+		myReader = new Reader();
 		gp = new GridPane();
 		menuSpan = 0;
 		
