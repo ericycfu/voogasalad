@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreatedObjects {
-	private List<AuthoringObject> myAuthoringObjects;
+	
+	private static List<AuthoringObject> myAuthoringObjects;
+	
 	public CreatedObjects() {
 		myAuthoringObjects = new ArrayList<>();
 		addObject(new AuthoringObject());
 		addObject(new AuthoringObject());
 	}
 	
-	public void addObject(AuthoringObject obj) {
+	public static void addObject(AuthoringObject obj) {
 		myAuthoringObjects.add(obj);
+	}
+	
+	public static List<AuthoringObject> getAuthoringObjects() {
+		return myAuthoringObjects;
 	}
 	
 	public AuthoringObject getObjectByIndex(int index) {

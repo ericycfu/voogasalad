@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import game_object.PropertyNotFoundException;
+import game_object.UnmodifiableGameObjectException;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -55,8 +57,8 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeProfilePic() {
 		myCurrentUnitImageView = new ImageView(DefaultImage);
-		myCurrentUnitImageView.setFitHeight(myHeight/3);
-		myCurrentUnitImageView.setFitWidth(myHeight/3);
+		myCurrentUnitImageView.setFitHeight(myHeight);
+		myCurrentUnitImageView.setFitWidth(myWidth/3);
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myUnitProfilePic.getChildren().add(myCurrentUnitImageView);
@@ -65,22 +67,22 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeHealthManaInfo() {
 		myHealthManaInfo = new TextArea();
-		myHealthManaInfo.setPrefHeight(myHeight/8);
-		myHealthManaInfo.setPrefWidth(myWidth/4);
+		myHealthManaInfo.setPrefHeight(myHeight);
+		myHealthManaInfo.setPrefWidth(myWidth/3);
 		myHealthManaInfo.setLayoutX(myWidth/4 - myHealthManaInfo.getWidth());
 		myHealthManaInfo.setLayoutY(myHeight*(3/4) - myHealthManaInfo.getHeight());
 		myHealthManaInfo.setEditable(false);
-		myUnitInfoDisplay.add(myHealthManaInfo, 0, 1, 1, 1);
+		myUnitInfoDisplay.add(myHealthManaInfo, 1, 0, 1, 2);
 	}
 	
 	private void initializeStatusInfo() {
 		myStatusInfo = new TextArea();
-		myStatusInfo.setPrefHeight(myHeight/2);
+		myStatusInfo.setPrefHeight(myHeight);
 		myStatusInfo.setPrefWidth(myWidth/3);
 		myStatusInfo.setLayoutX(myWidth*(3/4) - myStatusInfo.getWidth());
 		myStatusInfo.setLayoutY(myWidth/4 - myStatusInfo.getHeight());
 		myStatusInfo.setEditable(false);
-		myUnitInfoDisplay.add(myStatusInfo, 1, 0, 1, 2);
+		myUnitInfoDisplay.add(myStatusInfo, 2, 0, 1, 2);
 	}
 	
 	private void updateProfilePic(Image profile) {
@@ -92,7 +94,14 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
-			//myHealthManaInfo.setText(currentUnit.getHealth() + "\n" + currentUnit.getMana());
+			try {
+				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(0);
+				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
+				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
+						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				//DO NOTHING
+			}
 		}
 	}
 	
@@ -101,13 +110,21 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myStatusInfo.setText(DefaultStatus);
 		}
 		else {
-			//myStatusInfo.setText("Damage: " + currentUnit.getDamage() + "\n" + "Armor: " + currentUnit.getArmor());
+			try {
+				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(2);
+				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(3);
+				myStatusInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
+						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				//DO NOTHING
+			}
 		}
 	}
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		updateProfilePic(UnitProfileMap.get(gameObjects.get(0).getName()));
+		if (gameObjects.isEmpty()) return;
+		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());
 		updateHealthManaInfo(gameObjects.get(0));
 		updateStatusInfo(gameObjects.get(0));
 	}
