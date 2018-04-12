@@ -65,11 +65,10 @@ public class GamePlayer {
 		for (GameObject go : myGameManager.getElements()) {
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
-				//if (e.getButton()==MouseButton.PRIMARY) {
+				if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
 					mySelectedUnitManager.add(go);
-					System.out.println("s");
-				//}
+				}
 			});
 		}
 	}
