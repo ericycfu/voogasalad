@@ -13,7 +13,7 @@ public class DataTester {
 		List<Object> stuff = new ArrayList<>();
 		stuff.add("hi");
 		stuff.add(3);
-		stuff.add(new Interaction());
+		//stuff.add(new Interaction());
 		try {
 			myWriter.write("src/game_data/test", stuff);
 		} catch (IOException e) {
