@@ -9,6 +9,7 @@ import java.util.Map;
 import game_data.Reader;
 import game_data.Writer;
 import game_object.GameObject;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
@@ -50,8 +51,8 @@ public class TopPanel implements VisualUpdate {
 	private String r1Name;
 	private String r2Name;
 	private List<GameObject> myGameObjects;
-	
 	private int menuSpan;
+	private Timeline tl;
 	private Reader myReader;
 	private Writer myWriter;
 	
@@ -79,11 +80,11 @@ public class TopPanel implements VisualUpdate {
 	private void setupMenu(double xsize, double ysize) {
 		MenuItem menuItem1 = new MenuItem(START);
 		menuItem1.setOnAction(e -> {
-			//todo: communicate with GAE
+			tl.play();
 		});
 		MenuItem menuItem2 = new MenuItem(PAUSE);
 		menuItem2.setOnAction(e -> {
-			//todo: communicate with GAE
+			tl.pause();
 		});
 		MenuItem menuItem3 = new MenuItem(SAVE);
 		menuItem3.setOnAction(e -> save());
@@ -140,6 +141,10 @@ public class TopPanel implements VisualUpdate {
 		} catch (IOException e) {
 			// TODO deal with this error
 		}
+	}
+	
+	public void setTimeline(Timeline timeline) {
+		tl = timeline;
 	}
 	
 	/**
