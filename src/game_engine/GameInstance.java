@@ -1,14 +1,16 @@
 package game_engine;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import game_data.Reader;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.UnmodifiableGameObjectException;
 import game_player.GamePlayer;
 import interactions.Interaction;
-import transform_library.Transform;
 import transform_library.Vector2;
 
 /**
@@ -24,36 +26,36 @@ public class GameInstance {
 	private boolean running;
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
-	private List<TeamManager> myTeamManager;
-	private SceneManager mySceneManager;
+	private TeamManager myTeamManager;
 	private Reader myReader;
 	private Writer myWriter;
 	
 	public GameInstance(GameInfo g, String filepath) {
 		myReader = new Reader();
-		myWriter = new Writer();
 		myGameInfo = g;
-		TeamManager myTeamManager = new TeamManager();
+		myTeamManager = new TeamManager();
+		try {
 		setUp(filepath);
-		GamePlayer player1 = new GamePlayer(myGameInfo, myObjectManager, myTeamManager.get(1));
-		GamePlayer player2 = new GamePlayer(myGameInfo, myObjectManager, myTeamManager.get(2));
+		}
+		catch(Exception e) {}
 		play();
 	}
-	public void setUp(String filepath) {
+	public void setUp(String filepath) throws ClassNotFoundException, IOException {
 		List<Object> gameObjects = myReader.read(filepath, "gameObject");
 		myObjectManager = new GameObjectManager();
 		for(int x = 0; x < gameObjects.size(); x++) {
 			myObjectManager.addElementToManager((GameObject)gameObjects.get(x));
 		}
-		mySceneManager = (SceneManager) myReader.read(filepath,"SceneManager");
 	}
 	/**
 	 * Saves the information in the GameInstance to the specified file
 	 * @param filepath
+	 * @throws IOException 
 	 */
-	public void save(String filepath) {
-		myWriter.write(filepath,myObjectManager.getElements());
-		myWriter.write(filepath,mySceneManager);
+	public void save(String filepath) throws IOException {
+		List<Object> toWrite = new ArrayList<>();
+		toWrite.add(this);
+		myWriter.write(filepath,toWrite);
 	}
 	/**
 	 * Read commands from the file that is updated by the GamePlayer
@@ -63,18 +65,20 @@ public class GameInstance {
 		if(!running)
 			return;
 		myObjectManager.get(source_id).queueInteraction(myObjectManager.get(target_id));
-		myObjectManager.get(source_id).accessLogic().setCurrentInteraction(i);
+		try {
+			myObjectManager.get(source_id).accessLogic().setCurrentInteraction(i);
+		} catch (UnmodifiableGameObjectException e) {
+		}
 	}
 	public void executeMovement(int id, int xcor, int ycor) {
 		if(!running)
 			return;
-		Transform t = new Transform(new Vector2(xcor,ycor));
-		myObjectManager.get(id).setTransform(t);
+		Vector2 v = new Vector2(xcor,ycor);
+		myObjectManager.get(id).queueMovement(v);
 	}
 	public void loop() {
 		while(running) {
 			myObjectManager.runGameObjectLoop();
-			mySceneManager.update();
 		}
 	}
 	public void play() {
@@ -83,5 +87,14 @@ public class GameInstance {
 	}
 	public void stop() {
 		running = false;
+	}
+	public GameInfo getGameInfo() {
+		return myGameInfo;
+	}
+	public GameObjectManager getGameObjects() {
+		return myObjectManager;
+	}
+	public TeamManager getTeamManager() {
+		return myTeamManager;
 	}
 }

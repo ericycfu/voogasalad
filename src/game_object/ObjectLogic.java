@@ -61,7 +61,7 @@ public class ObjectLogic
 	{
 		for(Interaction inter : interactions.getElements())
 		{
-			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
+			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) <= inter.getRange())
 			{
 				inter.executeCustomFunctions(current, interactionTarget);
 			}
