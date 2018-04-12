@@ -8,5 +8,10 @@
 	<classpathentry kind="lib" path="lib/xstream-1.4.10 2/lib/xstream-benchmark-1.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.10 2/lib/xstream-hibernate-1.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.10 2/lib/xstream-jmh-1.4.10.jar"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
