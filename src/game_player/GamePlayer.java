@@ -11,6 +11,7 @@ import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitDisplay;
+import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -49,7 +50,7 @@ public class GamePlayer {
 	private Scene myScene;
 	private String myCurrentAction;
 	
-	public GamePlayer(GameObjectManager gameManager, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameManager = gameManager;
 		myUnitInfoImg = unitInfoImgs;
 		myUnitDispImg = unitDispImgs;
@@ -58,7 +59,7 @@ public class GamePlayer {
 		mySelectedUnitManager = new SelectedUnitManager();
 		initializeSingleUnitSelect();
 		initialize();
-		//System.out.println(((Group) ((Group) myRoot.getChildren().get(0)).getChildren().get(0)).getChildren());
+		myTopPanel.setTimeline(timeline);
 	}
 	
 	private void initializeSingleUnitSelect() {
