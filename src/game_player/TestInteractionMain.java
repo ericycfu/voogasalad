@@ -77,11 +77,7 @@ public class TestInteractionMain extends Application {
 		gom.addElementToManager(go2);
 		
 		go2.queueInteraction(go);
-		GamePlayer gp = new GamePlayer(gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        myGP = gp;
-		Scene scene = gp.getScene();  
-        gpStage.setScene(scene);
-        gpStage.show();
+
         //myGP.update(myGOM.getElements());
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -90,7 +86,12 @@ public class TestInteractionMain extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
-        System.out.println("ooogogogogo");
+        
+		GamePlayer gp = new GamePlayer(animation, gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+        myGP = gp;
+		Scene scene = gp.getScene();  
+        gpStage.setScene(scene);
+        gpStage.show();
 	}
 
 	public static void main(String[] args) {
