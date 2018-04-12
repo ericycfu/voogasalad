@@ -45,7 +45,7 @@ public class TestInteractionMain extends Application {
 		go.accessLogic().accessAttributes().createAttribute("Design Checklist Score");
 		go.accessLogic().accessAttributes().setAttributeValue("Health", 500);
 		go.accessLogic().accessAttributes().setAttributeValue("Code Commits", 9001);
-		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
+		go.accessLogic().accessAttributes().setAttributeValue("Attack", 0);
 		go.accessLogic().accessAttributes().setAttributeValue("Design Checklist Score", 0);
 		go.setMovementSpeed(5);
 		Renderer renderer = new Renderer(new Image("robert.png"));
@@ -58,7 +58,7 @@ public class TestInteractionMain extends Application {
 		go2.accessLogic().accessAttributes().createAttribute("Armor");
 		go2.accessLogic().accessAttributes().setAttributeValue("Health", 100);
 		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
-		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
+		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 1);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
 		Interaction attack = new Interaction(go2.accessLogic().accessInteractions());
 		attack.addTag("professor");
@@ -66,7 +66,7 @@ public class TestInteractionMain extends Application {
 		attack.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		attack.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
 		attack.getCustomFunction(0).setParameters(attack.getCustomFunction(0).getParameterFormat());
-		attack.setRange(1000);
+		attack.setRange(100);
 		
 		
 		go2.setMovementSpeed(30);
@@ -90,7 +90,6 @@ public class TestInteractionMain extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
-        System.out.println("ooogogogogo");
 	}
 
 	public static void main(String[] args) {
