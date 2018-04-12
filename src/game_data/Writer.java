@@ -26,6 +26,7 @@ public class Writer {
 		}
 		out.close();
 	}
+	
 	/**
 	 * writes data to location without overwriting previous data
 	 * @param location
