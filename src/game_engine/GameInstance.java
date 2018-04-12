@@ -34,8 +34,10 @@ public class GameInstance {
 		myReader = new Reader();
 		myGameInfo = g;
 		myTeamManager = new TeamManager();
+		try {
 		setUp(filepath);
-		GamePlayer player1 = new GamePlayer(this, 1);
+		}
+		catch(Exception e) {}
 		play();
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {

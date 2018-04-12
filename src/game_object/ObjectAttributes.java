@@ -81,7 +81,6 @@ public class ObjectAttributes {
 	{
 		if(attributes.containsKey(attribute))
 			return attributes.get(attribute);
-		
-		throw new PropertyNotFoundException("Property does not exist for object");
+		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}	
 }
