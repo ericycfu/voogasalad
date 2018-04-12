@@ -1,6 +1,7 @@
 package game_object;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +15,30 @@ public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
 	
-	public List<String> GetAttributeNames()
-	{
+	public ObjectAttributes() {
+		attributes = new HashMap<String, Double>();
+	}
+	
+	public List<String> getAttributeNames() {
 		List<String> list = new ArrayList<>();
-		for(Map.Entry<String, Double> entry : attributes.entrySet())
-		{
-			list.add(entry.getKey());
-		}
-		
+		for(String attribute : attributes.keySet()) {
+			list.add(attribute);
+		}		
 		return list;
 	}
+	
+	public List<Double> getAttributeValues() {
+		List<Double> list = new ArrayList<>();
+		for(String attribute : attributes.keySet()) {
+			list.add(attributes.get(attribute));
+		}		
+		return list;
+	}
+	
+	public Map<String, Double> getAttributeMap() {
+		return attributes;
+	}
+	
 	
 	/**
 	 * 
@@ -31,9 +46,9 @@ public class ObjectAttributes {
 	 * @param value
 	 * Create attribute for the unit. Attributes must be created before changing their values.
 	 */
-	public void CreateAttribute(String attribute)
+	public void createAttribute(String attribute)
 	{
-		attributes.put(attribute, null);
+		attributes.put(attribute, 0.0);
 	}
 	
 	/**
@@ -44,12 +59,14 @@ public class ObjectAttributes {
 	 * Set the attribute value for a unit. Attribute must have been created beforehand to be able to change it.
 	 * This prevents the engine for creating and changing a mistyped attribute that may not be used or seen.
 	 */
-	public void SetAttributeValue(String attribute, double newValue) throws PropertyNotFoundException
+	public void setAttributeValue(String attribute, double newValue) throws PropertyNotFoundException
 	{
 		if(attributes.containsKey(attribute))
 			attributes.put(attribute, newValue);
-		
-		throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		else
+		{
+			throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		}
 	}
 	
 	/**
@@ -66,6 +83,5 @@ public class ObjectAttributes {
 			return attributes.get(attribute);
 		
 		throw new PropertyNotFoundException("Property does not exist for object");
-	}
-	
+	}	
 }
