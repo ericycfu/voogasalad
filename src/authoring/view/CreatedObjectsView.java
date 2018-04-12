@@ -55,8 +55,6 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 
 	@Override
 	public void update() {
-		setupBox();
-		
+		setupBox();		
 	}
-	
 }
