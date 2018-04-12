@@ -63,12 +63,6 @@ public class TestMain extends Application {
 		
 		gom.addElementToManager(go);
 		gom.addElementToManager(go2);
-		GamePlayer gp = new GamePlayer(gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        myGP = gp;
-		Scene scene = gp.getScene();  
-        gpStage.setScene(scene);
-        gpStage.show();
-        //myGP.update(myGOM.getElements());
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));
@@ -76,6 +70,14 @@ public class TestMain extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
+        
+		GamePlayer gp = new GamePlayer(animation, gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+        myGP = gp;
+		Scene scene = gp.getScene();  
+        gpStage.setScene(scene);
+        gpStage.show();
+        //myGP.update(myGOM.getElements());
+
 	}
 
 	public static void main(String[] args) {
