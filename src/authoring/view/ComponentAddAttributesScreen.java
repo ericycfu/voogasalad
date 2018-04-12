@@ -25,7 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ComponentAddAttributesScreen {
+public class ComponentAddAttributesScreen implements AuthoringView {
 	private final Paint BACKGROUND = Color.BLACK;
     private final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
     private final String TITLE_PROPERTY = "title";
@@ -37,7 +37,7 @@ public class ComponentAddAttributesScreen {
     private ObjectAttributes objAttributesInstance;
     private MainPane attribute_names_pane, attribute_values_pane;
 
-	// Additional setup for the turtle property screen.
+	// Additional setup for the add-attributes screen.
     private Scene myScene;
     private static Group root;
     
@@ -62,7 +62,7 @@ public class ComponentAddAttributesScreen {
 	}
 
 	/**
-	 * Sets the stage for the turtle property screen.
+	 * Sets the stage for the add-attributes screen.
 	 */
 	private void setStage() {
 		stage = new Stage();

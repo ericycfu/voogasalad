@@ -10,16 +10,18 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
 
-	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; 
+	private double myCurrentXCoor = 0; // current MAP-x-coordinate of window left corner
+	private double myCurrentYCoor = 0; 
 	private double myWidth;
 	private double myHeight;
-	private List<GameObject> myTerrains = new ArrayList<>();
-	private List<GameObject> myUnits = new ArrayList<>();
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private SelectedUnitManager mySelectedUnitManager;
@@ -32,29 +34,26 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMainDisplay.setOnMouseClicked(e -> {
-			if (e.isSecondaryButtonDown()) {
+		Rectangle rect = new Rectangle();
+		rect.setWidth(myWidth);
+		rect.setHeight(myHeight);
+		rect.setFill(Color.GREEN);
+		rect.setOnMouseClicked(e -> {
+			if (e.getButton()==MouseButton.SECONDARY) {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+				System.out.println("move");
 			}
 		});
+		rect.toBack();
+		myMainDisplay.getChildren().add(rect);
 		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
 	}
 	
 	private void initialize() {
 		myDisplayables = new Group();
 		initializeMoveButtons();
-		display();
-	}
-	
-	private void display() {
-		for (GameObject go: myTerrains) {
-			myDisplayables.getChildren().add(go.getRenderer().getDisp());
-		}
-		for (GameObject go: myUnits) {
-			myDisplayables.getChildren().add(go.getRenderer().getDisp());
-		}
 	}
 	
 	private void initializeMoveButtons() {
@@ -96,13 +95,16 @@ public class MainDisplay implements VisualUpdate {
 		myMoveWindowButtons.getChildren().add(down);
 	}
 	
-	private void select() {
-		
-	}
-	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		select();
+		myDisplayables.getChildren().clear();
+		for (GameObject go : gameObjects) {
+			double xloc = translateX(go.getTransform().getPosition().getX());
+			double yloc = translateY(go.getTransform().getPosition().getY());
+			go.getRenderer().getDisp().setX(xloc);
+			go.getRenderer().getDisp().setY(yloc);
+			myDisplayables.getChildren().add(go.getRenderer().getDisp());
+		}
 	}
 
 	@Override

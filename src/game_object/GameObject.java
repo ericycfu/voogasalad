@@ -56,6 +56,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
+		this.myObjectLogic = new ObjectLogic();
 		isDead = false;
 
 	}
@@ -106,7 +107,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
-		myObjectLogic.checkConditions(this);
+		//myObjectLogic.checkConditions(this);
 		
 		
 

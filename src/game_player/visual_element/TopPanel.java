@@ -33,6 +33,9 @@ public class TopPanel implements VisualUpdate {
 	public static final String SCORE = "Scores";
 	public static final String[] SCORES = {"Player1: "};
 	public static final String COLON = ": ";
+	public static final String FILEPATH = "data/";
+	public static final String SAVETEXT = "Save Game";
+	public static final String LOADTEXT = "Load Game";
 	public static final double MENUWIDTH = 0.125;
 	public static final double SBWIDTH = 0.125;
 	public static final double TAWIDTH = 0.25;
@@ -46,16 +49,20 @@ public class TopPanel implements VisualUpdate {
 	private TextArea r2;
 	private String r1Name;
 	private String r2Name;
+	private List<GameObject> myGameObjects;
 	
 	private int menuSpan;
 	private Reader myReader;
 	private Writer myWriter;
+	
 	public TopPanel(double xsize, double ysize) {
 		gp = new GridPane();
 		menuSpan = 0;
 		
 		setupMenu(xsize, ysize);
 		setupScores(xsize, ysize);
+		r1Name = "Gold";
+		r2Name = "Wood";
 		time = new TextArea(TIME + COLON + 0);
 		r1 = new TextArea(r1Name + COLON + 0);
 		r2 = new TextArea(r2Name + COLON + 0);
@@ -105,29 +112,33 @@ public class TopPanel implements VisualUpdate {
 	private void save() {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
-		fc.setInitialDirectory(new File("data/"));
-		fc.setTitle("Save Game");
+		fc.setInitialDirectory(new File(FILEPATH));
+		fc.setTitle(SAVETEXT);
 		File file = fc.showSaveDialog(stage);
-		//for writing
-		//myWriter.write(file.getCanonicalPath(), **INSERT GAMEOBJECT ARRAY HERE**);
-
-		
+		try {
+			myWriter.write(file.getCanonicalPath(), myGameObjects);
+		} catch (IOException e) {
+			System.out.print("Error!");
+		}
 	}
 	
 	private void load() {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
-		fc.setInitialDirectory(new File("data/"));
-		fc.setTitle("Load Game");
+		fc.setInitialDirectory(new File(FILEPATH));
+		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
 		try {
 			List<Object> gameObjects= myReader.read(file.getCanonicalPath());
+			myGameObjects.clear();
+			for(Object o: gameObjects) {
+				myGameObjects.add((GameObject) o);
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO deal with this error
 			
 		} catch (IOException e) {
 			// TODO deal with this error
-
 		}
 	}
 	
@@ -163,7 +174,7 @@ public class TopPanel implements VisualUpdate {
 
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		
+		myGameObjects = gameObjects;
 	}
 	
 	public Node getNodes() {

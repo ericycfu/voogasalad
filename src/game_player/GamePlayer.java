@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.visual_element.MainDisplay;
@@ -15,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 
 /**
  * 
@@ -54,17 +56,20 @@ public class GamePlayer {
 		myUnitSkills = unitSkills;
 		mySkillImages = skillImages;
 		mySelectedUnitManager = new SelectedUnitManager();
-		initialize();
 		initializeSingleUnitSelect();
+		initialize();
+		//System.out.println(((Group) ((Group) myRoot.getChildren().get(0)).getChildren().get(0)).getChildren());
 	}
 	
 	private void initializeSingleUnitSelect() {
 		for (GameObject go : myGameManager.getElements()) {
+			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
-				if (e.isPrimaryButtonDown()) {
+				//if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
 					mySelectedUnitManager.add(go);
-				}
+					System.out.println("s");
+				//}
 			});
 		}
 	}
@@ -103,10 +108,10 @@ public class GamePlayer {
 		myCurrentAction = ""; // returns action selection to default
 		
 		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
-		myTopPanel.update(displayGameObjects); //resources
+		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(mySelectedGameObjects); // selection TO-DO
-		//myMainDisplay.update(displayGameObjects);
+		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits()); // selection TO-DO
+		myMainDisplay.update(displayGameObjects);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
 		if (!myCurrentAction.equals("")) {
