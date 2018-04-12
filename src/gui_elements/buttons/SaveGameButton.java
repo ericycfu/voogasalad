@@ -15,17 +15,20 @@ public class SaveGameButton extends MainButton {
 
 	public SaveGameButton() {
 		super(FILENAME, EXPLICIT_SET_ACTION);
+		setAction();
 	}
 
 	@Override
 	protected void setAction() {
-//		getButton().setOnAction(value -> {
-//			myWriter = new Writer();
-//			try {
-//				myWriter.write(Resources.getString("AUTHOR_LOCATION"), CreatedObjects.getAuthoringObjects());
-//			} catch (IOException e) {
-//				System.err.println("Could not save created authoring objects");
-//			}
-//		});
+		getButton().setOnAction(value -> {
+			myWriter = new Writer();
+			try {
+				myWriter.write(Resources.getString("AUTHOR_LOCATION"), CreatedObjects.getAuthoringObjects());
+				System.out.print(CreatedObjects.getAuthoringObjects().size());
+				System.out.print("Printing!");
+			} catch (IOException e) {
+				System.err.println("Could not save created authoring objects");
+			}
+		});
 	}	
 }
