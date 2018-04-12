@@ -18,8 +18,6 @@ public class SelectionImageView extends ImageView {
 		this.setOnMouseClicked(e -> {
 			DraggableImageView dragimgview = obj.getDragImage();
 			pane.getChildren().add(dragimgview);
-//			AuthoringObject newobj = new AuthoringObject();
-//			pane.getChildren().add(newobj);
 		});
 	}
 }

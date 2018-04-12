@@ -11,8 +11,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import observables.Listener;
 
-public class CreatedObjectsView extends ScrollPane implements AuthoringView {
+public class CreatedObjectsView extends ScrollPane implements AuthoringView, Listener {
 	public static final int THUMBNAIL_WIDTH = 200;
 	public static final int THUMBNAIL_HEIGHT = 200;
 	private CreatedObjects createdobjects;
@@ -51,6 +52,9 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView {
 	private String extractName(AuthoringObject obj) {
 		return obj.getName();
 	}
-	
-//	public void 
+
+	@Override
+	public void update() {
+		setupBox();		
+	}
 }

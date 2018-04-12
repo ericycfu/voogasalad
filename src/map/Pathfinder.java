@@ -64,12 +64,13 @@ public class Pathfinder {
 				
 				int gscore = current.getGVal();
 				boolean isInOpen = openList.contains(nbr);
-				if(!isInOpen || gScore < nbr.getGVal())
+				// if(!isInOpen || gScore < nbr.getGVal())
 			}
 			
 			
 			
 		}
+		return null;
 		
 		
 		
