@@ -14,18 +14,30 @@ public class CreatedObjects {
 	}
 	
 	public static void addObject(AuthoringObject obj) {
-		myAuthoringObjects.add(obj);
+		if(myAuthoringObjects.contains(obj)) {
+			myAuthoringObjects.set(myAuthoringObjects.indexOf(obj), obj);
+		}
+		else {
+			myAuthoringObjects.add(obj);
+		}
 	}
 	
 	public static List<AuthoringObject> getAuthoringObjects() {
 		return myAuthoringObjects;
 	}
 	
+	public static void setAuthoringObjects(List<Object> authoring_objects) {
+		myAuthoringObjects.clear();
+		for(Object obj : authoring_objects) {
+			myAuthoringObjects.add((AuthoringObject) obj);
+		}
+	}
+	
 	public AuthoringObject getObjectByIndex(int index) {
 		return myAuthoringObjects.get(index);
 	}
 	
-	public int getSize() {
+	public static int getSize() {
 		return myAuthoringObjects.size();
 	}
 }
