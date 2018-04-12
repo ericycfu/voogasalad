@@ -16,7 +16,6 @@ public class MakeGameButton extends ImageButton {
 	
 	private void setupText() {
 		this.setText("Make Game");
-
 	}
 	
 	
