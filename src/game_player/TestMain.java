@@ -44,7 +44,7 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
 		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
 		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
-		go.setMovementSpeed(10);
+		go.setMovementSpeed(30);
 		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
