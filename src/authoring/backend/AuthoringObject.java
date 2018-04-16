@@ -13,8 +13,8 @@ public class AuthoringObject {
 	//extends group?
 	public static final String TEST_IMAGE = "/images/station.png";
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
-	public static final int ICON_PREF_WIDTH = 50;
-	public static final int ICON_PREF_HEIGHT = 50;
+	public static final int ICON_PREF_WIDTH = 70;
+	public static final int ICON_PREF_HEIGHT = 70;
 
 	private DraggableImageView myDragImage;
 	private String myName;
@@ -33,7 +33,7 @@ public class AuthoringObject {
 	}
 	
 	private void defaultObject() {
-		myDragImage = null;
+		myDragImage = null;		
 		myName = "";
 		myX = 0;
 		myY = 0;
