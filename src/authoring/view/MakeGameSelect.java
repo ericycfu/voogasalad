@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MakeGameSelect implements AuthoringView {
-	public static final String STYLE_PATH = "gui_elements/texts/style_properties.css";
+	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final int NUM_GAMES = 6;
 	private BorderPane myPane;
