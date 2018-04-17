@@ -1,4 +1,4 @@
-package game_player.visual_element;
+ package game_player.visual_element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import transform_library.Vector2;
@@ -22,6 +21,7 @@ public class MainDisplay implements VisualUpdate {
 	private double myCurrentYCoor = 0; 
 	private double myWidth;
 	private double myHeight;
+	private List<GameObject> myDisplayableList;
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private SelectedUnitManager mySelectedUnitManager;
@@ -96,13 +96,24 @@ public class MainDisplay implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		myDisplayables.getChildren().clear();
+		//myDisplayables.getChildren().clear();
+		List<ImageView> imgvList = new ArrayList<>();
 		for (GameObject go : gameObjects) {
 			double xloc = translateX(go.getTransform().getPosition().getX());
 			double yloc = translateY(go.getTransform().getPosition().getY());
 			go.getRenderer().getDisp().setX(xloc);
 			go.getRenderer().getDisp().setY(yloc);
-			myDisplayables.getChildren().add(go.getRenderer().getDisp());
+			imgvList.add(go.getRenderer().getDisp());
+			//myDisplayables.getChildren().add(go.getRenderer().getDisp());
+		}	
+		for (Node n : myDisplayables.getChildren()) {
+			if (!imgvList.contains(n)) {
+				myDisplayables.getChildren().remove(n);
+			}
+			imgvList.remove(n);
+		}
+		for (ImageView imgv : imgvList) {
+			myDisplayables.getChildren().add(imgv);
 		}
 	}
 
