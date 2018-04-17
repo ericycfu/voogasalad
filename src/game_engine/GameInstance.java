@@ -66,12 +66,14 @@ public class GameInstance {
 		myObjectManager.get(source_id).queueInteraction(myObjectManager.get(target_id));
 		myObjectManager.get(source_id).accessLogic().setCurrentInteraction(i);
 	}
+	
 	public void executeMovement(int id, int xcor, int ycor) {
 		if(!running)
 			return;
 		Transform t = new Transform(new Vector2(xcor,ycor));
 		myObjectManager.get(id).setTransform(t);
 	}
+	
 	public void loop() {
 		while(running) {
 			myObjectManager.runGameObjectLoop();

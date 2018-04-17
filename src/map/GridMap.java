@@ -1,7 +1,10 @@
 package map;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import game_object.GameObject;
 import game_object.GameObjectManager;
 import transform_library.Transform;
 import transform_library.Vector2;
@@ -10,46 +13,105 @@ import transform_library.Vector2;
  * 
  * @author Rayan
  * This class transforms the map into a grid which can then be used for pathfinding functionality.
- * Each cell is assigned a weightage 
+ * It also changes the states of the cells if they become obstacles. 
  */
+
 
 public class GridMap {
 
-	private GridCell[][] mapGrid;
-	private int width;
-	private int height;
+	public final static int CELL_LENGTH = 10;
 	
-	public void GridMap(int width, int height)
+	private GridCell[][] mapGrid;
+	private int gridLength;
+	
+	public void GridMap(int maplength)
 	{
-		mapGrid = new GridCell[width][height];
-		this.width = width;
-		this.height = height;
+		gridLength = maplength / CELL_LENGTH;
+		mapGrid = new GridCell[gridLength][gridLength];
 		initializeEmptyMap();
 	}
 	
+	//Call this whenever a building object is built or destroyed
+	
 	public void updateMapPositions(GameObjectManager gameObjectManager)
 	{
-		List<Transform> transformList = gameObjectManager.accessGameObjectTransforms();
-		//convert javafx coordinates to grid coordinates and update grid
+		for(GameObject obj : gameObjectManager.getElements())
+		{
+			if(!obj.isBuilding()) break;
+			for(GridCell cell : getOccupiedCells(obj))
+			{
+				cell.setObstacle(true);
+			}
+		}
+		
+		
+	}
+	
+	private Set<GridCell> getOccupiedCells(GameObject object)
+	{
+		Set<GridCell> occupiedCells = new HashSet<>();
+		Vector2 originCoordinates = object.getTransform().getPosition();
+		int limitX = (int) (originCoordinates.getX() + object.getRenderer().getDisp().getImage().getWidth());
+		int limitY = (int) (originCoordinates.getY() + object.getRenderer().getDisp().getImage().getHeight());
+		for(int i = (int)(originCoordinates.getX()); i <= limitX; i++)
+		{
+			for(int j = (int)(originCoordinates.getY()); j < limitY; j++)
+			{
+				occupiedCells.add(convertToGrid(new Vector2(i,j)));
+			}
+		}
+		
+		return occupiedCells;
+		
+	}
+	
+
+	/**
+	 * 
+	 * @param pos
+	 * @return
+	 * Converts vector2 position into grid position
+	 */
+	public GridCell convertToGrid(Vector2 pos)
+	{
+		String xPos = Integer.toString((int)pos.getX());
+		xPos = xPos.substring(0, xPos.length()-1);
+		String yPos = Integer.toString((int)pos.getY());
+		yPos = yPos.substring(0, yPos.length()-1);
+		
+		return getCell(Integer.parseInt(yPos), Integer.parseInt(xPos));
+	}
+	
+	/**
+	 * 
+	 * @param cell
+	 * @return
+	 * Grid position into vector2 
+	 */
+	public Vector2 convertToWorld(GridCell cell)
+	{
+		int cellLength = CELL_LENGTH;
+		double xCord = (cell.getColumn() * cellLength) + (cellLength / 2);
+		double yCord = (cell.getRow() * cellLength) + (cellLength / 2);
+		return new Vector2(xCord, yCord);
 	}
 	
 	private void initializeEmptyMap()
 	{
-		for(int i = 0; i < width; i++)
+		for(int i = 0; i < gridLength; i++)
 		{
-			for(int j = 0; j < height; j++)
+			for(int j = 0; j < gridLength; j++)
 			{
+				mapGrid[i][j] = new GridCell(i, j);
 				mapGrid[i][j].setObstacle(false);
 			}
 		}
 	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
+	
+	
+	public double getGridLength()
+	{
+		return gridLength;
 	}
 	
 	public GridCell getCell(int r, int c)

@@ -1,10 +1,13 @@
 package game_object;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
@@ -23,13 +26,9 @@ import transform_library.Vector2;
 public class GameObjectManager implements ElementManager<GameObject>{
 	
 	private Map<Integer, GameObject> objectMap;
-	private Pathfinder pathfinder;
-	private GridMap gridMap;
-	
 	public GameObjectManager()
 	{
 		objectMap = new TreeMap<>();
-		pathfinder = new Pathfinder(gridMap);
 	}
 	
 	/**
@@ -50,7 +49,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 		{
 			id = objectMap.size() + 1;
 			objectMap.put(id, object);
-		}
+		}	
 		return id;
 
 	}
@@ -126,6 +125,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 		
 		return Collections.unmodifiableList(gameObjectList);
 	}
+	
 	public GameObject get(int id) {
 		return objectMap.get(id);
 	}

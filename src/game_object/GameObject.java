@@ -32,6 +32,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	private String name;
 	private List<String> tag;
+	private boolean isBuilding;
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
@@ -43,7 +44,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private boolean isMovementQueued;
 	private Transform movementWaypoint;
 
-	private Image img;
+	
 	
 	/**
 	 *
@@ -57,6 +58,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
 		isDead = false;
+		isBuilding = false;
 
 	}
 	
@@ -65,6 +67,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		this.transform = transform;
 		this.myObjectLogic = logic;
+		isDead = false;
+		isBuilding = false;
 	}
 	
 	/**
@@ -87,6 +91,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
+		isBuilding = false;
 	}
 	
 	/**
@@ -105,6 +110,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
 			{
+				
+
 				dequeueMovement();
 			}
 		}
@@ -119,6 +126,15 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 
 	}
 	
+	public void setIsBuilding(boolean val)
+	{
+		this.isBuilding = val;
+	}
+	
+	public boolean isBuilding()
+	{
+		return isBuilding;
+	}
 	
 	public void setIsDead(boolean isDead)
 	{
