@@ -123,7 +123,10 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		if (gameObjects.isEmpty()) return;
+		if (gameObjects.isEmpty()) {
+			updateProfilePic(DefaultImage);
+			return;
+		}
 		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());
 		updateHealthManaInfo(gameObjects.get(0));
 		updateStatusInfo(gameObjects.get(0));
