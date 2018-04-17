@@ -32,11 +32,14 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private TextArea myHealthManaInfo;
 	private TextArea myStatusInfo; 
 	private Map<String, Image> UnitProfileMap;
+	private Rectangle myBackground;
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
 		myUnitProfilePic = new Group();
 		myUnitStatus = new Group();
+		myBackground = new Rectangle(myWidth/3, myHeight);
+		myUnitProfilePic.getChildren().add(myBackground);
 		myUnitInfoDisplay.getChildren().add(myUnitProfilePic);
 		myUnitInfoDisplay.getChildren().add(myUnitStatus);
 		myWidth = width;
