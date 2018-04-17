@@ -36,7 +36,6 @@ public class GamePlayer {
 	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
 	private GameObjectManager myGameManager;
-	private List<GameObject> mySelectedGameObjects;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
@@ -49,6 +48,7 @@ public class GamePlayer {
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	private String myCurrentAction;
+	private List<GameObject> myDisplayGameObjects;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
 		myGameManager = gameManager;
@@ -56,9 +56,9 @@ public class GamePlayer {
 		myUnitDispImg = unitDispImgs;
 		myUnitSkills = unitSkills;
 		mySkillImages = skillImages;
-		mySelectedUnitManager = new SelectedUnitManager();
-		initializeSingleUnitSelect();
+		mySelectedUnitManager = new SelectedUnitManager();		
 		initialize();
+		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
 	}
 	
@@ -76,7 +76,6 @@ public class GamePlayer {
 	
 	private void initialize() {
 		myRoot = new Group();
-		mySelectedGameObjects = new ArrayList<GameObject>();
 		
 		myMainDisplay = new MainDisplay(mySelectedUnitManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		Node mainDisp = myMainDisplay.getNodes();
@@ -106,12 +105,11 @@ public class GamePlayer {
 	
 	public void update(List<GameObject> gameobject) {
 		myCurrentAction = ""; // returns action selection to default
-		
-		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
+
 		myTopPanel.update(gameobject); //resources
-		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits()); // selection TO-DO
-		myMainDisplay.update(displayGameObjects);
+		myMiniMap.update(gameobject);
+		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
+		myMainDisplay.update(gameobject);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
 		if (!myCurrentAction.equals("")) {
@@ -120,28 +118,6 @@ public class GamePlayer {
 		myUnitDisplay.getUnitActionDisp().setDefault();
 	}
 	
-	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
-		List<GameObject> ret = new ArrayList<>();
-		for (GameObject go : gameobjects) {
-			if (isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY())) {
-				ret.add(go);
-			}
-		}
-		return ret;
-	}
-	
-	private boolean isXInWindow(double x) {
-		if (x>myCurrentXCoor & x<myCurrentXCoor+SCENE_SIZE_X) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean isYInWindow(double y) {
-		if (y>myCurrentYCoor & y<myCurrentYCoor+SCENE_SIZE_Y*(1-TOP_HEIGHT-BOTTOM_HEIGHT)) {
-			return true;
-		}
-		return false;
-	}
+
 	
 }
