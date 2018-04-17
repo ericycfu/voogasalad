@@ -88,6 +88,7 @@ public class Pathfinder {
 					
 			}
 		}
+		return null;
 		
 		return getPath(null);
 		

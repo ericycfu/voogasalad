@@ -1,19 +1,28 @@
 package authoring.view;
 
+import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
+import authoring.backend.DraggableImageView;
+import authoring.backend.DraggableScrollPane;
+import authoring.backend.MapEntity;
+import authoring.backend.SelectionImageView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import observables.Listener;
 
-public class CreatedObjectsView extends ScrollPane {
-	public static final int THUMBNAIL_WIDTH = 200;
-	public static final int THUMBNAIL_HEIGHT = 200;
+public class CreatedObjectsView extends ScrollPane implements AuthoringView, Listener {
+	public static final int THUMBNAIL_WIDTH = 150;
+	public static final int THUMBNAIL_HEIGHT = 150;
 	private CreatedObjects createdobjects;
+	private MapEntity map;
 	
-	public CreatedObjectsView(CreatedObjects cb) {
+	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		createdobjects = cb;
+		map = ac.getMap();
+		cb.addListener(this);
 		setupBox();
 	}
 	
@@ -23,7 +32,10 @@ public class CreatedObjectsView extends ScrollPane {
 		for (int i=0; i<size; i++) {
 			box.getChildren().add(setupIndivBox(createdobjects.getObjectByIndex(i)));
 		}
-		this.setContent(box);
+		if (size != 0) {
+			this.setContent(box);
+		}
+		return;
 	}
 	
 	private VBox setupIndivBox(AuthoringObject obj) {
@@ -33,8 +45,8 @@ public class CreatedObjectsView extends ScrollPane {
 		return box;
 	}
 	
-	private ImageView extractImage(AuthoringObject obj) {
-		ImageView imgview = new ImageView(obj.getImage());
+	private SelectionImageView extractImage(AuthoringObject obj) {
+		SelectionImageView imgview = new SelectionImageView(obj, map);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 		return imgview;
@@ -43,7 +55,9 @@ public class CreatedObjectsView extends ScrollPane {
 	private String extractName(AuthoringObject obj) {
 		return obj.getName();
 	}
-	
-	
-	
+
+	@Override
+	public void update() {
+		setupBox();
+	}
 }

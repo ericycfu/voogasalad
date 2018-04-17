@@ -61,6 +61,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
+		this.myObjectLogic = new ObjectLogic();
 		isDead = false;
 		isBuilding = false;
 		activeWaypoints = new LinkedList<>();
