@@ -1,6 +1,9 @@
 package authoring.backend;
 
 import java.util.List;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
@@ -16,7 +19,8 @@ public class AuthoringObject {
 	public static final int ICON_PREF_WIDTH = 70;
 	public static final int ICON_PREF_HEIGHT = 70;
 
-	private DraggableImageView myDragImage;
+	@XStreamOmitField
+	private transient DraggableImageView myDragImage;
 	private String myName;
 	private String myTag;
 	private double myX;
