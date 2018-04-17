@@ -14,6 +14,7 @@ import java.util.Map;
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
+	private Map<String, Double> buildCosts;
 	
 	public ObjectAttributes() {
 		attributes = new HashMap<String, Double>();

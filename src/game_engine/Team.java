@@ -2,16 +2,24 @@ package game_engine;
 
 import java.util.Map;
 
+/**
+ * 
+ * @author Rayan
+ *
+ */
+
 public class Team implements EngineObject<TeamManager>{
 
 	private int id;
 	private String teamName;
-	private Map<String, Double> availableResources;
+	//private Map<String, Double> availableResources;
+	private ResourceManager resourceManager;
 	
-	public Team(String teamName, TeamManager manager)
+	public Team(String teamName, TeamManager manager, ResourceManager resourceManager)
 	{
 		this.teamName = teamName;
 		addToManager(manager);
+		this.resourceManager = resourceManager;
 	}
 	
 	public String getTeamName() {
@@ -36,6 +44,16 @@ public class Team implements EngineObject<TeamManager>{
 		
 		setID(manager.addElementToManager(this));
 	}
+
+	public ResourceManager getResourceManager() {
+		return resourceManager;
+	}
+
+	public void setResourceManager(ResourceManager resourceManager) {
+		this.resourceManager = resourceManager;
+	}
+	
+	/*
 	public boolean checkEnoughResources(Map<String, Double> costs) {
 		for(String s: costs.keySet()) {
 			Double currentAvailable = availableResources.get(s);
@@ -54,5 +72,5 @@ public class Team implements EngineObject<TeamManager>{
 	public void changeMultipleResources(Map<String,Double> changes) {
 		for(String s: changes.keySet())
 			changeResource(s, changes.get(s));
-	}
+	}*/
 }
