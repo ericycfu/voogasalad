@@ -6,11 +6,15 @@ import java.util.Map;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,23 +29,15 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private double myHeight; 
 	private double myWidth; 
 	private GridPane myUnitInfoDisplay;
-	private Group myUnitProfilePic;
-	private Group myUnitStatus;
 	private ImageView myCurrentUnitImageView;
 	private Rectangle myDisplayFrame;
 	private TextArea myHealthManaInfo;
 	private TextArea myStatusInfo; 
 	private Map<String, Image> UnitProfileMap;
-	private Rectangle myBackground;
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
-		myUnitProfilePic = new Group();
-		myUnitStatus = new Group();
-		myBackground = new Rectangle(myWidth/3, myHeight);
-		myUnitProfilePic.getChildren().add(myBackground);
-		myUnitInfoDisplay.getChildren().add(myUnitProfilePic);
-		myUnitInfoDisplay.getChildren().add(myUnitStatus);
+		myUnitInfoDisplay.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		myWidth = width;
 		myHeight = height;
 		initializeDisplayStructure();
@@ -64,7 +60,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 		myCurrentUnitImageView.setFitWidth(myWidth/3);
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
-		myUnitProfilePic.getChildren().add(myCurrentUnitImageView);
 		myUnitInfoDisplay.add(myCurrentUnitImageView, 0, 0, 1, 1);
 	}
 	
