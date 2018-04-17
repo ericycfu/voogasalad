@@ -50,8 +50,8 @@ public class GameSettingsTab extends Tab {
 	private Stage stage;
 
 	public GameSettingsTab() {
-//		ObjectAttributes objAttr) {
-//		this.objAttr = objAttr;
+		//		ObjectAttributes objAttr) {
+		//		this.objAttr = objAttr;
 		initialize();
 	}
 
@@ -61,7 +61,7 @@ public class GameSettingsTab extends Tab {
 		setPane();
 		setLabel();
 		setComboBoxes();
-//		setButtons();
+		//		setButtons();
 	}
 
 	private void setText(){
@@ -90,12 +90,12 @@ public class GameSettingsTab extends Tab {
 		create_resource_label = new CreateResourceLabel().getLabel();
 		choose_resource_label = new ChooseResourceLabel().getLabel();
 		starting_amount_label = new StartingAmountLabel().getLabel();
-		
+
 		choose_resource_label1 = new ChooseResourceLabel1().getLabel();
 		starting_amount_label1 = new StartingAmountLabel1().getLabel();
 
-		
-		
+
+
 		design_root.getChildren().addAll(game_settings_label, num_players_label,loss_condition_label,
 				create_resource_label, choose_resource_label, starting_amount_label,
 				choose_resource_label1, starting_amount_label1);
@@ -146,12 +146,12 @@ public class GameSettingsTab extends Tab {
 		choose_resource_cb1 = new ChooseResourceComboBox1();
 		choose_resource_cb1.setValue("silver");
 		choose_resource_cb1.getItems().addAll(resource_options);
-		
-		
+
+
 		choose_amount_cb1 = new ChooseAmountComboBox1();
 		choose_amount_cb1.setValue("10");
 		choose_amount_cb1.getItems().addAll(amount_options);
-		
+
 		design_root.getChildren().addAll(num_players_cb.getComboBox(), 
 				loss_condition_cb.getComboBox(), choose_resource_cb.getComboBox(),
 				choose_amount_cb.getComboBox(), choose_resource_cb1.getComboBox(),
@@ -163,7 +163,8 @@ public class GameSettingsTab extends Tab {
 
 	private void setButtons() {
 		design_root.getChildren().addAll(new AddResourceButton(resource_name_pane.getPane(), resource_amount_pane.getPane()));
-		//					new ResourceApplyButton(resource_name_pane.getPane(),
+		new ResourceApplyButton().getButton();
+		//							resource_name_pane.getPane(),
 		//	  						 resource_amount_pane.getPane(),
 		//	  						 stage,
 		//	  						objAttr));
