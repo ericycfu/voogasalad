@@ -41,8 +41,9 @@ public class PlaceTab extends Tab {
 	}
 	
 	private void setButtons() {
-		place_root.getChildren().addAll(new SaveGameButton().getButton(),
-										new PlayGameButton().getButton());
+		place_root.getChildren().addAll(new SaveGameButton().getButton()
+//										new PlayGameButton().getButton()
+										);
 	}
 
 	public DraggableScrollPane getScroll() {

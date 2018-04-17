@@ -42,7 +42,8 @@ public class StartScreen {
 		VBox box = new VBox();
 		box.getChildren().addAll(
 				new StartScreenText(), 
-				new MakeGameButton(myStage));
+				new MakeGameButton(myStage), 
+				new PlayGameButton());
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
 		box.setSpacing(10);
