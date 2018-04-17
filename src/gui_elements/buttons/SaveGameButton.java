@@ -36,18 +36,18 @@ public class SaveGameButton extends MainButton {
 			
 			CreatedObjects.getAuthoringObjects().clear();
 			
-//			try {
-//				CreatedObjects.setAuthoringObjects(myReader.read(Resources.getString("AUTHOR_LOCATION")));
-//				DesignTab.setAuthoringObject(CreatedObjects.getAuthoringObjects().get(2));
-//				DesignTab.assignComponents();
-//			} catch (ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (Exception e) {
-//			}
+			try {
+				CreatedObjects.setAuthoringObjects(myReader.read(Resources.getString("AUTHOR_LOCATION")));
+				DesignTab.setAuthoringObject(CreatedObjects.getAuthoringObjects().get(2));
+				DesignTab.assignComponents();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+			}
 		});
 	}
 }

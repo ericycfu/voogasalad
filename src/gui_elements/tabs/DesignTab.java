@@ -56,9 +56,10 @@ public class DesignTab extends Tab {
 	private static MainComboBox component_tag_cb, interaction_component_property_cb, interaction_component_tag_cb;
 	private static MainLabel component_image_choice_text_label;
 	private static MainButton component_image_chooser_button;
-	private static AuthoringObject authoring_object = new AuthoringObject();
+	private static AuthoringObject authoring_object;
 	
 	public DesignTab() {
+		authoring_object = new AuthoringObject();
 		initialize();
 	}
 	
