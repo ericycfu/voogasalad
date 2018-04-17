@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 public class MainComboBox extends ComboBox<String> {
@@ -20,7 +21,7 @@ public class MainComboBox extends ComboBox<String> {
 	public MainComboBox(String filename) {
 		assignProperties(DIRECTORY_STRING + filename);
 	}
-	
+
 	private void assignProperties(String full_filename) {
 		properties = new Properties();
 		input = null;

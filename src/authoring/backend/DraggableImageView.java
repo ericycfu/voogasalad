@@ -21,12 +21,12 @@ public class DraggableImageView extends ImageView {
     		
     		this.setOnMouseDragged(event -> {
     			   double deltaX = event.getSceneX() - mouseX ;
-    			   double deltaY = event.getSceneY() - mouseY ;
+    			   double deltaY = event.getSceneY() - mouseY ; 		
     			   obj.changeX(obj.getX() + deltaX);
     			   obj.changeY(obj.getY() + deltaY);
+    			   obj.updateImage();
     			   mouseX = event.getSceneX();
     			   mouseY = event.getSceneY();
-    			   
     		});
     }
 }

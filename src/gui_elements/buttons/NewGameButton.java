@@ -1,5 +1,6 @@
 package gui_elements.buttons;
 
+import authoring.backend.GameEntity;
 import authoring.view.MakeGameScreen;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -11,7 +12,7 @@ public class NewGameButton extends Button {
 	
 	public NewGameButton(int i, Stage stage) {
 		setupText(i);
-		this.setOnAction(e -> new MakeGameScreen(stage));
+		this.setOnAction(e -> new MakeGameScreen(stage, new GameEntity()));
 	}
 	
 	private void setupText(int i) {

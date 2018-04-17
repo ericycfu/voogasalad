@@ -12,8 +12,7 @@ import transform_library.Transform;
 import transform_library.Vector2;
 
 public class GameDataStuff {
-	
-//	// for gameEngine
+
 //	private Reader myReader;
 //	
 //	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
@@ -36,6 +35,7 @@ public class GameDataStuff {
 //	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
 //	List<LossCondition> lossConditions = myReader.read(INITIALIZATION_LOCATION,"lossCondition");
 //	List<StartingCondition> startingConditions = myReader.read(INITIALIZATION_LOCATION,"startingCondition");
+<<<<<<< HEAD
 	
 	//actual gameAuthor code
 	
@@ -60,5 +60,7 @@ public class GameDataStuff {
 		return gameObjects;
 	}
 	
+=======
+>>>>>>> 37d706d3df7f25a4ad9a94382c1c02cb83ff1245
 	
 }

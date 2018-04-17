@@ -42,5 +42,3 @@ public class AuthoringController {
 		return myMap;
 	}
 }
-
-

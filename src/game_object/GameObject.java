@@ -42,8 +42,6 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private double movementSpeed = 0;
 	private boolean isMovementQueued;
 	private Transform movementWaypoint;
-
-	private Image img;
 	
 	/**
 	 *
@@ -56,6 +54,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	{
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
+		this.myObjectLogic = new ObjectLogic();
 		isDead = false;
 
 	}
@@ -93,7 +92,6 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
-		
 		if(isMovementQueued && movementWaypoint != null)
 		{
 			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
@@ -106,7 +104,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget);
 		}
-		myObjectLogic.checkConditions(this);
+		//myObjectLogic.checkConditions(this);
 		
 		
 
