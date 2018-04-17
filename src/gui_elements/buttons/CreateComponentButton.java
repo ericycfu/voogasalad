@@ -3,6 +3,7 @@ package gui_elements.buttons;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import gui_elements.combo_boxes.MainComboBox;
+import gui_elements.tabs.DesignTab;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -36,6 +37,8 @@ public class CreateComponentButton extends MainButton {
 			authoring_object.setImage(image_text_label.getText());
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));
 			CreatedObjects.addObject(authoring_object);
+			DesignTab.setNewAuthoringObject();
+			DesignTab.resetComponents();
 		});
 	}
 }

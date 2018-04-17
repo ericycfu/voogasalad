@@ -1,6 +1,9 @@
 package authoring.backend;
 
 import java.util.List;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
@@ -13,10 +16,12 @@ public class AuthoringObject {
 	//extends group?
 	public static final String TEST_IMAGE = "/images/station.png";
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
-	public static final int ICON_PREF_WIDTH = 50;
-	public static final int ICON_PREF_HEIGHT = 50;
-
-	private DraggableImageView myDragImage;
+	public static final int ICON_PREF_WIDTH = 70;
+	public static final int ICON_PREF_HEIGHT = 70;
+	
+	@XStreamOmitField
+	private transient DraggableImageView myDragImage;
+	private String myImagePath;
 	private String myName;
 	private String myTag;
 	private double myX;
@@ -33,7 +38,7 @@ public class AuthoringObject {
 	}
 	
 	private void defaultObject() {
-		myDragImage = null;
+		myDragImage = null;		
 		myName = "";
 		myX = 0;
 		myY = 0;
@@ -43,18 +48,12 @@ public class AuthoringObject {
 	}
 	
 	private void addTestObject() {
-		Image image = new Image(getClass().getResourceAsStream(TEST_IMAGE));
-		myDragImage = new DraggableImageView(this, image);
-		myDragImage.setFitWidth(ICON_PREF_WIDTH);
-		myDragImage.setFitHeight(ICON_PREF_HEIGHT);
+		setImage(TEST_IMAGE);
 		myName = "Station";
 	}
 	
 	private void addDuvall() {
-		Image image = new Image(getClass().getResourceAsStream(TEST_IMAGE_DUVALL));
-		myDragImage = new DraggableImageView(this, image);
-		myDragImage.setFitWidth(ICON_PREF_WIDTH);
-		myDragImage.setFitHeight(ICON_PREF_HEIGHT);
+		setImage(TEST_IMAGE_DUVALL);
 		myName = "Final Boss";
 	}
 	
@@ -65,15 +64,18 @@ public class AuthoringObject {
 	public DraggableImageView getDragImage() {
 		return myDragImage;
 	}
-	
+		
 	public void updateImage() {
 		myDragImage.setX(myX);
 		myDragImage.setY(myY);
 	}
 	
-	public void setImage(String image_filename) {
-//		Image img = new Image(getClass().getClassLoader().getResourceAsStream(image_filename));
-//		myDragImage = new DraggableImageView(this, img);
+	public void setImage(String image_path) {
+		myImagePath = image_path;
+		Image image = new Image(getClass().getResourceAsStream(image_path));
+		myDragImage = new DraggableImageView(this, image);
+		myDragImage.setFitWidth(ICON_PREF_WIDTH);
+		myDragImage.setFitHeight(ICON_PREF_HEIGHT);
 	}
 	
 	public String getName() {
@@ -126,5 +128,11 @@ public class AuthoringObject {
 
 	public ObjectAttributes getObjectAttributesInstance() {
 		return myAttributes;
+	}
+	
+	public AuthoringObject duplicateObj() {
+		AuthoringObject newobj = new AuthoringObject();
+		
+		return newobj;
 	}
 }

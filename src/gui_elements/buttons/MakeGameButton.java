@@ -15,6 +15,7 @@ public class MakeGameButton extends ImageButton {
 	}
 	
 	private void setupText() {
+		this.getStyleClass().add("make_game_button");
 		this.setText("Make Game");
 	}
 	
