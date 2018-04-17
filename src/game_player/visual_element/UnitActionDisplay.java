@@ -1,14 +1,19 @@
 package game_player.visual_element;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 
 public class UnitActionDisplay implements VisualUpdate{
@@ -29,11 +34,16 @@ public class UnitActionDisplay implements VisualUpdate{
 		myUnitSkills = unitSkills;
 		myCellWidth = width/ACTION_GRID_WIDTH;
 		myCellHeight = height/ACTION_GRID_HEIGHT;
+		
+		myGridPane = new GridPane();
+		myGridPane.setPrefWidth(width);
+		myGridPane.setPrefHeight(height);
+		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
+		
 		initialize();
 	}
 	
 	private void initialize() {
-		myGridPane = new GridPane();
 		myCurrentAction = "";
 		myActionsGrid = new SkillButton[ACTION_GRID_WIDTH][ACTION_GRID_HEIGHT];
 		for (int i = 0; i < myActionsGrid.length; i++) {
@@ -41,11 +51,14 @@ public class UnitActionDisplay implements VisualUpdate{
 				Image img = new Image("attack_icon.png");
 				SkillButton cell = new SkillButton();
 				ImageView imgv = new ImageView(img);
-				imgv.setFitHeight(myCellHeight*0.8);
-				imgv.setFitWidth(myCellWidth*0.65);
+				imgv.setFitHeight(myCellHeight);
+				imgv.setFitWidth(myCellWidth);
 				cell.setGraphic(imgv);
+				/**
 				cell.setLayoutX(myCellWidth*i);
 				cell.setLayoutY(myCellHeight*j);
+				**/
+				myGridPane.add(imgv, i, j);
 				myActionsGrid[i][j] = cell;
 			}
 		}
@@ -86,7 +99,7 @@ public class UnitActionDisplay implements VisualUpdate{
 				group.getChildren().add(myActionsGrid[i][j]);
 			}
 		}
-		return group;
+		return myGridPane;
 	}
 	
 	
