@@ -23,42 +23,10 @@ import transform_library.Vector2;
  * Allows the game engine to restrict access of gameobjects from the game player
  */
 
-public class GameObjectManager implements ElementManager<GameObject>{
+public class GameObjectManager extends ElementManager<GameObject> {
 	
-	private Map<Integer, GameObject> objectMap;
 	public GameObjectManager()
-	{
-		objectMap = new TreeMap<>();
-	}
-	
-	/**
-	 * 
-	 * @param object
-	 * @return
-	 * Adds a gameobject to the manager and assigns an ID to it based on the objects already inside
-	 */
-	@Override
-	public int addElementToManager(GameObject object)
-	{
-		int id = 1;
-		if(objectMap.isEmpty())
-		{
-			objectMap.put(id, object);
-		}
-		else
-		{
-			id = objectMap.size() + 1;
-			objectMap.put(id, object);
-		}	
-		return id;
-
-	}
-	
-	@Override
-	public void removeElement(GameObject element) {
-		
-		objectMap.remove(element.getID());
-	}
+	{}
 	
 	
 	/**
@@ -67,7 +35,7 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	 */
 	public void runGameObjectLoop()
 	{
-		Iterator<Map.Entry<Integer, GameObject>> iter = objectMap.entrySet().iterator();
+		Iterator<Map.Entry<Integer, GameObject>> iter = this.getElementMap().entrySet().iterator();
 		while(iter.hasNext())
 		{
 			Map.Entry<Integer, GameObject> entry = iter.next();
@@ -118,17 +86,12 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	@Override
 	public List<GameObject> getElements() {
 		List<GameObject> gameObjectList = new ArrayList<>();
-		for(Map.Entry<Integer, GameObject> var : objectMap.entrySet())
+		for(Map.Entry<Integer, GameObject> var : getElementMap().entrySet())
 		{
 			gameObjectList.add(var.getValue());
 		}
 		
 		return Collections.unmodifiableList(gameObjectList);
 	}
-	
-	public GameObject get(int id) {
-		return objectMap.get(id);
-	}
-	
 
 }

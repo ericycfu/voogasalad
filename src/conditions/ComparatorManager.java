@@ -31,7 +31,7 @@ public class ComparatorManager {
 		return comparatorMap.get(comparatorID).compare(val1, val2);
 	}
 	
-	public Comparator getCompartor(int id) throws ComparatorNotFoundException
+	public Comparator getComparator(int id) throws ComparatorNotFoundException
 	{
 		if(comparatorMap.containsKey(id))
 			return comparatorMap.get(id);
@@ -39,7 +39,7 @@ public class ComparatorManager {
 		throw new ComparatorNotFoundException("Invalid id given to manager");
 	}
 	
-	public List<Comparator> getComparator()
+	public List<Comparator> getComparators()
 	{
 		List<Comparator> comparatorList = new ArrayList<>();
 		for(Map.Entry<Integer, Comparator> entry: comparatorMap.entrySet())

@@ -16,26 +16,26 @@ import transform_library.Vector2;
  * It also changes the states of the cells if they become obstacles. 
  */
 
-
+//each object will have its own repeatedly created gridmap
 public class GridMap {
 
 	public final static int CELL_LENGTH = 10;
-	
+	public final static int MAP_LENGTH = 800;
 	private GridCell[][] mapGrid;
 	private int gridLength;
 	
-	public void GridMap(int maplength)
+	public GridMap()
 	{
-		gridLength = maplength / CELL_LENGTH;
+		gridLength = MAP_LENGTH / CELL_LENGTH;
 		mapGrid = new GridCell[gridLength][gridLength];
 		initializeEmptyMap();
 	}
 	
 	//Call this whenever a building object is built or destroyed
 	
-	public void updateMapPositions(GameObjectManager gameObjectManager)
+	public void updateMapPositions(List<GameObject> objList)
 	{
-		for(GameObject obj : gameObjectManager.getElements())
+		for(GameObject obj : objList)
 		{
 			if(!obj.isBuilding()) break;
 			for(GridCell cell : getOccupiedCells(obj))

@@ -13,6 +13,5 @@ import map.GridMap;
 public class InteractionRequirementsWrapper {
 	
 	private GameObjectManager GameObjectManager;
-	private GridMap gridMap;
 	
 }

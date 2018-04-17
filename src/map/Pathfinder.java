@@ -16,7 +16,7 @@ import transform_library.Vector2;
 /**
  * 
  * @author Rayan
- * Class that implements pathfinding algorithm
+ * Class that implements pathfinding algorithm.
  */
 
 public class Pathfinder {
@@ -28,7 +28,6 @@ public class Pathfinder {
 	public Pathfinder(GridMap gridMap)
 	{
 		this.gridMap = gridMap;
-		
 	}
 	
 	/**
@@ -94,8 +93,9 @@ public class Pathfinder {
 		
 	}
 	
-	public Queue<Vector2> findPath(GameObject obj, Vector2 target)
+	public Queue<Vector2> findPath(GameObject obj, Vector2 target, List<GameObject> objList)
 	{
+		gridMap.updateMapPositions(objList);
 		Stack<GridCell> gridPathPoints = calculatePath(obj.getTransform().getPosition(), target);
 		Queue<Vector2> mapWayPoints = new LinkedList<>();
 		for(GridCell cell : gridPathPoints)
