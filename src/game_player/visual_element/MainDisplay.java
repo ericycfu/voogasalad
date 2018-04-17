@@ -12,13 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.Region;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
 
-	public static final double WINDOW_STEP_SIZE = 50;
+	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
 	private double myCurrentXCoor = 0; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor = 0; 
@@ -37,6 +36,11 @@ public class MainDisplay implements VisualUpdate {
 	private double myMouseXFinalPosition;
 	private double myMouseYFinalPosition;
 	private boolean isMultipleSelectAvailable;
+	
+	private boolean isUpHovered;
+	private boolean isDownHovered;
+	private boolean isLeftHovered;
+	private boolean isRightHovered;
 	
 	public MainDisplay(SelectedUnitManager selectedUnitManager, double width, double height) {
 		myDisplayGameObjects = new ArrayList<>();
@@ -69,48 +73,45 @@ public class MainDisplay implements VisualUpdate {
 	
 	private void initializeMoveButtons() {
 		myMoveWindowButtons = new Group();
+		
 		Button right = new Button();
 		right.setLayoutX(myWidth - 60);
 		right.setLayoutY(myHeight/2 - 60);
 		right.setGraphic(new ImageView(new Image("arrow_right.png")));
-		right.setOnMousePressed(e -> {
-			if (myCurrentXCoor < myWidth*MAP_DISPLAY_RATIO) {
-				myCurrentXCoor += WINDOW_STEP_SIZE;
-			}
+		right.setOnMouseEntered(e -> {
+			isRightHovered = true;
 		});
+		right.setOnMouseExited(e -> isRightHovered = false);
 		myMoveWindowButtons.getChildren().add(right);
 		
 		Button left = new Button();
 		left.setLayoutX(0);
 		left.setLayoutY(myHeight/2 - 60);
 		left.setGraphic(new ImageView(new Image("arrow_left.png")));
-		left.setOnMousePressed(e -> {
-			if (myCurrentXCoor > 0) {
-				myCurrentXCoor -= WINDOW_STEP_SIZE;
-			}
+		left.setOnMouseEntered(e -> {
+			isLeftHovered = true;
 		});
+		left.setOnMouseExited(e -> isLeftHovered = false);
 		myMoveWindowButtons.getChildren().add(left);
 		
 		Button up = new Button();
 		up.setLayoutX(myWidth/2 - 60);
 		up.setLayoutY(0);
 		up.setGraphic(new ImageView(new Image("arrow_up.png")));
-		up.setOnMousePressed(e -> {
-			if (myCurrentYCoor > 0) {
-				myCurrentYCoor -= WINDOW_STEP_SIZE;
-			}
+		up.setOnMouseEntered(e -> {
+			isUpHovered = true;
 		});
+		up.setOnMouseExited(e -> isUpHovered = false);
 		myMoveWindowButtons.getChildren().add(up);
 		
 		Button down = new Button();
 		down.setLayoutX(myWidth/2 - 60);
 		down.setLayoutY(myHeight - 60);
 		down.setGraphic(new ImageView(new Image("arrow_down.png")));
-		down.setOnMousePressed(e -> {
-			if (myCurrentYCoor < myHeight*MAP_DISPLAY_RATIO) {
-				myCurrentYCoor += WINDOW_STEP_SIZE;
-			}
+		down.setOnMouseEntered(e -> {
+			isDownHovered = true;
 		});
+		down.setOnMouseExited(e -> isDownHovered = false);
 		myMoveWindowButtons.getChildren().add(down);
 	}
 	
@@ -135,7 +136,20 @@ public class MainDisplay implements VisualUpdate {
 		for (ImageView imgv : imgvList) {
 			myDisplayables.getChildren().add(imgv);
 		}
+		if (isDownHovered && myCurrentYCoor < myHeight*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
+			myCurrentYCoor += WINDOW_STEP_SIZE;
+		}
+		if (isUpHovered && myCurrentYCoor > 0) {
+			myCurrentYCoor -= WINDOW_STEP_SIZE;
+		}
+		if (isLeftHovered && myCurrentXCoor > 0) {
+			myCurrentXCoor -= WINDOW_STEP_SIZE;
+		}
+		if (isRightHovered && myCurrentXCoor < myWidth*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_X) {
+			myCurrentXCoor += WINDOW_STEP_SIZE;
+		}
 		updateCurrentWindow();
+		
 	}
 
 	@Override
