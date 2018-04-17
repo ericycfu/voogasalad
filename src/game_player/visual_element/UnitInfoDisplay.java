@@ -6,15 +6,11 @@ import java.util.Map;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -37,7 +33,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
-		myUnitInfoDisplay.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		myUnitInfoDisplay.setStyle("-fx-background-color: #FFFFFF;");
 		myWidth = width;
 		myHeight = height;
 		initializeDisplayStructure();

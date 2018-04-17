@@ -58,7 +58,7 @@ public class UnitActionDisplay implements VisualUpdate{
 				cell.setLayoutX(myCellWidth*i);
 				cell.setLayoutY(myCellHeight*j);
 				**/
-				myGridPane.add(imgv, i, j);
+				myGridPane.add(cell, i, j);
 				myActionsGrid[i][j] = cell;
 			}
 		}
