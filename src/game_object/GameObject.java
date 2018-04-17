@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import game_engine.EngineObject;
 import game_engine.Team;
 
@@ -27,7 +29,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	private int id;
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
-	private Renderer renderer;
+	@XStreamOmitField
+	private transient Renderer renderer;
 	private Team owner;
 	
 	private String name;

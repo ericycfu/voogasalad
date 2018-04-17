@@ -124,11 +124,13 @@ public class GameObjectManager implements ElementManager<GameObject>{
 			gameObjectList.add(var.getValue());
 		}
 		
-		return Collections.unmodifiableList(gameObjectList);
+		return gameObjectList;
 	}
 	public GameObject get(int id) {
 		return objectMap.get(id);
 	}
-	
+	public void clear() {
+		objectMap.clear();
+	}
 
 }
