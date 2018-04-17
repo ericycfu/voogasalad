@@ -7,6 +7,7 @@ import authoring.backend.DraggableImageView;
 import authoring.backend.DraggableScrollPane;
 import authoring.backend.MapEntity;
 import authoring.backend.SelectionImageView;
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -42,6 +43,7 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 		VBox box = new VBox();
 		box.getChildren().add(extractImage(obj));
 		box.getChildren().add(new Text(extractName(obj)));
+		box.setPadding(new Insets(10, 10, 0, 10));
 		return box;
 	}
 	
