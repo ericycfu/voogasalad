@@ -1,19 +1,14 @@
 package game_player.visual_element;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import game_object.GameObject;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 
 public class UnitActionDisplay implements VisualUpdate{
@@ -54,11 +49,9 @@ public class UnitActionDisplay implements VisualUpdate{
 				imgv.setFitHeight(myCellHeight);
 				imgv.setFitWidth(myCellWidth);
 				cell.setGraphic(imgv);
-				
-				cell.setLayoutX(myCellWidth*i);
-				cell.setLayoutY(myCellHeight*j);
-				
-				//myGridPane.add(cell, i, j);
+				//cell.setLayoutX(myCellWidth*i);
+				//cell.setLayoutY(myCellHeight*j);
+				myGridPane.add(cell, i, j);
 				myActionsGrid[i][j] = cell;
 			}
 		}
