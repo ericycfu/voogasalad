@@ -54,11 +54,11 @@ public class UnitActionDisplay implements VisualUpdate{
 				imgv.setFitHeight(myCellHeight);
 				imgv.setFitWidth(myCellWidth);
 				cell.setGraphic(imgv);
-				/**
+				
 				cell.setLayoutX(myCellWidth*i);
 				cell.setLayoutY(myCellHeight*j);
-				**/
-				myGridPane.add(imgv, i, j);
+				
+				//myGridPane.add(cell, i, j);
 				myActionsGrid[i][j] = cell;
 			}
 		}
@@ -94,12 +94,14 @@ public class UnitActionDisplay implements VisualUpdate{
 	@Override
 	public Node getNodes() {
 		Group group = new Group();
+		group.setStyle("-fx-background-color: #FFFFFF;");
 		for (int i = 0; i < myActionsGrid.length; i++) {
 			for (int j = 0; j < myActionsGrid[0].length; j++) {
 				group.getChildren().add(myActionsGrid[i][j]);
 			}
 		}
-		return myGridPane;
+		//return myGridPane;
+		return group;
 	}
 	
 	
