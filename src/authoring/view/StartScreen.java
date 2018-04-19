@@ -1,5 +1,9 @@
 package authoring.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
@@ -11,10 +15,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class StartScreen {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
+
 	public static final String TITLE = "Rap Tilt Swagger";
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
@@ -42,7 +48,8 @@ public class StartScreen {
 		VBox box = new VBox();
 		box.getChildren().addAll(
 				new StartScreenText(), 
-				new MakeGameButton(myStage));
+				new MakeGameButton(myStage), 
+				new PlayGameButton());
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
 		box.setSpacing(10);
