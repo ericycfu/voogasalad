@@ -1,13 +1,18 @@
 package game_object;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import game_engine.EngineObject;
+import game_engine.Team;
 import map.GridMap;
 import map.Pathfinder;
 import transform_library.Transform;
@@ -20,47 +25,32 @@ import transform_library.Vector2;
  * Allows the game engine to restrict access of gameobjects from the game player
  */
 
-public class GameObjectManager implements ElementManager<GameObject>{
-	
-	private Map<Integer, GameObject> objectMap;
-	private Pathfinder pathfinder;
-	private GridMap gridMap;
+public class GameObjectManager extends ElementManager {
 	
 	public GameObjectManager()
+	{}
+	
+	
+	public int createGameObject(int id, Vector2 startingPosition, List<String> tags, String name, Team t)
 	{
-		objectMap = new TreeMap<>();
-		pathfinder = new Pathfinder(gridMap);
+		int newID = calculateID();
+		GameObject obj = new GameObject(newID, startingPosition, tags, name, t);
+		this.addElement(obj);
+		return newID;
 	}
 	
-	/**
-	 * 
-	 * @param object
-	 * @return
-	 * Adds a gameobject to the manager and assigns an ID to it based on the objects already inside
-	 */
-	@Override
-	public int addElementToManager(GameObject object)
-	{
-		int id = 1;
-		if(objectMap.isEmpty())
-		{
-			objectMap.put(id, object);
-		}
-		else
-		{
-			id = objectMap.size() + 1;
-			objectMap.put(id, object);
-		}
-		return id;
-
-	}
 	
-	@Override
-	public void removeElement(GameObject element) {
+	public List<GameObject> getElements()
+	{
+		List<GameObject> gameObjects = new ArrayList<>();
 		
-		objectMap.remove(element.getID());
+		for(EngineObject eObj : getElementsRaw())
+		{
+			GameObject gObj = (GameObject) eObj;
+			gameObjects.add(gObj);
+		}
+		return gameObjects;
 	}
-	
 	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop.
@@ -68,11 +58,11 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	 */
 	public void runGameObjectLoop()
 	{
-		Iterator<Map.Entry<Integer, GameObject>> iter = objectMap.entrySet().iterator();
+		Iterator<GameObject> iter = this.getElements().iterator();
 		while(iter.hasNext())
 		{
-			Map.Entry<Integer, GameObject> entry = iter.next();
-			if(entry.getValue().isDead())
+			GameObject obj = iter.next();
+			if(obj.isDead())
 			{
 				iter.remove();
 			}
@@ -105,30 +95,14 @@ public class GameObjectManager implements ElementManager<GameObject>{
 	{
 		List<Transform> transformList = new ArrayList<>();
 		
-		for(GameObject g : getElements())
+		for(EngineObject g : getElements())
 		{
-			transformList.add(g.getTransform());
+			GameObject gObj = (GameObject) g;
+			transformList.add(gObj.getTransform());
 		}
 		
 		return Collections.unmodifiableList(transformList);
 		
 		
 	}
-
-	
-	@Override
-	public List<GameObject> getElements() {
-		List<GameObject> gameObjectList = new ArrayList<>();
-		for(Map.Entry<Integer, GameObject> var : objectMap.entrySet())
-		{
-			gameObjectList.add(var.getValue());
-		}
-		
-		return Collections.unmodifiableList(gameObjectList);
-	}
-	public GameObject get(int id) {
-		return objectMap.get(id);
-	}
-	
-
 }

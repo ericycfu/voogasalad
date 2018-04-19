@@ -6,6 +6,7 @@ import java.util.List;
 
 import conditions.Condition;
 import conditions.ConditionManager;
+import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
 

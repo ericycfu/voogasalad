@@ -105,8 +105,4 @@ public class AttributeNamesPane extends MainPane {
 	public Pane getPane() {
 		return flow_pane;
 	}
-		
-//	public static void addButton(Button button) {
-//		flow_pane.getChildren().add(button);
-//	}
 }
