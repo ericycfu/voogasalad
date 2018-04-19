@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import game_engine.ElementManager;
 
-public class InteractionManager implements ElementManager<Interaction> {
+public class InteractionManager extends ElementManager<Interaction> {
 	
 	Map<Integer, Interaction> interactionMap;
 	
