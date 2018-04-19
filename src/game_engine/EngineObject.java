@@ -6,11 +6,11 @@ package game_engine;
  *
  * @param <E>
  * 
- * Engine objects are objects that the engine will specifically handle. Every engine object must have id and 
- * a manager that handles that object.
+ * Engine objects are objects that the engine will specifically handle. Every engine object must have id assigned
+ * by a manager.
  */
 
-public interface EngineObject<E>{
+public interface EngineObject {
 
 	/**
 	 * 
@@ -20,12 +20,7 @@ public interface EngineObject<E>{
 	 */
 	public int getID();
 	
-	/**
-	 * 
-	 * @param manager
-	 * Each engine object will be handled by a manager which will also set its id.
-	 */
-	public void addToManager(E manager);
+
 	
 	
 }

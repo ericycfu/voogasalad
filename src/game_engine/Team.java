@@ -8,17 +8,17 @@ import java.util.Map;
  *
  */
 
-public class Team implements EngineObject<TeamManager>{
+public class Team implements EngineObject {
 
 	private int id;
 	private String teamName;
 	//private Map<String, Double> availableResources;
 	private ResourceManager resourceManager;
 	
-	public Team(String teamName, TeamManager manager, ResourceManager resourceManager)
+	public Team(int id, String teamName, ResourceManager resourceManager)
 	{
+		this.id = id;
 		this.teamName = teamName;
-		addToManager(manager);
 		this.resourceManager = resourceManager;
 	}
 	
@@ -34,16 +34,6 @@ public class Team implements EngineObject<TeamManager>{
 		return id;
 	}
 	
-	private void setID(int id)
-	{
-		this.id = id;
-	}
-
-	@Override
-	public void addToManager(TeamManager manager) {
-		
-		setID(manager.addElementToManager(this));
-	}
 
 	public ResourceManager getResourceManager() {
 		return resourceManager;
