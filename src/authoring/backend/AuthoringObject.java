@@ -11,6 +11,7 @@ import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import transform_library.Vector2;
 public class AuthoringObject {
 	//extends group?
@@ -35,6 +36,12 @@ public class AuthoringObject {
 		defaultObject();
 		addTestObject();
 //		addDuvall();
+	}
+	
+	public AuthoringObject(DraggableImageView img) {
+		myDragImage = img;
+		myX = 0;
+		myY = 0;
 	}
 	
 	private void defaultObject() {
@@ -73,9 +80,7 @@ public class AuthoringObject {
 	public void setImage(String image_path) {
 		myImagePath = image_path;
 		Image image = new Image(getClass().getResourceAsStream(image_path));
-		myDragImage = new DraggableImageView(this, image);
-		myDragImage.setFitWidth(ICON_PREF_WIDTH);
-		myDragImage.setFitHeight(ICON_PREF_HEIGHT);
+		myDragImage = new DraggableImageView(this, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
 	}
 	
 	public String getName() {
@@ -130,9 +135,13 @@ public class AuthoringObject {
 		return myAttributes;
 	}
 	
-	public AuthoringObject duplicateObj() {
-		AuthoringObject newobj = new AuthoringObject();
-		
-		return newobj;
+	public DraggableImageView duplicateImgView() {
+		Image image = myDragImage.getImage();
+		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+		AuthoringObject newobj = new AuthoringObject(imageview);
+		imageview.setAction(newobj);
+		return imageview;
 	}
+	
+	
 }
