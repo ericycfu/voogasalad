@@ -14,14 +14,15 @@ import javafx.scene.text.Text;
 import observables.Listener;
 
 public class CreatedObjectsView extends ScrollPane implements AuthoringView, Listener {
-	public static final int THUMBNAIL_WIDTH = 200;
-	public static final int THUMBNAIL_HEIGHT = 200;
+	public static final int THUMBNAIL_WIDTH = 150;
+	public static final int THUMBNAIL_HEIGHT = 150;
 	private CreatedObjects createdobjects;
 	private MapEntity map;
 	
 	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		createdobjects = cb;
 		map = ac.getMap();
+		cb.addListener(this);
 		setupBox();
 	}
 	
@@ -31,7 +32,10 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 		for (int i=0; i<size; i++) {
 			box.getChildren().add(setupIndivBox(createdobjects.getObjectByIndex(i)));
 		}
-		this.setContent(box);
+		if (size != 0) {
+			this.setContent(box);
+		}
+		return;
 	}
 	
 	private VBox setupIndivBox(AuthoringObject obj) {
@@ -45,7 +49,6 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 		SelectionImageView imgview = new SelectionImageView(obj, map);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
-//		this.addDropOutHandling(obj, imgview);
 		return imgview;
 	}
 	
@@ -55,6 +58,6 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 
 	@Override
 	public void update() {
-		setupBox();		
+		setupBox();
 	}
 }

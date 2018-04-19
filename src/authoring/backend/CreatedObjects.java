@@ -16,7 +16,6 @@ public class CreatedObjects implements StaticSpeaker {
 		myListeners = new ArrayList<>();
 		addObject(new AuthoringObject());
 		addObject(new AuthoringObject());
-		System.out.print("In CreatedObjects class");
 	}
 	
 	public static void addObject(AuthoringObject obj) {
@@ -59,7 +58,7 @@ public class CreatedObjects implements StaticSpeaker {
 	
 	private static void notifyListeners() {
 		for (Listener l: myListeners) {
-			l.notify();
+			l.update();
 		}
 	}
 }

@@ -134,6 +134,7 @@ public class Transform {
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
 		position = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
+		System.out.println(getDisplacement(this,target));
 		if(getDisplacement(this, target) <= stepDistance)
 		{
 			return false;
