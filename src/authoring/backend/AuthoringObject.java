@@ -147,4 +147,8 @@ public class AuthoringObject {
 		imageview.setAction(newobj);
 		return imageview;
 	}
+
+	public ObjectLogic getObjectLogic() {
+		return myObjectLogic;
+	}
 }

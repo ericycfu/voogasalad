@@ -1,6 +1,9 @@
 package game_engine;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -13,29 +16,62 @@ import java.util.Map.Entry;
  * Manager itself can only set the id for the gameobject 
  */
 
-public interface ElementManager<E> {
+public abstract class ElementManager {
+	
+	private Map<Integer, EngineObject> elementMap;
+	
 	
 	/**
 	 * 
-	 * @param element
 	 * @return
-	 * returns an id that can be assigned to the object just added to the manager
+	 * Allows the manager to calculate the id before adding
 	 */
-	public int addElementToManager(E element);
+	protected int calculateID()
+	{
+		if(elementMap.isEmpty()) return 1;
+		return elementMap.size() + 1;
+	}
 	
 	/**
 	 * 
 	 * @param element
 	 * Remove that element from the manager
 	 */
-	public void removeElement(E element);
+	public void removeElement(EngineObject element)
+	{
+		elementMap.remove(element.getID());
+	}
 	
 	/**
 	 * 
 	 * @return
 	 * Returns a list of key value pairs from the manager which can be accessed 
 	 */
-	public List<E> getElements();
+	public List<EngineObject> getElements() 
+	{
+		List<EngineObject> elementList = new ArrayList<>();
+		
+		for(Map.Entry<Integer, EngineObject> var : elementMap.entrySet())
+		{
+			elementList.add(var.getValue());
+		}
+		
+		return Collections.unmodifiableList(elementList);
+	}	
 	
+	public EngineObject get(int id) 
+	{
+		return elementMap.get(id);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * Allows subclasses to directly access the map, but prevents objects that call the manager from directly accessing it
+	 */
+	public void addElement(EngineObject obj)
+	{
+		elementMap.put(obj.getID(), obj);
+	}
 
 }
