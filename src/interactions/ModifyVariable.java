@@ -64,7 +64,7 @@ public class ModifyVariable implements CustomFunction {
 		try 
 		{
 			prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
-			other.accessLogic().accessAttributes().SetAttributeValue(variable, prevVal + delta);
+			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + delta);
 			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 

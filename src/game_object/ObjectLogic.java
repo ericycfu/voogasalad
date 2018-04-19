@@ -6,6 +6,7 @@ import java.util.List;
 
 import conditions.Condition;
 import conditions.ConditionManager;
+import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
 
@@ -59,8 +60,9 @@ public class ObjectLogic
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		for(Interaction inter : interactions.getElements())
+		for(EngineObject obj : interactions.getElements())
 		{
+			Interaction inter = (Interaction)obj;
 			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
 			{
 				inter.executeCustomFunctions(current, interactionTarget);
@@ -76,8 +78,9 @@ public class ObjectLogic
 	
 	public void checkConditions(GameObject current)
 	{
-		for(Condition condition : conditions.getElements())
+		for(EngineObject obj : conditions.getElements())
 		{
+			Condition condition = (Condition)obj; 
 			condition.execute();
 		}
 	}

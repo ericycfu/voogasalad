@@ -83,4 +83,12 @@ public class ObjectAttributes {
 		
 		throw new PropertyNotFoundException("Property does not exist for object");
 	}	
+	
+	public void setCosts(Map<String, Double> costMap)
+	{
+		for(Map.Entry<String, Double> map : costMap.entrySet())
+		{
+			buildCosts.put(map.getKey(), map.getValue());
+		}
+	}
 }

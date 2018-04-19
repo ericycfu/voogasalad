@@ -9,6 +9,7 @@ import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.ObjectLogic;
+import javafx.scene.image.Image;
 import transform_library.Transform;
 
 /**
@@ -16,21 +17,23 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction implements EngineObject<InteractionManager>{
+public class Interaction implements EngineObject {
 	
 	private int id;
 	private List<String> targetTags;
-	
+	private String name;
+	private Image img;
+	private String description;
 	
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
 	
-	public Interaction(InteractionManager manager) {
-		
+	public Interaction(int id)
+	{
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
-		addToManager(manager);
+		this.id = id;
 	}
 	
 	
@@ -84,15 +87,7 @@ public class Interaction implements EngineObject<InteractionManager>{
 		return range;
 	}
 	
- 	private void setID(int id)
- 	{
- 		this.id = id;
- 	}
- 	
- 	public int getID()
- 	{
- 		return id;
- 	}
+	
  	public List<String> getTargetTags(){
  		return targetTags;
  	}
@@ -104,10 +99,40 @@ public class Interaction implements EngineObject<InteractionManager>{
  		targetTags.remove(oldTag);
  	}
 
-	@Override
-	public void addToManager(InteractionManager manager) {
-		
-		setID(manager.addElementToManager(this));
 
+	@Override
+	public int getID() {
+		return id;
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Image getImg() {
+		return img;
+	}
+
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }
