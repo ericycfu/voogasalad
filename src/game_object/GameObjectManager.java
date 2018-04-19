@@ -39,26 +39,38 @@ public class GameObjectManager extends ElementManager {
 		return newID;
 	}
 	
+	
+	public List<GameObject> getElements()
+	{
+		List<GameObject> gameObjects = new ArrayList<>();
+		
+		for(EngineObject eObj : getElementsRaw())
+		{
+			GameObject gObj = (GameObject) eObj;
+			gameObjects.add(gObj);
+		}
+		return gameObjects;
+	}
+	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop.
 	 *  Also removes dead elements at the start of every cycle.
 	 */
 	public void runGameObjectLoop()
 	{
-		Iterator<EngineObject> iter = this.getElements().iterator();
+		Iterator<GameObject> iter = this.getElements().iterator();
 		while(iter.hasNext())
 		{
-			GameObject obj = (GameObject) (iter.next());
+			GameObject obj = iter.next();
 			if(obj.isDead())
 			{
 				iter.remove();
 			}
 		}
 		
-		for(EngineObject obj : getElements())
+		for(GameObject obj : getElements())
 		{
-			GameObject gObj = (GameObject)obj;
-			gObj.Update();
+			obj.Update();
 		}
 		
 	}

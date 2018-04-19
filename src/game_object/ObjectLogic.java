@@ -60,9 +60,8 @@ public class ObjectLogic
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		for(EngineObject obj : interactions.getElements())
+		for(Interaction inter : interactions.getElements())
 		{
-			Interaction inter = (Interaction)obj;
 			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
 			{
 				inter.executeCustomFunctions(current, interactionTarget);
@@ -78,9 +77,8 @@ public class ObjectLogic
 	
 	public void checkConditions(GameObject current)
 	{
-		for(EngineObject obj : conditions.getElements())
+		for(Condition condition : conditions.getElements())
 		{
-			Condition condition = (Condition)obj; 
 			condition.execute();
 		}
 	}
