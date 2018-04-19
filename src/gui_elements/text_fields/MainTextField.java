@@ -32,7 +32,7 @@ public class MainTextField extends TextField {
 	  		this.setPrefSize(Double.parseDouble(properties.getProperty(WIDTH_STRING)),
 	  						  Double.parseDouble(properties.getProperty(HEIGHT_STRING)));
 	   	} catch (IOException ex) {
-	   		System.err.println("Cannot create text field");
+	   		System.err.println("Cannot create text field for " + full_filename);
 	  	} finally {
 	  		if (input != null) {
 	  			try {

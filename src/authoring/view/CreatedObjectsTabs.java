@@ -18,6 +18,8 @@ public class CreatedObjectsTabs extends TabPane implements AuthoringView {
 				new ObjectTypeTab("Buildings", new CreatedObjectsView(ac, game.getCreatedObjects())), 
 //				new ObjectTypeTab("Buildings"),
 				new ObjectTypeTab("Maps"));
+		this.setPrefSize(500, 800);
+		this.getStyleClass().add("tab_pane");
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	}
 }
