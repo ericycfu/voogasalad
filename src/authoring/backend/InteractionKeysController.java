@@ -43,4 +43,8 @@ public class InteractionKeysController {
 	public List<String> getInteractionKeys() {
 		return interaction_keys;
 	}
+	
+	public List<AuthoringObject> getInteractionComponents(String interaction_key) {
+		return interactionMap.get(interaction_key);
+	}
 }

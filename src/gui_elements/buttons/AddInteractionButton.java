@@ -53,8 +53,6 @@ public class AddInteractionButton extends MainButton {
 	protected void setAction() {
 		getButton().setOnAction(value -> {
 			interaction.setName(interaction_name_cb.getComboBox().getEditor().getText());
-			System.out.println(interaction_name_cb.getComboBox().getEditor().getText());
-			System.out.println(interaction_vision_range_tf.getTextField().getText());
 			interaction.setRange(Double.parseDouble(interaction_vision_range_tf.getTextField().getText()));
 			interaction.addToManager(interaction_manager);
 			for(Object obj : interaction_selected_pane.getPane().getChildren()) {

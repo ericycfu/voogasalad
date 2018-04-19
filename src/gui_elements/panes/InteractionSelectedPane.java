@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import authoring.backend.AuthoringObject;
+import authoring.backend.InteractionKeysController;
 import authoring.backend.TagController;
 import game_object.ObjectAttributes;
 import gui_elements.combo_boxes.InteractionNameComboBox;
@@ -32,13 +33,13 @@ public class InteractionSelectedPane extends MainPane {
 	private int x, y, width, height;
 	private static final int TEXTFIELD_SIZE = 10;
 	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
-	private InteractionManager interaction_manager;
+	private InteractionKeysController interaction_keys_controller;
 	private MainComboBox interaction_name_cb;
 		
-	public InteractionSelectedPane(MainComboBox interaction_name_cb, 
-			InteractionManager interaction_manager) {
-		this.interaction_manager = interaction_manager;
+	public InteractionSelectedPane(MainComboBox interaction_name_cb, InteractionKeysController interaction_keys_controller) {
+		this.interaction_keys_controller = interaction_keys_controller;
 		this.interaction_name_cb = (InteractionNameComboBox) interaction_name_cb;
+		System.out.println("HI");
 		initialize();
 	}
 	
@@ -109,11 +110,11 @@ public class InteractionSelectedPane extends MainPane {
 	public void updateSelectedComponentsPane() {
 		grid_pane.getChildren().clear();
 		String name_selected = interaction_name_cb.getSelectionModel().getSelectedItem();
-		List<AuthoringObject> authoring_objects = interaction_manager.getInteractionComponents(name_selected);
+		List<AuthoringObject> authoring_objects = interaction_keys_controller.getInteractionComponents(name_selected);
 		for(AuthoringObject ao : authoring_objects) {
-//			grid_pane.getChildren().add(new Button(ao.getName()));
-			ImageView imageView = new ImageView(ao.getImage());
-			grid_pane.getChildren().add(imageView);
+			grid_pane.getChildren().add(new Button(ao.getName()));
+//			ImageView imageView = new ImageView(ao.getImage());
+//			grid_pane.getChildren().add(imageView);
 		}
 	}
 }

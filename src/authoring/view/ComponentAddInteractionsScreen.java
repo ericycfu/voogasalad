@@ -151,8 +151,8 @@ public class ComponentAddInteractionsScreen {
     }
         
     private void setComboBoxes() {
-		interaction_name_cb = new InteractionNameComboBox(interaction_keys_controller);
-    	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller);
+		interaction_name_cb = new InteractionNameComboBox(interaction_keys_controller, interaction_selected_pane);
+    	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, interaction_selections_pane);
 		
 		root.getChildren().addAll(interaction_component_tag_cb.getComboBox(),
 								  interaction_name_cb.getComboBox());
@@ -163,13 +163,12 @@ public class ComponentAddInteractionsScreen {
             
     private void setTextFields() {
 		interaction_vision_range_tf = new InteractionVisionRangeTextField();
-		
 		root.getChildren().addAll(interaction_vision_range_tf.getTextField());
     }
     
     private void setPanes() {
-    	interaction_selected_pane = new InteractionSelectedPane(interaction_name_cb, interaction_manager);
-    	interaction_selections_pane = new InteractionSelectionsPane(interaction_component_tag_cb, tag_controller, interaction_selected_pane);
+    	interaction_selected_pane = new InteractionSelectedPane(interaction_name_cb, interaction_keys_controller);
+    	interaction_selections_pane = new InteractionSelectionsPane(interaction_component_tag_cb, tag_controller);
     	    	
     	root.getChildren().addAll(interaction_selected_pane.getPane(),
     							  interaction_selections_pane.getPane());

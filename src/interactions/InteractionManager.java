@@ -12,12 +12,9 @@ import game_engine.ElementManager;
 public class InteractionManager implements ElementManager<Interaction> {
 	
 	Map<Integer, Interaction> interactionIndexMap;
-	Map<String, List<AuthoringObject>> interactionComponentsMap;
 	
-	public InteractionManager()
-	{
+	public InteractionManager() {
 		interactionIndexMap = new TreeMap<Integer, Interaction>();
-		interactionComponentsMap = new TreeMap<String, List<AuthoringObject>>();
 	}
 
 	@Override
@@ -25,7 +22,6 @@ public class InteractionManager implements ElementManager<Interaction> {
 		// TODO Auto-generated method stub
 		int id = interactionIndexMap.size() + 1;
 		interactionIndexMap.put(id, element);
-		interactionComponentsMap.put(element.getName(), new ArrayList<AuthoringObject>());
 
 		return id;
 	}
@@ -34,7 +30,6 @@ public class InteractionManager implements ElementManager<Interaction> {
 	@Override
 	public void removeElement(Interaction element) {
 		interactionIndexMap.remove(element.getID());
-		interactionComponentsMap.remove(element.getName());
 	}
 
 	@Override
@@ -47,9 +42,5 @@ public class InteractionManager implements ElementManager<Interaction> {
 		}
 		
 		return Collections.unmodifiableList(interactionList);
-	}
-	
-	public List<AuthoringObject> getInteractionComponents(String name) {
-		return interactionComponentsMap.get(name);
-	}
+	}	
 }
