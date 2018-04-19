@@ -2,9 +2,11 @@ package game_object;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
@@ -23,15 +25,24 @@ import transform_library.Vector2;
 public class GameObjectManager implements ElementManager<GameObject>{
 	
 	private Map<Integer, GameObject> objectMap;
+	private Set<GameObject> possibleUnitSet;
 	private Pathfinder pathfinder;
 	private GridMap gridMap;
 	
 	public GameObjectManager()
 	{
 		objectMap = new TreeMap<>();
+		possibleUnitSet = new HashSet<>();
 		pathfinder = new Pathfinder(gridMap);
 	}
 	
+	public void setPossibleUnits(Set<GameObject> punits) {
+		possibleUnitSet = punits;
+	}
+	
+	public Set<GameObject> getPossibleUnits() {
+		return possibleUnitSet;
+	}
 	/**
 	 * 
 	 * @param object

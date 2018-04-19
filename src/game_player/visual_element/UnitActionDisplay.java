@@ -19,21 +19,17 @@ public class UnitActionDisplay implements VisualUpdate{
 	private double myCellWidth;
 	private double myCellHeight;
 	private String myCurrentAction;
-	Map<String, List<String>> myUnitSkills;
+	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
 	
-	public UnitActionDisplay(double width, double height, Map<String, List<String>> unitSkills, 
-			Map<String, Image> skillImages) {
-		mySkillImages = skillImages;
+	public UnitActionDisplay(double width, double height, Map<String, List<SkillButton>> unitSkills) {
 		myUnitSkills = unitSkills;
 		myCellWidth = width/ACTION_GRID_WIDTH;
 		myCellHeight = height/ACTION_GRID_HEIGHT;
-		
 		myGridPane = new GridPane();
 		myGridPane.setMaxWidth(width);
 		myGridPane.setMaxHeight(height);
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
-		
 		initialize();
 	}
 	
@@ -41,8 +37,9 @@ public class UnitActionDisplay implements VisualUpdate{
 		myCurrentAction = "";
 		for (int i = 0; i < ACTION_GRID_WIDTH; i++) {
 			for (int j = 0; j < ACTION_GRID_HEIGHT; j++) {
-				Image img = new Image("attack_icon.png");
+				Image img = new Image("default_icon.png");
 				SkillButton cell = new SkillButton();
+				cell.setMaxSize(myCellWidth, myCellHeight);
 				ImageView imgv = new ImageView(img);
 				imgv.setFitHeight(myCellHeight*0.8);
 				imgv.setFitWidth(myCellWidth*0.8);
@@ -54,21 +51,15 @@ public class UnitActionDisplay implements VisualUpdate{
 
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		if (gameObjects.isEmpty()) return;
+		myGridPane.getChildren().clear();
+		if (gameObjects.isEmpty()) {
+			initialize();
+			return;
+		}
 		GameObject gameObject = gameObjects.get(0);
-		ArrayList<String> skills = (ArrayList<String>) myUnitSkills.get(gameObject.getName());
-		if (skills==null) return;
-		for (int i = 0; i < skills.size(); i++) {
-			if (i < 12) {
-				SkillButton curr = (SkillButton) myGridPane.getChildren().get(i);
-				curr.setSkillName(skills.get(i));
-				curr.setGraphic(new ImageView(mySkillImages.get(skills.get(i))));
-				curr.setOnAction(e -> {
-					myCurrentAction = curr.getSkillName();
-					//TO-BE-COMPLETED
-				});
-			}
-			else return;
+		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
+		for (int i = 0; i < unitSkills.size(); i++) {
+			myGridPane.add(unitSkills.get(0), i%4, i/3);
 		}
 	}
 	
