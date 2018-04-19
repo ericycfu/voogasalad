@@ -88,10 +88,7 @@ public class Pathfinder {
 					
 			}
 		}
-		return null;
-		
-		return getPath(null);
-		
+		return getPath(null);	
 	}
 	
 	public Queue<Vector2> findPath(GameObject obj, Vector2 target, List<GameObject> objList)
@@ -109,6 +106,8 @@ public class Pathfinder {
 	private Stack<GridCell> getPath(GridCell finalCell)
 	{
 		Stack<GridCell> path = new Stack<>();
+		if(finalCell == null) 
+			return path;
 		while(finalCell.getParent() != null)
 		{
 			path.add(finalCell.getParent());
