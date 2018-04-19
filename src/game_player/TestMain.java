@@ -61,8 +61,8 @@ public class TestMain extends Application {
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 		
-		gom.addElementToManager(go);
-		gom.addElementToManager(go2);
+		gom.addElement(go);
+		gom.addElement(go2);
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));

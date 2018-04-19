@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import game_engine.EngineObject;
 import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
@@ -63,7 +64,8 @@ public class GamePlayer {
 	}
 	
 	private void initializeSingleUnitSelect() {
-		for (GameObject go : myGameManager.getElements()) {
+		for (EngineObject eo : myGameManager.getElements()) {
+			GameObject go = (GameObject)eo;
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
@@ -103,8 +105,12 @@ public class GamePlayer {
 		return myScene;
 	}
 	
-	public void update(List<GameObject> gameobject) {
+	public void update(List<EngineObject> engineobject) {
 		myCurrentAction = ""; // returns action selection to default
+		List<GameObject> gameobject = new ArrayList<>();
+		for (EngineObject eo : engineobject) {
+			gameobject.add((GameObject)eo);
+		}
 
 		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(gameobject);
