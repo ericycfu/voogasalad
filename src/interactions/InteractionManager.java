@@ -1,8 +1,5 @@
 package interactions;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,12 +10,12 @@ import game_object.GameObject;
 
 public class InteractionManager extends ElementManager {
 	
-	Map<Integer, Interaction> interactionMap;
+	Map<Integer, Interaction> interactionIndexMap;
 	
-	public InteractionManager()
-	{
-		interactionMap = new TreeMap<>();
+	public InteractionManager() {
+		interactionIndexMap = new TreeMap<Integer, Interaction>();
 	}
+
 	
 	public int createInteraction()
 	{

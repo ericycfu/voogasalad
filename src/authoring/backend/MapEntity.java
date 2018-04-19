@@ -11,9 +11,11 @@ public class MapEntity extends Pane {
 	 * size, background image, locations of various objects
 	 */
 	private Map<AuthoringObject, ArrayList<DraggableImageView>> locations;
+	private MapSettings mapsettings;
 	
 	public MapEntity() {
 		locations = new HashMap<AuthoringObject, ArrayList<DraggableImageView>>();
+		mapsettings = new MapSettings();
 	}
 	
 	public void addToMap(AuthoringObject obj, DraggableImageView dragimg) {

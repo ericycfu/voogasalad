@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import authoring.backend.AuthoringObject;
 import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
@@ -44,8 +45,7 @@ public class Interaction implements EngineObject {
 	 * Adds a custom function to the interaction.
 	 * need to add the functionality that only the variables related to those tags can be changed etc.
 	 */
-	public CustomFunction addCustomFunction(String type)
-	{
+	public CustomFunction addCustomFunction(String type) {
 		CustomFunctionFactory factory = new CustomFunctionFactory();
 			
 		//this is where i need to make it better
@@ -54,6 +54,11 @@ public class Interaction implements EngineObject {
 		return function;
 	}
 	
+	public void addAllCustomFunctions(List<String> types) {
+		for(String type : types) {
+			addCustomFunction(type);
+		}
+	}
 	
 	/**
 	 * Runs all the custom functions in the interactions
@@ -82,8 +87,7 @@ public class Interaction implements EngineObject {
 		this.range = range;
 	}
 	
-	public double getRange()
-	{
+	public double getRange() {
 		return range;
 	}
 	
