@@ -5,11 +5,15 @@ import transform_library.Vector2;
 /**
  * 
  * @author Rayan
- * Helper cell class for pathfinding map
+ * Helper cell class for pathfinding map. Contains data like position in the grid and its H and G scores for the 
+ * A* algorithm.
  */
 
 public class GridCell {
 
+	private final static int MOVEMENT_COST = 10;
+	private final static double DIAGONAL_MODIFIER = 1.4;
+	
 	private int row;
 	private int column;
 	
@@ -18,27 +22,38 @@ public class GridCell {
 	private int gVal;
 	private int hVal;
 	
-	private int movementCost = 1;
+	private GridCell parent;
 	
+
 	public GridCell(int r, int c)
 	{
 		row = r;
 		column = c;
+		isObstacle = false;
 	}
 	
-	public void updateGVal(int val)
+	public void setGVal(int val)
 	{
 		gVal = val;
 	}
 	
-	public void updateGVal(GridCell cell)
+	public void setGVal(GridCell cell)
 	{
-		gVal = cell.getGVal() + movementCost;
+		gVal = calculateGVal(cell);
+	}
+	
+	private int getMovementCost(GridCell origin, GridCell target)
+	{
+		if(origin.getRow() != target.getRow() && origin.getColumn() != target.getColumn())
+		{
+			return (int)(MOVEMENT_COST * DIAGONAL_MODIFIER);
+		}
+		return MOVEMENT_COST;
 	}
 	
 	public void setHVal(GridCell cell)
 	{
-		hVal = (Math.abs(column - cell.getColumn()) + Math.abs(row - cell.getRow())) * this.movementCost;
+		hVal = (Math.abs(column - cell.getColumn()) + Math.abs(row - cell.getRow())) * MOVEMENT_COST;
 	}
 	
 	public int getFVal()
@@ -49,6 +64,11 @@ public class GridCell {
 	public int getGVal()
 	{
 		return gVal;
+	}
+	
+	public int calculateGVal(GridCell cell)
+	{
+		return cell.getGVal() + getMovementCost(cell, this);
 	}
 	
 	public int getHVal()
@@ -77,5 +97,16 @@ public class GridCell {
 	public boolean matches(GridCell other)
 	{
 		return(this.row == other.row && this.column == other.column);
+	}
+	
+
+	public GridCell getParent() 
+	{
+		return parent;
+	}
+
+	public void setParent(GridCell parent) 
+	{
+		this.parent = parent;
 	}
 }

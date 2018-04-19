@@ -1,13 +1,17 @@
 package game_object;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import game_engine.EngineObject;
 import game_engine.Team;
 
 import javafx.scene.image.Image;
+import map.GridMap;
+import map.Pathfinder;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -32,6 +36,7 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	private String name;
 	private List<String> tag;
+	private boolean isBuilding;
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
@@ -41,7 +46,9 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 	
 	private double movementSpeed = 0;
 	private boolean isMovementQueued;
-	private Transform movementWaypoint;
+	private Queue<Vector2> activeWaypoints;
+
+	
 	
 	/**
 	 *
@@ -56,7 +63,18 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		this.renderer = new Renderer();
 		this.myObjectLogic = new ObjectLogic();
 		isDead = false;
-
+		isBuilding = false;
+		activeWaypoints = new LinkedList<>();
+	}
+	
+	
+	public GameObject(Transform transform, ObjectLogic logic)
+	{
+		this.transform = transform;
+		this.myObjectLogic = logic;
+		isDead = false;
+		isBuilding = false;
+		activeWaypoints = new LinkedList<>();
 	}
 	
 	/**
@@ -79,6 +97,9 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
+		isBuilding = false;
+		activeWaypoints = new LinkedList<>();
+
 	}
 	
 	/**
@@ -92,13 +113,8 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
-		if(isMovementQueued && movementWaypoint != null)
-		{
-			if(!transform.MoveTowards(movementWaypoint, movementSpeed))
-			{
-				dequeueMovement();
-			}
-		}
+		
+		moveUpdate();
 		
 		if(isInteractionQueued)
 		{
@@ -109,6 +125,27 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 
 	}
 	
+	private void moveUpdate()
+	{
+		if(isMovementQueued && !activeWaypoints.isEmpty())
+		{
+			if(!transform.MoveTowards(new Transform(activeWaypoints.peek()), movementSpeed))
+			{
+				activeWaypoints.remove();
+				if(activeWaypoints.isEmpty()) dequeueMovement();
+			}
+		}
+	}
+	
+	public void setIsBuilding(boolean val)
+	{
+		this.isBuilding = val;
+	}
+	
+	public boolean isBuilding()
+	{
+		return isBuilding;
+	}
 	
 	public void setIsDead(boolean isDead)
 	{
@@ -141,16 +178,20 @@ public class GameObject implements InterfaceGameObject, EngineObject<GameObjectM
 		interactionTarget = null;
 	}
 	
-	public void queueMovement(Vector2 target)
+	public void queueMovement(Vector2 target, List<GameObject> objectList)
 	{
-		isMovementQueued = true;
-		movementWaypoint = new Transform(target);
+		Pathfinder pathfinder = new Pathfinder(new GridMap());
+		Queue<Vector2> movementPoints = pathfinder.findPath(this, target, objectList);
+		if(!movementPoints.isEmpty())
+		{
+			isMovementQueued = true;
+			
+		}
 	}
 	
 	public void dequeueMovement()
 	{
 		isMovementQueued = false;
-		movementWaypoint = null;
 	}
 	
 	/**

@@ -58,10 +58,20 @@ public class Interaction implements EngineObject<InteractionManager>{
 	 */
 	public void executeCustomFunctions(GameObject current, GameObject other)
 	{
+		if(matchesTags(other, targetTags)) return;
 		for(CustomFunction cFunc : customFunctions)
 		{
 			cFunc.Execute(current, other);
 		}
+	}
+	
+	private boolean matchesTags(GameObject other, List<String> tags)
+	{
+		for(String s : other.getTags())
+		{
+			if(tags.contains(s)) return true;
+		}
+		return false;
 	}
 	
 	public void setRange(double range)
