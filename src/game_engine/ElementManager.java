@@ -47,7 +47,7 @@ public abstract class ElementManager {
 	 * @return
 	 * Returns a list of key value pairs from the manager which can be accessed 
 	 */
-	public List<EngineObject> getElements() 
+	protected List<EngineObject> getElementsRaw() 
 	{
 		List<EngineObject> elementList = new ArrayList<>();
 		

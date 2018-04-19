@@ -8,7 +8,7 @@ import java.util.Queue;
 
 import game_engine.EngineObject;
 import game_engine.Team;
-
+import interactions.Interaction;
 import javafx.scene.image.Image;
 import map.GridMap;
 import map.Pathfinder;
@@ -61,9 +61,6 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.transform = new Transform(startingPosition);
 		this.renderer = new Renderer();
 		this.myObjectLogic = new ObjectLogic();
-		isDead = false;
-		isBuilding = false;
-		activeWaypoints = new LinkedList<>();
 		propertiesInit();
 	}
 	
@@ -79,9 +76,6 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.id = id;
 		this.transform = transform;
 		this.myObjectLogic = logic;
-		isDead = false;
-		isBuilding = false;
-		activeWaypoints = new LinkedList<>();
 		propertiesInit();
 	}
 	
@@ -175,7 +169,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * gives the signal to the gameobject that an interaction is queued
 	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
 	 */
-	public void queueInteraction(GameObject other)
+	public void queueInteraction(GameObject other, Interaction id)
 	{
 		isInteractionQueued = true;
 		interactionTarget = other;
