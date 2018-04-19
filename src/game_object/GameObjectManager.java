@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
@@ -104,5 +105,10 @@ public class GameObjectManager extends ElementManager {
 		return Collections.unmodifiableList(transformList);
 		
 		
+	}
+	
+	public GameObject getGameObject(int id)
+	{
+		return (GameObject)(this.get(id));
 	}
 }

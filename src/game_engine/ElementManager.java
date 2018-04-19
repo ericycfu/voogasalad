@@ -20,6 +20,10 @@ public abstract class ElementManager {
 	
 	private Map<Integer, EngineObject> elementMap;
 	
+	public ElementManager()
+	{
+		elementMap = new Map<Integer, EngineObject>();
+	}
 	
 	/**
 	 * 
