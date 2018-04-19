@@ -98,6 +98,9 @@ public class Interaction implements EngineObject {
  	public void removeTag(String oldTag) {
  		targetTags.remove(oldTag);
  	}
+ 	public CustomFunction getCustomFunction(int x) {
+ 		return customFunctions.get(x);
+ 	}
 
 
 	@Override

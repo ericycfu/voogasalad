@@ -3,6 +3,7 @@ package authoring.view;
 import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -13,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartScreen {
-	public static final String STYLE_PATH = "gui_elements/texts/style_properties.css";
+	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
 	public static final String TITLE = "Rap Tilt Swagger";
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
@@ -32,6 +33,7 @@ public class StartScreen {
 	private void setupScreen() {
 		myPane = new StackPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
+		myPane.setId("start_screen");
 		myScene = new Scene(myPane);
 		myScene.getStylesheets().add(STYLE_PATH);
 	}
@@ -40,9 +42,10 @@ public class StartScreen {
 		VBox box = new VBox();
 		box.getChildren().addAll(
 				new StartScreenText(), 
-				new MakeGameButton(myStage),
-				new PlayGameButton(myStage));
-		box.setAlignment(Pos.CENTER);
+				new MakeGameButton(myStage));
+		box.setAlignment(Pos.CENTER_LEFT);
+		box.setPadding(new Insets(0, 0, 0, 30));
+		box.setSpacing(10);
 		myPane.getChildren().add(box);
 	}
 	

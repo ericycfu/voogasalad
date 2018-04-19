@@ -6,5 +6,6 @@ public class ComponentTagComboBox extends MainComboBox {
 	
 	public ComponentTagComboBox() {
 		super(FILENAME);
+		getComboBox().setEditable(true);
 	}
 }

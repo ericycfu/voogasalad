@@ -24,6 +24,9 @@ public class DeathFunction implements CustomFunction{
 		format.addHelpText("This function allows you to instantly destroy a unit");
 		
 	}
+	public void setParameters(CustomComponentParameterFormat toFormat) {
+		
+	}
 	
 
 }

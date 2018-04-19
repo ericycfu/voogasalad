@@ -19,15 +19,12 @@ public abstract class MainButton extends Button {
 	private Properties properties;
 	private InputStream input;
 	
-	public MainButton(String filename) {
+	public MainButton(String filename, boolean explicit_set_action_allowed) {
 		assignProperties(DIRECTORY_STRING + filename);
-		setAction();
+		if(explicit_set_action_allowed)
+			setAction();
 	}
-	
-	public MainButton(String filename, boolean noExplicitSetAction) {
-		assignProperties(DIRECTORY_STRING + filename);
-	}
-	
+		
 	private void assignProperties(String full_filename) {
 		properties = new Properties();
 		input = null;
