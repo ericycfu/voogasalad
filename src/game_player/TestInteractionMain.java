@@ -60,7 +60,8 @@ public class TestInteractionMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
 		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 1);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
-		Interaction attack = new Interaction(go2.accessLogic().accessInteractions());
+		Interaction attack = new Interaction();
+		attack.addToManager(go2.accessLogic().accessInteractions());
 		attack.addTag("professor");
 		attack.addCustomFunction("ModifyVariable");
 		attack.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
