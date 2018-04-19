@@ -169,10 +169,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * gives the signal to the gameobject that an interaction is queued
 	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
 	 */
-	public void queueInteraction(GameObject other, Interaction id)
+	public void queueInteraction(GameObject other, int id, List<GameObject> objList)
 	{
 		isInteractionQueued = true;
 		interactionTarget = other;
+		this.myObjectLogic.setCurrentInteraction(id, this, other, objList);
 	}
 	
 	/**
