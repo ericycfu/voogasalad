@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import game_engine.EngineObject;
+import game_engine.Team;
 import map.GridMap;
 import map.Pathfinder;
 import transform_library.Transform;
@@ -23,11 +25,19 @@ import transform_library.Vector2;
  * Allows the game engine to restrict access of gameobjects from the game player
  */
 
-public class GameObjectManager extends ElementManager<GameObject> {
+public class GameObjectManager extends ElementManager {
 	
 	public GameObjectManager()
 	{}
 	
+	
+	public int createGameObject(int id, Vector2 startingPosition, List<String> tags, String name, Team t)
+	{
+		int newID = calculateID();
+		GameObject obj = new GameObject(newID, startingPosition, tags, name, t);
+		this.addElement(obj);
+		return newID;
+	}
 	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop.
@@ -35,19 +45,20 @@ public class GameObjectManager extends ElementManager<GameObject> {
 	 */
 	public void runGameObjectLoop()
 	{
-		Iterator<Map.Entry<Integer, GameObject>> iter = this.getElementMap().entrySet().iterator();
+		Iterator<EngineObject> iter = this.getElements().iterator();
 		while(iter.hasNext())
 		{
-			Map.Entry<Integer, GameObject> entry = iter.next();
-			if(entry.getValue().isDead())
+			GameObject obj = (GameObject) (iter.next());
+			if(obj.isDead())
 			{
 				iter.remove();
 			}
 		}
 		
-		for(GameObject obj : getElements())
+		for(EngineObject obj : getElements())
 		{
-			obj.Update();
+			GameObject gObj = (GameObject)obj;
+			gObj.Update();
 		}
 		
 	}
@@ -72,26 +83,14 @@ public class GameObjectManager extends ElementManager<GameObject> {
 	{
 		List<Transform> transformList = new ArrayList<>();
 		
-		for(GameObject g : getElements())
+		for(EngineObject g : getElements())
 		{
-			transformList.add(g.getTransform());
+			GameObject gObj = (GameObject) g;
+			transformList.add(gObj.getTransform());
 		}
 		
 		return Collections.unmodifiableList(transformList);
 		
 		
 	}
-
-	
-	@Override
-	public List<GameObject> getElements() {
-		List<GameObject> gameObjectList = new ArrayList<>();
-		for(Map.Entry<Integer, GameObject> var : getElementMap().entrySet())
-		{
-			gameObjectList.add(var.getValue());
-		}
-		
-		return Collections.unmodifiableList(gameObjectList);
-	}
-
 }

@@ -12,6 +12,7 @@ import map.GridMap;
 
 public class InteractionRequirementsWrapper {
 	
+	//required for building manager
 	private GameObjectManager GameObjectManager;
 	
 }
