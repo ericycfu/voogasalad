@@ -1,15 +1,9 @@
 package game_player.visual_element;
 
-import java.util.List;
-
-import game_object.GameObject;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
 /**
  * 
