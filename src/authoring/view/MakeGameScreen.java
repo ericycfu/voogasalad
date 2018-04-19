@@ -2,17 +2,10 @@ package authoring.view;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -32,12 +25,19 @@ public class MakeGameScreen implements AuthoringView {
 	
 	private void setupScreen() {
 		myAuthoringController = new AuthoringController();
-		myPane = new SplitPane(
+//		myPane = new SplitPane(
+//				new MakeGameTabs(myAuthoringController, myGame),
+//				new CreatedObjectsTabs(myAuthoringController, myGame));
+//		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
+		HBox box = new HBox();
+//		box.setId("start_screen");
+		box.getChildren().addAll(
 				new MakeGameTabs(myAuthoringController, myGame),
 				new CreatedObjectsTabs(myAuthoringController, myGame));
-		
-		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
-		myScene = new Scene(myPane);
+		box.setPadding(new Insets(10, 10, 10, 10));
+		box.setSpacing(10);
+		myScene = new Scene(box);
+		myScene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(myScene);
 	}
 	
