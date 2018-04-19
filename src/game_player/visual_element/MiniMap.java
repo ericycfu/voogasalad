@@ -18,7 +18,9 @@ import javafx.scene.shape.Rectangle;
  *
  */
 public class MiniMap implements VisualUpdate {
-	private static double unitMapRatio = 1/100;
+	public static final double UNITMINIMAPRATIO = 1.0/80;
+	public static final double MINIMAPDISPLAYXRATIO = 1.0/4;
+	public static final double MINIMAPDISPLAYYRATIO = 1.0/3;
 	private Group myMiniMap;
 	private Rectangle myMiniMapDisplay;
 	private Group myVisibleUnits;
@@ -33,6 +35,7 @@ public class MiniMap implements VisualUpdate {
 		myVisibleUnits = new Group();
 		currentVisibleUnits = new ArrayList<GameObject>();
 		initializeMiniMapBackground();
+		myMiniMap.getChildren().add(myVisibleUnits);
 	}
 	
 	private void initializeMiniMapBackground() {
@@ -59,8 +62,11 @@ public class MiniMap implements VisualUpdate {
 	
 	private void displayUnits(List<GameObject> currentVisibleUnits) {
 		for (GameObject object: currentVisibleUnits) {
-			Rectangle unitSquare = new Rectangle(myWidth*unitMapRatio, myWidth*unitMapRatio);
+			Rectangle unitSquare = new Rectangle(myWidth * UNITMINIMAPRATIO, myWidth * UNITMINIMAPRATIO);
+			unitSquare.setX(object.getTransform().getPosition().getX() * MINIMAPDISPLAYXRATIO);
+			unitSquare.setY(object.getTransform().getPosition().getY() * MINIMAPDISPLAYYRATIO);
 			//unitSquare.setFill(object.getPlayerColor());
+			unitSquare.setFill(Color.BLUE);
 			myVisibleUnits.getChildren().add(unitSquare);
 		}
 	}

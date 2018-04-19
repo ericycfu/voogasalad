@@ -14,4 +14,5 @@ public interface CustomFunction {
 	public void Execute(GameObject current, GameObject other);
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
+	public void setParameters(CustomComponentParameterFormat toFormat);
 }

@@ -13,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import transform_library.Vector2;
+
 public class AuthoringObject {
 	//extends group?
 	public static final String TEST_IMAGE = "/images/station.png";
@@ -24,7 +25,7 @@ public class AuthoringObject {
 	private transient DraggableImageView myDragImage;
 	private String myImagePath;
 	private String myName;
-	private String myTag;
+	private List<String> myTags;
 	private double myX;
 	private double myY;
 	private double myMovementSpeed;
@@ -99,12 +100,12 @@ public class AuthoringObject {
 		myMovementSpeed = movementSpeed;
 	}
 	
-	public String getTag() {
-		return myTag;
+	public List<String> getTags() {
+		return myTags;
 	}
 	
-	public void setTag(String tag) {
-		myTag = tag;
+	public void addTag(String tag) {
+		myTags.add(tag);
 	}
 	
 	public double getX() {
@@ -135,6 +136,10 @@ public class AuthoringObject {
 		return myAttributes;
 	}
 	
+	public InteractionManager getInteractionsManagerInstance() {
+		return myInteractions;
+	}
+
 	public DraggableImageView duplicateImgView() {
 		Image image = myDragImage.getImage();
 		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
@@ -142,6 +147,8 @@ public class AuthoringObject {
 		imageview.setAction(newobj);
 		return imageview;
 	}
-	
-	
+
+	public ObjectLogic getObjectLogic() {
+		return myObjectLogic;
+	}
 }
