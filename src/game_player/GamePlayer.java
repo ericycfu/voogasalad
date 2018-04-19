@@ -105,12 +105,8 @@ public class GamePlayer {
 		return myScene;
 	}
 	
-	public void update(List<EngineObject> engineobject) {
+	public void update(List<GameObject> gameobject) {
 		myCurrentAction = ""; // returns action selection to default
-		List<GameObject> gameobject = new ArrayList<>();
-		for (EngineObject eo : engineobject) {
-			gameobject.add((GameObject)eo);
-		}
 
 		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(gameobject);
