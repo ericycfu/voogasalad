@@ -91,26 +91,22 @@ public class Interaction implements EngineObject {
 		return range;
 	}
 	
- 	public List<String> getTargetTags(){
+	
+ 	public List<String> getTargetTags()
+ 	{
  		return targetTags;
  	}
-
- 	public void addTag(String newTag) {
+ 	public void addTag(String newTag) 
+ 	{
  		if(!targetTags.contains(newTag))
  			targetTags.add(newTag);
  	}
- 	
- 	public void addAllTags(List<String> newTags) {
- 		for(String tag : newTags) {
- 			addTag(tag);
- 		}
- 	}
- 	
- 	public void removeTag(String oldTag) {
+ 	public void removeTag(String oldTag) 
+ 	{
  		targetTags.remove(oldTag);
  	}
- 	
- 	public CustomFunction getCustomFunction(int x) {
+ 	public CustomFunction getCustomFunction(int x) 
+ 	{
  		return customFunctions.get(x);
  	}
 

@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import game_engine.EngineObject;
 import game_object.GameObject;
-import interactions.Interaction;
 
 public class ConditionManager extends ElementManager {
 
@@ -22,5 +22,17 @@ public class ConditionManager extends ElementManager {
 		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
 		this.addElement(condition);
 		return newID;
+	}
+	
+	public List<Condition> getElements()
+	{
+		List<Condition> conditions = new ArrayList<>();
+		
+		for(EngineObject eObj : getElementsRaw())
+		{
+			Condition gObj = (Condition) eObj;
+			conditions.add(gObj);
+		}
+		return conditions;
 	}
 }

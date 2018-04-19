@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import conditions.Condition;
 import game_object.GameObject;
+import interactions.Interaction;
 
 import java.util.TreeMap;
 import java.util.AbstractMap.SimpleEntry;
@@ -29,5 +30,17 @@ public class TeamManager extends ElementManager {
 		Team team = new Team(newID, teamName, resourceManager);
 		this.addElement(team);
 		return newID;
+	}
+	
+	public List<Team> getElements()
+	{
+		List<Team> teams = new ArrayList<>();
+		
+		for(EngineObject eObj : getElementsRaw())
+		{
+			Team gObj = (Team) eObj;
+			teams.add(gObj);
+		}
+		return teams;
 	}
 }
