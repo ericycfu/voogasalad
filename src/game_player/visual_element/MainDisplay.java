@@ -43,7 +43,6 @@ public class MainDisplay implements VisualUpdate {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
-				System.out.println("move");
 			}
 		});
 		rect.toBack();

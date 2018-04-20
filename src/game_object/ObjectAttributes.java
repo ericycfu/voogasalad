@@ -14,6 +14,7 @@ import java.util.Map;
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
+	private Map<String, Double> buildCosts;
 	
 	public ObjectAttributes() {
 		attributes = new HashMap<String, Double>();
@@ -81,7 +82,14 @@ public class ObjectAttributes {
 	{
 		if(attributes.containsKey(attribute))
 			return attributes.get(attribute);
-		
-		throw new PropertyNotFoundException("Property does not exist for object");
+		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}	
+	
+	public void setCosts(Map<String, Double> costMap)
+	{
+		for(Map.Entry<String, Double> map : costMap.entrySet())
+		{
+			buildCosts.put(map.getKey(), map.getValue());
+		}
+	}
 }

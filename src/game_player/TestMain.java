@@ -44,7 +44,7 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
 		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
 		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
-		go.setMovementSpeed(10);
+		go.setMovementSpeed(5);
 		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
@@ -57,19 +57,12 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
 		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
-
-		go2.setMovementSpeed(10);
+		go2.setMovementSpeed(30);
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 		
 		gom.addElementToManager(go);
 		gom.addElementToManager(go2);
-		GamePlayer gp = new GamePlayer(gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        myGP = gp;
-		Scene scene = gp.getScene();  
-        gpStage.setScene(scene);
-        gpStage.show();
-        //myGP.update(myGOM.getElements());
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));
@@ -77,6 +70,13 @@ public class TestMain extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
+        
+		GamePlayer gp = new GamePlayer(animation, gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+        myGP = gp;
+		Scene scene = gp.getScene();  
+        gpStage.setScene(scene);
+        gpStage.show();
+        //myGP.update(myGOM.getElements());
 
 	}
 

@@ -6,57 +6,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import conditions.Condition;
 import game_object.GameObject;
+import interactions.Interaction;
 
 import java.util.TreeMap;
 import java.util.AbstractMap.SimpleEntry;
 
-public class TeamManager implements ElementManager<Team>{
+/**
+ * 
+ * @author Rayan
+ * Team manager that creates teams and allows the game designer to set objects to specific teams
+ */
 
-	private Map<Integer, Team> teamMap;
-	
+public class TeamManager extends ElementManager {
+		
 	public TeamManager()
+	{}
+
+	public int createTeam(String teamName, ResourceManager resourceManager)
 	{
-		teamMap = new TreeMap<>();
+		int newID = calculateID();
+		Team team = new Team(newID, teamName, resourceManager);
+		this.addElement(team);
+		return newID;
 	}
 	
-	@Override
-	public int addElementToManager(Team element) {
-		int id = 1;
-		if(teamMap.isEmpty())
+	public List<Team> getElements()
+	{
+		List<Team> teams = new ArrayList<>();
+		
+		for(EngineObject eObj : getElementsRaw())
 		{
-			teamMap.put(id, element);
+			Team gObj = (Team) eObj;
+			teams.add(gObj);
 		}
-		else
-		{
-			id = teamMap.size() + 1;
-			teamMap.put(id, element);
-		}
-		return id;
+		return teams;
 	}
-
-	@Override
-	public void removeElement(Team element) {
-		
-		teamMap.remove(element.getID());
+	
+	public Team getTeam(int id)
+	{
+		return (Team)(this.get(id));
 	}
-
-	@Override
-	public List<Team> getElements() {
-		
-		List<Team> teamObjectList = new ArrayList<>();
-		
-		for(Map.Entry<Integer, Team> var : teamMap.entrySet())
-		{
-			teamObjectList.add(var.getValue());
-		}
-		
-		return Collections.unmodifiableList(teamObjectList);
-	}
-	public Team get(int team_id) {
-		return teamMap.get(team_id);
-	}
-
-
-
 }
