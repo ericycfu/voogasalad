@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import game_engine.EngineObject;
 import game_engine.Team;
 import interactions.Interaction;
@@ -31,7 +33,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private int id;
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
-	private Renderer renderer;
+	@XStreamOmitField
+	private transient Renderer renderer;
 	private Team owner;
 	
 	private String name;
