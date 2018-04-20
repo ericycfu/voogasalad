@@ -39,7 +39,7 @@ public class GamePlayer {
 	public static final double INFO_DISPLAY_WIDTH = 0.50;
 	public static final double ACTION_DISPLAY_WIDTH = 0.25;
 	public static final double TOP_HEIGHT = 0.05;
-	private GameObjectManager myGameManager;
+	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
@@ -51,7 +51,7 @@ public class GamePlayer {
 	private String myCurrentAction;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager) {
-		myGameManager = gameManager;
+		myGameObjectManager = gameManager;
 		myUnitSkills = new HashMap<>();
 		mySelectedUnitManager = new SelectedUnitManager();		
 		initialize();
@@ -61,7 +61,7 @@ public class GamePlayer {
 	}
 	
 	private void unitSkillMapInitialize() {
-		for (GameObject go : myGameManager.getPossibleUnits()) {
+		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
@@ -76,7 +76,7 @@ public class GamePlayer {
 	}
 	
 	private void initializeSingleUnitSelect() {
-		for (EngineObject eo : myGameManager.getElements()) {
+		for (EngineObject eo : myGameObjectManager.getElements()) {
 			GameObject go = (GameObject)eo;
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
@@ -91,7 +91,7 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		
-		myMainDisplay = new MainDisplay(mySelectedUnitManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myMainDisplay = new MainDisplay(mySelectedUnitManager, this.myGameObjectManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_player.GamePlayer;
 import game_player.SelectedUnitManager;
 import javafx.scene.Group;
@@ -30,6 +31,7 @@ public class MainDisplay implements VisualUpdate {
 	//private double currentPressedLocation; 
 	private Group myMainDisplay;
 	private ImageView myMap;
+	private GameObjectManager myGameObjectManager;
 	
 	private double myMouseXInitPosition;
 	private double myMouseYInitPosition;
@@ -42,7 +44,8 @@ public class MainDisplay implements VisualUpdate {
 	private boolean isLeftHovered;
 	private boolean isRightHovered;
 	
-	public MainDisplay(SelectedUnitManager selectedUnitManager, double width, double height) {
+	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, double width, double height) {
+		myGameObjectManager = gom;
 		myDisplayGameObjects = new ArrayList<>();
 		mySelectedUnitManager = selectedUnitManager;
 		myMainDisplay = new Group();
@@ -57,7 +60,7 @@ public class MainDisplay implements VisualUpdate {
 			if (e.getButton()==MouseButton.SECONDARY) {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
-				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), );
+				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager);
 			}
 		});
 		myMap.toBack();
