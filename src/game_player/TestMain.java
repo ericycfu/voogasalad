@@ -71,7 +71,7 @@ public class TestMain extends Application {
         animation.getKeyFrames().add(frame);
         animation.play();
         
-		GamePlayer gp = new GamePlayer(animation, gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+		GamePlayer gp = new GamePlayer(animation, gom);		
         myGP = gp;
 		Scene scene = gp.getScene();  
         gpStage.setScene(scene);

@@ -18,32 +18,30 @@ public class SkillButton extends Button {
 	private int myInteractionID;
 	private ImageView mySkillImageView;
 	
-	public SkillButton() {
-		initialize();
+	public SkillButton(){
+		
 	}
 	
-	public SkillButton(Image skillImage, String interactionName, int interactionNumber, String skillDescription) {
+	public SkillButton(Image skillImage, String interactionName, int interactionNumber, String skillDescription, double width, double height) {
 		mySkillImage = skillImage;
 		mySkillName = interactionName;
 		myInteractionID = interactionNumber;
 		mySkillDescription = skillDescription;
-		initialize();
+		setPicture(width, height);
+		setDescription();
 	}
 	
-	private void initialize() {
+	private void setDescription() {
 		Tooltip tooltip = new Tooltip("hello");
 		this.setTooltip(tooltip);
 	}
 	
-	/**
-	 * How is this useful?
-	public void setGraphic(double width) {
+	private void setPicture(double width, double height) {
 		mySkillImageView = new ImageView(mySkillImage);
-		mySkillImageView.setFitHeight(width);
+		mySkillImageView.setFitHeight(height);
 		mySkillImageView.setFitWidth(width);
 		this.setGraphic(mySkillImageView);
 	}
-	**/
 	
 	public String getSkillName() {
 		return mySkillName;
