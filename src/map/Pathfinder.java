@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import transform_library.Vector2;
 
 /**
@@ -91,9 +92,9 @@ public class Pathfinder {
 		return getPath(null);	
 	}
 	
-	public Queue<Vector2> findPath(GameObject obj, Vector2 target, List<GameObject> objList)
+	public Queue<Vector2> findPath(GameObject obj, Vector2 target, GameObjectManager manager)
 	{
-		gridMap.updateMapPositions(objList);
+		gridMap.updateMapPositions(manager.getElements());
 		Stack<GridCell> gridPathPoints = calculatePath(obj.getTransform().getPosition(), target);
 		Queue<Vector2> mapWayPoints = new LinkedList<>();
 		for(GridCell cell : gridPathPoints)
@@ -102,6 +103,8 @@ public class Pathfinder {
 		}
 		return mapWayPoints;		
 	}
+	
+
 	
 	private Stack<GridCell> getPath(GridCell finalCell)
 	{

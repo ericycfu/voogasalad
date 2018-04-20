@@ -1,6 +1,7 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 
 public class DeathFunction implements CustomFunction{
 	private CustomComponentParameterFormat format;
@@ -8,7 +9,7 @@ public class DeathFunction implements CustomFunction{
 		setParameterFormatFields();
 	}
 	@Override
-	public void Execute(GameObject current, GameObject other) {
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		other.setIsDead(true);
 	}
 

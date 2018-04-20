@@ -64,12 +64,12 @@ public class Interaction implements EngineObject {
 	 * Runs all the custom functions in the interactions
 	 * Each custom function can affect the other game object
 	 */
-	public void executeCustomFunctions(GameObject current, GameObject other)
+	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		if(matchesTags(other, targetTags)) return;
 		for(CustomFunction cFunc : customFunctions)
 		{
-			cFunc.Execute(current, other);
+			cFunc.Execute(current, other, manager);
 		}
 	}
 	

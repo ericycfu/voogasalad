@@ -1,7 +1,14 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_object.PropertyNotFoundException;
+
+/**
+ * 
+ * @author Rayan
+ * Custom Function for building object.
+ */
 
 public class BuildFunction implements CustomFunction 
 {
@@ -9,9 +16,10 @@ public class BuildFunction implements CustomFunction
 	private CustomComponentParameterFormat format;
 	
 	@Override
-	public void Execute(GameObject current, GameObject other) 
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
 		
+		other.isUninteractive();
 	}
 
 	@Override
@@ -21,7 +29,8 @@ public class BuildFunction implements CustomFunction
 
 	@Override
 	public void setParameterFormatFields() {
-		format.addHelpText("This function allows you to build a unit." );
+		format.addHelpText("This function allows you to build a unit. Enter the tags for all the possible"
+				+ "units that this object can create." );
 		format.addStringField("buildTime");	
 		
 	}

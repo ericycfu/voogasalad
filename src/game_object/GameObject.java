@@ -35,7 +35,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private Team owner;
 	
 	private String name;
-	private List<String> tag;
+	private List<String> tags;
 	private boolean isBuilding;
 	
 	private boolean isInteractionQueued;
@@ -46,6 +46,10 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private double movementSpeed = 0;
 	private boolean isMovementQueued;
 	private Queue<Vector2> activeWaypoints;
+	
+	private GameObjectManager manager;
+	
+	private boolean isUninteractive;
 
 	
 	
@@ -82,7 +86,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	/**
 	 * 
 	 * @param startingPosition
-	 * @param tag
+	 * @param tags
 	 * @param name
 	 * Standard constructor. Encouraged to use this
 	 */
@@ -93,7 +97,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.renderer = new Renderer();
 		this.id = id;
 		this.name = name;
-		this.tag = tag;
+		this.tags = tags;
 		propertiesInit();
 
 	}
@@ -104,6 +108,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		interactionTarget = null;
 		isDead = false;
 		isBuilding = false;
+		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 	}
 	
@@ -119,11 +124,13 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		 *  3. Update renderer data
 		 */
 		
+		if(this.isUninteractive) return;
+		
 		moveUpdate();
 		
 		if(isInteractionQueued)
 		{
-			 myObjectLogic.executeInteractions(this, interactionTarget);
+			 myObjectLogic.executeInteractions(this, interactionTarget, manager);
 		}
 		//myObjectLogic.checkConditions(this);
 		
@@ -169,11 +176,12 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * gives the signal to the gameobject that an interaction is queued
 	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
 	 */
-	public void queueInteraction(GameObject other, int id, List<GameObject> objList)
+	public void queueInteraction(GameObject other, int id, GameObjectManager manager)
 	{
 		isInteractionQueued = true;
 		interactionTarget = other;
-		this.myObjectLogic.setCurrentInteraction(id, this, other, objList);
+		this.myObjectLogic.setCurrentInteraction(id, this, other, manager);
+		this.manager = manager;
 	}
 	
 	/**
@@ -185,15 +193,26 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		interactionTarget = null;
 	}
 	
-	public void queueMovement(Vector2 target, List<GameObject> objectList)
+	public void queueMovement(Vector2 target, GameObjectManager manager)
 	{
+		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(new GridMap());
-		Queue<Vector2> movementPoints = pathfinder.findPath(this, target, objectList);
+		Queue<Vector2> movementPoints = pathfinder.findPath(this, target, manager);
 		if(!movementPoints.isEmpty())
 		{
 			isMovementQueued = true;
 			
 		}
+	}
+	
+	public void setIsUninteractive(boolean val)
+	{
+		this.isUninteractive = val;
+	}
+	
+	public boolean isUninteractive()
+	{
+		return this.isUninteractive;
 	}
 	
 	public void dequeueMovement()
@@ -217,14 +236,14 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	} 
 	
 	public List<String> getTags() {
-		if(tag == null)
+		if(tags == null)
 			return new ArrayList<String>();
 		else
-			return tag;
+			return tags;
 	}
 
-	public void setTags(List<String> tag) {
-		this.tag = tag;
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 	
 	public String getName() {
