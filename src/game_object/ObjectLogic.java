@@ -27,7 +27,7 @@ public class ObjectLogic
 	
 	InteractionManager interactions;
 	ConditionManager conditions;
-	
+		
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
@@ -62,6 +62,7 @@ public class ObjectLogic
 	{
 		if(inRange(current, interactionTarget, currentInteraction))
 		{
+			current.dequeueMovement();
 			currentInteraction.executeCustomFunctions(current, interactionTarget);
 			current.dequeueInteraction();
 		}
