@@ -78,5 +78,13 @@ public abstract class ElementManager {
 	{
 		elementMap.put(obj.getID(), obj);
 	}
+	
+	/**
+	 * Clears the element database
+	 */
+	public void clearManager()
+	{
+		elementMap.clear();
+	}
 
 }

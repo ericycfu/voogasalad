@@ -14,6 +14,7 @@ import game_object.PropertyNotFoundException;
  * @author Rayan
  * Object that manages resources for each team.
  * Has certain limitations to ensure that improperly named resources are ignored.
+ * To use: This 
  */
 public class ResourceManager {
 
