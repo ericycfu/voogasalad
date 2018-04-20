@@ -31,6 +31,7 @@ public class GameInstance {
 	private Writer myWriter;
 	
 	public GameInstance(GameInfo g, String filepath) {
+		
 		myReader = new Reader();
 		myGameInfo = g;
 		myTeamManager = new TeamManager();
@@ -70,12 +71,14 @@ public class GameInstance {
 		} catch (UnmodifiableGameObjectException e) {
 		}
 	}
+	
 	public void executeMovement(int id, int xcor, int ycor) {
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
 		myObjectManager.get(id).queueMovement(v);
 	}
+	
 	public void loop() {
 		while(running) {
 			myObjectManager.runGameObjectLoop();
