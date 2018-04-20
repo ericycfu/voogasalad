@@ -45,6 +45,10 @@ public class AuthoringController {
 		myPlaceTab = placetab;
 	}
 	
+	public DraggableScrollPane getScroll() {
+		return myScroll;
+	}
+	
 	public MapEntity getMap() {
 		return myMap;
 	}
