@@ -6,14 +6,16 @@ import server.RTSServerException;
 
 public class CommunicationsHandlerFactory {
 	private RTSServer hostServer;
-	public CommunicationsHandlerFactory(RTSServer server) {
+	private Socket connectionSocket;
+	public CommunicationsHandlerFactory(RTSServer server, Socket connection) {
 		hostServer = server;
+		connectionSocket = connection;
 	}
-	public CommunicationsHandler get(String className, Socket connection) {
+	public CommunicationsHandler get(String className) {
 		
 		try {
-			Class<?> clazz = Class.forName("server.communications_handler" + className);
-			return (CommunicationsHandler) clazz.getConstructor(Socket.class,RTSServer.class).newInstance(connection,hostServer);
+			Class<?> clazz = Class.forName("server.communications_handler" + className + "Handler");
+			return (CommunicationsHandler) clazz.getConstructor(Socket.class,RTSServer.class).newInstance(connectionSocket,hostServer);
 		} catch (Exception e) {
 			throw new RTSServerException("Unable to correctly handle input");
 		}

@@ -17,7 +17,7 @@ public abstract class CommunicationsHandler {
 	protected RTSServer getServer() {
 		return host;
 	}
-	public abstract void updateServer();
+	public abstract String updateServer();
 	public abstract void updateClient();
 
 }

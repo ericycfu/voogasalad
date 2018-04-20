@@ -9,6 +9,7 @@ import server.RTSServer;
 import server.RTSServerException;
 
 public class MainPageHandler extends CommunicationsHandler {
+	public static final String CLASS_REF = "MainPage";
 	private BufferedReader in;
 	public MainPageHandler(Socket input, RTSServer server) {
 		super(input, server);
@@ -21,7 +22,7 @@ public class MainPageHandler extends CommunicationsHandler {
 	}
 
 	@Override
-	public void updateServer() {
+	public String updateServer() {
 		try {
 			String input;
 			if((input = in.readLine()) != null) {
@@ -29,9 +30,12 @@ public class MainPageHandler extends CommunicationsHandler {
 				if(lobbyID == -1)
 					getServer().addLobby(getSocket(), null);
 				else getServer().addToLobby(lobbyID, getSocket());
+				return LobbyHandler.CLASS_REF;
 			}
+			else return CLASS_REF;
 		}
-		catch(Exception e) {}
+		catch(IOException e) {return CLASS_REF;}
+		
 	}
 
 	@Override
