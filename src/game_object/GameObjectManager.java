@@ -52,7 +52,13 @@ public class GameObjectManager extends ElementManager {
 	
 	public List<GameObject> getElements()
 	{
+		List<GameObject> gameObjects = new ArrayList<>();
 		
+		for (EngineObject eObj : getElementsRaw()) {
+			GameObject gObj = (GameObject) eObj;
+			gameObjects.add(gObj);
+		}
+		return gameObjects;
 	}
 	
 	
