@@ -57,9 +57,10 @@ public class GamePlayer {
 		initialize();
 		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
-		unitSkillMapInitialize();
+		//unitSkillMapInitialize();
 	}
 	
+	/**
 	private void unitSkillMapInitialize() {
 		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
 			List<SkillButton> skillList = new ArrayList<>();
@@ -74,6 +75,7 @@ public class GamePlayer {
 			myUnitSkills.put(go.getName(), skillList);
 		}
 	}
+	**/
 	
 	private void initializeSingleUnitSelect() {
 		for (EngineObject eo : myGameObjectManager.getElements()) {
