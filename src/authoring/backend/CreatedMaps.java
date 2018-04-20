@@ -30,11 +30,9 @@ public class CreatedMaps implements Speaker {
 		return createdmaps.size();
 	}
 	
-
 	@Override
 	public void addListener(Listener l) {
 		listeners.add(l);
-		
 	}
 
 	@Override
@@ -47,7 +45,5 @@ public class CreatedMaps implements Speaker {
 		for (Listener l: listeners) {
 			l.update();
 		}
-		
 	}
-
 }

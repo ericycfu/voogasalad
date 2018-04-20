@@ -24,6 +24,7 @@ public class Condition implements EngineObject {
 	private int id;
 	private ComparatorManager comparatorManager;
 	private GameObject host;
+	private List<String> tags;
 	
 	private String var1;
 	private String var2;
@@ -56,6 +57,15 @@ public class Condition implements EngineObject {
 		return id;
 	}
 
+	public void addTag(String t)
+	{
+		tags.add(t);
+	}
+	
+	public void removeTag(String t)
+	{
+		tags.remove(t);
+	}
 	
 	public void execute()
 	{

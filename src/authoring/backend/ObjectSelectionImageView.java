@@ -4,13 +4,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class ObjectSelectionImageView extends ImageView {
-	public ObjectSelectionImageView(AuthoringObject obj) {
-		super();
-		this.setImage(obj.getImage());
-	}
 	
 	public ObjectSelectionImageView(AuthoringObject obj, AuthoringController ac) {
-		this(obj);
+		this.setImage(obj.getImage());
 		actionImgToScrollPane(obj, ac);
 	}
 	

@@ -36,7 +36,6 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		}
 		if (size != 0) {
 			this.setContent(box);
-			System.out.print("setting up box!");
 		}
 	}
 	
