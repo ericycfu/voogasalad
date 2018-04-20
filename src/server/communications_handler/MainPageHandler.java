@@ -1,0 +1,41 @@
+package server.communications_handler;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+import server.RTSServer;
+import server.RTSServerException;
+
+public class MainPageHandler extends CommunicationsHandler {
+	private BufferedReader in;
+	public MainPageHandler(Socket input, RTSServer server) {
+		super(input, server);
+		try {
+			in = new BufferedReader(
+					new InputStreamReader(getSocket().getInputStream()));
+		} catch (IOException e) {
+			throw new RTSServerException("Unable to connect to server");
+		}
+	}
+
+	@Override
+	public void updateServer() {
+		try {
+			String input;
+			if((input = in.readLine()) != null) {
+				int lobbyID = Integer.parseInt(input);
+				if(lobbyID == -1)
+					getServer().addLobby(getSocket(), null);
+				else getServer().addToLobby(lobbyID, getSocket());
+			}
+		}
+		catch(Exception e) {}
+	}
+
+	@Override
+	public void updateClient() {
+	}
+
+}
