@@ -3,46 +3,30 @@ package authoring.view;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.CreatedObjects;
 import authoring.backend.InteractionKeysController;
 import authoring.backend.TagController;
-import game_object.ObjectAttributes;
+import gui_elements.buttons.AddCustomFunctionsButton;
 import gui_elements.buttons.AddInteractionButton;
-import gui_elements.combo_boxes.ComponentTagComboBox;
 import gui_elements.combo_boxes.InteractionComponentTagComboBox;
 import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.MainComboBox;
-import gui_elements.labels.AttributeNameLabel;
-import gui_elements.labels.AttributeValueLabel;
-import gui_elements.labels.ComponentAttributesTitleLabel;
 import gui_elements.labels.ComponentInteractionsTitleLabel;
 import gui_elements.labels.InteractionComponentTagLabel;
 import gui_elements.labels.InteractionNameLabel;
 import gui_elements.labels.InteractionSelectedLabel;
 import gui_elements.labels.InteractionSelectionsLabel;
 import gui_elements.labels.InteractionVisionRangeLabel;
-import gui_elements.panes.AttributeNamesPane;
-import gui_elements.panes.AttributeValuesPane;
 import gui_elements.panes.InteractionSelectedPane;
 import gui_elements.panes.InteractionSelectionsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
-import interactions.CustomFunction;
-import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -54,7 +38,7 @@ public class ComponentAddInteractionsScreen {
     private final String WIDTH_PROPERTY = "width";
     private final String HEIGHT_PROPERTY = "height";
     private String title;
-    private int screen_width, screen_height;
+    private int screen_width, screen_height, interaction_id;
     private Stage stage;
     private InteractionManager interaction_manager;
     private InteractionKeysController interaction_keys_controller;
@@ -62,7 +46,6 @@ public class ComponentAddInteractionsScreen {
     private MainPane interaction_selected_pane, interaction_selections_pane;
     private MainComboBox interaction_component_tag_cb, interaction_name_cb;
     private MainTextField interaction_vision_range_tf;
-	private List<String> custom_function_strings;
     private AuthoringObject authoring_object;
 	
 	// Additional setup for the add-interactions screen.
@@ -74,7 +57,7 @@ public class ComponentAddInteractionsScreen {
     	this.tag_controller = tag_controller;
     	interaction_manager = authoring_object.getInteractionsManagerInstance();
     	interaction_keys_controller = new InteractionKeysController();
-    	custom_function_strings = new ArrayList<String>();
+    	interaction_id = interaction_manager.createInteraction();
     	initialize();
     }
 
@@ -102,6 +85,9 @@ public class ComponentAddInteractionsScreen {
 		stage.setTitle(title);
 		stage.show();
 		stage.setResizable(false);
+		stage.setOnCloseRequest(e -> {
+			e.consume();
+		});
 	}
 
 	/**
@@ -168,7 +154,9 @@ public class ComponentAddInteractionsScreen {
     
     private void setPanes() {
     	interaction_selected_pane = new InteractionSelectedPane(interaction_name_cb, interaction_keys_controller);
-    	interaction_selections_pane = new InteractionSelectionsPane(interaction_component_tag_cb, tag_controller);
+    	interaction_selections_pane = new InteractionSelectionsPane(interaction_component_tag_cb, 
+    																tag_controller,
+    																interaction_selected_pane);
     	    	
     	root.getChildren().addAll(interaction_selected_pane.getPane(),
     							  interaction_selections_pane.getPane());
@@ -176,12 +164,13 @@ public class ComponentAddInteractionsScreen {
 
     private void setButtons() {
     	root.getChildren().addAll(new AddInteractionButton(authoring_object,
-    													   custom_function_strings,
     													   interaction_name_cb,
     													   interaction_vision_range_tf,
     													   interaction_selected_pane,
     													   interaction_keys_controller,
-    													   this).getButton());
+    													   this,
+    													   interaction_id).getButton(),
+    							  new AddCustomFunctionsButton());
     }
 
     public void resetElements() {
@@ -190,6 +179,13 @@ public class ComponentAddInteractionsScreen {
     	interaction_name_cb.getEditor().clear();
     	interaction_component_tag_cb.getEditor().clear();
     	interaction_vision_range_tf.clear();
-    	custom_function_strings.clear();
+    }
+    
+    public void setInteractionID(int interaction_id) {
+    	this.interaction_id = interaction_id;
+    }
+    
+    public Stage getStage() {
+    	return stage;
     }
 }
