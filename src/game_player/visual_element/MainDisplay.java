@@ -57,7 +57,7 @@ public class MainDisplay implements VisualUpdate {
 			if (e.getButton()==MouseButton.SECONDARY) {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
-				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), );
 			}
 		});
 		myMap.toBack();
