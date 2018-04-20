@@ -13,7 +13,7 @@
 }
 
 .image_button {
-    -fx-font: 48px Arial;
+    	-fx-font: 48px Arial;
     -fx-text-fill: steelblue;
     -fx-pref-width: 400px;
     -fx-pref-height: 100px;
@@ -33,6 +33,26 @@
 
 .new_game_button:hover {
 	-fx-background-image:none;
-	-fx-background-color: transparent;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
 }
 
+.back_button {
+	-fx-font: 18px Arial;
+    -fx-text-fill: steelblue;
+    -fx-pref-width: 250px;
+    -fx-pref-height: 40px;
+    -fx-background-color: white;
+}
+
+.tab_pane {
+	-fx-border-width: 2px;
+	-fx-border-color: gray;
+	-fx-opacity: 0.8;
+}
+
+#map_entity_default {
+	-fx-pref-width: 1000;
+	-fx-pref-height: 1000;
+	-fx-background-image: url("/images/tt.jpg");
+}

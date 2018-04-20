@@ -2,8 +2,13 @@ package map;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.Stack;
 
 import game_object.GameObject;
 import transform_library.Vector2;
@@ -11,86 +16,105 @@ import transform_library.Vector2;
 /**
  * 
  * @author Rayan
- * Class that implements pathfinding algorithm
+ * Class that implements pathfinding algorithm.
  */
 
 public class Pathfinder {
-
-	private GridMap gridMap;
 	
+	private final static int MOVEMENT_DIRECTIONS = 8;
+	
+	private GridMap gridMap;
 	
 	public Pathfinder(GridMap gridMap)
 	{
 		this.gridMap = gridMap;
-		
 	}
-	
 	
 	/**
 	 * 
 	 * @param obj
 	 * @param targetPos
 	 * @return
-	 * Get the cell to which to move next
+	 * Finds a path for the unit
 	 */
-	public Vector2 getNextCell(GameObject obj, Vector2 targetPos)
-	{
-		if(gridMap.getCell(convert(targetPos).getRow(), convert(targetPos).getColumn()).isObstacle())
-			return obj.getTransform().getPosition();
+	private Stack<GridCell> calculatePath(Vector2 originPos, Vector2 targetPos)
+	{			
+		//Created open and closed lists
+		PriorityQueue<GridCell> openSet = new PriorityQueue<>(MOVEMENT_DIRECTIONS, cellComparator);
+		Set<GridCell> closedSet = new HashSet<>();
 		
-		PriorityQueue<GridCell> openList = new PriorityQueue<>(8, cellComparator);
-		List<GridCell> closedList = new ArrayList<>();
+		//converted coordinates from JavaFX to MapGrid
+		GridCell current = gridMap.convertToGrid(originPos);
+		GridCell target = gridMap.convertToGrid(targetPos);
 		
-		GridCell current = convert(obj.getTransform().getPosition());
-		GridCell target = convert(targetPos);
-		
-		current.updateGVal(0);
+		//Setting the scores and adding the current node to the open list
+		current.setGVal(0);
 		current.setHVal(target);
+		openSet.add(current);
 		
-		openList.add(current);
-		
-		while(!openList.isEmpty())
+		while(!openSet.isEmpty())
 		{
-			GridCell cell = openList.remove();
-			if(cell.matches(target))
+			current = openSet.peek();
+			if(current.matches(target))
 			{
-				//end path
+				return getPath(target);
 			}
 			
-			closedList.add(current);
+			current = openSet.remove();
+			closedSet.add(current);
+			
 			for(GridCell nbr : getValidNeighbors(current))
 			{
-				if(closedList.contains(nbr)) continue;
+				if(closedSet.contains(nbr))
+					continue;
 				
-				int gscore = current.getGVal();
-				boolean isInOpen = openList.contains(nbr);
-				// if(!isInOpen || gScore < nbr.getGVal())
+				if(!openSet.contains(nbr))
+				{
+					nbr.setGVal(current);
+					nbr.setHVal(target);
+					nbr.setParent(current);
+					openSet.add(nbr);
+				}
+				else
+				{
+					int tempG = nbr.calculateGVal(current);
+					if(tempG >= nbr.getGVal()) continue;
+					openSet.remove(nbr);
+					nbr.setParent(current);
+					nbr.setGVal(current);
+					nbr.setHVal(target);
+					openSet.add(nbr);
+				}
+					
 			}
-			
-			
-			
 		}
-		return null;
-		
-		
-		
-		
-		
-		
-		
-		
+		return getPath(null);	
 	}
 	
-	/**
-	 * 
-	 * @param pos
-	 * @return
-	 * Converts vector2 position into grid position
-	 */
-	private GridCell convert(Vector2 pos)
+	public Queue<Vector2> findPath(GameObject obj, Vector2 target, List<GameObject> objList)
 	{
-		return new GridCell(0,0);
+		gridMap.updateMapPositions(objList);
+		Stack<GridCell> gridPathPoints = calculatePath(obj.getTransform().getPosition(), target);
+		Queue<Vector2> mapWayPoints = new LinkedList<>();
+		for(GridCell cell : gridPathPoints)
+		{
+			mapWayPoints.add(gridMap.convertToWorld(cell));
+		}
+		return mapWayPoints;		
 	}
+	
+	private Stack<GridCell> getPath(GridCell finalCell)
+	{
+		Stack<GridCell> path = new Stack<>();
+		if(finalCell == null) 
+			return path;
+		while(finalCell.getParent() != null)
+		{
+			path.add(finalCell.getParent());
+		}
+		return path;
+	}
+	
 	
 	/**
 	 * 
@@ -100,8 +124,8 @@ public class Pathfinder {
 	 */
 	private boolean inBounds(GridCell cell)
 	{
-		return(cell.getRow() < 0 || cell.getColumn() >= gridMap.getHeight()
-				|| cell.getRow() < 0 || cell.getColumn() >= gridMap.getWidth());
+		return(cell.getRow() < 0 || cell.getColumn() >= gridMap.getGridLength()
+				|| cell.getRow() < 0 || cell.getColumn() >= gridMap.getGridLength());
 	}
 	
 	private boolean isMoveableInto(GridCell cell)

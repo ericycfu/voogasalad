@@ -19,11 +19,12 @@ import game_object.UnmodifiableGameObjectException;
  * to act upon, the comparator to use, and the values to compare.
  */
 
-public class Condition implements EngineObject<ConditionManager> {
+public class Condition implements EngineObject {
 
 	private int id;
 	private ComparatorManager comparatorManager;
 	private GameObject host;
+	private List<String> tags;
 	
 	private String var1;
 	private String var2;
@@ -32,11 +33,11 @@ public class Condition implements EngineObject<ConditionManager> {
 	private List<CustomCondition> customConditions;
 
 	
-	public Condition(GameObject object, ConditionManager manager, int comparatorID, String var1, String var2)
+	public Condition(int id, GameObject object, int comparatorID, String var1, String var2)
 	{
+		this.id = id;
 		comparatorManager = new ComparatorManager();
 		host = object;
-		addToManager(manager);
 		this.var1 = var1;
 		this.var2 = var2;
 		this.comparatorID = comparatorID;
@@ -56,17 +57,14 @@ public class Condition implements EngineObject<ConditionManager> {
 		return id;
 	}
 
-
-	public void setID(int id)
+	public void addTag(String t)
 	{
-		this.id = id;
+		tags.add(t);
 	}
 	
-	@Override
-	public void addToManager(ConditionManager manager) {
-		
-		setID(manager.addElementToManager(this));
-		
+	public void removeTag(String t)
+	{
+		tags.remove(t);
 	}
 	
 	public void execute()
