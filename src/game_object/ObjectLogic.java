@@ -27,7 +27,7 @@ public class ObjectLogic
 	
 	InteractionManager interactions;
 	ConditionManager conditions;
-	
+		
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
@@ -60,19 +60,27 @@ public class ObjectLogic
 	 */
 	public void executeInteractions(GameObject current, GameObject interactionTarget)
 	{
-		for(Interaction inter : interactions.getElements())
+		if(inRange(current, interactionTarget, currentInteraction))
 		{
-			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
-			{
-				inter.executeCustomFunctions(current, interactionTarget);
-			}
+			current.dequeueMovement();
+			currentInteraction.executeCustomFunctions(current, interactionTarget);
+			current.dequeueInteraction();
 		}
-		current.dequeueInteraction();
 		
 	}
+	
+	public boolean inRange(GameObject current, GameObject interactionTarget, Interaction inter)
+	{
+		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
+	}
 
-	public void setCurrentInteraction(Interaction i) {
-		currentInteraction = i;
+	public void setCurrentInteraction(int id, GameObject current, GameObject other, List<GameObject> objList) {
+		currentInteraction = interactions.getInteraction(id);
+		if(!inRange(current, other, currentInteraction))
+		{
+			current.queueMovement(current.getTransform().getPosition(), objList);
+		}
+
 	}
 	
 	public void checkConditions(GameObject current)

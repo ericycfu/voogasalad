@@ -16,11 +16,11 @@ public final class AuthoringToGameObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static List<GameObject> convert(Map<AuthoringObject, List<DraggableImageView>> map) {
-		List<GameObject> GOs = new ArrayList<GameObject>();
+	public static GameObjectManager convert(Map<AuthoringObject, List<DraggableImageView>> map) {
+		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
 			for(DraggableImageView DIV: map.get(AO)) {
-				GOs.add(new GameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())), AO.getObjectLogic()));
+				GOM.add(new Transform(new Vector2(DIV.getX(), DIV.getY())), AO.getObjectLogic());
 			}
 		}
 		

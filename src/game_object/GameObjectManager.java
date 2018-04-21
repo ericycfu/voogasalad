@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
@@ -35,6 +36,14 @@ public class GameObjectManager extends ElementManager {
 	{
 		int newID = calculateID();
 		GameObject obj = new GameObject(newID, startingPosition, tags, name, t);
+		this.addElement(obj);
+		return newID;
+	}
+	
+	public int createGameObject(Transform transform, ObjectLogic logic)
+	{
+		int newID = calculateID();
+		GameObject obj = new GameObject(newID, transform, logic);
 		this.addElement(obj);
 		return newID;
 	}
@@ -105,6 +114,7 @@ public class GameObjectManager extends ElementManager {
 		
 		
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public List<GameObject> getElements() {
@@ -123,4 +133,12 @@ public class GameObjectManager extends ElementManager {
 		objectMap.clear();
 	}
 
+=======
+
+	public GameObject getGameObject(int id)
+	{
+		return (GameObject)(this.get(id));
+	}
+	
+>>>>>>> dev
 }

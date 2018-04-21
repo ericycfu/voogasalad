@@ -32,17 +32,16 @@ public class AuthoringController {
 		myCreatedObjectsTabs = objtabs;
 	}
 	
-	
 	public void addToAuthorController(DraggableScrollPane scroll) {
 		myScroll = scroll;
 	}
 	
-	public void addToAuthoringController(MapEntity map) {
+	public void updateMap(MapEntity map) {
 		myMap = map;
 	}
-	
-	public void addToAuthoringController(PlaceTab placetab) {
-		myPlaceTab = placetab;
+		
+	public DraggableScrollPane getScroll() {
+		return myScroll;
 	}
 	
 	public MapEntity getMap() {

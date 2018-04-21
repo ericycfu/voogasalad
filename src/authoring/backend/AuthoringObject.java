@@ -1,5 +1,6 @@
 package authoring.backend;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -52,6 +53,7 @@ public class AuthoringObject {
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
+		myTags = new ArrayList<>();
 	}
 	
 	private void addTestObject() {

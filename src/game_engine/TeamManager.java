@@ -43,4 +43,9 @@ public class TeamManager extends ElementManager {
 		}
 		return teams;
 	}
+	
+	public Team getTeam(int id)
+	{
+		return (Team)(this.get(id));
+	}
 }
