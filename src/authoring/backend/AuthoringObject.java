@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import conditions.ConditionManager;
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
@@ -32,6 +33,7 @@ public class AuthoringObject {
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private InteractionManager myInteractions;
+	private ConditionManager myConditionManager;
 	
 	public AuthoringObject() {
 		defaultObject();
@@ -53,6 +55,7 @@ public class AuthoringObject {
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
+		myConditionManager = new ConditionManager();
 		myTags = new ArrayList<>();
 	}
 	
@@ -151,5 +154,9 @@ public class AuthoringObject {
 
 	public ObjectLogic getObjectLogic() {
 		return myObjectLogic;
+	}
+	
+	public ConditionManager getConditionManager() {
+		return myConditionManager;
 	}
 }

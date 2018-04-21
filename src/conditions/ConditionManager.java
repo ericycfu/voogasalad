@@ -16,10 +16,12 @@ public class ConditionManager extends ElementManager {
 	public ConditionManager()
 	{}
 	
-	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
+//	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
+	public int createCondition(int comparatorID, String var1, String var2)
 	{
 		int newID = calculateID();
-		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
+//		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
+		Condition condition = new Condition(newID, comparatorID, var1, var2);
 		this.addElement(condition);
 		return newID;
 	}
@@ -39,5 +41,11 @@ public class ConditionManager extends ElementManager {
 	public Condition getCondition(int id)
 	{
 		return (Condition)(this.get(id));
+	}
+		
+	public List<String> availableCustomConditions() {
+		List<String> customConditions = new ArrayList<>();
+		customConditions.add(new Death().getClass().getSimpleName());
+		return customConditions;
 	}
 }
