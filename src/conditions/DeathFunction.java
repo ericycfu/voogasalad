@@ -1,16 +1,19 @@
-package interactions;
+package conditions;
 
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import interactions.CustomComponentParameterFormat;
 
-public class DeathFunction implements CustomFunction{
+public class DeathFunction implements CustomCondition {
+	
 	private CustomComponentParameterFormat format;
 	public DeathFunction() {
 		setParameterFormatFields();
 	}
 	@Override
-	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
-		other.setIsDead(true);
+	public void Execute(GameObject current) {
+		
+		current.setIsDead(true);
 	}
 
 	@Override
