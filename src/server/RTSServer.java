@@ -31,7 +31,7 @@ public class RTSServer {
 			}
 			catch(IOException e) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("");
+				alert.setHeaderText("Error");
 				alert.setContentText("Unable to listen in on port " + PORT_NUMBER);
 				alert.show();
 				try {
@@ -65,5 +65,8 @@ public class RTSServer {
 	}
 	public void addToLobby(int ID, Socket s) {
 		myLobbyManager.get(ID).addPlayer(s);
+	}
+	public GameLobby findPlayer(Socket s) {
+		return myLobbyManager.find(s);
 	}
 }

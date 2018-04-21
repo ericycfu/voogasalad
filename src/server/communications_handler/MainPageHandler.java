@@ -3,6 +3,7 @@ package server.communications_handler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import server.RTSServer;
@@ -40,6 +41,14 @@ public class MainPageHandler extends CommunicationsHandler {
 
 	@Override
 	public void updateClient() {
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(getSocket().getOutputStream());
+			out.writeObject(getServer());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

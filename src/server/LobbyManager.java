@@ -1,5 +1,6 @@
 package server;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,6 +33,13 @@ public class LobbyManager{
 	}
 	public GameLobby get(int ID) {
 		return lobbies.get(ID);
+	}
+	public GameLobby find(Socket player) {
+		for(GameLobby g: lobbies.values()) {
+			if (g.contains(player))
+				return g;
+		}
+		return null;
 	}
 
 }

@@ -11,6 +11,7 @@ public class GameLobby {
 	private GameInstance loadedMap;
 	private boolean isRunning;
 	private int ID;
+	private boolean isReady;
 	
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
 		myPlayers = new ArrayList<Socket>();
@@ -36,5 +37,17 @@ public class GameLobby {
 	}
 	public int getCurrentSize() {
 		return myPlayers.size();
+	}
+	public boolean contains(Socket s) {
+		return myPlayers.contains(s);
+	}
+	public Object getHost() {
+		return myPlayers.get(0);
+	}
+	public boolean isReady() {
+		return isReady;
+	}
+	public void setIsReady(boolean b) {
+		isReady = b;
 	}
 }
