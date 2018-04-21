@@ -187,8 +187,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	public void queueMovement(Vector2 target, List<GameObject> objectList)
 	{
 		Pathfinder pathfinder = new Pathfinder(new GridMap());
-		Queue<Vector2> movementPoints = pathfinder.findPath(this, target, objectList);
-		if(!movementPoints.isEmpty())
+		activeWaypoints = pathfinder.findPath(this, target, objectList);
+		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
 			
