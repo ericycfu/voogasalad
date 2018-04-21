@@ -45,7 +45,7 @@ public class GameInstance {
 		List<Object> gameObjects = myReader.read(filepath, "gameObject");
 		myObjectManager = new GameObjectManager();
 		for(int x = 0; x < gameObjects.size(); x++) {
-			myObjectManager.addElementToManager((GameObject)gameObjects.get(x));
+			myObjectManager.addElement((GameObject)gameObjects.get(x));
 		}
 	}
 	/**
@@ -65,9 +65,9 @@ public class GameInstance {
 	public void executeCommand(int source_id, int target_id, Interaction i) {
 		if(!running)
 			return;
-		myObjectManager.get(source_id).queueInteraction(myObjectManager.get(target_id));
+		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id));
 		try {
-			myObjectManager.get(source_id).accessLogic().setCurrentInteraction(i);
+			myObjectManager.getGameObject(source_id).accessLogic().setCurrentInteraction(i);
 		} catch (UnmodifiableGameObjectException e) {
 		}
 	}
@@ -76,7 +76,7 @@ public class GameInstance {
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
-		myObjectManager.get(id).queueMovement(v);
+		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager.getElements());
 	}
 	
 	public void loop() {
