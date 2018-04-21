@@ -115,7 +115,7 @@ public class DesignTab extends Tab {
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
-										 new CreateConditionsButton().getButton());
+										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton());
 	}
 	
 	public void setNewAuthoringObject() {
