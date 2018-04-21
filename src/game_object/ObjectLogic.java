@@ -57,12 +57,13 @@ public class ObjectLogic
 	 * 
 	 * for now it executes all interactions, later it must be specific interactions
 	 */
-	public void executeInteractions(GameObject current, GameObject interactionTarget)
+	public void executeInteractions(GameObject current, GameObject interactionTarget, GameObjectManager manager)
 	{
+		if(interactionTarget.isUninteractive() || current.isUninteractive()) return;
 		if(inRange(current, interactionTarget, currentInteraction))
 		{
 			current.dequeueMovement();
-			currentInteraction.executeCustomFunctions(current, interactionTarget);
+			currentInteraction.executeCustomFunctions(current, interactionTarget, manager);
 			current.dequeueInteraction();
 		}
 		
@@ -73,11 +74,11 @@ public class ObjectLogic
 		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
 	}
 
-	public void setCurrentInteraction(int id, GameObject current, GameObject other, List<GameObject> objList) {
+	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager) {
 		currentInteraction = interactions.getInteraction(id);
 		if(!inRange(current, other, currentInteraction))
 		{
-			current.queueMovement(current.getTransform().getPosition(), objList);
+			current.queueMovement(current.getTransform().getPosition(), manager);
 		}
 
 	}

@@ -15,7 +15,5 @@ import interactions.CustomComponentParameterFormat;
 public interface CustomCondition {
 	
 	public void Execute(GameObject current);
-	public CustomComponentParameterFormat getParameterFormat();
-	public void setParameterFormatFields();
 
 }
