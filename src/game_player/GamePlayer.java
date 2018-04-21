@@ -108,7 +108,7 @@ public class GamePlayer {
 		if(myTopPanel.getIsLoaded()) {
 			gameobject = myTopPanel.getGameObjects();
 			System.out.println("we got here");
-			myGameManager.clear();
+			myGameManager.clearManager();
 			for(GameObject GO: gameobject) {
 				myGameManager.addElementToManager(GO);
 			}

@@ -15,12 +15,16 @@ public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
 	private Map<String, Double> buildCosts;
+	private double buildTime;
 	
-	public ObjectAttributes() {
+	
+	public ObjectAttributes()
+	{
 		attributes = new HashMap<String, Double>();
 	}
 	
-	public List<String> getAttributeNames() {
+	public List<String> getAttributeNames() 
+	{
 		List<String> list = new ArrayList<>();
 		for(String attribute : attributes.keySet()) {
 			list.add(attribute);
@@ -28,7 +32,8 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public List<Double> getAttributeValues() {
+	public List<Double> getAttributeValues() 
+	{
 		List<Double> list = new ArrayList<>();
 		for(String attribute : attributes.keySet()) {
 			list.add(attributes.get(attribute));
@@ -36,7 +41,8 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public Map<String, Double> getAttributeMap() {
+	public Map<String, Double> getAttributeMap() 
+	{
 		return attributes;
 	}
 	
@@ -91,5 +97,15 @@ public class ObjectAttributes {
 		{
 			buildCosts.put(map.getKey(), map.getValue());
 		}
+	}
+
+	public double getBuildTime() 
+	{
+		return buildTime;
+	}
+
+	public void setBuildTime(double buildTime) 
+	{
+		this.buildTime = buildTime;
 	}
 }

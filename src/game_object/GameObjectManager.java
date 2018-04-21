@@ -40,6 +40,14 @@ public class GameObjectManager extends ElementManager {
 		return newID;
 	}
 	
+	public int createGameObject(Transform transform, ObjectLogic logic)
+	{
+		int newID = calculateID();
+		GameObject obj = new GameObject(newID, transform, logic);
+		this.addElement(obj);
+		return newID;
+	}
+	
 	
 	public List<GameObject> getElements()
 	{
@@ -111,4 +119,5 @@ public class GameObjectManager extends ElementManager {
 	{
 		return (GameObject)(this.get(id));
 	}
+	
 }
