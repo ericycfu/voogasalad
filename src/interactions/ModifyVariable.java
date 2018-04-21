@@ -32,9 +32,7 @@ public class ModifyVariable implements CustomFunction {
 		setParameterFormatFields();
 	}
 	
-	
-	// make seperate container object for parameter data? 
-	
+		
 	public void setParameters(CustomComponentParameterFormat format)
 	{
 		try 
