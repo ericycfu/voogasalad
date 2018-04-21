@@ -1,6 +1,7 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
@@ -12,7 +13,7 @@ import game_object.UnmodifiableGameObjectException;
  *
  */
 
-public class ModifyVariable implements CustomFunction {
+public class ModifyVariable implements CustomFunction, CustomComponentFunction {
 
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
@@ -54,7 +55,7 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute(GameObject current, GameObject other) {
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
 		//largely placeholder implementation, will have to take care of rate
 		double prevVal;
