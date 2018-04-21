@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import transform_library.Vector2;
 
 public class SelectedUnitManager {
@@ -20,9 +21,9 @@ public class SelectedUnitManager {
 		selectedUnits.add(go);
 	}
 	
-	public void move(Vector2 target) {
+	public void move(Vector2 target, GameObjectManager gom) {
 		for (GameObject go : selectedUnits) {
-			go.queueMovement(target);
+			go.queueMovement(target, gom.getElements());
 		}
 	}
 	

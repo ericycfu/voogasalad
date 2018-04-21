@@ -147,8 +147,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 			 myObjectLogic.executeInteractions(this, interactionTarget, manager);
 		}
 		//myObjectLogic.checkConditions(this);
-		
-		
+	
 
 	}
 	
@@ -211,8 +210,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(new GridMap());
-		Queue<Vector2> movementPoints = pathfinder.findPath(this, target, manager);
-		if(!movementPoints.isEmpty())
+		activeWaypoints = pathfinder.findPath(this, target, objectList);
+		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
 			

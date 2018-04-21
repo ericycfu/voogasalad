@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import authoring.view.AuthoringView;
 import javafx.scene.layout.Pane;
 
-public class MapEntity extends Pane {
+public class MapEntity extends Pane implements AuthoringView {
 	/**
 	 * size, background image, locations of various objects
 	 */
@@ -16,11 +17,23 @@ public class MapEntity extends Pane {
 	public MapEntity() {
 		locations = new HashMap<AuthoringObject, ArrayList<DraggableImageView>>();
 		mapsettings = new MapSettings();
+		mapsettings.matchToSize(this);
+		mapsettings.setMapByImage(this);
 	}
 	
 	public void addToMap(AuthoringObject obj, DraggableImageView dragimg) {
 		if (locations.get(obj) == null) 
 			locations.put(obj, new ArrayList<DraggableImageView>());
 		locations.get(obj).add(dragimg);
+		this.getChildren().add(dragimg);
 	}
+	
+	public String getImagePath() {
+		return mapsettings.getImagePath();
+	}
+	
+	public String getName() {
+		return mapsettings.getName();
+	}
+	
 }
