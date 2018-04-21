@@ -23,7 +23,7 @@ public class Condition implements EngineObject {
 
 	private int id;
 	private ComparatorManager comparatorManager;
-	private GameObject host;
+//	private GameObject host;
 	private List<String> tags;
 	
 	private String var1;
@@ -33,11 +33,14 @@ public class Condition implements EngineObject {
 	private List<CustomCondition> customConditions;
 
 	
-	public Condition(int id, GameObject object, int comparatorID, String var1, String var2)
+//	public Condition(int id, GameObject object, int comparatorID, String var1, String var2)
+	public Condition(int id, int comparatorID, String var1, String var2)
+
 	{
 		this.id = id;
 		comparatorManager = new ComparatorManager();
-		host = object;
+		customConditions = new ArrayList<>();
+//		host = object;
 		this.var1 = var1;
 		this.var2 = var2;
 		this.comparatorID = comparatorID;
@@ -46,6 +49,7 @@ public class Condition implements EngineObject {
 	
 	public CustomCondition addCustomCondition(String type)
 	{
+		System.out.print("this should only print once");
 		CustomConditionFactory factory = new CustomConditionFactory();
 		CustomCondition cc = factory.getCustomCondition(type);
 		customConditions.add(cc);
@@ -75,7 +79,7 @@ public class Condition implements EngineObject {
 			{
 				for(CustomCondition c : customConditions)
 				{
-					c.Execute(host);
+//					c.Execute(host);
 				}
 			}
 		} 
@@ -98,7 +102,8 @@ public class Condition implements EngineObject {
 			return Double.parseDouble(var);
 		}
 		
-		return host.accessLogic().accessAttributes().getAttribute(var);
+//		return host.accessLogic().accessAttributes().getAttribute(var);
+		return 0;
 	}
 	
 }
