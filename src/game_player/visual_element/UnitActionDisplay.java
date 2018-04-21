@@ -15,10 +15,10 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	public static final int ACTION_GRID_WIDTH = 4;
 	public static final int ACTION_GRID_HEIGHT = 3;
+	private int myCurrentActionID;
 	private GridPane myGridPane;
 	private double myCellWidth;
 	private double myCellHeight;
-	private String myCurrentAction;
 	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
 	
@@ -30,11 +30,11 @@ public class UnitActionDisplay implements VisualUpdate{
 		myGridPane.setMaxWidth(width);
 		myGridPane.setMaxHeight(height);
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
+		setCurrentActionID(-1);
 		initialize();
 	}
 	
 	private void initialize() {
-		myCurrentAction = "";
 		for (int i = 0; i < ACTION_GRID_WIDTH; i++) {
 			for (int j = 0; j < ACTION_GRID_HEIGHT; j++) {
 				Image img = new Image("default_icon.png");
@@ -48,7 +48,7 @@ public class UnitActionDisplay implements VisualUpdate{
 			}
 		}
 	}
-
+	
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		myGridPane.getChildren().clear();
@@ -63,19 +63,17 @@ public class UnitActionDisplay implements VisualUpdate{
 		}
 	}
 	
-	public String getCurrentAction() {
-		return myCurrentAction;
-	}
-	
-	public void setDefault() {
-		myCurrentAction = "";
-	}
-	
 	@Override
 	public Node getNodes() {
 		return myGridPane;
 	}
 	
-	
+	public int getCurrentActionID() {
+		return myCurrentActionID;
+	}
+
+	public void setCurrentActionID(int myCurrentActionID) {
+		this.myCurrentActionID = myCurrentActionID;
+	}
 	
 }

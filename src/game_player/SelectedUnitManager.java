@@ -27,8 +27,10 @@ public class SelectedUnitManager {
 		}
 	}
 	
-	public void takeInteraction(int interactionID) {
-		
+	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
+		for (GameObject go : selectedUnits){
+			go.queueInteraction(position, target, interactionID, gom);
+		}
 	}
 	
 	public List<GameObject> getSelectedUnits(){
