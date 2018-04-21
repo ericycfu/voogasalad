@@ -61,13 +61,15 @@ public class TopPanel implements VisualUpdate {
 	private Writer myWriter;
 	
 	public TopPanel(double xsize, double ysize) {
+		gp = new GridPane();
 		background = new Rectangle(0, 0, xsize, ysize);
 		background.setFill(DEFAULTBGCOLOR);
 		addToPane(background);
 		myWriter = new Writer();
 		myReader = new Reader();
-		gp = new GridPane();
+		
 		menuSpan = 0;
+		
 		
 		setupMenu(xsize, ysize);
 		setupScores(xsize, ysize);

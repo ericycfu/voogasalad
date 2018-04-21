@@ -50,3 +50,9 @@
 	-fx-border-color: gray;
 	-fx-opacity: 0.8;
 }
+
+#map_entity_default {
+	-fx-pref-width: 1000;
+	-fx-pref-height: 1000;
+	-fx-background-image: url("/images/tt.jpg");
+}

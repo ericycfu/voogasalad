@@ -2,17 +2,28 @@ package gui_elements.panes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import authoring.backend.AuthoringObject;
+import authoring.backend.CreatedObjects;
 import authoring.backend.TagController;
+import game_object.ObjectAttributes;
 import gui_elements.combo_boxes.InteractionComponentTagComboBox;
 import gui_elements.combo_boxes.MainComboBox;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class InteractionSelectionsPane extends MainPane {
 
@@ -20,12 +31,18 @@ public class InteractionSelectionsPane extends MainPane {
 	private String full_directory_name = DIRECTORY_STRING + "interaction_selections_pane.properties";
 	private final String PANE_STYLE = "-fx-background-color: #ffffff";
 	private int x, y, width, height;
+	private static final int TEXTFIELD_SIZE = 10;
+	private static final double DEFAULT_ATTRIBUTE_VALUE = 0.0;
+	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;	
 	private MainComboBox interaction_component_tag_cb;
 	private TagController tag_controller;
+	private MainPane interaction_selected_pane;
 	
-	public InteractionSelectionsPane(MainComboBox interaction_component_tag_cb, TagController tag_controller) {
+	public InteractionSelectionsPane(MainComboBox interaction_component_tag_cb, TagController tag_controller,
+			MainPane interaction_selected_pane) {
 		this.interaction_component_tag_cb = (InteractionComponentTagComboBox) interaction_component_tag_cb;
 		this.tag_controller = tag_controller;
+		this.interaction_selected_pane = (InteractionSelectedPane) interaction_selected_pane;
 		initialize();
 	}
 	
@@ -101,7 +118,19 @@ public class InteractionSelectionsPane extends MainPane {
 		for(AuthoringObject ao : authoring_objects) {
 //			grid_pane.getChildren().add(new Button(ao.getName()));
 			ImageView imageView = new ImageView(ao.getImage());
+			addImageViewProperties(imageView);
 			grid_pane.getChildren().add(imageView);
 		}
+	}
+	
+	private void addImageViewProperties(ImageView imageView) {
+		imageView.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+    		if(e.isPrimaryButtonDown()) {
+    			List<Node> imageViews = interaction_selected_pane.getPane().getChildren();
+    			if(e.getClickCount() == 2 && !imageViews.contains(imageView)) {
+    				interaction_selected_pane.getPane().getChildren().add(imageView);
+            	}
+            }
+        });
 	}
 }

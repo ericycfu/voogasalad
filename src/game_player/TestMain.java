@@ -61,8 +61,8 @@ public class TestMain extends Application {
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 		
-		gom.addElementToManager(go);
-		gom.addElementToManager(go2);
+		gom.addElement(go);
+		gom.addElement(go2);
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));
@@ -71,7 +71,7 @@ public class TestMain extends Application {
         animation.getKeyFrames().add(frame);
         animation.play();
         
-		GamePlayer gp = new GamePlayer(animation, gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
+		GamePlayer gp = new GamePlayer(animation, gom);		
         myGP = gp;
 		Scene scene = gp.getScene();  
         gpStage.setScene(scene);

@@ -35,4 +35,9 @@ public class ConditionManager extends ElementManager {
 		}
 		return conditions;
 	}
+	
+	public Condition getCondition(int id)
+	{
+		return (Condition)(this.get(id));
+	}
 }

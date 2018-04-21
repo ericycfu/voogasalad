@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
@@ -26,6 +27,7 @@ import transform_library.Vector2;
  */
 
 public class GameObjectManager extends ElementManager {
+
 	
 	public GameObjectManager()
 	{}
@@ -39,18 +41,27 @@ public class GameObjectManager extends ElementManager {
 		return newID;
 	}
 	
+	public int createGameObject(Transform transform, ObjectLogic logic)
+	{
+		int newID = calculateID();
+		GameObject obj = new GameObject(newID, transform, logic);
+		this.addElement(obj);
+		return newID;
+	}
+	
 	
 	public List<GameObject> getElements()
 	{
 		List<GameObject> gameObjects = new ArrayList<>();
 		
-		for(EngineObject eObj : getElementsRaw())
-		{
+		for (EngineObject eObj : getElementsRaw()) {
 			GameObject gObj = (GameObject) eObj;
 			gameObjects.add(gObj);
 		}
 		return gameObjects;
 	}
+	
+	
 	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop.
@@ -105,4 +116,10 @@ public class GameObjectManager extends ElementManager {
 		
 		
 	}
+	
+	public GameObject getGameObject(int id)
+	{
+		return (GameObject)(this.get(id));
+	}
+	
 }
