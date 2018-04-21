@@ -32,6 +32,7 @@ public class MainDisplay implements VisualUpdate {
 	private Group myMainDisplay;
 	private ImageView myMap;
 	private GameObjectManager myGameObjectManager;
+	private UnitActionDisplay myUnitActionDisp;
 	
 	private double myMouseXInitPosition;
 	private double myMouseYInitPosition;
@@ -44,7 +45,8 @@ public class MainDisplay implements VisualUpdate {
 	private boolean isLeftHovered;
 	private boolean isRightHovered;
 	
-	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, double width, double height) {
+	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height) {
+		myUnitActionDisp = uadisp;
 		myGameObjectManager = gom;
 		myDisplayGameObjects = new ArrayList<>();
 		mySelectedUnitManager = selectedUnitManager;
@@ -57,12 +59,17 @@ public class MainDisplay implements VisualUpdate {
 		myMap.setFitHeight(myHeight*MAP_DISPLAY_RATIO);
 		//myMap.setFill(Color.GREEN);
 		myMap.setOnMouseClicked(e -> {
+			double mouseX = e.getX();
+			double mouseY = e.getY();
 			if (e.getButton()==MouseButton.SECONDARY) {
-				double mouseX = e.getX();
-				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager);
 			}
+			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
+				mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, this.myUnitActionDisp.getCurrentActionID(), myGameObjectManager);
+				myUnitActionDisp.setCurrentActionID(-1);
+			}
 		});
+
 		myMap.toBack();
 		myMainDisplay.getChildren().add(myMap);
 		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
@@ -139,6 +146,7 @@ public class MainDisplay implements VisualUpdate {
 		for (ImageView imgv : imgvList) {
 			myDisplayables.getChildren().add(imgv);
 		}
+		
 		if (isDownHovered && myCurrentYCoor < myHeight*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
 			myCurrentYCoor += WINDOW_STEP_SIZE;
 		}

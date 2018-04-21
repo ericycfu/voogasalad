@@ -48,7 +48,6 @@ public class GamePlayer {
 	private Map<String, List<SkillButton>> myUnitSkills;
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
-	private String myCurrentAction;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager) {
 		myGameObjectManager = gameManager;
@@ -60,14 +59,16 @@ public class GamePlayer {
 		//unitSkillMapInitialize();
 	}
 	
-	/**
 	private void unitSkillMapInitialize() {
 		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					//SkillButton sb = new SkillButton(ia.getImage(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					//skillList.add(sb);
+					SkillButton sb = new SkillButton(ia.getImage(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					skillList.add(sb);
+					sb.setOnAction(e->{
+						myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
+					});
 				}
 			} catch (UnmodifiableGameObjectException e) {
 				// TODO Auto-generated catch block
@@ -75,16 +76,21 @@ public class GamePlayer {
 			myUnitSkills.put(go.getName(), skillList);
 		}
 	}
-	**/
 	
 	private void initializeSingleUnitSelect() {
-		for (EngineObject eo : myGameObjectManager.getElements()) {
+		for (GameObject eo : myGameObjectManager.getElements()) {
 			GameObject go = (GameObject)eo;
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
-					mySelectedUnitManager.clear();
-					mySelectedUnitManager.add(go);
+					if (myUnitDisplay.getUnitActionDisp().getCurrentActionID() != -1) {
+						mySelectedUnitManager.clear();
+						mySelectedUnitManager.add(go);
+					}
+					else {
+						mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, myUnitDisplay.getUnitActionDisp().getCurrentActionID(), myGameObjectManager);
+						myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+					}
 				}
 			});
 		}
@@ -92,11 +98,6 @@ public class GamePlayer {
 	
 	private void initialize() {
 		myRoot = new Group();
-		
-		myMainDisplay = new MainDisplay(mySelectedUnitManager, this.myGameObjectManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
-		Node mainDisp = myMainDisplay.getNodes();
-		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
-		myRoot.getChildren().add(mainDisp);
 		
 		myTopPanel = new TopPanel(SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
@@ -112,6 +113,11 @@ public class GamePlayer {
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(unitDisp);
 		
+		myMainDisplay = new MainDisplay(mySelectedUnitManager, myGameObjectManager, myUnitDisplay.getUnitActionDisp(), SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		Node mainDisp = myMainDisplay.getNodes();
+		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
+		myRoot.getChildren().add(mainDisp);
+		
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 
@@ -120,19 +126,19 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		myCurrentAction = ""; // returns action selection to default
-
 		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
-		
-		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
-		if (!myCurrentAction.equals("")) {
+		if (myUnitDisplay.getUnitActionDisp().getCurrentActionID()!=-1) {
 			myScene.setCursor(Cursor.CROSSHAIR);
 		}
-		myUnitDisplay.getUnitActionDisp().setDefault();
+		else {
+			myScene.setCursor(Cursor.DEFAULT);
+		}
 	}
+	
+	// TO-DO: set select when a new unit is created
 	
 
 	
