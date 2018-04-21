@@ -46,8 +46,7 @@ public class MainPageHandler extends CommunicationsHandler {
 			out = new ObjectOutputStream(getSocket().getOutputStream());
 			out.writeObject(getServer());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 
