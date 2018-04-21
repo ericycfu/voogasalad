@@ -18,8 +18,8 @@ public class BuildFunction implements CustomFunction
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
-		
-		other.isUninteractive();
+		//object may not have been added to manager
+		other.queueBuilding();
 	}
 
 	@Override

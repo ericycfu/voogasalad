@@ -26,6 +26,10 @@ public class Interaction implements EngineObject {
 	private Image img;
 	private String description;
 	
+	//these will be changed by authoring for the interaction
+	private boolean isBuild;
+	private boolean isInstantaneous;
+	
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
@@ -92,6 +96,8 @@ public class Interaction implements EngineObject {
 	}
 	
 	
+	
+	
  	public List<String> getTargetTags()
  	{
  		return targetTags;
@@ -144,6 +150,26 @@ public class Interaction implements EngineObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public boolean isBuild() {
+		return isBuild;
+	}
+
+
+	public void setBuild(boolean isBuild) {
+		this.isBuild = isBuild;
+	}
+
+
+	public boolean isInstantaneous() {
+		return isInstantaneous;
+	}
+
+
+	public void setInstantaneous(boolean isInstantaneous) {
+		this.isInstantaneous = isInstantaneous;
 	}
 
 }

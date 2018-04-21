@@ -8,6 +8,7 @@ import java.util.Queue;
 
 import game_engine.EngineObject;
 import game_engine.Team;
+import game_engine.Timer;
 import interactions.Interaction;
 import javafx.scene.image.Image;
 import map.GridMap;
@@ -43,6 +44,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	private boolean isDead;
 	
+	
 	private double movementSpeed = 0;
 	private boolean isMovementQueued;
 	private Queue<Vector2> activeWaypoints;
@@ -50,8 +52,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private GameObjectManager manager;
 	
 	private boolean isUninteractive;
-
 	
+	private Timer buildTimer;
+	private boolean isBeingConstructed;
+	
+	private double elapsedTime;
 	
 	/**
 	 *
@@ -110,6 +115,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
+		this.elapsedTime = 0;
 	}
 	
 	/**
@@ -123,6 +129,14 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		 *  2. Act upon logic data
 		 *  3. Update renderer data
 		 */
+		
+		if(isBeingConstructed)
+		{
+			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
+			{
+				this.dequeueBuilding();
+			}
+		}
 		
 		if(this.isUninteractive) return;
 		
@@ -205,6 +219,21 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		}
 	}
 	
+	public void queueBuilding()
+	{
+		setIsUninteractive(true);
+		isBeingConstructed = true;
+		this.buildTimer = new Timer();
+		buildTimer.setTimerOn(true);
+		buildTimer.setInitialTime(elapsedTime);
+	}
+	
+	public void dequeueBuilding()
+	{
+		this.setIsUninteractive(false);
+		isBeingConstructed = false;
+	}
+	
 	public void setIsUninteractive(boolean val)
 	{
 		this.isUninteractive = val;
@@ -283,4 +312,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.movementSpeed = movementSpeed;
 	}
 
+	public void setElapsedTime(double time)
+	{
+		this.elapsedTime += time;
+	}
 }
