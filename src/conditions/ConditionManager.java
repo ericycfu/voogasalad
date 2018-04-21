@@ -7,51 +7,32 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import game_engine.EngineObject;
 import game_object.GameObject;
 
-public class ConditionManager implements ElementManager<Condition>{
+public class ConditionManager extends ElementManager {
 
-	private Map<Integer, Condition> conditionMap;
 	
 	public ConditionManager()
+	{}
+	
+	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
 	{
-		conditionMap = new TreeMap<>();
+		int newID = calculateID();
+		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
+		this.addElement(condition);
+		return newID;
 	}
 	
-	@Override
-	public int addElementToManager(Condition condition)
+	public List<Condition> getElements()
 	{
-		int id = 1;
-		if(conditionMap.isEmpty())
+		List<Condition> conditions = new ArrayList<>();
+		
+		for(EngineObject eObj : getElementsRaw())
 		{
-			conditionMap.put(id, condition);
+			Condition gObj = (Condition) eObj;
+			conditions.add(gObj);
 		}
-		else
-		{
-			id = conditionMap.size() + 1;
-			conditionMap.put(id, condition);
-		}
-		return id;
-
+		return conditions;
 	}
-	
-	@Override
-	public void removeElement(Condition element) {
-		
-		conditionMap.remove(element.getID());
-	}
-	
-	@Override
-	public List<Condition> getElements() {
-		
-		List<Condition> conditionList = new ArrayList<>();
-		
-		for(Map.Entry<Integer, Condition> var : conditionMap.entrySet())
-		{
-			conditionList.add(var.getValue());
-		}
-		
-		return Collections.unmodifiableList(conditionList);
-	}
-
 }

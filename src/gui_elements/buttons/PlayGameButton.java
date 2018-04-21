@@ -1,16 +1,19 @@
 package gui_elements.buttons;
 
-public class PlayGameButton extends MainButton {
-	
-	private static final String FILENAME = "play_game_button.properties";
-	private static final boolean EXPLICIT_SET_ACTION = true;
 
+public class PlayGameButton extends ImageButton {	
 	public PlayGameButton() {
-		super(FILENAME, EXPLICIT_SET_ACTION);
+		setupText();
 	}
-
-	@Override
-	protected void setAction() {
-		
+	
+//	public PlayGameButton(Stage stage) {
+//		setupText();
+//		this.setOnAction(e -> new MakeGameSelect(stage));
+//	}
+	
+	private void setupText() {
+		this.getStyleClass().add("make_game_button");
+		this.setText("Play Game");
 	}
+	
 }

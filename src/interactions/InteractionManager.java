@@ -1,57 +1,39 @@
 package interactions;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import game_engine.ElementManager;
+import game_engine.EngineObject;
+import game_object.GameObject;
 
-public class InteractionManager implements ElementManager<Interaction> {
+public class InteractionManager extends ElementManager {
 	
-	Map<Integer, Interaction> interactionMap;
+	Map<Integer, Interaction> interactionIndexMap;
 	
-	public InteractionManager()
+	public InteractionManager() {
+		interactionIndexMap = new TreeMap<Integer, Interaction>();
+	}
+
+	
+	public int createInteraction()
 	{
-		interactionMap = new TreeMap<>();
+		int newID = calculateID();
+		Interaction interaction = new Interaction(newID);
+		this.addElement(interaction);
+		return newID;
 	}
-
-	@Override
-	public int addElementToManager(Interaction element) {
-		// TODO Auto-generated method stub
-		int id = 1;
-		if(interactionMap.isEmpty())
-		{
-			interactionMap.put(id, element);
-		}
-		else
-		{
-			id = interactionMap.size() + 1;
-			interactionMap.put(id, element);
-		}
-		return id;
-	}
-
 	
-	@Override
-	public void removeElement(Interaction element) {
-		interactionMap.remove(element.getID());
+	public List<Interaction> getElements()
+	{
+		List<Interaction> interactions = new ArrayList<>();
 		
-	}
-
-	@Override
-	public List<Interaction> getElements() {
-
-		List<Interaction> interactionList = new ArrayList<>();
-		
-		for(Map.Entry<Integer, Interaction> var : interactionMap.entrySet())
+		for(EngineObject eObj : getElementsRaw())
 		{
-			interactionList.add(var.getValue());
+			Interaction gObj = (Interaction) eObj;
+			interactions.add(gObj);
 		}
-		
-		return Collections.unmodifiableList(interactionList);
-		
-	}	
-
+		return interactions;
+	}
+	
 }

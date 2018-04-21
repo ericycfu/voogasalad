@@ -6,6 +6,7 @@ import authoring.view.AuthoringView;
 import authoring.view.CreatedObjectsTabs;
 import authoring.view.MakeGameTabs;
 import gui_elements.tabs.GameSettingsTab;
+import gui_elements.tabs.PlaceTab;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 
@@ -14,6 +15,7 @@ public class AuthoringController {
 	private DraggableScrollPane myScroll;
 	private MapEntity myMap;
 	private CreatedObjectsTabs myCreatedObjectsTabs;
+	private PlaceTab myPlaceTab;
 	public AuthoringController() {
 		
 	}
@@ -30,12 +32,17 @@ public class AuthoringController {
 		myCreatedObjectsTabs = objtabs;
 	}
 	
+	
 	public void addToAuthorController(DraggableScrollPane scroll) {
 		myScroll = scroll;
 	}
 	
 	public void addToAuthoringController(MapEntity map) {
 		myMap = map;
+	}
+	
+	public void addToAuthoringController(PlaceTab placetab) {
+		myPlaceTab = placetab;
 	}
 	
 	public MapEntity getMap() {
