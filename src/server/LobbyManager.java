@@ -1,5 +1,6 @@
 package server;
 
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LobbyManager{
+public class LobbyManager implements Serializable{
 	private Map<Integer,GameLobby> lobbies;
 	public LobbyManager() {
 		lobbies = new HashMap<>();
@@ -19,8 +20,7 @@ public class LobbyManager{
 	}
 
 	public void removeElement(GameLobby element) {
-		lobbies.remove(element.getID());
-		
+		lobbies.remove(element.getID());	
 	}
 
 	public List<GameLobby> getElements() {

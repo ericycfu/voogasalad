@@ -1,5 +1,6 @@
 package game_engine;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
-import game_player.GamePlayer;
 import interactions.Interaction;
 import transform_library.Vector2;
 
@@ -29,7 +29,7 @@ public class GameInstance {
 	private TeamManager myTeamManager;
 	private Reader myReader;
 	private Writer myWriter;
-	
+	private BufferedImage background;
 	public GameInstance(GameInfo g, String filepath) {
 		
 		myReader = new Reader();
@@ -40,6 +40,9 @@ public class GameInstance {
 		}
 		catch(Exception e) {}
 		play();
+	}
+	public GameInstance(BufferedImage i) {
+		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
 		List<Object> gameObjects = myReader.read(filepath, "gameObject");
@@ -65,7 +68,7 @@ public class GameInstance {
 	public void executeCommand(int source_id, int target_id, Interaction i) {
 		if(!running)
 			return;
-		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id));
+		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), i);
 		try {
 			myObjectManager.getGameObject(source_id).accessLogic().setCurrentInteraction(i);
 		} catch (UnmodifiableGameObjectException e) {
@@ -99,5 +102,8 @@ public class GameInstance {
 	}
 	public TeamManager getTeamManager() {
 		return myTeamManager;
+	}
+	public BufferedImage getBackground() {
+		return background;
 	}
 }
