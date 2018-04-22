@@ -15,7 +15,7 @@ import game_object.UnmodifiableGameObjectException;
  *
  */
 
-public class ModifyVariable implements CustomFunction, CustomComponentFunction {
+public class ModifyVariable implements CustomFunction {
 
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";

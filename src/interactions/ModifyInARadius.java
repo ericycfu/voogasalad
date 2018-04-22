@@ -12,7 +12,7 @@ import transform_library.Transform;
  * Allows users to modify variables within the radius of a unit e.g. explosion interactions
  */
 
-public class ModifyInARadius implements CustomComponentFunction, CustomFunction {
+public class ModifyInARadius implements CustomFunction {
 	
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
