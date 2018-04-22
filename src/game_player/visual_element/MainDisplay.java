@@ -125,6 +125,7 @@ public class MainDisplay implements VisualUpdate {
 		for (GameObject go : myDisplayGameObjects) {
 			double xloc = translateX(go.getTransform().getPosition().getX());
 			double yloc = translateY(go.getTransform().getPosition().getY());
+			System.out.println(xloc);
 			go.getRenderer().getDisp().setX(xloc);
 			go.getRenderer().getDisp().setY(yloc);
 			imgvList.add(go.getRenderer().getDisp());

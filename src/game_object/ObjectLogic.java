@@ -24,7 +24,6 @@ public class ObjectLogic
 	private Interaction currentInteraction;
 	
 	ObjectAttributes attributes;
-	
 	InteractionManager interactions;
 	ConditionManager conditions;
 		

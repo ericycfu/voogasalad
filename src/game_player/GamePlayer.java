@@ -120,6 +120,15 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		if(myTopPanel.getIsLoaded()) {
+			gameobject = myTopPanel.getGameObjects();
+			System.out.println("we got here");
+			myGameManager.clear();
+			for(GameObject GO: gameobject) {
+				myGameManager.addElementToManager(GO);
+			}
+		}
+		
 		myCurrentAction = ""; // returns action selection to default
 
 		myTopPanel.update(gameobject); //resources
