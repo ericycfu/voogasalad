@@ -5,6 +5,7 @@ import java.util.List;
 
 import game_engine.EngineObject;
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import javafx.scene.image.Image;
 
 /**

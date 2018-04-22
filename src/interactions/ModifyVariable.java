@@ -1,5 +1,7 @@
 package interactions;
 
+import java.util.regex.Pattern;
+
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.ObjectLogic;
@@ -22,7 +24,7 @@ public class ModifyVariable implements CustomFunction, CustomComponentFunction {
 	private CustomComponentParameterFormat format;
 	
 	private String variable;
-	private double delta;
+	private String delta;
 	
 	//reconsider rate, maybe add a limit to simulate a for loop? and couple that with rate?
 	private double rate;
@@ -39,7 +41,8 @@ public class ModifyVariable implements CustomFunction, CustomComponentFunction {
 		try 
 		{
 			this.variable = format.getParameterValue(VARIABLE);
-			this.delta = Double.parseDouble(format.getParameterValue(DELTA));
+			String para = format.getParameterValue(DELTA);
+		
 		} 
 		catch (PropertyNotFoundException e) 
 		{
@@ -57,13 +60,22 @@ public class ModifyVariable implements CustomFunction, CustomComponentFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
-		//largely placeholder implementation, will have to take care of rate
 		double prevVal;
+		double deltaVal;
+		
 		
 		try 
 		{
+			if(isDouble(delta))
+			{
+				deltaVal = Double.parseDouble(format.getParameterValue(DELTA));
+			}
+			else
+			{
+				deltaVal = current.accessLogic().accessAttributes().getAttribute(delta);
+			}
 			prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
-			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + delta);
+			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
 			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
@@ -82,11 +94,18 @@ public class ModifyVariable implements CustomFunction, CustomComponentFunction {
 	public void setParameterFormatFields() {
 		
 		format.addHelpText("This function allows you to change a variable in another object when the "
-				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place.");
+				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta "
+				+ "can either be a number or an attribute in the player");
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
 		format.addStringField(RATE);		
 	}
 	
+	
+	private boolean isDouble(String text)
+	{
+		String decimalPattern = "([0-9]*)\\.([0-9]*)";  
+		return (Pattern.matches(decimalPattern, text));
+	}
 
 }

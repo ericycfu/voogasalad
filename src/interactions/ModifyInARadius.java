@@ -6,6 +6,12 @@ import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import transform_library.Transform;
 
+/**
+ * 
+ * @author Rayan
+ * Allows users to modify variables within the radius of a unit e.g. explosion interactions
+ */
+
 public class ModifyInARadius implements CustomComponentFunction, CustomFunction {
 	
 	public final String VARIABLE = "Variable";
