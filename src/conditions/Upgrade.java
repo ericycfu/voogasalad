@@ -3,7 +3,6 @@ package conditions;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import interactions.CustomComponentFunction;
 import interactions.CustomComponentParameterFormat;
 
 /**
@@ -11,7 +10,7 @@ import interactions.CustomComponentParameterFormat;
  * This CustomCondition allows users to upgrade their stats.
  */
 
-public class Upgrade implements CustomCondition, CustomComponentFunction {
+public class Upgrade implements CustomCondition {
 
 	public final String VARIABLE = "Attribute";
 	public final String DELTA = "Delta";

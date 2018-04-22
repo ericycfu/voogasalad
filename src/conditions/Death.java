@@ -1,7 +1,6 @@
 package conditions;
 
 import game_object.GameObject;
-import interactions.CustomComponentFunction;
 import interactions.CustomComponentParameterFormat;
 
 /**
@@ -9,7 +8,7 @@ import interactions.CustomComponentParameterFormat;
  * @author Rayan
  * Custom condition that kills the unit it is assigned to. 
  */
-public class Death implements CustomComponentFunction, CustomCondition {
+public class Death implements CustomCondition {
 	
 	private CustomComponentParameterFormat format;
 

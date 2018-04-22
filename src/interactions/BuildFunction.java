@@ -10,7 +10,7 @@ import game_object.PropertyNotFoundException;
  * Custom Function for building object.
  */
 
-public class BuildFunction implements CustomFunction, CustomComponentFunction {
+public class BuildFunction implements CustomFunction {
 	
 	private CustomComponentParameterFormat format;
 	
