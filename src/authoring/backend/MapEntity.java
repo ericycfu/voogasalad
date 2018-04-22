@@ -22,5 +22,6 @@ public class MapEntity extends Pane {
 		if (locations.get(obj) == null) 
 			locations.put(obj, new ArrayList<DraggableImageView>());
 		locations.get(obj).add(dragimg);
+		this.getChildren().add(dragimg);
 	}
 }
