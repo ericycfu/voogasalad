@@ -16,6 +16,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -40,7 +42,9 @@ public class TopPanel implements VisualUpdate {
 	public static final double MENUWIDTH = 0.125;
 	public static final double SBWIDTH = 0.125;
 	public static final double TAWIDTH = 0.25;
+	public static final Color DEFAULTBGCOLOR = Color.WHITE;
 	
+	private Rectangle background;
 	private GridPane gp;
 	private MenuButton menu;
 	private List<TextArea> myTA;
@@ -55,12 +59,19 @@ public class TopPanel implements VisualUpdate {
 	private Timeline tl;
 	private Reader myReader;
 	private Writer myWriter;
+	private boolean isLoaded;
 	
 	public TopPanel(double xsize, double ysize) {
+		gp = new GridPane();
+		background = new Rectangle(0, 0, xsize, ysize);
+		background.setFill(DEFAULTBGCOLOR);
+		addToPane(background);
+		isLoaded = false;
 		myWriter = new Writer();
 		myReader = new Reader();
-		gp = new GridPane();
+		
 		menuSpan = 0;
+		
 		
 		setupMenu(xsize, ysize);
 		setupScores(xsize, ysize);
@@ -81,13 +92,9 @@ public class TopPanel implements VisualUpdate {
 
 	private void setupMenu(double xsize, double ysize) {
 		MenuItem menuItem1 = new MenuItem(START);
-		menuItem1.setOnAction(e -> {
-			tl.play();
-		});
+		menuItem1.setOnAction(e -> tl.play());
 		MenuItem menuItem2 = new MenuItem(PAUSE);
-		menuItem2.setOnAction(e -> {
-			tl.pause();
-		});
+		menuItem2.setOnAction(e -> tl.pause());
 		MenuItem menuItem3 = new MenuItem(SAVE);
 		menuItem3.setOnAction(e -> save());
 		MenuItem menuItem4 = new MenuItem(LOAD);
@@ -132,11 +139,14 @@ public class TopPanel implements VisualUpdate {
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
 		try {
-			List<Object> gameObjects= myReader.read(file.getCanonicalPath());
+			List<Object> gameObjects= myReader.read(file.getCanonicalPath(), "game_object.GameObject");
+			
+			System.out.println(gameObjects.size());
 			myGameObjects.clear();
 			for(Object o: gameObjects) {
 				myGameObjects.add((GameObject) o);
 			}
+			isLoaded = true;
 		} catch (ClassNotFoundException e) {
 			// TODO deal with this error
 			
@@ -184,6 +194,14 @@ public class TopPanel implements VisualUpdate {
 		myGameObjects = gameObjects;
 	}
 	
+	public List<GameObject> getGameObjects(){
+		return myGameObjects;
+	}
+	public boolean getIsLoaded() {
+		boolean temp = isLoaded;
+		isLoaded = false;
+		return temp;
+	}
 	public Node getNodes() {
 		return gp;
 	}

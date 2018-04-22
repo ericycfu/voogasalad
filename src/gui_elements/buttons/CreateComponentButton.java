@@ -38,7 +38,6 @@ public class CreateComponentButton extends MainButton {
 	protected void setAction() {
 		getButton().setOnAction(value -> {
 			String tag_text = tag_cb.getEditor().getText();
-
 			authoring_object.setName(name_tf.getText());
 			for(String tag : tag_text.split(SPACE)) {
 				authoring_object.addTag(tag);

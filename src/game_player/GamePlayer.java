@@ -1,16 +1,22 @@
 package game_player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import game_engine.EngineObject;
 import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.UnmodifiableGameObjectException;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
+import game_player.visual_element.SkillButton;
 import game_player.visual_element.TopPanel;
+import game_player.visual_element.UnitActionDisplay;
 import game_player.visual_element.UnitDisplay;
+import interactions.Interaction;
 import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -26,44 +32,54 @@ import javafx.scene.input.MouseButton;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 700;
+	public static final int SCENE_SIZE_X = 800;
+	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.50;
 	public static final double ACTION_DISPLAY_WIDTH = 0.25;
 	public static final double TOP_HEIGHT = 0.05;
-	private double myCurrentXCoor; // current MAP-x-coordinate of window left corner
-	private double myCurrentYCoor; // GET FROM MAIN DISPLAY
-	private GameObjectManager myGameManager;
-	private List<GameObject> mySelectedGameObjects;
+	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
 	private MainDisplay myMainDisplay;
 	private Group myRoot;
-	private Map<String, List<String>> myUnitSkills;
-	private Map<String, Image> mySkillImages;
-	private Map<String, Image> myUnitInfoImg;
-	private Map<String, Image> myUnitDispImg;
+	private Map<String, List<SkillButton>> myUnitSkills;
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	private String myCurrentAction;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Map<String, List<String>> unitSkills, Map<String, Image> skillImages, Map<String, Image> unitInfoImgs,  Map<String, Image> unitDispImgs) {
-		myGameManager = gameManager;
-		myUnitInfoImg = unitInfoImgs;
-		myUnitDispImg = unitDispImgs;
-		myUnitSkills = unitSkills;
-		mySkillImages = skillImages;
-		mySelectedUnitManager = new SelectedUnitManager();
-		initializeSingleUnitSelect();
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager) {
+		myGameObjectManager = gameManager;
+		myUnitSkills = new HashMap<>();
+		mySelectedUnitManager = new SelectedUnitManager();		
 		initialize();
+		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
+		//unitSkillMapInitialize();
 	}
 	
+	/**
+	private void unitSkillMapInitialize() {
+		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
+			List<SkillButton> skillList = new ArrayList<>();
+			try {
+				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
+					//SkillButton sb = new SkillButton(ia.getImage(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					//skillList.add(sb);
+				}
+			} catch (UnmodifiableGameObjectException e) {
+				// TODO Auto-generated catch block
+			}
+			myUnitSkills.put(go.getName(), skillList);
+		}
+	}
+	**/
+	
 	private void initializeSingleUnitSelect() {
-		for (GameObject go : myGameManager.getElements()) {
+		for (EngineObject eo : myGameObjectManager.getElements()) {
+			GameObject go = (GameObject)eo;
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
@@ -76,9 +92,8 @@ public class GamePlayer {
 	
 	private void initialize() {
 		myRoot = new Group();
-		mySelectedGameObjects = new ArrayList<GameObject>();
 		
-		myMainDisplay = new MainDisplay(mySelectedUnitManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myMainDisplay = new MainDisplay(mySelectedUnitManager, this.myGameObjectManager, SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);
@@ -91,7 +106,7 @@ public class GamePlayer {
 		minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(minimap);
 		
-		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills, mySkillImages);
+		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills);
 		Node unitDisp = myUnitDisplay.getNodes();
 		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
@@ -105,13 +120,21 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		myCurrentAction = ""; // returns action selection to default
+		if(myTopPanel.getIsLoaded()) {
+			gameobject = myTopPanel.getGameObjects();
+			System.out.println("we got here");
+			myGameManager.clear();
+			for(GameObject GO: gameobject) {
+				myGameManager.addElementToManager(GO);
+			}
+		}
 		
-		List<GameObject> displayGameObjects = filterDisplayGameObjects(gameobject);
+		myCurrentAction = ""; // returns action selection to default
+
 		myTopPanel.update(gameobject); //resources
-		myMiniMap.update(displayGameObjects);
-		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits()); // selection TO-DO
-		myMainDisplay.update(displayGameObjects);
+		myMiniMap.update(gameobject);
+		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
+		myMainDisplay.update(gameobject);
 		
 		myCurrentAction = myUnitDisplay.getUnitActionDisp().getCurrentAction();
 		if (!myCurrentAction.equals("")) {
@@ -120,28 +143,6 @@ public class GamePlayer {
 		myUnitDisplay.getUnitActionDisp().setDefault();
 	}
 	
-	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
-		List<GameObject> ret = new ArrayList<>();
-		for (GameObject go : gameobjects) {
-			if (isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY())) {
-				ret.add(go);
-			}
-		}
-		return ret;
-	}
-	
-	private boolean isXInWindow(double x) {
-		if (x>myCurrentXCoor & x<myCurrentXCoor+SCENE_SIZE_X) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean isYInWindow(double y) {
-		if (y>myCurrentYCoor & y<myCurrentYCoor+SCENE_SIZE_Y*(1-TOP_HEIGHT-BOTTOM_HEIGHT)) {
-			return true;
-		}
-		return false;
-	}
+
 	
 }
