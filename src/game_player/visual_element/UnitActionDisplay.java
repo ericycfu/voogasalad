@@ -19,6 +19,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	private GridPane myGridPane;
 	private double myCellWidth;
 	private double myCellHeight;
+	private GameObject myBuildTarget;
 	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
 	
@@ -32,6 +33,14 @@ public class UnitActionDisplay implements VisualUpdate{
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
 		setCurrentActionID(-1);
 		initialize();
+	}
+	
+	public void setBuildTarget(GameObject go) {
+		myBuildTarget = go;
+	}
+	
+	public GameObject getBuildTarget() {
+		return myBuildTarget;
 	}
 	
 	private void initialize() {

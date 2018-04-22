@@ -5,6 +5,7 @@ import java.util.List;
 
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.UnmodifiableGameObjectException;
 import game_player.GamePlayer;
 import game_player.SelectedUnitManager;
 import javafx.scene.Group;
@@ -65,8 +66,20 @@ public class MainDisplay implements VisualUpdate {
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager);
 			}
 			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
-				mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, this.myUnitActionDisp.getCurrentActionID(), myGameObjectManager);
-				myUnitActionDisp.setCurrentActionID(-1);
+				int ID = this.myUnitActionDisp.getCurrentActionID();
+				try {
+					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
+						myUnitActionDisp.setBuildTarget(new GameObject(new Vector2(-1, -1)));
+					}
+					else {
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager);
+					}
+					myUnitActionDisp.setCurrentActionID(-1);
+				} catch (UnmodifiableGameObjectException e1) {
+					// do nothing
+				}
+				
 			}
 		});
 

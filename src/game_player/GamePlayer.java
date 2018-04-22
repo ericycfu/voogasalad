@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import transform_library.Vector2;
 
 /**
  * 
@@ -47,6 +48,7 @@ public class GamePlayer {
 	private MainDisplay myMainDisplay;
 	private Group myRoot;
 	private Map<String, List<SkillButton>> myUnitSkills;
+	private Map<String, List<SkillButton>> myUnitBuilds;
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	
@@ -61,7 +63,35 @@ public class GamePlayer {
 		//unitSkillMapInitialize();
 	}
 	
+	private void unitBuildsMapInitialize() {
+		myUnitBuilds = new HashMap<>();
+		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
+			List<SkillButton> skillList = new ArrayList<>();
+			for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
+				if (i.isBuild()) {
+					List<String> tags = i.getTargetTags();
+					for (String s : tags) {
+						for (GameObject go2 : myGameObjectManager.getPossibleUnits()) {
+							if (s.equals(go2.getName())) {
+								SkillButton sb = new SkillButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
+										SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, 
+										SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+								sb.setOnAction(e -> {
+									myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
+									myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
+								});
+								skillList.add(sb);
+							}
+						}
+					}
+					myUnitBuilds.put(go.getName(), skillList);
+				}
+			}
+		}
+	}
+	
 	private void unitSkillMapInitialize() {
+		unitBuildsMapInitialize();
 		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
@@ -81,7 +111,7 @@ public class GamePlayer {
 							this.myUnitDisplay.getUnitActionDisp().update(temp);
 						});
 						sb.setOnAction(e -> {
-							List<SkillButton> sblist = myGameObjectBuildMap.get(go.getName());
+							List<SkillButton> sblist = myUnitBuilds.get(go.getName());
 							sblist.add(cancel);
 							myUnitDisplay.getUnitActionDisp().build(sblist);
 						});
@@ -106,8 +136,15 @@ public class GamePlayer {
 						mySelectedUnitManager.add(go);
 					}
 					else {
-						mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, myUnitDisplay.getUnitActionDisp().getCurrentActionID(), myGameObjectManager);
-						myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+						int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
+						try {
+							if (!mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+								mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager);
+								myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+							}
+						} catch (UnmodifiableGameObjectException e1) {
+							// do nothing
+						}
 					}
 				}
 			});

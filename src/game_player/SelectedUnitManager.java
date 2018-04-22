@@ -31,16 +31,21 @@ public class SelectedUnitManager {
 	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
 		GameObject top = selectedUnits.get(0);
 		String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
-		for (GameObject go : selectedUnits){
-			boolean isInteractionValid = false;
-			for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-				isInteractionValid = i.getName().equals(interactionName);
-			}
-			if (isInteractionValid) {
-				go.queueInteraction(position, target, interactionID, gom);
+		if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
+			top.queueInteraction(position, target, interactionID, gom);
+		}
+		else {
+			for (GameObject go : selectedUnits){
+				boolean isInteractionValid = false;
+				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
+					isInteractionValid = i.getName().equals(interactionName);
+				}
+				if (isInteractionValid) {
+					go.queueInteraction(position, target, interactionID, gom);
+				}
 			}
 		}
-		//TO-DO: build interaction - only the top unit does build 
+		
 	}
 	
 	public List<GameObject> getSelectedUnits(){
