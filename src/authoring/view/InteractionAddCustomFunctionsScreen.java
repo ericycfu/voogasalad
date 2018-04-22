@@ -136,7 +136,7 @@ public class InteractionAddCustomFunctionsScreen {
     }
     
     private void setComboBoxes() {
-		root.getChildren().addAll(new CustomFunctionTypeComboBox().getComboBox());
+		root.getChildren().addAll(new CustomFunctionTypeComboBox(interaction_manager, interaction_id).getComboBox());
     }
 
     private void setButtons() {
