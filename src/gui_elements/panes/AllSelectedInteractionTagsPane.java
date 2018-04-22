@@ -10,17 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-public class InteractionSelectedPane extends MainPane {
+public class AllSelectedInteractionTagsPane extends MainPane {
 
 	private FlowPane flow_pane;
-	private String full_directory_name = DIRECTORY_STRING + "interaction_selected_pane.properties";
+	private String full_directory_name = DIRECTORY_STRING + "all_selected_interaction_tags_pane.properties";
 	private final String PANE_STYLE = "-fx-background-color: #ffffff";
 	private int x, y, width, height;
 	private InteractionManager interaction_manager;
 	private boolean inOldInteractionMode = false;
 	private int current_interaction_id;
 		
-	public InteractionSelectedPane(InteractionManager interaction_manager) {
+	public AllSelectedInteractionTagsPane(InteractionManager interaction_manager) {
 		this.interaction_manager = interaction_manager;
 		current_interaction_id = interaction_manager.getElements().size();
 		initialize();
@@ -113,5 +113,6 @@ public class InteractionSelectedPane extends MainPane {
 	public void setToNewInteractionMode() {
 		inOldInteractionMode = false;
 		current_interaction_id = interaction_manager.getElements().size();
+		flow_pane.getChildren().clear();
 	}
 }

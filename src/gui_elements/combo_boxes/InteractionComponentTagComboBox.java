@@ -1,8 +1,8 @@
 package gui_elements.combo_boxes;
 
 import authoring.backend.TagController;
-import gui_elements.panes.InteractionSelectedPane;
-import gui_elements.panes.InteractionSelectionsPane;
+import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
 import gui_elements.panes.MainPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
@@ -12,15 +12,15 @@ public class InteractionComponentTagComboBox extends MainComboBox {
 
 	private static final String FILENAME = "interaction_component_tag_cb.properties";
 	private TagController tag_controller;
-	private InteractionSelectedPane interaction_selected_pane;
-	private InteractionSelectionsPane interaction_selections_pane;
+	private AllSelectedInteractionTagsPane all_selected_interaction_tags_pane;
+	private CurrentSelectedInteractionComponentsPane current_selected_interaction_components_pane;
 	
-	public InteractionComponentTagComboBox(TagController tag_controller, MainPane interaction_selected_pane, 
-			MainPane interaction_selections_pane) {
+	public InteractionComponentTagComboBox(TagController tag_controller, MainPane all_selected_interaction_tags_pane, 
+			MainPane current_selected_interaction_components_pane) {
 		super(FILENAME);
 		this.tag_controller = tag_controller;
-		this.interaction_selected_pane = (InteractionSelectedPane) interaction_selected_pane;
-		this.interaction_selections_pane = (InteractionSelectionsPane) interaction_selections_pane;
+		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
+		this.current_selected_interaction_components_pane = (CurrentSelectedInteractionComponentsPane) current_selected_interaction_components_pane;
 		getComboBox().setEditable(true);
 		addElements();
 		chooseElements();
@@ -38,11 +38,11 @@ public class InteractionComponentTagComboBox extends MainComboBox {
 				String tag_entered = getComboBox().getEditor().getText();
 				if(getComboBox().getItems().contains(tag_entered)) {
 					String tag_selected = getComboBox().getSelectionModel().getSelectedItem();
-	    			interaction_selected_pane.updatePane(tag_selected);
-	    			interaction_selections_pane.updatePane(tag_selected);
+	    			all_selected_interaction_tags_pane.updatePane(tag_selected);
+	    			current_selected_interaction_components_pane.updatePane(tag_selected);
 				}
 				else {
-					interaction_selections_pane.getPane().getChildren().clear();
+					current_selected_interaction_components_pane.getPane().getChildren().clear();
 				}
     		} catch (Exception e) {
 				System.err.println("Interaction tag does not exist");

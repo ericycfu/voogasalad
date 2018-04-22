@@ -20,9 +20,7 @@ public class InteractionOkButton extends MainButton {
 	@Override
 	protected void setAction() {
 		getButton().setOnAction(value -> {
-			System.out.println("Number of interactions just before ok button is pressed: " + interaction_manager.getElements().size());
 			interaction_manager.removeElement(interaction_manager.get(interaction_manager.getElements().size()));
-			System.out.println("Number of interactions just after ok button is pressed: " + interaction_manager.getElements().size());
 			component_add_interactions_screen.getStage().close();
 		});
 	}

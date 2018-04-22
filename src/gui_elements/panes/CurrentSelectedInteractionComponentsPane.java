@@ -12,15 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-public class InteractionSelectionsPane extends MainPane {
+public class CurrentSelectedInteractionComponentsPane extends MainPane {
 
 	private FlowPane flow_pane;
-	private String full_directory_name = DIRECTORY_STRING + "interaction_selections_pane.properties";
+	private String full_directory_name = DIRECTORY_STRING + "current_selected_interaction_components_pane.properties";
 	private final String PANE_STYLE = "-fx-background-color: #ffffff";
 	private int x, y, width, height;
 	private TagController tag_controller;
 	
-	public InteractionSelectionsPane(TagController tag_controller) {			
+	public CurrentSelectedInteractionComponentsPane(TagController tag_controller) {			
 		this.tag_controller = tag_controller;
 		initialize();
 	}
