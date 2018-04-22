@@ -3,7 +3,6 @@ package gui_elements.buttons;
 import java.util.List;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.InteractionKeysController;
 import authoring.backend.TagController;
 import authoring.view.ComponentAddAttributesScreen;
 import authoring.view.ComponentAddInteractionsScreen;
@@ -29,7 +28,6 @@ public class AddCustomFunctionsButton extends MainButton {
 	private MainPane interaction_selected_pane;
 	private int interaction_id;
 	private AuthoringObject authoring_object;
-	private InteractionKeysController interaction_keys_controller;
 	private ComponentAddInteractionsScreen component_add_interactions_screen;
 	private static final boolean EXPLICIT_SET_ACTION = false;
 

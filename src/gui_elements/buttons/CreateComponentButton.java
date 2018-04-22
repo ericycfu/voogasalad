@@ -46,7 +46,7 @@ public class CreateComponentButton extends MainButton {
 				if(!tag_cb.getItems().contains(tag))
 					tag_cb.getItems().add(tag);
 			}
-			authoring_object.setImage(image_text_label.getText());
+//			authoring_object.setImage(image_text_label.getText());
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));
 			CreatedObjects.addObject(authoring_object);
 			design_tab.setNewAuthoringObject();
