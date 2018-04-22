@@ -16,6 +16,12 @@ public class GatherLimitedResource implements CustomFunction {
 	private String resource;
 	private String gatherRate;
 	
+	public GatherLimitedResource()
+	{
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		

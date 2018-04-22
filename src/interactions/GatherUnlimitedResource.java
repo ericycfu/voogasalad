@@ -17,6 +17,12 @@ public class GatherUnlimitedResource implements CustomFunction{
 	private String resource;
 	private String gatherRate;
 	
+	public GatherUnlimitedResource()
+	{
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
@@ -34,7 +40,7 @@ public class GatherUnlimitedResource implements CustomFunction{
 			}
 			
 			double prevVal = current.getOwner().getResourceManager().getResource(resource);
-			other.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
+			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
 			current.dequeueInteraction();
 			
 		} 
