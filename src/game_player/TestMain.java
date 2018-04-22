@@ -86,6 +86,6 @@ public class TestMain extends Application {
 	
 	private void step(double timeElapsed) {
 		myGP.update(myGOM.getElements());
-		myGOM.runGameObjectLoop();
+		myGOM.runGameObjectLoop(SECOND_DELAY);
 	}
 }
