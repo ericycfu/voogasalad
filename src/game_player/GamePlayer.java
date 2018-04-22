@@ -32,8 +32,8 @@ import javafx.scene.input.MouseButton;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 700;
+	public static final int SCENE_SIZE_X = 800;
+	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.50;

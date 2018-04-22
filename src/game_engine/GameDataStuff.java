@@ -12,8 +12,6 @@ import transform_library.Transform;
 import transform_library.Vector2;
 
 public class GameDataStuff {
-	
-//	// for gameEngine
 //	private Reader myReader;
 //	
 //	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
@@ -59,6 +57,5 @@ public class GameDataStuff {
 		}
 		return gameObjects;
 	}
-	
 	
 }

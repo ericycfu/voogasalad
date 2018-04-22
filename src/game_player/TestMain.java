@@ -44,7 +44,7 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
 		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
 		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
-		go.setMovementSpeed(5);
+		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
@@ -57,7 +57,7 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
 		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
-		go2.setMovementSpeed(30);
+		go2.setMovementSpeed(4);
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 		
