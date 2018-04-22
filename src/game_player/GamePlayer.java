@@ -24,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -49,7 +50,8 @@ public class GamePlayer {
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager) {
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager) { // (Socket socket, GameInstance gi)
+		//Timeline: pause requests to server
 		myGameObjectManager = gameManager;
 		myUnitSkills = new HashMap<>();
 		mySelectedUnitManager = new SelectedUnitManager();		
@@ -65,13 +67,29 @@ public class GamePlayer {
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
 					SkillButton sb = new SkillButton(ia.getImage(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					skillList.add(sb);
-					sb.setOnAction(e->{
-						myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
-					});
+					if (!ia.isBuild()) {
+						skillList.add(sb);
+						sb.setOnAction(e->{
+							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
+						});
+					}
+					else {
+						SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+						List<GameObject> temp = new ArrayList<>();
+						temp.add(go);
+						cancel.setOnAction(e -> {
+							this.myUnitDisplay.getUnitActionDisp().update(temp);
+						});
+						sb.setOnAction(e -> {
+							List<SkillButton> sblist = myGameObjectBuildMap.get(go.getName());
+							sblist.add(cancel);
+							myUnitDisplay.getUnitActionDisp().build(sblist);
+						});
+						
+					}
 				}
 			} catch (UnmodifiableGameObjectException e) {
-				// TODO Auto-generated catch block
+				// do nothing
 			}
 			myUnitSkills.put(go.getName(), skillList);
 		}
