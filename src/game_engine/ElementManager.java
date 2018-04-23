@@ -20,10 +20,12 @@ import java.util.Map.Entry;
 public abstract class ElementManager {
 	
 	private Map<Integer, EngineObject> elementMap;
+	private int new_ID_val;
 	
 	public ElementManager()
 	{
 		elementMap = new HashMap<Integer, EngineObject>();
+		new_ID_val = 1;
 	}
 	
 	/**
@@ -33,8 +35,7 @@ public abstract class ElementManager {
 	 */
 	protected int calculateID()
 	{
-		if(elementMap.isEmpty()) return 1;
-		return elementMap.size() + 1;
+		return new_ID_val;
 	}
 	
 	/**
@@ -77,6 +78,7 @@ public abstract class ElementManager {
 	public void addElement(EngineObject obj)
 	{
 		elementMap.put(obj.getID(), obj);
+		new_ID_val++;
 	}
 	
 	/**

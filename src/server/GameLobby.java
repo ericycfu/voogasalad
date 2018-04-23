@@ -40,6 +40,13 @@ public class GameLobby implements Serializable{
 			 myPlayers.add(null);
 		 loadedMap = new GameInstance(ImageIO.read(in));
 	 }
+	public int getPlayerID(Socket s) {
+		for(int x = 0; x < myPlayers.size(); x++) {
+			if(myPlayers.get(x).equals(s))
+				return x;
+		}
+		return -1;
+	}
 	public void addPlayer(Socket toAdd) {
 		if(!isRunning && loadedMap.getTeamManager().getElements().size() > myPlayers.size())
 		myPlayers.add(toAdd);

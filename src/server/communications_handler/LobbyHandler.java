@@ -37,7 +37,7 @@ public class LobbyHandler extends CommunicationsHandler {
 									}
 									return LobbyHandler.CLASS_REF;
 					case ENTER_GAME:
-									//todo send GameInstance to client
+									//todo send entire GameInstance to client
 									return GameHandler.CLASS_REF;
 					default: return CLASS_REF;
 				}

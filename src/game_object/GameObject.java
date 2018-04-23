@@ -213,7 +213,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(new GridMap());
-		activeWaypoints = pathfinder.findPath(this, target, objectList);
+		activeWaypoints = pathfinder.findPath(this, target, manager);
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;

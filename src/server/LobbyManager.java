@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LobbyManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<Integer,GameLobby> lobbies;
 	public LobbyManager() {
 		lobbies = new HashMap<>();

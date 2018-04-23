@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.net.Socket;
 
 import game_engine.GameInstance;
+import server.GameCommandInterpreter;
 import server.RTSServer;
 
 public class GameHandler extends CommunicationsHandler {
+	private GameCommandInterpreter myInterpreter;
 	private GameInstance runningGame;
-	public GameHandler(Socket input, RTSServer server) {
+	private int ID;
+	public GameHandler(Socket input, RTSServer server, GameInstance run, int team_ID) {
 		super(input, server);
-		runningGame = server.findPlayer(input).getCurrentGameInstance();
+		runningGame = run;
+		ID = team_ID;
+		myInterpreter = new GameCommandInterpreter(run);
 	}
 
 	public static final String CLASS_REF = "GAME";
@@ -19,7 +24,7 @@ public class GameHandler extends CommunicationsHandler {
 		try {
 			String input;
 			while((input = (String)getInputStream().readObject()) != null) {
-				// TODO runningGame.executeCommand(source_id, target_id, i);
+				myInterpreter.executeCommand(input);
 			}
 			if(Math.random() < 0.5) //TODO is Game complete
 				return CLASS_REF;
@@ -31,7 +36,9 @@ public class GameHandler extends CommunicationsHandler {
 	@Override
 	public void updateClient() {
 		try {
-			getOutputStream().writeObject(runningGame);
+			getOutputStream().writeObject(runningGame.getGameObjects());
+			getOutputStream().writeObject(runningGame.getTeamManager().get(ID));
+			getOutputStream().writeDouble(runningGame.getGameTime());
 		} catch (IOException e) {
 		}
 

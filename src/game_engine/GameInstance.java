@@ -9,8 +9,6 @@ import game_data.Reader;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_object.UnmodifiableGameObjectException;
-import interactions.Interaction;
 import transform_library.Vector2;
 
 /**
@@ -23,6 +21,7 @@ public class GameInstance {
 	 * Sets up the GameInstance based on the information in the file
 	 * @param filepath
 	 */
+	public static final int FRAMES_PER_SECOND = 60;
 	private boolean running;
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
@@ -30,6 +29,8 @@ public class GameInstance {
 	private Reader myReader;
 	private Writer myWriter;
 	private BufferedImage background;
+	private double gameTime;
+	
 	public GameInstance(GameInfo g, String filepath) {
 		
 		myReader = new Reader();
@@ -65,26 +66,29 @@ public class GameInstance {
 	 * Read commands from the file that is updated by the GamePlayer
 	 * @param filepath
 	 */
-	public void executeCommand(int source_id, int target_id, Interaction i) {
+	public void executeCommand(int source_id, int target_id, int interaction_ID) {
 		if(!running)
 			return;
-		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), i);
-		try {
-			myObjectManager.getGameObject(source_id).accessLogic().setCurrentInteraction(i);
-		} catch (UnmodifiableGameObjectException e) {
-		}
+		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager);
 	}
 	
-	public void executeMovement(int id, int xcor, int ycor) {
+	public void executeMovement(int id, double xcor, double ycor) {
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
-		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager.getElements());
+		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager);
 	}
 	
 	public void loop() {
+		double startTime = 0;
+		double endTime = 0;
+		double diff = 0;
 		while(running) {
-			myObjectManager.runGameObjectLoop();
+			startTime = System.nanoTime();
+			myObjectManager.runGameObjectLoop(diff);
+			gameTime += diff;
+			endTime = System.nanoTime();
+			diff = endTime - startTime;
 		}
 	}
 	public void play() {
@@ -105,5 +109,8 @@ public class GameInstance {
 	}
 	public BufferedImage getBackground() {
 		return background;
+	}
+	public double getGameTime(){
+		return gameTime;
 	}
 }
