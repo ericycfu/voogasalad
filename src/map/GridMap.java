@@ -20,7 +20,7 @@ import transform_library.Vector2;
 public class GridMap {
 
 	public final static int CELL_LENGTH = 10;
-	public final static int MAP_LENGTH = 800;
+	public final static int MAP_LENGTH = 2000;
 	private GridCell[][] mapGrid;
 	private int gridLength;
 	

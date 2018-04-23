@@ -19,8 +19,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class MiniMap implements VisualUpdate {
 	public static final double UNITMINIMAPRATIO = 1.0/80;
-	public static final double MINIMAPDISPLAYXRATIO = 1.0/4;
-	public static final double MINIMAPDISPLAYYRATIO = 1.0/3;
+	public static final double MINIMAPDISPLAYXRATIO = 1.0/4/MainDisplay.MAP_DISPLAY_RATIO;
+	public static final double MINIMAPDISPLAYYRATIO = 1.0/3/MainDisplay.MAP_DISPLAY_RATIO;
 	private Group myMiniMap;
 	private Rectangle myMiniMapDisplay;
 	private Group myVisibleUnits;

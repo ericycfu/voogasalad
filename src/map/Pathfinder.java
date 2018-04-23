@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import transform_library.Vector2;
 
 /**
@@ -50,11 +51,15 @@ public class Pathfinder {
 		//Setting the scores and adding the current node to the open list
 		current.setGVal(0);
 		current.setHVal(target);
+		current.setParent(null);
 		openSet.add(current);
 		
 		while(!openSet.isEmpty())
 		{
 			current = openSet.peek();
+			System.out.println("Current: " + current.getRow() + ", " + current.getColumn());
+			System.out.println("Target: " + target.getRow() + ", " + target.getColumn());
+
 			if(current.matches(target))
 			{
 				return getPath(target);
@@ -91,17 +96,21 @@ public class Pathfinder {
 		return getPath(null);	
 	}
 	
-	public Queue<Vector2> findPath(GameObject obj, Vector2 target, List<GameObject> objList)
+	public Queue<Vector2> findPath(GameObject obj, Vector2 target, GameObjectManager manager)
 	{
-		gridMap.updateMapPositions(objList);
+		gridMap.updateMapPositions(manager.getElements());
 		Stack<GridCell> gridPathPoints = calculatePath(obj.getTransform().getPosition(), target);
 		Queue<Vector2> mapWayPoints = new LinkedList<>();
-		for(GridCell cell : gridPathPoints)
+		while(!gridPathPoints.isEmpty())
 		{
+			GridCell cell = gridPathPoints.pop();
 			mapWayPoints.add(gridMap.convertToWorld(cell));
 		}
+		mapWayPoints.add(target);
 		return mapWayPoints;		
 	}
+	
+
 	
 	private Stack<GridCell> getPath(GridCell finalCell)
 	{
@@ -111,7 +120,9 @@ public class Pathfinder {
 		while(finalCell.getParent() != null)
 		{
 			path.add(finalCell.getParent());
+			finalCell = finalCell.getParent();
 		}
+	
 		return path;
 	}
 	
@@ -124,13 +135,13 @@ public class Pathfinder {
 	 */
 	private boolean inBounds(GridCell cell)
 	{
-		return(cell.getRow() < 0 || cell.getColumn() >= gridMap.getGridLength()
-				|| cell.getRow() < 0 || cell.getColumn() >= gridMap.getGridLength());
+		return(cell.getRow() >= 0 || cell.getColumn() <= gridMap.getGridLength()
+				|| cell.getColumn() >= 0 || cell.getRow() <= gridMap.getGridLength());
 	}
 	
 	private boolean isMoveableInto(GridCell cell)
 	{
-		return(gridMap.getCell(cell.getRow(), cell.getColumn()).isObstacle());
+		return(!gridMap.getCell(cell.getRow(), cell.getColumn()).isObstacle());
 	}
 	
 	/**
@@ -147,7 +158,7 @@ public class Pathfinder {
 			for(int j = -1; j < 2; j++)
 			{
 				if(i == 0 && j == 0) continue;
-				GridCell temp = new GridCell(cell.getRow() + i, cell.getColumn() + j);
+				GridCell temp = gridMap.getCell(cell.getRow() + i, cell.getColumn() + j);
 				if(inBounds(temp) && isMoveableInto(temp))
 				{
 					neighbors.add(temp);
