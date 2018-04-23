@@ -6,21 +6,21 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.InteractionKeysController;
 import authoring.backend.TagController;
 import gui_elements.buttons.AddCustomFunctionsButton;
 import gui_elements.buttons.AddInteractionButton;
+import gui_elements.buttons.InteractionOkButton;
 import gui_elements.combo_boxes.InteractionComponentTagComboBox;
 import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.ComponentInteractionsTitleLabel;
 import gui_elements.labels.InteractionComponentTagLabel;
 import gui_elements.labels.InteractionNameLabel;
-import gui_elements.labels.InteractionSelectedLabel;
-import gui_elements.labels.InteractionSelectionsLabel;
+import gui_elements.labels.AllSelectedInteractionTagsLabel;
+import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
 import gui_elements.labels.InteractionVisionRangeLabel;
-import gui_elements.panes.InteractionSelectedPane;
-import gui_elements.panes.InteractionSelectionsPane;
+import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
@@ -32,6 +32,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ComponentAddInteractionsScreen {
+
 	private final Paint BACKGROUND = Color.BLACK;
     private final String PROPERTY_FILENAME = "data/component_add_interactions_screen.properties";
     private final String TITLE_PROPERTY = "title";
@@ -41,22 +42,18 @@ public class ComponentAddInteractionsScreen {
     private int screen_width, screen_height, interaction_id;
     private Stage stage;
     private InteractionManager interaction_manager;
-    private InteractionKeysController interaction_keys_controller;
     private TagController tag_controller;
-    private MainPane interaction_selected_pane, interaction_selections_pane;
+    private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane;
     private MainComboBox interaction_component_tag_cb, interaction_name_cb;
     private MainTextField interaction_vision_range_tf;
-    private AuthoringObject authoring_object;
 	
 	// Additional setup for the add-interactions screen.
     private Scene myScene;
     private static Group root;
     
     public ComponentAddInteractionsScreen(AuthoringObject authoring_object, TagController tag_controller) {
-    	this.authoring_object = authoring_object;
     	this.tag_controller = tag_controller;
     	interaction_manager = authoring_object.getInteractionsManagerInstance();
-    	interaction_keys_controller = new InteractionKeysController();
     	interaction_id = interaction_manager.createInteraction();
     	initialize();
     }
@@ -120,10 +117,10 @@ public class ComponentAddInteractionsScreen {
     
     private void setGUIComponents() {
     	setLabels();
-    	setComboBoxes();
     	setRadioButtons();
     	setTextFields();
     	setPanes();
+    	setComboBoxes();
     	setButtons();
     }
     
@@ -132,16 +129,8 @@ public class ComponentAddInteractionsScreen {
     							  new InteractionNameLabel().getLabel(),
     							  new InteractionComponentTagLabel().getLabel(),
     							  new InteractionVisionRangeLabel().getLabel(),
-  								  new InteractionSelectionsLabel().getLabel(),
-  								  new InteractionSelectedLabel().getLabel());    							  
-    }
-        
-    private void setComboBoxes() {
-		interaction_name_cb = new InteractionNameComboBox(interaction_keys_controller, interaction_selected_pane);
-    	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, interaction_selections_pane);
-		
-		root.getChildren().addAll(interaction_component_tag_cb.getComboBox(),
-								  interaction_name_cb.getComboBox());
+  								  new CurrentSelectedInteractionComponentsLabel().getLabel(),
+  								  new AllSelectedInteractionTagsLabel().getLabel());    							  
     }
     
     private void setRadioButtons() {
@@ -153,32 +142,48 @@ public class ComponentAddInteractionsScreen {
     }
     
     private void setPanes() {
-    	interaction_selected_pane = new InteractionSelectedPane(interaction_name_cb, interaction_keys_controller);
-    	interaction_selections_pane = new InteractionSelectionsPane(interaction_component_tag_cb, 
-    																tag_controller,
-    																interaction_selected_pane);
+    	all_selected_interaction_tags_pane = new AllSelectedInteractionTagsPane(interaction_manager);
+    	current_selected_interaction_components_pane = new CurrentSelectedInteractionComponentsPane(tag_controller);
     	    	
-    	root.getChildren().addAll(interaction_selected_pane.getPane(),
-    							  interaction_selections_pane.getPane());
+    	root.getChildren().addAll(all_selected_interaction_tags_pane.getPane(),
+    							  current_selected_interaction_components_pane.getPane());
+    }
+    
+    private void setComboBoxes() {
+		interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane, 
+														  interaction_manager,
+														  interaction_vision_range_tf);
+    	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, 
+    																	   all_selected_interaction_tags_pane,
+    																	   current_selected_interaction_components_pane);
+		
+		root.getChildren().addAll(interaction_component_tag_cb.getComboBox(),
+								  interaction_name_cb.getComboBox());
     }
 
     private void setButtons() {
-    	root.getChildren().addAll(new AddInteractionButton(authoring_object,
+    	root.getChildren().addAll(new AddInteractionButton(interaction_manager,
     													   interaction_name_cb,
     													   interaction_vision_range_tf,
-    													   interaction_selected_pane,
-    													   interaction_keys_controller,
+    													   all_selected_interaction_tags_pane,
     													   this,
     													   interaction_id).getButton(),
-    							  new AddCustomFunctionsButton());
+    							  new AddCustomFunctionsButton(interaction_manager,
+    									  					   this),
+    							  new InteractionOkButton(interaction_manager, 
+    									  				  this));
     }
 
     public void resetElements() {
-    	interaction_selected_pane.getPane().getChildren().clear();
-    	interaction_selections_pane.getPane().getChildren().clear();
+    	all_selected_interaction_tags_pane.getPane().getChildren().clear();
+    	current_selected_interaction_components_pane.getPane().getChildren().clear();
     	interaction_name_cb.getEditor().clear();
     	interaction_component_tag_cb.getEditor().clear();
     	interaction_vision_range_tf.clear();
+    }
+    
+    public int getCurrentInteractionID() {
+    	return interaction_id;
     }
     
     public void setInteractionID(int interaction_id) {

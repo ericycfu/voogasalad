@@ -1,6 +1,7 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 /**
  * 
  * @author Rayan
@@ -11,7 +12,7 @@ import game_object.GameObject;
 
 public interface CustomFunction {
 
-	public void Execute(GameObject current, GameObject other);
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager);
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);

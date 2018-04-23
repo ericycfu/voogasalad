@@ -19,6 +19,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	private GridPane myGridPane;
 	private double myCellWidth;
 	private double myCellHeight;
+	private GameObject myBuildTarget;
 	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
 	
@@ -32,6 +33,14 @@ public class UnitActionDisplay implements VisualUpdate{
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
 		setCurrentActionID(-1);
 		initialize();
+	}
+	
+	public void setBuildTarget(GameObject go) {
+		myBuildTarget = go;
+	}
+	
+	public GameObject getBuildTarget() {
+		return myBuildTarget;
 	}
 	
 	private void initialize() {
@@ -58,9 +67,23 @@ public class UnitActionDisplay implements VisualUpdate{
 		}
 		GameObject gameObject = gameObjects.get(0);
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
-		for (int i = 0; i < unitSkills.size(); i++) {
-			myGridPane.add(unitSkills.get(0), i%4, i/3);
+		for (int i = 0; i < unitSkills.size() && i < 12; i++) {
+			myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_HEIGHT);
 		}
+	}
+	
+	public void build(List<SkillButton> sblist) {
+		myGridPane.getChildren().clear();
+		for (int i = 0; i < sblist.size()-1; i++) {
+			myGridPane.add(sblist.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_HEIGHT);
+		}
+		myGridPane.add(sblist.get(sblist.size()-1), ACTION_GRID_WIDTH, ACTION_GRID_HEIGHT);
+	}
+	
+	private SkillButton getCancelButton() {
+		SkillButton ret = new SkillButton();
+		
+		return ret;
 	}
 	
 	@Override

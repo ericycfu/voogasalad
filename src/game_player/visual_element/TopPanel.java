@@ -60,6 +60,7 @@ public class TopPanel implements VisualUpdate {
 	private Timeline tl;
 	private Reader myReader;
 	private Writer myWriter;
+	private boolean isLoaded;
 	
 	public TopPanel(double xsize, double ysize) {
 		myPane = new GridPane();
@@ -140,9 +141,20 @@ public class TopPanel implements VisualUpdate {
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
 		try {
+<<<<<<< HEAD
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			myGameObjectManager.clearManager();
 			myGameObjectManager = (GameObjectManager) gameObjects.get(0);
+=======
+			List<Object> gameObjects= myReader.read(file.getCanonicalPath(), "game_object.GameObject");
+			
+			System.out.println(gameObjects.size());
+			myGameObjects.clear();
+			for(Object o: gameObjects) {
+				myGameObjects.add((GameObject) o);
+			}
+			isLoaded = true;
+>>>>>>> dev
 		} catch (ClassNotFoundException e) {
 			// TODO alert prompt
 		} catch (IOException e) {
@@ -189,6 +201,14 @@ public class TopPanel implements VisualUpdate {
 		myGameObjectManager = gameObjects;
 	}
 	
+	public List<GameObject> getGameObjects(){
+		return myGameObjects;
+	}
+	public boolean getIsLoaded() {
+		boolean temp = isLoaded;
+		isLoaded = false;
+		return temp;
+	}
 	public Node getNodes() {
 		return myPane;
 	}
