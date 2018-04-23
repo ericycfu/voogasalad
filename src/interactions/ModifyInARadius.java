@@ -6,7 +6,13 @@ import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import transform_library.Transform;
 
-public class ModifyInARadius implements CustomComponentFunction, CustomFunction {
+/**
+ * 
+ * @author Rayan
+ * Allows users to modify variables within the radius of a unit e.g. explosion interactions
+ */
+
+public class ModifyInARadius implements CustomFunction {
 	
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
@@ -17,6 +23,14 @@ public class ModifyInARadius implements CustomComponentFunction, CustomFunction 
 	private String variable;
 	private double delta;
 	private double radius;
+	
+	public ModifyInARadius()
+	{
+		
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+		
+	}
 	
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {

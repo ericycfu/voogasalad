@@ -23,7 +23,7 @@ public class SelectedUnitManager {
 	
 	public void move(Vector2 target, GameObjectManager gom) {
 		for (GameObject go : selectedUnits) {
-			go.queueMovement(target, gom.getElements());
+			go.queueMovement(target, gom);
 		}
 	}
 	

@@ -106,7 +106,7 @@ public class Pathfinder {
 			GridCell cell = gridPathPoints.pop();
 			mapWayPoints.add(gridMap.convertToWorld(cell));
 		}
-		
+		mapWayPoints.add(target);
 		return mapWayPoints;		
 	}
 	
