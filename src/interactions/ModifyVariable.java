@@ -64,14 +64,7 @@ public class ModifyVariable implements CustomFunction {
 		{
 			double deltaVal;
 			ParameterParser p = new ParameterParser();
-			if(p.isDouble(delta))
-			{
-				deltaVal = Double.parseDouble(format.getParameterValue(DELTA));
-			}
-			else
-			{
-				deltaVal = current.accessLogic().accessAttributes().getAttribute(delta);
-			}
+			deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
 			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
 			current.dequeueInteraction();

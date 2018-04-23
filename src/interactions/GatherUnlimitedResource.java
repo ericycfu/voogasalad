@@ -30,14 +30,7 @@ public class GatherUnlimitedResource implements CustomFunction{
 		{
 			double deltaVal;
 			ParameterParser p = new ParameterParser();
-			if(p.isDouble(gatherRate))
-			{
-				deltaVal = Double.parseDouble(gatherRate);
-			}
-			else
-			{
-				deltaVal = current.accessLogic().accessAttributes().getAttribute(gatherRate);
-			}
+			deltaVal = p.assignValidatedValue(gatherRate, current);
 			
 			double prevVal = current.getOwner().getResourceManager().getResource(resource);
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
