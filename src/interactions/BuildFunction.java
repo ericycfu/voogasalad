@@ -14,6 +14,12 @@ public class BuildFunction implements CustomFunction {
 	
 	private CustomComponentParameterFormat format;
 	
+	public BuildFunction()
+	{
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{

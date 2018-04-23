@@ -41,7 +41,7 @@ public class ModifyVariable implements CustomFunction {
 		try 
 		{
 			this.variable = format.getParameterValue(VARIABLE);
-			String para = format.getParameterValue(DELTA);
+			this.delta = format.getParameterValue(DELTA);
 		
 		} 
 		catch (PropertyNotFoundException e) 
@@ -58,15 +58,13 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
-		
-		double prevVal;
-		double deltaVal;
-		
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {		
 		
 		try 
 		{
-			if(isDouble(delta))
+			double deltaVal;
+			ParameterParser p = new ParameterParser();
+			if(p.isDouble(delta))
 			{
 				deltaVal = Double.parseDouble(format.getParameterValue(DELTA));
 			}
@@ -74,7 +72,7 @@ public class ModifyVariable implements CustomFunction {
 			{
 				deltaVal = current.accessLogic().accessAttributes().getAttribute(delta);
 			}
-			prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
+			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
 			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
 			current.dequeueInteraction();
 		} 
@@ -99,13 +97,6 @@ public class ModifyVariable implements CustomFunction {
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
 		format.addStringField(RATE);		
-	}
-	
-	
-	private boolean isDouble(String text)
-	{
-		String decimalPattern = "([0-9]*)\\.([0-9]*)";  
-		return (Pattern.matches(decimalPattern, text));
 	}
 
 }

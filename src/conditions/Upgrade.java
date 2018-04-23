@@ -19,6 +19,12 @@ public class Upgrade implements CustomCondition {
 	private String attribute;
 	private double delta;
 	
+	public Upgrade()
+	{
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
 	@Override
 	public void Execute(GameObject current) {
 		
