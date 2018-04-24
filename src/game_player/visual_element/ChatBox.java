@@ -47,7 +47,7 @@ public class ChatBox {
 		KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
 		
 		if(keyComb1.match(event)) {
-    		// send to server;
+    		// TODO: send to server;
 			displayText(myInputBox.getText()); // for testing purpose
 			myInputBox.clear();
     	}
