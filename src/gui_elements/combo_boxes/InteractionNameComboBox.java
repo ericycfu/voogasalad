@@ -1,6 +1,7 @@
 package gui_elements.combo_boxes;
 
 import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
@@ -12,13 +13,15 @@ public class InteractionNameComboBox extends MainComboBox {
 	private static final String FILENAME = "interaction_name_cb.properties";
 	private static final String BLANK_TEXT = "";
 	private AllSelectedInteractionTagsPane all_selected_interaction_tags_pane;
+	private CreatedCustomFunctionsPane created_custom_functions_pane;
 	private InteractionManager interaction_manager;
 	private InteractionVisionRangeTextField interaction_vision_range_tf;
 	
-	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, InteractionManager interaction_manager, 
-			MainTextField interaction_vision_range_tf) {
+	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, MainPane created_custom_functions_pane,
+			InteractionManager interaction_manager, MainTextField interaction_vision_range_tf) {
 		super(FILENAME);
 		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
+		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
 		this.interaction_manager = interaction_manager;
 		this.interaction_vision_range_tf = (InteractionVisionRangeTextField) interaction_vision_range_tf;
 		getComboBox().setEditable(true);

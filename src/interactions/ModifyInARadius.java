@@ -14,6 +14,7 @@ import transform_library.Transform;
 
 public class ModifyInARadius implements CustomFunction {
 	
+	public final String NAME = "ModifyInARadius";
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
 	public final String RADIUS = "Radius";
@@ -92,6 +93,12 @@ public class ModifyInARadius implements CustomFunction {
 			System.out.println("Improper format for variable");
 		}
 
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }
