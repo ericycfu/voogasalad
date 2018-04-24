@@ -211,6 +211,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
 	{
+
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);

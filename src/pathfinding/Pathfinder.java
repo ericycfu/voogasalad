@@ -43,7 +43,7 @@ public class Pathfinder {
 		//Created open and closed lists
 		PriorityQueue<GridCell> openSet = new PriorityQueue<>(MOVEMENT_DIRECTIONS, cellComparator);
 		Set<GridCell> closedSet = new HashSet<>();
-		
+				
 		//converted coordinates from JavaFX to MapGrid
 		GridCell current = gridMap.convertToGrid(originPos);
 		GridCell target = gridMap.convertToGrid(targetPos);
@@ -57,8 +57,8 @@ public class Pathfinder {
 		while(!openSet.isEmpty())
 		{
 			current = openSet.peek();
-			System.out.println("Current: " + current.getRow() + ", " + current.getColumn());
-			System.out.println("Target: " + target.getRow() + ", " + target.getColumn());
+			//System.out.println("Current: " + current.getRow() + ", " + current.getColumn());
+			//System.out.println("Target: " + target.getRow() + ", " + target.getColumn());
 
 			if(current.matches(target))
 			{
@@ -101,6 +101,7 @@ public class Pathfinder {
 		gridMap.updateMapPositions(manager.getElements());
 		Stack<GridCell> gridPathPoints = calculatePath(obj.getTransform().getPosition(), target);
 		Queue<Vector2> mapWayPoints = new LinkedList<>();
+		
 		while(!gridPathPoints.isEmpty())
 		{
 			GridCell cell = gridPathPoints.pop();
@@ -135,8 +136,8 @@ public class Pathfinder {
 	 */
 	private boolean inBounds(GridCell cell)
 	{
-		return(cell.getRow() >= 0 || cell.getColumn() <= gridMap.getGridLength()
-				|| cell.getColumn() >= 0 || cell.getRow() <= gridMap.getGridLength());
+		return(cell.getRow() >= 0 || cell.getColumn() <= gridMap.getGridWidth()
+				|| cell.getColumn() >= 0 || cell.getRow() <= gridMap.getGridHeight());
 	}
 	
 	private boolean isMoveableInto(GridCell cell)
