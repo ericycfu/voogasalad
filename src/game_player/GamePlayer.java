@@ -36,11 +36,11 @@ import transform_library.Vector2;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 800;
+	public static final int SCENE_SIZE_X = 1200;
 	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
-	public static final double INFO_DISPLAY_WIDTH = 0.50;
+	public static final double INFO_DISPLAY_WIDTH = 0.49;
 	public static final double ACTION_DISPLAY_WIDTH = 0.25;
 	public static final double TOP_HEIGHT = 0.05;
 	public static final double CHATBOX_WIDTH = 0.20;
@@ -179,6 +179,7 @@ public class GamePlayer {
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);
+		mainDisp.toBack();
 		
 		myChatBox = new ChatBox(SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getGroup();
