@@ -3,6 +3,7 @@ package game_player;
 import java.util.ArrayList;
 import java.util.List;
 
+import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import interactions.Interaction;
@@ -10,16 +11,23 @@ import transform_library.Vector2;
 
 public class SelectedUnitManager {
 	private List<GameObject> selectedUnits;
+	private Team myTeam;
+	private int myTeamID;
 	
-	public SelectedUnitManager() {
+	public SelectedUnitManager(Team team) {
 		selectedUnits = new ArrayList<GameObject>();
+		myTeam = team;
+		myTeamID = myTeam.getID();
 	}
 	
 	public void clear() {
 		selectedUnits.clear();
 	}
+	
 	public void add(GameObject go) {
-		selectedUnits.add(go);
+		if (go.getOwner().getID()==myTeamID) {
+			selectedUnits.add(go);
+		}
 	}
 	
 	public void move(Vector2 target, GameObjectManager gom) {

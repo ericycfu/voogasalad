@@ -7,9 +7,11 @@ import java.util.Map;
 
 import game_engine.EngineObject;
 import game_engine.GameInstance;
+import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
+import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
 import game_player.visual_element.SkillButton;
@@ -34,29 +36,34 @@ import transform_library.Vector2;
  */
 public class GamePlayer {
 	
-	public static final int SCENE_SIZE_X = 800;
+	public static final int SCENE_SIZE_X = 1200;
 	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
-	public static final double INFO_DISPLAY_WIDTH = 0.50;
+	public static final double INFO_DISPLAY_WIDTH = 0.49;
 	public static final double ACTION_DISPLAY_WIDTH = 0.25;
 	public static final double TOP_HEIGHT = 0.05;
+	public static final double CHATBOX_WIDTH = 0.20;
+	public static final double CHATBOX_HEIGHT = 0.30;
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
 	private UnitDisplay myUnitDisplay;
 	private MainDisplay myMainDisplay;
+	private ChatBox myChatBox;
 	private Group myRoot;
 	private Map<String, List<SkillButton>> myUnitSkills;
 	private Map<String, List<SkillButton>> myUnitBuilds;
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
+	private Team myTeam;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager) { // (Socket socket, GameInstance gi)
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team) { // (Socket socket, GameInstance gi)
 		//Timeline: pause requests to server
 		myGameObjectManager = gameManager;
+		myTeam = team;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SelectedUnitManager();		
+		mySelectedUnitManager = new SelectedUnitManager(myTeam);		
 		initialize();
 		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
@@ -172,7 +179,14 @@ public class GamePlayer {
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);
+		mainDisp.toBack();
 		
+		myChatBox = new ChatBox(SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		Node chatBox = myChatBox.getGroup();
+		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
+		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
+		myRoot.getChildren().add(chatBox);
+	
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 	}
 

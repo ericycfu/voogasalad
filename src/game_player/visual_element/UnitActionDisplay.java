@@ -29,7 +29,7 @@ public class UnitActionDisplay implements VisualUpdate{
 		myCellHeight = height/ACTION_GRID_HEIGHT;
 		myGridPane = new GridPane();
 		myGridPane.setMaxWidth(width);
-		myGridPane.setMaxHeight(height);
+		myGridPane.setPrefHeight(height);
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
 		setCurrentActionID(-1);
 		initialize();
