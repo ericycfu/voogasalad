@@ -3,7 +3,6 @@ package game_object;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -11,8 +10,6 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
-import interactions.Interaction;
-import javafx.scene.image.Image;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
