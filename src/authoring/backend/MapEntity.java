@@ -36,4 +36,8 @@ public class MapEntity extends Pane implements AuthoringView {
 		return mapsettings.getName();
 	}
 	
+	public MapSettings getMapSettings() {
+		return mapsettings;
+	}
+	
 }
