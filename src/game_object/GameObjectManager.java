@@ -118,31 +118,11 @@ public class GameObjectManager extends ElementManager {
 		
 		
 	}
-<<<<<<< HEAD
-	
-	@Override
-	public List<GameObject> getElements() {
-		List<GameObject> gameObjectList = new ArrayList<>();
-		for(Map.Entry<Integer, GameObject> var : objectMap.entrySet())
-		{
-			gameObjectList.add(var.getValue());
-		}
-		
-		return gameObjectList;
-	}
-	public GameObject get(int id) {
-		return objectMap.get(id);
-	}
-	public void clear() {
-		objectMap.clear();
-	}
 
-=======
 
 	public GameObject getGameObject(int id)
 	{
 		return (GameObject)(this.get(id));
 	}
 	
->>>>>>> dev
 }
