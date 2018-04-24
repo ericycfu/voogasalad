@@ -1,4 +1,4 @@
-package map;
+package pathfinding;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,14 +20,15 @@ import transform_library.Vector2;
 public class GridMap {
 
 	public final static int CELL_LENGTH = 10;
-	public final static int MAP_LENGTH = 2000;
 	private GridCell[][] mapGrid;
 	private int gridLength;
 	
-	public GridMap()
+	public GridMap(double width, double height)
 	{
-		gridLength = MAP_LENGTH / CELL_LENGTH;
-		mapGrid = new GridCell[gridLength][gridLength];
+		int gridHeight = (int) (height / CELL_LENGTH);
+		int gridWidth = (int) (width / CELL_LENGTH);
+		
+		mapGrid = new GridCell[gridHeight][gridWidth];
 		initializeEmptyMap();
 	}
 	

@@ -17,6 +17,7 @@ import game_object.UnmodifiableGameObjectException;
 
 public class ModifyVariable implements CustomFunction {
 
+	public final String NAME = "ModifyVariable";
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
 	public final String RATE = "Rate";
@@ -90,6 +91,13 @@ public class ModifyVariable implements CustomFunction {
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
 		format.addStringField(RATE);		
+	}
+
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }

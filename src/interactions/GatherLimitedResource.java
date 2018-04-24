@@ -8,6 +8,7 @@ import game_object.UnmodifiableGameObjectException;
 
 public class GatherLimitedResource implements CustomFunction {
 
+	public final String NAME = "GatherLimitedResource";
 	public final String RESOURCE = "Resource";
 	public final String GATHER_RATE = "Gather Rate";
 	
@@ -75,6 +76,12 @@ public class GatherLimitedResource implements CustomFunction {
 		{
 			System.out.println("Improper format for variable");
 		}
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }

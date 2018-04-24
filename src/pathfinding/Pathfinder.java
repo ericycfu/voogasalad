@@ -1,4 +1,4 @@
-package map;
+package pathfinding;
 
 import java.util.ArrayList;
 import java.util.Comparator;

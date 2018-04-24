@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Region;
+import pathfinding.GridMap;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
@@ -60,7 +61,8 @@ public class MainDisplay implements VisualUpdate {
 			if (e.getButton()==MouseButton.SECONDARY) {
 				double mouseX = e.getX();
 				double mouseY = e.getY();
-				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager);
+				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
+						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
 		});
 		myMap.toBack();

@@ -7,6 +7,7 @@ import game_object.UnmodifiableGameObjectException;
 
 public class StaggeredModifyVariable implements CustomFunction {
 
+	public final String NAME = "StaggeredModifyVariable";
 	public final String VARIABLE1 = "Variable 1";
 	public final String INCREASE_DECREASE = "Increase or Decrease (1 or 0)";
 	public final String LIMIT = "Limit";
@@ -86,6 +87,12 @@ public class StaggeredModifyVariable implements CustomFunction {
 		{
 			System.out.println("Improper format for variable");
 		}
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }
