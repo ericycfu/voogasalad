@@ -1,10 +1,13 @@
 package authoring.backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import conditions.ConditionManager;
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
@@ -30,16 +33,20 @@ public class AuthoringObject {
 	private double myX;
 	private double myY;
 	private double myMovementSpeed;
+	private boolean isBuilding;
+	private double buildTime;
+	private Map<String, Double> buildCost;
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private InteractionManager myInteractions;
+	private ConditionManager myConditionManager;
 	
 	public AuthoringObject() {
 		defaultObject();
 		addTestObject();
 //		addDuvall();
 	}
-	
+		
 	public AuthoringObject(DraggableImageView img) {
 		myDragImage = img;
 		myX = 0;
@@ -54,7 +61,12 @@ public class AuthoringObject {
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
+		myTags = new ArrayList<String>();
+		myConditionManager = new ConditionManager();
 		myTags = new ArrayList<>();
+		isBuilding = false;
+		buildTime = 0;
+		buildCost = new HashMap<>();
 	}
 	
 	private void addTestObject() {
@@ -126,12 +138,16 @@ public class AuthoringObject {
 		myY = newY;
 	}
 	
-	public void changeByX(double deltaX) {
-		myX = myX + deltaX;
+	public void setBuilding(boolean b) {
+		isBuilding = b;
 	}
 	
-	public void changeByY(double deltaY) {
-		myY = myY + deltaY;
+	public void setBuildTime(double time) {
+		buildTime = time;
+	}
+	
+	public void setBuildCost(String resource, double amount) {
+		buildCost.put(resource, amount);
 	}
 
 	public ObjectAttributes getObjectAttributesInstance() {
@@ -152,5 +168,9 @@ public class AuthoringObject {
 
 	public ObjectLogic getObjectLogic() {
 		return myObjectLogic;
+	}
+	
+	public ConditionManager getConditionManager() {
+		return myConditionManager;
 	}
 }

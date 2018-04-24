@@ -11,7 +11,7 @@ public class ComponentTagComboBox extends MainComboBox {
 		super(FILENAME);
 		this.tag_controller = tag_controller;
 		getComboBox().setEditable(true);
-//		addElements();
+		addElements();
 	}
 	
 	private void addElements() {

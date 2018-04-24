@@ -1,17 +1,31 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_object.PropertyNotFoundException;
 
-public class BuildFunction implements CustomFunction 
-{
+/**
+ * 
+ * @author Rayan
+ * Custom Function for building object.
+ */
+
+public class BuildFunction implements CustomFunction {
 	
+	public final String NAME = "BuildFunction";
 	private CustomComponentParameterFormat format;
 	
-	@Override
-	public void Execute(GameObject current, GameObject other) 
+	public BuildFunction()
 	{
-		
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
+	@Override
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
+	{
+		//object may not have been added to manager
+		other.queueBuilding();
 	}
 
 	@Override
@@ -21,7 +35,8 @@ public class BuildFunction implements CustomFunction
 
 	@Override
 	public void setParameterFormatFields() {
-		format.addHelpText("This function allows you to build a unit." );
+		format.addHelpText("This function allows you to build a unit. Enter the tags for all the possible"
+				+ "units that this object can create." );
 		format.addStringField("buildTime");	
 		
 	}
@@ -29,6 +44,12 @@ public class BuildFunction implements CustomFunction
 	@Override
 	public void setParameters(CustomComponentParameterFormat toFormat) {
 		format = toFormat;
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }

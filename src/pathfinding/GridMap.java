@@ -1,12 +1,10 @@
-package map;
+package pathfinding;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import game_object.GameObject;
-import game_object.GameObjectManager;
-import transform_library.Transform;
 import transform_library.Vector2;
 
 /**
@@ -20,14 +18,17 @@ import transform_library.Vector2;
 public class GridMap {
 
 	public final static int CELL_LENGTH = 10;
-	public final static int MAP_LENGTH = 800;
 	private GridCell[][] mapGrid;
-	private int gridLength;
+	private int gridHeight;
+	private int gridWidth;
 	
-	public GridMap()
+	public GridMap(double width, double height)
 	{
-		gridLength = MAP_LENGTH / CELL_LENGTH;
-		mapGrid = new GridCell[gridLength][gridLength];
+		gridHeight = (int) (height / CELL_LENGTH);
+		gridWidth = (int) (width / CELL_LENGTH);
+		
+		mapGrid = new GridCell[gridHeight][gridWidth];
+		
 		initializeEmptyMap();
 	}
 	
@@ -79,7 +80,9 @@ public class GridMap {
 		String yPos = Integer.toString((int)pos.getY());
 		yPos = yPos.substring(0, yPos.length()-1);
 		
-		return getCell(Integer.parseInt(yPos), Integer.parseInt(xPos));
+		GridCell c = getCell(Integer.parseInt(yPos), Integer.parseInt(xPos));
+		return c;
+		
 	}
 	
 	/**
@@ -98,9 +101,9 @@ public class GridMap {
 	
 	private void initializeEmptyMap()
 	{
-		for(int i = 0; i < gridLength; i++)
+		for(int i = 0; i < gridHeight; i++)
 		{
-			for(int j = 0; j < gridLength; j++)
+			for(int j = 0; j < gridWidth; j++)
 			{
 				mapGrid[i][j] = new GridCell(i, j);
 				mapGrid[i][j].setObstacle(false);
@@ -109,9 +112,14 @@ public class GridMap {
 	}
 	
 	
-	public double getGridLength()
+	public int getGridHeight()
 	{
-		return gridLength;
+		return gridHeight;
+	}
+	
+	public int getGridWidth()
+	{
+		return gridWidth;
 	}
 	
 	public GridCell getCell(int r, int c)

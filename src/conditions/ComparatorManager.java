@@ -1,8 +1,10 @@
 package conditions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ComparatorManager {
 	
@@ -15,6 +17,8 @@ public class ComparatorManager {
 	
 	private void initializeMap()
 	{
+		comparatorMap = new HashMap<>();
+		
 		Comparator equalsTo = new EqualsTo();
 		Comparator greaterThan = new GreaterThan();
 		Comparator lessThan = new LessThan();
@@ -47,5 +51,24 @@ public class ComparatorManager {
 			comparatorList.add(entry.getValue());
 		}
 		return comparatorList;
+	}
+	
+	public List<String> getComparatorSigns() 
+	{
+		List<String> comparatorSigns = new ArrayList<>();
+		for(Map.Entry<Integer, Comparator> entry: comparatorMap.entrySet())
+		{
+			comparatorSigns.add(entry.getValue().getSign());
+		}
+		return comparatorSigns;
+	}
+	
+	public String getSymbolById(int id) {
+		for(Map.Entry<Integer, Comparator> entry: comparatorMap.entrySet()) {
+			if (entry.getValue().getID() == id) {
+				return entry.getValue().getSign();
+			}
+		}
+		return "";
 	}
 }

@@ -2,10 +2,16 @@ package interactions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import authoring.backend.AuthoringObject;
 import game_engine.EngineObject;
 import game_object.GameObject;
+import game_object.GameObjectManager;
+import game_object.ObjectLogic;
 import javafx.scene.image.Image;
+import transform_library.Transform;
 
 /**
  * Codes for an action that occurs in the game. Different actions might simulate a GameObject acting on itself or acting on another object
@@ -19,6 +25,10 @@ public class Interaction implements EngineObject {
 	private String name;
 	private Image img;
 	private String description;
+	
+	//these will be changed by authoring for the interaction
+	private boolean isBuild;
+	private boolean isInstantaneous;
 	
 	//store functions by id
 	private List<CustomFunction> customFunctions;
@@ -40,24 +50,30 @@ public class Interaction implements EngineObject {
 	 * need to add the functionality that only the variables related to those tags can be changed etc.
 	 */
 	public CustomFunction addCustomFunction(String type) {
+		
 		CustomFunctionFactory factory = new CustomFunctionFactory();
 			
-		//this is where i need to make it better
 		CustomFunction function = factory.getCustomFunction(type);
 		customFunctions.add(function);
 		return function;
 	}
-
+	
+	public void addAllCustomFunctions(List<String> types) {
+		for(String type : types) {
+			addCustomFunction(type);
+		}
+	}
+	
 	/**
 	 * Runs all the custom functions in the interactions
 	 * Each custom function can affect the other game object
 	 */
-	public void executeCustomFunctions(GameObject current, GameObject other)
+	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		if(matchesTags(other, targetTags)) return;
 		for(CustomFunction cFunc : customFunctions)
 		{
-			cFunc.Execute(current, other);
+			cFunc.Execute(current, other, manager);
 		}
 	}
 	
@@ -79,26 +95,24 @@ public class Interaction implements EngineObject {
 		return range;
 	}
 	
- 	public List<String> getTargetTags(){
+	
+	
+	
+ 	public List<String> getTargetTags()
+ 	{
  		return targetTags;
  	}
-
- 	public void addTag(String newTag) {
+ 	public void addTag(String newTag) 
+ 	{
  		if(!targetTags.contains(newTag))
  			targetTags.add(newTag);
  	}
- 	
- 	public void addAllTags(List<String> newTags) {
- 		for(String tag : newTags) {
- 			addTag(tag);
- 		}
- 	}
- 	
- 	public void removeTag(String oldTag) {
+ 	public void removeTag(String oldTag) 
+ 	{
  		targetTags.remove(oldTag);
  	}
- 	
- 	public CustomFunction getCustomFunction(int x) {
+ 	public CustomFunction getCustomFunction(int x) 
+ 	{
  		return customFunctions.get(x);
  	}
 
@@ -136,6 +150,11 @@ public class Interaction implements EngineObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public List<CustomFunction> getCustomFunctions()
+	{
+		return customFunctions;
 	}
 
 }

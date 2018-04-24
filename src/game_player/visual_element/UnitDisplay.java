@@ -16,30 +16,30 @@ import javafx.scene.image.Image;
 public class UnitDisplay implements VisualUpdate {
 	private UnitInfoDisplay myInfoDisp;
 	private UnitActionDisplay myActionDisp;
-	private Map<String, List<String>> myUnitSkillsMap;
+	private Map<String, List<SkillButton>> myUnitSkillsMap;
 	private Map<String, Image> mySkillImagesMap;
 	private Group myUnitDisplay;
 	
-	public UnitDisplay(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
-		initializeUnitDisplayComponents(infoDispWidth, infoDispHeight, actionDispWidth, actionDispHeight, unitSkills, skillImages);
+	public UnitDisplay(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<SkillButton>> unitSkills) {
+		initializeUnitDisplayComponents(infoDispWidth, infoDispHeight, actionDispWidth, actionDispHeight, unitSkills);
 	}
 	
-	private void initializeUnitDisplayComponents(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<String>> unitSkills, Map<String, Image> skillImages) {
+	private void initializeUnitDisplayComponents(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<SkillButton>> unitSkills) {
 		myUnitDisplay = new Group();
 		myUnitSkillsMap = unitSkills;
-		mySkillImagesMap = skillImages;
 		myInfoDisp = new UnitInfoDisplay(infoDispWidth, infoDispHeight);
-		myActionDisp = new UnitActionDisplay(actionDispWidth, actionDispHeight, myUnitSkillsMap, mySkillImagesMap);
+		myActionDisp = new UnitActionDisplay(actionDispWidth, actionDispHeight, myUnitSkillsMap);
 		myUnitDisplay.getChildren().add(myInfoDisp.getNodes());
 		Node actionDisp = myActionDisp.getNodes();
 		actionDisp.setLayoutX(infoDispWidth);
+		System.out.println(actionDisp);
 		myUnitDisplay.getChildren().add(actionDisp);
 	}
 	
 	@Override
 	public void update(List<GameObject> selectedGameObjects) {
 		myInfoDisp.update(selectedGameObjects);
-		myInfoDisp.update(selectedGameObjects);
+		//myActionDisp.update(selectedGameObjects);
 	}
 
 	@Override
