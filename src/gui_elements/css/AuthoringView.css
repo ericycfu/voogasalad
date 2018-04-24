@@ -56,3 +56,7 @@
 	-fx-pref-height: 1000;
 	-fx-background-image: url("/images/tt.jpg");
 }
+
+.default_label {
+	-fx-font-size: 12pt;
+}
