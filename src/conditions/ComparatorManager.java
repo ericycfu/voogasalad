@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ComparatorManager {
 	
@@ -60,5 +61,14 @@ public class ComparatorManager {
 			comparatorSigns.add(entry.getValue().getSign());
 		}
 		return comparatorSigns;
+	}
+	
+	public String getSymbolById(int id) {
+		for(Map.Entry<Integer, Comparator> entry: comparatorMap.entrySet()) {
+			if (entry.getValue().getID() == id) {
+				return entry.getValue().getSign();
+			}
+		}
+		return "";
 	}
 }

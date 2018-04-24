@@ -13,7 +13,6 @@ public class ButtonFactory {
 		b.setOnAction(handler);
 		return b;
 	}
-	
 	public static Button makeButton(String text, EventHandler<ActionEvent> handler, String styleclass) {
 		Button b = makeButton(text, handler);
 		b.getStyleClass().add(styleclass);
