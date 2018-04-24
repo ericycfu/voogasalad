@@ -2,6 +2,7 @@ package game_engine;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import game_data.Reader;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import pathfinding.GridMap;
 import transform_library.Vector2;
 
 /**
@@ -16,7 +18,9 @@ import transform_library.Vector2;
  * @author andrew
  *
  */
-public class GameInstance {
+public class GameInstance implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Sets up the GameInstance based on the information in the file
 	 * @param filepath
@@ -29,6 +33,7 @@ public class GameInstance {
 	private transient Writer myWriter;
 	private BufferedImage background;
 	private double gameTime;
+	private ArrayList<ChatEntry> chat;
 	
 	public GameInstance(GameInfo g, String filepath) {
 		
@@ -75,7 +80,13 @@ public class GameInstance {
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
-		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager);
+		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
+		currentGridMap.updateMapPositions(myObjectManager.getElements());
+		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager,currentGridMap);
+	}
+	
+	public void addToChat(int player_ID, String message) {
+		chat.add(new ChatEntry(gameTime,player_ID,message));
 	}
 	
 	public void loop() {
@@ -114,5 +125,8 @@ public class GameInstance {
 	}
 	public double getGameTime(){
 		return gameTime;
+	}
+	public List<ChatEntry> getChat(){
+		return chat;
 	}
 }

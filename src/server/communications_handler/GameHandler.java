@@ -48,6 +48,7 @@ public class GameHandler extends CommunicationsHandler {
 			getOutputStream().writeObject(runningGame.getGameObjects());
 			getOutputStream().writeObject(runningGame.getTeamManager().get(team_ID));
 			getOutputStream().writeDouble(runningGame.getGameTime());
+			getOutputStream().writeObject(runningGame.getChat());
 		} catch (IOException e) {
 		}
 	}
