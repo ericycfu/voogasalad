@@ -11,7 +11,7 @@ import game_object.PropertyNotFoundException;
  * 
  * @author Rayan
  * Format for how parameters should be displayed for each custom function. Frontend can access this 
- * to create the fields it needs. Alsos stores the parameter values and how they need to be passed to the backend
+ * to create the fields it needs. Also stores the parameter values and how they need to be passed to the backend
  */
 
 public class CustomComponentParameterFormat {

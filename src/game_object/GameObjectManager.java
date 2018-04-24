@@ -14,8 +14,8 @@ import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
-import map.GridMap;
-import map.Pathfinder;
+import pathfinding.GridMap;
+import pathfinding.Pathfinder;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -27,6 +27,7 @@ import transform_library.Vector2;
  */
 
 public class GameObjectManager extends ElementManager {
+
 	
 	public GameObjectManager()
 	{}
@@ -53,19 +54,20 @@ public class GameObjectManager extends ElementManager {
 	{
 		List<GameObject> gameObjects = new ArrayList<>();
 		
-		for(EngineObject eObj : getElementsRaw())
-		{
+		for (EngineObject eObj : getElementsRaw()) {
 			GameObject gObj = (GameObject) eObj;
 			gameObjects.add(gObj);
 		}
 		return gameObjects;
 	}
 	
+	
+	
 	/**
 	 *  This will allow the game player to cycle through all the objects and runs their game loop.
 	 *  Also removes dead elements at the start of every cycle.
 	 */
-	public void runGameObjectLoop()
+	public void runGameObjectLoop(double stepTime)
 	{
 		Iterator<GameObject> iter = this.getElements().iterator();
 		while(iter.hasNext())
@@ -79,8 +81,10 @@ public class GameObjectManager extends ElementManager {
 		
 		for(GameObject obj : getElements())
 		{
+			obj.setElapsedTime(stepTime);
 			obj.Update();
 		}
+		
 		
 	}
 	

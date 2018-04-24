@@ -1,37 +1,64 @@
 package gui_elements.combo_boxes;
 
-import authoring.backend.AuthoringObject;
-import authoring.backend.InteractionKeysController;
-import gui_elements.panes.InteractionSelectedPane;
+import java.util.List;
+
+import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
+import gui_elements.text_fields.InteractionVisionRangeTextField;
+import gui_elements.text_fields.MainTextField;
+import interactions.CustomComponentParameterFormat;
+import interactions.CustomFunction;
+import interactions.Interaction;
+import interactions.InteractionManager;
 import javafx.event.ActionEvent;
 
 public class InteractionNameComboBox extends MainComboBox {
 	
 	private static final String FILENAME = "interaction_name_cb.properties";
-	private InteractionKeysController interaction_controller;
-	private InteractionSelectedPane interaction_selected_pane;
+	private static final String BLANK_TEXT = "";
+	private AllSelectedInteractionTagsPane all_selected_interaction_tags_pane;
+	private CreatedCustomFunctionsPane created_custom_functions_pane;
+	private InteractionManager interaction_manager;
+	private InteractionVisionRangeTextField interaction_vision_range_tf;
 	
-	public InteractionNameComboBox(InteractionKeysController interaction_controller, 
-			MainPane interaction_selected_pane) {
+	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, MainPane created_custom_functions_pane,
+			InteractionManager interaction_manager, MainTextField interaction_vision_range_tf) {
 		super(FILENAME);
-		this.interaction_controller = interaction_controller;
-		this.interaction_selected_pane = (InteractionSelectedPane) interaction_selected_pane;
+		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
+		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
+		this.interaction_manager = interaction_manager;
+		this.interaction_vision_range_tf = (InteractionVisionRangeTextField) interaction_vision_range_tf;
 		getComboBox().setEditable(true);
 		addElements();
 		chooseElements();
 	}
 	
 	private void addElements() {
-		for(String interaction_key : interaction_controller.getInteractionKeys()) {
-			getComboBox().getItems().add(interaction_key);
+//		System.out.println("Number of interactions just as interaction screen pops up: " + interaction_manager.getElements().size());
+		for(int i = 1; i < interaction_manager.getElements().size(); i++) {
+			getComboBox().getItems().add(interaction_manager.getInteraction(i).getName());
 		}
 	}
 	
 	private void chooseElements() {
     	getComboBox().setOnAction((ActionEvent ev) -> {
-    		if(!interaction_selected_pane.equals(null))
-    			interaction_selected_pane.updateSelectedComponentsPane();
+			String name_entered = getComboBox().getEditor().getText();
+			if(getComboBox().getItems().contains(name_entered)) {
+	    		int id_selected = getComboBox().getSelectionModel().getSelectedIndex() + 1;
+	    		all_selected_interaction_tags_pane.changePaneWithNewName(id_selected);
+	    		all_selected_interaction_tags_pane.setToOldInteractionMode();
+	    		Interaction interaction = interaction_manager.getInteraction(id_selected);
+	    		interaction_vision_range_tf.setText(interaction.getRange() + BLANK_TEXT);
+	    		List<CustomFunction> custom_functions = interaction.getCustomFunctions();
+	    		for(CustomFunction custom_function : custom_functions) {
+	    			created_custom_functions_pane.addButton(custom_function.getName(), custom_function.getParameterFormat());
+	    		}
+			}
+			else {
+				all_selected_interaction_tags_pane.setToNewInteractionMode();
+				interaction_vision_range_tf.setText(BLANK_TEXT);
+			}			
     	});
 	}
 }
