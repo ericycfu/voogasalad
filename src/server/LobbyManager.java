@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class LobbyManager implements Serializable{
 	/**
-	 * 
+	 * This entity stores all GameLobbies currently active.
 	 */
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,GameLobby> lobbies;

@@ -35,9 +35,9 @@ public class LobbyHandler extends CommunicationsHandler {
 									if(getSocket().equals(currentLobby.getHost())) {
 										currentLobby.setIsRunning(true);
 									}
-									return LobbyHandler.CLASS_REF;
+									return CLASS_REF;
 					case ENTER_GAME:
-									//todo send entire GameInstance to client
+									getOutputStream().writeObject(currentLobby.getCurrentGameInstance());
 									return GameHandler.CLASS_REF;
 					default: return CLASS_REF;
 				}

@@ -1,5 +1,8 @@
 package server.communications_handler;
-
+/**
+ * This class is responsible handling the server side of a specific server/client interaction
+ * @author andrew
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

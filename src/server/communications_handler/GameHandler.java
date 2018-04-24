@@ -5,17 +5,21 @@ import java.net.Socket;
 
 import game_engine.GameInstance;
 import server.GameCommandInterpreter;
+import server.GameLobby;
 import server.RTSServer;
 
 public class GameHandler extends CommunicationsHandler {
 	private GameCommandInterpreter myInterpreter;
 	private GameInstance runningGame;
-	private int ID;
-	public GameHandler(Socket input, RTSServer server, GameInstance run, int team_ID) {
+	private GameLobby runningGameLobby;
+	private int player_ID;
+	private int team_ID;
+	public GameHandler(Socket input, RTSServer server) {
 		super(input, server);
-		runningGame = run;
-		ID = team_ID;
-		myInterpreter = new GameCommandInterpreter(run);
+		runningGameLobby = server.findPlayer(input);
+		runningGame = runningGameLobby.getCurrentGameInstance();
+		player_ID = runningGameLobby.getPlayerID(input);
+		myInterpreter = new GameCommandInterpreter(runningGame);
 	}
 
 	public static final String CLASS_REF = "GAME";
@@ -24,11 +28,16 @@ public class GameHandler extends CommunicationsHandler {
 		try {
 			String input;
 			while((input = (String)getInputStream().readObject()) != null) {
+				if(!input.split("\\s+")[0].equals("Leave")) {
+					runningGameLobby.removePlayer(getSocket());
+					return MainPageHandler.CLASS_REF;
+				}
 				myInterpreter.executeCommand(input);
 			}
-			if(Math.random() < 0.5) //TODO is Game complete
-				return CLASS_REF;
-			return MainPageHandler.CLASS_REF;
+			// if(runningGameLobby.isTeamEmpty(runningGameLobby.getTeamID(getSocket()))
+			// update the game loss condition for that team
+			// TODO if the game has ended, return MainPageHandler.CLASS_REF;
+			return CLASS_REF;
 		}
 		catch(Exception e) {return CLASS_REF;}
 	}
@@ -37,11 +46,10 @@ public class GameHandler extends CommunicationsHandler {
 	public void updateClient() {
 		try {
 			getOutputStream().writeObject(runningGame.getGameObjects());
-			getOutputStream().writeObject(runningGame.getTeamManager().get(ID));
+			getOutputStream().writeObject(runningGame.getTeamManager().get(team_ID));
 			getOutputStream().writeDouble(runningGame.getGameTime());
 		} catch (IOException e) {
 		}
-
 	}
 
 }

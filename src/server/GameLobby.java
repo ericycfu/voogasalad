@@ -17,42 +17,87 @@ public class GameLobby implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private transient List<Socket> myPlayers;
+	private transient List<Socket>[] myPlayers;
 	private transient GameInstance loadedMap;
 	private boolean isRunning;
 	private int ID;
+	private int numTeams;
 	
+	@SuppressWarnings("unchecked")
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
-		myPlayers = new ArrayList<Socket>();
-		myPlayers.add(lobbyHost);
+		numTeams = toRun.getTeamManager().getSize();
+		myPlayers = (List<Socket>[]) new ArrayList[numTeams];
+		for(int x = 0; x < numTeams; x++){
+			myPlayers[x] = new ArrayList<>();
+		}
+		myPlayers[0].add(lobbyHost);
 		loadedMap = toRun;
 		isRunning = false;
 	}
 	 private void writeObject(ObjectOutputStream out) throws IOException{
 		 out.defaultWriteObject();
-		 out.writeInt(myPlayers.size());
-		 //
+		 int[] numPlayers = new int[numTeams];
+		 for(int x = 0; x < numTeams; x++) {
+			 numPlayers[x] = myPlayers[x].size();
+		 }
+		 out.writeObject(numPlayers);
 		 ImageIO.write(loadedMap.getBackground(), "png", out);
 	 }
 	 private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		 in.defaultReadObject();
-		 for(int x = 0; x < in.readInt(); x++)
-			 myPlayers.add(null);
+		 int[] playersPerTeam = (int[])in.readObject();
+		 for(int x = 0; x < in.readInt(); x++) {
+			 myPlayers[x] = new ArrayList<>();
+			 for(int y = 0; y < playersPerTeam[x]; y++) {
+				 myPlayers[x].add(null);
+			 }
+		 }
+
 		 loadedMap = new GameInstance(ImageIO.read(in));
-	 }
-	public int getPlayerID(Socket s) {
-		for(int x = 0; x < myPlayers.size(); x++) {
-			if(myPlayers.get(x).equals(s))
+	}
+	public int getTeamID(Socket s) {
+		for(int x = 0; x < myPlayers.length; x++) {
+			if(myPlayers[x].contains(s))
 				return x;
 		}
 		return -1;
 	}
+	public int getPlayerID(Socket s) {
+		int playerID = 1;
+		for(int x = 0; x < myPlayers.length; x++) {
+			for(int y = 0; y < myPlayers[x].size(); y++) {
+				if(myPlayers[x].get(y).equals(s))
+					return playerID;
+				playerID++;
+			}
+		}
+		return -1;
+	}
 	public void addPlayer(Socket toAdd) {
-		if(!isRunning && loadedMap.getTeamManager().getElements().size() > myPlayers.size())
-		myPlayers.add(toAdd);
+		if(isRunning)
+			return;
+		int min_index = 0;
+		for(int y = 1; y < numTeams; y++) {
+			if(myPlayers[y].size() < myPlayers[min_index].size()) {
+				min_index = y;
+			}
+		}
+		addPlayer(min_index, toAdd);
+		
+	}
+	public void addPlayer(int index, Socket toAdd) {
+		if(!isRunning)
+			myPlayers[index].add(toAdd);
 	}
 	public void removePlayer(Socket toRemove) {
-		myPlayers.remove(toRemove);
+		for(int x = 0; x < numTeams; x++) {
+			if(myPlayers[x].contains(toRemove))
+				myPlayers[x].remove(toRemove);
+		}
+	}
+	public void changeTeam(int newTeam, Socket toAdd) {
+		removePlayer(toAdd);
+		addPlayer(newTeam,toAdd);
 	}
 	public void setID(int newID) {
 		ID = newID;
@@ -64,13 +109,27 @@ public class GameLobby implements Serializable{
 		isRunning = true;
 	}
 	public int getCurrentSize() {
-		return myPlayers.size();
+		int total = 0;
+		for(int x = 0; x < numTeams; x++)
+			total += myPlayers[x].size();
+		return total;
 	}
 	public boolean contains(Socket s) {
-		return myPlayers.contains(s);
+		for(int x = 0; x < numTeams; x++) {
+			if(myPlayers[x].contains(s))
+				return true;
+		}
+		return false;
 	}
-	public Object getHost() {
-		return myPlayers.get(0);
+	public Socket getHost() {
+		for(int x = 0; x < numTeams; x++) {
+			if(!myPlayers[x].isEmpty())
+				return myPlayers[x].get(0);
+		}
+		return null;
+	}
+	public boolean isTeamEmpty(int team_ID) {
+		return myPlayers[team_ID].isEmpty();
 	}
 	public boolean isRunning() {
 		return isRunning;

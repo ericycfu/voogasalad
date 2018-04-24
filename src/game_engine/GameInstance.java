@@ -21,13 +21,12 @@ public class GameInstance {
 	 * Sets up the GameInstance based on the information in the file
 	 * @param filepath
 	 */
-	public static final int FRAMES_PER_SECOND = 60;
 	private boolean running;
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
-	private TeamManager myTeamManager;
-	private Reader myReader;
-	private Writer myWriter;
+	private transient TeamManager myTeamManager;
+	private transient Reader myReader;
+	private transient Writer myWriter;
 	private BufferedImage background;
 	private double gameTime;
 	
@@ -97,6 +96,9 @@ public class GameInstance {
 	}
 	public void stop() {
 		running = false;
+	}
+	public boolean getIsRunning() {
+		return running;
 	}
 	public GameInfo getGameInfo() {
 		return myGameInfo;

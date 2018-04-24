@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * 
@@ -35,7 +34,7 @@ public abstract class ElementManager {
 	 */
 	protected int calculateID()
 	{
-		return new_ID_val;
+		return new_ID_val++;
 	}
 	
 	/**
@@ -78,7 +77,6 @@ public abstract class ElementManager {
 	public void addElement(EngineObject obj)
 	{
 		elementMap.put(obj.getID(), obj);
-		new_ID_val++;
 	}
 	
 	/**
