@@ -2,30 +2,46 @@ package authoring.view;
 
 import javax.swing.JFileChooser;
 
+import authoring.backend.ButtonFactory;
 import authoring.backend.LabelFactory;
 import authoring.backend.MapSettings;
+import authoring.backend.TextFieldFactory;
+import game_engine.ResourceManager;
 import gui_elements.buttons.ImageChooserButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
+	private ResourceManager myResourceManager;
+	
 	
 	public MapSettingsView(MapSettings settings) {
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
+		myResourceManager = new ResourceManager();
 	}
 	
 	private void initializeAll() {
+		VBox myVBox = new VBox();
 		HBox box = new HBox();
+		HBox resourcesBox = new HBox();
+		myVBox.getChildren().add(box);
+		myVBox.getChildren().add(resourcesBox);
 		initializeLabelBox(box);
 		initializeContent(box);
+		initializeResources(resourcesBox);
 		box.setPadding(new Insets(100, 50, 0, 50));
-		this.getChildren().add(box);
+		resourcesBox.setPadding(new Insets(0, 50, 0, 50));
+		this.getChildren().add(myVBox);
 	}
 	
 	private void initializeLabelBox(HBox rootBox) {
@@ -35,7 +51,8 @@ public class MapSettingsView extends Pane implements AuthoringView {
 				"Loss condition:", 
 				"Image selection:",
 				"Map width:",
-				"Map height:"};
+				"Map height:"
+				};
 		for (int i=0; i<labels.length; i++) {
 			box.getChildren().addAll(newLabel(labels[i]));
 		}
@@ -56,7 +73,43 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		standardBox(box);
 		box.setSpacing(32);
 		rootBox.getChildren().add(box);
-
+	}
+	
+	private void initializeResources(HBox rootBox) {
+		VBox myVBox = new VBox();
+		rootBox.getChildren().add(myVBox);
+		HBox myHBox = new HBox();
+		myVBox.getChildren().add(myHBox);
+		String labels[] = {"Resource Name", "Default Amount"};
+		for (int i = 0; i < labels.length; i++) {
+			myHBox.getChildren().addAll(newLabel(labels[i]));
+			myHBox.setSpacing(75);
+		}
+		EventHandler<ActionEvent> myHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				myVBox.getChildren().add(createResourceEntry());
+			}
+		};
+		EventHandler<ActionEvent> mySavingHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				saveSettings();
+			}
+		};
+		myHBox.getChildren().add(ButtonFactory.makeButton("Add New Resource Entry", myHandler));
+		myVBox.getChildren().add(createResourceEntry());
+		((HBox)myVBox.getChildren().get(myVBox.getChildren().size()-1)).getChildren().add(ButtonFactory.makeButton("Save Settings", mySavingHandler));
+		standardBox(myVBox);
+	}
+	
+	private HBox createResourceEntry(){
+		HBox myReturn = new HBox();
+		myReturn.getChildren().addAll(
+			new TextField(),
+			new TextField()
+		);
+		return myReturn;
 	}
 	
 	private Label newLabel(String text) {
@@ -66,4 +119,23 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void standardBox(VBox box) {
 		box.setPadding(new Insets(0, 25, 0, 25));
 	}
+	private void saveSettings() {
+		VBox myRootBox = (VBox) this.getChildren().get(0);
+		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
+	}
+	private void saveResources(VBox myBox) {
+		for (Node myNode : myBox.getChildren()) {
+			try {
+				HBox currentHBox = (HBox) myNode;
+				String name = ((TextField) currentHBox.getChildren().get(0)).getText();
+				String amount = ((TextField) currentHBox.getChildren().get(1)).getText();
+				myResourceManager.addResource(name, Double.parseDouble(amount));
+			}
+			catch(Exception e){
+			//nothing really wrong here, just nothign to get because not a textfield, change this later
+			}
+		}
+	}
+	
+
 }
