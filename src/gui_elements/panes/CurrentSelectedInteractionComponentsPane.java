@@ -9,6 +9,7 @@ import java.util.Properties;
 import authoring.backend.AuthoringObject;
 import authoring.backend.TagController;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
@@ -20,7 +21,7 @@ public class CurrentSelectedInteractionComponentsPane extends MainPane {
 	private int x, y, width, height;
 	private TagController tag_controller;
 	
-	public CurrentSelectedInteractionComponentsPane(TagController tag_controller) {			
+	public CurrentSelectedInteractionComponentsPane(TagController tag_controller) {
 		this.tag_controller = tag_controller;
 		initialize();
 	}
@@ -97,9 +98,9 @@ public class CurrentSelectedInteractionComponentsPane extends MainPane {
 			flow_pane.getChildren().add(new Button(ao.getName()));
 //			ImageView imageView = new ImageView(ao.getImage());
 //			addImageViewProperties(imageView);
-//			grid_pane.getChildren().add(imageView);
+//			flow_pane.getChildren().add(imageView);
 		}
-	}
+	}	
 	
 //	private void addImageViewProperties(ImageView imageView) {
 //		imageView.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {

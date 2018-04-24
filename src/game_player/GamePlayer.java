@@ -193,7 +193,7 @@ public class GamePlayer {
 	public Scene getScene() {
 		return myScene;
 	}
-
+	
 	public void update(List<GameObject> gameobject) {
 		myTopPanel.update(gameobject); //resources
 		myMiniMap.update(gameobject);

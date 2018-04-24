@@ -8,6 +8,7 @@ import game_object.UnmodifiableGameObjectException;
 
 public class GatherUnlimitedResource implements CustomFunction{
 
+	public final String NAME = "GatherUnlimitedResource";
 	public final String RESOURCE = "Resource";
 	public final String GATHER_RATE = "Gather Rate";
 	
@@ -30,14 +31,7 @@ public class GatherUnlimitedResource implements CustomFunction{
 		{
 			double deltaVal;
 			ParameterParser p = new ParameterParser();
-			if(p.isDouble(gatherRate))
-			{
-				deltaVal = Double.parseDouble(gatherRate);
-			}
-			else
-			{
-				deltaVal = current.accessLogic().accessAttributes().getAttribute(gatherRate);
-			}
+			deltaVal = p.assignValidatedValue(gatherRate, current);
 			
 			double prevVal = current.getOwner().getResourceManager().getResource(resource);
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
@@ -80,6 +74,12 @@ public class GatherUnlimitedResource implements CustomFunction{
 		{
 			System.out.println("Improper format for variable");
 		}
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }

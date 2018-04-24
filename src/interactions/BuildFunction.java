@@ -12,6 +12,7 @@ import game_object.PropertyNotFoundException;
 
 public class BuildFunction implements CustomFunction {
 	
+	public final String NAME = "BuildFunction";
 	private CustomComponentParameterFormat format;
 	
 	public BuildFunction()
@@ -43,6 +44,12 @@ public class BuildFunction implements CustomFunction {
 	@Override
 	public void setParameters(CustomComponentParameterFormat toFormat) {
 		format = toFormat;
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
 	}
 
 }

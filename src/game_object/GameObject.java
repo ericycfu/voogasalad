@@ -3,7 +3,6 @@ package game_object;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -11,10 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
-import interactions.Interaction;
-import javafx.scene.image.Image;
-import map.GridMap;
-import map.Pathfinder;
+import pathfinding.GridMap;
+import pathfinding.Pathfinder;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -209,10 +206,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		interactionTarget = null;
 	}
 	
-	public void queueMovement(Vector2 target, GameObjectManager manager)
+	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
 	{
+
 		this.manager = manager;
-		Pathfinder pathfinder = new Pathfinder(new GridMap());
+		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
 		if(!activeWaypoints.isEmpty())
 		{

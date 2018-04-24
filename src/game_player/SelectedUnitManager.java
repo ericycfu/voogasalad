@@ -7,6 +7,8 @@ import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import interactions.Interaction;
+import pathfinding.GridMap;
+import pathfinding.Pathfinder;
 import transform_library.Vector2;
 
 public class SelectedUnitManager {
@@ -30,9 +32,9 @@ public class SelectedUnitManager {
 		}
 	}
 	
-	public void move(Vector2 target, GameObjectManager gom) {
+	public void move(Vector2 target, GameObjectManager gom, GridMap gridmap) {
 		for (GameObject go : selectedUnits) {
-			go.queueMovement(target, gom);
+			go.queueMovement(target, gom, gridmap);
 		}
 	}
 	
