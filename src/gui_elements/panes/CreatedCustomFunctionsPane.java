@@ -3,26 +3,24 @@ package gui_elements.panes;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
-import authoring.backend.AuthoringObject;
-import authoring.backend.TagController;
+import authoring.view.EditCustomFunctionsScreen;
+import interactions.CustomComponentParameterFormat;
+import interactions.CustomFunction;
+import interactions.InteractionManager;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-public class CurrentSelectedInteractionComponentsPane extends MainPane {
+public class CreatedCustomFunctionsPane extends MainPane {
 
 	private FlowPane flow_pane;
-	private String full_directory_name = DIRECTORY_STRING + "current_selected_interaction_components_pane.properties";
+	private String full_directory_name = DIRECTORY_STRING + "created_custom_functions_pane.properties";
 	private final String PANE_STYLE = "-fx-background-color: #ffffff";
 	private int x, y, width, height;
-	private TagController tag_controller;
-	
-	public CurrentSelectedInteractionComponentsPane(TagController tag_controller) {
-		this.tag_controller = tag_controller;
+		
+	public CreatedCustomFunctionsPane() {
 		initialize();
 	}
 	
@@ -90,26 +88,11 @@ public class CurrentSelectedInteractionComponentsPane extends MainPane {
 		return flow_pane;
 	}
 	
-	public void updatePane(String tag_selected) {
-		flow_pane.getChildren().clear();
-		Map<String, List<AuthoringObject>> tagMap = tag_controller.getTagMap();
-		List<AuthoringObject> authoring_objects = tagMap.get(tag_selected);
-		for(AuthoringObject ao : authoring_objects) {
-			flow_pane.getChildren().add(new Button(ao.getName()));
-//			ImageView imageView = new ImageView(ao.getImage());
-//			addImageViewProperties(imageView);
-//			flow_pane.getChildren().add(imageView);
-		}
-	}	
-	
-//	private void addImageViewProperties(ImageView imageView) {
-//		imageView.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
-//    		if(e.isPrimaryButtonDown()) {
-//    			List<Node> imageViews = interaction_selected_pane.getPane().getChildren();
-//    			if(e.getClickCount() == 2 && !imageViews.contains(imageView)) {
-//    				interaction_selected_pane.getPane().getChildren().add(imageView);
-//            	}
-//            }
-//        });
-//	}
+	public void addButton(String text, CustomComponentParameterFormat format) {
+		Button custom_function_button = new Button(text);
+		custom_function_button.setOnAction(e -> {
+			new EditCustomFunctionsScreen(format);
+		});
+		flow_pane.getChildren().add(custom_function_button);
+	}
 }
