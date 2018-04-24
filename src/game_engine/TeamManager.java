@@ -48,4 +48,7 @@ public class TeamManager extends ElementManager {
 	{
 		return (Team)(this.get(id));
 	}
+	public int getSize() {
+		return getElements().size();
+	}
 }
