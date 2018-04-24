@@ -151,5 +151,10 @@ public class Interaction implements EngineObject {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<CustomFunction> getCustomFunctions()
+	{
+		return customFunctions;
+	}
 
 }
