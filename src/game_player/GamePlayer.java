@@ -7,6 +7,7 @@ import java.util.Map;
 
 import game_engine.EngineObject;
 import game_engine.GameInstance;
+import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
@@ -51,12 +52,14 @@ public class GamePlayer {
 	private Map<String, List<SkillButton>> myUnitBuilds;
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
+	private Team myTeam;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager) { // (Socket socket, GameInstance gi)
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team) { // (Socket socket, GameInstance gi)
 		//Timeline: pause requests to server
 		myGameObjectManager = gameManager;
+		myTeam = team;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SelectedUnitManager();		
+		mySelectedUnitManager = new SelectedUnitManager(myTeam);		
 		initialize();
 		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);

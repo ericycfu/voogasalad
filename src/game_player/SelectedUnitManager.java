@@ -23,6 +23,7 @@ public class SelectedUnitManager {
 	public void clear() {
 		selectedUnits.clear();
 	}
+	
 	public void add(GameObject go) {
 		if (go.getOwner().getID()==myTeamID) {
 			selectedUnits.add(go);
