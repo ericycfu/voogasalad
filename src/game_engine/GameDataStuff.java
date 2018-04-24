@@ -1,4 +1,17 @@
-//package game_engine;
+package game_engine;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import game_data.Reader;
+import game_data.Writer;
+import game_object.GameObjectManager;
+import game_object.ObjectLogic;
+import resources.Resources;
+import transform_library.Transform;
+import transform_library.Vector2;
+
+
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -11,7 +24,18 @@
 //import transform_library.Transform;
 //import transform_library.Vector2;
 //
-//public class GameDataStuff {
+public class GameDataStuff {
+	public static void main(String[] args) throws IOException {
+		GameObjectManager GOM= new GameObjectManager();
+		GOM.createGameObject(new Transform(new Vector2()), new ObjectLogic());
+		Reader myReader = new Reader();
+		Writer myWriter = new Writer();
+		myWriter.write(Resources.getString("TEST_LOCATION"), new ArrayList<GameObjectManager>() {{
+			add(GOM);
+		}}
+		);
+	}
+}
 ////	private Reader myReader;
 ////	
 ////	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
