@@ -56,6 +56,7 @@ public class AuthoringObject {
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
+		myTags = new ArrayList<String>();
 		myConditionManager = new ConditionManager();
 		myTags = new ArrayList<>();
 	}
