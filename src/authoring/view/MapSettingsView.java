@@ -2,10 +2,12 @@ package authoring.view;
 
 import javax.swing.JFileChooser;
 
+import authoring.backend.ButtonFactory;
 import authoring.backend.LabelFactory;
 import authoring.backend.MapSettings;
 import gui_elements.buttons.ImageChooserButton;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,11 +23,19 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	
 	private void initializeAll() {
+		initializeTitle();
+		
 		HBox box = new HBox();
 		initializeLabelBox(box);
 		initializeContent(box);
-		box.setPadding(new Insets(100, 50, 0, 50));
+		box.setPadding(new Insets(50, 50, 0, 50));
 		this.getChildren().add(box);
+		
+		setupButton();
+	}
+	
+	private void initializeTitle() {
+		this.getChildren().add(LabelFactory.makeLabel("Game Settings", DEFAULT_TITLE));
 	}
 	
 	private void initializeLabelBox(HBox rootBox) {
@@ -56,7 +66,18 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		standardBox(box);
 		box.setSpacing(32);
 		rootBox.getChildren().add(box);
-
+	}
+	
+	private void setupButton() {
+		HBox box = new HBox();
+		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions());
+		box.getChildren().addAll(saveButton);
+//		box.setPadding(new Insets(0, 0, 0, 0));
+		this.getChildren().add(box);
+	}
+	
+	private void saveConditions() {
+		
 	}
 	
 	private Label newLabel(String text) {
