@@ -62,9 +62,10 @@ public class GamePlayer {
 	
 	private Set<GameObject> myPossibleUnits;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team) { 
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
+		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
 		myTeam = team;
 		myUnitSkills = new HashMap<>();
@@ -72,7 +73,8 @@ public class GamePlayer {
 		initialize();
 		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
-		//unitSkillMapInitialize();
+		unitSkillMapInitialize();
+		System.out.println(myUnitSkills);
 	}
 	
 	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team) {
@@ -111,7 +113,7 @@ public class GamePlayer {
 	}
 	
 	private void unitSkillMapInitialize() {
-		unitBuildsMapInitialize();
+		//unitBuildsMapInitialize();
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
@@ -135,11 +137,10 @@ public class GamePlayer {
 							sblist.add(cancel);
 							myUnitDisplay.getUnitActionDisp().build(sblist);
 						});
-						
 					}
 				}
 			} catch (UnmodifiableGameObjectException e) {
-				// do nothing
+				
 			}
 			myUnitSkills.put(go.getName(), skillList);
 		}
@@ -155,6 +156,7 @@ public class GamePlayer {
 						mySelectedUnitManager.clear();
 						mySelectedUnitManager.add(go);
 					}
+					/**
 					else {
 						int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
 						try {
@@ -166,6 +168,7 @@ public class GamePlayer {
 							// do nothing
 						}
 					}
+					**/
 				}
 			});
 		}
