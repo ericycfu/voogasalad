@@ -10,6 +10,7 @@ import game_data.Reader;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.Renderer;
+import interactions.Interaction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -63,6 +64,19 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
 		go2.setMovementSpeed(4);
+		/**
+		int j = go2.accessLogic().accessInteractions().createInteraction();
+		Interaction test = go2.accessLogic().accessInteractions().getInteraction(j);
+		test.setDescription("attack: damage = 5");
+		test.setImg(new Image("attack_icon.png"));
+		test.setName("attack");
+		test.setRange(50);
+		test.addTag("professor");
+		test.addCustomFunction("ModifyVariable");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
+		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		**/
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 

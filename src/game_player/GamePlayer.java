@@ -222,6 +222,4 @@ public class GamePlayer {
 	
 	// TO-DO: set select when a new unit is created
 	
-
-	
 }
