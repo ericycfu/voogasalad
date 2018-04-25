@@ -137,12 +137,36 @@ public class AuthoringObject {
 		myY = newY;
 	}
 	
+	public boolean isBuilding() {
+		return isBuilding;
+	}
+	
 	public void setBuilding(boolean b) {
 		isBuilding = b;
 	}
 	
+	public double getBuildTime() {
+		return buildTime;
+	}
+	
 	public void setBuildTime(double time) {
 		buildTime = time;
+	}
+	
+	public List<String> getBuildCostResources() {
+		List<String> resources = new ArrayList<String>();
+		for(String resource : buildCost.keySet()) {
+			resources.add(resource);
+		}
+		return resources;
+	}
+	
+	public List<Double> getBuildCostAmounts() {
+		List<Double> amounts = new ArrayList<Double>();
+		for(double amount : buildCost.values()) {
+			amounts.add(amount);
+		}
+		return amounts;
 	}
 	
 	public void setBuildCost(String resource, double amount) {

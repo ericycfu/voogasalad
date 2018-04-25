@@ -14,7 +14,6 @@ public class ResourceVictory implements WinCondition {
 	public final String NAME = "ResourceVictory";
 	public final String RESOURCE = "Resource";
 	public final String THRESHOLD = "Threshold";
-
 	
 	private CustomComponentParameterFormat format;
 	
@@ -75,6 +74,12 @@ public class ResourceVictory implements WinCondition {
 	public String getName() {
 		return NAME;
 	}
-	
+
+
+	@Override
+	public String getVictoryMessage(String teamName) {
+		// TODO Auto-generated method stub
+		return String.format("%s has achieved resource victory by collecting %d %s", teamName, threshold, resource);  
+	}
 	
 }
