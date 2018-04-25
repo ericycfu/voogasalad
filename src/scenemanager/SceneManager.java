@@ -19,28 +19,24 @@ public class SceneManager {
  
 	private GameObjectManager objManager;
 	
-	private List<WinCondition> winConditions;
+	private List<EndCondition> endConditions;
 	
-	public SceneManager(GameObjectManager manager, List<WinCondition> winConditions)
+	public SceneManager(GameObjectManager manager, List<EndCondition> winConditions)
 	{
-		this.winConditions = new ArrayList<>();
+		this.endConditions = new ArrayList<>();
 		this.objManager = manager;
 	}
 	
-	public EndStateWrapper isWinConditionFulfilled()
+	public EndStateWrapper checkEndCondition()
 	{
 		Iterator<GameObject> iter = objManager.getElements().iterator();
 		while(iter.hasNext())
 		{
 			GameObject ob = iter.next();
-			for(WinCondition win : winConditions)
+			for(EndCondition end : endConditions)
 			{
 				Team team = ob.getOwner();
-				if(win.check(team, objManager.getElements()))
-				{
-					return new EndStateWrapper(win.getVictoryMessage(team.getTeamName()), 
-							EndStateWrapper.EndState.WIN);
-				}
+				return end.check(team, objManager.getElements());
 			}
 		}
 		return null;
