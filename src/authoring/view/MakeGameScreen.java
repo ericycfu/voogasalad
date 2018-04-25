@@ -19,9 +19,9 @@ public class MakeGameScreen implements AuthoringView {
 	private SplitPane myPane;
 	private GameEntity myGame;
 	private AuthoringController myAuthoringController;
-	public MakeGameScreen (Stage stage, GameEntity game) {
+	public MakeGameScreen (Stage stage) {
+		myGame = new GameEntity(); ////////////////////
 		myStage = stage;
-		myGame = game;
 		setupScreen();
 	}
 	
@@ -35,7 +35,7 @@ public class MakeGameScreen implements AuthoringView {
 //		box.setId("start_screen");
 		VBox inner = new VBox();
 		inner.getChildren().addAll(
-				new DisplayMenu(myAuthoringController, myGame),
+				new DisplayMenu(myAuthoringController, myGame), ///////////////////////////
 				new CreatedObjectsTabs(myAuthoringController, myGame));
 		box.getChildren().addAll(
 				new MakeGameTabs(myAuthoringController, myGame),
