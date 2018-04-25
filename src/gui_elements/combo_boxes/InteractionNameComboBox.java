@@ -1,9 +1,15 @@
 package gui_elements.combo_boxes;
 
+import java.util.List;
+
 import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
+import interactions.CustomComponentParameterFormat;
+import interactions.CustomFunction;
+import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.event.ActionEvent;
 
@@ -12,13 +18,15 @@ public class InteractionNameComboBox extends MainComboBox {
 	private static final String FILENAME = "interaction_name_cb.properties";
 	private static final String BLANK_TEXT = "";
 	private AllSelectedInteractionTagsPane all_selected_interaction_tags_pane;
+	private CreatedCustomFunctionsPane created_custom_functions_pane;
 	private InteractionManager interaction_manager;
 	private InteractionVisionRangeTextField interaction_vision_range_tf;
 	
-	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, InteractionManager interaction_manager, 
-			MainTextField interaction_vision_range_tf) {
+	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, MainPane created_custom_functions_pane,
+			InteractionManager interaction_manager, MainTextField interaction_vision_range_tf) {
 		super(FILENAME);
 		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
+		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
 		this.interaction_manager = interaction_manager;
 		this.interaction_vision_range_tf = (InteractionVisionRangeTextField) interaction_vision_range_tf;
 		getComboBox().setEditable(true);
@@ -40,7 +48,12 @@ public class InteractionNameComboBox extends MainComboBox {
 	    		int id_selected = getComboBox().getSelectionModel().getSelectedIndex() + 1;
 	    		all_selected_interaction_tags_pane.changePaneWithNewName(id_selected);
 	    		all_selected_interaction_tags_pane.setToOldInteractionMode();
-	    		interaction_vision_range_tf.setText(interaction_manager.getInteraction(id_selected).getRange() + BLANK_TEXT);
+	    		Interaction interaction = interaction_manager.getInteraction(id_selected);
+	    		interaction_vision_range_tf.setText(interaction.getRange() + BLANK_TEXT);
+	    		List<CustomFunction> custom_functions = interaction.getCustomFunctions();
+	    		for(CustomFunction custom_function : custom_functions) {
+	    			created_custom_functions_pane.addButton(custom_function.getName(), custom_function.getParameterFormat());
+	    		}
 			}
 			else {
 				all_selected_interaction_tags_pane.setToNewInteractionMode();

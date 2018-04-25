@@ -5,28 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import authoring.backend.AuthoringObject;
-import authoring.backend.TagController;
-import gui_elements.buttons.AddCustomFunctionsButton;
-import gui_elements.buttons.AddInteractionButton;
-import gui_elements.buttons.InteractionOkButton;
+import gui_elements.buttons.CustomFunctionsSaveButton;
 import gui_elements.combo_boxes.CustomFunctionTypeComboBox;
-import gui_elements.combo_boxes.InteractionComponentTagComboBox;
-import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.MainComboBox;
-import gui_elements.labels.ComponentInteractionsTitleLabel;
-import gui_elements.labels.InteractionComponentTagLabel;
 import gui_elements.labels.InteractionCustomFunctionsTitleLabel;
-import gui_elements.labels.InteractionNameLabel;
-import gui_elements.labels.AllSelectedInteractionTagsLabel;
-import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
+import gui_elements.labels.CreatedCustomFunctionsLabel;
 import gui_elements.labels.CustomFunctionTypeLabel;
-import gui_elements.labels.InteractionVisionRangeLabel;
-import gui_elements.panes.AllSelectedInteractionTagsPane;
-import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
+import gui_elements.panes.CreatedCustomFunctionsPane;
+import gui_elements.panes.CustomFunctionsPane;
 import gui_elements.panes.MainPane;
-import gui_elements.text_fields.InteractionVisionRangeTextField;
-import gui_elements.text_fields.MainTextField;
+import interactions.CustomFunction;
 import interactions.InteractionManager;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -45,14 +33,19 @@ public class InteractionAddCustomFunctionsScreen {
     private int screen_width, screen_height, current_interaction_id;
     private Stage stage;
     private InteractionManager interaction_manager;
+    private MainPane custom_functions_pane, created_custom_functions_pane;
+    private MainComboBox custom_function_type_cb;
+    private CustomFunction custom_function;
     
 	// Additional setup for the add-interactions screen.
     private Scene myScene;
     private static Group root;
     
-    public InteractionAddCustomFunctionsScreen(InteractionManager interaction_manager, int current_interaction_id) {
+    public InteractionAddCustomFunctionsScreen(InteractionManager interaction_manager, int current_interaction_id,
+    		MainPane created_custom_functions_pane) {
     	this.interaction_manager = interaction_manager;
     	this.current_interaction_id = current_interaction_id;
+    	this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
     	initialize();
     }
 
@@ -115,7 +108,6 @@ public class InteractionAddCustomFunctionsScreen {
     
     private void setGUIComponents() {
     	setLabels();
-    	setTextFields();
     	setPanes();
     	setComboBoxes();
     	setButtons();
@@ -126,20 +118,25 @@ public class InteractionAddCustomFunctionsScreen {
     							  new CustomFunctionTypeLabel().getLabel());
     }
     
-    private void setRadioButtons() {
-    }
-            
-    private void setTextFields() {
-    }
-    
     private void setPanes() {
+    	custom_functions_pane = new CustomFunctionsPane();
+    	
+    	root.getChildren().add(custom_functions_pane.getPane());
     }
     
     private void setComboBoxes() {
-		root.getChildren().addAll(new CustomFunctionTypeComboBox().getComboBox());
+    	custom_function_type_cb = new CustomFunctionTypeComboBox(interaction_manager, 
+																 current_interaction_id,
+																 custom_functions_pane,
+																 custom_function);
+    	
+		root.getChildren().add(custom_function_type_cb.getComboBox());
     }
 
     private void setButtons() {
+    	root.getChildren().add(new CustomFunctionsSaveButton(custom_functions_pane,
+    													     created_custom_functions_pane,
+    														 custom_function_type_cb));
     }
 
     public void resetElements() {

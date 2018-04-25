@@ -1,6 +1,7 @@
 package conditions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,6 @@ public class Condition implements EngineObject {
 	
 	public CustomCondition addCustomCondition(String type)
 	{
-		System.out.print("this should only print once");
 		CustomConditionFactory factory = new CustomConditionFactory();
 		CustomCondition cc = factory.getCustomCondition(type);
 		customConditions.add(cc);
@@ -59,6 +59,15 @@ public class Condition implements EngineObject {
 	@Override
 	public int getID() {
 		return id;
+	}
+	
+	public List<String> getInfo() {
+		String[] array = {var1, comparatorManager.getSymbolById(comparatorID), var2};
+		List<String> info = new ArrayList<>(Arrays.asList(array));
+		for (CustomCondition c: customConditions) {
+			info.add(c.getClass().getSimpleName());
+		}
+		return info;
 	}
 
 	public void addTag(String t)
