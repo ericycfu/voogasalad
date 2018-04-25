@@ -10,6 +10,7 @@ import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.ObjectLogic;
+import game_object.PropertyNotFoundException;
 import javafx.scene.image.Image;
 import transform_library.Transform;
 
@@ -19,29 +20,29 @@ import transform_library.Transform;
  *
  */
 public class Interaction implements EngineObject {
-	
+
 	private int id;
 	private List<String> targetTags;
 	private String name;
 	private Image img;
 	private String description;
-	
+
 	//these will be changed by authoring for the interaction
 	private boolean isBuild;
 	private boolean isInstantaneous;
-	
+
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
-	
+
 	public Interaction(int id)
 	{
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
 		this.id = id;
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * @param type
@@ -50,20 +51,20 @@ public class Interaction implements EngineObject {
 	 * need to add the functionality that only the variables related to those tags can be changed etc.
 	 */
 	public CustomFunction addCustomFunction(String type) {
-		
+
 		CustomFunctionFactory factory = new CustomFunctionFactory();
-			
+
 		CustomFunction function = factory.getCustomFunction(type);
 		customFunctions.add(function);
 		return function;
 	}
-	
+
 	public void addAllCustomFunctions(List<String> types) {
 		for(String type : types) {
 			addCustomFunction(type);
 		}
 	}
-	
+
 	/**
 	 * Runs all the custom functions in the interactions
 	 * Each custom function can affect the other game object
@@ -71,12 +72,17 @@ public class Interaction implements EngineObject {
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		if(matchesTags(other, targetTags)) return;
-		for(CustomFunction cFunc : customFunctions)
-		{
-			cFunc.Execute(current, other, manager);
+		try {
+			for(CustomFunction cFunc : customFunctions)
+			{
+				cFunc.Execute(current, other, manager);
+			}
+		}
+		catch(PropertyNotFoundException p) {
+
 		}
 	}
-	
+
 	private boolean matchesTags(GameObject other, List<String> tags)
 	{
 		for(String s : other.getTags())
@@ -85,12 +91,12 @@ public class Interaction implements EngineObject {
 		}
 		return false;
 	}
-	
+
 	public void setRange(double range)
 	{
 		this.range = range;
 	}
-	
+
 	public double getRange() {
 		return range;
 	}
@@ -158,7 +164,7 @@ public class Interaction implements EngineObject {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public List<CustomFunction> getCustomFunctions()
 	{
 		return customFunctions;

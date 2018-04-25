@@ -32,6 +32,11 @@ public class GameHandler extends CommunicationsHandler {
 					runningGameLobby.removePlayer(getSocket());
 					return MainPageHandler.CLASS_REF;
 				}
+				if(input.equals("Save")) {
+					if(!runningGame.getIsRunning())
+						getOutputStream().writeObject(runningGame);
+					return CLASS_REF;
+				}
 				myInterpreter.executeCommand(input);
 			}
 			// if(runningGameLobby.isTeamEmpty(runningGameLobby.getTeamID(getSocket()))
@@ -44,12 +49,14 @@ public class GameHandler extends CommunicationsHandler {
 
 	@Override
 	public void updateClient() {
+		if(runningGame.getIsRunning()) {
 		try {
 			getOutputStream().writeObject(runningGame.getGameObjects());
 			getOutputStream().writeObject(runningGame.getTeamManager().get(team_ID));
 			getOutputStream().writeDouble(runningGame.getGameTime());
 			getOutputStream().writeObject(runningGame.getChat());
 		} catch (IOException e) {
+		}
 		}
 	}
 
