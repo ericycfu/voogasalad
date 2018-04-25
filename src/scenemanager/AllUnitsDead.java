@@ -1,6 +1,8 @@
 package scenemanager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import game_engine.EndStateWrapper;
 import game_engine.Team;
@@ -19,14 +21,36 @@ public class AllUnitsDead implements EndCondition {
 	}
 	
 	@Override
-	public EndStateWrapper check(Team team, List<GameObject> gameObjects) {
-		// TODO Auto-generated method stub
-		return null;
+	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {
+		
+		Map<Team, Integer> unitCount = new HashMap<>();
+		for(Team team : teams)
+		{
+			unitCount.put(team, 0);
+		}
+		
+		for(GameObject o : gameObjects)
+		{
+			Team objectTeam = o.getOwner();
+			int newUnitCount = unitCount.get(objectTeam) + 1;
+			unitCount.put(objectTeam, newUnitCount);
+		}
+		
+		for(Map.Entry<Team, Integer> entry : unitCount.entrySet())
+		{
+			if(entry.getValue() == 0)
+			{
+				Team team = entry.getKey();
+				return new EndStateWrapper(getVictoryMessage(team.getTeamName()), EndStateWrapper.EndState.LOSE, team);
+			}
+		}
+		
+		return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);
+		
 	}
 
 	@Override
 	public CustomComponentParameterFormat getParameterFormat() {
-		// TODO Auto-generated method stub
 		return format;
 	}
 
@@ -38,20 +62,17 @@ public class AllUnitsDead implements EndCondition {
 
 	@Override
 	public void setParameters(CustomComponentParameterFormat toFormat) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return NAME;
 	}
 
 	@Override
 	public String getVictoryMessage(String teamName) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("%s has lost because he has no units or buildings left.", teamName);  
 	}
 	
 }
