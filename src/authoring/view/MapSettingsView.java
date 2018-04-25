@@ -147,6 +147,8 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			for (Object myObj : initialList) {
 				myList.add((Entry<String, Double>) myObj);
 			}
+			//this is the constructor that gameplayer will use
+			ResourceManager newManager = new ResourceManager(myList);
 			System.out.println(myList.get(0));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
