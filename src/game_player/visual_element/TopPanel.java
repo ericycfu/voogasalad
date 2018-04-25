@@ -113,7 +113,7 @@ public class TopPanel {
 		resourceBoard = new ComboBox<>();
 		scoreboard.setPromptText(RESOURCE);
 		scoreboard.setMaxHeight(ysize);
-		addToPane(scoreboard);
+		addToPane(resourceBoard);
 	}
 	
 	private void addToPane(Node n) {
