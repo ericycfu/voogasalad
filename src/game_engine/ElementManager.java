@@ -26,6 +26,11 @@ public abstract class ElementManager {
 		elementMap = new HashMap<Integer, EngineObject>();
 	}
 	
+	public ElementManager(ElementManager other)
+	{
+		this.elementMap = other.elementMap;
+	}
+	
 	/**
 	 * 
 	 * @return

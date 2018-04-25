@@ -2,6 +2,7 @@ package scenemanager;
 
 import java.util.List;
 
+import game_engine.EndStateWrapper;
 import game_engine.Team;
 import game_object.GameObject;
 import interactions.CustomComponentParameterFormat;
@@ -12,9 +13,9 @@ import interactions.CustomComponentParameterFormat;
  * Interface for creating win condition modules
  */
 
-public interface WinCondition {
+public interface EndCondition {
 
-	public boolean check(Team team, List<GameObject> gameObjects);
+	public EndStateWrapper check(Team team, List<GameObject> gameObjects);
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);

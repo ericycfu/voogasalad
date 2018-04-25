@@ -2,6 +2,7 @@ package scenemanager;
 
 import java.util.List;
 
+import game_engine.EndStateWrapper;
 import game_engine.InvalidResourceValueException;
 import game_engine.ResourceManager;
 import game_engine.Team;
@@ -9,7 +10,13 @@ import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import interactions.CustomComponentParameterFormat;
 
-public class ResourceVictory implements WinCondition {
+/**
+ * 
+ * @author Rayan
+ * Implementation of ResourceVictory 
+ */
+
+public class ResourceVictory implements EndCondition {
 
 	public final String NAME = "ResourceVictory";
 	public final String RESOURCE = "Resource";
@@ -21,17 +28,18 @@ public class ResourceVictory implements WinCondition {
 	private double threshold;
 	
 	@Override
-	public boolean check(Team team, List<GameObject> gameObjects) {
+	public EndStateWrapper check(Team team, List<GameObject> gameObjects) {
 		
 		try
 		{
 			double resourceVal = team.getResourceManager().getResource(resource);
-			return (resourceVal > threshold);
+			return new EndStateWrapper(getVictoryMessage(team.getTeamName()), 
+					EndStateWrapper.EndState.WIN);
 		} 
 		catch (InvalidResourceValueException e) 
 		{
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 		
 	}
