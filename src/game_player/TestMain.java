@@ -69,7 +69,7 @@ public class TestMain extends Application {
 		int j = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test = go2.accessLogic().accessInteractions().getInteraction(j);
 		test.setDescription("attack: damage = 5");
-		test.setImg(new Image("attack_icon.png"));
+		test.setImg(new Image("defend_icon.png"));
 		test.setName("attack");
 		test.setRange(50);
 		test.addCustomFunction("ModifyVariable");

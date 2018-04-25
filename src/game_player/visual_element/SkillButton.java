@@ -27,6 +27,7 @@ public class SkillButton extends Button {
 		mySkillName = interactionName;
 		myInteractionID = interactionNumber;
 		mySkillDescription = skillDescription;
+		this.setMaxSize(width, height);
 		setPicture(width, height);
 		setDescription();
 	}

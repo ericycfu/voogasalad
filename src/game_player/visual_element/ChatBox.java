@@ -10,6 +10,8 @@ import javafx.scene.input.KeyEvent;
 
 public class ChatBox {
 	
+	private static final String PROMPT = "Enter here to chat: ";
+	private static final double INPUTBOXOPACITY = 0.7;
 	private static final double CHATHISTORYRATIO = 0.8;
 	private static final double INPUTBOXRATIO = 0.2;
 	private static final String LINEBREAK = "\n";
@@ -34,12 +36,14 @@ public class ChatBox {
 	
 	private void initMyInputBox(double width, double height) {
 		myInputBox = new TextArea();
+		myInputBox.setPromptText(PROMPT);
 		myInputBox.setOnMouseEntered(e -> myChatHistory.setVisible(true));
 		myInputBox.setOnMouseExited(e -> myChatHistory.setVisible(false));
 		myInputBox.setOnKeyPressed(event -> handleKeyInput(event));
 		myInputBox.setLayoutY(myChatHistory.getPrefHeight());
 		myInputBox.setPrefWidth(width);
 		myInputBox.setPrefHeight(height * INPUTBOXRATIO);
+		myInputBox.setOpacity(INPUTBOXOPACITY);
 		myGroup.getChildren().add(myInputBox);
 	}
 	

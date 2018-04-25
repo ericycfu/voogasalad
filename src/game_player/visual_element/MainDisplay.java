@@ -69,9 +69,9 @@ public class MainDisplay implements VisualUpdate {
 			}
 			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
 				int ID = this.myUnitActionDisp.getCurrentActionID();
-				/**
+				
 				try {
-					if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
 						myUnitActionDisp.setBuildTarget(new GameObject(new Vector2(-1, -1)));
 					}
@@ -82,7 +82,7 @@ public class MainDisplay implements VisualUpdate {
 				} catch (UnmodifiableGameObjectException e1) {
 					// do nothing
 				}
-				**/
+				
 				
 			}
 		});
@@ -220,6 +220,7 @@ public class MainDisplay implements VisualUpdate {
 		myMap.setOnMouseReleased(e -> {
 			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
 				mySelectedUnitManager.clear();
+				this.myUnitActionDisp.setCurrentActionID(-1);
 				myMouseXFinalPosition = e.getSceneX();
 				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y*GamePlayer.TOP_HEIGHT;
 				for (GameObject go : myDisplayGameObjects) {

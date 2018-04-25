@@ -24,6 +24,7 @@ import interactions.Interaction;
 import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -74,7 +75,6 @@ public class GamePlayer {
 		initializeSingleUnitSelect();
 		myTopPanel.setTimeline(timeline);
 		unitSkillMapInitialize();
-		System.out.println(myUnitSkills);
 	}
 	
 	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team) {
@@ -118,12 +118,16 @@ public class GamePlayer {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					System.out.println(SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH);
+					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					System.out.println(ia.getID());
+					System.out.println(sb.getInteractionID());
 					if (!ia.isBuild()) {
-						skillList.add(sb);
 						sb.setOnAction(e->{
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
 						});
+						skillList.add(sb);
 					}
 					else {
 						SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
@@ -140,7 +144,7 @@ public class GamePlayer {
 					}
 				}
 			} catch (UnmodifiableGameObjectException e) {
-				
+				// do nothing
 			}
 			myUnitSkills.put(go.getName(), skillList);
 		}
@@ -156,7 +160,6 @@ public class GamePlayer {
 						mySelectedUnitManager.clear();
 						mySelectedUnitManager.add(go);
 					}
-					/**
 					else {
 						int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
 						try {
@@ -168,7 +171,6 @@ public class GamePlayer {
 							// do nothing
 						}
 					}
-					**/
 				}
 			});
 		}
@@ -216,7 +218,15 @@ public class GamePlayer {
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
 		if (myUnitDisplay.getUnitActionDisp().getCurrentActionID()!=-1) {
-			myScene.setCursor(Cursor.CROSSHAIR);
+			try {
+				Image img = mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID()).getImg();
+				ImageCursor cursor = new ImageCursor(img);
+				
+				myScene.setCursor(cursor);
+			} catch (UnmodifiableGameObjectException e) {
+
+			}
+			
 		}
 		else {
 			myScene.setCursor(Cursor.DEFAULT);

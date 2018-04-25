@@ -3,6 +3,7 @@ package game_player.visual_element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import game_object.GameObject;
 import javafx.scene.Group;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import transform_library.Vector2;
 
 public class UnitActionDisplay implements VisualUpdate{
 	
@@ -22,13 +24,16 @@ public class UnitActionDisplay implements VisualUpdate{
 	private GameObject myBuildTarget;
 	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
+	private GameObject myCurrentGameObject;
 	
 	public UnitActionDisplay(double width, double height, Map<String, List<SkillButton>> unitSkills) {
 		myUnitSkills = unitSkills;
 		myCellWidth = width/ACTION_GRID_WIDTH;
+		System.out.println("cell width" + myCellWidth);
 		myCellHeight = height/ACTION_GRID_HEIGHT;
+		System.out.println("cell height" + myCellHeight);
 		myGridPane = new GridPane();
-		myGridPane.setMaxWidth(width);
+		myGridPane.setPrefWidth(width);
 		myGridPane.setPrefHeight(height);
 		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
 		setCurrentActionID(-1);
@@ -60,15 +65,36 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		myGridPane.getChildren().clear();
 		if (gameObjects.isEmpty()) {
+			myCurrentGameObject = new GameObject(new Vector2(-1,-1));
+			myGridPane.getChildren().clear();
 			initialize();
 			return;
 		}
 		GameObject gameObject = gameObjects.get(0);
+		if (gameObject==myCurrentGameObject) {
+			return;
+		}
+		myGridPane.getChildren().clear();
+		
+		
+		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
-		for (int i = 0; i < unitSkills.size() && i < 12; i++) {
-			myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_HEIGHT);
+		for (int i = 0; i < 12; i++) {
+			System.out.println("i: " + i + "; x: " + i%ACTION_GRID_WIDTH + "; y: " + i/ACTION_GRID_WIDTH);
+			if (i < unitSkills.size()) {
+				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
+			}
+			else {
+				Image img = new Image("default_icon.png");
+				SkillButton cell = new SkillButton();
+				cell.setMaxSize(myCellWidth, myCellHeight);
+				ImageView imgv = new ImageView(img);
+				imgv.setFitHeight(myCellHeight*0.8);
+				imgv.setFitWidth(myCellWidth*0.8);
+				cell.setGraphic(imgv);
+				myGridPane.add(cell, i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
+			}
 		}
 	}
 	
