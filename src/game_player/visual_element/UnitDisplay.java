@@ -39,7 +39,7 @@ public class UnitDisplay implements VisualUpdate {
 	@Override
 	public void update(List<GameObject> selectedGameObjects) {
 		myInfoDisp.update(selectedGameObjects);
-		//myActionDisp.update(selectedGameObjects);
+		myActionDisp.update(selectedGameObjects);
 	}
 
 	@Override

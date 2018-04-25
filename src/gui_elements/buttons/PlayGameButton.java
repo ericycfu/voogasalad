@@ -29,12 +29,12 @@ public class PlayGameButton extends ImageButton {
 		this.ac = ac;
 		this.gameEntity = game;
 		setupText();
+		
 	}
 	
-//	public PlayGameButton(Stage stage) {
-//		setupText();
-//		this.setOnAction(e -> new MakeGameSelect(stage));
-//	}
+	public PlayGameButton(Stage stage) {
+		setupText();
+	}
 	
 	private void setupText() {
 		this.getStyleClass().add("make_game_button");

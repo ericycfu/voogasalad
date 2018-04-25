@@ -30,8 +30,14 @@ public class GameObjectManager extends ElementManager {
 
 	
 	public GameObjectManager()
-	{}
-	
+	{
+		super();
+	}
+		
+	public GameObjectManager(GameObjectManager other)
+	{
+		super(other);
+	}
 	
 	public int createGameObject(int id, Vector2 startingPosition, List<String> tags, String name, Team t)
 	{

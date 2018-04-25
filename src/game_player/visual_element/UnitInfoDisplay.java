@@ -29,7 +29,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private Rectangle myDisplayFrame;
 	private TextArea myHealthManaInfo;
 	private TextArea myStatusInfo; 
-	private Map<String, Image> UnitProfileMap;
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
