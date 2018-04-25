@@ -16,4 +16,5 @@ public interface CustomFunction {
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);
+	public String getName();
 }

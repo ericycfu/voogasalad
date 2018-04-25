@@ -3,6 +3,7 @@ package authoring.view;
 import authoring.backend.AuthoringController;
 import authoring.backend.ButtonFactory;
 import authoring.backend.GameEntity;
+import game_data.Writer;
 import javafx.scene.layout.HBox;
 
 public class DisplayMenu extends HBox {
@@ -18,8 +19,5 @@ public class DisplayMenu extends HBox {
 		this.getChildren().add(ButtonFactory.makeButton("Play Game", e -> playGame()));
 	}
 	
-	private void playGame() {
-		
-	}
 
 }

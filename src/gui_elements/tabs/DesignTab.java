@@ -6,6 +6,7 @@ import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
 import gui_elements.buttons.CreateInteractionsButton;
 import gui_elements.buttons.MainButton;
+import gui_elements.buttons.SaveGameButton;
 import gui_elements.buttons.ComponentImageChooserButton;
 import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
@@ -67,7 +68,6 @@ public class DesignTab extends Tab {
 	
 	private void setLabels() {
 		design_root.getChildren().addAll(new ComponentNameLabel().getLabel(),
-//										 new ComponentHealthLabel().getLabel(),
 										 new CreateComponentTitleLabel(),
 										 new ComponentImageChooserLabel().getLabel(),
 										 (component_image_choice_text_label = new ComponentImageChoiceTextLabel()).getLabel(),
@@ -140,7 +140,8 @@ public class DesignTab extends Tab {
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
-										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton());
+										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
+										 new SaveGameButton().getButton());
 	}
 	
 	public void setNewAuthoringObject() {
@@ -158,11 +159,19 @@ public class DesignTab extends Tab {
 		component_tag_cb.getEditor().clear();
 		component_image_choice_text_label.setText(null);
 		component_movement_speed_tf.clear();
+		building_cb.getEditor().clear();
+		component_build_time_tf.clear();
+		component_build_cost_tf.clear();
 	}
 	
 	public void assignComponents() {
-		component_name_tf.setText(authoring_object.getName() + " Loaded");
-		component_tag_cb.getEditor().setText(authoring_object.getTags() + " Loaded");
-		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + 2.0 + "");
+		component_name_tf.setText(authoring_object.getName());
+		String tag_string = "";
+		for(String tag : authoring_object.getTags())
+			tag_string += tag + " ";
+		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
+		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
+		building_cb.getEditor().setText(String.valueOf(authoring_object.isBuilding()));
+//		component_build_cost_tf.setText(authoring_object.get);
 	}
 }

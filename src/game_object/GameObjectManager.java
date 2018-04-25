@@ -14,8 +14,8 @@ import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
-import map.GridMap;
-import map.Pathfinder;
+import pathfinding.GridMap;
+import pathfinding.Pathfinder;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -118,6 +118,7 @@ public class GameObjectManager extends ElementManager {
 		
 		
 	}
+
 
 	public GameObject getGameObject(int id)
 	{

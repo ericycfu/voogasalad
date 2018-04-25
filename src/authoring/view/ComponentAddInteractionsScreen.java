@@ -14,12 +14,14 @@ import gui_elements.combo_boxes.InteractionComponentTagComboBox;
 import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.ComponentInteractionsTitleLabel;
+import gui_elements.labels.CreatedCustomFunctionsLabel;
 import gui_elements.labels.InteractionComponentTagLabel;
 import gui_elements.labels.InteractionNameLabel;
 import gui_elements.labels.AllSelectedInteractionTagsLabel;
 import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
 import gui_elements.labels.InteractionVisionRangeLabel;
 import gui_elements.panes.AllSelectedInteractionTagsPane;
+import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
@@ -43,7 +45,7 @@ public class ComponentAddInteractionsScreen {
     private Stage stage;
     private InteractionManager interaction_manager;
     private TagController tag_controller;
-    private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane;
+    private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane, created_custom_functions_pane;
     private MainComboBox interaction_component_tag_cb, interaction_name_cb;
     private MainTextField interaction_vision_range_tf;
 	
@@ -130,7 +132,8 @@ public class ComponentAddInteractionsScreen {
     							  new InteractionComponentTagLabel().getLabel(),
     							  new InteractionVisionRangeLabel().getLabel(),
   								  new CurrentSelectedInteractionComponentsLabel().getLabel(),
-  								  new AllSelectedInteractionTagsLabel().getLabel());    							  
+  								  new AllSelectedInteractionTagsLabel().getLabel(),
+    							  new CreatedCustomFunctionsLabel().getLabel());    							  
     }
     
     private void setRadioButtons() {
@@ -144,13 +147,16 @@ public class ComponentAddInteractionsScreen {
     private void setPanes() {
     	all_selected_interaction_tags_pane = new AllSelectedInteractionTagsPane(interaction_manager);
     	current_selected_interaction_components_pane = new CurrentSelectedInteractionComponentsPane(tag_controller);
-    	    	
+    	created_custom_functions_pane = new CreatedCustomFunctionsPane();
+    	
     	root.getChildren().addAll(all_selected_interaction_tags_pane.getPane(),
-    							  current_selected_interaction_components_pane.getPane());
+    							  current_selected_interaction_components_pane.getPane(),
+    							  created_custom_functions_pane.getPane());
     }
     
     private void setComboBoxes() {
-		interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane, 
+		interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane,
+														  created_custom_functions_pane,
 														  interaction_manager,
 														  interaction_vision_range_tf);
     	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, 
@@ -166,9 +172,11 @@ public class ComponentAddInteractionsScreen {
     													   interaction_name_cb,
     													   interaction_vision_range_tf,
     													   all_selected_interaction_tags_pane,
+    													   created_custom_functions_pane,
     													   this,
     													   interaction_id).getButton(),
     							  new AddCustomFunctionsButton(interaction_manager,
+    									  					   created_custom_functions_pane,
     									  					   this),
     							  new InteractionOkButton(interaction_manager, 
     									  				  this));
@@ -177,6 +185,7 @@ public class ComponentAddInteractionsScreen {
     public void resetElements() {
     	all_selected_interaction_tags_pane.getPane().getChildren().clear();
     	current_selected_interaction_components_pane.getPane().getChildren().clear();
+    	created_custom_functions_pane.getPane().getChildren().clear();
     	interaction_name_cb.getEditor().clear();
     	interaction_component_tag_cb.getEditor().clear();
     	interaction_vision_range_tf.clear();

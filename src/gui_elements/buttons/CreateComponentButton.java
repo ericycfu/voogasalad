@@ -13,6 +13,7 @@ public class CreateComponentButton extends MainButton {
 
 	private static final String FILENAME = "create_component_button.properties";
 	private static final String SPACE = " ";
+	private static final String IMAGE_PATH_HEADING = "/images/";
 	private AuthoringObject authoring_object;
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private TextField name_tf, movement_speed_tf;
@@ -55,11 +56,11 @@ public class CreateComponentButton extends MainButton {
 				if(!tag_cb.getItems().contains(tag))
 					tag_cb.getItems().add(tag);
 			}
-//			authoring_object.setImage(image_text_label.getText());
+			authoring_object.setImage(IMAGE_PATH_HEADING + image_text_label.getText());
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));
 			authoring_object.setBuilding(Boolean.parseBoolean(building_cb.getValue()));
 			authoring_object.setBuildTime(Double.parseDouble(build_time_tf.getText()));
-			authoring_object.setBuildCost(resource_cb.getValue(), Double.parseDouble(resource_cost_tf.getText()));
+//			authoring_object.setBuildCost(resource_cb.getValue(), Double.parseDouble(resource_cost_tf.getText()));
 			CreatedObjects.addObject(authoring_object);
 			design_tab.setNewAuthoringObject();
 			design_tab.resetComponents();

@@ -1,4 +1,4 @@
-package map;
+package pathfinding;
 
 import transform_library.Vector2;
 
