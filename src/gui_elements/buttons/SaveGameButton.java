@@ -39,21 +39,9 @@ public class SaveGameButton extends MainButton {
 			myWriter = new Writer();
 //			myReader = new Reader();
 			try {
-//				System.out.println("this should occur once");
-				System.out.print(myGameEntity == null);
 				myWriter.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
 				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getMap().getLocations();
-				Map<AuthoringObject, List<Vector2>> changedMap = new HashMap<>();
-				for (AuthoringObject obj: map.keySet()) {
-					List<DraggableImageView> list = map.get(obj);
-					List<Vector2> newList = new ArrayList();
-					for (DraggableImageView img: list) {
-						Vector2 v = new Vector2(img.getX(), img.getY());
-						newList.add(v);
-					}
-					changedMap.put(obj, newList);
-				}
-				
+				Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 				
 				List<Map<AuthoringObject, List<Vector2>>> listform = new ArrayList<>();
 				listform.add(changedMap);
@@ -65,5 +53,19 @@ public class SaveGameButton extends MainButton {
 			
 			CreatedObjects.getAuthoringObjects().clear();			
 		});
+	}
+	
+	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<DraggableImageView>> originalMap) {
+		Map<AuthoringObject, List<Vector2>> newMap = new HashMap<>();
+		for (AuthoringObject obj: originalMap.keySet()) {
+			List<DraggableImageView> list = originalMap.get(obj);
+			List<Vector2> newList = new ArrayList();
+			for (DraggableImageView img: list) {
+				Vector2 v = new Vector2(img.getX(), img.getY());
+				newList.add(v);
+			}
+			newMap.put(obj, newList);
+		}
+		return newMap;
 	}
 }
