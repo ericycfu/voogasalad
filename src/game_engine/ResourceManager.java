@@ -37,6 +37,22 @@ public class ResourceManager {
 	
 	/**
 	 * 
+	 * @param resources
+	 * Constructor for game data
+	 */
+	public ResourceManager(List<Entry<String, Double>> resources)
+	{
+		Map<String, Double> map = new HashMap<>();
+		for(Entry<String, Double> entry : resources)
+		{
+			map.put(entry.getKey(), entry.getValue());
+		}
+		
+		this.resourceMap = map;
+	}
+	
+	/**
+	 * 
 	 * @param copy
 	 * Allows for copying of the resource manager
 	 */
