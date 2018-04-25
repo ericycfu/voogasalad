@@ -20,26 +20,26 @@ public class SceneManager {
 	private GameObjectManager objManager;
 	
 	private List<EndCondition> endConditions;
+	private List<Team> teams;
 	
-	public SceneManager(GameObjectManager manager, List<EndCondition> winConditions)
+	public SceneManager(List<Team> teams, GameObjectManager manager, List<EndCondition> winConditions)
 	{
 		this.endConditions = new ArrayList<>();
 		this.objManager = manager;
+		this.teams = teams;
 	}
 	
-	public EndStateWrapper checkEndCondition()
-	{
-		Iterator<GameObject> iter = objManager.getElements().iterator();
-		while(iter.hasNext())
+	
+	public EndStateWrapper checkEndCondition() throws NullEndConditionException
+	{	
+		for(EndCondition end: endConditions)
 		{
-			GameObject ob = iter.next();
-			for(EndCondition end : endConditions)
-			{
-				Team team = ob.getOwner();
-				return end.check(team, objManager.getElements());
-			}
+			EndStateWrapper endState = end.check(teams, objManager.getElements());
+			if(!endState.getState().equals(EndStateWrapper.EndState.CONTINUE))
+				return endState;
 		}
-		return null;
+		
+		throw new NullEndConditionException("No End Conditions have been made for your game");
 	}
 
 }
