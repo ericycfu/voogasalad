@@ -100,27 +100,34 @@ public class Interaction implements EngineObject {
 	public double getRange() {
 		return range;
 	}
-
-
-
-
-	public List<String> getTargetTags()
+	
+	public boolean isBuild()
 	{
-		return targetTags;
+		return isBuild;
 	}
-	public void addTag(String newTag) 
+	
+	public void isBuild(boolean val)
 	{
-		if(!targetTags.contains(newTag))
-			targetTags.add(newTag);
+		this.isBuild = val;
 	}
-	public void removeTag(String oldTag) 
-	{
-		targetTags.remove(oldTag);
-	}
-	public CustomFunction getCustomFunction(int x) 
-	{
-		return customFunctions.get(x);
-	}
+	
+ 	public List<String> getTargetTags()
+ 	{
+ 		return targetTags;
+ 	}
+ 	public void addTag(String newTag) 
+ 	{
+ 		if(!targetTags.contains(newTag))
+ 			targetTags.add(newTag);
+ 	}
+ 	public void removeTag(String oldTag) 
+ 	{
+ 		targetTags.remove(oldTag);
+ 	}
+ 	public CustomFunction getCustomFunction(int x) 
+ 	{
+ 		return customFunctions.get(x);
+ 	}
 
 
 	@Override

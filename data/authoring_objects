@@ -1,0 +1,94 @@
+<object-stream>
+  <authoring.backend.AuthoringObject>
+    <myImagePath>/images/station.png</myImagePath>
+    <myName>Station</myName>
+    <myTags/>
+    <myX>0.0</myX>
+    <myY>0.0</myY>
+    <myMovementSpeed>0.0</myMovementSpeed>
+    <isBuilding>false</isBuilding>
+    <buildTime>0.0</buildTime>
+    <buildCost/>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <buildTime>0.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <interactionIndexMap class="tree-map"/>
+      </interactions>
+      <conditions>
+        <elementMap/>
+      </conditions>
+    </myObjectLogic>
+    <myAttributes reference="../myObjectLogic/attributes"/>
+    <myInteractions reference="../myObjectLogic/interactions"/>
+    <myConditionManager>
+      <elementMap/>
+    </myConditionManager>
+  </authoring.backend.AuthoringObject>
+  <authoring.backend.AuthoringObject>
+    <myImagePath>/images/station.png</myImagePath>
+    <myName>Station</myName>
+    <myTags/>
+    <myX>0.0</myX>
+    <myY>0.0</myY>
+    <myMovementSpeed>0.0</myMovementSpeed>
+    <isBuilding>false</isBuilding>
+    <buildTime>0.0</buildTime>
+    <buildCost/>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <buildTime>0.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <interactionIndexMap class="tree-map"/>
+      </interactions>
+      <conditions>
+        <elementMap/>
+      </conditions>
+    </myObjectLogic>
+    <myAttributes reference="../myObjectLogic/attributes"/>
+    <myInteractions reference="../myObjectLogic/interactions"/>
+    <myConditionManager>
+      <elementMap/>
+    </myConditionManager>
+  </authoring.backend.AuthoringObject>
+  <authoring.backend.AuthoringObject>
+    <myImagePath>/images/rcd.png</myImagePath>
+    <myName>SDLKFJ</myName>
+    <myTags>
+      <string>SDF</string>
+    </myTags>
+    <myX>0.0</myX>
+    <myY>0.0</myY>
+    <myMovementSpeed>234.0</myMovementSpeed>
+    <isBuilding>false</isBuilding>
+    <buildTime>23.0</buildTime>
+    <buildCost/>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <buildTime>0.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <interactionIndexMap class="tree-map"/>
+      </interactions>
+      <conditions>
+        <elementMap/>
+      </conditions>
+    </myObjectLogic>
+    <myAttributes reference="../myObjectLogic/attributes"/>
+    <myInteractions reference="../myObjectLogic/interactions"/>
+    <myConditionManager>
+      <elementMap/>
+    </myConditionManager>
+  </authoring.backend.AuthoringObject>
+</object-stream>
