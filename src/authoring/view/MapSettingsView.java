@@ -122,6 +122,25 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void saveSettings() {
 		VBox myRootBox = (VBox) this.getChildren().get(0);
 		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
+		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
+	}
+	
+	private void saveMapConfiguration(VBox myBox) {
+		for (Node myNode : myBox.getChildren()) {
+			  try {
+				  ((TextField) myNode).getText();
+			  }
+			  catch(Exception e) {
+				  try {
+					 // ((ComboBox) myNode).get
+					  //work in progress
+				  }
+				  catch(Exception e2) {
+					  
+				  }
+			  }
+		}
+		
 	}
 	private void saveResources(VBox myBox) {
 		for (Node myNode : myBox.getChildren()) {
@@ -136,6 +155,4 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			}
 		}
 	}
-	
-
 }
