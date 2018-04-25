@@ -9,6 +9,15 @@ import interactions.CustomComponentParameterFormat;
 
 public class AllUnitsDead implements EndCondition {
 
+	public final String NAME = "AllUnitsDead";
+	
+	private CustomComponentParameterFormat format;
+	
+	public AllUnitsDead()
+	{
+		
+	}
+	
 	@Override
 	public EndStateWrapper check(Team team, List<GameObject> gameObjects) {
 		// TODO Auto-generated method stub
@@ -18,13 +27,13 @@ public class AllUnitsDead implements EndCondition {
 	@Override
 	public CustomComponentParameterFormat getParameterFormat() {
 		// TODO Auto-generated method stub
-		return null;
+		return format;
 	}
 
 	@Override
 	public void setParameterFormatFields() {
-		// TODO Auto-generated method stub
-		
+
+		format.addHelpText("Victory is achieved through this condition when all units of one team are dead.");
 	}
 
 	@Override
@@ -36,7 +45,7 @@ public class AllUnitsDead implements EndCondition {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return NAME;
 	}
 
 	@Override
