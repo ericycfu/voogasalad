@@ -24,7 +24,6 @@ public class AuthoringObject {
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
 	public static final int ICON_PREF_WIDTH = 70;
 	public static final int ICON_PREF_HEIGHT = 70;
-	
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
 	private String myImagePath;
