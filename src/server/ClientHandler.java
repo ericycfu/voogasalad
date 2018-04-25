@@ -17,8 +17,8 @@ public class ClientHandler implements Runnable {
 	public void run() {
 		String newHandler =  myCommunicationsHandler.updateServer();
 		myCommunicationsHandler.updateClient();
-		myCommunicationsHandler = myCHFactory.get(newHandler);
-		
+		if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
+			myCommunicationsHandler = myCHFactory.get(newHandler);
 	}
 
 }

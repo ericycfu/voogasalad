@@ -1,0 +1,6 @@
+<object-stream>
+  <java.util.AbstractMap_-SimpleEntry>
+    <key class="string">gold </key>
+    <value class="double">10.0</value>
+  </java.util.AbstractMap_-SimpleEntry>
+</object-stream>
