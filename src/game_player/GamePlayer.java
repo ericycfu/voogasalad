@@ -1,9 +1,11 @@
 package game_player;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import game_engine.EngineObject;
 import game_engine.GameInstance;
@@ -58,7 +60,10 @@ public class GamePlayer {
 	private Scene myScene;
 	private Team myTeam;
 	
-	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team) { // (Socket socket, GameInstance gi)
+	private Set<GameObject> myPossibleUnits;
+	
+	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team) { 
+		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
 		myGameObjectManager = gameManager;
 		myTeam = team;
@@ -70,40 +75,48 @@ public class GamePlayer {
 		//unitSkillMapInitialize();
 	}
 	
+	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team) {
+		myPossibleUnits = allPossibleUnits;
+	}
+	
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
-		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
+		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
-			for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-				if (i.isBuild()) {
-					List<String> tags = i.getTargetTags();
-					for (String s : tags) {
-						for (GameObject go2 : myGameObjectManager.getPossibleUnits()) {
-							if (s.equals(go2.getName())) {
-								SkillButton sb = new SkillButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
-										SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, 
-										SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-								sb.setOnAction(e -> {
-									myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
-									myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
-								});
-								skillList.add(sb);
+			try {
+				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
+					if (i.isBuild()) {
+						List<String> tags = i.getTargetTags();
+						for (String s : tags) {
+							for (GameObject go2 : myPossibleUnits) {
+								if (s.equals(go2.getName())) {
+									SkillButton sb = new SkillButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
+											SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, 
+											SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+									sb.setOnAction(e -> {
+										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
+										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
+									});
+									skillList.add(sb);
+								}
 							}
 						}
+						myUnitBuilds.put(go.getName(), skillList);
 					}
-					myUnitBuilds.put(go.getName(), skillList);
 				}
+			} catch (UnmodifiableGameObjectException e) {
+				// do nothing
 			}
 		}
 	}
 	
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
-		for (GameObject go : myGameObjectManager.getPossibleUnits()) {
+		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					SkillButton sb = new SkillButton(ia.getImage(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					if (!ia.isBuild()) {
 						skillList.add(sb);
 						sb.setOnAction(e->{
@@ -111,7 +124,7 @@ public class GamePlayer {
 						});
 					}
 					else {
-						SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*this.ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*this.BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+						SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 						List<GameObject> temp = new ArrayList<>();
 						temp.add(go);
 						cancel.setOnAction(e -> {
@@ -138,14 +151,14 @@ public class GamePlayer {
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
-					if (myUnitDisplay.getUnitActionDisp().getCurrentActionID() != -1) {
+					if (myUnitDisplay.getUnitActionDisp().getCurrentActionID() == -1) {
 						mySelectedUnitManager.clear();
 						mySelectedUnitManager.add(go);
 					}
 					else {
 						int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
 						try {
-							if (!mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+							if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 								mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager);
 								myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 							}

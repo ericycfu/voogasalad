@@ -55,7 +55,7 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMap = new ImageView(new Image("map.jpeg"));
+		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(myWidth*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight(myHeight*MAP_DISPLAY_RATIO);
 		//myMap.setFill(Color.GREEN);

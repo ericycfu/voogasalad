@@ -198,7 +198,7 @@ public class TopPanel implements VisualUpdate {
 
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		myGameObjectManager = gameObjects;
+		//myGameObjectManager = gameObjects;
 	}
 	
 	public List<GameObject> getGameObjects(){

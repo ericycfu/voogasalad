@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import game_data.Reader;
 import game_object.GameObject;
@@ -48,7 +49,11 @@ public class TestMain extends Application {
 		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
-		GameObject go2 = new GameObject(new Vector2(50,100));
+
+		
+		gom.addElement(go);
+		int i = gom.createGameObject(1, new Vector2(50, 100), null, "ghoul", null);
+		GameObject go2 = gom.getGameObject(i);
 		go2.accessLogic().accessAttributes().createAttribute("Health");
 		go2.accessLogic().accessAttributes().createAttribute("Mana");
 		go2.accessLogic().accessAttributes().createAttribute("Attack");
@@ -60,9 +65,6 @@ public class TestMain extends Application {
 		go2.setMovementSpeed(4);
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
-		
-		gom.addElement(go);
-		gom.addElement(go2);
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));

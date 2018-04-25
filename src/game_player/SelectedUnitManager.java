@@ -17,7 +17,7 @@ public class SelectedUnitManager {
 	public SelectedUnitManager(Team team) {
 		selectedUnits = new ArrayList<GameObject>();
 		myTeam = team;
-		myTeamID = myTeam.getID();
+		//myTeamID = myTeam.getID();
 	}
 	
 	public void clear() {
@@ -25,9 +25,9 @@ public class SelectedUnitManager {
 	}
 	
 	public void add(GameObject go) {
-		if (go.getOwner().getID()==myTeamID) {
+		//if (go.getOwner().getID()==myTeamID) {
 			selectedUnits.add(go);
-		}
+		//}
 	}
 	
 	public void move(Vector2 target, GameObjectManager gom) {
