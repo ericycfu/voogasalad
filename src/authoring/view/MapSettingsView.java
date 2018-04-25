@@ -18,6 +18,7 @@ import gui_elements.buttons.ImageChooserButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -29,6 +30,7 @@ import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
 	private ResourceManager myResourceManager;
+	private HBox resourcesBox;
 	private Writer myWriter;
 	private Reader myReader;
 	
@@ -41,17 +43,25 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	
 	private void initializeAll() {
+		initializeTitle();
 		VBox myVBox = new VBox();
 		HBox box = new HBox();
-		HBox resourcesBox = new HBox();
+		resourcesBox = new HBox();
 		myVBox.getChildren().add(box);
 		myVBox.getChildren().add(resourcesBox);
 		initializeLabelBox(box);
 		initializeContent(box);
-		initializeResources(resourcesBox);
-		box.setPadding(new Insets(100, 50, 0, 50));
-		resourcesBox.setPadding(new Insets(0, 50, 0, 50));
-		this.getChildren().add(myVBox);
+		box.setPadding(new Insets(50, 50, 0, 50));
+		this.getChildren().add(box);
+		setupButton();
+	}
+	
+	private void initializeTitle() {
+		this.getChildren().add(LabelFactory.makeLabel("Game Settings", DEFAULT_TITLE));
+//		initializeResources(resourcesBox);
+//		box.setPadding(new Insets(100, 50, 0, 50));
+//		resourcesBox.setPadding(new Insets(0, 50, 0, 50));
+//		this.getChildren().add(myVBox);
 	}
 	
 	private void initializeLabelBox(HBox rootBox) {
@@ -85,6 +95,16 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		rootBox.getChildren().add(box);
 	}
 	
+	private void setupButton() {
+		HBox box = new HBox();
+		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions());
+		box.getChildren().addAll(saveButton);
+//		box.setPadding(new Insets(0, 0, 0, 0));
+		this.getChildren().add(box);
+	}
+	
+	private void saveConditions() {
+	}
 	private void initializeResources(HBox rootBox) {
 		VBox myVBox = new VBox();
 		rootBox.getChildren().add(myVBox);
