@@ -9,6 +9,7 @@ import conditions.ConditionManager;
 import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
+import pathfinding.GridMap;
 
 
 /**
@@ -74,11 +75,12 @@ public class ObjectLogic
 		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
 	}
 
-	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager) {
+	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager, GridMap gridMap) {
+		
 		currentInteraction = interactions.getInteraction(id);
 		if(!inRange(current, other, currentInteraction))
 		{
-			current.queueMovement(current.getTransform().getPosition(), manager);
+			current.queueMovement(current.getTransform().getPosition(), manager, gridMap);
 		}
 
 	}
