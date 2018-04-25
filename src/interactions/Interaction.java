@@ -95,8 +95,15 @@ public class Interaction implements EngineObject {
 		return range;
 	}
 	
+	public boolean isBuild()
+	{
+		return isBuild;
+	}
 	
-	
+	public void isBuild(boolean val)
+	{
+		this.isBuild = val;
+	}
 	
  	public List<String> getTargetTags()
  	{

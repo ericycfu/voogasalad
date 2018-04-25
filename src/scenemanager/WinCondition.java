@@ -19,4 +19,5 @@ public interface WinCondition {
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);
 	public String getName();
+	public String getVictoryMessage(String teamName);
 }
