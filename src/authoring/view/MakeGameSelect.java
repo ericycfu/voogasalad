@@ -1,5 +1,6 @@
 package authoring.view;
 
+import gui_elements.buttons.BackButton;
 import gui_elements.buttons.NewGameButton;
 import gui_elements.texts.MakeGameText;
 import javafx.geometry.Pos;
@@ -31,13 +32,16 @@ public class MakeGameSelect implements AuthoringView {
 	private void setupScreen() {
 		myPane = new BorderPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
+//		myPane.setId("start_screen");
 		myScene = new Scene(myPane);
 		myScene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(myScene);
 	}
 	
 	private void setupTitle() {
-		myPane.setTop(new MakeGameText());
+		HBox box = new HBox();
+		box.getChildren().addAll(new MakeGameText(), new BackButton());
+		myPane.setTop(box);
 	}
 	
 	private void setupGameSelect() {

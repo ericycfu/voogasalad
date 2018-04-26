@@ -1,6 +1,8 @@
 package interactions;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
+import game_object.PropertyNotFoundException;
 /**
  * 
  * @author Rayan
@@ -11,7 +13,9 @@ import game_object.GameObject;
 
 public interface CustomFunction {
 
-	public void Execute(GameObject current, GameObject other);
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) throws PropertyNotFoundException;
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
+	public void setParameters(CustomComponentParameterFormat toFormat);
+	public String getName();
 }

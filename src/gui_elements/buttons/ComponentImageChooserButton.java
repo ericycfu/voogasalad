@@ -31,6 +31,7 @@ public class ComponentImageChooserButton extends MainButton {
 			file = filechooser.showOpenDialog(new Stage());
 			if(file != null) {
 				component_image_choice_text_label.setText(
+//						file.toString().split("src")[1]);
 						file.toString().substring(file.toString().lastIndexOf("\\") + 1));
 			}
 		});

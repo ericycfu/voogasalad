@@ -1,6 +1,7 @@
 package conditions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +20,12 @@ import game_object.UnmodifiableGameObjectException;
  * to act upon, the comparator to use, and the values to compare.
  */
 
-public class Condition implements EngineObject<ConditionManager> {
+public class Condition implements EngineObject {
 
 	private int id;
 	private ComparatorManager comparatorManager;
-	private GameObject host;
+//	private GameObject host;
+	private List<String> tags;
 	
 	private String var1;
 	private String var2;
@@ -32,11 +34,14 @@ public class Condition implements EngineObject<ConditionManager> {
 	private List<CustomCondition> customConditions;
 
 	
-	public Condition(GameObject object, ConditionManager manager, int comparatorID, String var1, String var2)
+//	public Condition(int id, GameObject object, int comparatorID, String var1, String var2)
+	public Condition(int id, int comparatorID, String var1, String var2)
+
 	{
+		this.id = id;
 		comparatorManager = new ComparatorManager();
-		host = object;
-		addToManager(manager);
+		customConditions = new ArrayList<>();
+//		host = object;
 		this.var1 = var1;
 		this.var2 = var2;
 		this.comparatorID = comparatorID;
@@ -55,18 +60,24 @@ public class Condition implements EngineObject<ConditionManager> {
 	public int getID() {
 		return id;
 	}
+	
+	public List<String> getInfo() {
+		String[] array = {var1, comparatorManager.getSymbolById(comparatorID), var2};
+		List<String> info = new ArrayList<>(Arrays.asList(array));
+		for (CustomCondition c: customConditions) {
+			info.add(c.getClass().getSimpleName());
+		}
+		return info;
+	}
 
-
-	public void setID(int id)
+	public void addTag(String t)
 	{
-		this.id = id;
+		tags.add(t);
 	}
 	
-	@Override
-	public void addToManager(ConditionManager manager) {
-		
-		setID(manager.addElementToManager(this));
-		
+	public void removeTag(String t)
+	{
+		tags.remove(t);
 	}
 	
 	public void execute()
@@ -77,7 +88,7 @@ public class Condition implements EngineObject<ConditionManager> {
 			{
 				for(CustomCondition c : customConditions)
 				{
-					c.Execute(host);
+//					c.Execute(host);
 				}
 			}
 		} 
@@ -100,7 +111,8 @@ public class Condition implements EngineObject<ConditionManager> {
 			return Double.parseDouble(var);
 		}
 		
-		return host.accessLogic().accessAttributes().getAttribute(var);
+//		return host.accessLogic().accessAttributes().getAttribute(var);
+		return 0;
 	}
 	
 }

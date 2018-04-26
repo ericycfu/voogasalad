@@ -1,0 +1,39 @@
+<object-stream>
+  <game__object.GameObjectManager>
+    <elementMap>
+      <entry>
+        <int>1</int>
+        <game__object.GameObject>
+          <id>1</id>
+          <transform>
+            <position>
+              <x>0.0</x>
+              <y>0.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <interactionIndexMap class="tree-map"/>
+            </interactions>
+            <conditions>
+              <elementMap/>
+            </conditions>
+          </myObjectLogic>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+        </game__object.GameObject>
+      </entry>
+    </elementMap>
+  </game__object.GameObjectManager>
+</object-stream>

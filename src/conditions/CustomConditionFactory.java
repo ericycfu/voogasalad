@@ -17,7 +17,8 @@ public class CustomConditionFactory {
 		Class<?> clazz;
 		try 
 		{
-			clazz = Class.forName("conditions." + type);
+			String className = "conditions." + type;
+			clazz = Class.forName(className);
 			CustomCondition comm = (CustomCondition)clazz.newInstance();
 			return comm;
 		} 

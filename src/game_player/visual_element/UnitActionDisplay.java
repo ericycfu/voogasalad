@@ -3,6 +3,7 @@ package game_player.visual_element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import game_object.GameObject;
 import javafx.scene.Group;
@@ -10,85 +11,118 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import transform_library.Vector2;
 
 public class UnitActionDisplay implements VisualUpdate{
 	
 	public static final int ACTION_GRID_WIDTH = 4;
 	public static final int ACTION_GRID_HEIGHT = 3;
+	private int myCurrentActionID;
 	private GridPane myGridPane;
 	private double myCellWidth;
 	private double myCellHeight;
-	private String myCurrentAction;
-	SkillButton[][] myActionsGrid;
-	Map<String, List<String>> myUnitSkills;
+	private GameObject myBuildTarget;
+	Map<String, List<SkillButton>> myUnitSkills;
 	Map<String, Image> mySkillImages;
+	private GameObject myCurrentGameObject;
 	
-	public UnitActionDisplay(double width, double height, Map<String, List<String>> unitSkills, 
-			Map<String, Image> skillImages) {
-		mySkillImages = skillImages;
+	public UnitActionDisplay(double width, double height, Map<String, List<SkillButton>> unitSkills) {
 		myUnitSkills = unitSkills;
 		myCellWidth = width/ACTION_GRID_WIDTH;
+		System.out.println("cell width" + myCellWidth);
 		myCellHeight = height/ACTION_GRID_HEIGHT;
+		System.out.println("cell height" + myCellHeight);
+		myGridPane = new GridPane();
+		myGridPane.setPrefWidth(width);
+		myGridPane.setPrefHeight(height);
+		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
+		setCurrentActionID(-1);
 		initialize();
 	}
 	
+	public void setBuildTarget(GameObject go) {
+		myBuildTarget = go;
+	}
+	
+	public GameObject getBuildTarget() {
+		return myBuildTarget;
+	}
+	
 	private void initialize() {
-		myGridPane = new GridPane();
-		myCurrentAction = "";
-		myActionsGrid = new SkillButton[ACTION_GRID_WIDTH][ACTION_GRID_HEIGHT];
-		for (int i = 0; i < myActionsGrid.length; i++) {
-			for (int j = 0; j < myActionsGrid[0].length; j++) {
-				Image img = new Image("attack_icon.png");
+		for (int i = 0; i < ACTION_GRID_WIDTH; i++) {
+			for (int j = 0; j < ACTION_GRID_HEIGHT; j++) {
+				Image img = new Image("default_icon.png");
 				SkillButton cell = new SkillButton();
+				cell.setMaxSize(myCellWidth, myCellHeight);
 				ImageView imgv = new ImageView(img);
 				imgv.setFitHeight(myCellHeight*0.8);
-				imgv.setFitWidth(myCellWidth*0.65);
+				imgv.setFitWidth(myCellWidth*0.8);
 				cell.setGraphic(imgv);
-				cell.setLayoutX(myCellWidth*i);
-				cell.setLayoutY(myCellHeight*j);
-				myActionsGrid[i][j] = cell;
+				myGridPane.add(cell, i, j);
 			}
 		}
 	}
-
+	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		if (gameObjects.isEmpty()) return;
+		if (gameObjects.isEmpty()) {
+			myCurrentGameObject = new GameObject(new Vector2(-1,-1));
+			myGridPane.getChildren().clear();
+			initialize();
+			return;
+		}
 		GameObject gameObject = gameObjects.get(0);
-		ArrayList<String> skills = (ArrayList<String>) myUnitSkills.get(gameObject.getName());
-		for (int i = 0; i < skills.size(); i++) {
-			if (i < 12) {
-				SkillButton curr = myActionsGrid[i%4][i/4];
-				curr.setSkillName(skills.get(i));
-				curr.setGraphic(new ImageView(mySkillImages.get(skills.get(i))));
-				curr.setOnAction(e -> {
-					myCurrentAction = curr.getSkillName();
-					//TO-BE-COMPLETED
-				});
+		if (gameObject==myCurrentGameObject) {
+			return;
+		}
+		myGridPane.getChildren().clear();
+		
+		
+		myCurrentGameObject = gameObject;
+		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
+		for (int i = 0; i < 12; i++) {
+			System.out.println("i: " + i + "; x: " + i%ACTION_GRID_WIDTH + "; y: " + i/ACTION_GRID_WIDTH);
+			if (i < unitSkills.size()) {
+				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
 			}
-			else return;
+			else {
+				Image img = new Image("default_icon.png");
+				SkillButton cell = new SkillButton();
+				cell.setMaxSize(myCellWidth, myCellHeight);
+				ImageView imgv = new ImageView(img);
+				imgv.setFitHeight(myCellHeight*0.8);
+				imgv.setFitWidth(myCellWidth*0.8);
+				cell.setGraphic(imgv);
+				myGridPane.add(cell, i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
+			}
 		}
 	}
 	
-	public String getCurrentAction() {
-		return myCurrentAction;
+	public void build(List<SkillButton> sblist) {
+		myGridPane.getChildren().clear();
+		for (int i = 0; i < sblist.size()-1; i++) {
+			myGridPane.add(sblist.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_HEIGHT);
+		}
+		myGridPane.add(sblist.get(sblist.size()-1), ACTION_GRID_WIDTH, ACTION_GRID_HEIGHT);
 	}
 	
-	public void setDefault() {
-		myCurrentAction = "";
+	private SkillButton getCancelButton() {
+		SkillButton ret = new SkillButton();
+		
+		return ret;
 	}
 	
 	@Override
 	public Node getNodes() {
-		Group group = new Group();
-		for (int i = 0; i < myActionsGrid.length; i++) {
-			for (int j = 0; j < myActionsGrid[0].length; j++) {
-				group.getChildren().add(myActionsGrid[i][j]);
-			}
-		}
-		return group;
+		return myGridPane;
 	}
 	
-	
+	public int getCurrentActionID() {
+		return myCurrentActionID;
+	}
+
+	public void setCurrentActionID(int myCurrentActionID) {
+		this.myCurrentActionID = myCurrentActionID;
+	}
 	
 }

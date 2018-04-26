@@ -14,12 +14,17 @@ import java.util.Map;
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
+	private Map<String, Double> buildCosts;
+	private double buildTime;
 	
-	public ObjectAttributes() {
+	
+	public ObjectAttributes()
+	{
 		attributes = new HashMap<String, Double>();
 	}
 	
-	public List<String> getAttributeNames() {
+	public List<String> getAttributeNames() 
+	{
 		List<String> list = new ArrayList<>();
 		for(String attribute : attributes.keySet()) {
 			list.add(attribute);
@@ -27,7 +32,8 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public List<Double> getAttributeValues() {
+	public List<Double> getAttributeValues() 
+	{
 		List<Double> list = new ArrayList<>();
 		for(String attribute : attributes.keySet()) {
 			list.add(attributes.get(attribute));
@@ -35,7 +41,8 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public Map<String, Double> getAttributeMap() {
+	public Map<String, Double> getAttributeMap() 
+	{
 		return attributes;
 	}
 	
@@ -81,7 +88,24 @@ public class ObjectAttributes {
 	{
 		if(attributes.containsKey(attribute))
 			return attributes.get(attribute);
-		
-		throw new PropertyNotFoundException("Property does not exist for object");
+		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}	
+	
+	public void setCosts(Map<String, Double> costMap)
+	{
+		for(Map.Entry<String, Double> map : costMap.entrySet())
+		{
+			buildCosts.put(map.getKey(), map.getValue());
+		}
+	}
+
+	public double getBuildTime() 
+	{
+		return buildTime;
+	}
+
+	public void setBuildTime(double buildTime) 
+	{
+		this.buildTime = buildTime;
+	}
 }

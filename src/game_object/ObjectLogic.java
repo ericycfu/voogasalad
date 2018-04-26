@@ -6,8 +6,10 @@ import java.util.List;
 
 import conditions.Condition;
 import conditions.ConditionManager;
+import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
+import pathfinding.GridMap;
 
 
 /**
@@ -23,10 +25,9 @@ public class ObjectLogic
 	private Interaction currentInteraction;
 	
 	ObjectAttributes attributes;
-	
 	InteractionManager interactions;
 	ConditionManager conditions;
-	
+		
 	public ObjectLogic()
 	{
 		this.attributes = new ObjectAttributes();
@@ -57,21 +58,31 @@ public class ObjectLogic
 	 * 
 	 * for now it executes all interactions, later it must be specific interactions
 	 */
-	public void executeInteractions(GameObject current, GameObject interactionTarget)
+	public void executeInteractions(GameObject current, GameObject interactionTarget, GameObjectManager manager)
 	{
-		for(Interaction inter : interactions.getElements())
+		if(interactionTarget.isUninteractive() || current.isUninteractive()) return;
+		if(inRange(current, interactionTarget, currentInteraction))
 		{
-			if(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange())
-			{
-				inter.executeCustomFunctions(current, interactionTarget);
-			}
+			current.dequeueMovement();
+			currentInteraction.executeCustomFunctions(current, interactionTarget, manager);
+			current.dequeueInteraction();
 		}
-		current.dequeueInteraction();
 		
 	}
+	
+	public boolean inRange(GameObject current, GameObject interactionTarget, Interaction inter)
+	{
+		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
+	}
 
-	public void setCurrentInteraction(Interaction i) {
-		currentInteraction = i;
+	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager, GridMap gridMap) {
+		
+		currentInteraction = interactions.getInteraction(id);
+		if(!inRange(current, other, currentInteraction))
+		{
+			current.queueMovement(current.getTransform().getPosition(), manager, gridMap);
+		}
+
 	}
 	
 	public void checkConditions(GameObject current)

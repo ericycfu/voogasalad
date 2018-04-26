@@ -25,20 +25,14 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private double myHeight; 
 	private double myWidth; 
 	private GridPane myUnitInfoDisplay;
-	private Group myUnitProfilePic;
-	private Group myUnitStatus;
 	private ImageView myCurrentUnitImageView;
 	private Rectangle myDisplayFrame;
 	private TextArea myHealthManaInfo;
 	private TextArea myStatusInfo; 
-	private Map<String, Image> UnitProfileMap;
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
-		myUnitProfilePic = new Group();
-		myUnitStatus = new Group();
-		myUnitInfoDisplay.getChildren().add(myUnitProfilePic);
-		myUnitInfoDisplay.getChildren().add(myUnitStatus);
+		myUnitInfoDisplay.setStyle("-fx-background-color: #FFFFFF;");
 		myWidth = width;
 		myHeight = height;
 		initializeDisplayStructure();
@@ -61,7 +55,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 		myCurrentUnitImageView.setFitWidth(myWidth/3);
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
-		myUnitProfilePic.getChildren().add(myCurrentUnitImageView);
 		myUnitInfoDisplay.add(myCurrentUnitImageView, 0, 0, 1, 1);
 	}
 	
@@ -123,7 +116,10 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		if (gameObjects.isEmpty()) return;
+		if (gameObjects.isEmpty()) {
+			updateProfilePic(DefaultImage);
+			return;
+		}
 		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());
 		updateHealthManaInfo(gameObjects.get(0));
 		updateStatusInfo(gameObjects.get(0));

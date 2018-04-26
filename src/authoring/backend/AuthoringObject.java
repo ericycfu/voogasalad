@@ -1,9 +1,13 @@
 package authoring.backend;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import conditions.ConditionManager;
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
@@ -11,30 +15,41 @@ import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import transform_library.Vector2;
+
 public class AuthoringObject {
 	//extends group?
 	public static final String TEST_IMAGE = "/images/station.png";
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
 	public static final int ICON_PREF_WIDTH = 70;
 	public static final int ICON_PREF_HEIGHT = 70;
-	
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
 	private String myImagePath;
 	private String myName;
-	private String myTag;
+	private List<String> myTags;
 	private double myX;
 	private double myY;
 	private double myMovementSpeed;
+	private boolean isBuilding;
+	private double buildTime;
+	private Map<String, Double> buildCost;
 	private ObjectLogic myObjectLogic;
 	private ObjectAttributes myAttributes;
 	private InteractionManager myInteractions;
+	private ConditionManager myConditionManager;
 	
 	public AuthoringObject() {
 		defaultObject();
 		addTestObject();
 //		addDuvall();
+	}
+		
+	public AuthoringObject(DraggableImageView img) {
+		myDragImage = img;
+		myX = 0;
+		myY = 0;
 	}
 	
 	private void defaultObject() {
@@ -45,6 +60,12 @@ public class AuthoringObject {
 		myObjectLogic = new ObjectLogic();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
+		myTags = new ArrayList<String>();
+		myConditionManager = new ConditionManager();
+		myTags = new ArrayList<>();
+		isBuilding = false;
+		buildTime = 0;
+		buildCost = new HashMap<>();
 	}
 	
 	private void addTestObject() {
@@ -73,9 +94,7 @@ public class AuthoringObject {
 	public void setImage(String image_path) {
 		myImagePath = image_path;
 		Image image = new Image(getClass().getResourceAsStream(image_path));
-		myDragImage = new DraggableImageView(this, image);
-		myDragImage.setFitWidth(ICON_PREF_WIDTH);
-		myDragImage.setFitHeight(ICON_PREF_HEIGHT);
+		myDragImage = new DraggableImageView(this, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
 	}
 	
 	public String getName() {
@@ -94,12 +113,12 @@ public class AuthoringObject {
 		myMovementSpeed = movementSpeed;
 	}
 	
-	public String getTag() {
-		return myTag;
+	public List<String> getTags() {
+		return myTags;
 	}
 	
-	public void setTag(String tag) {
-		myTag = tag;
+	public void addTag(String tag) {
+		myTags.add(tag);
 	}
 	
 	public double getX() {
@@ -118,21 +137,63 @@ public class AuthoringObject {
 		myY = newY;
 	}
 	
-	public void changeByX(double deltaX) {
-		myX = myX + deltaX;
+	public boolean isBuilding() {
+		return isBuilding;
 	}
 	
-	public void changeByY(double deltaY) {
-		myY = myY + deltaY;
+	public void setBuilding(boolean b) {
+		isBuilding = b;
+	}
+	
+	public double getBuildTime() {
+		return buildTime;
+	}
+	
+	public void setBuildTime(double time) {
+		buildTime = time;
+	}
+	
+	public List<String> getBuildCostResources() {
+		List<String> resources = new ArrayList<String>();
+		for(String resource : buildCost.keySet()) {
+			resources.add(resource);
+		}
+		return resources;
+	}
+	
+	public List<Double> getBuildCostAmounts() {
+		List<Double> amounts = new ArrayList<Double>();
+		for(double amount : buildCost.values()) {
+			amounts.add(amount);
+		}
+		return amounts;
+	}
+	
+	public void setBuildCost(String resource, double amount) {
+		buildCost.put(resource, amount);
 	}
 
 	public ObjectAttributes getObjectAttributesInstance() {
 		return myAttributes;
 	}
 	
-	public AuthoringObject duplicateObj() {
-		AuthoringObject newobj = new AuthoringObject();
-		
-		return newobj;
+	public InteractionManager getInteractionsManagerInstance() {
+		return myInteractions;
+	}
+
+	public DraggableImageView duplicateImgView() {
+		Image image = myDragImage.getImage();
+		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+		AuthoringObject newobj = new AuthoringObject(imageview);
+		imageview.setAction(newobj);
+		return imageview;
+	}
+
+	public ObjectLogic getObjectLogic() {
+		return myObjectLogic;
+	}
+	
+	public ConditionManager getConditionManager() {
+		return myConditionManager;
 	}
 }

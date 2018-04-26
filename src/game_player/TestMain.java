@@ -2,13 +2,17 @@ package game_player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 
 import game_data.Reader;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.Renderer;
+import interactions.Interaction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -20,7 +24,7 @@ import transform_library.Vector2;
 
 public class TestMain extends Application {
 
-    private final int FRAMES_PER_SECOND = 5;
+    private final int FRAMES_PER_SECOND = 60;
     private final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final String TITLE = "Gameplayer";
@@ -44,11 +48,15 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
 		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
 		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
-		go.setMovementSpeed(30);
+		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer(new Image("robert.png"));
 		go.setRenderer(renderer);
 		
-		GameObject go2 = new GameObject(new Vector2(50,100));
+
+		
+		gom.addElement(go);
+		int i = gom.createGameObject(1, new Vector2(50, 100), null, "ghoul", null);
+		GameObject go2 = gom.getGameObject(i);
 		go2.accessLogic().accessAttributes().createAttribute("Health");
 		go2.accessLogic().accessAttributes().createAttribute("Mana");
 		go2.accessLogic().accessAttributes().createAttribute("Attack");
@@ -57,19 +65,22 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
 		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
-
-		go2.setMovementSpeed(10);
+		go2.setMovementSpeed(4);
+		int j = go2.accessLogic().accessInteractions().createInteraction();
+		Interaction test = go2.accessLogic().accessInteractions().getInteraction(j);
+		test.setDescription("attack: damage = 5");
+		test.setImg(new Image("defend_icon.png"));
+		test.setName("attack");
+		test.setRange(50);
+		test.addCustomFunction("ModifyVariable");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
+		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
-		
-		gom.addElementToManager(go);
-		gom.addElementToManager(go2);
-		GamePlayer gp = new GamePlayer(gom, unitSkills, skillImages, new HashMap<String, Image>(), new HashMap<String, Image>());		
-        myGP = gp;
-		Scene scene = gp.getScene();  
-        gpStage.setScene(scene);
-        gpStage.show();
-        //myGP.update(myGOM.getElements());
+		Set<GameObject> possibleunits = new HashSet<>();
+		possibleunits.add(go);
+		possibleunits.add(go2);
 
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));
@@ -77,6 +88,13 @@ public class TestMain extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
+        
+		GamePlayer gp = new GamePlayer(animation, gom, null, possibleunits);
+        myGP = gp;
+		Scene scene = gp.getScene();  
+        gpStage.setScene(scene);
+        gpStage.show();
+        //myGP.update(myGOM.getElements());
 
 	}
 
@@ -86,6 +104,6 @@ public class TestMain extends Application {
 	
 	private void step(double timeElapsed) {
 		myGP.update(myGOM.getElements());
-		myGOM.runGameObjectLoop();
+		myGOM.runGameObjectLoop(SECOND_DELAY);
 	}
 }

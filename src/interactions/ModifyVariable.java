@@ -1,6 +1,9 @@
 package interactions;
 
+import java.util.regex.Pattern;
+
 import game_object.GameObject;
+import game_object.GameObjectManager;
 import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
@@ -14,6 +17,7 @@ import game_object.UnmodifiableGameObjectException;
 
 public class ModifyVariable implements CustomFunction {
 
+	public final String NAME = "ModifyVariable";
 	public final String VARIABLE = "Variable";
 	public final String DELTA = "Delta";
 	public final String RATE = "Rate";
@@ -21,7 +25,7 @@ public class ModifyVariable implements CustomFunction {
 	private CustomComponentParameterFormat format;
 	
 	private String variable;
-	private double delta;
+	private String delta;
 	
 	//reconsider rate, maybe add a limit to simulate a for loop? and couple that with rate?
 	private double rate;
@@ -32,15 +36,14 @@ public class ModifyVariable implements CustomFunction {
 		setParameterFormatFields();
 	}
 	
-	
-	// make seperate container object for parameter data? 
-	
+		
 	public void setParameters(CustomComponentParameterFormat format)
 	{
 		try 
 		{
 			this.variable = format.getParameterValue(VARIABLE);
-			this.delta = Double.parseDouble(format.getParameterValue(DELTA));
+			this.delta = format.getParameterValue(DELTA);
+		
 		} 
 		catch (PropertyNotFoundException e) 
 		{
@@ -56,20 +59,20 @@ public class ModifyVariable implements CustomFunction {
 	 * Will get variable list from object and subtract from relevant variable
 	 */
 	@Override
-	public void Execute(GameObject current, GameObject other) {
-		
-		//largely placeholder implementation, will have to take care of rate
-		double prevVal;
+	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {		
 		
 		try 
 		{
-			prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
-			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + delta);
+			double deltaVal;
+			ParameterParser p = new ParameterParser();
+			deltaVal = p.assignValidatedValue(delta, current);
+			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
+			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
 			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
-			throw new IllegalArgumentException(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -83,11 +86,18 @@ public class ModifyVariable implements CustomFunction {
 	public void setParameterFormatFields() {
 		
 		format.addHelpText("This function allows you to change a variable in another object when the "
-				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place.");
+				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta "
+				+ "can either be a number or an attribute in the player");
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
 		format.addStringField(RATE);		
 	}
-	
+
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
+	}
 
 }

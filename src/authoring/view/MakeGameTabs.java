@@ -4,6 +4,7 @@ import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
 import gui_elements.tabs.DesignTab;
 import gui_elements.tabs.GameSettingsTab;
+import gui_elements.tabs.MapSettingsTab;
 import gui_elements.tabs.PlaceTab;
 import javafx.scene.control.TabPane;
 
@@ -13,11 +14,14 @@ public class MakeGameTabs extends TabPane implements AuthoringView {
 		myPlaceTab = new PlaceTab(ac, game);
 		
 		this.getTabs().addAll(
-				new GameSettingsTab(),
+//				new GameSettingsTab(),
+				new MapSettingsTab(ac),
 				new DesignTab(),
 				myPlaceTab);
 		ac.addToAuthorController(this);
 //		ac.addToAuthorController(myPlaceTab.getMap());
+		this.setPrefSize(700, 800);
+		this.getStyleClass().add("tab_pane");
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	}
 	
