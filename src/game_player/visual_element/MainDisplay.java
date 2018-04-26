@@ -56,7 +56,7 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMap = new ImageView(new Image("map.jpeg"));
+		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(myWidth*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight(myHeight*MAP_DISPLAY_RATIO);
 		//myMap.setFill(Color.GREEN);
@@ -64,17 +64,12 @@ public class MainDisplay implements VisualUpdate {
 			double mouseX = e.getX();
 			double mouseY = e.getY();
 			if (e.getButton()==MouseButton.SECONDARY) {
-<<<<<<< HEAD
-				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager);
-=======
-				double mouseX = e.getX();
-				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
->>>>>>> dev
 			}
 			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
 				int ID = this.myUnitActionDisp.getCurrentActionID();
+				
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
@@ -87,6 +82,7 @@ public class MainDisplay implements VisualUpdate {
 				} catch (UnmodifiableGameObjectException e1) {
 					// do nothing
 				}
+				
 				
 			}
 		});
@@ -224,6 +220,7 @@ public class MainDisplay implements VisualUpdate {
 		myMap.setOnMouseReleased(e -> {
 			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
 				mySelectedUnitManager.clear();
+				this.myUnitActionDisp.setCurrentActionID(-1);
 				myMouseXFinalPosition = e.getSceneX();
 				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y*GamePlayer.TOP_HEIGHT;
 				for (GameObject go : myDisplayGameObjects) {

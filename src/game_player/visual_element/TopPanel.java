@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import game_data.Reader;
 import game_data.Writer;
+import game_engine.ResourceManager;
+import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import javafx.animation.Timeline;
@@ -18,8 +21,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
  * the interface that all top panel UI elements implement
  * @author Eddie
  */
-public class TopPanel implements VisualUpdate {
+public class TopPanel {
 	
 	public static final String MENU = "Menu";
 	public static final String START = "Start";
@@ -37,6 +38,7 @@ public class TopPanel implements VisualUpdate {
 	public static final String TIME = "Time";
 	public static final String SCORE = "Scores";
 	public static final String[] SCORES = {"Player1: "};
+	public static final String RESOURCE = "Resources";
 	public static final String COLON = ": ";
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
@@ -51,29 +53,28 @@ public class TopPanel implements VisualUpdate {
 	private List<TextArea> myTA;
 	private TextArea time;
 	private ComboBox<String> scoreboard;
-	private TextArea r1;
-	private TextArea r2;
-	private String r1Name;
-	private String r2Name;
+	private ComboBox<String> resourceBoard;
 	private GameObjectManager myGameObjectManager;
+	private Team myTeam;
 	private int menuSpan;
 	private Timeline tl;
 	private Reader myReader;
 	private Writer myWriter;
 	private boolean isLoaded;
 	
-	public TopPanel(double xsize, double ysize) {
+	public TopPanel(Team team, GameObjectManager gom, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
+		myTeam = team;
+		myGameObjectManager = gom;
 		myWriter = new Writer();
 		myReader = new Reader();
-		
 		menuSpan = 0;
-		
 		
 		setupMenu(xsize, ysize);
 		setupScores(xsize, ysize);
-		setupTAs(xsize, ysize);
+		setupTime(xsize, ysize);
+		setupResources(xsize, ysize);
 	}
 
 	private void setupMenu(double xsize, double ysize) {
@@ -100,18 +101,19 @@ public class TopPanel implements VisualUpdate {
 		addToPane(scoreboard);
 	}
 	
-	private void setupTAs(double xsize, double ysize) {
+	private void setupTime(double xsize, double ysize) {
 		time = new TextArea(TIME + COLON + 0);
-		r1 = new TextArea(r1Name + COLON + 0);
-		r2 = new TextArea(r2Name + COLON + 0);
-		TextArea[] tas = {time, r1, r2};
-		myTA = Arrays.asList(tas);
-		myTA.forEach(ta -> {
-			ta.setEditable(false);
-			ta.setPrefWidth(xsize * TAWIDTH);
-			ta.setMaxHeight(ysize);
-			addToPane(ta);
-		});
+		time.setEditable(false);
+		time.setPrefWidth(xsize * TAWIDTH);
+		time.setMaxHeight(ysize);
+		addToPane(time);
+	}
+	
+	private void setupResources(double xsize, double ysize) {
+		resourceBoard = new ComboBox<>();
+		scoreboard.setPromptText(RESOURCE);
+		scoreboard.setMaxHeight(ysize);
+		addToPane(resourceBoard);
 	}
 	
 	private void addToPane(Node n) {
@@ -130,7 +132,7 @@ public class TopPanel implements VisualUpdate {
 		try {
 			myWriter.write(file.getCanonicalPath(), ListRepresentation);
 		} catch (IOException e) {
-			System.out.print("Error!");
+			System.out.print("Error!"); // TODO: add alert
 		}
 	}
 	
@@ -141,20 +143,9 @@ public class TopPanel implements VisualUpdate {
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
 		try {
-<<<<<<< HEAD
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			myGameObjectManager.clearManager();
-			myGameObjectManager = (GameObjectManager) gameObjects.get(0);
-=======
-			List<Object> gameObjects= myReader.read(file.getCanonicalPath(), "game_object.GameObject");
-			
-			System.out.println(gameObjects.size());
-			myGameObjects.clear();
-			for(Object o: gameObjects) {
-				myGameObjects.add((GameObject) o);
-			}
-			isLoaded = true;
->>>>>>> dev
+			myGameObjectManager = (GameObjectManager) gameObjects.get(0); // TODO: don't create new
 		} catch (ClassNotFoundException e) {
 			// TODO alert prompt
 		} catch (IOException e) {
@@ -166,49 +157,40 @@ public class TopPanel implements VisualUpdate {
 		tl = timeline;
 	}
 	
-	/**
-	 * allow the game player to set the resources amounts displayed in the top panel
-	 * @param amount1 amount for first resource
-	 * @param amount2 amount for second resource
-	 */
-	public void setResourcesAmount(int amount1, int amount2) {
-		r1.setText(r1Name + COLON + amount1);
-		r2.setText(r2Name + COLON + amount2);
+	private void setResources() {
+		scoreboard.getItems().clear();
+		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
+		String[] resources = new String[entryList.size()];
+		for(int i = 0; i < entryList.size(); i++) {
+			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
+		}
+		scoreboard.getItems().addAll(resources);
 	}
 	
-	/**
-	 * allow the game player to set the time displayed in the top panel
-	 * @param time current time
-	 */
-	public void setTime(double timeValue) {
+	private void setTime(double timeValue) {
 		time.setText(TIME + COLON + timeValue);
 	}
 	
-	/**
-	 * allow the game player to set the scores displayed in the top panel
-	 * @param scores current scores for each player
-	 */
-	public void setScores(Map<String, Integer> scores) {
+	private void setScores(Map<String, Integer> scores) {
 		int counter = 0;
 		for(String s: scores.keySet()) {
 			scoreboard.getItems().set(counter, s + COLON + scores.get(s));
 			counter++;
 		}
 	}
-
-	@Override
-	public void update(List<GameObject> gameObjects) {
-		myGameObjectManager = gameObjects;
-	}
 	
-	public List<GameObject> getGameObjects(){
-		return myGameObjects;
-	}
 	public boolean getIsLoaded() {
 		boolean temp = isLoaded;
 		isLoaded = false;
 		return temp;
 	}
+	
+	public void update() {
+		setResources(); // TODO: set resource amount using gameobjectmanager
+		setTime(0); // TODO: set time
+		setScores(null); // TODO: set scores
+	}
+	
 	public Node getNodes() {
 		return myPane;
 	}
