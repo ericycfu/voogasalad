@@ -50,5 +50,5 @@ public class AttributeApplyAndOkButton extends MainButton {
 			}
 			stage.close();
 		});
-	}	
+	}
 }

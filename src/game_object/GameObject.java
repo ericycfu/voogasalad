@@ -103,8 +103,26 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.id = id;
 		this.name = name;
 		this.tags = tags;
+		this.owner = t;
 		propertiesInit();
 
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * Constructor that deep copies an object.
+	 */
+	public GameObject(int id, Team t, GameObject other)
+	{
+		this.id = id;
+		this.name = other.name;
+		this.tags = other.tags;
+		this.owner = t;
+		this.propertiesInit();
+		this.transform = other.transform;
+		this.renderer = other.renderer;
+		this.myObjectLogic = other.myObjectLogic;
 	}
 	
 	private void propertiesInit()
@@ -316,4 +334,5 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.elapsedTime += time;
 	}
+	
 }

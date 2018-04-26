@@ -1,8 +1,7 @@
-package authoring.view;
+package server_client;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
+import java.net.Socket;
 
 import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
@@ -15,21 +14,20 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class StartScreen {
+public class LobbySelectionScreen {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
 
-	public static final String TITLE = "Rap Tilt Swagger";
+	public static final String TITLE = "Client";
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	private Stage myStage;
-	private 	StackPane myPane;
+	private StackPane myPane;
 	private Scene myScene; 
 
-	public StartScreen(Stage primaryStage) {
+	public LobbySelectionScreen(Stage primaryStage, Socket clientSocket) {
 		myStage = primaryStage;
 		setupScreen();
 		setupContent();
@@ -49,7 +47,7 @@ public class StartScreen {
 		box.getChildren().addAll(
 				new StartScreenText(), 
 				new MakeGameButton(myStage), 
-				new PlayGameButton(myStage));
+				new PlayGameButton());
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
 		box.setSpacing(10);

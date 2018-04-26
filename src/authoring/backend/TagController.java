@@ -3,7 +3,7 @@ package authoring.backend;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class TagController {
 	
@@ -12,7 +12,7 @@ public class TagController {
 	
 	public TagController() {
 		tags = new ArrayList<String>();
-		tagMap = new TreeMap<String, List<AuthoringObject>>();
+		tagMap = new HashMap<String, List<AuthoringObject>>();
 	}
 	
 	public void addTag(String tag) {
@@ -40,6 +40,19 @@ public class TagController {
 		}
 	}
 	
+	public void updateTag(int index, String new_tag) {
+		String old_tag = tags.get(index);
+		if(tagMap.containsKey(old_tag)) {
+			List<AuthoringObject> authoring_objects = tagMap.get(old_tag);
+			tagMap.remove(old_tag);
+			tagMap.put(new_tag, authoring_objects);
+			for(AuthoringObject ao : authoring_objects) {
+				ao.getTags().set(ao.getTags().indexOf(old_tag), new_tag);
+			}
+		}
+		tags.set(index, new_tag);
+	}
+		
 	public List<String> getTags() {
 		return tags;
 	}

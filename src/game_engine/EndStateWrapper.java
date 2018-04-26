@@ -10,16 +10,18 @@ public class EndStateWrapper {
 
 	public static enum EndState
 	{
-		WIN, LOSE;
+		WIN, LOSE, CONTINUE;
 	}
 	
 	private String message;
 	private EndState state;
+	private Team team;
 	
-	public EndStateWrapper(String message, EndState state)
+	public EndStateWrapper(String message, EndState state, Team team)
 	{
 		this.state = state;
 		this.message = message;
+		this.team = team;
 	}
 
 	public String getMessage() 
@@ -30,6 +32,11 @@ public class EndStateWrapper {
 	public EndState getState() 
 	{
 		return state;
+	}
+	
+	public Team getTeam()
+	{
+		return team;
 	}
 	
 	

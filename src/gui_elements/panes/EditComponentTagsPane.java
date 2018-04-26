@@ -2,23 +2,36 @@ package gui_elements.panes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
+import authoring.backend.TagController;
+import game_object.ObjectAttributes;
+import game_object.PropertyNotFoundException;
+import interactions.CustomComponentParameterFormat;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-public class CustomFunctionsPane extends MainPane {
+public class EditComponentTagsPane extends MainPane {
 
 	private FlowPane flow_pane;
-	private String full_directory_name = DIRECTORY_STRING + "custom_functions_pane.properties";
+	private ScrollPane scroll_pane;
+	private String full_directory_name = DIRECTORY_STRING + "edit_component_tags_pane.properties";
 	private final String PANE_STYLE = "-fx-background-color: #000000";
 	private int x, y, width, height;
 	private static final int TEXTFIELD_SIZE = 10;
 	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
+	private TagController tag_controller;;
 	
-	public CustomFunctionsPane() {
+	public EditComponentTagsPane(TagController tag_controller) {
+		this.tag_controller = tag_controller;
 		initialize();
 	}
 	
@@ -59,13 +72,20 @@ public class CustomFunctionsPane extends MainPane {
 		flow_pane.setLayoutY(y);
 		flow_pane.setPrefSize(width, height);
 		flow_pane.setStyle(PANE_STYLE);
+		scroll_pane = new ScrollPane();
+		scroll_pane.setContent(flow_pane);
+		
+		List<String> tagList = tag_controller.getTags();
+		for(String tag : tagList) {
+			addComponentTagTextField(tag);
+		}
 	}
 	
-	public void addCustomFunctionTextField(String text) {
-		TextField custom_function_text_field = new TextField(text);
-		custom_function_text_field.setAlignment(TEXTFIELD_POSITION);
-		custom_function_text_field.setPrefSize(width, height / TEXTFIELD_SIZE);
-		flow_pane.getChildren().add(custom_function_text_field);
+	private void addComponentTagTextField(String text) {
+		TextField component_tag_text_field = new TextField(text);
+		component_tag_text_field.setAlignment(TEXTFIELD_POSITION);
+		component_tag_text_field.setPrefSize(width, height / TEXTFIELD_SIZE);
+		flow_pane.getChildren().add(component_tag_text_field);
 	}
 
 	@Override
