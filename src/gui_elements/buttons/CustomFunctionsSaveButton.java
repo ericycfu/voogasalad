@@ -3,6 +3,7 @@ package gui_elements.buttons;
 import java.util.List;
 
 import authoring.view.ComponentAddInteractionsScreen;
+import authoring.view.InteractionAddCustomFunctionsScreen;
 import gui_elements.combo_boxes.CustomFunctionTypeComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.panes.CreatedCustomFunctionsPane;
@@ -22,13 +23,15 @@ public class CustomFunctionsSaveButton extends MainButton {
 	private CustomFunctionsPane custom_functions_pane;
 	private CreatedCustomFunctionsPane created_custom_functions_pane;
 	private CustomFunctionTypeComboBox custom_function_type_cb;
+	private InteractionAddCustomFunctionsScreen interaction_add_custom_functions_screen;
 
 	public CustomFunctionsSaveButton(MainPane custom_functions_pane, MainPane created_custom_functions_pane,
-			MainComboBox custom_function_type_cb) {
+			MainComboBox custom_function_type_cb, InteractionAddCustomFunctionsScreen interaction_add_custom_functions_screen) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.custom_functions_pane = (CustomFunctionsPane) custom_functions_pane;
 		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
 		this.custom_function_type_cb = (CustomFunctionTypeComboBox) custom_function_type_cb;
+		this.interaction_add_custom_functions_screen = interaction_add_custom_functions_screen;
 		setAction();
 	}
 
@@ -43,6 +46,7 @@ public class CustomFunctionsSaveButton extends MainButton {
 			}
 			created_custom_functions_pane.addButton(custom_function_type_cb.getComboBox().getSelectionModel().getSelectedItem(),
 													format);
+			interaction_add_custom_functions_screen.getStage().close();
 		});
 	}
 }
