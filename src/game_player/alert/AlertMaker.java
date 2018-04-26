@@ -1,4 +1,4 @@
-package game_player.visual_element;
+package game_player.alert;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
