@@ -5,20 +5,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-public class CustomFunctionsPane extends MainPane {
+public class CustomFunctionNamesPane extends MainPane {
 
 	private FlowPane flow_pane;
-	private String full_directory_name = DIRECTORY_STRING + "custom_functions_pane.properties";
-	private final String PANE_STYLE = "-fx-background-color: #000000";
+	private String full_directory_name = DIRECTORY_STRING + "custom_function_names_pane.properties";
+	private static final String PANE_STYLE = "-fx-background-color: #000000";
+	private static final String LABEL_STYLE = "-fx-text-fill: #ffff00; -fx-font-size: 12pt";
 	private int x, y, width, height;
-	private static final int TEXTFIELD_SIZE = 10;
-	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
+	private static final int LABEL_SIZE = 10;
+	private static final Pos LABEL_POSITION = Pos.CENTER;	
 	
-	public CustomFunctionsPane() {
+	public CustomFunctionNamesPane() {
 		initialize();
 	}
 	
@@ -60,12 +61,13 @@ public class CustomFunctionsPane extends MainPane {
 		flow_pane.setPrefSize(width, height);
 		flow_pane.setStyle(PANE_STYLE);
 	}
-	
-	public void addCustomFunctionTextField(String text) {
-		TextField custom_function_text_field = new TextField(text);
-		custom_function_text_field.setAlignment(TEXTFIELD_POSITION);
-		custom_function_text_field.setPrefSize(width, height / TEXTFIELD_SIZE);
-		flow_pane.getChildren().add(custom_function_text_field);
+
+	public void addCustomFunctionNameLabel(String text) {
+		Label custom_function_name_label = new Label(text);
+		custom_function_name_label.setAlignment(LABEL_POSITION);
+		custom_function_name_label.setPrefSize(width, height / LABEL_SIZE);
+		custom_function_name_label.setStyle(LABEL_STYLE);
+		flow_pane.getChildren().add(custom_function_name_label);
 	}
 
 	@Override
