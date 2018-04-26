@@ -43,7 +43,8 @@ public class PlaceTab extends Tab {
 	}
 	
 	private void setButtons() {
-		place_root.getChildren().addAll(new SaveGameButton().getButton()
+		place_root.getChildren().addAll(
+//				new SaveGameButton(game).getButton()
 //										new PlayGameButton().getButton()
 										);
 	}

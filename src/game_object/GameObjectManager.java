@@ -149,6 +149,7 @@ public class GameObjectManager extends ElementManager {
 		
 	}
 
+
 	public GameObject getGameObject(int id)
 	{
 		return (GameObject)(this.get(id));

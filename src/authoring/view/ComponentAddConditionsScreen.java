@@ -1,13 +1,19 @@
 package authoring.view;
 
 import javafx.geometry.Insets;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import authoring.backend.AuthoringObject;
 import authoring.backend.ButtonFactory;
+import authoring.backend.ComboBoxFactory;
 import authoring.backend.ConditionStatement;
+import authoring.backend.TextFieldFactory;
 import conditions.Comparator;
 import conditions.ComparatorManager;
+import conditions.Condition;
 import conditions.ConditionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,11 +48,20 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 //		getProperties();
 		initializeScreen();
 		newPane();
+		showExistingConditions();
 		setupButtons();
 	}
 	
 	private void getProperties() {
 //		myResources = ResourceBundle.getBundle(PROPERTY_FILENAME);
+	}
+	
+	private void showExistingConditions() {
+		for (Condition c: conditionManager.getElements()) {
+			List<String> info = c.getInfo();
+			setLine(info.get(0), info.get(1), info.get(2), info.get(3));
+		}
+		newLine();
 	}
 	
 	private void initializeScreen() {
@@ -67,11 +82,18 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		grid.setPadding(new Insets(100, 50, 100, 50));
 		root.getChildren().add(grid);
 		setTitles();
-		newLine();
 	}
-	
+		
 	private void setTitles() {
 		addLine(new Label("Attribute"), new Label("Comparator"), new Label("Value"), new Label("Condition Triggered"));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void setLine(String attribute, String comparator, String value, String condition) {
+		addLine(TextFieldFactory.makeTextField(attribute),
+				ComboBoxFactory.makeComboBox(comparatorSelect(), comparator),
+				TextFieldFactory.makeTextField(value),
+				ComboBoxFactory.makeComboBox(customConditionSelect(), condition));
 	}
 	
 	private void newLine() {
@@ -88,18 +110,12 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private ComboBox comparatorSelect() {
-		ComboBox box = new ComboBox();
-		ObservableList<String> comparatorSigns = FXCollections.observableArrayList(comparatorManager.getComparatorSigns());
-		box.setItems(comparatorSigns);
-		return box;
+		return ComboBoxFactory.makeComboBox(comparatorManager.getComparatorSigns());
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked"})
 	private ComboBox customConditionSelect() {
-		ComboBox box = new ComboBox();
-		ObservableList<String> comparatorSigns = FXCollections.observableArrayList(conditionManager.availableCustomConditions());
-		box.setItems(comparatorSigns);
-		return box;
+		return ComboBoxFactory.makeComboBox(conditionManager.availableCustomConditions());
 	}
 	
 	private void setupButtons() {
@@ -114,6 +130,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	}
 	
 	private void saveConditions() {
+		conditionManager.clearManager();
 		for (int i=1; i<currentRow; i++) {
 			String attribute = extractTextField(findNode(i,COLUMNS[0]));
 			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));

@@ -27,7 +27,6 @@ public class CustomFunctionFactory {
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			System.out.println("Custom function does not exist. Check if properly named on frontend");
 			return null;
 		}
