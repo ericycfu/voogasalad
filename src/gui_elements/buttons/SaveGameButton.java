@@ -25,7 +25,7 @@ public class SaveGameButton extends MainButton {
 	private static final String FILENAME = "save_game_button.properties";
 	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
 	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
-	private static final String ALERT_TITLE = "COmponent Saved";
+	private static final String ALERT_TITLE = "Component Saved";
 	private static final String ALERT_MESSAGE = "Your component has been saved!";
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private Writer myWriter;
@@ -79,6 +79,7 @@ public class SaveGameButton extends MainButton {
 	private void createAlert() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(ALERT_TITLE);
+		alert.setHeaderText(null);
 		alert.setContentText(ALERT_MESSAGE);
 		alert.showAndWait();
 	}
