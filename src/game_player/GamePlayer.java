@@ -179,7 +179,7 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		
-		myTopPanel = new TopPanel(myTeam, myGameObjectManager, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(myTeam, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
