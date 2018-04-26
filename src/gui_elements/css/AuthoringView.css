@@ -56,3 +56,12 @@
 	-fx-pref-height: 1000;
 	-fx-background-image: url("/images/tt.jpg");
 }
+
+.default_authoring_label {
+	-fx-font-size: 12pt;
+}
+
+.default_authoring_title {
+	-fx-text-fill: #0000ff;
+	-fx-font-size: 18pt
+}

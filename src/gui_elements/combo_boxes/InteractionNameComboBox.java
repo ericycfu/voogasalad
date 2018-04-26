@@ -1,10 +1,15 @@
 package gui_elements.combo_boxes;
 
+import java.util.List;
+
 import gui_elements.panes.AllSelectedInteractionTagsPane;
 import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
+import interactions.CustomComponentParameterFormat;
+import interactions.CustomFunction;
+import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.event.ActionEvent;
 
@@ -43,7 +48,12 @@ public class InteractionNameComboBox extends MainComboBox {
 	    		int id_selected = getComboBox().getSelectionModel().getSelectedIndex() + 1;
 	    		all_selected_interaction_tags_pane.changePaneWithNewName(id_selected);
 	    		all_selected_interaction_tags_pane.setToOldInteractionMode();
-	    		interaction_vision_range_tf.setText(interaction_manager.getInteraction(id_selected).getRange() + BLANK_TEXT);
+	    		Interaction interaction = interaction_manager.getInteraction(id_selected);
+	    		interaction_vision_range_tf.setText(interaction.getRange() + BLANK_TEXT);
+	    		List<CustomFunction> custom_functions = interaction.getCustomFunctions();
+	    		for(CustomFunction custom_function : custom_functions) {
+	    			created_custom_functions_pane.addButton(custom_function.getName(), custom_function.getParameterFormat());
+	    		}
 			}
 			else {
 				all_selected_interaction_tags_pane.setToNewInteractionMode();
