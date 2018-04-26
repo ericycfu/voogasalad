@@ -24,6 +24,7 @@ public class EndStateWrapper {
 		this.team = team;
 	}
 
+	
 	public String getMessage() 
 	{
 		return message;
