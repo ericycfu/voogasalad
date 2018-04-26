@@ -50,18 +50,27 @@ public class Interaction implements EngineObject {
 	 * Adds a custom function to the interaction.
 	 * need to add the functionality that only the variables related to those tags can be changed etc.
 	 */
-	public CustomFunction addCustomFunction(String type) {
-
-		CustomFunctionFactory factory = new CustomFunctionFactory();
-
+	public CustomFunction generateCustomFunction(String type) {
+		
+		CustomFunctionFactory factory = new CustomFunctionFactory();		
 		CustomFunction function = factory.getCustomFunction(type);
-		customFunctions.add(function);
 		return function;
 	}
 
+	/**
+	 * 
+	 * @param cFunction
+	 * Adds a prepared custom function to the interaction
+	 */
+	public void addCustomFunction(CustomFunction cFunction)
+	{
+		customFunctions.add(cFunction);
+	}
+	
+	
 	public void addAllCustomFunctions(List<String> types) {
 		for(String type : types) {
-			addCustomFunction(type);
+			generateCustomFunction(type);
 		}
 	}
 

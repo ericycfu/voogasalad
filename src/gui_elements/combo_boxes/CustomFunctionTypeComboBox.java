@@ -43,7 +43,7 @@ public class CustomFunctionTypeComboBox extends MainComboBox {
 		getCustomFunctions();
     	getComboBox().setOnAction((ActionEvent ev) -> {
     		String type = getComboBox().getSelectionModel().getSelectedItem();
-    		custom_function = interaction_manager.getInteraction(interaction_id).addCustomFunction(type);
+    		custom_function = interaction_manager.getInteraction(interaction_id).generateCustomFunction(type);
     		CustomComponentParameterFormat format = custom_function.getParameterFormat();
     		List<String> parameterList = format.getParameterList();
 //    		format.addHelpText(custom_function_map.get(type));
