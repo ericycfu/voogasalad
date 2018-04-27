@@ -1,4 +1,4 @@
-package authoring.backend;
+package gui_elements.factories;
 
 import javafx.scene.control.Label;
 

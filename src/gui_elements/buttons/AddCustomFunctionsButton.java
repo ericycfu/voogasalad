@@ -1,9 +1,9 @@
 package gui_elements.buttons;
 
+import authoring.view.ComponentAddInteractionsScreen;
 import authoring.view.InteractionAddCustomFunctionsScreen;
 import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
-import authoring.view.ComponentAddInteractionsScreen;
 import interactions.InteractionManager;
 
 public class AddCustomFunctionsButton extends MainButton {

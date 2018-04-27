@@ -15,11 +15,13 @@ import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_player.GamePlayer;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import resources.Resources;
 import transform_library.Vector2;
 
-public class PlayGameButton extends ImageButton {	
+public class PlayGameButton extends Button {	
 	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
 	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
 	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
@@ -39,16 +41,17 @@ public class PlayGameButton extends ImageButton {
 	}
 	
 	private void setupText() {
-		this.getStyleClass().add("make_game_button");
+//		this.getStyleClass().add("make_game_button");
 		this.setText("Play Game");
 	}
 	
 	protected void setAction() {
 		this.setOnAction(value -> {
+			System.out.print("Playing game!");
 			Writer myWriter = new Writer();
 //			myReader = new Reader();
 			
-			Map<AuthoringObject, List<DraggableImageView>> map = ac.getMap().getLocations();
+			Map<AuthoringObject, List<DraggableImageView>> map = ac.getCurrentMap().getLocations();
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 			List<Map<AuthoringObject, List<Vector2>>> listFormMap = new ArrayList<>();
 			listFormMap.add(changedMap);
