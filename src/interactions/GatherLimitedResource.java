@@ -26,6 +26,7 @@ public class GatherLimitedResource implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
+		if(other == null) return;
 		try 
 		{
 			double deltaVal;

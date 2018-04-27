@@ -45,6 +45,7 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().createAttribute("Mana", 200);
 		go.accessLogic().accessAttributes().createAttribute("Attack", -10);
 		go.accessLogic().accessAttributes().createAttribute("Armor", 10);
+		go.accessLogic().accessAttributes().setAttributeValue("Health", 185);
 	
 		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer("robert.png");
@@ -70,14 +71,15 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().createAttribute("Mana", 100);
 		go2.accessLogic().accessAttributes().createAttribute("Attack", -10);
 		go2.accessLogic().accessAttributes().createAttribute("Armor", 5);
-		go2.accessLogic().accessAttributes().createAttribute("Heal", 100);
+		go2.accessLogic().accessAttributes().createAttribute("Heal", 20);
 		go2.setMovementSpeed(4);
+		
 		int m = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test1 = go2.accessLogic().accessInteractions().getInteraction(m);
 		test1.setDescription("heal: health + 10");
 		test1.setImg("arrow_up.png");
 		test1.setName("Heal");
-		test1.setRange(500);
+		test1.setRange(50);
 		CustomFunction cf = test1.generateCustomFunction("ModifyVariable");
 		test1.addCustomFunction(cf);
 		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
@@ -93,14 +95,14 @@ public class TestMain extends Application {
 		CustomFunction cf2 = test2.generateCustomFunction("ModifyVariable");
 		test2.addCustomFunction(cf2);
 		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
-		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "Attack");
+		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "5");
 		test2.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		Renderer renderer2 = new Renderer("ghoul.png");
 		go2.setRenderer(renderer2);
 		Set<GameObject> possibleunits = new HashSet<>();
 		possibleunits.add(go);
 		possibleunits.add(go2);
-
+		
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> step(SECOND_DELAY));
         Timeline animation = new Timeline();

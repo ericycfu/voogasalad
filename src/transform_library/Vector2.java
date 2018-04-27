@@ -153,5 +153,10 @@ public class Vector2 {
 		return (x * b.getX() + y * b.getY());
 	}
 	
+	public boolean matches(Vector2 other)
+	{
+		return(this.x == other.x && this.y == other.y);
+	}
+	
 	
 }
