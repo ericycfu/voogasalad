@@ -10,6 +10,7 @@ public class MainComponentPropertyManager {
 	private List<String> myTags;
 	private double myMovementSpeed;
 	private boolean isBuilding;
+	private int myTeam;
 	
 	public MainComponentPropertyManager() {
 		myImagePath = "";
@@ -52,5 +53,13 @@ public class MainComponentPropertyManager {
 	
 	public void setBuilding(boolean b) {
 		isBuilding = b;
+	}
+	
+	public int getTeam() {
+		return myTeam;
+	}
+	
+	public void setTeam(int team) {
+		myTeam = team;
 	}
 }
