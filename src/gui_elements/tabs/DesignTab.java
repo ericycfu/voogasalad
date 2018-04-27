@@ -1,6 +1,8 @@
 package gui_elements.tabs;
 
+import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
+import authoring.backend.GameEntity;
 import authoring.backend.TagController;
 import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
@@ -41,8 +43,12 @@ public class DesignTab extends Tab {
 	private MainButton component_image_chooser_button;
 	private AuthoringObject authoring_object;
 	private TagController tag_controller;
+	private AuthoringController authoring_controller;
+	private GameEntity game_entity;
 	
-	public DesignTab() {
+	public DesignTab(AuthoringController authoring_controller, GameEntity game_entity) {
+		this.authoring_controller = authoring_controller;
+		this.game_entity = game_entity;
 		authoring_object = new AuthoringObject();
 		tag_controller = new TagController();
 		initialize();
@@ -148,8 +154,8 @@ public class DesignTab extends Tab {
 		initialize();
 	}
 	
-	public void setAuthoringObject(AuthoringObject object) {
-		authoring_object = object;
+	public void assignCurrentAuthoringObject() {
+		authoring_object = authoring_controller.getCurrentObject();
 		initialize();
 	}
 	
