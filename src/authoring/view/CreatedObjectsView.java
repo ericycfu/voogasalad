@@ -24,7 +24,7 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		authorcontroller = ac;
 		createdobjects = cb;
-		map = ac.getMap();
+		map = ac.getCurrentMap();
 		cb.addListener(this);
 		setupBox();
 	}

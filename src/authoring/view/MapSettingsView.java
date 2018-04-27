@@ -7,14 +7,14 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
-import authoring.backend.ButtonFactory;
-import authoring.backend.LabelFactory;
 import authoring.backend.MapSettings;
-import authoring.backend.TextFieldFactory;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
 import gui_elements.buttons.ImageChooserButton;
+import gui_elements.factories.ButtonFactory;
+import gui_elements.factories.LabelFactory;
+import gui_elements.factories.TextFieldFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
