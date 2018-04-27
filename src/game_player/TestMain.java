@@ -75,7 +75,7 @@ public class TestMain extends Application {
 		int m = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test1 = go2.accessLogic().accessInteractions().getInteraction(m);
 		test1.setDescription("heal: health + 10");
-		test1.setImg(new Image("arrow_up.png"));
+		test1.setImg("arrow_up.png");
 		test1.setName("Heal");
 		test1.setRange(500);
 		CustomFunction cf = test1.generateCustomFunction("ModifyVariable");
