@@ -196,4 +196,8 @@ public class AuthoringObject {
 	public ConditionManager getConditionManager() {
 		return myConditionManager;
 	}
+	
+	public void resetImageAfterLoad() {
+		setImage(myImagePath);
+	}
 }
