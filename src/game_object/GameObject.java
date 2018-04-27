@@ -335,5 +335,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.elapsedTime += time;
 	}
-
+	public void setupImages() {
+		renderer.setupImage();
+		myObjectLogic.setupImage();
+	}
 }
