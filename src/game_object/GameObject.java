@@ -166,6 +166,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
+		
 		//myObjectLogic.checkConditions(this);
 	
 
