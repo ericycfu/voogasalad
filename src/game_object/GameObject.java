@@ -97,7 +97,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * @param logic
 	 * Constructor for game object given authoring object data
 	 */
-	public GameObject(int id, Transform transform, ObjectLogic logic, String imagePath, double movementSpeed, boolean isBuilding)
+	public GameObject(int id, Transform transform, ObjectLogic logic, String imagePath, double movementSpeed, boolean isBuilding, String name, List<String> tags)
 	{
 		this.id = id;
 		this.transform = transform;
@@ -105,6 +105,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.movementSpeed = movementSpeed;
 		this.isBuilding = isBuilding;
 		this.renderer = new Renderer(imagePath);
+		this.name = name;
+		this.tags = tags;
 		propertiesInit();
 		
 	}
