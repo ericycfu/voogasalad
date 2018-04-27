@@ -12,6 +12,7 @@ import game_data.Reader;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.Renderer;
+import interactions.CustomFunction;
 import interactions.Interaction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,7 +56,7 @@ public class TestMain extends Application {
 
 		
 		gom.addElement(go);
-		int i = gom.createGameObject(1, new Vector2(50, 100), null, "ghoul", null);
+		int i = gom.createGameObject(new Vector2(50, 100), null, "ghoul", null);
 		GameObject go2 = gom.getGameObject(i);
 		go2.accessLogic().accessAttributes().createAttribute("Health");
 		go2.accessLogic().accessAttributes().createAttribute("Mana");
@@ -72,7 +73,8 @@ public class TestMain extends Application {
 		test.setImg(new Image("defend_icon.png"));
 		test.setName("attack");
 		test.setRange(50);
-		test.addCustomFunction("ModifyVariable");
+		CustomFunction cf = test.generateCustomFunction("ModifyVariable");
+		test.addCustomFunction(cf);
 		test.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		test.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
 		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
