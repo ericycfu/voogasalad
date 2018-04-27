@@ -126,7 +126,7 @@ public class TestMain extends Application {
 		Renderer renderer2 = new Renderer("ghoul.png");
 		go2.setRenderer(renderer2);
 		Set<GameObject> possibleunits = new HashSet<>();
-		possibleunits.add(gom.copyGameObject(go, null));
+		possibleunits.add(go);
 		possibleunits.add(go2);
 		
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
