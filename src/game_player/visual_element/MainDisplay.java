@@ -5,6 +5,7 @@ import java.util.List;
 
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.UnmodifiableGameObjectException;
 import game_player.GamePlayer;
 import game_player.SelectedUnitManager;
 import javafx.scene.Group;
@@ -33,6 +34,7 @@ public class MainDisplay implements VisualUpdate {
 	private Group myMainDisplay;
 	private ImageView myMap;
 	private GameObjectManager myGameObjectManager;
+	private UnitActionDisplay myUnitActionDisp;
 	
 	private double myMouseXInitPosition;
 	private double myMouseYInitPosition;
@@ -45,7 +47,8 @@ public class MainDisplay implements VisualUpdate {
 	private boolean isLeftHovered;
 	private boolean isRightHovered;
 	
-	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, double width, double height) {
+	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height) {
+		myUnitActionDisp = uadisp;
 		myGameObjectManager = gom;
 		myDisplayGameObjects = new ArrayList<>();
 		mySelectedUnitManager = selectedUnitManager;
@@ -53,18 +56,37 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMap = new ImageView(new Image("map.jpeg"));
+		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(myWidth*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight(myHeight*MAP_DISPLAY_RATIO);
 		//myMap.setFill(Color.GREEN);
 		myMap.setOnMouseClicked(e -> {
+			double mouseX = e.getX();
+			double mouseY = e.getY();
 			if (e.getButton()==MouseButton.SECONDARY) {
-				double mouseX = e.getX();
-				double mouseY = e.getY();
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
+			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
+				int ID = this.myUnitActionDisp.getCurrentActionID();
+				
+				try {
+					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
+						myUnitActionDisp.setBuildTarget(new GameObject(new Vector2(-1, -1)));
+					}
+					else {
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager);
+					}
+					myUnitActionDisp.setCurrentActionID(-1);
+				} catch (UnmodifiableGameObjectException e1) {
+					// do nothing
+				}
+				
+				
+			}
 		});
+
 		myMap.toBack();
 		myMainDisplay.getChildren().add(myMap);
 		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
@@ -127,7 +149,7 @@ public class MainDisplay implements VisualUpdate {
 		for (GameObject go : myDisplayGameObjects) {
 			double xloc = translateX(go.getTransform().getPosition().getX());
 			double yloc = translateY(go.getTransform().getPosition().getY());
-			System.out.println(xloc);
+			//System.out.println(xloc);
 			go.getRenderer().getDisp().setX(xloc);
 			go.getRenderer().getDisp().setY(yloc);
 			imgvList.add(go.getRenderer().getDisp());
@@ -142,6 +164,7 @@ public class MainDisplay implements VisualUpdate {
 		for (ImageView imgv : imgvList) {
 			myDisplayables.getChildren().add(imgv);
 		}
+		
 		if (isDownHovered && myCurrentYCoor < myHeight*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
 			myCurrentYCoor += WINDOW_STEP_SIZE;
 		}
@@ -197,6 +220,7 @@ public class MainDisplay implements VisualUpdate {
 		myMap.setOnMouseReleased(e -> {
 			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
 				mySelectedUnitManager.clear();
+				this.myUnitActionDisp.setCurrentActionID(-1);
 				myMouseXFinalPosition = e.getSceneX();
 				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y*GamePlayer.TOP_HEIGHT;
 				for (GameObject go : myDisplayGameObjects) {
