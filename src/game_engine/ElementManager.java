@@ -27,6 +27,11 @@ public abstract class ElementManager {
 		new_ID_val = 1;
 	}
 	
+	public ElementManager(ElementManager other)
+	{
+		this.elementMap = other.elementMap;
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -86,5 +91,7 @@ public abstract class ElementManager {
 	{
 		elementMap.clear();
 	}
+	
+	
 
 }

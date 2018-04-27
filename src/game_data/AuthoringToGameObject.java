@@ -16,7 +16,11 @@ public final class AuthoringToGameObject {
 	private AuthoringToGameObject() {
 
 	}
-
+	/**
+	 * takes a map and transforms it to a gameobject manager.
+	 * @param map
+	 * @return
+	 */
 	public static GameObjectManager convertMap(Map<AuthoringObject, List<DraggableImageView>> map) {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
@@ -28,14 +32,14 @@ public final class AuthoringToGameObject {
 		return GOM;
 	}
 	/**
-	 * currently doesn't work, need gameObjectConstructor
+	 * takes a list of authoring objects and makes them a list of game objects
 	 * @param list
 	 * @return
 	 */
 	public static List<GameObject> convertList(List<AuthoringObject> list){
 		List<GameObject> gameObjectList = new ArrayList<>();
 		for(AuthoringObject AO: list) {
-			//gameObjectList.add(new GameObject())
+			gameObjectList.add(new GameObject(0,new Transform(new Vector2(0,0)), AO.getObjectLogic()));
 		}
 		
 		

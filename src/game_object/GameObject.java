@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
+import javafx.scene.image.Image;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -31,8 +32,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private int id;
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
-	@XStreamOmitField
-	private transient Renderer renderer;
+	private Renderer renderer;
+
 	private Team owner;
 	
 	private String name;
@@ -103,8 +104,26 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.id = id;
 		this.name = name;
 		this.tags = tags;
+		this.owner = t;
 		propertiesInit();
 
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * Constructor that deep copies an object.
+	 */
+	public GameObject(int id, Team t, GameObject other)
+	{
+		this.id = id;
+		this.name = other.name;
+		this.tags = other.tags;
+		this.owner = t;
+		this.propertiesInit();
+		this.transform = other.transform;
+		this.renderer = other.renderer;
+		this.myObjectLogic = other.myObjectLogic;
 	}
 	
 	private void propertiesInit()
@@ -189,7 +208,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * gives the signal to the gameobject that an interaction is queued
 	 * Will be called by the game player when an already selected unit chooses to interact with another unit e.g. to attack
 	 */
-	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap)
+	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
 		isInteractionQueued = true;
 		interactionTarget = other;
@@ -316,4 +335,5 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.elapsedTime += time;
 	}
+
 }

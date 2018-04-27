@@ -30,10 +30,32 @@ public class GameObjectManager extends ElementManager {
 
 	
 	public GameObjectManager()
-	{}
+	{
+		super();
+	}
+		
+	public GameObjectManager(GameObjectManager other)
+	{
+		super(other);
+	}
+	
+	/**
+	 * 
+	 * @param gameObjects
+	 * Transfer gameobjects between managers
+	 */
+	public void transferGameObjects(GameObjectManager gameObjects)
+	{
+		this.clearManager();
+		List<GameObject> objList = gameObjects.getElements();
+		for(GameObject obj : objList)
+		{
+			this.addElement(obj);
+		}
+	}
 	
 	
-	public int createGameObject(int id, Vector2 startingPosition, List<String> tags, String name, Team t)
+	public int createGameObject(Vector2 startingPosition, List<String> tags, String name, Team t)
 	{
 		int newID = calculateID();
 		GameObject obj = new GameObject(newID, startingPosition, tags, name, t);
@@ -46,6 +68,14 @@ public class GameObjectManager extends ElementManager {
 		int newID = calculateID();
 		GameObject obj = new GameObject(newID, transform, logic);
 		this.addElement(obj);
+		return newID;
+	}
+	
+	public int copyGameObject(GameObject other, Team t)
+	{
+		int newID = calculateID();
+		GameObject copy = new GameObject(newID, t, other);
+		this.addElement(copy);
 		return newID;
 	}
 	
