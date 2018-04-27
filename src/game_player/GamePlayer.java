@@ -15,6 +15,7 @@ import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
+import game_player.alert.AlertMaker;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
@@ -241,21 +242,25 @@ public class GamePlayer {
 		}
 		
 		try {
-			EndStateWrapper esw = mySceneManager.checkEndCondition();
-			if (esw.getState().equals(EndState.WIN)) {
-				
-			}
-			else if (esw.getState().equals(EndState.LOSE)) {
-				
-			}
-			else {
-				
-			}
+			checkEnd();
 		} catch (NullEndConditionException e) {
-			
+			new AlertMaker("End Condition", "No end condition is defined");
 		}
 	}
 	
 	// TO-DO: set select when a new unit is created
+	
+	private void checkEnd() throws NullEndConditionException {
+		EndStateWrapper esw = mySceneManager.checkEndCondition();
+		if (esw.getState().equals(EndState.WIN)) {
+			
+		}
+		else if (esw.getState().equals(EndState.LOSE)) {
+			
+		}
+		else {
+			
+		}
+	}
 	
 }
