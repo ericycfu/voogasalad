@@ -58,10 +58,8 @@ public class Reader {
 				Object obj = in.readObject();
 				System.out.println(obj.getClass().getName());
 				try {
-					//replace ghoul.png with the get image path method.
-					//if we are saving a game object because game object has an image.
 					System.out.println("we are pre image");
-					((GameObject) obj).setRenderer(new Renderer(new Image("ghoul.png")));
+					((GameObject) obj).getRenderer().setupImage();
 					System.out.println("we are post image");
 				}
 				catch(Exception e) {
