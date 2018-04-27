@@ -197,4 +197,12 @@ public class AuthoringObject {
 	public void resetImageAfterLoad() {
 		setImage(myMainComponentPropertyManager.getImagePath());
 	}
+	
+	public String getImagePath() {
+		return myImagePath;
+	}
+	
+	public boolean getIsBuilding() {
+		return isBuilding;
+	}
 }
