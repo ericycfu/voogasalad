@@ -30,9 +30,10 @@ public class AttributeApplyAndOkButton extends MainButton {
 
 	@Override
 	protected void setAction() {
-		Map<String, Double> attributes = objAttributesInstance.getAttributeMap();
+		//Map<String, Double> attributes = objAttributesInstance.getAttributeMap();
 		getButton().setOnAction(e -> {
-			attributes.clear();
+			//attributes.clear();
+			objAttributesInstance.clearAttributes();
 			for(int i = 0; i < attribute_names_pane.getChildren().size(); i++) {
 				String name = "";
 				double value = DEFAULT_ATTRIBUTE_VALUE;
@@ -40,12 +41,13 @@ public class AttributeApplyAndOkButton extends MainButton {
 					name = (String) ((TextField) attribute_names_pane.getChildren().get(i)).getText();
 					value = Double.parseDouble(((TextField) attribute_values_pane.getChildren().get(i)).getText());
 					if(!name.equals(""))
-						attributes.put(name, value);
+						//attributes.put(name, value);
+						objAttributesInstance.createAttribute(name, value);
 				} catch(NullPointerException ex) {
 					((TextField) attribute_names_pane.getChildren().get(i)).clear();
 					((TextField) attribute_values_pane.getChildren().get(i)).clear();					
 				} catch(NumberFormatException ey) {
-					attributes.put(name, DEFAULT_ATTRIBUTE_VALUE);
+					objAttributesInstance.createAttribute(name, DEFAULT_ATTRIBUTE_VALUE);
 				}
 			}
 			stage.close();

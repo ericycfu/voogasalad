@@ -14,6 +14,7 @@ import java.util.Map;
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
+	private Map<String, Double> maxAttributes;
 	private Map<String, Double> buildCosts;
 	private double buildTime;
 	
@@ -41,10 +42,12 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public Map<String, Double> getAttributeMap() 
+	private Map<String, Double> getAttributeMap() 
 	{
 		return attributes;
 	}
+	
+	
 	
 	
 	/**
@@ -53,9 +56,10 @@ public class ObjectAttributes {
 	 * @param value
 	 * Create attribute for the unit. Attributes must be created before changing their values.
 	 */
-	public void createAttribute(String attribute)
+	public void createAttribute(String attribute, double maxVal)
 	{
-		attributes.put(attribute, 0.0);
+		maxAttributes.put(attribute, maxVal);
+		attributes.put(attribute, maxVal);
 	}
 	
 	/**
@@ -91,6 +95,13 @@ public class ObjectAttributes {
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}	
 	
+	public double getMaxAttributeVal(String attribute) throws PropertyNotFoundException
+	{
+		if(maxAttributes.containsKey(attribute))
+			return maxAttributes.get(attribute);
+		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
+	}
+	
 	public void setCosts(Map<String, Double> costMap)
 	{
 		for(Map.Entry<String, Double> map : costMap.entrySet())
@@ -107,5 +118,11 @@ public class ObjectAttributes {
 	public void setBuildTime(double buildTime) 
 	{
 		this.buildTime = buildTime;
+	}
+	
+	public void clearAttributes()
+	{
+		attributes.clear();
+		maxAttributes.clear();
 	}
 }
