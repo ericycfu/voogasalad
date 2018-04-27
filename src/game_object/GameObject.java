@@ -42,6 +42,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
+	private Vector2 emptyPosTarget;
 	
 	private boolean isDead;
 	
@@ -163,7 +164,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		
 		if(isInteractionQueued)
 		{
-			 myObjectLogic.executeInteractions(this, interactionTarget, manager);
+			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
 		//myObjectLogic.checkConditions(this);
 	
@@ -212,7 +213,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		isInteractionQueued = true;
 		interactionTarget = other;
-		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap);
+		emptyPosTarget = emptyPos;
+		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap, emptyPos);
 		this.manager = manager;
 	}
 	
