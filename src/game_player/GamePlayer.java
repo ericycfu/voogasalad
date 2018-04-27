@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import game_engine.EndStateWrapper;
+import game_engine.EndStateWrapper.EndState;
 import game_engine.EngineObject;
 import game_engine.GameInstance;
 import game_engine.Team;
@@ -30,6 +32,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import scenemanager.NullEndConditionException;
+import scenemanager.SceneManager;
 import transform_library.Vector2;
 
 /**
@@ -62,10 +66,12 @@ public class GamePlayer {
 	private Team myTeam;
 	
 	private Set<GameObject> myPossibleUnits;
+	private SceneManager mySceneManager;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
+		
 		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
 		myTeam = team;
@@ -77,8 +83,10 @@ public class GamePlayer {
 		unitSkillMapInitialize();
 	}
 	
-	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team) {
+	// network constructor
+	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
 		myPossibleUnits = allPossibleUnits;
+		mySceneManager = scenemanager;
 	}
 	
 	private void unitBuildsMapInitialize() {
@@ -230,6 +238,21 @@ public class GamePlayer {
 		}
 		else {
 			myScene.setCursor(Cursor.DEFAULT);
+		}
+		
+		try {
+			EndStateWrapper esw = mySceneManager.checkEndCondition();
+			if (esw.getState().equals(EndState.WIN)) {
+				
+			}
+			else if (esw.getState().equals(EndState.LOSE)) {
+				
+			}
+			else {
+				
+			}
+		} catch (NullEndConditionException e) {
+			
 		}
 	}
 	
