@@ -32,6 +32,7 @@ public class Reader {
 		try {
 			while(true) {
 				Object obj = in.readObject();
+				setUpNonSerializable(obj);
 				result.add(obj);
 			}
 		}
@@ -56,17 +57,7 @@ public class Reader {
 		try {
 			while(true) {
 				Object obj = in.readObject();
-				System.out.println(obj.getClass().getName());
-				try {
-					System.out.println("we are pre image");
-					((GameObject) obj).getRenderer().setupImage();
-					System.out.println("we are post image");
-				}
-				catch(ClassCastException e) {
-					//if it is an authoring object
-					//replace with code to get image url
-					((AuthoringObject) obj).resetImageAfterLoad();
-				}
+				setUpNonSerializable(obj);
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
@@ -78,6 +69,18 @@ public class Reader {
 		}
 		return result;
 	}
-	
+	private void setUpNonSerializable(Object obj) {
+		System.out.println(obj.getClass().getName());
+		try {
+			System.out.println("we are pre image");
+			((GameObject) obj).getRenderer().setupImage();
+			System.out.println("we are post image");
+		}
+		catch(ClassCastException e) {
+			//if it is an authoring object
+			//replace with code to get image url
+			((AuthoringObject) obj).resetImageAfterLoad();
+		}
+	}
 
 }
