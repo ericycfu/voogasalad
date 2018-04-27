@@ -3,17 +3,16 @@ package game_player.visual_element;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import game_data.Reader;
 import game_data.Writer;
-import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_player.alert.AlertMaker;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -36,69 +35,56 @@ public class TopPanel {
 	public static final String SAVE = "Save";
 	public static final String LOAD = "Load";
 	public static final String TIME = "Time";
-	public static final String SCORE = "Scores";
-	public static final String[] SCORES = {"Player1: "};
 	public static final String RESOURCE = "Resources";
 	public static final String COLON = ": ";
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
 	public static final String LOADTEXT = "Load Game";
+	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF);";
+	public static final String CLASSALERTHEAD = "ClassNotFoundException";
+	public static final String CLASSALERTBODY = "Incorrect class type!";
+	public static final String IOALERTHEAD = "FileNotFound";
+	public static final String IOALERTBODY = "Location invalid! No file found!";
 	public static final double MENUWIDTH = 0.125;
 	public static final double SBWIDTH = 0.125;
 	public static final double TAWIDTH = 0.25;
-	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF);";
 	
 	private GridPane myPane;
 	private MenuButton menu;
-	private List<TextArea> myTA;
 	private TextArea time;
-	private ComboBox<String> scoreboard;
 	private ComboBox<String> resourceBoard;
-	private GameObjectManager myGameObjectManager;
-	private Team myTeam;
 	private int menuSpan;
 	private Timeline tl;
+	private Team myTeam;
 	private Reader myReader;
 	private Writer myWriter;
 	private boolean isLoaded;
 	
-	public TopPanel(Team team, GameObjectManager gom, double xsize, double ysize) {
+	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
-		myTeam = team;
-		myGameObjectManager = gom;
 		myWriter = new Writer();
 		myReader = new Reader();
 		menuSpan = 0;
 		
-		setupMenu(xsize, ysize);
-		setupScores(xsize, ysize);
+		setupMenu(gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
 		setupResources(xsize, ysize);
 	}
 
-	private void setupMenu(double xsize, double ysize) {
+	private void setupMenu(GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		MenuItem menuItem1 = new MenuItem(START);
 		menuItem1.setOnAction(e -> tl.play());
 		MenuItem menuItem2 = new MenuItem(PAUSE);
 		menuItem2.setOnAction(e -> tl.pause());
 		MenuItem menuItem3 = new MenuItem(SAVE);
-		menuItem3.setOnAction(e -> save());
+		menuItem3.setOnAction(e -> save(gom, possibleUnits));
 		MenuItem menuItem4 = new MenuItem(LOAD);
-		menuItem4.setOnAction(e -> load());
+		menuItem4.setOnAction(e -> load(gom, possibleUnits));
 		menu = new MenuButton(MENU, null, menuItem1, menuItem2, menuItem3, menuItem4);
 		menu.setPrefWidth(xsize * MENUWIDTH);
 		menu.setMinHeight(ysize);
 		addToPane(menu);
-	}
-
-	private void setupScores(double xsize, double ysize) {
-		scoreboard = new ComboBox<>();
-		scoreboard.setPromptText(SCORE);
-		scoreboard.getItems().addAll(SCORES);
-		scoreboard.setPrefWidth(xsize * SBWIDTH);
-		scoreboard.setMinHeight(ysize);
-		addToPane(scoreboard);
 	}
 	
 	private void setupTime(double xsize, double ysize) {
@@ -111,8 +97,8 @@ public class TopPanel {
 	
 	private void setupResources(double xsize, double ysize) {
 		resourceBoard = new ComboBox<>();
-		scoreboard.setPromptText(RESOURCE);
-		scoreboard.setMaxHeight(ysize);
+		resourceBoard.setPromptText(RESOURCE);
+		resourceBoard.setMaxHeight(ysize);
 		addToPane(resourceBoard);
 	}
 	
@@ -121,22 +107,23 @@ public class TopPanel {
 		menuSpan++;
 	}
 	
-	private void save() {
+	private void save(GameObjectManager gom, Set<GameObject> possibleUnits) {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
 		fc.setInitialDirectory(new File(FILEPATH));
 		fc.setTitle(SAVETEXT);
 		File file = fc.showSaveDialog(stage);
-		List<GameObjectManager> ListRepresentation = new ArrayList<>();
-		ListRepresentation.add(myGameObjectManager);
+		List<Object> listRepresentation = new ArrayList<>();
+		listRepresentation.add(gom);
+		listRepresentation.add(possibleUnits);
 		try {
-			myWriter.write(file.getCanonicalPath(), ListRepresentation);
+			myWriter.write(file.getCanonicalPath(), listRepresentation);
 		} catch (IOException e) {
-			System.out.print("Error!"); // TODO: add alert
+			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
 	}
 	
-	private void load() {
+	private void load(GameObjectManager gom, Set<GameObject> possibleUnits) {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
 		fc.setInitialDirectory(new File(FILEPATH));
@@ -144,12 +131,14 @@ public class TopPanel {
 		File file = fc.showOpenDialog(stage);
 		try {
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
-			myGameObjectManager.clearManager();
-			myGameObjectManager = (GameObjectManager) gameObjects.get(0); // TODO: don't create new
+			gom.clearManager();
+			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
+			possibleUnits.clear();
+			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
 		} catch (ClassNotFoundException e) {
-			// TODO alert prompt
+			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
-			// TODO deal with this error
+			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
 	}
 	
@@ -158,25 +147,17 @@ public class TopPanel {
 	}
 	
 	private void setResources() {
-		scoreboard.getItems().clear();
+		resourceBoard.getItems().clear();
 		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
 			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
 		}
-		scoreboard.getItems().addAll(resources);
+		resourceBoard.getItems().addAll(resources);
 	}
 	
 	private void setTime(double timeValue) {
 		time.setText(TIME + COLON + timeValue);
-	}
-	
-	private void setScores(Map<String, Integer> scores) {
-		int counter = 0;
-		for(String s: scores.keySet()) {
-			scoreboard.getItems().set(counter, s + COLON + scores.get(s));
-			counter++;
-		}
 	}
 	
 	public boolean getIsLoaded() {
@@ -186,9 +167,8 @@ public class TopPanel {
 	}
 	
 	public void update() {
-		setResources(); // TODO: set resource amount using gameobjectmanager
+		setResources();
 		setTime(0); // TODO: set time
-		setScores(null); // TODO: set scores
 	}
 	
 	public Node getNodes() {
