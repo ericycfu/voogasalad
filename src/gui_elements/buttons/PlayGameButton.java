@@ -35,6 +35,7 @@ public class PlayGameButton extends ImageButton {
 	
 	public PlayGameButton(Stage stage) {
 		setupText();
+	//	this.setOnAction(e -> );
 	}
 	
 	private void setupText() {
