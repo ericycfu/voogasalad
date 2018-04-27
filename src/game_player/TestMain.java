@@ -51,7 +51,7 @@ public class TestMain extends Application {
 		int k = go.accessLogic().accessInteractions().createInteraction();
 		Interaction test = go.accessLogic().accessInteractions().getInteraction(k);
 		test.setDescription("attack: damage = 5");
-		test.setImg(new Image("defend_icon.png"));
+		test.setImg("defend_icon.png");
 		test.setName("Attack");
 		test.setRange(50);
 		CustomFunction cf0 = test.generateCustomFunction("ModifyVariable");
@@ -87,7 +87,7 @@ public class TestMain extends Application {
 		int j = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test2 = go2.accessLogic().accessInteractions().getInteraction(j);
 		test2.setDescription("attack: damage = 5");
-		test2.setImg(new Image("defend_icon.png"));
+		test2.setImg("defend_icon.png");
 		test2.setName("Attack");
 		test2.setRange(50);
 		CustomFunction cf2 = test2.generateCustomFunction("ModifyVariable");
