@@ -93,12 +93,25 @@ public class TestMain extends Application {
 		test2.setDescription("attack: damage = 5");
 		test2.setImg("defend_icon.png");
 		test2.setName("Attack");
-		test2.setRange(50);
+		test2.setRange(1);
 		CustomFunction cf2 = test2.generateCustomFunction("ModifyVariable");
 		test2.addCustomFunction(cf2);
 		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "5");
 		test2.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		
+		int o = go2.accessLogic().accessInteractions().createInteraction();
+		Interaction test3 = go2.accessLogic().accessInteractions().getInteraction(o);
+		test3.setDescription("attack: damage = 5");
+		test3.setImg("defend_icon.png");
+		test3.setName("Attack");
+		test3.setRange(1);
+		CustomFunction cf3 = test2.generateCustomFunction("ModifyVariable");
+		test3.addCustomFunction(cf3);
+		test3.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
+		test3.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "5");
+		test3.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		
 		Renderer renderer2 = new Renderer("ghoul.png");
 		go2.setRenderer(renderer2);
 		Set<GameObject> possibleunits = new HashSet<>();
