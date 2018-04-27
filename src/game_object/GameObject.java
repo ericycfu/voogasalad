@@ -86,6 +86,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.id = id;
 		this.transform = transform;
 		this.myObjectLogic = logic;
+		this.renderer = new Renderer();
 		propertiesInit();
 	}
 	
