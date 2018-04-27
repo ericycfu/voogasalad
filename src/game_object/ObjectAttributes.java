@@ -22,6 +22,7 @@ public class ObjectAttributes {
 	public ObjectAttributes()
 	{
 		attributes = new HashMap<String, Double>();
+		maxAttributes = new HashMap<String, Double>();
 	}
 	
 	public List<String> getAttributeNames() 

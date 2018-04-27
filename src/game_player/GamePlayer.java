@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import game_engine.EndStateWrapper;
+import game_engine.EndStateWrapper.EndState;
 import game_engine.EngineObject;
 import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
+import game_player.alert.AlertMaker;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
@@ -30,6 +33,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import scenemanager.NullEndConditionException;
+import scenemanager.SceneManager;
 import transform_library.Vector2;
 
 /**
@@ -62,10 +67,12 @@ public class GamePlayer {
 	private Team myTeam;
 	
 	private Set<GameObject> myPossibleUnits;
+	private SceneManager mySceneManager;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
+		
 		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
 		myTeam = team;
@@ -77,8 +84,10 @@ public class GamePlayer {
 		unitSkillMapInitialize();
 	}
 	
-	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team) {
+	// network constructor
+	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
 		myPossibleUnits = allPossibleUnits;
+		mySceneManager = scenemanager;
 	}
 	
 	private void unitBuildsMapInitialize() {
@@ -183,7 +192,7 @@ public class GamePlayer {
 	private void initialize() {
 		myRoot = new Group();
 		
-		myTopPanel = new TopPanel(SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(myTeam, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -217,7 +226,7 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		myTopPanel.update(gameobject); //resources
+		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
@@ -235,8 +244,29 @@ public class GamePlayer {
 		else {
 			myScene.setCursor(Cursor.DEFAULT);
 		}
+		
+		/**
+		try {
+			checkEnd();
+		} catch (NullEndConditionException e) {
+			new AlertMaker("End Condition", "No end condition is defined");
+		}
+		**/
 	}
 	
 	// TO-DO: set select when a new unit is created
+	
+	private void checkEnd() throws NullEndConditionException {
+		EndStateWrapper esw = mySceneManager.checkEndCondition();
+		if (esw.getState().equals(EndState.WIN)) {
+			
+		}
+		else if (esw.getState().equals(EndState.LOSE)) {
+			
+		}
+		else {
+			
+		}
+	}
 	
 }

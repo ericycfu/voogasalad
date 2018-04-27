@@ -47,8 +47,7 @@ public class SelectedUnitManager {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
 				System.out.println("Iam  here instead !");
-				//top.queueInteraction(position, target, interactionID, gom);
-				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000));  // JUST FOR TESTING
+				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
 			}
 			else {
 				System.out.println("Iam  here !");
@@ -58,10 +57,7 @@ public class SelectedUnitManager {
 						isInteractionValid = i.getName().equals(interactionName);
 					}
 					if (isInteractionValid) {
-						//go.queueInteraction(position, target, interactionID, gom);
-						go.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000));  // JUST FOR TESTING
-						System.out.println(go.getName());
-					
+						go.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
 					}
 				}
 			}

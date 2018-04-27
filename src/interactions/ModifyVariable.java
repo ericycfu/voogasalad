@@ -71,7 +71,7 @@ public class ModifyVariable implements CustomFunction {
 			else
 			{
 				double finalDelta = (prevVal + deltaVal) - maxVal;
-				other.accessLogic().accessAttributes().setAttributeValue(variable, finalDelta);
+				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
 			}
 			current.dequeueInteraction();
 		} 

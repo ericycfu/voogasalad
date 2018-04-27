@@ -37,6 +37,7 @@ public class PlayGameButton extends Button {
 	
 	public PlayGameButton(Stage stage) {
 		setupText();
+	//	this.setOnAction(e -> );
 	}
 	
 	private void setupText() {
