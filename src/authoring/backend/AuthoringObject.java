@@ -200,4 +200,12 @@ public class AuthoringObject {
 	public void resetImageAfterLoad() {
 		setImage(myImagePath);
 	}
+	
+	public String getImagePath() {
+		return myImagePath;
+	}
+	
+	public boolean getIsBuilding() {
+		return isBuilding;
+	}
 }
