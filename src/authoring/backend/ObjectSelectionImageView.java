@@ -16,6 +16,7 @@ public class ObjectSelectionImageView extends ImageView {
 				DraggableImageView dragimgview = obj.duplicateImgView();
 				ac.getMap().addToMap(obj, dragimgview);
 			}
+			
 		});
 	}
 }

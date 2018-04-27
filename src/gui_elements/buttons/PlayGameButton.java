@@ -15,6 +15,7 @@ import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_player.GamePlayer;
 import javafx.stage.Stage;
 import resources.Resources;
 import transform_library.Vector2;
@@ -38,12 +39,13 @@ public class PlayGameButton extends ImageButton {
 	}
 	
 	private void setupText() {
-		this.getStyleClass().add("make_game_button");
+//		this.getStyleClass().add("make_game_button");
 		this.setText("Play Game");
 	}
 	
 	protected void setAction() {
 		this.setOnAction(value -> {
+			System.out.print("Playing game!");
 			Writer myWriter = new Writer();
 //			myReader = new Reader();
 			
