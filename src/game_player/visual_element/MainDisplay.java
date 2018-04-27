@@ -63,19 +63,22 @@ public class MainDisplay implements VisualUpdate {
 		myMap.setOnMouseClicked(e -> {
 			double mouseX = e.getX();
 			double mouseY = e.getY();
-			if (e.getButton()==MouseButton.SECONDARY) {
+			if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() == -1) {
+				System.out.println("current interaction id" + this.myUnitActionDisp.getCurrentActionID());
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
-			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
+			else if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
 				int ID = this.myUnitActionDisp.getCurrentActionID();
-				
+				System.out.println("current interaction id" + ID);
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						System.out.println("print maindisp");
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
 						myUnitActionDisp.setBuildTarget(new GameObject(new Vector2(-1, -1)));
 					}
 					else {
+						System.out.println("print maindisp");
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager);
 					}
 					myUnitActionDisp.setCurrentActionID(-1);
@@ -85,6 +88,7 @@ public class MainDisplay implements VisualUpdate {
 				
 				
 			}
+			System.out.println(this.myUnitActionDisp.getCurrentActionID());
 		});
 
 		myMap.toBack();
