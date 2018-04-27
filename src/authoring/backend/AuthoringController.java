@@ -3,6 +3,7 @@ package authoring.backend;
 import java.util.List;
 
 import authoring.view.AuthoringView;
+import authoring.view.CreatedMapsView;
 import authoring.view.CreatedObjectsTabs;
 import authoring.view.MakeGameTabs;
 import gui_elements.tabs.GameSettingsTab;
@@ -15,7 +16,9 @@ public class AuthoringController {
 	private DraggableScrollPane myScroll;
 	private MapEntity myMap;
 	private CreatedObjectsTabs myCreatedObjectsTabs;
+	private AuthoringObject myObject;
 	private PlaceTab myPlaceTab;
+	private CreatedMapsView myCreatedMapsView;
 	public AuthoringController() {
 		
 	}
@@ -36,8 +39,16 @@ public class AuthoringController {
 		myScroll = scroll;
 	}
 	
+	public void addToAuthorController(CreatedMapsView createdmapsview) {
+		myCreatedMapsView = createdmapsview;
+	}
+	
 	public void updateMap(MapEntity map) {
 		myMap = map;
+	}
+	
+	public void updateObject(AuthoringObject obj) {
+		myObject = obj;
 	}
 		
 	public DraggableScrollPane getScroll() {
@@ -46,5 +57,9 @@ public class AuthoringController {
 	
 	public MapEntity getMap() {
 		return myMap;
+	}
+	
+	public CreatedMapsView getCreatedMapsView() {
+		return myCreatedMapsView;
 	}
 }
