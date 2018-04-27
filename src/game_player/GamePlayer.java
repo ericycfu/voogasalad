@@ -222,7 +222,7 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		myTopPanel.update();
+		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
@@ -241,11 +241,13 @@ public class GamePlayer {
 			myScene.setCursor(Cursor.DEFAULT);
 		}
 		
+		/**
 		try {
 			checkEnd();
 		} catch (NullEndConditionException e) {
 			new AlertMaker("End Condition", "No end condition is defined");
 		}
+		**/
 	}
 	
 	// TO-DO: set select when a new unit is created
