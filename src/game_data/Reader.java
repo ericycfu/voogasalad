@@ -12,8 +12,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.backend.AuthoringObject;
 import game_object.GameObject;
-import game_object.Renderer;
-import javafx.scene.image.Image;
+import game_object.GameObjectManager;
 
 public class Reader {
 	/**
@@ -71,16 +70,16 @@ public class Reader {
 	}
 	private void setUpNonSerializable(Object obj) {
 		System.out.println(obj.getClass().getName());
-		try {
-			System.out.println("we are pre image");
-			((GameObject) obj).setupImages();
-			System.out.println("we are post image");
+		if(obj instanceof GameObjectManager) {
+			((GameObjectManager) obj).setupImages();
 		}
-		catch(ClassCastException e) {
-			//if it is an authoring object
-			//replace with code to get image url
+		else if(obj instanceof GameObject) {
+			((GameObject) obj).setupImages();
+		}
+		else if(obj instanceof AuthoringObject) {
 			((AuthoringObject) obj).resetImageAfterLoad();
 		}
+		
 	}
 
 }
