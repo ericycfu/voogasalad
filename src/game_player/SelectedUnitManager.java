@@ -53,11 +53,19 @@ public class SelectedUnitManager {
 				System.out.println("Iam  here !");
 				for (GameObject go : selectedUnits){
 					boolean isInteractionValid = false;
+					int goSpecificInteractionID = -1;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-						isInteractionValid = i.getName().equals(interactionName);
+						System.out.println("i's name " + i.getName() + " interaction name " + interactionName);
+						if (i.getName().equals(interactionName)) {
+							isInteractionValid = true;
+							goSpecificInteractionID = i.getID();
+						}
 					}
+					System.out.println(isInteractionValid);
+					System.out.println(goSpecificInteractionID);
 					if (isInteractionValid) {
-						go.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
+						System.out.println("interaction is valid");
+						go.queueInteraction(target, goSpecificInteractionID, gom, new GridMap(1000, 1000), position);
 					}
 				}
 			}

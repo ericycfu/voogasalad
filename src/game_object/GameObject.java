@@ -87,6 +87,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.id = id;
 		this.transform = transform;
 		this.myObjectLogic = logic;
+		this.renderer = new Renderer();
 		propertiesInit();
 	}
 	
@@ -212,6 +213,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 */
 	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
+		System.out.println("get into queueInteraction" );
 		isInteractionQueued = true;
 		interactionTarget = other;
 		emptyPosTarget = emptyPos;
@@ -338,5 +340,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.elapsedTime += time;
 	}
-
+	public void setupImages() {
+		renderer.setupImage();
+		myObjectLogic.setupImage();
+	}
 }

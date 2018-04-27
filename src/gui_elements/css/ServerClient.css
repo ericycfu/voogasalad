@@ -1,0 +1,39 @@
+#lobby_selection_screen {
+	-fx-background-image: url("/images/silk.png");
+	-fx-background-color: black;
+	-fx-background-repeat: stretch;
+	-fx-background-position: 0 center;
+}
+
+#main_title {
+    -fx-font: 100px Arial;
+    -fx-fill: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
+    -fx-stroke: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
+    -fx-stroke-width: 1;
+}
+
+.image_button {
+    	-fx-font: 48px Arial;
+    -fx-text-fill: steelblue;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 100px;
+    -fx-background-color: black;
+}
+.image_button:hover {
+	-fx-background-image:none;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
+}
+
+.lobby_selection_button {
+	-fx-font: 32px Arial;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 300px;
+}
+
+.lobby_selection_button:hover {
+	-fx-background-image:none;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
+}
+
