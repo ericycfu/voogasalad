@@ -1,6 +1,6 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
-    <myImagePath>/images/</myImagePath>
+    <myImagePath>/images/station.png</myImagePath>
     <myName>a</myName>
     <myTags>
       <string>a</string>

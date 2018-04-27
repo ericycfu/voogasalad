@@ -90,7 +90,24 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.renderer = new Renderer();
 		propertiesInit();
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param transform
+	 * @param logic
+	 * Constructor for game object given authoring object data
+	 */
+	public GameObject(int id, Transform transform, ObjectLogic logic, String imagePath, double movementSpeed, boolean isBuilding)
+	{
+		this.id = id;
+		this.transform = transform;
+		this.myObjectLogic = logic;
+		this.movementSpeed = movementSpeed;
+		this.isBuilding = isBuilding;
+		this.renderer = new Renderer(imagePath);
+		propertiesInit();
+		
+	}
 	/**
 	 * 
 	 * @param startingPosition

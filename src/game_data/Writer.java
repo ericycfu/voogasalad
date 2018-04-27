@@ -17,6 +17,7 @@ public class Writer {
 	 * @throws IOException 
 	 */
 	public void write(String location, List<? extends Object> data) throws IOException {
+		System.out.println(data.size());
 		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);

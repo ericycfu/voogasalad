@@ -1,7 +1,50 @@
 <object-stream>
   <game__object.GameObjectManager>
-    <elementMap/>
-    <new__ID__val>1</new__ID__val>
+    <elementMap>
+      <entry>
+        <int>1</int>
+        <game__object.GameObject>
+          <id>1</id>
+          <transform>
+            <position>
+              <x>211.0</x>
+              <y>240.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+              <interactionIndexMap class="tree-map"/>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/station.png</myImageLocation>
+          </renderer>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>1.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+        </game__object.GameObject>
+      </entry>
+    </elementMap>
+    <new__ID__val>2</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
