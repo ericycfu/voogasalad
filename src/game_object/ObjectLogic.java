@@ -130,5 +130,7 @@ public class ObjectLogic
 	public boolean getFulFillsLossCondition() {
 		return fulfillsLossCondition;
 	}
-	
+	public void setupImage() {
+		interactions.setupImage();
+	}
 }
