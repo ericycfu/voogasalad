@@ -12,29 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 
 public class AuthoringController {
-	private MakeGameTabs myMakeGameTabs;
 	private DraggableScrollPane myScroll;
 	private MapEntity myMap;
-	private CreatedObjectsTabs myCreatedObjectsTabs;
 	private AuthoringObject myObject;
-	private PlaceTab myPlaceTab;
 	private CreatedMapsView myCreatedMapsView;
-	public AuthoringController() {
-		
-	}
-	public AuthoringController(MakeGameTabs gametabs, CreatedObjectsTabs objtabs) {
-		myMakeGameTabs = gametabs;
-		myCreatedObjectsTabs = objtabs;
-	}
-	
-	public void addToAuthorController(MakeGameTabs gametabs) {
-		myMakeGameTabs = gametabs;
-	}
-	
-	public void addToAuthorController(CreatedObjectsTabs objtabs) {
-		myCreatedObjectsTabs = objtabs;
-	}
-	
+
 	public void addToAuthorController(DraggableScrollPane scroll) {
 		myScroll = scroll;
 	}
@@ -55,8 +37,12 @@ public class AuthoringController {
 		return myScroll;
 	}
 	
-	public MapEntity getMap() {
+	public MapEntity getCurrentMap() {
 		return myMap;
+	}
+	
+	public AuthoringObject getCurrentObject() {
+		return myObject;
 	}
 	
 	public CreatedMapsView getCreatedMapsView() {
