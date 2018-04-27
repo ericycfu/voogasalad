@@ -3,15 +3,17 @@ package server;
  * This class is the Server. The Server doesn't really have a front-end but it does 
  */
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import game_engine.GameInstance;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class RTSServer {
-	public static final String SERVER_IP = "10.197.12.152";
+	public static final String SERVER_IP = "10.197.114.35";
 	public static final int PORT_NUMBER = 9098;
 	public static final int RETRY_CONNECTION_DELAY = 10000;
 	private ServerSocket myServerSocket;
@@ -39,6 +41,7 @@ public class RTSServer {
 				} catch (InterruptedException e1) {}
 			}
 		}
+		System.out.println("Success!");
 		myLobbyManager = new LobbyManager();
 	}
 	private void listenForConnections() {

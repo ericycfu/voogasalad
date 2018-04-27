@@ -6,6 +6,7 @@ import authoring.view.AuthoringView;
 import authoring.view.CreatedMapsView;
 import authoring.view.CreatedObjectsTabs;
 import authoring.view.MakeGameTabs;
+import gui_elements.tabs.DesignTab;
 import gui_elements.tabs.GameSettingsTab;
 import gui_elements.tabs.PlaceTab;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ public class AuthoringController {
 	private MapEntity myMap;
 	private AuthoringObject myObject;
 	private CreatedMapsView myCreatedMapsView;
+	private DesignTab myDesignTab;
 
 	public void addToAuthorController(DraggableScrollPane scroll) {
 		myScroll = scroll;
@@ -25,12 +27,17 @@ public class AuthoringController {
 		myCreatedMapsView = createdmapsview;
 	}
 	
+	public void addToAuthorController (DesignTab designtab) {
+		myDesignTab = designtab;
+	}
+	
 	public void updateMap(MapEntity map) {
 		myMap = map;
 	}
 	
 	public void updateObject(AuthoringObject obj) {
 		myObject = obj;
+		myDesignTab.assignCurrentAuthoringObject();
 	}
 		
 	public DraggableScrollPane getScroll() {
@@ -48,4 +55,5 @@ public class AuthoringController {
 	public CreatedMapsView getCreatedMapsView() {
 		return myCreatedMapsView;
 	}
+	
 }
