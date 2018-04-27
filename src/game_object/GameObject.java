@@ -210,6 +210,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 */
 	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
+		System.out.println("get into queueInteraction" );
 		isInteractionQueued = true;
 		interactionTarget = other;
 		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap);

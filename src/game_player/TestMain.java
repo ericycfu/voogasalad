@@ -45,6 +45,7 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().createAttribute("Mana", 200);
 		go.accessLogic().accessAttributes().createAttribute("Attack", -10);
 		go.accessLogic().accessAttributes().createAttribute("Armor", 10);
+		go.accessLogic().accessAttributes().setAttributeValue("Health", 100);
 	
 		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer("robert.png");
@@ -81,7 +82,8 @@ public class TestMain extends Application {
 		CustomFunction cf = test1.generateCustomFunction("ModifyVariable");
 		test1.addCustomFunction(cf);
 		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
-		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "Heal");
+		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "5");
+		System.out.println("delta" + test1.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
 		test1.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		
 		int j = go2.accessLogic().accessInteractions().createInteraction();
