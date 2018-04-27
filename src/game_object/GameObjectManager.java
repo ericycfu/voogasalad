@@ -155,4 +155,12 @@ public class GameObjectManager extends ElementManager {
 		return (GameObject)(this.get(id));
 	}
 	
+	public void setupImages() {
+		for(EngineObject g : getElements())
+		{
+			GameObject gObj = (GameObject) g;
+			gObj.setupImages();
+		}
+	}
+	
 }
