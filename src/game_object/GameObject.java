@@ -184,6 +184,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		{
 			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
+		
 		//myObjectLogic.checkConditions(this);
 	
 
@@ -229,6 +230,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 */
 	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
+		System.out.println("get into queueInteraction" );
 		isInteractionQueued = true;
 		interactionTarget = other;
 		emptyPosTarget = emptyPos;
