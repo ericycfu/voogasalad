@@ -91,7 +91,8 @@ public class ObjectLogic
 	 */
 	public boolean inRange(GameObject current, GameObject interactionTarget, Interaction inter)
 	{
-		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
+		double dist = current.getTransform().getDisplacement(interactionTarget.getTransform()); 
+		return (dist < inter.getRange());
 	}
 
 	/**
