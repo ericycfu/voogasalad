@@ -14,8 +14,7 @@ public class CreatedObjects implements StaticSpeaker {
 	public CreatedObjects() {
 		myAuthoringObjects = new ArrayList<>();
 		myListeners = new ArrayList<>();
-		addObject(new AuthoringObject());
-		addObject(new AuthoringObject());
+//		addObject(new AuthoringObject());
 	}
 	
 	public static void addObject(AuthoringObject obj) {

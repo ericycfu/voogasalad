@@ -29,6 +29,7 @@ public class PlayGameButton extends ImageButton {
 		this.ac = ac;
 		this.gameEntity = game;
 		setupText();
+		setAction();
 	}
 	
 //	public PlayGameButton(Stage stage) {
@@ -37,12 +38,13 @@ public class PlayGameButton extends ImageButton {
 //	}
 	
 	private void setupText() {
-		this.getStyleClass().add("make_game_button");
+//		this.getStyleClass().add("make_game_button");
 		this.setText("Play Game");
 	}
 	
 	protected void setAction() {
 		this.setOnAction(value -> {
+			System.out.print("Playing game!");
 			Writer myWriter = new Writer();
 //			myReader = new Reader();
 			Map<AuthoringObject, List<DraggableImageView>> map = ac.getMap().getLocations();
