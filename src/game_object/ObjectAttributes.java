@@ -23,6 +23,7 @@ public class ObjectAttributes {
 	{
 		attributes = new HashMap<String, Double>();
 		maxAttributes = new HashMap<String, Double>();
+		buildCosts = new HashMap<String, Double>();
 	}
 	
 	public List<String> getAttributeNames() 
@@ -42,13 +43,6 @@ public class ObjectAttributes {
 		}		
 		return list;
 	}
-	
-	private Map<String, Double> getAttributeMap() 
-	{
-		return attributes;
-	}
-	
-	
 	
 	
 	/**
@@ -81,6 +75,19 @@ public class ObjectAttributes {
 		}
 	}
 	
+	public void setMaximumAttributeValue(String attribute, double newMaxValue) throws PropertyNotFoundException
+	{
+		if(attributes.containsKey(attribute) && maxAttributes.containsKey(attribute))
+		{
+			attributes.put(attribute, newMaxValue);
+			maxAttributes.put(attribute, newMaxValue);
+		}
+		else
+		{
+			throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		}
+	}
+		
 	/**
 	 * 
 	 * @param attribute
