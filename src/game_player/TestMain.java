@@ -50,6 +50,16 @@ public class TestMain extends Application {
 		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
 		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer(new Image("robert.png"));
+		int k = go.accessLogic().accessInteractions().createInteraction();
+		Interaction test = go.accessLogic().accessInteractions().getInteraction(k);
+		test.setDescription("attack: damage = 5");
+		test.setImg(new Image("defend_icon.png"));
+		test.setName("Attack");
+		test.setRange(50);
+		test.addCustomFunction("ModifyVariable");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
+		test.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
+		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		go.setRenderer(renderer);
 		
 
@@ -67,15 +77,15 @@ public class TestMain extends Application {
 		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
 		go2.setMovementSpeed(4);
 		int j = go2.accessLogic().accessInteractions().createInteraction();
-		Interaction test = go2.accessLogic().accessInteractions().getInteraction(j);
-		test.setDescription("attack: damage = 5");
-		test.setImg(new Image("defend_icon.png"));
-		test.setName("attack");
-		test.setRange(50);
-		test.addCustomFunction("ModifyVariable");
-		test.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
-		test.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
-		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		Interaction test2 = go2.accessLogic().accessInteractions().getInteraction(j);
+		test2.setDescription("attack: damage = 5");
+		test2.setImg(new Image("defend_icon.png"));
+		test2.setName("Attack");
+		test2.setRange(50);
+		test2.addCustomFunction("ModifyVariable");
+		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
+		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "-1");
+		test2.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		Renderer renderer2 = new Renderer(new Image("ghoul.png"));
 		go2.setRenderer(renderer2);
 		Set<GameObject> possibleunits = new HashSet<>();
