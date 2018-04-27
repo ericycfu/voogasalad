@@ -62,7 +62,7 @@ public class Reader {
 					((GameObject) obj).getRenderer().setupImage();
 					System.out.println("we are post image");
 				}
-				catch(Exception e) {
+				catch(ClassCastException e) {
 					//if it is an authoring object
 					//replace with code to get image url
 					((AuthoringObject) obj).setImage("ghoul.png");
