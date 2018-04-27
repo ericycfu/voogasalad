@@ -5,15 +5,19 @@ import authoring.backend.CreatedObjects;
 import authoring.backend.TagController;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.tabs.DesignTab;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class CreateComponentButton extends MainButton {
 
 	private static final String FILENAME = "create_component_button.properties";
 	private static final String SPACE = " ";
 	private static final String IMAGE_PATH_HEADING = "/images/";
+	private static final String ALERT_TITLE = "Component Created";
+	private static final String ALERT_MESSAGE = "You successfully created a new component!";
 	private AuthoringObject authoring_object;
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private TextField name_tf, movement_speed_tf;
@@ -25,7 +29,6 @@ public class CreateComponentButton extends MainButton {
 	private TextField build_time_tf;
 	private ComboBox<String> resource_cb;
 	private TextField resource_cost_tf;
-
 		
 	public CreateComponentButton(AuthoringObject authoring_object, TextField name_tf, ComboBox<String> tag_cb, 
 			TagController tag_controller, Label image_text_label, TextField movement_speed_tf, ComboBox<String> building_cb, 
@@ -64,6 +67,15 @@ public class CreateComponentButton extends MainButton {
 			CreatedObjects.addObject(authoring_object);
 			design_tab.setNewAuthoringObject();
 			design_tab.resetComponents();
+			createAlert();
 		});
+	}
+	
+	private void createAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(ALERT_TITLE);
+		alert.setHeaderText(null);
+		alert.setContentText(ALERT_MESSAGE);
+		alert.showAndWait();
 	}
 }

@@ -14,8 +14,9 @@ public class ObjectSelectionImageView extends ImageView {
 		this.setOnMouseClicked(e -> {
 			if (e.getClickCount() == 2) {
 				DraggableImageView dragimgview = obj.duplicateImgView();
-				ac.getMap().addToMap(obj, dragimgview);
+				ac.getCurrentMap().addToMap(obj, dragimgview);
 			}
+			ac.updateObject(obj);
 		});
 	}
 }

@@ -1,6 +1,8 @@
 package gui_elements.buttons;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 
 import gui_elements.labels.ComponentImageChoiceTextLabel;
 import gui_elements.labels.MainLabel;
@@ -14,11 +16,14 @@ public class ComponentImageChooserButton extends MainButton {
 	private FileChooser filechooser;
 	private File file;
 	private ComponentImageChoiceTextLabel component_image_choice_text_label;
+	private Desktop desktop;
+	
 	private static final boolean EXPLICIT_SET_ACTION = true;
 	
 	public ComponentImageChooserButton(MainLabel component_image_choice_text_label) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.component_image_choice_text_label = (ComponentImageChoiceTextLabel) component_image_choice_text_label;
+		desktop = Desktop.getDesktop();
 		setAction();
 	}
 
@@ -33,6 +38,11 @@ public class ComponentImageChooserButton extends MainButton {
 				component_image_choice_text_label.setText(
 //						file.toString().split("src")[1]);
 						file.toString().substring(file.toString().lastIndexOf("\\") + 1));
+				try {
+					desktop.open(file);
+				} catch (IOException e1) {
+					System.err.println("Canoot open image file on desktop!");
+				}
 			}
 		});
 	}

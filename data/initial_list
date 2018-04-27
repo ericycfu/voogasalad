@@ -1,1 +1,72 @@
-<object-stream/>
+<object-stream>
+  <game__object.GameObject>
+    <id>0</id>
+    <transform>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+      </position>
+      <rotation>0.0</rotation>
+    </transform>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <buildTime>0.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+        <interactionIndexMap class="tree-map"/>
+      </interactions>
+      <conditions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+      </conditions>
+    </myObjectLogic>
+    <isBuilding>false</isBuilding>
+    <isInteractionQueued>false</isInteractionQueued>
+    <isDead>false</isDead>
+    <movementSpeed>0.0</movementSpeed>
+    <isMovementQueued>false</isMovementQueued>
+    <activeWaypoints class="linked-list"/>
+    <isUninteractive>false</isUninteractive>
+    <isBeingConstructed>false</isBeingConstructed>
+    <elapsedTime>0.0</elapsedTime>
+  </game__object.GameObject>
+  <game__object.GameObject>
+    <id>0</id>
+    <transform>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+      </position>
+      <rotation>0.0</rotation>
+    </transform>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <buildTime>0.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+        <interactionIndexMap class="tree-map"/>
+      </interactions>
+      <conditions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+      </conditions>
+    </myObjectLogic>
+    <isBuilding>false</isBuilding>
+    <isInteractionQueued>false</isInteractionQueued>
+    <isDead>false</isDead>
+    <movementSpeed>0.0</movementSpeed>
+    <isMovementQueued>false</isMovementQueued>
+    <activeWaypoints class="linked-list"/>
+    <isUninteractive>false</isUninteractive>
+    <isBeingConstructed>false</isBeingConstructed>
+    <elapsedTime>0.0</elapsedTime>
+  </game__object.GameObject>
+</object-stream>

@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
+import javafx.scene.image.Image;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -31,8 +32,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private int id;
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
-	@XStreamOmitField
-	private transient Renderer renderer;
+	private Renderer renderer;
+
 	private Team owner;
 	
 	private String name;
@@ -334,5 +335,5 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	{
 		this.elapsedTime += time;
 	}
-	
+
 }

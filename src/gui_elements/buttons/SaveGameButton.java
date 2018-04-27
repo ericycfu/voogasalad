@@ -1,6 +1,7 @@
 package gui_elements.buttons;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +12,21 @@ import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.GameEntity;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import game_data.Writer;
 import resources.Resources;
 import transform_library.Vector2;
 
-public class SaveGameButton extends MainButton {
+public class SaveGameButton extends Button {
 
 	private static final String FILENAME = "save_game_button.properties";
 	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
 	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
+	private static final String ALERT_TITLE = "Component Saved";
+	private static final String ALERT_MESSAGE = "Your component has been saved!";
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private Writer myWriter;
 	private AuthoringController myAuthoringController;
@@ -27,26 +34,26 @@ public class SaveGameButton extends MainButton {
 //	private Reader myReader;
 
 	public SaveGameButton(AuthoringController ac, GameEntity gameEntity) {
-		super(FILENAME, EXPLICIT_SET_ACTION);
+//		super(FILENAME, EXPLICIT_SET_ACTION);
 		myAuthoringController = ac;
 		myGameEntity = gameEntity;
+		this.setText("Save Game");
 		setAction();
 	}
 
-	@Override
 	protected void setAction() {
-		getButton().setOnAction(value -> {
+		this.setOnAction(value -> {
 			myWriter = new Writer();
 //			myReader = new Reader();
 			try {
 				myWriter.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
-				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getMap().getLocations();
+				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getCurrentMap().getLocations();
 				Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 				
 				List<Map<AuthoringObject, List<Vector2>>> listform = new ArrayList<>();
 				listform.add(changedMap);
 				myWriter.write(Resources.getString(RESOURCES_STRING2), listform);
-				System.out.println("Object saved");
+				createAlert();
 			} catch (IOException e) {
 				System.err.println("Could not save created authoring objects");
 			}
@@ -67,5 +74,13 @@ public class SaveGameButton extends MainButton {
 			newMap.put(obj, newList);
 		}
 		return newMap;
+	}
+
+	private void createAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(ALERT_TITLE);
+		alert.setHeaderText(null);
+		alert.setContentText(ALERT_MESSAGE);
+		alert.showAndWait();
 	}
 }
