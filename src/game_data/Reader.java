@@ -65,7 +65,7 @@ public class Reader {
 				catch(ClassCastException e) {
 					//if it is an authoring object
 					//replace with code to get image url
-					((AuthoringObject) obj).setImage("ghoul.png");
+					((AuthoringObject) obj).resetImageAfterLoad();
 				}
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
