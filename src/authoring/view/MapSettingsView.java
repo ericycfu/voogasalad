@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
+import authoring.backend.Extractor;
 import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
@@ -33,6 +34,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private HBox resourcesBox;
 	private Writer myWriter;
 	private Reader myReader;
+	private VBox contentBox;
 	
 	public MapSettingsView(MapSettings settings) {
 		this.getStyleClass().add(STYLE_PATH);
@@ -45,15 +47,26 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeAll() {
 		initializeTitle();
 		VBox myVBox = new VBox();
+		initializeSettings(myVBox);
+		initializeResources(myVBox);
+		this.getChildren().add(myVBox);
+		setupButton();
+	}
+	
+	private void initializeSettings(VBox rootBox) {
 		HBox box = new HBox();
-		resourcesBox = new HBox();
-		myVBox.getChildren().add(box);
-		myVBox.getChildren().add(resourcesBox);
 		initializeLabelBox(box);
 		initializeContent(box);
 		box.setPadding(new Insets(50, 50, 0, 50));
-		this.getChildren().add(box);
-		setupButton();
+		rootBox.getChildren().add(box);
+	}
+	
+	private void initializeResources(VBox rootBox) {
+		resourcesBox = new HBox();
+		initializeResources(resourcesBox);
+		resourcesBox.setPadding(new Insets(50, 50, 0, 50));
+		rootBox.getChildren().add(resourcesBox);
+		
 	}
 	
 	private void initializeTitle() {
@@ -83,16 +96,16 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	
 	private void initializeContent(HBox rootBox) {
-		VBox box = new VBox();
-		box.getChildren().addAll(
+		contentBox = new VBox();
+		contentBox.getChildren().addAll(
 				new TextField(),
 				new ComboBox(),
 				new ImageChooserButton(),
 				new TextField(),
 				new TextField());
-		standardBox(box);
-		box.setSpacing(32);
-		rootBox.getChildren().add(box);
+		standardBox(contentBox);
+		contentBox.setSpacing(32);
+		rootBox.getChildren().add(contentBox);
 	}
 	
 	private void setupButton() {
@@ -104,6 +117,11 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	
 	private void saveConditions() {
+		String mapName = Extractor.extractTextField(contentBox.getChildren().get(0));
+		String filePath = Extractor.extractImagePath(contentBox.getChildren().get(2));
+		int width = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(3)));
+		int height = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(4)));
+
 	}
 	private void initializeResources(HBox rootBox) {
 		VBox myVBox = new VBox();
@@ -207,4 +225,5 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			}
 		}
 	}
+
 }
