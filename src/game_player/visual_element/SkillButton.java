@@ -33,7 +33,7 @@ public class SkillButton extends Button {
 	}
 	
 	private void setDescription() {
-		Tooltip tooltip = new Tooltip("hello");
+		Tooltip tooltip = new Tooltip(mySkillDescription);
 		this.setTooltip(tooltip);
 	}
 	

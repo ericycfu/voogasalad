@@ -1,9 +1,9 @@
 package authoring.view;
 
 import authoring.backend.AuthoringController;
-import authoring.backend.ButtonFactory;
 import authoring.backend.CreatedObjects;
 import authoring.backend.GameEntity;
+import gui_elements.factories.ButtonFactory;
 import gui_elements.tabs.ObjectTypeTab;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
@@ -16,7 +16,6 @@ public class CreatedObjectsTabs extends TabPane implements AuthoringView {
 	private CreatedObjectsView myCreatedObjectsView;
 	public CreatedObjectsTabs(AuthoringController ac, GameEntity game) {
 		this.game = game;
-		ac.addToAuthorController(this);
 		this.getTabs().addAll(
 				new ObjectTypeTab("Buildings", new CreatedObjectsView(ac, game.getCreatedObjects())), 
 //				new ObjectTypeTab("Buildings"),
