@@ -41,14 +41,11 @@ public class TestMain extends Application {
 		myGOM = gom;
 		
 		GameObject go = new GameObject(new Vector2(100,100));
-		go.accessLogic().accessAttributes().createAttribute("Health");
-		go.accessLogic().accessAttributes().createAttribute("Mana");
-		go.accessLogic().accessAttributes().createAttribute("Attack");
-		go.accessLogic().accessAttributes().createAttribute("Armor");
-		go.accessLogic().accessAttributes().setAttributeValue("Health", 200);
-		go.accessLogic().accessAttributes().setAttributeValue("Mana", 200);
-		go.accessLogic().accessAttributes().setAttributeValue("Attack", -50);
-		go.accessLogic().accessAttributes().setAttributeValue("Armor", 10);
+		go.accessLogic().accessAttributes().createAttribute("Health", 200);
+		go.accessLogic().accessAttributes().createAttribute("Mana", 200);
+		go.accessLogic().accessAttributes().createAttribute("Attack", -10);
+		go.accessLogic().accessAttributes().createAttribute("Armor", 10);
+	
 		go.setMovementSpeed(1);
 		Renderer renderer = new Renderer("robert.png");
 		int k = go.accessLogic().accessInteractions().createInteraction();
@@ -69,14 +66,10 @@ public class TestMain extends Application {
 		gom.addElement(go);
 		int i = gom.createGameObject(new Vector2(50, 100), null, "ghoul", null);
 		GameObject go2 = gom.getGameObject(i);
-		go2.accessLogic().accessAttributes().createAttribute("Health");
-		go2.accessLogic().accessAttributes().createAttribute("Mana");
-		go2.accessLogic().accessAttributes().createAttribute("Attack");
-		go2.accessLogic().accessAttributes().createAttribute("Armor");
-		go2.accessLogic().accessAttributes().setAttributeValue("Health", 100);
-		go2.accessLogic().accessAttributes().setAttributeValue("Mana", 100);
-		go2.accessLogic().accessAttributes().setAttributeValue("Attack", 10);
-		go2.accessLogic().accessAttributes().setAttributeValue("Armor", 5);
+		go2.accessLogic().accessAttributes().createAttribute("Health", 100);
+		go2.accessLogic().accessAttributes().createAttribute("Mana", 100);
+		go2.accessLogic().accessAttributes().createAttribute("Attack", 10);
+		go2.accessLogic().accessAttributes().createAttribute("Armor", 5);
 		go2.setMovementSpeed(4);
 		int j = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test2 = go2.accessLogic().accessInteractions().getInteraction(j);
