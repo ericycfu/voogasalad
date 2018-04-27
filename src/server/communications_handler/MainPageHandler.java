@@ -3,6 +3,7 @@ package server.communications_handler;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import game_engine.GameInstance;
 import server.RTSServer;
@@ -29,13 +30,17 @@ public class MainPageHandler extends CommunicationsHandler {
 	}
 
 	@Override
-	public void updateClient() {
-		ObjectOutputStream out;
+	public void updateClient() throws SocketException {
+		System.out.println(System.currentTimeMillis());
 		try {
-			out = new ObjectOutputStream(getSocket().getOutputStream());
-			out.writeObject(getServer());
+			ObjectOutputStream out = getOutputStream();
+			out.writeObject(
+					getServer()
+					.getLobbyManager());
+			out.flush();
+			System.out.println("Write success!");
 		} catch (IOException e) {
-			
+			throw new SocketException("Write fail!");
 		}
 	}
 

@@ -1,6 +1,7 @@
 package server;
 
 import java.net.Socket;
+import java.net.SocketException;
 
 import server.communications_handler.CommunicationsHandler;
 import server.communications_handler.CommunicationsHandlerFactory;
@@ -15,10 +16,18 @@ public class ClientHandler implements Runnable {
 	}
 	@Override
 	public void run() {
-		String newHandler =  myCommunicationsHandler.updateServer();
-		myCommunicationsHandler.updateClient();
-		if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
-			myCommunicationsHandler = myCHFactory.get(newHandler);
+		try {
+		while(true) {
+			myCommunicationsHandler.updateClient();
+			String newHandler =  myCommunicationsHandler.updateServer();
+			if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
+				myCommunicationsHandler = myCHFactory.get(newHandler);
+		}
+		}
+		catch(SocketException e) {
+			System.out.println("hi");
+			Thread.currentThread().interrupt();
+		}
 	}
 
 }

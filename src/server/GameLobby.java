@@ -140,4 +140,7 @@ public class GameLobby implements Serializable{
 	public GameInstance getCurrentGameInstance() {
 		return loadedMap;
 	}
+	public int getNumTeams() {
+		return numTeams;
+	}
 }

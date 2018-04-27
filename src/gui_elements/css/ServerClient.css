@@ -5,8 +5,8 @@
 	-fx-background-position: 0 center;
 }
 
-#main_title {
-    -fx-font: 100px Arial;
+#lobby_main_text {
+    -fx-font: 30px Arial;
     -fx-fill: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
     -fx-stroke: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
     -fx-stroke-width: 1;
