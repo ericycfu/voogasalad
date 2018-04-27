@@ -10,11 +10,15 @@ import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
 import interactions.Interaction;
 import interactions.InteractionManager;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 
 public class AddInteractionButton extends MainButton {
 
 	private static final String FILENAME = "add_interaction_button.properties";
+	private static final String ALERT_TITLE = "Interaction Added";
+	private static final String ALERT_MESSAGE = "You successfully added an interaction!";
 	private InteractionManager interaction_manager;
 	private MainComboBox interaction_name_cb;
 	private MainTextField interaction_vision_range_tf;
@@ -50,6 +54,15 @@ public class AddInteractionButton extends MainButton {
 			}
 			component_add_interactions_screen.resetElements();
 			component_add_interactions_screen.setInteractionID(interaction_id = interaction_manager.createInteraction());
+			createAlert();
 		});
+	}
+	
+	private void createAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(ALERT_TITLE);
+		alert.setHeaderText(null);
+		alert.setContentText(ALERT_MESSAGE);
+		alert.showAndWait();
 	}
 }

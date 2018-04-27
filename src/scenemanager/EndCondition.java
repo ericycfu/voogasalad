@@ -15,7 +15,7 @@ import interactions.CustomComponentParameterFormat;
 
 public interface EndCondition {
 
-	public EndStateWrapper check(Team team, List<GameObject> gameObjects);
+	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects);
 	public CustomComponentParameterFormat getParameterFormat();
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);

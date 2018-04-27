@@ -21,7 +21,8 @@ import resources.Resources;
 import transform_library.Vector2;
 
 public class PlayGameButton extends ImageButton {	
-	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_MAP";
+	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
+	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
 	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
 	private static final String INITIAL_LIST_STRING = "INITIALIZATION_LOCATION_LIST";
 	private AuthoringController ac;
@@ -47,12 +48,14 @@ public class PlayGameButton extends ImageButton {
 			System.out.print("Playing game!");
 			Writer myWriter = new Writer();
 //			myReader = new Reader();
+			
 			Map<AuthoringObject, List<DraggableImageView>> map = ac.getMap().getLocations();
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 			List<Map<AuthoringObject, List<Vector2>>> listFormMap = new ArrayList<>();
 			listFormMap.add(changedMap);
 			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), listFormMap);
+				myWriter.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
+				myWriter.write(Resources.getString(RESOURCES_STRING2), listFormMap);
 				List<GameObjectManager> listFormGOM = new ArrayList<>();
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
 				listFormGOM.add(myGOM);

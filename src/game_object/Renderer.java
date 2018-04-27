@@ -1,9 +1,9 @@
 package game_object;
 
-import javafx.scene.Node;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import transform_library.Vector2;
 
 /**
  * 
@@ -13,18 +13,22 @@ import transform_library.Vector2;
  */
 
 public class Renderer {
-	
-	private ImageView myDisp;
+	private String myImageLocation;
+	@XStreamOmitField
+	private transient ImageView myDisp;
 	
 
-	public Renderer(Image img){
-		myDisp = new ImageView(img);
+	public Renderer(String imageLocation){
+		myImageLocation = imageLocation;
+		myDisp = new ImageView(new Image(imageLocation));
 	}
 	
 	public ImageView getDisp() {
 		return myDisp;
 	}
-
+	public void setupImage() {
+		myDisp = new ImageView(new Image(myImageLocation));
+	}
 	public Renderer()
 	{
 		

@@ -25,6 +25,7 @@ public class SelectedUnitManager {
 	
 	public void clear() {
 		selectedUnits.clear();
+		System.out.println("this get aclled" );
 	}
 	
 	public void add(GameObject go) {
@@ -41,13 +42,16 @@ public class SelectedUnitManager {
 	
 	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
 		GameObject top = selectedUnits.get(0);
+		System.out.println("Iam  here instead !");
 		try {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
+				System.out.println("Iam  here instead !");
 				//top.queueInteraction(position, target, interactionID, gom);
 				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000));  // JUST FOR TESTING
 			}
 			else {
+				System.out.println("Iam  here !");
 				for (GameObject go : selectedUnits){
 					boolean isInteractionValid = false;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
@@ -55,7 +59,9 @@ public class SelectedUnitManager {
 					}
 					if (isInteractionValid) {
 						//go.queueInteraction(position, target, interactionID, gom);
-						top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000));  // JUST FOR TESTING
+						go.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000));  // JUST FOR TESTING
+						System.out.println(go.getName());
+					
 					}
 				}
 			}
