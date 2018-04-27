@@ -73,7 +73,7 @@ public class Reader {
 		System.out.println(obj.getClass().getName());
 		try {
 			System.out.println("we are pre image");
-			((GameObject) obj).getRenderer().setupImage();
+			((GameObject) obj).setupImages();
 			System.out.println("we are post image");
 		}
 		catch(ClassCastException e) {
