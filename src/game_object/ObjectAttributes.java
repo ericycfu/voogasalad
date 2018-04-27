@@ -103,6 +103,10 @@ public class ObjectAttributes {
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}
 	
+	public Map<String, Double> getCosts() {
+		return buildCosts;
+	}
+	
 	public void setCosts(Map<String, Double> costMap)
 	{
 		for(Map.Entry<String, Double> map : costMap.entrySet())

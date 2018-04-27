@@ -159,6 +159,7 @@ public class DesignTab extends Tab {
 	public void assignCurrentAuthoringObject() {
 		authoring_object = authoring_controller.getCurrentObject();
 		initialize();
+		assignComponents();
 	}
 	
 	public void resetComponents() {
@@ -179,6 +180,7 @@ public class DesignTab extends Tab {
 		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
 		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
 		building_cb.getEditor().setText(String.valueOf(authoring_object.isBuilding()));
+		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 //		component_build_cost_tf.setText(authoring_object.get);
 	}
 

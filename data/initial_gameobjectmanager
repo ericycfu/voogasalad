@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>71.0</x>
-              <y>75.0</y>
+              <x>403.0</x>
+              <y>410.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -16,6 +16,7 @@
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
               <attributes/>
+              <maxAttributes/>
               <buildTime>0.0</buildTime>
             </attributes>
             <interactions>
