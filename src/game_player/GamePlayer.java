@@ -123,8 +123,10 @@ public class GamePlayer {
 	
 	private void unitSkillMapInitialize() {
 		//unitBuildsMapInitialize();
+		
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
+			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
 					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
@@ -132,6 +134,13 @@ public class GamePlayer {
 					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					System.out.println(ia.getID());
 					System.out.println(sb.getInteractionID());
+					List<GameObject> temp = new ArrayList<>();
+					temp.add(go);
+					cancel.setOnAction(e -> {
+						this.myUnitDisplay.getUnitActionDisp().update(temp);
+						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+						System.out.println(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID());
+					});
 					if (!ia.isBuild()) {
 						sb.setOnAction(e->{
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
@@ -139,19 +148,14 @@ public class GamePlayer {
 						skillList.add(sb);
 					}
 					else {
-						SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-						List<GameObject> temp = new ArrayList<>();
-						temp.add(go);
-						cancel.setOnAction(e -> {
-							this.myUnitDisplay.getUnitActionDisp().update(temp);
-						});
 						sb.setOnAction(e -> {
-							List<SkillButton> sblist = myUnitBuilds.get(go.getName());
+							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);
 							myUnitDisplay.getUnitActionDisp().build(sblist);
 						});
 					}
 				}
+				skillList.add(cancel);
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
