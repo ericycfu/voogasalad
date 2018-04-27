@@ -199,10 +199,6 @@ public class AuthoringObject {
 	}
 	
 	public String getImagePath() {
-		return myImagePath;
-	}
-	
-	public boolean getIsBuilding() {
-		return isBuilding;
+		return myMainComponentPropertyManager.getImagePath();
 	}
 }
