@@ -3,8 +3,8 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myTags>
-          <string>DEF</string>
-          <string>DEF</string>
+          <string>1</string>
+          <string>1</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
@@ -12,84 +12,14 @@
         <myObjectLogic>
           <fulfillsLossCondition>false</fulfillsLossCondition>
           <attributes>
-            <attributes>
-              <entry>
-                <string>Health</string>
-                <double>2.0</double>
-              </entry>
-            </attributes>
-            <maxAttributes>
-              <entry>
-                <string>Health</string>
-                <double>2.0</double>
-              </entry>
-            </maxAttributes>
+            <attributes/>
+            <maxAttributes/>
             <buildCosts reference="../../../buildCosts"/>
-            <buildTime>23.0</buildTime>
+            <buildTime>1.0</buildTime>
           </attributes>
           <interactions>
-            <elementMap>
-              <entry>
-                <int>2</int>
-                <interactions.Interaction>
-                  <id>2</id>
-                  <targetTags/>
-                  <name>Heal</name>
-                  <isBuild>false</isBuild>
-                  <isInstantaneous>false</isInstantaneous>
-                  <customFunctions>
-                    <interactions.ModifyVariable>
-                      <NAME>ModifyVariable</NAME>
-                      <VARIABLE>Variable</VARIABLE>
-                      <DELTA>Delta</DELTA>
-                      <RATE>Rate</RATE>
-                      <format>
-                        <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                        <parameterFields>
-                          <entry>
-                            <string>Variable</string>
-                            <string>health</string>
-                          </entry>
-                          <entry>
-                            <string>Delta</string>
-                            <string>10</string>
-                          </entry>
-                          <entry>
-                            <string>Rate</string>
-                            <string>12</string>
-                          </entry>
-                        </parameterFields>
-                      </format>
-                    </interactions.ModifyVariable>
-                    <interactions.ModifyVariable>
-                      <NAME>ModifyVariable</NAME>
-                      <VARIABLE>Variable</VARIABLE>
-                      <DELTA>Delta</DELTA>
-                      <RATE>Rate</RATE>
-                      <format>
-                        <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                        <parameterFields>
-                          <entry>
-                            <string>Variable</string>
-                            <string>Health</string>
-                          </entry>
-                          <entry>
-                            <string>Delta</string>
-                            <string>-30</string>
-                          </entry>
-                          <entry>
-                            <string>Rate</string>
-                            <string>23</string>
-                          </entry>
-                        </parameterFields>
-                      </format>
-                    </interactions.ModifyVariable>
-                  </customFunctions>
-                  <range>20.0</range>
-                </interactions.Interaction>
-              </entry>
-            </elementMap>
-            <new__ID__val>4</new__ID__val>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
           </interactions>
           <conditions>
             <elementMap/>
@@ -98,9 +28,9 @@
         </myObjectLogic>
         <myMainComponentPropertyManager>
           <myImagePath>/images/rcd.png</myImagePath>
-          <myName>DSF</myName>
+          <myName>2</myName>
           <myTags reference="../../myTags"/>
-          <myMovementSpeed>3.0</myMovementSpeed>
+          <myMovementSpeed>1.0</myMovementSpeed>
           <isBuilding>false</isBuilding>
           <myTeam>1</myTeam>
         </myMainComponentPropertyManager>
@@ -110,8 +40,16 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>0.0</x>
-          <y>0.0</y>
+          <x>235.0</x>
+          <y>205.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>300.0</x>
+          <y>55.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>68.0</x>
+          <y>169.0</y>
         </transform__library.Vector2>
       </list>
     </entry>
