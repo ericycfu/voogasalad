@@ -25,6 +25,7 @@ import transform_library.Vector2;
 
 public class PlayGameButton extends Button {	
 	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
+
 	private AuthoringController ac;
 	private GameEntity gameEntity;
 	public PlayGameButton(AuthoringController ac, GameEntity game) {

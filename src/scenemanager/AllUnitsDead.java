@@ -9,6 +9,12 @@ import game_engine.Team;
 import game_object.GameObject;
 import interactions.CustomComponentParameterFormat;
 
+/**
+ * 
+ * @author Rayan
+ * Implementation of loss condition
+ */
+
 public class AllUnitsDead implements EndCondition {
 
 	public final String NAME = "AllUnitsDead";
@@ -16,9 +22,7 @@ public class AllUnitsDead implements EndCondition {
 	private CustomComponentParameterFormat format;
 	
 	public AllUnitsDead()
-	{
-		
-	}
+	{}
 	
 	@Override
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {
@@ -57,13 +61,11 @@ public class AllUnitsDead implements EndCondition {
 	@Override
 	public void setParameterFormatFields() {
 
-		format.addHelpText("Victory is achieved through this condition when all units of one team are dead.");
+		format.addHelpText("You lose when all your units and buildings are dead..");
 	}
 
 	@Override
-	public void setParameters(CustomComponentParameterFormat toFormat) {
-		
-	}
+	public void setParameters(CustomComponentParameterFormat toFormat) {}
 
 	@Override
 	public String getName() {
@@ -72,7 +74,7 @@ public class AllUnitsDead implements EndCondition {
 
 	@Override
 	public String getVictoryMessage(String teamName) {
-		return String.format("%s has lost because he has no units or buildings left.", teamName);  
+		return String.format("%s has lost because they have no units or buildings left.", teamName);  
 	}
 	
 }
