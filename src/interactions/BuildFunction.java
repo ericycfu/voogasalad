@@ -37,7 +37,6 @@ public class BuildFunction implements CustomFunction {
 	public void setParameterFormatFields() {
 		format.addHelpText("This function allows you to build a unit. Enter the tags for all the possible"
 				+ "units that this object can create." );
-		format.addStringField("buildTime");	
 		
 	}
 
