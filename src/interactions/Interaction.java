@@ -219,6 +219,7 @@ public class Interaction implements EngineObject {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}

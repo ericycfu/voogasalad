@@ -14,6 +14,7 @@ import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import game_player.alert.AlertMaker;
 import game_player.visual_element.BuildButton;
@@ -241,7 +242,6 @@ public class GamePlayer {
 	
 	public void update(List<GameObject> gameobject) {
 		if (myTopPanel.getIsLoaded()) {
-			System.out.println("reinit");
 			unitSkillMapInitialize();
 			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
 			myTopPanel.setIsLoaded(false);
