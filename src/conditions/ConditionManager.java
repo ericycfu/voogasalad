@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_object.GameObject;
+import interactions.Interaction;
 
 public class ConditionManager extends ElementManager {
 
@@ -44,10 +45,12 @@ public class ConditionManager extends ElementManager {
 	{
 		return (Condition)(this.get(id));
 	}
-		
-	public List<String> availableCustomConditions() {
-		List<String> customConditions = new ArrayList<>();
-		customConditions.add(new Death().getClass().getSimpleName());
-		return customConditions;
+	
+	public void removeLastAddedCondition()
+	{
+		List<Condition> conds = getElements();
+		this.removeElement(conds.get(conds.size()-1));
 	}
+	
+		
 }
