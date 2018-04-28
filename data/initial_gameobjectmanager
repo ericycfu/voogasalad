@@ -7,8 +7,13 @@
           <id>1</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>194.0</x>
               <y>104.0</y>
+=======
+              <x>202.0</x>
+              <y>115.0</y>
+>>>>>>> dev
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -30,11 +35,17 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/silk.png</myImageLocation>
           </renderer>
+<<<<<<< HEAD
           <name>robert</name>
           <tags>
             <string>melee</string>
+=======
+          <name>a</name>
+          <tags>
+            <string>a</string>
+>>>>>>> dev
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -53,21 +64,34 @@
           <id>2</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>78.0</x>
               <y>106.0</y>
+=======
+              <x>91.0</x>
+              <y>159.0</y>
+>>>>>>> dev
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/silk.png</myImageLocation>
           </renderer>
+<<<<<<< HEAD
           <name>robert</name>
+=======
+          <name>a</name>
+>>>>>>> dev
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+<<<<<<< HEAD
           <movementSpeed>3.0</movementSpeed>
+=======
+          <movementSpeed>1.0</movementSpeed>
+>>>>>>> dev
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>

@@ -2,6 +2,7 @@ package authoring.view;
 
 public interface AuthoringView {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
+	public static final String IMAGE_PATH = "/images/";
 	public static final String TITLE_PROPERTY = "title";
 	public static final String WIDTH_PROPERTY = "width";
 	public static final String HEIGHT_PROPERTY = "height";

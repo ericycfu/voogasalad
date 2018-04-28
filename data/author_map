@@ -3,7 +3,11 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myTags>
+<<<<<<< HEAD
           <string>melee</string>
+=======
+          <string>a</string>
+>>>>>>> dev
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
@@ -26,8 +30,13 @@
           </conditions>
         </myObjectLogic>
         <myMainComponentPropertyManager>
+<<<<<<< HEAD
           <myImagePath>/images/rcd.png</myImagePath>
           <myName>robert</myName>
+=======
+          <myImagePath>/images/silk.png</myImagePath>
+          <myName>a</myName>
+>>>>>>> dev
           <myTags reference="../../myTags"/>
           <myMovementSpeed>3.0</myMovementSpeed>
           <isBuilding>false</isBuilding>
@@ -39,12 +48,21 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
+<<<<<<< HEAD
           <x>194.0</x>
           <y>104.0</y>
         </transform__library.Vector2>
         <transform__library.Vector2>
           <x>78.0</x>
           <y>106.0</y>
+=======
+          <x>202.0</x>
+          <y>115.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>91.0</x>
+          <y>159.0</y>
+>>>>>>> dev
         </transform__library.Vector2>
       </list>
     </entry>

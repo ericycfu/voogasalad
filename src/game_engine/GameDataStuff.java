@@ -28,19 +28,16 @@
 //	public static void main(String[] args) throws IOException {
 //		GameObjectManager GOM= new GameObjectManager();
 //		GOM.createGameObject(new Transform(new Vector2()), new ObjectLogic());
-//		Reader myReader = new Reader();
-//		Writer myWriter = new Writer();
 //		myWriter.write(Resources.getString("TEST_LOCATION"), new ArrayList<GameObjectManager>() {{
 //			add(GOM);
 //		}}
 //		);
 //	}
 //}
-//////	private Reader myReader;
 //////	
-//////	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
-//////	List<LossCondition> lossConditions = myReader.read(INITIALIZATION_LOCATION,"lossCondition");
-//////	List<StartingCondition> startingConditions = myReader.read(INITIALIZATION_LOCATION,"startingCondition");
+//////	List<GameObject> gameObjects = Reader.read(INITIALIZATION_LOCATION, "gameObject");
+//////	List<LossCondition> lossConditions = Reader.read(INITIALIZATION_LOCATION,"lossCondition");
+//////	List<StartingCondition> startingConditions = Reader.read(INITIALIZATION_LOCATION,"startingCondition");
 //////	
 //////	
 //////	// for gamePlayer
@@ -48,29 +45,27 @@
 //////	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
 //////	
 //////	// for gameAuthor
-//////	private Reader myReader;
-//////	private Writer myWriter;
 //////	//for writing
-//////	myWriter.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT GAMEOBJECT ARRAY HERE**);
-//////	myWriter.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT LOSSCONDITION ARRAY HERE**);
-//////	myWriter.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT STARTINGCONDITION ARRAY HERE**);
+//////	Writer.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT GAMEOBJECT ARRAY HERE**);
+//////	Writer.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT LOSSCONDITION ARRAY HERE**);
+//////	Writer.writeNoOverwrite(INITIALIZATION_LOCATION, **INSERT STARTINGCONDITION ARRAY HERE**);
 //////	//for reading it in
-//////	List<GameObject> gameObjects = myReader.read(INITIALIZATION_LOCATION, "gameObject");
-//////	List<LossCondition> lossConditions = myReader.read(INITIALIZATION_LOCATION,"lossCondition");
-//////	List<StartingCondition> startingConditions = myReader.read(INITIALIZATION_LOCATION,"startingCondition");
+//////	List<GameObject> gameObjects = Reader.read(INITIALIZATION_LOCATION, "gameObject");
+//////	List<LossCondition> lossConditions = Reader.read(INITIALIZATION_LOCATION,"lossCondition");
+//////	List<StartingCondition> startingConditions = Reader.read(INITIALIZATION_LOCATION,"startingCondition");
 ////	
 ////	//actual gameAuthor code
 ////	
 ////	//load
-////	myReader.read(AUTHOR LOCATION);
+////	Reader.read(AUTHOR LOCATION);
 ////	
 ////	//save
-////	myWriter.write(AUTHOR LOCATION, List including CreatedObjects object and the map)
+////	Writer.write(AUTHOR LOCATION, List including CreatedObjects object and the map)
 ////	
 ////	//run game
 ////	save()
 ////	List<GameObject> gameObjects = convert(map);
-////	myWriter.write(INITIALIZATION_LOCATION, gameObjects);
+////	Writer.write(INITIALIZATION_LOCATION, gameObjects);
 ////	
 ////	//convert map to list of gameObjects
 ////	public List<GameObject> transform(Map<AuthoringObject, Vector2> map){
