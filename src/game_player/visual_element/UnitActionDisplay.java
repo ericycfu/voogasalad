@@ -1,12 +1,9 @@
 package game_player.visual_element;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import game_object.GameObject;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -81,12 +78,12 @@ public class UnitActionDisplay implements VisualUpdate{
 		System.out.println(gameObject.getName());
 		System.out.println(myUnitSkills);
 		fill(unitSkills);
+		System.out.println(((ImageView)unitSkills.get(0).getGraphic()).getImage());
 	}
 	
 	public void fill(List<SkillButton> unitSkills) {
 		myGridPane.getChildren().clear();
 		for (int i = 0; i < 12; i++) {
-			System.out.println("i: " + i + "; x: " + i%ACTION_GRID_WIDTH + "; y: " + i/ACTION_GRID_WIDTH);
 			if (i < unitSkills.size()) {
 				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
 			}

@@ -82,7 +82,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void updateHealthManaInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
-			System.out.println("current unit is null");
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
@@ -93,7 +92,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 				}
 			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
-				System.out.println("error occurred");
 			}
 		}
 		
