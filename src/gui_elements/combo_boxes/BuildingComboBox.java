@@ -7,7 +7,6 @@ public class BuildingComboBox extends MainComboBox {
 	
 	public BuildingComboBox() {
 		super(FILENAME);
-		getComboBox().setEditable(true);
 		addElements();
 	}
 	

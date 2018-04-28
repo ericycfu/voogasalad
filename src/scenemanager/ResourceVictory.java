@@ -1,7 +1,10 @@
 package scenemanager;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import game_engine.EndStateWrapper;
 import game_engine.InvalidResourceValueException;
 import game_engine.ResourceManager;
 import game_engine.Team;
@@ -9,12 +12,18 @@ import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import interactions.CustomComponentParameterFormat;
 
-public class ResourceVictory implements WinCondition {
+/**
+ * 
+ * @author Rayan
+ * This class implements ResourceVictory, which checks if the game if won when the resource stockpile passes
+ * a certain level.
+ */
+
+public class ResourceVictory implements EndCondition {
 
 	public final String NAME = "ResourceVictory";
 	public final String RESOURCE = "Resource";
 	public final String THRESHOLD = "Threshold";
-
 	
 	private CustomComponentParameterFormat format;
 	
@@ -22,17 +31,27 @@ public class ResourceVictory implements WinCondition {
 	private double threshold;
 	
 	@Override
-	public boolean check(Team team, List<GameObject> gameObjects) {
+	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {
 		
+		Set<Integer> teamIDSet = new HashSet<>();
 		try
 		{
-			double resourceVal = team.getResourceManager().getResource(resource);
-			return (resourceVal > threshold);
+			for(GameObject o : gameObjects)
+			{
+				Team team = o.getOwner();
+				if(teamIDSet.contains(team.getID())) continue;
+				teamIDSet.add(team.getID());
+				double resourceVal = team.getResourceManager().getResource(resource);
+				if(resourceVal > threshold)
+					return new EndStateWrapper(getVictoryMessage(team.getTeamName()), 
+							EndStateWrapper.EndState.WIN, team);
+			}
+			return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);
 		} 
 		catch (InvalidResourceValueException e) 
 		{
 			e.printStackTrace();
-			return false;
+			return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);
 		}
 		
 	}
@@ -75,6 +94,12 @@ public class ResourceVictory implements WinCondition {
 	public String getName() {
 		return NAME;
 	}
-	
+
+
+	@Override
+	public String getVictoryMessage(String teamName) {
+		// TODO Auto-generated method stub
+		return String.format("%s has achieved resource victory by collecting %d %s", teamName, threshold, resource);  
+	}
 	
 }

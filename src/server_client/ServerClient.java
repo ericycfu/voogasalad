@@ -1,8 +1,40 @@
 package server_client;
 
-public class ServerClient {
-	//todo figure out the backend for this crap
-	public ServerClient() {
-		
+import java.net.Socket;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+import server.RTSServer;
+import server_client.screens.ClientScreen;
+import server_client.screens.LobbySelectionScreen;
+import server_client.screens.ScreenFactory;
+
+public class ServerClient  extends Application {
+	private ClientScreen currentScreen;
+	//todo figure out the backend for this crap AND THE FRONT END FEELSGOODMAN
+	private ScreenFactory myScreenFactory;
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Socket clientSocket = null;
+		do {
+			try {
+				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
+			}
+			catch(Exception e){
+				System.out.println("Fail");
+			}
+		} while (clientSocket == null);
+		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
+		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
+		while(true) {
+			String newClass = currentScreen.updateSelf();
+			if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
+				currentScreen = myScreenFactory.get(newClass);
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		launch(args);
 	}
 }

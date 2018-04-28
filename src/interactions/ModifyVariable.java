@@ -27,9 +27,6 @@ public class ModifyVariable implements CustomFunction {
 	private String variable;
 	private String delta;
 	
-	//reconsider rate, maybe add a limit to simulate a for loop? and couple that with rate?
-	private double rate;
-	
 	public ModifyVariable()
 	{
 		format = new CustomComponentParameterFormat();
@@ -43,7 +40,6 @@ public class ModifyVariable implements CustomFunction {
 		{
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
-		
 		} 
 		catch (PropertyNotFoundException e) 
 		{
@@ -61,13 +57,23 @@ public class ModifyVariable implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {		
 		
+		if(other == null) return;
 		try 
 		{
-			double deltaVal;
 			ParameterParser p = new ParameterParser();
-			deltaVal = p.assignValidatedValue(delta, current);
+			double deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
-			other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
+			double maxVal = other.accessLogic().accessAttributes().getMaxAttributeVal(variable);
+			if(prevVal + deltaVal <= maxVal)
+			{
+				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
+			}
+			else
+			{
+				double finalDelta = (prevVal + deltaVal) - maxVal;
+				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
+
+			}
 			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 

@@ -12,6 +12,7 @@ import gui_elements.labels.InteractionCustomFunctionsTitleLabel;
 import gui_elements.labels.CreatedCustomFunctionsLabel;
 import gui_elements.labels.CustomFunctionTypeLabel;
 import gui_elements.panes.CreatedCustomFunctionsPane;
+import gui_elements.panes.CustomFunctionNamesPane;
 import gui_elements.panes.CustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import interactions.CustomFunction;
@@ -33,7 +34,7 @@ public class InteractionAddCustomFunctionsScreen {
     private int screen_width, screen_height, current_interaction_id;
     private Stage stage;
     private InteractionManager interaction_manager;
-    private MainPane custom_functions_pane, created_custom_functions_pane;
+    private MainPane custom_functions_pane, custom_function_names_pane, created_custom_functions_pane;
     private MainComboBox custom_function_type_cb;
     private CustomFunction custom_function;
     
@@ -120,13 +121,16 @@ public class InteractionAddCustomFunctionsScreen {
     
     private void setPanes() {
     	custom_functions_pane = new CustomFunctionsPane();
+    	custom_function_names_pane = new CustomFunctionNamesPane();
     	
-    	root.getChildren().add(custom_functions_pane.getPane());
+    	root.getChildren().addAll(custom_functions_pane.getPane(),
+    							  custom_function_names_pane.getPane());
     }
     
     private void setComboBoxes() {
     	custom_function_type_cb = new CustomFunctionTypeComboBox(interaction_manager, 
 																 current_interaction_id,
+																 custom_function_names_pane,
 																 custom_functions_pane,
 																 custom_function);
     	
@@ -134,9 +138,12 @@ public class InteractionAddCustomFunctionsScreen {
     }
 
     private void setButtons() {
-    	root.getChildren().add(new CustomFunctionsSaveButton(custom_functions_pane,
+    	root.getChildren().add(new CustomFunctionsSaveButton(interaction_manager,
+    														 current_interaction_id,
+    														 custom_functions_pane,
     													     created_custom_functions_pane,
-    														 custom_function_type_cb));
+    														 custom_function_type_cb,
+    														 this));
     }
 
     public void resetElements() {

@@ -11,11 +11,9 @@ import game_engine.EngineObject;
 import game_object.GameObject;
 
 public class InteractionManager extends ElementManager {
-	
-	Map<Integer, Interaction> interactionIndexMap;
-	
+		
 	public InteractionManager() {
-		interactionIndexMap = new TreeMap<Integer, Interaction>();
+		super();
 	}
 
 	
@@ -42,6 +40,20 @@ public class InteractionManager extends ElementManager {
 	public Interaction getInteraction(int id)
 	{
 		return (Interaction)(this.get(id));
+	}
+	
+	public void removeLastAddedInteraction()
+	{
+		List<Interaction> inters = getElements();
+		this.removeElement(inters.get(inters.size()-1));
+	}
+	
+	public void setupImage() 
+	{
+		for(Interaction interaction: getElements()) 
+		{
+			interaction.setImageFromPath();
+		}
 	}
 	
 }

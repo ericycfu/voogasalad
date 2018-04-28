@@ -27,12 +27,13 @@ public class SkillButton extends Button {
 		mySkillName = interactionName;
 		myInteractionID = interactionNumber;
 		mySkillDescription = skillDescription;
+		this.setMaxSize(width, height);
 		setPicture(width, height);
 		setDescription();
 	}
 	
 	private void setDescription() {
-		Tooltip tooltip = new Tooltip("hello");
+		Tooltip tooltip = new Tooltip(mySkillDescription);
 		this.setTooltip(tooltip);
 	}
 	

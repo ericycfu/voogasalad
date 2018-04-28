@@ -22,8 +22,8 @@ public class ModifyInARadius implements CustomFunction {
 	private CustomComponentParameterFormat format;
 	
 	private String variable;
-	private double delta;
-	private double radius;
+	private String delta;
+	private String radius;
 	
 	public ModifyInARadius()
 	{
@@ -37,20 +37,28 @@ public class ModifyInARadius implements CustomFunction {
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
 		Transform curTrans = current.getTransform();
+		ParameterParser p = new ParameterParser();
 		for(GameObject g : manager.getElements())
 		{
 			Transform otherTrans = g.getTransform();
-			double distance = curTrans.getDisplacement(otherTrans);
-			if(distance >= radius) return;
-			
-			double prevVal;
-			
+			double distance = curTrans.getDisplacement(otherTrans);			
 			try 
 			{
-				prevVal = g.accessLogic().accessAttributes().getAttribute(variable);
-				g.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + delta);
+				if(distance >= p.assignValidatedValue(radius, current)) return;
+				double deltaVal = p.assignValidatedValue(delta, current);
+				double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
+				double maxVal = other.accessLogic().accessAttributes().getMaxAttributeVal(variable);
+				if(prevVal + deltaVal <= maxVal)
+				{
+					other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
+				}
+				else
+				{
+					double finalDelta = (prevVal + deltaVal) - maxVal;
+					other.accessLogic().accessAttributes().setAttributeValue(variable, finalDelta);
+				}
 				current.dequeueInteraction();
-			} 
+			}
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{
 				e.printStackTrace();
@@ -81,8 +89,8 @@ public class ModifyInARadius implements CustomFunction {
 		try 
 		{
 			this.variable = format.getParameterValue(VARIABLE);
-			this.delta = Double.parseDouble(format.getParameterValue(DELTA));
-			this.radius = Double.parseDouble(format.getParameterValue(RADIUS));
+			this.delta = format.getParameterValue(DELTA);
+			this.radius = format.getParameterValue(RADIUS);
 		} 
 		catch (PropertyNotFoundException e) 
 		{

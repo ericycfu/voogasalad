@@ -12,7 +12,7 @@ public class NewGameButton extends Button {
 	
 	public NewGameButton(int i, Stage stage) {
 		setupText(i);
-		this.setOnAction(e -> new MakeGameScreen(stage, new GameEntity()));
+		this.setOnAction(e -> new MakeGameScreen(stage));
 	}
 	
 	private void setupText(int i) {

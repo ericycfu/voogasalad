@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import game_object.PropertyNotFoundException;
+import gui_elements.panes.CustomFunctionNamesPane;
 import gui_elements.panes.CustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import interactions.CustomComponentParameterFormat;
@@ -20,19 +21,24 @@ public class CustomFunctionTypeComboBox extends MainComboBox {
 	
 	private static final String FILENAME = "custom_function_type_cb.properties";
 	private static final String CUSTOM_FUNCTIONS_FILENAME = "data/CustomFunctions.properties";
+	private static final String BLANK = "";
+	private static final String COLON = ":";
 	private Properties properties;
 	private InputStream input;
 	private Map<String, String> custom_function_map;
 	private InteractionManager interaction_manager;
+	private CustomFunctionNamesPane custom_function_names_pane;
 	private CustomFunctionsPane custom_functions_pane;
 	private CustomFunction custom_function;
 	private int interaction_id;
 	
 	public CustomFunctionTypeComboBox(InteractionManager interaction_manager, int interaction_id,
-			MainPane custom_functions_pane, CustomFunction custom_function) { 
+			MainPane custom_function_names_pane, MainPane custom_functions_pane,
+			CustomFunction custom_function) { 
 		super(FILENAME);
 		this.interaction_manager = interaction_manager;
 		this.interaction_id = interaction_id;
+		this.custom_function_names_pane = (CustomFunctionNamesPane) custom_function_names_pane;
 		this.custom_functions_pane = (CustomFunctionsPane) custom_functions_pane;
 		this.custom_function = custom_function;
 		custom_function_map = new HashMap<String, String>();
@@ -43,18 +49,20 @@ public class CustomFunctionTypeComboBox extends MainComboBox {
 		getCustomFunctions();
     	getComboBox().setOnAction((ActionEvent ev) -> {
     		String type = getComboBox().getSelectionModel().getSelectedItem();
-    		custom_function = interaction_manager.getInteraction(interaction_id).addCustomFunction(type);
+    		custom_function = interaction_manager.getInteraction(interaction_id).generateCustomFunction(type);
     		CustomComponentParameterFormat format = custom_function.getParameterFormat();
     		List<String> parameterList = format.getParameterList();
 //    		format.addHelpText(custom_function_map.get(type));
+    		custom_function_names_pane.getPane().getChildren().clear();
     		custom_functions_pane.getPane().getChildren().clear();
     		for(int i = 0; i < parameterList.size(); i++) {
+    			String parameter = parameterList.get(i);
+    			custom_function_names_pane.addCustomFunctionNameLabel(parameter + COLON);
 				try {
-	    			String parameter = parameterList.get(i);
 	    			String value = format.getParameterValue(parameter);
 	    			custom_functions_pane.addCustomFunctionTextField(value);
 				} catch (PropertyNotFoundException e) {
-					custom_functions_pane.addCustomFunctionTextField("");
+					custom_functions_pane.addCustomFunctionTextField(BLANK);
 				}
     		}
     	});
