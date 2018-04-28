@@ -92,7 +92,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
 				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
 						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
-			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
 		}
@@ -108,7 +108,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(3);
 				myStatusInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
 						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
-			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
 		}

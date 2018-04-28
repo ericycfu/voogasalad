@@ -236,6 +236,7 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		initializeSingleUnitSelect();
 		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());

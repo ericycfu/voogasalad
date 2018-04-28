@@ -3,8 +3,10 @@ package gui_elements.buttons;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
@@ -15,7 +17,6 @@ import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_player.GamePlayer;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import resources.Resources;
@@ -55,15 +56,17 @@ public class PlayGameButton extends Button {
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 			List<Map<AuthoringObject, List<Vector2>>> listFormMap = new ArrayList<>();
 			listFormMap.add(changedMap);
+			List<Object> listForm = new ArrayList<>();
 			try {
 				myWriter.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
 				myWriter.write(Resources.getString(RESOURCES_STRING2), listFormMap);
-				List<GameObjectManager> listFormGOM = new ArrayList<>();
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
-				listFormGOM.add(myGOM);
-				myWriter.write(Resources.getString(INITIAL_MAP_STRING), listFormGOM);
-				List<GameObject> possibleObjects = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
-				myWriter.write(Resources.getString(INITIAL_LIST_STRING),possibleObjects);
+				listForm.add(myGOM);
+				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
+				Set<GameObject> possibleObjects = new HashSet<>();
+				possibleObjects.addAll(possibleObjectsList);
+				listForm.add(possibleObjects);
+				myWriter.write(Resources.getString(INITIAL_MAP_STRING),listForm);
 				//GamePlayer gamePlayer = new GamePlayer(myGOM);
 				System.out.println("Object saved");
 			} catch (IOException e) {
