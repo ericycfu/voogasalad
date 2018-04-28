@@ -15,8 +15,6 @@ public class DemoTester {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		Reader myReader = new Reader();
-		Writer myWriter = new Writer();
 		List<Object> objects = new ArrayList<>();
 		
 		Vector2 myVector = new Vector2(1.0, 6.0);
@@ -30,10 +28,10 @@ public class DemoTester {
 		objects.add(myGO);
 		objects.add("hello");
 		objects.add(myAO);
-		myWriter.write("src/game_data/myDemo", objects);
+		Writer.write("src/game_data/myDemo", objects);
 		
 		List<Object> objects2 = new ArrayList<>();
-		objects2 = myReader.read("src/game_data/myDemo");
+		objects2 = Reader.read("src/game_data/myDemo");
 		
 		System.out.println(objects2.get(0));
 		System.out.println(((GameObject) objects2.get(0)).getName());
@@ -47,11 +45,11 @@ public class DemoTester {
 		
 		
 		List<Object> selectiveList = new ArrayList<>();
-		selectiveList = myReader.read("src/game_data/myDemo", "java.lang.String");
+		selectiveList = Reader.read("src/game_data/myDemo", "java.lang.String");
 		System.out.println(selectiveList.get(0));
 		
 		List<Object> selectiveList2 = new ArrayList<>();
-		selectiveList2 = myReader.read("src/game_data/myDemo", "game_object.GameObject");
+		selectiveList2 = Reader.read("src/game_data/myDemo", "game_object.GameObject");
 		System.out.println(selectiveList2.get(0));
 		}
 
