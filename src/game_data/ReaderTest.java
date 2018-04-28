@@ -24,11 +24,9 @@ public class ReaderTest {
 		List<Object> recovery = new ArrayList<>();
 		try {
 			recovery = Reader.read("src/game_data/test");
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			fail("we fucked up");
-		} catch (IOException e) {
-			fail("we fucked up");
-		}
+		} 
 		for(int i = 0; i < stuff.size();i++) {
 			if(!stuff.get(i).equals(recovery.get(i))) {
 				fail("elements differ");
@@ -52,9 +50,7 @@ public class ReaderTest {
 		List<Object> recovery = new ArrayList<>();
 		try {
 			recovery = Reader.read("src/game_data/test","java.lang.String");
-		} catch (ClassNotFoundException e) {
-			fail("we fucked up");
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			fail("we fucked up");
 		}
 		if(recovery.size() > 1) {
@@ -78,11 +74,9 @@ public class ReaderTest {
 		try {
 			Reader.read("hi");
 			fail("we fucked up");
-		} catch (ClassNotFoundException e) {
-			fail("we fucked up");
 		} catch (FileNotFoundException e) {
 			return;
-		} catch(IOException e) {
+		} catch(IOException | ClassNotFoundException e) {
 			fail("we fucked up");
 		}
 	}

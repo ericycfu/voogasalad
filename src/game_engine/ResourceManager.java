@@ -131,4 +131,12 @@ public class ResourceManager {
 		
 		return varList;
 	}
+	
+	/**
+	 * Clears the manager
+	 */
+	public void clearManager()
+	{
+		resourceMap.clear();
+	}
 }

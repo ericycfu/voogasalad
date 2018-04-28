@@ -21,7 +21,7 @@ public class ComboBoxFactory {
 		box.setOnAction(e);
 		return box;
 	}
-	
+		
 	public static ComboBox makeComboBox(List<String> list, String text) {
 		ComboBox box = makeComboBox(list);
 		box.setValue(text);
@@ -32,5 +32,16 @@ public class ComboBoxFactory {
 		box.setValue(text);
 		return box;
 	}
+	
+	public static ComboBox makeComboBox(ComboBox box, EventHandler<ActionEvent> e) {
+		box.setOnAction(e);
+		return box;
+	}
+	
+	public static void updateComboBox(ComboBox box, List<String> list) {
+		ObservableList<String> observableList = FXCollections.observableArrayList(list);
+		box.setItems(observableList);
+	}
+
 	
 }
