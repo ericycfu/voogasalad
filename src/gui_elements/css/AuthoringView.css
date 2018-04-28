@@ -51,6 +51,10 @@
 	-fx-opacity: 0.8;
 }
 
+.tab_title {
+	-fx-font-color: red;
+}
+
 #map_entity_default {
 	-fx-pref-width: 1000;
 	-fx-pref-height: 1000;

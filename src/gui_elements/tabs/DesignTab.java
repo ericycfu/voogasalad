@@ -73,6 +73,7 @@ public class DesignTab extends Tab {
 		
 	private void setText() {
 		this.setText(TAB_TEXT);
+		this.getStyleClass().add("tab_title");
 	}
 	
 	private void setLabels() {
