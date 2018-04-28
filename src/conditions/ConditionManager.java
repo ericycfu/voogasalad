@@ -1,5 +1,6 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,9 +12,14 @@ import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_object.GameObject;
 
-public class ConditionManager extends ElementManager {
+public class ConditionManager extends ElementManager implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ConditionManager()
 	{
 		super();

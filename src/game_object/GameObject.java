@@ -1,5 +1,6 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,8 +26,13 @@ import transform_library.Vector2;
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject, EngineObject {
+public class GameObject  implements InterfaceGameObject, EngineObject, Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String EMPTY = "empty";
 	
 	private int id;

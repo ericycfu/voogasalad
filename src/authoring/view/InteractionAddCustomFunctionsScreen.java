@@ -145,11 +145,12 @@ public class InteractionAddCustomFunctionsScreen {
     														 custom_function_type_cb,
     														 this));
     }
-
-    public void resetElements() {
-    }
     
     public Stage getStage() {
     	return stage;
+    }
+    
+    public Scene getScene() {
+    	return myScene;
     }
 }

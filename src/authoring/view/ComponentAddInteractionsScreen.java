@@ -9,6 +9,7 @@ import authoring.backend.AuthoringObject;
 import authoring.backend.TagController;
 import gui_elements.buttons.AddCustomFunctionsButton;
 import gui_elements.buttons.AddInteractionButton;
+import gui_elements.buttons.InteractionImageChooserButton;
 import gui_elements.buttons.InteractionOkButton;
 import gui_elements.combo_boxes.InteractionComponentTagComboBox;
 import gui_elements.combo_boxes.InteractionNameComboBox;
@@ -16,10 +17,13 @@ import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.ComponentInteractionsTitleLabel;
 import gui_elements.labels.CreatedCustomFunctionsLabel;
 import gui_elements.labels.InteractionComponentTagLabel;
+import gui_elements.labels.InteractionImageChoiceTextLabel;
+import gui_elements.labels.InteractionImageChooserLabel;
 import gui_elements.labels.InteractionNameLabel;
 import gui_elements.labels.AllSelectedInteractionTagsLabel;
 import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
 import gui_elements.labels.InteractionVisionRangeLabel;
+import gui_elements.labels.MainLabel;
 import gui_elements.panes.AllSelectedInteractionTagsPane;
 import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
@@ -48,6 +52,7 @@ public class ComponentAddInteractionsScreen {
     private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane, created_custom_functions_pane;
     private MainComboBox interaction_component_tag_cb, interaction_name_cb;
     private MainTextField interaction_vision_range_tf;
+    private MainLabel interaction_image_choice_text_label;
 	
 	// Additional setup for the add-interactions screen.
     private Scene myScene;
@@ -128,13 +133,18 @@ public class ComponentAddInteractionsScreen {
     }
     
     private void setLabels() {
+    	
+    	interaction_image_choice_text_label = new InteractionImageChoiceTextLabel();
+    	
     	root.getChildren().addAll(new ComponentInteractionsTitleLabel().getLabel(),
     							  new InteractionNameLabel().getLabel(),
     							  new InteractionComponentTagLabel().getLabel(),
     							  new InteractionVisionRangeLabel().getLabel(),
   								  new CurrentSelectedInteractionComponentsLabel().getLabel(),
   								  new AllSelectedInteractionTagsLabel().getLabel(),
-    							  new CreatedCustomFunctionsLabel().getLabel());    							  
+  								  new InteractionImageChooserLabel().getLabel(),
+  								  interaction_image_choice_text_label.getLabel(),
+    							  new CreatedCustomFunctionsLabel().getLabel());
     }
     
     private void setRadioButtons() {
@@ -174,13 +184,15 @@ public class ComponentAddInteractionsScreen {
     													   interaction_vision_range_tf,
     													   all_selected_interaction_tags_pane,
     													   created_custom_functions_pane,
+    													   interaction_image_choice_text_label,
     													   this,
     													   interaction_id).getButton(),
     							  new AddCustomFunctionsButton(interaction_manager,
     									  					   created_custom_functions_pane,
     									  					   this),
     							  new InteractionOkButton(interaction_manager, 
-    									  				  this));
+    									  				  this),
+    							  new InteractionImageChooserButton(interaction_image_choice_text_label));
     }
 
     public void resetElements() {
@@ -190,6 +202,7 @@ public class ComponentAddInteractionsScreen {
     	interaction_name_cb.getEditor().clear();
     	interaction_component_tag_cb.getEditor().clear();
     	interaction_vision_range_tf.clear();
+    	interaction_image_choice_text_label.setText(null);
     }
     
     public int getCurrentInteractionID() {
