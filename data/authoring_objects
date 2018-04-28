@@ -1,11 +1,7 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-<<<<<<< HEAD
       <string>melee</string>
-=======
-      <string>a</string>
->>>>>>> dev
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
@@ -28,13 +24,8 @@
       </conditions>
     </myObjectLogic>
     <myMainComponentPropertyManager>
-<<<<<<< HEAD
       <myImagePath>/images/rcd.png</myImagePath>
-      <myName>robert</myName>
-=======
-      <myImagePath>/images/silk.png</myImagePath>
-      <myName>a</myName>
->>>>>>> dev
+      <myName>duvall</myName>
       <myTags reference="../../myTags"/>
       <myMovementSpeed>3.0</myMovementSpeed>
       <isBuilding>false</isBuilding>

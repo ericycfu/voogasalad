@@ -7,13 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-<<<<<<< HEAD
-              <x>194.0</x>
-              <y>104.0</y>
-=======
-              <x>202.0</x>
-              <y>115.0</y>
->>>>>>> dev
+              <x>141.0</x>
+              <y>97.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -35,17 +30,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/silk.png</myImageLocation>
+            <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-<<<<<<< HEAD
-          <name>robert</name>
+          <name>duvall</name>
           <tags>
             <string>melee</string>
-=======
-          <name>a</name>
-          <tags>
-            <string>a</string>
->>>>>>> dev
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -64,34 +53,21 @@
           <id>2</id>
           <transform>
             <position>
-<<<<<<< HEAD
-              <x>78.0</x>
-              <y>106.0</y>
-=======
-              <x>91.0</x>
-              <y>159.0</y>
->>>>>>> dev
+              <x>61.0</x>
+              <y>222.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
           <renderer>
-            <myImageLocation>/images/silk.png</myImageLocation>
+            <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-<<<<<<< HEAD
-          <name>robert</name>
-=======
-          <name>a</name>
->>>>>>> dev
+          <name>duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-<<<<<<< HEAD
           <movementSpeed>3.0</movementSpeed>
-=======
-          <movementSpeed>1.0</movementSpeed>
->>>>>>> dev
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -129,11 +105,17 @@
           <new__ID__val>1</new__ID__val>
         </conditions>
       </myObjectLogic>
-      <renderer/>
+      <renderer>
+        <myImageLocation>/images/rcd.png</myImageLocation>
+      </renderer>
+      <name>duvall</name>
+      <tags>
+        <string>melee</string>
+      </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
+      <movementSpeed>3.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
