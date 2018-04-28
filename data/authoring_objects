@@ -1,7 +1,7 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>prof</string>
+      <string>beast</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
@@ -22,16 +22,16 @@
           </entry>
         </maxAttributes>
         <buildCosts reference="../../../buildCosts"/>
-        <buildTime>10.0</buildTime>
+        <buildTime>100.0</buildTime>
       </attributes>
       <interactions>
         <elementMap>
           <entry>
-            <int>1</int>
+            <int>2</int>
             <interactions.Interaction>
-              <id>1</id>
+              <id>2</id>
               <targetTags>
-                <string>prof</string>
+                <string>beast</string>
               </targetTags>
               <name>Attack</name>
               <imagePath>/images/attack_icon.png</imagePath>
@@ -62,7 +62,53 @@
             </interactions.Interaction>
           </entry>
         </elementMap>
-        <new__ID__val>3</new__ID__val>
+        <new__ID__val>4</new__ID__val>
+      </interactions>
+      <conditions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+      </conditions>
+    </myObjectLogic>
+    <myMainComponentPropertyManager>
+      <myImagePath>/images/ghoul.png</myImagePath>
+      <myName>duvall</myName>
+      <myTags reference="../../myTags"/>
+      <myMovementSpeed>10.0</myMovementSpeed>
+      <isBuilding>false</isBuilding>
+      <myTeam>2</myTeam>
+    </myMainComponentPropertyManager>
+    <myAttributes reference="../myObjectLogic/attributes"/>
+    <myInteractions reference="../myObjectLogic/interactions"/>
+    <myConditionManager reference="../myObjectLogic/conditions"/>
+  </authoring.backend.AuthoringObject>
+  <authoring.backend.AuthoringObject>
+    <myTags>
+      <string>beast</string>
+    </myTags>
+    <myX>0.0</myX>
+    <myY>0.0</myY>
+    <buildCosts/>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes>
+          <entry>
+            <string>Health</string>
+            <double>200.0</double>
+          </entry>
+        </attributes>
+        <maxAttributes>
+          <entry>
+            <string>Health</string>
+            <double>200.0</double>
+          </entry>
+        </maxAttributes>
+        <buildCosts reference="../../../buildCosts"/>
+        <buildTime>10.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
       </interactions>
       <conditions>
         <elementMap/>
@@ -71,7 +117,7 @@
     </myObjectLogic>
     <myMainComponentPropertyManager>
       <myImagePath>/images/rcd.png</myImagePath>
-      <myName>duvall</myName>
+      <myName>robert</myName>
       <myTags reference="../../myTags"/>
       <myMovementSpeed>10.0</myMovementSpeed>
       <isBuilding>false</isBuilding>

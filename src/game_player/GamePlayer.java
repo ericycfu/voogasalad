@@ -142,11 +142,6 @@ public class GamePlayer {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
 					System.out.println(ia.getImg());
 					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH);
-					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(ia.getID());
-					System.out.println(sb.getInteractionID());
-					System.out.println("img: " + ia.getImg());
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);

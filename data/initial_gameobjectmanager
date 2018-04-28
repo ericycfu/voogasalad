@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>414.0</x>
-              <y>234.0</y>
+              <x>122.0</x>
+              <y>71.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -28,16 +28,16 @@
                 </entry>
               </maxAttributes>
               <buildCosts/>
-              <buildTime>10.0</buildTime>
+              <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
                 <entry>
-                  <int>1</int>
+                  <int>2</int>
                   <interactions.Interaction>
-                    <id>1</id>
+                    <id>2</id>
                     <targetTags>
-                      <string>prof</string>
+                      <string>beast</string>
                     </targetTags>
                     <name>Attack</name>
                     <imagePath>/images/attack_icon.png</imagePath>
@@ -68,7 +68,7 @@
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>3</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -76,11 +76,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <name>duvall</name>
           <tags>
-            <string>prof</string>
+            <string>beast</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -99,17 +99,45 @@
           <id>2</id>
           <transform>
             <position>
-              <x>184.0</x>
-              <y>138.0</y>
+              <x>221.0</x>
+              <y>78.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
-          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
           <renderer>
             <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-          <name>duvall</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <name>robert</name>
+          <tags>
+            <string>beast</string>
+          </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
@@ -150,16 +178,16 @@
             </entry>
           </maxAttributes>
           <buildCosts/>
-          <buildTime>10.0</buildTime>
+          <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
             <entry>
-              <int>1</int>
+              <int>2</int>
               <interactions.Interaction>
-                <id>1</id>
+                <id>2</id>
                 <targetTags>
-                  <string>prof</string>
+                  <string>beast</string>
                 </targetTags>
                 <name>Attack</name>
                 <imagePath>/images/attack_icon.png</imagePath>
@@ -190,7 +218,60 @@
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>3</new__ID__val>
+          <new__ID__val>4</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
+      </renderer>
+      <name>duvall</name>
+      <tags>
+        <string>beast</string>
+      </tags>
+      <isBuilding>false</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>10.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </maxAttributes>
+          <buildCosts/>
+          <buildTime>10.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -200,9 +281,9 @@
       <renderer>
         <myImageLocation>/images/rcd.png</myImageLocation>
       </renderer>
-      <name>duvall</name>
+      <name>robert</name>
       <tags>
-        <string>prof</string>
+        <string>beast</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
