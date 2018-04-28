@@ -10,7 +10,7 @@ import interactions.CustomComponentParameterFormat;
 /**
  * 
  * @author Rayan
- * Interface for creating win condition modules
+ * Interface for creating end condition modules
  */
 
 public interface EndCondition {

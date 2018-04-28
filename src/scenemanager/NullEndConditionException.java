@@ -1,6 +1,15 @@
 package scenemanager;
 
+/**
+ * 
+ * @author Rayan
+ *
+ */
+
 public class NullEndConditionException extends Exception {
+
+
+	private static final long serialVersionUID = 1L;
 
 	public NullEndConditionException() {
 		super();

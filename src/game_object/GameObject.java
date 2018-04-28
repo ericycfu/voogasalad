@@ -60,6 +60,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	private double elapsedTime;
 	
+	
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -187,8 +189,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
 		
-		//myObjectLogic.checkConditions(this);
-	
+		myObjectLogic.checkConditions(this);
 
 	}
 	
@@ -345,6 +346,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	public Team getOwner() {
 		return owner;
+	}
+	
+	public void setOwner(Team team)
+	{
+		this.owner = team;
 	}
 
 	public double getMovementSpeed() {
