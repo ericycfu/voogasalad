@@ -16,6 +16,7 @@ public class ServerClient  extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Socket clientSocket = null;
+		System.out.println(System.currentTimeMillis());
 		do {
 			try {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);

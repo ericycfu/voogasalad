@@ -1,6 +1,7 @@
 package server.communications_handler;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
@@ -14,19 +15,29 @@ public class MainPageHandler extends CommunicationsHandler {
 		super(input, server);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public String updateServer() {
 		try {
-			int input;
-			if((input = getInputStream().readInt()) == -1) {
-				if(input == -1)
-					getServer().addLobby(getSocket(), (GameInstance)getInputStream().readObject());
-				else getServer().addToLobby(input, getSocket());
-				return LobbyHandler.CLASS_REF;
-			}
-			else return CLASS_REF;
+			Integer input;
+			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new SocketException("Client disconnected");
+			if((input = in.readInt()) == null)
+				return CLASS_REF;
+			
+			System.out.println("Here");
+			if(input == -1)
+				getServer().addLobby(getSocket(), 
+						(GameInstance)in.readObject());
+			else getServer().addToLobby(input, getSocket());
+			System.out.println("Message received");
+			return LobbyHandler.CLASS_REF;
 		}
-		catch(Exception e) {return CLASS_REF;}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Oops");
+			return CLASS_REF;}
 	}
 
 	@Override
@@ -39,8 +50,7 @@ public class MainPageHandler extends CommunicationsHandler {
 					.getLobbyManager());
 			out.flush();
 			System.out.println("Write success!");
-		} catch (IOException e) {
-			throw new SocketException("Write fail!");
+		} catch (Exception e) {
 		}
 	}
 

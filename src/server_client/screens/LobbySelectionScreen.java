@@ -11,6 +11,7 @@ import java.util.Set;
 
 import game_data.Reader;
 import game_engine.GameInfo;
+import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
@@ -22,7 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import server.GameLobby;
 import server.LobbyManager;
 import server_client.buttons.CreateLobbyButton;
 import server_client.buttons.JoinLobbyButton;
@@ -85,7 +86,7 @@ public class LobbySelectionScreen extends ClientScreen {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
 			File chosenMap = myMapChooser.showOpenDialog(getStage());
 			try {
-				List<Object> gameObjects = new Reader().read(chosenGame.getCanonicalPath());
+				List<Object> gameObjects = Reader.read(chosenGame.getCanonicalPath());
 				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
 				@SuppressWarnings("unchecked")
 				Set<GameObject> possibleUnits = ((Set<GameObject>) gameObjects.get(1));
@@ -93,12 +94,14 @@ public class LobbySelectionScreen extends ClientScreen {
 				for(GameObject g: possibleUnits) {
 					currentGameInfo.addReferenceGameObject(g);
 				}
+				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenMap.getCanonicalPath());
 				ObjectOutputStream out = getOutputStream();
 				out.writeInt(-1);
-				out.writeObject(null);
-				List<Object> mapSettings = new Reader().read(chosenMap.getCanonicalPath());
+				out.writeObject(newGame);
+				out.flush();
 				
 			} catch (Exception e2) {
+				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
@@ -153,8 +156,7 @@ public class LobbySelectionScreen extends ClientScreen {
 			if(in == null)
 				return CLASS_REF;
 			obj = in.readObject();
-			System.out.println(obj.getClass().getName());
-			if(obj instanceof String)
+			if(obj instanceof GameLobby)
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();

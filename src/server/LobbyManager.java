@@ -14,13 +14,15 @@ public class LobbyManager implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,GameLobby> lobbies;
+	private int nextID;
 	public LobbyManager() {
 		lobbies = new HashMap<>();
+		nextID = 0;
 	}
 	public int addElementToManager(GameLobby element) {
-		int id = lobbies.size() + 1;
-		lobbies.put(id, element);
-		return id;
+		nextID ++;
+		lobbies.put(nextID, element);
+		return nextID;
 	}
 
 	public void removeElement(GameLobby element) {

@@ -37,6 +37,7 @@ public abstract class CommunicationsHandler {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(getSocket().getOutputStream()));
 		} catch (IOException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

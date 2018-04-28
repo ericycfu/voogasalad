@@ -48,12 +48,17 @@ public class LobbyHandler extends CommunicationsHandler {
 	public void updateClient() throws SocketException{
 		try {
 			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				return;
+			System.out.println("Writing lobby");
 			if(currentLobby.isRunning())
 				out.writeObject(START_GAME);
 			else { out.writeObject(currentLobby);
 				out.writeInt(currentLobby.getTeamID(getSocket()));
 				out.writeInt(currentLobby.getPlayerID(getSocket()));
 			}
+			out.flush();
+			System.out.println("Lobby writing finished");
 		} catch (IOException e) {
 			return;
 		}

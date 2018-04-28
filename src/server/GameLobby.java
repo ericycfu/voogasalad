@@ -31,6 +31,7 @@ public class GameLobby implements Serializable{
 	@SuppressWarnings("unchecked")
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
 		numTeams = toRun.getTeamManager().getSize();
+		System.out.println(numTeams);
 		myPlayers = (List<Socket>[]) new ArrayList[numTeams];
 		for(int x = 0; x < numTeams; x++){
 			myPlayers[x] = new ArrayList<>();
@@ -119,11 +120,7 @@ public class GameLobby implements Serializable{
 		return playerIDs.size();
 	}
 	public boolean contains(Socket s) {
-		for(int x = 0; x < numTeams; x++) {
-			if(myPlayers[x].contains(s))
-				return true;
-		}
-		return false;
+		return playerIDs.keySet().contains(s);
 	}
 	public Socket getHost() {
 		int min_ID = Collections.min(playerIDs.values());

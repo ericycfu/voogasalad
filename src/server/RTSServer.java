@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class RTSServer {
-	public static final String SERVER_IP = "10.188.208.79";
+	public static final String SERVER_IP = "10.197.114.35";
 	public static final int PORT_NUMBER = 9098;
 	public static final int RETRY_CONNECTION_DELAY = 10000;
 	private ServerSocket myServerSocket;

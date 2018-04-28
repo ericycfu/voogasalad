@@ -1,11 +1,18 @@
 package game_engine;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
 import game_object.GameObject;
@@ -20,7 +27,7 @@ import transform_library.Vector2;
  *
  */
 public class GameInstance implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Sets up the GameInstance based on the information in the file
@@ -29,30 +36,44 @@ public class GameInstance implements Serializable{
 	private boolean running;
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
-	private transient TeamManager myTeamManager;
-	private BufferedImage background;
+	private TeamManager myTeamManager;
+	private transient BufferedImage background;
 	private double gameTime;
-	private ArrayList<ChatEntry> chat;
-	
-	public GameInstance(GameInfo g, String filepath) {
-		
+	private List<ChatEntry> chat;
+	private double mapHeight;
+	private double mapWidth;
+
+	public GameInstance(GameInfo g, GameObjectManager gom, String filepath) {
+
 		myGameInfo = g;
+		myObjectManager = gom;
 		myTeamManager = new TeamManager();
+		chat = new ArrayList<ChatEntry>();
+		running = false;
 		try {
-		setUp(filepath);
+			setUp(filepath);
 		}
-		catch(Exception e) {}
-		play();
+		catch(Exception e) {e.printStackTrace();}
 	}
 	public GameInstance(BufferedImage i) {
 		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		List<Object> gameObjects = Reader.read(filepath, "gameObject");
-		myObjectManager = new GameObjectManager();
-		for(int x = 0; x < gameObjects.size(); x++) {
-			myObjectManager.addElement((GameObject)gameObjects.get(x));
+		MapSettings mapProperties = (MapSettings)Reader.read(filepath).get(0);
+		System.out.println(mapProperties.getNumPlayers());
+		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
+			ResourceManager rm = new ResourceManager();
+			for(String s: mapProperties.getInitialResources().keySet()) {
+				rm.addResource(s, mapProperties.getInitialResources().get(s));
+			}
+			myTeamManager.createTeam("Team" + Integer.toString(x+1), rm);
 		}
+		mapHeight = mapProperties.getMapHeight();
+		mapWidth = mapProperties.getMapWidth();
+		background = ImageIO.read(this.getClass().getResourceAsStream(mapProperties.getImagePath()));
+		if(background == null)
+			System.out.println("The Image is null");
+		else System.out.println("Image successfully loaded");
 	}
 	/**
 	 * Saves the information in the GameInstance to the specified file
@@ -64,6 +85,15 @@ public class GameInstance implements Serializable{
 		toWrite.add(this);
 		Writer.write(filepath,toWrite);
 	}
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.defaultWriteObject();
+		ImageIO.write(getBackground(), "png", out);
+	}
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject();
+		background = ImageIO.read(in);
+	}
+
 	/**
 	 * Read commands from the file that is updated by the GamePlayer
 	 * @param filepath
@@ -74,28 +104,29 @@ public class GameInstance implements Serializable{
 		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
 		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
 	}
-	
+
 	public void executeBuildCommand(int sourceID, String newUnitName, int interactionID, int xcor, int ycor) {
 		if(!running)
 			return;
 		GameObject newGO = getGameInfo().get(newUnitName);
 		newGO.setTransform(new Transform(new Vector2(xcor,ycor)));
-		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
-		myObjectManager.getGameObject(sourceID).queueInteraction(newGO, interactionID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
+		GameObject source = myObjectManager.getGameObject(sourceID);
+		Vector2 direction = new Vector2(xcor,ycor);
+		source.queueInteraction(newGO, interactionID, myObjectManager, getNewGridMap(), direction);
 	}
 	public void executeMovement(int id, double xcor, double ycor) {
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
-		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
-		currentGridMap.updateMapPositions(myObjectManager.getElements());
-		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager,currentGridMap);
+		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager,getNewGridMap());
 	}
-	
+	public GridMap getNewGridMap() {
+		return new GridMap(mapHeight, mapWidth);
+	}
 	public void addToChat(int player_ID, String message) {
 		chat.add(new ChatEntry(gameTime,player_ID,message));
 	}
-	
+
 	public void loop() {
 		double startTime = 0;
 		double endTime = 0;

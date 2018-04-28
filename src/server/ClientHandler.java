@@ -16,18 +16,24 @@ public class ClientHandler implements Runnable {
 	}
 	@Override
 	public void run() {
-		try {
-		while(true) {
-			myCommunicationsHandler.updateClient();
-			String newHandler =  myCommunicationsHandler.updateServer();
-			if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
-				myCommunicationsHandler = myCHFactory.get(newHandler);
-		}
-		}
-		catch(SocketException e) {
-			System.out.println("hi");
-			Thread.currentThread().interrupt();
-		}
+		new Thread(() -> {
+			while(true) {
+				String newHandler =  myCommunicationsHandler.updateServer();
+				if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
+					myCommunicationsHandler = myCHFactory.get(newHandler);
+			}
+		}).start();
+		new Thread(() -> {
+			try {
+				while(true) {
+					myCommunicationsHandler.updateClient();
+				}
+			}
+			catch(SocketException e) {
+				System.out.println("Disconnected");
+				Thread.currentThread().interrupt();
+			}
+		}).start();
 	}
 
 }

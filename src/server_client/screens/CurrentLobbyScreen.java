@@ -73,7 +73,6 @@ public class CurrentLobbyScreen extends ClientScreen {
 		myPane.setId("lobby_selection_screen");
 		myScene = new Scene(myPane);
 		myScene.getStylesheets().add(STYLE_PATH);
-		
 	}
 
 	@Override
