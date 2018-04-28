@@ -132,7 +132,8 @@ public class GamePlayer {
 	
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
-		
+		myUnitSkills.clear();
+		System.out.println(myPossibleUnits);
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
@@ -166,7 +167,9 @@ public class GamePlayer {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			System.out.println(go.getName());
 			myUnitSkills.put(go.getName(), skillList);
+			System.out.println(skillList.size());
 		}
 	}
 	
@@ -237,7 +240,14 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		if (myTopPanel.getIsLoaded()) {
+			System.out.println("reinit");
+			unitSkillMapInitialize();
+			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
+			myTopPanel.setIsLoaded(false);
+		}
 		initializeSingleUnitSelect();
+		
 		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());

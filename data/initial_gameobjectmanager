@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>235.0</x>
-              <y>205.0</y>
+              <x>160.0</x>
+              <y>147.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -18,7 +18,7 @@
               <attributes/>
               <maxAttributes/>
               <buildCosts/>
-              <buildTime>1.0</buildTime>
+              <buildTime>3.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
@@ -32,15 +32,14 @@
           <renderer>
             <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-          <name>2</name>
+          <name>a</name>
           <tags>
-            <string>1</string>
-            <string>1</string>
+            <string>a</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
+          <movementSpeed>3.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -54,8 +53,8 @@
           <id>2</id>
           <transform>
             <position>
-              <x>300.0</x>
-              <y>55.0</y>
+              <x>9.0</x>
+              <y>61.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -63,40 +62,12 @@
           <renderer>
             <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-          <name>2</name>
+          <name>a</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>3</int>
-        <game__object.GameObject>
-          <id>3</id>
-          <transform>
-            <position>
-              <x>68.0</x>
-              <y>169.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
-          <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
-          </renderer>
-          <name>2</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
+          <movementSpeed>3.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -105,7 +76,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>4</new__ID__val>
+    <new__ID__val>3</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -123,7 +94,7 @@
           <attributes/>
           <maxAttributes/>
           <buildCosts/>
-          <buildTime>1.0</buildTime>
+          <buildTime>3.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>

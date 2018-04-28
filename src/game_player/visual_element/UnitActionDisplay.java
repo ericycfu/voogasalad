@@ -80,6 +80,8 @@ public class UnitActionDisplay implements VisualUpdate{
 		
 		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
+		System.out.println(gameObject.getName());
+		System.out.println(myUnitSkills);
 		fill(unitSkills);
 	}
 	
@@ -115,6 +117,10 @@ public class UnitActionDisplay implements VisualUpdate{
 
 	public void setCurrentActionID(int myCurrentActionID) {
 		this.myCurrentActionID = myCurrentActionID;
+	}
+	
+	public void setUnitSkills(Map<String, List<SkillButton>> newmap) {
+		this.myUnitSkills = newmap;
 	}
 	
 }

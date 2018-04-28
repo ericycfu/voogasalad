@@ -3,8 +3,7 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myTags>
-          <string>1</string>
-          <string>1</string>
+          <string>a</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
@@ -15,7 +14,7 @@
             <attributes/>
             <maxAttributes/>
             <buildCosts reference="../../../buildCosts"/>
-            <buildTime>1.0</buildTime>
+            <buildTime>3.0</buildTime>
           </attributes>
           <interactions>
             <elementMap/>
@@ -28,9 +27,9 @@
         </myObjectLogic>
         <myMainComponentPropertyManager>
           <myImagePath>/images/rcd.png</myImagePath>
-          <myName>2</myName>
+          <myName>a</myName>
           <myTags reference="../../myTags"/>
-          <myMovementSpeed>1.0</myMovementSpeed>
+          <myMovementSpeed>3.0</myMovementSpeed>
           <isBuilding>false</isBuilding>
           <myTeam>1</myTeam>
         </myMainComponentPropertyManager>
@@ -40,16 +39,12 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>235.0</x>
-          <y>205.0</y>
+          <x>160.0</x>
+          <y>147.0</y>
         </transform__library.Vector2>
         <transform__library.Vector2>
-          <x>300.0</x>
-          <y>55.0</y>
-        </transform__library.Vector2>
-        <transform__library.Vector2>
-          <x>68.0</x>
-          <y>169.0</y>
+          <x>9.0</x>
+          <y>61.0</y>
         </transform__library.Vector2>
       </list>
     </entry>

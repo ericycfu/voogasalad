@@ -1,8 +1,7 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>1</string>
-      <string>1</string>
+      <string>a</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
@@ -13,7 +12,7 @@
         <attributes/>
         <maxAttributes/>
         <buildCosts reference="../../../buildCosts"/>
-        <buildTime>1.0</buildTime>
+        <buildTime>3.0</buildTime>
       </attributes>
       <interactions>
         <elementMap/>
@@ -26,9 +25,9 @@
     </myObjectLogic>
     <myMainComponentPropertyManager>
       <myImagePath>/images/rcd.png</myImagePath>
-      <myName>2</myName>
+      <myName>a</myName>
       <myTags reference="../../myTags"/>
-      <myMovementSpeed>1.0</myMovementSpeed>
+      <myMovementSpeed>3.0</myMovementSpeed>
       <isBuilding>false</isBuilding>
       <myTeam>1</myTeam>
     </myMainComponentPropertyManager>

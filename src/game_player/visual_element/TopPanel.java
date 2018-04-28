@@ -59,6 +59,7 @@ public class TopPanel {
 	private Reader myReader;
 	private Writer myWriter;
 	private boolean isLoaded;
+
 	
 	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
@@ -129,12 +130,15 @@ public class TopPanel {
 		fc.setInitialDirectory(new File(FILEPATH));
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
+		isLoaded = true;
 		try {
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
+			System.out.println(gameObjects.get(1));
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
+			
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -161,9 +165,11 @@ public class TopPanel {
 	}
 	
 	public boolean getIsLoaded() {
-		boolean temp = isLoaded;
-		isLoaded = false;
-		return temp;
+		return isLoaded;
+	}
+	
+	public void setIsLoaded(boolean val) {
+		isLoaded = val;
 	}
 	
 	public void update() {
