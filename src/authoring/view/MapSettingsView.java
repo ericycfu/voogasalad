@@ -30,13 +30,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
+	private MapSettings settings;
 	private ResourceManager myResourceManager;
+	private HBox lossConditionBox;
 	private HBox resourcesBox;
 	private Writer myWriter;
 	private Reader myReader;
 	private VBox contentBox;
 	
 	public MapSettingsView(MapSettings settings) {
+		this.settings = settings;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
 		myResourceManager = new ResourceManager();
@@ -48,6 +51,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		initializeTitle();
 		VBox myVBox = new VBox();
 		initializeSettings(myVBox);
+		initializeLossConditions(myVBox);
 		initializeResources(myVBox);
 		this.getChildren().add(myVBox);
 		setupButton();
@@ -60,6 +64,12 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		box.setPadding(new Insets(50, 50, 0, 50));
 		rootBox.getChildren().add(box);
 	}
+	
+	private void initializeLossConditions(VBox rootBox) {
+		lossConditionBox = new HBox();
+		rootBox.getChildren().add(lossConditionBox);
+	}
+	
 	
 	private void initializeResources(VBox rootBox) {
 		resourcesBox = new HBox();
@@ -80,6 +90,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeLabelBox(HBox rootBox) {
 		VBox box = new VBox();
 		String[] labels = {
+				"Map name:",
 				"Number of players:", 
 				"Loss condition:", 
 				"Image selection:",
@@ -98,6 +109,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeContent(HBox rootBox) {
 		contentBox = new VBox();
 		contentBox.getChildren().addAll(
+				new TextField(),
 				new TextField(),
 				new ComboBox(),
 				new ImageChooserButton(),
@@ -118,11 +130,20 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	
 	private void saveConditions() {
 		String mapName = Extractor.extractTextField(contentBox.getChildren().get(0));
-		String filePath = Extractor.extractImagePath(contentBox.getChildren().get(2));
-		int width = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(3)));
-		int height = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(4)));
-
+		int numPlayers = Extractor.extractTextFieldInt(contentBox.getChildren().get(1));
+		String imagePath = IMAGE_PATH + Extractor.extractImagePath(contentBox.getChildren().get(3));
+		System.out.print(imagePath);
+		int mapwidth = Extractor.extractTextFieldInt(contentBox.getChildren().get(4));
+		int mapheight = Extractor.extractTextFieldInt(contentBox.getChildren().get(5));
+		settings.updateSettings(mapName, numPlayers, imagePath, mapwidth, mapheight);
 	}
+	
+	private void newLossConditionLine(HBox rootBox) {
+		HBox line = new HBox();
+		
+	}
+	
+	
 	private void initializeResources(HBox rootBox) {
 		VBox myVBox = new VBox();
 		rootBox.getChildren().add(myVBox);
