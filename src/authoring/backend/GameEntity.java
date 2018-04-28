@@ -19,8 +19,8 @@ public class GameEntity {
 	public CreatedMaps getCreatedMaps() {
 		return createdmaps;
 	}
+	
 	public ResourceManager getResourceManager() {
 		return myResourceManager;
 	}
 }
-
