@@ -76,8 +76,6 @@ public class UnitActionDisplay implements VisualUpdate{
 			return;
 		}
 		
-		
-		
 		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
 		System.out.println(gameObject.getName());
