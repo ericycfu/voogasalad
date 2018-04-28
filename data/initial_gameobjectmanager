@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>211.0</x>
-              <y>240.0</y>
+              <x>235.0</x>
+              <y>205.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,12 +17,12 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
-              <buildTime>0.0</buildTime>
+              <buildCosts/>
+              <buildTime>1.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
               <new__ID__val>1</new__ID__val>
-              <interactionIndexMap class="tree-map"/>
             </interactions>
             <conditions>
               <elementMap/>
@@ -30,8 +30,69 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/station.png</myImageLocation>
+            <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
+          <name>2</name>
+          <tags>
+            <string>1</string>
+            <string>1</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>1.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>2</int>
+        <game__object.GameObject>
+          <id>2</id>
+          <transform>
+            <position>
+              <x>300.0</x>
+              <y>55.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
+          <renderer>
+            <myImageLocation>/images/rcd.png</myImageLocation>
+          </renderer>
+          <name>2</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>1.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>3</int>
+        <game__object.GameObject>
+          <id>3</id>
+          <transform>
+            <position>
+              <x>68.0</x>
+              <y>169.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
+          <renderer>
+            <myImageLocation>/images/rcd.png</myImageLocation>
+          </renderer>
+          <name>2</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
@@ -44,7 +105,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>2</new__ID__val>
+    <new__ID__val>4</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -61,12 +122,12 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
-          <buildTime>0.0</buildTime>
+          <buildCosts/>
+          <buildTime>1.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
           <new__ID__val>1</new__ID__val>
-          <interactionIndexMap class="tree-map"/>
         </interactions>
         <conditions>
           <elementMap/>
