@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pathfinding.GridMap;
 import scenemanager.NullEndConditionException;
@@ -249,28 +250,17 @@ public class GamePlayer {
 		}
 
 		
-		/**
-		try {
-			checkEnd();
-		} catch (NullEndConditionException e) {
-			new AlertMaker("End Condition", "No end condition is defined");
-		}
-		**/
 	}
 	
 	// TO-DO: set select when a new unit is created
 	
-	private void checkEnd() throws NullEndConditionException {
-		EndStateWrapper esw = mySceneManager.checkEndCondition();
-		if (esw.getState().equals(EndState.WIN)) {
-			
-		}
-		else if (esw.getState().equals(EndState.LOSE)) {
-			
-		}
-		else {
-			
-		}
+	private void end(String result) {
+		myRoot.getChildren().clear();
+		Text text = new Text(result);
+		text.setLayoutX(SCENE_SIZE_X/2-100);
+		text.setLayoutY(SCENE_SIZE_Y/2-100);
+		myRoot.getChildren().add(text);
 	}
+	
 	
 }

@@ -147,13 +147,13 @@ public class TopPanel {
 	}
 	
 	private void setResources() {
-		resourceBoard.getItems().clear();
+		/*resourceBoard.getItems().clear();
 		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
 			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
 		}
-		resourceBoard.getItems().addAll(resources);
+		resourceBoard.getItems().addAll(resources);*/
 	}
 	
 	private void setTime(double timeValue) {
