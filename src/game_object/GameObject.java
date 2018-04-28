@@ -328,6 +328,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	public Team getOwner() {
 		return owner;
 	}
+	
+	public void setOwner(Team team)
+	{
+		this.owner = team;
+	}
 
 	public double getMovementSpeed() {
 		return movementSpeed;
