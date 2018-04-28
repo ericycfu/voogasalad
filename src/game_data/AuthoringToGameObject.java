@@ -25,7 +25,7 @@ public final class AuthoringToGameObject {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
 			for(DraggableImageView DIV: map.get(AO)) {
-				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())), AO.getObjectLogic(),AO.getImagePath(), AO.getMovementSpeed(), AO.getIsBuilding(), AO.getName(), AO.getTags());
+				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())), AO.getObjectLogic(),AO.getImagePath(), AO.getMovementSpeed(), AO.isBuilding(), AO.getName(), AO.getTags());
 			}
 		}
 		

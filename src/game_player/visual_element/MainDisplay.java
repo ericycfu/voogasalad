@@ -68,6 +68,8 @@ public class MainDisplay implements VisualUpdate {
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 						System.out.println(myUnitActionDisp.getBuildTarget().getName());
+						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
+						unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
 					}
 					else {

@@ -170,6 +170,6 @@ public class DesignTab extends Tab {
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
 		component_team_cb.getSelectionModel().select(authoring_object.getTeam() + "");
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
-//		component_build_cost_tf.setText(authoring_object.get);
+		component_image_choice_text_label.setText(authoring_object.getImagePath());
 	}
 }

@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>211.0</x>
-              <y>240.0</y>
+              <x>193.0</x>
+              <y>160.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,12 +17,12 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
-              <buildTime>0.0</buildTime>
+              <buildCosts/>
+              <buildTime>1.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
               <new__ID__val>1</new__ID__val>
-              <interactionIndexMap class="tree-map"/>
             </interactions>
             <conditions>
               <elementMap/>
@@ -30,8 +30,12 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/station.png</myImageLocation>
+            <myImageLocation>/images/silk.png</myImageLocation>
           </renderer>
+          <name>a</name>
+          <tags>
+            <string>a</string>
+          </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
@@ -61,12 +65,12 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
-          <buildTime>0.0</buildTime>
+          <buildCosts/>
+          <buildTime>1.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
           <new__ID__val>1</new__ID__val>
-          <interactionIndexMap class="tree-map"/>
         </interactions>
         <conditions>
           <elementMap/>

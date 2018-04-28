@@ -16,8 +16,19 @@ public class MapSettings implements AuthoringView {
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
+	private MapEntity map;
 	public MapSettings() {
 		initializeAll();
+	}
+	
+	public void updateSettings(String mapName, int numPlayers, String imagePath, int mapwidth, int mapheight) {
+		this.mapName = mapName;
+		this.numPlayers = numPlayers;
+		this.imagePath = imagePath;
+		this.mapwidth = mapwidth;
+		this.mapheight = mapheight;
+		matchToSize(map);
+		setMapByImage(map);
 	}
 	
 	private void initializeAll() {
@@ -31,12 +42,19 @@ public class MapSettings implements AuthoringView {
 	}
 	
 	public void matchToSize(MapEntity map) {
+		if (this.map == null) {
+			this.map = map;
+		}
 		map.setPrefSize(mapwidth, mapheight);
 	}
 	
 	public void setMapByImage(MapEntity map) {
-		Image image = new Image(getClass().getResourceAsStream(imagePath));
-		map.getChildren().add(new ImageView(image));
+		if (this.map == null) {
+			this.map = map;
+		}
+		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+		map.getChildren().add(image);
+		image.toBack();
 		
 	}
 	
