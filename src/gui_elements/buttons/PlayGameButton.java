@@ -49,8 +49,6 @@ public class PlayGameButton extends Button {
 	protected void setAction() {
 		this.setOnAction(value -> {
 			System.out.print("Playing game!");
-			Writer myWriter = new Writer();
-//			myReader = new Reader();
 			
 			Map<AuthoringObject, List<DraggableImageView>> map = ac.getCurrentMap().getLocations();
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
@@ -58,15 +56,15 @@ public class PlayGameButton extends Button {
 			listFormMap.add(changedMap);
 			List<Object> listForm = new ArrayList<>();
 			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
-				myWriter.write(Resources.getString(RESOURCES_STRING2), listFormMap);
+				Writer.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
+				Writer.write(Resources.getString(RESOURCES_STRING2), listFormMap);
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
 				listForm.add(myGOM);
 				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
 				Set<GameObject> possibleObjects = new HashSet<>();
 				possibleObjects.addAll(possibleObjectsList);
 				listForm.add(possibleObjects);
-				myWriter.write(Resources.getString(INITIAL_MAP_STRING),listForm);
+				Writer.write(Resources.getString(INITIAL_MAP_STRING),listForm);
 				//GamePlayer gamePlayer = new GamePlayer(myGOM);
 				System.out.println("Object saved");
 			} catch (IOException e) {

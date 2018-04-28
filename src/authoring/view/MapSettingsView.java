@@ -32,16 +32,12 @@ import javafx.scene.layout.VBox;
 public class MapSettingsView extends Pane implements AuthoringView {
 	private ResourceManager myResourceManager;
 	private HBox resourcesBox;
-	private Writer myWriter;
-	private Reader myReader;
 	private VBox contentBox;
 	
 	public MapSettingsView(MapSettings settings) {
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
 		myResourceManager = new ResourceManager();
-		myWriter = new Writer();
-		myReader = new Reader();
 	}
 	
 	private void initializeAll() {
@@ -172,7 +168,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
 		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
 		try {
-			myWriter.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
+			Writer.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -181,7 +177,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			System.out.println("creating the list");
 			List<Entry<String, Double>> myList = new ArrayList<Entry<String, Double>>();
 			List<Object> initialList = new ArrayList<Object>();
-			initialList = myReader.read("src/gui_elements/tabs/test");
+			initialList = Reader.read("src/gui_elements/tabs/test");
 			for (Object myObj : initialList) {
 				myList.add((Entry<String, Double>) myObj);
 			}
