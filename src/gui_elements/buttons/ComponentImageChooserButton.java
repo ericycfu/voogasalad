@@ -37,7 +37,7 @@ public class ComponentImageChooserButton extends MainButton {
 			if(file != null) {
 				component_image_choice_text_label.setText(
 //						file.toString().split("src")[1]);
-						file.toString().substring(file.toString().lastIndexOf("\\") + 1));
+						file.toString().substring(file.toString().lastIndexOf(File.separator) + 1));
 				try {
 					desktop.open(file);
 				} catch (IOException e1) {

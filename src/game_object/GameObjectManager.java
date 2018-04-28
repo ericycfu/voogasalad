@@ -63,10 +63,10 @@ public class GameObjectManager extends ElementManager {
 		return newID;
 	}
 	
-	public int createGameObject(Transform transform, ObjectLogic logic)
+	public int createGameObject(Transform transform, ObjectLogic logic, String imagePath, double movementSpeed,  boolean isBuilding, String name, List<String> tags)
 	{
 		int newID = calculateID();
-		GameObject obj = new GameObject(newID, transform, logic);
+		GameObject obj = new GameObject(newID, transform, logic, imagePath, movementSpeed, isBuilding, name, tags);
 		this.addElement(obj);
 		return newID;
 	}

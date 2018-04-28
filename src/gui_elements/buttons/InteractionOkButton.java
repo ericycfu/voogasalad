@@ -20,7 +20,7 @@ public class InteractionOkButton extends MainButton {
 	@Override
 	protected void setAction() {
 		getButton().setOnAction(value -> {
-			interaction_manager.removeElement(interaction_manager.get(interaction_manager.getElements().size()));
+			interaction_manager.removeLastAddedInteraction();
 			component_add_interactions_screen.getStage().close();
 		});
 	}
