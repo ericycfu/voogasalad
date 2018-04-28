@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import authoring.backend.AuthoringObject;
-import authoring.backend.ConditionStatement;
 import authoring.backend.Extractor;
 import conditions.Comparator;
 import conditions.ComparatorManager;
@@ -109,6 +108,10 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		currentRow += 1;
 	}
 	
+	private void addParameters(Node e) {
+		
+	}
+		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private ComboBox comparatorSelect() {
 		return ComboBoxFactory.makeComboBox(comparatorManager.getComparatorSigns());
@@ -116,7 +119,10 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked"})
 	private ComboBox customConditionSelect() {
-		return ComboBoxFactory.makeComboBox(conditionManager.availableCustomConditions());
+		return ComboBoxFactory.makeComboBox(conditionManager.availableCustomConditions(), e -> newConditionParameters());
+	}
+	
+	private void newConditionParameters() {
 	}
 	
 	private void setupButtons() {
