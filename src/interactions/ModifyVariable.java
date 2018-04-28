@@ -96,7 +96,6 @@ public class ModifyVariable implements CustomFunction {
 				+ "can either be a number or an attribute in the player");
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
-		format.addStringField(RATE);		
 	}
 
 
