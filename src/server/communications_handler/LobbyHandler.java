@@ -1,7 +1,9 @@
 package server.communications_handler;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import server.GameLobby;
 import server.RTSServer;
@@ -9,7 +11,6 @@ import server.RTSServer;
 public class LobbyHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "Lobby";
 	public static final String REMOVE_OPTION = "Remove";
-	public static final String CHANGE_OPTION = "Change";
 	public static final String START_GAME = "Start";
 	public static final String ENTER_GAME = "Play";
 	private GameLobby currentLobby;
@@ -25,12 +26,8 @@ public class LobbyHandler extends CommunicationsHandler {
 			if((input = (String)getInputStream().readObject()) != null) {
 				switch(input) {
 					case REMOVE_OPTION: currentLobby.removePlayer(getSocket());
+									getOutputStream().writeObject("Left");
 									return MainPageHandler.CLASS_REF;
-					case CHANGE_OPTION:
-									if(getSocket().equals(currentLobby.getHost())) {
-										//todo load new GameInstance from file
-									}
-									return CLASS_REF;
 					case START_GAME:
 									if(getSocket().equals(currentLobby.getHost())) {
 										currentLobby.setIsRunning(true);
@@ -48,11 +45,20 @@ public class LobbyHandler extends CommunicationsHandler {
 	}
 
 	@Override
-	public void updateClient() {
+	public void updateClient() throws SocketException{
 		try {
+			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				return;
+			System.out.println("Writing lobby");
 			if(currentLobby.isRunning())
-				getOutputStream().writeObject(START_GAME);
-			else getOutputStream().writeObject(currentLobby);
+				out.writeObject(START_GAME);
+			else { out.writeObject(currentLobby);
+				out.writeInt(currentLobby.getTeamID(getSocket()));
+				out.writeInt(currentLobby.getPlayerID(getSocket()));
+			}
+			out.flush();
+			System.out.println("Lobby writing finished");
 		} catch (IOException e) {
 			return;
 		}

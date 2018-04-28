@@ -1,12 +1,10 @@
 package game_object;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import conditions.Condition;
 import conditions.ConditionManager;
-import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
 import pathfinding.GridMap;
@@ -20,8 +18,12 @@ import transform_library.Vector2;
  * attributes and interactions
  */
 
-public class ObjectLogic  
+public class ObjectLogic implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean fulfillsLossCondition;
 	private Interaction currentInteraction;
 	
