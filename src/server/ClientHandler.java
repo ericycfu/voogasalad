@@ -1,6 +1,7 @@
 package server;
 
 import java.net.Socket;
+import java.net.SocketException;
 
 import server.communications_handler.CommunicationsHandler;
 import server.communications_handler.CommunicationsHandlerFactory;
@@ -15,10 +16,24 @@ public class ClientHandler implements Runnable {
 	}
 	@Override
 	public void run() {
-		String newHandler =  myCommunicationsHandler.updateServer();
-		myCommunicationsHandler.updateClient();
-		if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
-			myCommunicationsHandler = myCHFactory.get(newHandler);
+		new Thread(() -> {
+			while(true) {
+				String newHandler =  myCommunicationsHandler.updateServer();
+				if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
+					myCommunicationsHandler = myCHFactory.get(newHandler);
+			}
+		}).start();
+		new Thread(() -> {
+			try {
+				while(true) {
+					myCommunicationsHandler.updateClient();
+				}
+			}
+			catch(SocketException e) {
+				System.out.println("Disconnected");
+				Thread.currentThread().interrupt();
+			}
+		}).start();
 	}
 
 }

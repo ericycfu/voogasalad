@@ -6,7 +6,6 @@ import java.util.Map;
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 
 public class MapSettings implements AuthoringView {
 	private String mapName;
@@ -64,6 +63,18 @@ public class MapSettings implements AuthoringView {
 	
 	public String getName() {
 		return mapName;
+	}
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+	public int getMapHeight() {
+		return mapheight;
+	}
+	public int getMapWidth() {
+		return mapwidth;
+	}
+	public Map<String, Integer> getInitialResources(){
+		return resources;
 	}
 	
 }
