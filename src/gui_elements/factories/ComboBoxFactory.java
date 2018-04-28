@@ -15,7 +15,7 @@ public class ComboBoxFactory {
 		box.setItems(observableList);
 		return box;
 	}
-	
+		
 	public static ComboBox makeComboBox(List<String> list, EventHandler<ActionEvent> e) {
 		ComboBox<String> box = makeComboBox(list);
 		box.setOnAction(e);

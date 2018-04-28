@@ -101,7 +101,9 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	}
 	
 	private void newLine() {
-		addLine(new TextField(), comparatorSelect(), new TextField(), new CustomConditionComboBox());
+//		addLine(new TextField(), comparatorSelect(), new TextField(), new CustomConditionComboBox());
+		addLine(new TextField(), comparatorSelect(), new TextField(), ButtonFactory.makeButton("Add Custom Condition", e -> new EditCustomConditionsScreen()));
+
 	}
 	
 	private void addLine(Node a, Node b, Node c, Node d) {
