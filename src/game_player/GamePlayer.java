@@ -16,6 +16,7 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
 import game_player.alert.AlertMaker;
+import game_player.visual_element.BuildButton;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
@@ -108,9 +109,9 @@ public class GamePlayer {
 						for (String s : tags) {
 							for (GameObject go2 : myPossibleUnits) {
 								if (s.equals(go2.getName())) {
-									SkillButton sb = new SkillButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
-											SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, 
-											SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+									BuildButton sb = new BuildButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
+											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
+											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
 										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
 										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
@@ -129,7 +130,7 @@ public class GamePlayer {
 	}
 	
 	private void unitSkillMapInitialize() {
-		//unitBuildsMapInitialize();
+		unitBuildsMapInitialize();
 		
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
@@ -141,10 +142,8 @@ public class GamePlayer {
 					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					System.out.println(ia.getID());
 					System.out.println(sb.getInteractionID());
-					List<GameObject> temp = new ArrayList<>();
-					temp.add(go);
 					cancel.setOnAction(e -> {
-						this.myUnitDisplay.getUnitActionDisp().update(temp);
+						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 						System.out.println(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID());
 					});
@@ -152,15 +151,15 @@ public class GamePlayer {
 						sb.setOnAction(e->{
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
 						});
-						skillList.add(sb);
 					}
 					else {
 						sb.setOnAction(e -> {
 							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);
-							myUnitDisplay.getUnitActionDisp().build(sblist);
+							myUnitDisplay.getUnitActionDisp().fill(sblist);
 						});
 					}
+					skillList.add(sb);
 				}
 				skillList.add(cancel);
 			} catch (UnmodifiableGameObjectException e) {
@@ -248,6 +247,7 @@ public class GamePlayer {
 		else {
 			myScene.setCursor(Cursor.DEFAULT);
 		}
+
 		
 		/**
 		try {
