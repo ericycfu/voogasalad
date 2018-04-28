@@ -1,4 +1,4 @@
-package authoring.backend;
+package gui_elements.factories;
 
 import java.util.List;
 

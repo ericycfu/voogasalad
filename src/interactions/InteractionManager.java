@@ -43,5 +43,10 @@ public class InteractionManager extends ElementManager {
 	{
 		return (Interaction)(this.get(id));
 	}
+	public void setupImage() {
+		for(Interaction interaction: interactionIndexMap.values()) {
+			interaction.setImageFromPath();
+		}
+	}
 	
 }

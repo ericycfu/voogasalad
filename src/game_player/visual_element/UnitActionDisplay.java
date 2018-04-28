@@ -75,11 +75,16 @@ public class UnitActionDisplay implements VisualUpdate{
 		if (gameObject==myCurrentGameObject) {
 			return;
 		}
-		myGridPane.getChildren().clear();
+		
 		
 		
 		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
+		fill(unitSkills);
+	}
+	
+	public void fill(List<SkillButton> unitSkills) {
+		myGridPane.getChildren().clear();
 		for (int i = 0; i < 12; i++) {
 			System.out.println("i: " + i + "; x: " + i%ACTION_GRID_WIDTH + "; y: " + i/ACTION_GRID_WIDTH);
 			if (i < unitSkills.size()) {
@@ -98,19 +103,6 @@ public class UnitActionDisplay implements VisualUpdate{
 		}
 	}
 	
-	public void build(List<SkillButton> sblist) {
-		myGridPane.getChildren().clear();
-		for (int i = 0; i < sblist.size()-1; i++) {
-			myGridPane.add(sblist.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_HEIGHT);
-		}
-		myGridPane.add(sblist.get(sblist.size()-1), ACTION_GRID_WIDTH, ACTION_GRID_HEIGHT);
-	}
-	
-	private SkillButton getCancelButton() {
-		SkillButton ret = new SkillButton();
-		
-		return ret;
-	}
 	
 	@Override
 	public Node getNodes() {

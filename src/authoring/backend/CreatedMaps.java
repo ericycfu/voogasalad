@@ -23,6 +23,7 @@ public class CreatedMaps implements Speaker {
 	public MapEntity makeNewMap() {
 		MapEntity newmap = new MapEntity();
 		createdmaps.add(newmap);
+		notifyListeners();
 		return newmap;
 	}
 	
