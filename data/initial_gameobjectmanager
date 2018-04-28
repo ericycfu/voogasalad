@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>166.0</x>
-              <y>0.0</y>
+              <x>216.0</x>
+              <y>98.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,38 +17,64 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>frank</string>
-                  <double>100.0</double>
-                </entry>
-                <entry>
-                  <string>Mana</string>
-                  <double>100.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
                   <double>100.0</double>
+                </entry>
+                <entry>
+                  <string>Attack</string>
+                  <double>10.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
-                  <string>frank</string>
-                  <double>100.0</double>
-                </entry>
-                <entry>
-                  <string>Mana</string>
-                  <double>100.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
                   <double>100.0</double>
                 </entry>
+                <entry>
+                  <string>Attack</string>
+                  <double>10.0</double>
+                </entry>
               </maxAttributes>
               <buildCosts/>
-              <buildTime>3.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags/>
+                    <name>Attack</name>
+                    <imagePath>/images/attack_icon.png</imagePath>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <customFunctions>
+                      <interactions.ModifyVariable>
+                        <NAME>ModifyVariable</NAME>
+                        <VARIABLE>Variable</VARIABLE>
+                        <DELTA>Delta</DELTA>
+                        <RATE>Rate</RATE>
+                        <format>
+                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Variable</string>
+                              <string>Health</string>
+                            </entry>
+                            <entry>
+                              <string>Delta</string>
+                              <string>Attack</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.ModifyVariable>
+                    </customFunctions>
+                    <range>100.0</range>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>3</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -58,14 +84,14 @@
           <renderer>
             <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-          <name>duvall</name>
+          <name>Robert</name>
           <tags>
             <string>melee</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>3.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -79,8 +105,8 @@
           <id>2</id>
           <transform>
             <position>
-              <x>107.0</x>
-              <y>92.0</y>
+              <x>70.0</x>
+              <y>66.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -88,40 +114,12 @@
           <renderer>
             <myImageLocation>/images/rcd.png</myImageLocation>
           </renderer>
-          <name>duvall</name>
+          <name>Robert</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>3.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>3</int>
-        <game__object.GameObject>
-          <id>3</id>
-          <transform>
-            <position>
-              <x>7.0</x>
-              <y>0.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
-          <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
-          </renderer>
-          <name>duvall</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>3.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -130,7 +128,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>4</new__ID__val>
+    <new__ID__val>3</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -147,38 +145,64 @@
         <attributes>
           <attributes>
             <entry>
-              <string>frank</string>
-              <double>100.0</double>
-            </entry>
-            <entry>
-              <string>Mana</string>
-              <double>100.0</double>
-            </entry>
-            <entry>
               <string>Health</string>
               <double>100.0</double>
+            </entry>
+            <entry>
+              <string>Attack</string>
+              <double>10.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
-              <string>frank</string>
-              <double>100.0</double>
-            </entry>
-            <entry>
-              <string>Mana</string>
-              <double>100.0</double>
-            </entry>
-            <entry>
               <string>Health</string>
               <double>100.0</double>
             </entry>
+            <entry>
+              <string>Attack</string>
+              <double>10.0</double>
+            </entry>
           </maxAttributes>
           <buildCosts/>
-          <buildTime>3.0</buildTime>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
+          <elementMap>
+            <entry>
+              <int>1</int>
+              <interactions.Interaction>
+                <id>1</id>
+                <targetTags/>
+                <name>Attack</name>
+                <imagePath>/images/attack_icon.png</imagePath>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <customFunctions>
+                  <interactions.ModifyVariable>
+                    <NAME>ModifyVariable</NAME>
+                    <VARIABLE>Variable</VARIABLE>
+                    <DELTA>Delta</DELTA>
+                    <RATE>Rate</RATE>
+                    <format>
+                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Variable</string>
+                          <string>Health</string>
+                        </entry>
+                        <entry>
+                          <string>Delta</string>
+                          <string>Attack</string>
+                        </entry>
+                      </parameterFields>
+                    </format>
+                  </interactions.ModifyVariable>
+                </customFunctions>
+                <range>100.0</range>
+              </interactions.Interaction>
+            </entry>
+          </elementMap>
+          <new__ID__val>3</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -188,14 +212,14 @@
       <renderer>
         <myImageLocation>/images/rcd.png</myImageLocation>
       </renderer>
-      <name>duvall</name>
+      <name>Robert</name>
       <tags>
         <string>melee</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>3.0</movementSpeed>
+      <movementSpeed>10.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
