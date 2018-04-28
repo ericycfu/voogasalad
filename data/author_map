@@ -2,45 +2,116 @@
   <map>
     <entry>
       <authoring.backend.AuthoringObject>
-        <myImagePath>/images/station.png</myImagePath>
-        <myName>a</myName>
         <myTags>
-          <string>a</string>
+          <string>DEF</string>
+          <string>DEF</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
-        <myMovementSpeed>1.0</myMovementSpeed>
-        <isBuilding>false</isBuilding>
-        <buildTime>1.0</buildTime>
-        <buildCost/>
+        <buildCosts/>
         <myObjectLogic>
           <fulfillsLossCondition>false</fulfillsLossCondition>
           <attributes>
-            <attributes/>
-            <maxAttributes/>
-            <buildTime>0.0</buildTime>
+            <attributes>
+              <entry>
+                <string>Health</string>
+                <double>2.0</double>
+              </entry>
+            </attributes>
+            <maxAttributes>
+              <entry>
+                <string>Health</string>
+                <double>2.0</double>
+              </entry>
+            </maxAttributes>
+            <buildCosts reference="../../../buildCosts"/>
+            <buildTime>23.0</buildTime>
           </attributes>
           <interactions>
-            <elementMap/>
-            <new__ID__val>1</new__ID__val>
-            <interactionIndexMap class="tree-map"/>
+            <elementMap>
+              <entry>
+                <int>2</int>
+                <interactions.Interaction>
+                  <id>2</id>
+                  <targetTags/>
+                  <name>Heal</name>
+                  <isBuild>false</isBuild>
+                  <isInstantaneous>false</isInstantaneous>
+                  <customFunctions>
+                    <interactions.ModifyVariable>
+                      <NAME>ModifyVariable</NAME>
+                      <VARIABLE>Variable</VARIABLE>
+                      <DELTA>Delta</DELTA>
+                      <RATE>Rate</RATE>
+                      <format>
+                        <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                        <parameterFields>
+                          <entry>
+                            <string>Variable</string>
+                            <string>health</string>
+                          </entry>
+                          <entry>
+                            <string>Delta</string>
+                            <string>10</string>
+                          </entry>
+                          <entry>
+                            <string>Rate</string>
+                            <string>12</string>
+                          </entry>
+                        </parameterFields>
+                      </format>
+                    </interactions.ModifyVariable>
+                    <interactions.ModifyVariable>
+                      <NAME>ModifyVariable</NAME>
+                      <VARIABLE>Variable</VARIABLE>
+                      <DELTA>Delta</DELTA>
+                      <RATE>Rate</RATE>
+                      <format>
+                        <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                        <parameterFields>
+                          <entry>
+                            <string>Variable</string>
+                            <string>Health</string>
+                          </entry>
+                          <entry>
+                            <string>Delta</string>
+                            <string>-30</string>
+                          </entry>
+                          <entry>
+                            <string>Rate</string>
+                            <string>23</string>
+                          </entry>
+                        </parameterFields>
+                      </format>
+                    </interactions.ModifyVariable>
+                  </customFunctions>
+                  <range>20.0</range>
+                </interactions.Interaction>
+              </entry>
+            </elementMap>
+            <new__ID__val>4</new__ID__val>
           </interactions>
           <conditions>
             <elementMap/>
             <new__ID__val>1</new__ID__val>
           </conditions>
         </myObjectLogic>
+        <myMainComponentPropertyManager>
+          <myImagePath>/images/rcd.png</myImagePath>
+          <myName>DSF</myName>
+          <myTags reference="../../myTags"/>
+          <myMovementSpeed>3.0</myMovementSpeed>
+          <isBuilding>false</isBuilding>
+          <myTeam>1</myTeam>
+        </myMainComponentPropertyManager>
         <myAttributes reference="../myObjectLogic/attributes"/>
         <myInteractions reference="../myObjectLogic/interactions"/>
-        <myConditionManager>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </myConditionManager>
+        <myConditionManager reference="../myObjectLogic/conditions"/>
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>211.0</x>
-          <y>240.0</y>
+          <x>0.0</x>
+          <y>0.0</y>
         </transform__library.Vector2>
       </list>
     </entry>
