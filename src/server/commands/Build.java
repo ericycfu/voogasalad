@@ -13,9 +13,8 @@ public class Build extends Command {
 
 	@Override
 	public void act() {
-		GameObject newGO = getGameInstance().getGameInfo().get(getArgString(1));
-		newGO.setTransform(new Transform(new Vector2(getArgValue(2),getArgValue(3))));
-		getGameInstance().getGameObjects().getGameObject(getArgValue(0)).queueInteraction(newGO, getArgValue(4), getGameInstance().getGameObjects());
+		
+		getGameInstance().executeBuildCommand(getArgValue(0), getArgString(1), getArgValue(2), getArgValue(3), getArgValue(4));
 	}
 
 }

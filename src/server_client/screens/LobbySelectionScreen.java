@@ -4,8 +4,16 @@ package server_client.screens;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
+import java.util.Set;
 
+import game_data.Reader;
+import game_engine.GameInfo;
+import game_object.GameObject;
+import game_object.GameObjectManager;
+import game_player.alert.AlertMaker;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
@@ -14,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import server.LobbyManager;
 import server_client.buttons.CreateLobbyButton;
 import server_client.buttons.JoinLobbyButton;
@@ -30,6 +39,11 @@ public class LobbySelectionScreen extends ClientScreen {
 	public static final Color INITIAL_COLOR = Color.WHITE;
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
+
+	public static final String IOALERTHEAD = "ERROR!";
+
+	public static final String IOALERTBODY = "Unable to create lobby!";
+
 	private FileChooser myGameChooser;
 	private FileChooser myMapChooser;
 	private ListView<LobbyDisplay> currentLobbies;
@@ -68,13 +82,24 @@ public class LobbySelectionScreen extends ClientScreen {
 		create.setLayoutX(280);
 		create.setLayoutY(520);
 		create.setOnAction(e -> {
+			File chosenGame = myGameChooser.showOpenDialog(getStage());
+			File chosenMap = myMapChooser.showOpenDialog(getStage());
 			try {
-				File chosenGame = myGameChooser.showOpenDialog(getStage());
-				File chosenMap = myMapChooser.showOpenDialog(getStage());
+				List<Object> gameObjects = new Reader().read(chosenGame.getCanonicalPath());
+				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
+				@SuppressWarnings("unchecked")
+				Set<GameObject> possibleUnits = ((Set<GameObject>) gameObjects.get(1));
+				GameInfo currentGameInfo = new GameInfo();
+				for(GameObject g: possibleUnits) {
+					currentGameInfo.addReferenceGameObject(g);
+				}
+				ObjectOutputStream out = getOutputStream();
+				out.writeInt(-1);
+				out.writeObject(null);
+				List<Object> mapSettings = new Reader().read(chosenMap.getCanonicalPath());
 				
-			}
-			catch(Exception e1) {
-				
+			} catch (Exception e2) {
+				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
 
@@ -85,7 +110,9 @@ public class LobbySelectionScreen extends ClientScreen {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
 			if(current != null)
 				try {
-					getOutputStream().writeInt(current.getID());
+					ObjectOutputStream out = getOutputStream();
+					out.writeInt(current.getID());
+					out.flush();
 				} catch (IOException e1) {
 				}
 		});

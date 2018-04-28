@@ -11,6 +11,7 @@ import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import pathfinding.GridMap;
+import transform_library.Transform;
 import transform_library.Vector2;
 
 /**
@@ -74,10 +75,17 @@ public class GameInstance implements Serializable{
 		if(!running)
 			return;
 		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
-		currentGridMap.updateMapPositions(myObjectManager.getElements());
 		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
 	}
 	
+	public void executeBuildCommand(int sourceID, String newUnitName, int interactionID, int xcor, int ycor) {
+		if(!running)
+			return;
+		GameObject newGO = getGameInfo().get(newUnitName);
+		newGO.setTransform(new Transform(new Vector2(xcor,ycor)));
+		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
+		myObjectManager.getGameObject(sourceID).queueInteraction(newGO, interactionID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
+	}
 	public void executeMovement(int id, double xcor, double ycor) {
 		if(!running)
 			return;
