@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>253.0</x>
-              <y>141.0</y>
+              <x>414.0</x>
+              <y>234.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -20,19 +20,11 @@
                   <string>Health</string>
                   <double>100.0</double>
                 </entry>
-                <entry>
-                  <string>Attack</string>
-                  <double>-10.0</double>
-                </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
                   <double>100.0</double>
-                </entry>
-                <entry>
-                  <string>Attack</string>
-                  <double>-10.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts/>
@@ -44,7 +36,9 @@
                   <int>1</int>
                   <interactions.Interaction>
                     <id>1</id>
-                    <targetTags/>
+                    <targetTags>
+                      <string>prof</string>
+                    </targetTags>
                     <name>Attack</name>
                     <imagePath>/images/attack_icon.png</imagePath>
                     <isBuild>false</isBuild>
@@ -64,7 +58,7 @@
                             </entry>
                             <entry>
                               <string>Delta</string>
-                              <string>Attack</string>
+                              <string>-10</string>
                             </entry>
                           </parameterFields>
                         </format>
@@ -105,8 +99,8 @@
           <id>2</id>
           <transform>
             <position>
-              <x>121.0</x>
-              <y>137.0</y>
+              <x>184.0</x>
+              <y>138.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -148,19 +142,11 @@
               <string>Health</string>
               <double>100.0</double>
             </entry>
-            <entry>
-              <string>Attack</string>
-              <double>-10.0</double>
-            </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
               <double>100.0</double>
-            </entry>
-            <entry>
-              <string>Attack</string>
-              <double>-10.0</double>
             </entry>
           </maxAttributes>
           <buildCosts/>
@@ -172,7 +158,9 @@
               <int>1</int>
               <interactions.Interaction>
                 <id>1</id>
-                <targetTags/>
+                <targetTags>
+                  <string>prof</string>
+                </targetTags>
                 <name>Attack</name>
                 <imagePath>/images/attack_icon.png</imagePath>
                 <isBuild>false</isBuild>
@@ -192,7 +180,7 @@
                         </entry>
                         <entry>
                           <string>Delta</string>
-                          <string>Attack</string>
+                          <string>-10</string>
                         </entry>
                       </parameterFields>
                     </format>
