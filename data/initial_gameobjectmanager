@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>193.0</x>
-              <y>160.0</y>
+              <x>202.0</x>
+              <y>115.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -47,8 +47,36 @@
           <elapsedTime>0.0</elapsedTime>
         </game__object.GameObject>
       </entry>
+      <entry>
+        <int>2</int>
+        <game__object.GameObject>
+          <id>2</id>
+          <transform>
+            <position>
+              <x>91.0</x>
+              <y>159.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
+          <renderer>
+            <myImageLocation>/images/silk.png</myImageLocation>
+          </renderer>
+          <name>a</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>1.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+        </game__object.GameObject>
+      </entry>
     </elementMap>
-    <new__ID__val>2</new__ID__val>
+    <new__ID__val>3</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>

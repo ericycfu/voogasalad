@@ -39,8 +39,12 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>193.0</x>
-          <y>160.0</y>
+          <x>202.0</x>
+          <y>115.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>91.0</x>
+          <y>159.0</y>
         </transform__library.Vector2>
       </list>
     </entry>

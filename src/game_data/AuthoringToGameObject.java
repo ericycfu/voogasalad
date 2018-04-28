@@ -39,7 +39,7 @@ public final class AuthoringToGameObject {
 	public static List<GameObject> convertList(List<AuthoringObject> list){
 		List<GameObject> gameObjectList = new ArrayList<>();
 		for(AuthoringObject AO: list) {
-			gameObjectList.add(new GameObject(0,new Transform(new Vector2(0,0)), AO.getObjectLogic()));
+			gameObjectList.add(new GameObject(0,new Transform(new Vector2(0,0)), AO.getObjectLogic(),AO.getImagePath(), AO.getMovementSpeed(), AO.isBuilding(), AO.getName(), AO.getTags()));
 		}
 		
 		
