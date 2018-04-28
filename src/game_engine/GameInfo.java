@@ -1,5 +1,6 @@
 package game_engine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,11 @@ import game_object.GameObject;
  * @author andrew
  *
  */
-public class GameInfo {
+public class GameInfo implements Serializable {
 	public List<GameObject> ListOfGameObjs;
+	public GameInfo() {
+		ListOfGameObjs = new ArrayList<GameObject>();
+	}
 	public void addReferenceGameObject(GameObject go) {
 		ListOfGameObjs.add(go);
 	}
