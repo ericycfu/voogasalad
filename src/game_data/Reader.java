@@ -28,16 +28,18 @@ public final class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		try {
-			while(true) {
+		while(true) {
+			try {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				result.add(obj);
+				}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
 			}
 		}
-		catch(EOFException e) {
-			//not real error, just signifies end of file
-		}
+	
 		return result;
 	}
 	/**
@@ -53,18 +55,18 @@ public final class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		try {
-			while(true) {
+		while(true) {
+			try {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
-				
+				}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
 			}
-		}
-		catch(EOFException e) {
-			//not real error, just signifies end of file
 		}
 		return result;
 	}

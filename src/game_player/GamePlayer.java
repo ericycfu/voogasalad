@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pathfinding.GridMap;
 import scenemanager.NullEndConditionException;
@@ -131,7 +132,8 @@ public class GamePlayer {
 	
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
-		
+		myUnitSkills.clear();
+		System.out.println(myPossibleUnits);
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
@@ -165,7 +167,9 @@ public class GamePlayer {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			System.out.println(go.getName());
 			myUnitSkills.put(go.getName(), skillList);
+			System.out.println(skillList.size());
 		}
 	}
 	
@@ -236,7 +240,14 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		if (myTopPanel.getIsLoaded()) {
+			System.out.println("reinit");
+			unitSkillMapInitialize();
+			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
+			myTopPanel.setIsLoaded(false);
+		}
 		initializeSingleUnitSelect();
+		
 		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
@@ -249,28 +260,17 @@ public class GamePlayer {
 		}
 
 		
-		/**
-		try {
-			checkEnd();
-		} catch (NullEndConditionException e) {
-			new AlertMaker("End Condition", "No end condition is defined");
-		}
-		**/
 	}
 	
 	// TO-DO: set select when a new unit is created
 	
-	private void checkEnd() throws NullEndConditionException {
-		EndStateWrapper esw = mySceneManager.checkEndCondition();
-		if (esw.getState().equals(EndState.WIN)) {
-			
-		}
-		else if (esw.getState().equals(EndState.LOSE)) {
-			
-		}
-		else {
-			
-		}
+	private void end(String result) {
+		myRoot.getChildren().clear();
+		Text text = new Text(result);
+		text.setLayoutX(SCENE_SIZE_X/2-100);
+		text.setLayoutY(SCENE_SIZE_Y/2-100);
+		myRoot.getChildren().add(text);
 	}
+	
 	
 }

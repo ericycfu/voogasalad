@@ -3,7 +3,7 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myTags>
-          <string>a</string>
+          <string>melee</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
@@ -14,7 +14,7 @@
             <attributes/>
             <maxAttributes/>
             <buildCosts reference="../../../buildCosts"/>
-            <buildTime>1.0</buildTime>
+            <buildTime>3.0</buildTime>
           </attributes>
           <interactions>
             <elementMap/>
@@ -26,10 +26,10 @@
           </conditions>
         </myObjectLogic>
         <myMainComponentPropertyManager>
-          <myImagePath>/images/silk.png</myImagePath>
-          <myName>a</myName>
+          <myImagePath>/images/rcd.png</myImagePath>
+          <myName>duvall</myName>
           <myTags reference="../../myTags"/>
-          <myMovementSpeed>1.0</myMovementSpeed>
+          <myMovementSpeed>3.0</myMovementSpeed>
           <isBuilding>false</isBuilding>
           <myTeam>1</myTeam>
         </myMainComponentPropertyManager>
@@ -39,12 +39,12 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>202.0</x>
-          <y>115.0</y>
+          <x>141.0</x>
+          <y>97.0</y>
         </transform__library.Vector2>
         <transform__library.Vector2>
-          <x>91.0</x>
-          <y>159.0</y>
+          <x>61.0</x>
+          <y>222.0</y>
         </transform__library.Vector2>
       </list>
     </entry>

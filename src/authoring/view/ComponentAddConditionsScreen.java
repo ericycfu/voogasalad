@@ -12,6 +12,7 @@ import conditions.Comparator;
 import conditions.ComparatorManager;
 import conditions.Condition;
 import conditions.ConditionManager;
+import gui_elements.combo_boxes.CustomConditionComboBox;
 import gui_elements.factories.ButtonFactory;
 import gui_elements.factories.ComboBoxFactory;
 import gui_elements.factories.TextFieldFactory;
@@ -93,11 +94,14 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		addLine(TextFieldFactory.makeTextField(attribute),
 				ComboBoxFactory.makeComboBox(comparatorSelect(), comparator),
 				TextFieldFactory.makeTextField(value),
-				ComboBoxFactory.makeComboBox(customConditionSelect(), condition));
+				new ComboBox()
+//				new CustomConditionComboBox(conditionManager)
+//				ComboBoxFactory.makeComboBox(customConditionSelect(), condition)
+				);
 	}
 	
 	private void newLine() {
-		addLine(new TextField(), comparatorSelect(), new TextField(), customConditionSelect());
+		addLine(new TextField(), comparatorSelect(), new TextField(), new CustomConditionComboBox());
 	}
 	
 	private void addLine(Node a, Node b, Node c, Node d) {
@@ -107,23 +111,21 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		grid.add(d, COLUMNS[3], currentRow);
 		currentRow += 1;
 	}
-	
-	private void addParameters(Node e) {
-		
-	}
 		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private ComboBox comparatorSelect() {
 		return ComboBoxFactory.makeComboBox(comparatorManager.getComparatorSigns());
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked"})
-	private ComboBox customConditionSelect() {
-		return ComboBoxFactory.makeComboBox(conditionManager.availableCustomConditions(), e -> newConditionParameters());
-	}
+//	@SuppressWarnings({ "rawtypes", "unchecked"})
+//	private ComboBox customConditionSelect() {
+//		ComboBox box = ComboBoxFactory.makeComboBox(conditionManager.availableCustomConditions());
+//		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box));
+//	}
 	
-	private void newConditionParameters() {
-	}
+//	private void newConditionParameters(ComboBox box) {
+//		new EditCustomConditionsScreen((String)box.getValue());
+//	}
 	
 	private void setupButtons() {
 		HBox box = new HBox();

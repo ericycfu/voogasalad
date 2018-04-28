@@ -1,5 +1,6 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,8 +26,13 @@ import transform_library.Vector2;
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject, EngineObject {
+public class GameObject  implements InterfaceGameObject, EngineObject, Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String EMPTY = "empty";
 	
 	private int id;
@@ -59,6 +65,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private boolean isBeingConstructed;
 	
 	private double elapsedTime;
+	
+	
 	
 	/**
 	 *
@@ -187,8 +195,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
 		
-		//myObjectLogic.checkConditions(this);
-	
+		myObjectLogic.checkConditions(this);
 
 	}
 	
@@ -345,6 +352,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	public Team getOwner() {
 		return owner;
+	}
+	
+	public void setOwner(Team team)
+	{
+		this.owner = team;
 	}
 
 	public double getMovementSpeed() {

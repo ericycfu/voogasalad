@@ -2,6 +2,7 @@ package server.communications_handler;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 
 import game_engine.GameInstance;
 import server.GameCommandInterpreter;
@@ -48,7 +49,7 @@ public class GameHandler extends CommunicationsHandler {
 	}
 
 	@Override
-	public void updateClient() {
+	public void updateClient() throws SocketException{
 		if(runningGame.getIsRunning()) {
 		try {
 			getOutputStream().writeObject(runningGame.getGameObjects());
