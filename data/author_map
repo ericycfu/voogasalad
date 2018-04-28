@@ -1,3 +1,52 @@
 <object-stream>
-  <map/>
+  <map>
+    <entry>
+      <authoring.backend.AuthoringObject>
+        <myTags>
+          <string>a</string>
+        </myTags>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
+        <buildCosts/>
+        <myObjectLogic>
+          <fulfillsLossCondition>false</fulfillsLossCondition>
+          <attributes>
+            <attributes/>
+            <maxAttributes/>
+            <buildCosts reference="../../../buildCosts"/>
+            <buildTime>1.0</buildTime>
+          </attributes>
+          <interactions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </interactions>
+          <conditions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </conditions>
+        </myObjectLogic>
+        <myMainComponentPropertyManager>
+          <myImagePath>/images/silk.png</myImagePath>
+          <myName>a</myName>
+          <myTags reference="../../myTags"/>
+          <myMovementSpeed>1.0</myMovementSpeed>
+          <isBuilding>false</isBuilding>
+          <myTeam>1</myTeam>
+        </myMainComponentPropertyManager>
+        <myAttributes reference="../myObjectLogic/attributes"/>
+        <myInteractions reference="../myObjectLogic/interactions"/>
+        <myConditionManager reference="../myObjectLogic/conditions"/>
+      </authoring.backend.AuthoringObject>
+      <list>
+        <transform__library.Vector2>
+          <x>202.0</x>
+          <y>115.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>91.0</x>
+          <y>159.0</y>
+        </transform__library.Vector2>
+      </list>
+    </entry>
+  </map>
 </object-stream>

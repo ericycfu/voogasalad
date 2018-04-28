@@ -44,8 +44,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 		initializeProfilePic();
 		initializeHealthManaInfo();
 		initializeStatusInfo();
-		updateProfilePic(DefaultImage);
-		updateHealthManaInfo(null);
 		updateStatusInfo(null);
 	}
 	
@@ -96,6 +94,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 				//DO NOTHING
 			}
 		}
+		
 	}
 	
 	private void updateStatusInfo(GameObject currentUnit) {
@@ -118,6 +117,8 @@ public class UnitInfoDisplay implements VisualUpdate {
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) {
 			updateProfilePic(DefaultImage);
+			updateHealthManaInfo(null);
+			updateStatusInfo(null);
 			return;
 		}
 		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());

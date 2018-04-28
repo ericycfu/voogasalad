@@ -56,15 +56,11 @@ public class TopPanel {
 	private int menuSpan;
 	private Timeline tl;
 	private Team myTeam;
-	private Reader myReader;
-	private Writer myWriter;
 	private boolean isLoaded;
 	
 	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
-		myWriter = new Writer();
-		myReader = new Reader();
 		menuSpan = 0;
 		
 		setupMenu(gom, possibleUnits, xsize, ysize);
@@ -117,7 +113,7 @@ public class TopPanel {
 		listRepresentation.add(gom);
 		listRepresentation.add(possibleUnits);
 		try {
-			myWriter.write(file.getCanonicalPath(), listRepresentation);
+			Writer.write(file.getCanonicalPath(), listRepresentation);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
@@ -130,7 +126,7 @@ public class TopPanel {
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
 		try {
-			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
+			List<Object> gameObjects = Reader.read(file.getCanonicalPath());
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
