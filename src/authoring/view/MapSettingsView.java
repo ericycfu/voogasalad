@@ -121,6 +121,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		String filePath = Extractor.extractImagePath(contentBox.getChildren().get(2));
 		int width = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(3)));
 		int height = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(4)));
+		
 
 	}
 	private void initializeResources(HBox rootBox) {
@@ -168,7 +169,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		box.setPadding(new Insets(0, 25, 0, 25));
 	}
 	private void saveSettings() {
-		VBox myRootBox = (VBox) this.getChildren().get(0);
+		VBox myRootBox = (VBox) this.getChildren().get(1);
 		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
 		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
 		try {
