@@ -82,14 +82,19 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void updateHealthManaInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
+			System.out.println("current unit is null");
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
+			myHealthManaInfo.setText("");
 			try {
-				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(0);
-				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
-				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
-						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+				System.out.println(currentUnit.accessLogic().accessAttributes().getAttributeNames());
+				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
+					System.out.println(attri);
+					String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
+					System.out.println(temp2);
+					myHealthManaInfo.setText(myHealthManaInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+				}
 			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
