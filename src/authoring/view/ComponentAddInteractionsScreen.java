@@ -57,6 +57,7 @@ public class ComponentAddInteractionsScreen {
     	this.tag_controller = tag_controller;
     	interaction_manager = authoring_object.getInteractionsManagerInstance();
     	interaction_id = interaction_manager.createInteraction();
+    	System.out.println(interaction_id);
     	initialize();
     }
 

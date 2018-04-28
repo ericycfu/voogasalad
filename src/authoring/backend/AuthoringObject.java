@@ -201,4 +201,12 @@ public class AuthoringObject {
 	public String getImagePath() {
 		return myMainComponentPropertyManager.getImagePath();
 	}
+	
+	public int getTeam() {
+		return myMainComponentPropertyManager.getTeam();
+	}
+	
+	public void setTeam(int team) {
+		myMainComponentPropertyManager.setTeam(team);
+	}
 }
