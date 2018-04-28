@@ -34,7 +34,7 @@ import javafx.scene.Node;
 public class ComponentAddConditionsScreen implements AuthoringView {
 	private final String PROPERTY_FILENAME = "data/component_add_conditions_screen.properties";
 	private final Paint BACKGROUND = Color.WHITE;
-	private final String TITLE = "Create Component Attributes";
+	private final String TITLE = "Create Component Conditions";
 	private final int[] COLUMNS = {0, 2, 4, 10};
 	private ConditionManager conditionManager;
 	private ComparatorManager comparatorManager;
