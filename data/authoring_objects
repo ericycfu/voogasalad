@@ -1,7 +1,7 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>prof</string>
+      <string>melee</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
@@ -11,55 +11,38 @@
       <attributes>
         <attributes>
           <entry>
+            <string>frank</string>
+            <double>100.0</double>
+          </entry>
+          <entry>
+            <string>Mana</string>
+            <double>100.0</double>
+          </entry>
+          <entry>
             <string>Health</string>
             <double>100.0</double>
           </entry>
         </attributes>
         <maxAttributes>
           <entry>
+            <string>frank</string>
+            <double>100.0</double>
+          </entry>
+          <entry>
+            <string>Mana</string>
+            <double>100.0</double>
+          </entry>
+          <entry>
             <string>Health</string>
             <double>100.0</double>
           </entry>
         </maxAttributes>
         <buildCosts reference="../../../buildCosts"/>
-        <buildTime>10.0</buildTime>
+        <buildTime>3.0</buildTime>
       </attributes>
       <interactions>
-        <elementMap>
-          <entry>
-            <int>1</int>
-            <interactions.Interaction>
-              <id>1</id>
-              <targetTags/>
-              <name>Attack</name>
-              <isBuild>false</isBuild>
-              <isInstantaneous>false</isInstantaneous>
-              <customFunctions>
-                <interactions.ModifyVariable>
-                  <NAME>ModifyVariable</NAME>
-                  <VARIABLE>Variable</VARIABLE>
-                  <DELTA>Delta</DELTA>
-                  <RATE>Rate</RATE>
-                  <format>
-                    <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                    <parameterFields>
-                      <entry>
-                        <string>Variable</string>
-                        <string>Health</string>
-                      </entry>
-                      <entry>
-                        <string>Delta</string>
-                        <string>-10</string>
-                      </entry>
-                    </parameterFields>
-                  </format>
-                </interactions.ModifyVariable>
-              </customFunctions>
-              <range>100.0</range>
-            </interactions.Interaction>
-          </entry>
-        </elementMap>
-        <new__ID__val>3</new__ID__val>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
       </interactions>
       <conditions>
         <elementMap/>
@@ -70,7 +53,7 @@
       <myImagePath>/images/rcd.png</myImagePath>
       <myName>duvall</myName>
       <myTags reference="../../myTags"/>
-      <myMovementSpeed>10.0</myMovementSpeed>
+      <myMovementSpeed>3.0</myMovementSpeed>
       <isBuilding>false</isBuilding>
       <myTeam>1</myTeam>
     </myMainComponentPropertyManager>

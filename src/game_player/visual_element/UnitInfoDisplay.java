@@ -82,16 +82,18 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void updateHealthManaInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
+			System.out.println("current unit is null");
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
+			myHealthManaInfo.setText("");
 			try {
-				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(0);
-				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
-				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
-						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
+					myHealthManaInfo.setText(myHealthManaInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+				}
 			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
+				System.out.println("error occurred");
 			}
 		}
 		
@@ -102,11 +104,11 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myStatusInfo.setText(DefaultStatus);
 		}
 		else {
+			myStatusInfo.setText("");
 			try {
-				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(2);
-				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(3);
-				myStatusInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
-						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
+				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
+					myStatusInfo.setText(myStatusInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+				}
 			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
