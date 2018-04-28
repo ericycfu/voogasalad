@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import javax.swing.JFileChooser;
 
 import authoring.backend.Extractor;
+import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
@@ -31,16 +32,18 @@ import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
 	private MapSettings settings;
+	private GameEntity game;
 	private ResourceManager myResourceManager;
 	private HBox lossConditionBox;
 	private HBox resourcesBox;
 	private VBox contentBox;
 	
-	public MapSettingsView(MapSettings settings) {
+	public MapSettingsView(MapSettings settings, GameEntity game) {
 		this.settings = settings;
+		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
-		myResourceManager = new ResourceManager();
+		myResourceManager = game.getResourceManager();
 	}
 	
 	private void initializeAll() {
@@ -194,7 +197,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			e.printStackTrace();
 		}
 		//this try/catch statement below likely goes into the player so they can get the list of resources?
-		try {
+		/*try {
 			System.out.println("creating the list");
 			List<Entry<String, Double>> myList = new ArrayList<Entry<String, Double>>();
 			List<Object> initialList = new ArrayList<Object>();
@@ -211,7 +214,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	private void saveMapConfiguration(VBox myBox) {
