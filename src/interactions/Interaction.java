@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoring.backend.AuthoringObject;
 import game_engine.EngineObject;
 import game_object.GameObject;
@@ -24,7 +26,9 @@ public class Interaction implements EngineObject {
 	private int id;
 	private List<String> targetTags;
 	private String name;
-	private Image img;
+	@XStreamOmitField
+	private transient Image img;
+	private String imagePath;
 	private String description;
 
 	//these will be changed by authoring for the interaction
@@ -50,18 +54,27 @@ public class Interaction implements EngineObject {
 	 * Adds a custom function to the interaction.
 	 * need to add the functionality that only the variables related to those tags can be changed etc.
 	 */
-	public CustomFunction addCustomFunction(String type) {
-
-		CustomFunctionFactory factory = new CustomFunctionFactory();
-
+	public CustomFunction generateCustomFunction(String type) {
+		
+		CustomFunctionFactory factory = new CustomFunctionFactory();		
 		CustomFunction function = factory.getCustomFunction(type);
-		customFunctions.add(function);
 		return function;
 	}
 
+	/**
+	 * 
+	 * @param cFunction
+	 * Adds a prepared custom function to the interaction
+	 */
+	public void addCustomFunction(CustomFunction cFunction)
+	{
+		customFunctions.add(cFunction);
+	}
+	
+	
 	public void addAllCustomFunctions(List<String> types) {
 		for(String type : types) {
-			addCustomFunction(type);
+			generateCustomFunction(type);
 		}
 	}
 
@@ -151,8 +164,9 @@ public class Interaction implements EngineObject {
 	}
 
 
-	public void setImg(Image img) {
-		this.img = img;
+	public void setImg(String imagePath) {
+		this.imagePath = imagePath;
+		setImageFromPath();
 	}
 
 
@@ -169,5 +183,7 @@ public class Interaction implements EngineObject {
 	{
 		return customFunctions;
 	}
-
+	public void setImageFromPath() {
+		img = new Image(imagePath);
+	}
 }

@@ -14,7 +14,9 @@ public class ConditionManager extends ElementManager {
 
 	
 	public ConditionManager()
-	{}
+	{
+		super();
+	}
 	
 //	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
 	public int createCondition(int comparatorID, String var1, String var2)

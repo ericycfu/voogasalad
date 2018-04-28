@@ -16,9 +16,8 @@ public class MakeGameTabs extends TabPane implements AuthoringView {
 		this.getTabs().addAll(
 //				new GameSettingsTab(),
 				new MapSettingsTab(ac),
-				new DesignTab(),
+				new DesignTab(ac, game),
 				myPlaceTab);
-		ac.addToAuthorController(this);
 //		ac.addToAuthorController(myPlaceTab.getMap());
 		this.setPrefSize(700, 800);
 		this.getStyleClass().add("tab_pane");

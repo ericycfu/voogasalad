@@ -12,8 +12,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.backend.AuthoringObject;
 import game_object.GameObject;
-import game_object.Renderer;
-import javafx.scene.image.Image;
+import game_object.GameObjectManager;
 
 public class Reader {
 	/**
@@ -32,6 +31,7 @@ public class Reader {
 		try {
 			while(true) {
 				Object obj = in.readObject();
+				setUpNonSerializable(obj);
 				result.add(obj);
 			}
 		}
@@ -56,19 +56,7 @@ public class Reader {
 		try {
 			while(true) {
 				Object obj = in.readObject();
-				System.out.println(obj.getClass().getName());
-				try {
-					//replace ghoul.png with the get image path method.
-					//if we are saving a game object because game object has an image.
-					System.out.println("we are pre image");
-					((GameObject) obj).setRenderer(new Renderer(new Image("ghoul.png")));
-					System.out.println("we are post image");
-				}
-				catch(Exception e) {
-					//if it is an authoring object
-					//replace with code to get image url
-					((AuthoringObject) obj).setImage("ghoul.png");
-				}
+				setUpNonSerializable(obj);
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
@@ -80,6 +68,18 @@ public class Reader {
 		}
 		return result;
 	}
-	
+	private void setUpNonSerializable(Object obj) {
+		System.out.println(obj.getClass().getName());
+		if(obj instanceof GameObjectManager) {
+			((GameObjectManager) obj).setupImages();
+		}
+		else if(obj instanceof GameObject) {
+			((GameObject) obj).setupImages();
+		}
+		else if(obj instanceof AuthoringObject) {
+			((AuthoringObject) obj).resetImageAfterLoad();
+		}
+		
+	}
 
 }

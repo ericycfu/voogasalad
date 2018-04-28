@@ -14,6 +14,7 @@ import java.util.Map;
 public class ObjectAttributes {
 
 	private Map<String, Double> attributes;
+	private Map<String, Double> maxAttributes;
 	private Map<String, Double> buildCosts;
 	private double buildTime;
 	
@@ -21,6 +22,8 @@ public class ObjectAttributes {
 	public ObjectAttributes()
 	{
 		attributes = new HashMap<String, Double>();
+		maxAttributes = new HashMap<String, Double>();
+		buildCosts = new HashMap<String, Double>();
 	}
 	
 	public List<String> getAttributeNames() 
@@ -41,11 +44,6 @@ public class ObjectAttributes {
 		return list;
 	}
 	
-	public Map<String, Double> getAttributeMap() 
-	{
-		return attributes;
-	}
-	
 	
 	/**
 	 * 
@@ -53,9 +51,10 @@ public class ObjectAttributes {
 	 * @param value
 	 * Create attribute for the unit. Attributes must be created before changing their values.
 	 */
-	public void createAttribute(String attribute)
+	public void createAttribute(String attribute, double maxVal)
 	{
-		attributes.put(attribute, 0.0);
+		maxAttributes.put(attribute, maxVal);
+		attributes.put(attribute, maxVal);
 	}
 	
 	/**
@@ -76,6 +75,19 @@ public class ObjectAttributes {
 		}
 	}
 	
+	public void setMaximumAttributeValue(String attribute, double newMaxValue) throws PropertyNotFoundException
+	{
+		if(attributes.containsKey(attribute) && maxAttributes.containsKey(attribute))
+		{
+			attributes.put(attribute, newMaxValue);
+			maxAttributes.put(attribute, newMaxValue);
+		}
+		else
+		{
+			throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		}
+	}
+		
 	/**
 	 * 
 	 * @param attribute
@@ -90,6 +102,17 @@ public class ObjectAttributes {
 			return attributes.get(attribute);
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}	
+	
+	public double getMaxAttributeVal(String attribute) throws PropertyNotFoundException
+	{
+		if(maxAttributes.containsKey(attribute))
+			return maxAttributes.get(attribute);
+		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
+	}
+	
+	public Map<String, Double> getCosts() {
+		return buildCosts;
+	}
 	
 	public void setCosts(Map<String, Double> costMap)
 	{
@@ -107,5 +130,11 @@ public class ObjectAttributes {
 	public void setBuildTime(double buildTime) 
 	{
 		this.buildTime = buildTime;
+	}
+	
+	public void clearAttributes()
+	{
+		attributes.clear();
+		maxAttributes.clear();
 	}
 }

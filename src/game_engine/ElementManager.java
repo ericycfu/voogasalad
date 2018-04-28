@@ -10,7 +10,6 @@ import java.util.Map;
  * 
  * @author Rayan
  *
- * @param <E>
  * 
  * Manager interface for creating engine managers like gameobject manager etc.
  * Manager itself can only set the id for the gameobject 
@@ -91,5 +90,7 @@ public abstract class ElementManager {
 	{
 		elementMap.clear();
 	}
+	
+	
 
 }

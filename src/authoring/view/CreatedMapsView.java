@@ -24,6 +24,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		this.authoringcontroller = ac;
 		this.dragscroll = ac.getScroll();
 		this.createdmaps = cm;
+		authoringcontroller.addToAuthorController(this);
 		cm.addListener(this);
 		setupBox();
 	}
@@ -57,7 +58,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 	private String extractName(MapEntity map) {
 		return map.getName();
 	}
-
+	
 	@Override
 	public void update() {
 		setupBox();

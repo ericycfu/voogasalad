@@ -19,9 +19,7 @@ import pathfinding.GridMap;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
-
-	public static final double WINDOW_STEP_SIZE = 10;
-	public static final double MAP_DISPLAY_RATIO = 4;
+	
 	private double myCurrentXCoor = 0; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor = 0; 
 	private double myWidth;
@@ -47,7 +45,7 @@ public class MainDisplay implements VisualUpdate {
 	private boolean isLeftHovered;
 	private boolean isRightHovered;
 	
-	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height) {
+	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height, ImageView map) {
 		myUnitActionDisp = uadisp;
 		myGameObjectManager = gom;
 		myDisplayGameObjects = new ArrayList<>();
@@ -56,26 +54,27 @@ public class MainDisplay implements VisualUpdate {
 		myWidth = width;
 		myHeight = height;
 		initialize();
-		myMap = new ImageView(new Image("map4.jpg"));
-		myMap.setFitWidth(myWidth*MAP_DISPLAY_RATIO);
-		myMap.setFitHeight(myHeight*MAP_DISPLAY_RATIO);
+		myMap = map;
 		//myMap.setFill(Color.GREEN);
 		myMap.setOnMouseClicked(e -> {
 			double mouseX = e.getX();
 			double mouseY = e.getY();
-			if (e.getButton()==MouseButton.SECONDARY) {
+			if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() == -1) {
+				System.out.println("current interaction id" + this.myUnitActionDisp.getCurrentActionID());
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
-			else if (e.getButton()==MouseButton.PRIMARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
+			else if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
 				int ID = this.myUnitActionDisp.getCurrentActionID();
-				
+				System.out.println("current interaction id" + ID);
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						System.out.println("print maindisp");
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
 						myUnitActionDisp.setBuildTarget(new GameObject(new Vector2(-1, -1)));
 					}
 					else {
+						System.out.println("print maindisp");
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager);
 					}
 					myUnitActionDisp.setCurrentActionID(-1);
@@ -85,6 +84,7 @@ public class MainDisplay implements VisualUpdate {
 				
 				
 			}
+			System.out.println(this.myUnitActionDisp.getCurrentActionID());
 		});
 
 		myMap.toBack();
@@ -165,17 +165,17 @@ public class MainDisplay implements VisualUpdate {
 			myDisplayables.getChildren().add(imgv);
 		}
 		
-		if (isDownHovered && myCurrentYCoor < myHeight*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
-			myCurrentYCoor += WINDOW_STEP_SIZE;
+		if (isDownHovered && myCurrentYCoor < myHeight*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
+			myCurrentYCoor += GamePlayer.WINDOW_STEP_SIZE;
 		}
 		if (isUpHovered && myCurrentYCoor > 0) {
-			myCurrentYCoor -= WINDOW_STEP_SIZE;
+			myCurrentYCoor -= GamePlayer.WINDOW_STEP_SIZE;
 		}
 		if (isLeftHovered && myCurrentXCoor > 0) {
-			myCurrentXCoor -= WINDOW_STEP_SIZE;
+			myCurrentXCoor -= GamePlayer.WINDOW_STEP_SIZE;
 		}
-		if (isRightHovered && myCurrentXCoor < myWidth*MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_X) {
-			myCurrentXCoor += WINDOW_STEP_SIZE;
+		if (isRightHovered && myCurrentXCoor < myWidth*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_X) {
+			myCurrentXCoor += GamePlayer.WINDOW_STEP_SIZE;
 		}
 		updateCurrentWindow();
 		
@@ -186,21 +186,21 @@ public class MainDisplay implements VisualUpdate {
 		return myMainDisplay;
 	}
 	
-	private double translateX(double x) {
+	public double translateX(double x) {
 		double retX = x - myCurrentXCoor;
 		return retX;
 	}
 	
-	private double translateY(double y) {
+	public double translateY(double y) {
 		double retY = y - myCurrentYCoor;
 		return retY;
 	}
 	
-	private double detranslateX(double x){
+	public double detranslateX(double x){
 		return x + myCurrentXCoor;
 	}
 	
-	private double detranslateY(double y){
+	public double detranslateY(double y){
 		return y + myCurrentYCoor;
 	}
 	

@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import authoring.backend.AuthoringObject;
-import authoring.backend.ButtonFactory;
-import authoring.backend.ComboBoxFactory;
 import authoring.backend.ConditionStatement;
-import authoring.backend.TextFieldFactory;
+import authoring.backend.Extractor;
 import conditions.Comparator;
 import conditions.ComparatorManager;
 import conditions.Condition;
 import conditions.ConditionManager;
+import gui_elements.factories.ButtonFactory;
+import gui_elements.factories.ComboBoxFactory;
+import gui_elements.factories.TextFieldFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -132,20 +133,14 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	private void saveConditions() {
 		conditionManager.clearManager();
 		for (int i=1; i<currentRow; i++) {
-			String attribute = extractTextField(findNode(i,COLUMNS[0]));
+			String attribute = Extractor.extractTextField(findNode(i,COLUMNS[0]));
 			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));
-			String value = extractTextField(findNode(i,COLUMNS[2]));
-			String conditionString = extractComboBox(findNode(i,COLUMNS[3]));
+			String value = Extractor.extractTextField(findNode(i,COLUMNS[2]));
+			String conditionString = Extractor.extractComboBox(findNode(i,COLUMNS[3]));
 			int conditionId = conditionManager.createCondition(comparatorId, attribute, value);
 			conditionManager.getCondition(conditionId).addCustomCondition(conditionString);
 
 		}
-	}
-	private String extractTextField(Node n) {
-		if (n instanceof TextField) {
-			return ((TextField) n).getText();
-		}
-		return "";
 	}
 	
 	private int extractComparatorId(Node n) {
@@ -154,14 +149,6 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 			return matchComparatorId(symbol);
 		}
 		return 0;
-	}
-	
-	private String extractComboBox(Node n) {
-		if (n instanceof ComboBox) {
-			String symbol = (String) ((ComboBox) n).getValue();
-			return symbol;
-		}
-		return "";
 	}
 	
 	private int matchComparatorId(String symbol) {

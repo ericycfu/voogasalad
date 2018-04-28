@@ -2,14 +2,9 @@ package gui_elements.panes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Properties;
 
-import game_object.ObjectAttributes;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;

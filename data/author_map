@@ -3,18 +3,21 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myImagePath>/images/station.png</myImagePath>
-        <myName>Station</myName>
-        <myTags/>
+        <myName>a</myName>
+        <myTags>
+          <string>a</string>
+        </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
-        <myMovementSpeed>0.0</myMovementSpeed>
+        <myMovementSpeed>1.0</myMovementSpeed>
         <isBuilding>false</isBuilding>
-        <buildTime>0.0</buildTime>
+        <buildTime>1.0</buildTime>
         <buildCost/>
         <myObjectLogic>
           <fulfillsLossCondition>false</fulfillsLossCondition>
           <attributes>
             <attributes/>
+            <maxAttributes/>
             <buildTime>0.0</buildTime>
           </attributes>
           <interactions>
@@ -36,8 +39,8 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>266.0</x>
-          <y>258.0</y>
+          <x>211.0</x>
+          <y>240.0</y>
         </transform__library.Vector2>
       </list>
     </entry>
