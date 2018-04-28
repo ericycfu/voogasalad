@@ -11,7 +11,6 @@ public class LoadGameState {
 	private Reader myReader;
 	
 	public LoadGameState() {
-		myReader = new Reader();
 		try {
 			CreatedObjects.setAuthoringObjects(myReader.read(Resources.getString(RESOURCES_STRING)));
 		} catch (ClassNotFoundException e) {

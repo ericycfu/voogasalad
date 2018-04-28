@@ -30,15 +30,12 @@ public class GameInstance implements Serializable{
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
 	private transient TeamManager myTeamManager;
-	private transient Reader myReader;
-	private transient Writer myWriter;
 	private BufferedImage background;
 	private double gameTime;
 	private ArrayList<ChatEntry> chat;
 	
 	public GameInstance(GameInfo g, String filepath) {
 		
-		myReader = new Reader();
 		myGameInfo = g;
 		myTeamManager = new TeamManager();
 		try {
@@ -51,7 +48,7 @@ public class GameInstance implements Serializable{
 		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		List<Object> gameObjects = myReader.read(filepath, "gameObject");
+		List<Object> gameObjects = Reader.read(filepath, "gameObject");
 		myObjectManager = new GameObjectManager();
 		for(int x = 0; x < gameObjects.size(); x++) {
 			myObjectManager.addElement((GameObject)gameObjects.get(x));
@@ -65,7 +62,7 @@ public class GameInstance implements Serializable{
 	public void save(String filepath) throws IOException {
 		List<Object> toWrite = new ArrayList<>();
 		toWrite.add(this);
-		myWriter.write(filepath,toWrite);
+		Writer.write(filepath,toWrite);
 	}
 	/**
 	 * Read commands from the file that is updated by the GamePlayer

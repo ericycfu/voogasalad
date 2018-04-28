@@ -25,6 +25,7 @@ public class BuildFunction implements CustomFunction {
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
 		if(other == null) return;
+		manager.copyGameObject(other, current.getOwner());
 		other.queueBuilding();
 	}
 
@@ -37,7 +38,6 @@ public class BuildFunction implements CustomFunction {
 	public void setParameterFormatFields() {
 		format.addHelpText("This function allows you to build a unit. Enter the tags for all the possible"
 				+ "units that this object can create." );
-		format.addStringField("buildTime");	
 		
 	}
 

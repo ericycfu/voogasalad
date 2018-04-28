@@ -22,7 +22,7 @@ public class SceneManager {
 	private List<EndCondition> endConditions;
 	private List<Team> teams;
 	
-	public SceneManager(List<Team> teams, GameObjectManager manager, List<EndCondition> winConditions)
+	public SceneManager(List<Team> teams, GameObjectManager manager, List<EndCondition> endConditions)
 	{
 		this.endConditions = new ArrayList<>();
 		this.objManager = manager;

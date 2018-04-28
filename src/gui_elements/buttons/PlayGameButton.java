@@ -13,6 +13,7 @@ import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.GameEntity;
+import authoring.backend.MapSettings;
 import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
@@ -23,10 +24,8 @@ import resources.Resources;
 import transform_library.Vector2;
 
 public class PlayGameButton extends Button {	
-	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
-	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
 	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
-	private static final String INITIAL_LIST_STRING = "INITIALIZATION_LOCATION_LIST";
+
 	private AuthoringController ac;
 	private GameEntity gameEntity;
 	public PlayGameButton(AuthoringController ac, GameEntity game) {
@@ -49,24 +48,25 @@ public class PlayGameButton extends Button {
 	protected void setAction() {
 		this.setOnAction(value -> {
 			System.out.print("Playing game!");
-			Writer myWriter = new Writer();
-//			myReader = new Reader();
 			
 			Map<AuthoringObject, List<DraggableImageView>> map = ac.getCurrentMap().getLocations();
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 			List<Map<AuthoringObject, List<Vector2>>> listFormMap = new ArrayList<>();
 			listFormMap.add(changedMap);
+			List<MapSettings> listFormMapSettings = new ArrayList<>();
+			listFormMapSettings.add(ac.getCurrentMap().getMapSettings());
 			List<Object> listForm = new ArrayList<>();
 			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
-				myWriter.write(Resources.getString(RESOURCES_STRING2), listFormMap);
+				Writer.write(Resources.getString("AUTHOR_LOCATION_OBJECTS"), gameEntity.getCreatedObjects().getAuthoringObjects());
+				Writer.write(Resources.getString("AUTHOR_LOCATION_MAP"), listFormMap);
+				Writer.write(Resources.getString("AUTHOR_LOCATION_MAPSETTTINGS"), listFormMapSettings);
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
 				listForm.add(myGOM);
 				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
 				Set<GameObject> possibleObjects = new HashSet<>();
 				possibleObjects.addAll(possibleObjectsList);
 				listForm.add(possibleObjects);
-				myWriter.write(Resources.getString(INITIAL_MAP_STRING),listForm);
+				Writer.write(Resources.getString(INITIAL_MAP_STRING),listForm);
 				//GamePlayer gamePlayer = new GamePlayer(myGOM);
 				System.out.println("Object saved");
 			} catch (IOException e) {
