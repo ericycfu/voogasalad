@@ -2,10 +2,10 @@ package server_client.buttons;
 
 import javafx.scene.control.Button;
 
-public class JoinLobbyButton extends Button {
-	public JoinLobbyButton() {
+public class CreateLobbyButton extends Button {
+	public CreateLobbyButton() {
 		this.getStyleClass().add("lobby_selection_button");
-		this.setText("Join Lobby");
+		this.setText("Create Lobby");
 	}
 	
 	

@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import server.GameLobby;
 
 public class LobbyDisplay extends GridPane {
+	private int ID;
 	public LobbyDisplay() {
 		setPrefHeight(100);
 		setPrefWidth(300);
@@ -20,7 +21,8 @@ public class LobbyDisplay extends GridPane {
 	}
 	private void display(GameLobby toDisplay) {
 		getChildren().clear();
-		Text lobbyText = new Text("LOBBY: " + toDisplay.getID());
+		ID = toDisplay.getID();
+		Text lobbyText = new Text("LOBBY: " + ID);
 		lobbyText.setId("lobby_main_text");
 		add(lobbyText,0,0);
 		Text teamText = new Text("Teams: " + toDisplay.getNumTeams());
@@ -30,5 +32,8 @@ public class LobbyDisplay extends GridPane {
 		teamText.setId("team_text");
 		add(playerText,1,1);
 		add(new ImageView(SwingFXUtils.toFXImage(toDisplay.getCurrentGameInstance().getBackground(),null)),2,0);
+	}
+	public int getID() {
+		return ID;
 	}
 }

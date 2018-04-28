@@ -1,6 +1,7 @@
 package server.communications_handler;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -25,6 +26,7 @@ public class LobbyHandler extends CommunicationsHandler {
 			if((input = (String)getInputStream().readObject()) != null) {
 				switch(input) {
 					case REMOVE_OPTION: currentLobby.removePlayer(getSocket());
+									getOutputStream().writeObject("Left");
 									return MainPageHandler.CLASS_REF;
 					case START_GAME:
 									if(getSocket().equals(currentLobby.getHost())) {
@@ -45,9 +47,13 @@ public class LobbyHandler extends CommunicationsHandler {
 	@Override
 	public void updateClient() throws SocketException{
 		try {
+			ObjectOutputStream out = getOutputStream();
 			if(currentLobby.isRunning())
-				getOutputStream().writeObject(START_GAME);
-			else getOutputStream().writeObject(currentLobby);
+				out.writeObject(START_GAME);
+			else { out.writeObject(currentLobby);
+				out.writeInt(currentLobby.getTeamID(getSocket()));
+				out.writeInt(currentLobby.getPlayerID(getSocket()));
+			}
 		} catch (IOException e) {
 			return;
 		}

@@ -70,10 +70,12 @@ public class GameInstance implements Serializable{
 	 * Read commands from the file that is updated by the GamePlayer
 	 * @param filepath
 	 */
-	public void executeCommand(int source_id, int target_id, int interaction_ID) {
+	public void executeCommand(int source_id, int target_id, int interaction_ID, int xcor, int ycor) {
 		if(!running)
 			return;
-		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager);
+		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
+		currentGridMap.updateMapPositions(myObjectManager.getElements());
+		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
 	}
 	
 	public void executeMovement(int id, double xcor, double ycor) {
