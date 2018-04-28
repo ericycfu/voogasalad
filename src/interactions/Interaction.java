@@ -1,5 +1,6 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,12 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction implements EngineObject {
+public class Interaction implements EngineObject, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static enum interactionTargetTeam
 	{
 		OWN, OTHER, ALL;
