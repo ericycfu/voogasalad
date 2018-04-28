@@ -9,6 +9,12 @@ import game_engine.Team;
 import game_object.GameObject;
 import interactions.CustomComponentParameterFormat;
 
+/**
+ * 
+ * @author Rayan
+ * Implementation of loss condition
+ */
+
 public class AllUnitsDead implements EndCondition {
 
 	public final String NAME = "AllUnitsDead";

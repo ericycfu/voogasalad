@@ -60,6 +60,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	private double elapsedTime;
 	
+	
+	
 	/**
 	 *
 	 * @param startingPosition
@@ -168,8 +170,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
 		
-		//myObjectLogic.checkConditions(this);
-	
+		myObjectLogic.checkConditions(this);
 
 	}
 	
