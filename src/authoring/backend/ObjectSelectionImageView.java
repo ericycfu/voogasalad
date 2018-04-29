@@ -1,5 +1,6 @@
 package authoring.backend;
 
+import authoring.view.ObjectTeamSelectionScreen;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -15,9 +16,6 @@ public class ObjectSelectionImageView extends ImageView {
 			if (e.getClickCount() == 2) {
 				DraggableImageView dragimgview = obj.duplicateImgView();
 				ac.getCurrentMap().addToMap(obj, dragimgview);
-			}
-			else if(e.isSecondaryButtonDown()) {
-				
 			}
 			ac.updateObject(obj);
 		});

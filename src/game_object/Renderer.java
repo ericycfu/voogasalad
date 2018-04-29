@@ -16,6 +16,9 @@ import javafx.scene.image.ImageView;
 
 public class Renderer implements Serializable{
 	private String myImageLocation;
+	public final static double TEMP_OPACITY = 0.5;
+	public final static double NORMAL_OPACITY = 1;
+
 	@XStreamOmitField
 	private transient ImageView myDisp;
 	

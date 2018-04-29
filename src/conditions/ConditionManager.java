@@ -11,13 +11,11 @@ import java.util.TreeMap;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_object.GameObject;
+import interactions.Interaction;
 
 public class ConditionManager extends ElementManager implements Serializable {
 
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public ConditionManager()
@@ -25,11 +23,9 @@ public class ConditionManager extends ElementManager implements Serializable {
 		super();
 	}
 	
-//	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
 	public int createCondition(int comparatorID, String var1, String var2)
 	{
 		int newID = calculateID();
-//		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
 		Condition condition = new Condition(newID, comparatorID, var1, var2);
 		this.addElement(condition);
 		return newID;
@@ -51,5 +47,13 @@ public class ConditionManager extends ElementManager implements Serializable {
 	{
 		return (Condition)(this.get(id));
 	}
-		
+
+	
+	public void removeLastAddedCondition()
+	{
+		List<Condition> conds = getElements();
+		this.removeElement(conds.get(conds.size()-1));
+	}
+	
+
 }

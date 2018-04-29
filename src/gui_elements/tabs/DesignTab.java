@@ -19,7 +19,6 @@ import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
 import gui_elements.combo_boxes.ComponentResourceComboBox;
 import gui_elements.combo_boxes.ComponentTagComboBox;
-import gui_elements.combo_boxes.ComponentTeamComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.ComponentBuildCostLabel;
 import gui_elements.labels.ComponentBuildingLabel;
@@ -29,7 +28,6 @@ import gui_elements.labels.ComponentImageChooserLabel;
 import gui_elements.labels.ComponentMovementSpeedLabel;
 import gui_elements.labels.ComponentNameLabel;
 import gui_elements.labels.ComponentTagLabel;
-import gui_elements.labels.ComponentTeamLabel;
 import gui_elements.labels.CreateComponentTitleLabel;
 import gui_elements.labels.MainLabel;
 import gui_elements.text_fields.ComponentBuildCostTextField;
@@ -46,7 +44,7 @@ public class DesignTab extends Tab {
 	private final String TAB_TEXT = "Design";
 	private Group design_root;
 	private MainTextField component_name_tf, component_movement_speed_tf, component_build_time_tf, component_build_cost_tf;
-	private MainComboBox component_tag_cb, building_cb, component_resource_cb, component_team_cb;
+	private MainComboBox component_tag_cb, building_cb, component_resource_cb;
 	private MainLabel component_image_choice_text_label;
 	private MainButton component_image_chooser_button;
 	private AuthoringObject authoring_object;
@@ -90,8 +88,7 @@ public class DesignTab extends Tab {
 										 new ComponentMovementSpeedLabel().getLabel(),
 										 new ComponentBuildingLabel().getLabel(),
 										 new ComponentConstructionTimeLabel().getLabel(),
-										 new ComponentBuildCostLabel().getLabel(),
-										 new ComponentTeamLabel().getLabel());	
+										 new ComponentBuildCostLabel().getLabel());
 	}
 		
 	private void setTextFields() {
@@ -113,12 +110,10 @@ public class DesignTab extends Tab {
 		component_tag_cb = new ComponentTagComboBox(tag_controller);
 		building_cb = new BuildingComboBox();
 		component_resource_cb = new ComponentResourceComboBox();
-		component_team_cb = new ComponentTeamComboBox();
 		
 		design_root.getChildren().addAll(component_tag_cb.getComboBox(),
 										building_cb.getComboBox(),
-										component_resource_cb.getComboBox(),
-										component_team_cb.getComboBox());
+										component_resource_cb.getComboBox());
 	}
 	
 	private void setButtons() {
@@ -136,8 +131,7 @@ public class DesignTab extends Tab {
 												 component_build_time_tf.getTextField(),
 												 component_resource_cb.getComboBox(),
 												 component_build_cost_tf.getTextField(),
-												 this,
-												 component_team_cb.getComboBox()).getButton(),
+												 this),
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
@@ -164,7 +158,6 @@ public class DesignTab extends Tab {
 		building_cb.getEditor().clear();
 		component_build_time_tf.clear();
 		component_build_cost_tf.clear();
-		component_team_cb.getEditor().clear();
 	}
 	
 	public void assignComponents() {
@@ -175,7 +168,6 @@ public class DesignTab extends Tab {
 		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
 		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
-		component_team_cb.getSelectionModel().select(authoring_object.getTeam() + "");
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 		component_image_choice_text_label.setText(authoring_object.getImagePath());
 	}

@@ -37,6 +37,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
+	
 
 	private Team owner;
 	
@@ -276,12 +277,14 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();
 		buildTimer.setTimerOn(true);
+		this.renderer.getDisp().setOpacity(Renderer.TEMP_OPACITY);
 		buildTimer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()
 	{
 		this.setIsUninteractive(false);
+		this.renderer.getDisp().setOpacity(Renderer.NORMAL_OPACITY);
 		isBeingConstructed = false;
 	}
 	
