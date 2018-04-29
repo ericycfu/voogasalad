@@ -75,6 +75,8 @@ public class AuthoringObject {
 	}
 	
 	public Image getImage() {
+		System.out.println("myDragImage: " + myDragImage);
+		System.out.println("DragImage's Image: " + myDragImage.getImage());
 		return myDragImage.getImage();
 	}
 	

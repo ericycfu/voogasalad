@@ -109,6 +109,7 @@ public class Interaction implements EngineObject, Serializable {
 	 */
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
+		
 		if(!validatedInteractionTarget(current, other)) return;
 		System.out.println("validates");
 		//if(matchesTags(other, targetTags)) return;

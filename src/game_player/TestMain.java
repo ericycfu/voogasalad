@@ -40,6 +40,7 @@ public class TestMain extends Application {
 		GameObjectManager gom = new GameObjectManager();
 		myGOM = gom;
 		
+		/**
 		GameObject go = new GameObject(new Vector2(100,100));
 		go.accessLogic().accessAttributes().createAttribute("Health", 200);
 		go.accessLogic().accessAttributes().createAttribute("Mana", 200);
@@ -63,6 +64,7 @@ public class TestMain extends Application {
 		test.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		go.setRenderer(renderer);
 		
+		
 		int n = go.accessLogic().accessInteractions().createInteraction();
 		Interaction build = go.accessLogic().accessInteractions().getInteraction(n);
 		build.setDescription("build");
@@ -74,8 +76,9 @@ public class TestMain extends Application {
 		build.addCustomFunction(cf4);
 		build.addTag("ghoul");
 		build.addTag("empty");
+		**/
 		
-		gom.addElement(go);
+		//gom.addElement(go);
 		int i = gom.createGameObject(new Vector2(50, 100), null, "ghoul", null);
 		GameObject go2 = gom.getGameObject(i);
 		go2.accessLogic().accessAttributes().createAttribute("Health", 100);
@@ -97,7 +100,7 @@ public class TestMain extends Application {
 		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		test1.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "5");
 		System.out.println("delta" + test1.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
-		test1.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		//test1.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		
 		int j = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test2 = go2.accessLogic().accessInteractions().getInteraction(j);
@@ -109,7 +112,7 @@ public class TestMain extends Application {
 		test2.addCustomFunction(cf2);
 		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		test2.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "Attack");
-		test2.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		//test2.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		
 		int o = go2.accessLogic().accessInteractions().createInteraction();
 		Interaction test3 = go2.accessLogic().accessInteractions().getInteraction(o);
@@ -121,12 +124,12 @@ public class TestMain extends Application {
 		test3.addCustomFunction(cf3);
 		test3.getCustomFunction(0).getParameterFormat().setFieldValue("Variable", "Health");
 		test3.getCustomFunction(0).getParameterFormat().setFieldValue("Delta", "Attack2");
-		test3.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
+		//test3.getCustomFunction(0).setParameters(test.getCustomFunction(0).getParameterFormat());
 		
 		Renderer renderer2 = new Renderer("ghoul.png");
 		go2.setRenderer(renderer2);
 		Set<GameObject> possibleunits = new HashSet<>();
-		possibleunits.add(go);
+		//possibleunits.add(go);
 		possibleunits.add(go2);
 		
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
