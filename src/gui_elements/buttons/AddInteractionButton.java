@@ -2,6 +2,7 @@ package gui_elements.buttons;
 
 import authoring.view.ComponentAddInteractionsScreen;
 import gui_elements.combo_boxes.InteractionNameComboBox;
+import gui_elements.combo_boxes.InteractionTargetTeamComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.InteractionImageChoiceTextLabel;
 import gui_elements.labels.MainLabel;
@@ -25,7 +26,7 @@ public class AddInteractionButton extends MainButton {
 	private static final String ALERT_TITLE = "Interaction Added";
 	private static final String ALERT_MESSAGE = "You successfully added an interaction!";
 	private InteractionManager interaction_manager;
-	private MainComboBox interaction_name_cb;
+	private MainComboBox interaction_name_cb, interaction_target_team_cb;
 	private MainTextField interaction_vision_range_tf, interaction_description_tf;
 	private MainPane all_selected_interaction_tags_pane, created_custom_functions_pane;
 	private MainLabel interaction_image_choice_text_label;
@@ -36,8 +37,8 @@ public class AddInteractionButton extends MainButton {
 	public AddInteractionButton(InteractionManager interaction_manager, MainComboBox interaction_name_cb, 
 			MainTextField interaction_vision_range_tf, MainPane all_selected_interaction_tags_pane,
 			MainPane created_custom_functions_pane, MainLabel interaction_image_choice_text_label, 
-			MainTextField interaction_description_tf, ComponentAddInteractionsScreen component_add_interactions_screen, 
-			int interaction_id) {
+			MainTextField interaction_description_tf, MainComboBox interaction_target_team_cb, 
+			ComponentAddInteractionsScreen component_add_interactions_screen, int interaction_id) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.interaction_manager = interaction_manager;
 		this.interaction_name_cb = (InteractionNameComboBox) interaction_name_cb;
@@ -46,6 +47,7 @@ public class AddInteractionButton extends MainButton {
 		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
 		this.interaction_image_choice_text_label = (InteractionImageChoiceTextLabel) interaction_image_choice_text_label;
 		this.interaction_description_tf = (InteractionDescriptionTextField) interaction_description_tf;
+		this.interaction_target_team_cb = (InteractionTargetTeamComboBox) interaction_target_team_cb;
 		this.component_add_interactions_screen = component_add_interactions_screen;
 		this.interaction_id = interaction_id;
 		setAction();
@@ -63,6 +65,7 @@ public class AddInteractionButton extends MainButton {
 			}
 			interaction.setImg(IMAGE_PATH_HEADING + interaction_image_choice_text_label.getText());
 			interaction.setDescription(interaction_description_tf.getText());
+			interaction.setInteractionTargetTeam(interaction_target_team_cb.getSelectionModel().getSelectedItem());
 			component_add_interactions_screen.resetElements();
 			component_add_interactions_screen.setInteractionID(interaction_id = interaction_manager.createInteraction());
 			createAlert();

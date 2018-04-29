@@ -7,8 +7,13 @@
           <id>1</id>
           <transform>
             <position>
+<<<<<<< HEAD:data/initial_gameobjectmanager
               <x>155.0</x>
               <y>102.0</y>
+=======
+              <x>321.0</x>
+              <y>127.0</y>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -28,7 +33,11 @@
                 </entry>
               </maxAttributes>
               <buildCosts/>
+<<<<<<< HEAD:data/initial_gameobjectmanager
               <buildTime>10.0</buildTime>
+=======
+              <buildTime>1.0</buildTime>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
             </attributes>
             <interactions>
               <elementMap>
@@ -77,16 +86,28 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD:data/initial_gameobjectmanager
             <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <name>RealShit2</name>
           <tags>
             <string>Shit</string>
+=======
+            <myImageLocation>/images/arrow_down.png</myImageLocation>
+          </renderer>
+          <name>a</name>
+          <tags>
+            <string>a</string>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+<<<<<<< HEAD:data/initial_gameobjectmanager
           <movementSpeed>10.0</movementSpeed>
+=======
+          <movementSpeed>1.0</movementSpeed>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -100,8 +121,13 @@
           <id>2</id>
           <transform>
             <position>
+<<<<<<< HEAD:data/initial_gameobjectmanager
               <x>38.0</x>
               <y>34.0</y>
+=======
+              <x>93.0</x>
+              <y>87.0</y>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -133,6 +159,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD:data/initial_gameobjectmanager
             <myImageLocation>/images/robert.png</myImageLocation>
           </renderer>
           <name>RealShit1</name>
@@ -224,6 +251,16 @@
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>0.0</movementSpeed>
+=======
+            <myImageLocation>/images/arrow_down.png</myImageLocation>
+          </renderer>
+          <name>a</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>1.0</movementSpeed>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -428,7 +465,11 @@
             </entry>
           </maxAttributes>
           <buildCosts/>
+<<<<<<< HEAD:data/initial_gameobjectmanager
           <buildTime>5.0</buildTime>
+=======
+          <buildTime>1.0</buildTime>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
         </attributes>
         <interactions>
           <elementMap/>
@@ -440,16 +481,28 @@
         </conditions>
       </myObjectLogic>
       <renderer>
+<<<<<<< HEAD:data/initial_gameobjectmanager
         <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
       <name>RealShit1</name>
       <tags>
         <string>Shit</string>
+=======
+        <myImageLocation>/images/arrow_down.png</myImageLocation>
+      </renderer>
+      <name>a</name>
+      <tags>
+        <string>a</string>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
+<<<<<<< HEAD:data/initial_gameobjectmanager
       <movementSpeed>10.0</movementSpeed>
+=======
+      <movementSpeed>1.0</movementSpeed>
+>>>>>>> 1e9a2a38724bab92beacf7cb8d3d2f3284366620:data/game
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -457,4 +510,13 @@
       <elapsedTime>0.0</elapsedTime>
     </game__object.GameObject>
   </set>
+  <authoring.backend.MapSettings>
+    <mapName>Default map</mapName>
+    <numPlayers>1</numPlayers>
+    <lossCondition></lossCondition>
+    <resources/>
+    <mapwidth>1000</mapwidth>
+    <mapheight>1000</mapheight>
+    <imagePath>/images/tt.jpg</imagePath>
+  </authoring.backend.MapSettings>
 </object-stream>
