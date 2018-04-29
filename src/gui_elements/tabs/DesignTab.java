@@ -41,12 +41,14 @@ import observables.Listener;
 
 public class DesignTab extends Tab {
 
-	private final String TAB_TEXT = "Design";
+	private static final String TAB_TEXT = "Design";
+	private static final String CREATE_COMPONENT = "Create Component";
+	private static final String UPDATE_COMPONENT = "Update Component";	
 	private Group design_root;
 	private MainTextField component_name_tf, component_movement_speed_tf, component_build_time_tf, component_build_cost_tf;
 	private MainComboBox component_tag_cb, building_cb, component_resource_cb;
 	private MainLabel component_image_choice_text_label;
-	private MainButton component_image_chooser_button;
+	private MainButton component_image_chooser_button, create_component_button;
 	private AuthoringObject authoring_object;
 	private TagController tag_controller;
 	private AuthoringController authoring_controller;
@@ -118,20 +120,21 @@ public class DesignTab extends Tab {
 	
 	private void setButtons() {
 		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
+		create_component_button = new CreateComponentButton(authoring_object,
+															component_name_tf.getTextField(),
+															component_tag_cb.getComboBox(),
+															tag_controller,
+															component_image_choice_text_label.getLabel(),
+															component_movement_speed_tf.getTextField(),
+															building_cb.getComboBox(),
+															component_build_time_tf.getTextField(),
+															component_resource_cb.getComboBox(),
+															component_build_cost_tf.getTextField(),
+															this);
 		
 		design_root.getChildren().addAll(
 										 component_image_chooser_button.getButton(),
-										 new CreateComponentButton(authoring_object,
-												 component_name_tf.getTextField(),
-												 component_tag_cb.getComboBox(),
-												 tag_controller,
-												 component_image_choice_text_label.getLabel(),
-												 component_movement_speed_tf.getTextField(),
-												 building_cb.getComboBox(),
-												 component_build_time_tf.getTextField(),
-												 component_resource_cb.getComboBox(),
-												 component_build_cost_tf.getTextField(),
-												 this),
+										 create_component_button.getButton(),
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
@@ -141,11 +144,13 @@ public class DesignTab extends Tab {
 	
 	public void setNewAuthoringObject() {
 		authoring_object = new AuthoringObject();
+		create_component_button.getButton().setText(CREATE_COMPONENT);
 		initialize();
 	}
 	
 	public void assignCurrentAuthoringObject() {
 		authoring_object = authoring_controller.getCurrentObject();
+		create_component_button.getButton().setText(UPDATE_COMPONENT);
 		initialize();
 		assignComponents();
 	}
