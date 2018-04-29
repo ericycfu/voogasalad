@@ -9,15 +9,16 @@ import observables.StaticSpeaker;
 
 public class CreatedObjects implements StaticSpeaker {
 	
-	private static List<AuthoringObject> myAuthoringObjects;
-	private static List<Listener> myListeners;
+	private List<AuthoringObject> myAuthoringObjects;
+	private List<Listener> myListeners;
+	
 	public CreatedObjects() {
 		myAuthoringObjects = new ArrayList<>();
 		myListeners = new ArrayList<>();
 //		addObject(new AuthoringObject());
 	}
 	
-	public static void addObject(AuthoringObject obj) {
+	public void addObject(AuthoringObject obj) {
 		if(myAuthoringObjects.contains(obj)) {
 			myAuthoringObjects.set(myAuthoringObjects.indexOf(obj), obj);
 		}
@@ -27,11 +28,11 @@ public class CreatedObjects implements StaticSpeaker {
 		notifyListeners();
 	}
 	
-	public static List<AuthoringObject> getAuthoringObjects() {
+	public List<AuthoringObject> getAuthoringObjects() {
 		return myAuthoringObjects;
 	}
 	
-	public static void setAuthoringObjects(List<Object> authoring_objects) {
+	public void setAuthoringObjects(List<Object> authoring_objects) {
 		myAuthoringObjects.clear();
 		for(Object obj : authoring_objects) {
 			myAuthoringObjects.add((AuthoringObject) obj);
@@ -42,7 +43,7 @@ public class CreatedObjects implements StaticSpeaker {
 		return myAuthoringObjects.get(index);
 	}
 	
-	public static int getSize() {
+	public int getSize() {
 		return myAuthoringObjects.size();
 	}
 
@@ -55,7 +56,7 @@ public class CreatedObjects implements StaticSpeaker {
 		
 	}
 	
-	private static void notifyListeners() {
+	private void notifyListeners() {
 		for (Listener l: myListeners) {
 			l.update();
 		}
