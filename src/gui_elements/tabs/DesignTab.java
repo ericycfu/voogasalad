@@ -193,5 +193,5 @@ public class DesignTab extends Tab {
 			resource_names.add(entry.getKey());
 		}
 		return resource_names;
-	}
+	}	
 }
