@@ -151,6 +151,15 @@ public class GamePlayer {
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
+					if (ia.getCustomFunctions().size()!=0) {
+						System.out.println("got into this step"+ia.getName());
+					try {
+						System.out.println("delta value: "+ia.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
+					} catch (PropertyNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					}
 					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
@@ -250,6 +259,7 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		System.out.println("num of gos: " + myGameObjectManager.getElements());
 		if (myTopPanel.getIsLoaded()) {
 			unitSkillMapInitialize();
 			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);

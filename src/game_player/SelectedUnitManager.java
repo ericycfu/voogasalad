@@ -53,6 +53,7 @@ public class SelectedUnitManager {
 					boolean isInteractionValid = false;
 					int goSpecificInteractionID = -1;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
+						//System.out.println(i.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
 						if (i.getName().equals(interactionName)) {
 							isInteractionValid = true;
 							goSpecificInteractionID = i.getID();
