@@ -38,6 +38,14 @@ public class ObjectLogic implements Serializable
 		conditions = new ConditionManager();
 	}
 	
+	public ObjectLogic(ObjectLogic other)
+	{
+		this.fulfillsLossCondition = other.fulfillsLossCondition;
+		this.attributes = new ObjectAttributes(other.attributes);
+		this.interactions = new InteractionManager(other.interactions);
+		this.conditions = new ConditionManager(other.conditions);
+	}
+	
 	public ObjectAttributes accessAttributes()
 	{
 		return attributes;

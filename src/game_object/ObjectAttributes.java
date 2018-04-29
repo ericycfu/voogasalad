@@ -2,9 +2,11 @@ package game_object;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -23,12 +25,24 @@ public class ObjectAttributes implements Serializable{
 	private Map<String, Double> buildCosts;
 	private double buildTime;
 	
-	
 	public ObjectAttributes()
 	{
 		attributes = new HashMap<String, Double>();
 		maxAttributes = new HashMap<String, Double>();
 		buildCosts = new HashMap<String, Double>();
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * constructor to copy the object attributes
+	 */
+	public ObjectAttributes(ObjectAttributes other)
+	{
+		this.buildTime = other.buildTime;
+		this.buildCosts = copyMap(other.buildCosts);
+		this.attributes = copyMap(other.attributes);
+		this.maxAttributes = copyMap(other.maxAttributes);
 	}
 	
 	public List<String> getAttributeNames() 
@@ -49,6 +63,21 @@ public class ObjectAttributes implements Serializable{
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param mapToCopy
+	 * @return
+	 * Allows the class to copy a map for a deep copy
+	 */
+	private Map<String, Double> copyMap(Map<String, Double> mapToCopy)
+	{
+		Map<String, Double> newMap = new HashMap<>();
+		for(Map.Entry<String, Double> entry : mapToCopy.entrySet())
+		{
+			newMap.put(entry.getKey(), entry.getValue());
+		}
+		return newMap;
+	}
 	
 	/**
 	 * 
@@ -115,9 +144,6 @@ public class ObjectAttributes implements Serializable{
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}
 	
-	public Map<String, Double> getCosts() {
-		return buildCosts;
-	}
 	
 	public void setCosts(Map<String, Double> costMap)
 	{
@@ -125,6 +151,11 @@ public class ObjectAttributes implements Serializable{
 		{
 			buildCosts.put(map.getKey(), map.getValue());
 		}
+	}
+	
+	public Map<String, Double> getCosts()
+	{
+		return Collections.unmodifiableMap(buildCosts);
 	}
 
 	public double getBuildTime() 

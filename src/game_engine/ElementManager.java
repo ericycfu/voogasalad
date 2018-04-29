@@ -33,8 +33,15 @@ public abstract class ElementManager implements Serializable {
 	
 	public ElementManager(ElementManager other)
 	{
-		this.elementMap = other.elementMap;
+		Map<Integer, EngineObject> map = new HashMap<>();
+		for(Map.Entry<Integer, EngineObject> element : other.elementMap.entrySet())
+		{
+			map.put(element.getKey(), element.getValue());
+		}
+		this.new_ID_val = other.new_ID_val; 
+		this.elementMap = map;
 	}
+	
 	
 	/**
 	 * 
@@ -86,6 +93,7 @@ public abstract class ElementManager implements Serializable {
 	public void addElement(EngineObject obj)
 	{
 		elementMap.put(obj.getID(), obj);
+		new_ID_val++;
 	}
 	
 	/**

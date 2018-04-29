@@ -48,6 +48,15 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		initializeAll();
 		myResourceManager = game.getResourceManager();
 	}
+	public MapSettingsView(MapSettings settings) {
+		
+		
+	}
+	
+	public void setMapSettings(MapSettings settings) {
+		this.settings = settings;
+		
+	}
 	
 	private void initializeAll() {
 		initializeTitle();

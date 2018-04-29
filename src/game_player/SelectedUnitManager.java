@@ -6,6 +6,7 @@ import java.util.List;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import interactions.Interaction;
 import pathfinding.GridMap;
@@ -52,12 +53,20 @@ public class SelectedUnitManager {
 					boolean isInteractionValid = false;
 					int goSpecificInteractionID = -1;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
+						//System.out.println(i.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
 						if (i.getName().equals(interactionName)) {
 							isInteractionValid = true;
 							goSpecificInteractionID = i.getID();
 						}
 					}
 					if (isInteractionValid) {
+						try {
+							System.out.println(go.accessLogic().accessAttributes().getAttribute("Health"));
+							System.out.println(target.accessLogic().accessAttributes().getAttribute("Health"));
+						} catch (PropertyNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						go.queueInteraction(target, goSpecificInteractionID, gom, new GridMap(1000, 1000), position);
 					}
 				}

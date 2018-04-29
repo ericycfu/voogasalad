@@ -43,16 +43,20 @@ public class MapSettings implements AuthoringView {
 		imagePath = "/images/tt.jpg";
 	}
 	
+	public void setMap(MapEntity map) {
+		this.map = map;
+	}
+	
 	public void matchToSize(MapEntity map) {
 		if (this.map == null) {
-			this.map = map;
+			setMap(map);
 		}
 		map.setPrefSize(mapwidth, mapheight);
 	}
 	
 	public void setMapByImage(MapEntity map) {
 		if (this.map == null) {
-			this.map = map;
+			setMap(map);
 		}
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
