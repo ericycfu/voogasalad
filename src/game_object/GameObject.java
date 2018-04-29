@@ -18,7 +18,7 @@ import transform_library.Vector2;
 
 /**
  * 
- * @author andrew, Rayan
+ * @author Rayan
  * 
  * Any object that will be shown on the world screen will be of the GameObject type. 
  * 
@@ -119,16 +119,20 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 * @param other
 	 * Constructor that deep copies an object.
 	 */
-	public GameObject(int id, Team t, GameObject other)
+	public GameObject(int id, GameObject other)
 	{
 		this.id = id;
 		this.name = other.name;
 		this.tags = other.tags;
-		this.owner = t;
+		this.owner = other.owner;
+		this.isBuilding = other.isBuilding;
+		this.movementSpeed = other.movementSpeed;
 		this.propertiesInit();
-		this.transform = other.transform;
-		this.renderer = other.renderer;
-		this.myObjectLogic = other.myObjectLogic;
+		this.transform = new Transform(other.getTransform());
+		this.myObjectLogic = new ObjectLogic(other.myObjectLogic);
+		this.renderer = new Renderer(other.renderer);
+
+
 	}
 	
 	private void propertiesInit()
@@ -136,7 +140,6 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
-		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;

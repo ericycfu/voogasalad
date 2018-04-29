@@ -36,6 +36,14 @@ public class ObjectLogic
 		conditions = new ConditionManager();
 	}
 	
+	public ObjectLogic(ObjectLogic other)
+	{
+		this.fulfillsLossCondition = other.fulfillsLossCondition;
+		this.attributes = new ObjectAttributes(attributes);
+		this.interactions = new InteractionManager(interactions);
+		this.conditions = new ConditionManager(conditions);
+	}
+	
 	public ObjectAttributes accessAttributes()
 	{
 		return attributes;

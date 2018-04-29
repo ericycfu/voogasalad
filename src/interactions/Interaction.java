@@ -52,6 +52,15 @@ public class Interaction implements EngineObject {
 		targetTags = new ArrayList<>();
 		this.id = id;
 	}
+	
+	public Interaction(Interaction other)
+	{
+		this.isBuild = other.isBuild;
+		this.isInstantaneous = other.isInstantaneous;
+		this.interactionTargetTeam = other.interactionTargetTeam;
+		this.customFunctions = other.customFunctions;
+		this.range = other.range;
+	}
 
 
 	/**

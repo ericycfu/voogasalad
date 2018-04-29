@@ -20,12 +20,24 @@ public class ObjectAttributes {
 	private Map<String, Double> buildCosts;
 	private double buildTime;
 	
-	
 	public ObjectAttributes()
 	{
 		attributes = new HashMap<String, Double>();
 		maxAttributes = new HashMap<String, Double>();
 		buildCosts = new HashMap<String, Double>();
+	}
+	
+	/**
+	 * 
+	 * @param other
+	 * constructor to copy the object attributes
+	 */
+	public ObjectAttributes(ObjectAttributes other)
+	{
+		this.buildTime = other.buildTime;
+		this.buildCosts = copyMap(buildCosts);
+		this.attributes = copyMap(attributes);
+		this.maxAttributes = copyMap(maxAttributes);
 	}
 	
 	public List<String> getAttributeNames() 
@@ -46,6 +58,21 @@ public class ObjectAttributes {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param mapToCopy
+	 * @return
+	 * Allows the class to copy a map for a deep copy
+	 */
+	private Map<String, Double> copyMap(Map<String, Double> mapToCopy)
+	{
+		Map<String, Double> newMap = new HashMap<>();
+		for(Map.Entry<String, Double> entry : mapToCopy.entrySet())
+		{
+			newMap.put(entry.getKey(), entry.getValue());
+		}
+		return newMap;
+	}
 	
 	/**
 	 * 

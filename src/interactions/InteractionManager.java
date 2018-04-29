@@ -16,6 +16,11 @@ public class InteractionManager extends ElementManager {
 		super();
 	}
 
+	public InteractionManager(InteractionManager other)
+	{
+		super(other);
+	}
+	
 	
 	public int createInteraction()
 	{

@@ -23,6 +23,11 @@ public class Transform {
 		this.rotation = rotation;
 	}
 	
+	public Transform(Transform other)
+	{
+		this.position = new Vector2(other.position.getX(), other.position.getY());
+	}
+	
 	public Vector2 getPosition()
 	{
 		return position;

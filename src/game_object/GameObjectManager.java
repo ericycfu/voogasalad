@@ -74,7 +74,7 @@ public class GameObjectManager extends ElementManager {
 	public int copyGameObject(GameObject other, Team t)
 	{
 		int newID = calculateID();
-		GameObject copy = new GameObject(newID, t, other);
+		GameObject copy = new GameObject(newID, other);
 		this.addElement(copy);
 		return newID;
 	}
