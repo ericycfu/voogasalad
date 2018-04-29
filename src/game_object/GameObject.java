@@ -179,6 +179,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		
 		if(isBeingConstructed)
 		{
+			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
 				this.dequeueBuilding();
@@ -270,6 +271,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueBuilding()
 	{
+		System.out.println("goes to queu");
 		setIsUninteractive(true);
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();

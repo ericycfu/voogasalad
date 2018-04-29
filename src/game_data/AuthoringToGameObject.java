@@ -58,7 +58,8 @@ public final class AuthoringToGameObject {
 	 * @return
 	 */
 	private static Team convert(AuthoringObject AO, ResourceManager RM) {
-		return new Team(AO.getTeam(),(new ResourceManager()).copyResourceManager(RM));
+		//return new Team(AO.getTeam(),(new ResourceManager()).copyResourceManager(RM));
+		return null;
 	}
 	
 }

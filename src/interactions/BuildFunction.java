@@ -25,6 +25,7 @@ public class BuildFunction implements CustomFunction {
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
 		if(other == null) return;
+		System.out.print("building");
 		manager.copyGameObject(other, current.getOwner());
 		other.queueBuilding();
 	}
