@@ -141,7 +141,10 @@ public class Interaction implements EngineObject, Serializable {
 	{
 		for(String s : other.getTags())
 		{
-			if(tags.contains(s)) return true;
+			for(String x : tags)
+			{
+				if(s.equals(x)) return true;
+			}
 		}
 		return false;
 	}
@@ -230,7 +233,10 @@ public class Interaction implements EngineObject, Serializable {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -239,6 +245,7 @@ public class Interaction implements EngineObject, Serializable {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}

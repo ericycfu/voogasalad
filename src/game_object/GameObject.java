@@ -37,6 +37,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
+	
 
 	private Team owner;
 	
@@ -110,6 +111,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.myObjectLogic = logic;
 		this.movementSpeed = manager.getMovementSpeed();
 		this.isBuilding = manager.isBuilding();
+		System.out.println("manager.isBuilding" + manager.isBuilding());
 		this.renderer = new Renderer(manager.getImagePath());
 		this.name = manager.getName();
 		this.tags = manager.getTags();
@@ -159,7 +161,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
-		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;
@@ -179,6 +180,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		
 		if(isBeingConstructed)
 		{
+			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
 				this.dequeueBuilding();
@@ -270,16 +272,19 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueBuilding()
 	{
+		System.out.println("goes to queu");
 		setIsUninteractive(true);
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();
 		buildTimer.setTimerOn(true);
+		this.renderer.getDisp().setOpacity(Renderer.TEMP_OPACITY);
 		buildTimer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()
 	{
 		this.setIsUninteractive(false);
+		this.renderer.getDisp().setOpacity(Renderer.NORMAL_OPACITY);
 		isBeingConstructed = false;
 	}
 	
