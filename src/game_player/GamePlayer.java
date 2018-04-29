@@ -103,6 +103,7 @@ public class GamePlayer {
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
 		for (GameObject go : myPossibleUnits) {
+			System.out.println(go.getName() + "this unit is in possible units");
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
@@ -140,11 +141,8 @@ public class GamePlayer {
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
+					System.out.println(ia.getImg());
 					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH);
-					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(ia.getID());
-					System.out.println(sb.getInteractionID());
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
@@ -156,6 +154,9 @@ public class GamePlayer {
 						});
 					}
 					else {
+						System.out.println("something is buildInteraction");
+						System.out.println(ia.isBuild() + "look at this");
+						System.out.println(ia.getTargetTags());
 						sb.setOnAction(e -> {
 							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);

@@ -49,7 +49,7 @@ public class TestMain extends Application {
 
 	
 		go.setMovementSpeed(1);
-		Renderer renderer = new Renderer("robert.png");
+		Renderer renderer = new Renderer("/images/robert.png");
 		int k = go.accessLogic().accessInteractions().createInteraction();
 		Interaction test = go.accessLogic().accessInteractions().getInteraction(k);
 		test.setDescription("attack: damage = 5");

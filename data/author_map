@@ -3,7 +3,7 @@
     <entry>
       <authoring.backend.AuthoringObject>
         <myTags>
-          <string>melee</string>
+          <string>farm</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
@@ -16,19 +16,73 @@
                 <string>Health</string>
                 <double>100.0</double>
               </entry>
-              <entry>
-                <string>Attack</string>
-                <double>10.0</double>
-              </entry>
             </attributes>
             <maxAttributes>
               <entry>
                 <string>Health</string>
                 <double>100.0</double>
               </entry>
+            </maxAttributes>
+            <buildCosts reference="../../../buildCosts"/>
+            <buildTime>10.0</buildTime>
+          </attributes>
+          <interactions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </interactions>
+          <conditions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </conditions>
+        </myObjectLogic>
+        <myMainComponentPropertyManager>
+          <myImagePath>/images/robert.png</myImagePath>
+          <myName>Farmer1</myName>
+          <myTags reference="../../myTags"/>
+          <myMovementSpeed>10.0</myMovementSpeed>
+          <isBuilding>false</isBuilding>
+          <myTeam>1</myTeam>
+        </myMainComponentPropertyManager>
+        <myAttributes reference="../myObjectLogic/attributes"/>
+        <myInteractions reference="../myObjectLogic/interactions"/>
+        <myConditionManager reference="../myObjectLogic/conditions"/>
+      </authoring.backend.AuthoringObject>
+      <list>
+        <transform__library.Vector2>
+          <x>179.0</x>
+          <y>40.0</y>
+        </transform__library.Vector2>
+      </list>
+    </entry>
+    <entry>
+      <authoring.backend.AuthoringObject>
+        <myTags>
+          <string>building</string>
+        </myTags>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
+        <buildCosts/>
+        <myObjectLogic>
+          <fulfillsLossCondition>false</fulfillsLossCondition>
+          <attributes>
+            <attributes>
               <entry>
-                <string>Attack</string>
-                <double>10.0</double>
+                <string>Mana</string>
+                <double>200.0</double>
+              </entry>
+              <entry>
+                <string>Health</string>
+                <double>200.0</double>
+              </entry>
+            </attributes>
+            <maxAttributes>
+              <entry>
+                <string>Mana</string>
+                <double>200.0</double>
+              </entry>
+              <entry>
+                <string>Health</string>
+                <double>200.0</double>
               </entry>
             </maxAttributes>
             <buildCosts reference="../../../buildCosts"/>
@@ -40,31 +94,21 @@
                 <int>1</int>
                 <interactions.Interaction>
                   <id>1</id>
-                  <targetTags/>
-                  <name>Attack</name>
-                  <imagePath>/images/attack_icon.png</imagePath>
+                  <targetTags>
+                    <string>farm</string>
+                  </targetTags>
+                  <name>Build</name>
+                  <imagePath>/images/arrow_up.png</imagePath>
                   <isBuild>false</isBuild>
                   <isInstantaneous>false</isInstantaneous>
                   <customFunctions>
-                    <interactions.ModifyVariable>
-                      <NAME>ModifyVariable</NAME>
-                      <VARIABLE>Variable</VARIABLE>
-                      <DELTA>Delta</DELTA>
-                      <RATE>Rate</RATE>
+                    <interactions.BuildFunction>
+                      <NAME>BuildFunction</NAME>
                       <format>
-                        <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                        <parameterFields>
-                          <entry>
-                            <string>Variable</string>
-                            <string>Health</string>
-                          </entry>
-                          <entry>
-                            <string>Delta</string>
-                            <string>Attack</string>
-                          </entry>
-                        </parameterFields>
+                        <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                        <parameterFields/>
                       </format>
-                    </interactions.ModifyVariable>
+                    </interactions.BuildFunction>
                   </customFunctions>
                   <range>100.0</range>
                 </interactions.Interaction>
@@ -78,10 +122,64 @@
           </conditions>
         </myObjectLogic>
         <myMainComponentPropertyManager>
-          <myImagePath>/images/rcd.png</myImagePath>
-          <myName>Robert</myName>
+          <myImagePath>/images/station.png</myImagePath>
+          <myName>FarmerBuilding</myName>
           <myTags reference="../../myTags"/>
-          <myMovementSpeed>10.0</myMovementSpeed>
+          <myMovementSpeed>0.0</myMovementSpeed>
+          <isBuilding>true</isBuilding>
+          <myTeam>1</myTeam>
+        </myMainComponentPropertyManager>
+        <myAttributes reference="../myObjectLogic/attributes"/>
+        <myInteractions reference="../myObjectLogic/interactions"/>
+        <myConditionManager reference="../myObjectLogic/conditions"/>
+      </authoring.backend.AuthoringObject>
+      <list>
+        <transform__library.Vector2>
+          <x>77.0</x>
+          <y>104.0</y>
+        </transform__library.Vector2>
+      </list>
+    </entry>
+    <entry>
+      <authoring.backend.AuthoringObject>
+        <myTags>
+          <string>farm</string>
+        </myTags>
+        <myX>0.0</myX>
+        <myY>0.0</myY>
+        <buildCosts/>
+        <myObjectLogic>
+          <fulfillsLossCondition>false</fulfillsLossCondition>
+          <attributes>
+            <attributes>
+              <entry>
+                <string>Health</string>
+                <double>200.0</double>
+              </entry>
+            </attributes>
+            <maxAttributes>
+              <entry>
+                <string>Health</string>
+                <double>200.0</double>
+              </entry>
+            </maxAttributes>
+            <buildCosts reference="../../../buildCosts"/>
+            <buildTime>5.0</buildTime>
+          </attributes>
+          <interactions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </interactions>
+          <conditions>
+            <elementMap/>
+            <new__ID__val>1</new__ID__val>
+          </conditions>
+        </myObjectLogic>
+        <myMainComponentPropertyManager>
+          <myImagePath>/images/ghoul.png</myImagePath>
+          <myName>Farmer2</myName>
+          <myTags reference="../../myTags"/>
+          <myMovementSpeed>5.0</myMovementSpeed>
           <isBuilding>false</isBuilding>
           <myTeam>1</myTeam>
         </myMainComponentPropertyManager>
@@ -91,12 +189,8 @@
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>216.0</x>
-          <y>98.0</y>
-        </transform__library.Vector2>
-        <transform__library.Vector2>
-          <x>70.0</x>
-          <y>66.0</y>
+          <x>206.0</x>
+          <y>173.0</y>
         </transform__library.Vector2>
       </list>
     </entry>

@@ -215,7 +215,10 @@ public class Interaction implements EngineObject, Serializable {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}

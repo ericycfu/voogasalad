@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>216.0</x>
-              <y>98.0</y>
+              <x>179.0</x>
+              <y>40.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -20,61 +20,19 @@
                   <string>Health</string>
                   <double>100.0</double>
                 </entry>
-                <entry>
-                  <string>Attack</string>
-                  <double>10.0</double>
-                </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
                   <double>100.0</double>
                 </entry>
-                <entry>
-                  <string>Attack</string>
-                  <double>10.0</double>
-                </entry>
               </maxAttributes>
               <buildCosts/>
               <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags/>
-                    <name>Attack</name>
-                    <imagePath>/images/attack_icon.png</imagePath>
-                    <isBuild>false</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <customFunctions>
-                      <interactions.ModifyVariable>
-                        <NAME>ModifyVariable</NAME>
-                        <VARIABLE>Variable</VARIABLE>
-                        <DELTA>Delta</DELTA>
-                        <RATE>Rate</RATE>
-                        <format>
-                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                          <parameterFields>
-                            <entry>
-                              <string>Variable</string>
-                              <string>Health</string>
-                            </entry>
-                            <entry>
-                              <string>Delta</string>
-                              <string>Attack</string>
-                            </entry>
-                          </parameterFields>
-                        </format>
-                      </interactions.ModifyVariable>
-                    </customFunctions>
-                    <range>100.0</range>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>3</new__ID__val>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -82,11 +40,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/robert.png</myImageLocation>
           </renderer>
-          <name>Robert</name>
+          <name>Farmer1</name>
           <tags>
-            <string>melee</string>
+            <string>farm</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -105,21 +63,137 @@
           <id>2</id>
           <transform>
             <position>
-              <x>70.0</x>
-              <y>66.0</y>
+              <x>77.0</x>
+              <y>104.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
-          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Mana</string>
+                  <double>200.0</double>
+                </entry>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Mana</string>
+                  <double>200.0</double>
+                </entry>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>farm</string>
+                    </targetTags>
+                    <name>Build</name>
+                    <imagePath>/images/arrow_up.png</imagePath>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>100.0</range>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>3</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/station.png</myImageLocation>
           </renderer>
-          <name>Robert</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <name>FarmerBuilding</name>
+          <tags>
+            <string>building</string>
+          </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>3</int>
+        <game__object.GameObject>
+          <id>3</id>
+          <transform>
+            <position>
+              <x>206.0</x>
+              <y>173.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>200.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>5.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+          </renderer>
+          <name>Farmer2</name>
+          <tags>
+            <string>farm</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>5.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -128,7 +202,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>3</new__ID__val>
+    <new__ID__val>4</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -148,19 +222,72 @@
               <string>Health</string>
               <double>100.0</double>
             </entry>
-            <entry>
-              <string>Attack</string>
-              <double>10.0</double>
-            </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
               <double>100.0</double>
             </entry>
+          </maxAttributes>
+          <buildCosts/>
+          <buildTime>10.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/robert.png</myImageLocation>
+      </renderer>
+      <name>Farmer1</name>
+      <tags>
+        <string>farm</string>
+      </tags>
+      <isBuilding>false</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>10.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
             <entry>
-              <string>Attack</string>
-              <double>10.0</double>
+              <string>Mana</string>
+              <double>200.0</double>
+            </entry>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Mana</string>
+              <double>200.0</double>
+            </entry>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
             </entry>
           </maxAttributes>
           <buildCosts/>
@@ -172,31 +299,21 @@
               <int>1</int>
               <interactions.Interaction>
                 <id>1</id>
-                <targetTags/>
-                <name>Attack</name>
-                <imagePath>/images/attack_icon.png</imagePath>
+                <targetTags>
+                  <string>farm</string>
+                </targetTags>
+                <name>Build</name>
+                <imagePath>/images/arrow_up.png</imagePath>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <customFunctions>
-                  <interactions.ModifyVariable>
-                    <NAME>ModifyVariable</NAME>
-                    <VARIABLE>Variable</VARIABLE>
-                    <DELTA>Delta</DELTA>
-                    <RATE>Rate</RATE>
+                  <interactions.BuildFunction>
+                    <NAME>BuildFunction</NAME>
                     <format>
-                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                      <parameterFields>
-                        <entry>
-                          <string>Variable</string>
-                          <string>Health</string>
-                        </entry>
-                        <entry>
-                          <string>Delta</string>
-                          <string>Attack</string>
-                        </entry>
-                      </parameterFields>
+                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                      <parameterFields/>
                     </format>
-                  </interactions.ModifyVariable>
+                  </interactions.BuildFunction>
                 </customFunctions>
                 <range>100.0</range>
               </interactions.Interaction>
@@ -210,16 +327,69 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
+        <myImageLocation>/images/station.png</myImageLocation>
       </renderer>
-      <name>Robert</name>
+      <name>FarmerBuilding</name>
       <tags>
-        <string>melee</string>
+        <string>building</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>10.0</movementSpeed>
+      <movementSpeed>0.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </maxAttributes>
+          <buildCosts/>
+          <buildTime>5.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
+      </renderer>
+      <name>Farmer2</name>
+      <tags>
+        <string>farm</string>
+      </tags>
+      <isBuilding>false</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>5.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
