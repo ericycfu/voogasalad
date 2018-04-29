@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
+import authoring.backend.AuthoringController;
 import authoring.backend.Extractor;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
@@ -33,13 +34,15 @@ import javafx.scene.layout.VBox;
 public class MapSettingsView extends Pane implements AuthoringView {
 	private MapSettings settings;
 	private GameEntity game;
+	private AuthoringController authoring_controller;
 	private ResourceManager myResourceManager;
 	private HBox lossConditionBox;
 	private HBox resourcesBox;
 	private VBox contentBox;
 	
-	public MapSettingsView(MapSettings settings, GameEntity game) {
-		this.settings = settings;
+	public MapSettingsView(AuthoringController authoring_controller, GameEntity game) {
+		this.authoring_controller = authoring_controller;
+		settings = authoring_controller.getCurrentMap().getMapSettings();
 		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
@@ -244,6 +247,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		
 	}
 	private void saveResources(VBox myBox) {
+		myResourceManager.clearManager();
 		for (Node myNode : myBox.getChildren()) {
 			try {
 				HBox currentHBox = (HBox) myNode;
@@ -255,6 +259,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			//nothing really wrong here, just nothign to get because not a textfield, change this later
 			}
 		}
+		authoring_controller.updateBuildCost();
 	}
 
 }

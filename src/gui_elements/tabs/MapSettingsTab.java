@@ -14,8 +14,7 @@ public class MapSettingsTab extends Tab implements Listener {
 	public MapSettingsTab(AuthoringController ac, GameEntity game) {
 		this.ac = ac;
 		this.setText("Map Settings");
-		this.setContent(new MapSettingsView(this.ac.getCurrentMap().getMapSettings(), game));
-		ac.addToAuthorController(this);
+		this.setContent(new MapSettingsView(ac, game));
 	}
 
 	@Override

@@ -1,13 +1,19 @@
 package gui_elements.tabs;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
 import authoring.backend.TagController;
+import game_engine.ResourceManager;
 import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
 import gui_elements.buttons.CreateInteractionsButton;
 import gui_elements.buttons.MainButton;
+import gui_elements.buttons.NewComponentButton;
 import gui_elements.buttons.ComponentImageChooserButton;
 import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
@@ -135,7 +141,8 @@ public class DesignTab extends Tab {
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
-										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton());
+										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
+										 new NewComponentButton(this).getButton());
 	}
 	
 	public void setNewAuthoringObject() {
@@ -172,4 +179,21 @@ public class DesignTab extends Tab {
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 		component_image_choice_text_label.setText(authoring_object.getImagePath());
 	}
+	
+	public void updateBuildCost() {
+		ResourceManager resource_manager = game_entity.getResourceManager();
+		List<Entry<String, Double>> resource_entries = resource_manager.getResourceEntries();
+		List<String> resource_names = getResourceNames(resource_entries);
+		for(String resource_entry : resource_names) {
+			component_resource_cb.getItems().add(resource_entry);
+		}
+	}
+	
+	public List<String> getResourceNames(List<Entry<String, Double>> resource_entries) {
+		List<String> resource_names = new ArrayList<String>();
+		for(Entry<String, Double> entry : resource_entries) {
+			resource_names.add(entry.getKey());
+		}
+		return resource_names;
+	}	
 }
