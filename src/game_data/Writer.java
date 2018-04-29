@@ -8,7 +8,11 @@ import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
+/**
+ * static class for writing data
+ * @author shichengrao
+ *
+ */
 public final class Writer {
 	/**
 	 * writes data to location

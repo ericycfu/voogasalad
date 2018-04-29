@@ -13,7 +13,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import authoring.backend.AuthoringObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-
+/**
+ * static class for loading data
+ * @author shichengrao
+ *
+ */
 public final class Reader {
 	/**
 	 * reads all data at target location
