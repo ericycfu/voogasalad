@@ -35,6 +35,10 @@ public class Renderer implements Serializable{
 	public String getImagePath() {
 		return myImageLocation;
 	}
+	
+	public void setDisp(ImageView disp) {
+		myDisp = disp;
+	}
 	public Renderer()
 	{
 		

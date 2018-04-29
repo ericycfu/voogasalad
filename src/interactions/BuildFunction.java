@@ -24,7 +24,10 @@ public class BuildFunction implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
-		if(other == null) return;
+		if(other == null) {
+			System.out.println("other is null");
+			return;
+		}
 		System.out.print("building");
 		manager.copyGameObject(other, current.getOwner());
 		other.queueBuilding();
