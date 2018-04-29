@@ -28,6 +28,12 @@ public class Renderer implements Serializable{
 		myDisp = new ImageView(new Image(imageLocation));
 	}
 	
+	public Renderer(Renderer other)
+	{
+		this.myImageLocation = other.myImageLocation;
+		setupImage();
+	}
+	
 	public ImageView getDisp() {
 		return myDisp;
 	}

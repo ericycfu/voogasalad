@@ -65,13 +65,10 @@ public class GameObjectManager extends ElementManager implements Serializable{
 		return newID;
 	}
 	
-	public int copyGameObject(GameObject other, Team t)
+	public int copyGameObject(GameObject other)
 	{
 		int newID = calculateID();
-		System.out.println("other: " + other.getMovementSpeed());
-		GameObject copy = new GameObject(newID, t, other);
-		System.out.println("newly built unit: "+copy.isBuilding());
-		System.out.println("newly built unit: "+copy.getMovementSpeed());
+		GameObject copy = new GameObject(newID, other);
 		this.addElement(copy);
 		return newID;
 	}

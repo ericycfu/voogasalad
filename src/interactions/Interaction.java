@@ -61,11 +61,14 @@ public class Interaction implements EngineObject, Serializable {
 		createTargetTeamEnumMap();
 	}
 	
-	private void createTargetTeamEnumMap() {
-		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
-		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
-			targetTeamEnumMap.put(value.toString(), value);
-		}
+	
+	public Interaction(Interaction other)
+	{
+		this.isBuild = other.isBuild;
+		this.isInstantaneous = other.isInstantaneous;
+		this.InteractionTargetTeam = other.InteractionTargetTeam;
+		this.customFunctions = other.customFunctions;
+		this.range = other.range;
 	}
 
 
@@ -139,6 +142,15 @@ public class Interaction implements EngineObject, Serializable {
 		return false;
 		
 	}
+	
+	private void createTargetTeamEnumMap() 
+	{
+		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
+		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
+			targetTeamEnumMap.put(value.toString(), value);
+		}
+	}
+	
 
 	private boolean matchesTags(GameObject other, List<String> tags)
 	{
