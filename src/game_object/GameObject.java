@@ -192,6 +192,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
+				System.out.println("done building");
 				this.dequeueBuilding();
 			}
 		}
@@ -383,6 +384,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	public void setElapsedTime(double time)
 	{
 		this.elapsedTime += time;
+		//System.out.println("Time " + elapsedTime);
 	}
 	public void setupImages() {
 		renderer.setupImage();
