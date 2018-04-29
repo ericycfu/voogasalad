@@ -22,6 +22,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -140,6 +142,9 @@ public class TopPanel {
 			possibleUnits.clear();
 			System.out.println(gameObjects.get(1));
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
+			for (GameObject go : possibleUnits) {
+				go.getRenderer().setDisp(new ImageView(new Image(go.getRenderer().getImagePath())));
+			}
 			
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);

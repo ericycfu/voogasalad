@@ -6,12 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
+import authoring.backend.MainComponentPropertyManager;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
-import javafx.scene.image.Image;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -19,7 +17,7 @@ import transform_library.Vector2;
 
 /**
  * 
- * @author andrew, Rayan
+ * @author andrew, Rayan, shichengrao
  * 
  * Any object that will be shown on the world screen will be of the GameObject type. 
  * 
@@ -105,16 +103,18 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	 * @param logic
 	 * Constructor for game object given authoring object data
 	 */
-	public GameObject(int id, Transform transform, ObjectLogic logic, String imagePath, double movementSpeed, boolean isBuilding, String name, List<String> tags)
+	public GameObject(int id, Transform transform, ObjectLogic logic, MainComponentPropertyManager manager, Team team)
 	{
 		this.id = id;
 		this.transform = transform;
 		this.myObjectLogic = logic;
-		this.movementSpeed = movementSpeed;
-		this.isBuilding = isBuilding;
-		this.renderer = new Renderer(imagePath);
-		this.name = name;
-		this.tags = tags;
+		this.movementSpeed = manager.getMovementSpeed();
+		this.isBuilding = manager.isBuilding();
+		System.out.println("manager.isBuilding" + manager.isBuilding());
+		this.renderer = new Renderer(manager.getImagePath());
+		this.name = manager.getName();
+		this.tags = manager.getTags();
+		this.owner = team;
 		propertiesInit();
 		
 	}
@@ -160,7 +160,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
-		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;
@@ -180,6 +179,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		
 		if(isBeingConstructed)
 		{
+			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
 				this.dequeueBuilding();
@@ -271,6 +271,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueBuilding()
 	{
+		System.out.println("goes to queu");
 		setIsUninteractive(true);
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();

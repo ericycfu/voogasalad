@@ -3,6 +3,7 @@ package server_client;
 import java.net.Socket;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import server.RTSServer;
 import server_client.screens.ClientScreen;
@@ -32,7 +33,7 @@ public class ServerClient  extends Application {
 			while(true) {
 				String newClass = currentScreen.updateSelf();
 				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
-					currentScreen = myScreenFactory.get(newClass);
+					Platform.runLater(() -> currentScreen = myScreenFactory.get(newClass));
 				}
 			}
 		}).start();
