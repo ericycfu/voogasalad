@@ -259,7 +259,6 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
-		System.out.println("num of gos: " + myGameObjectManager.getElements());
 		if (myTopPanel.getIsLoaded()) {
 			unitSkillMapInitialize();
 			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
