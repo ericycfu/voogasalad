@@ -12,6 +12,8 @@ public class ComponentTagComboBox extends MainComboBox {
 	private static final String SPACE = " ";
 	private String current_tag_string = "";
 	private TagController tag_controller;
+	String a = "";
+
 	
 	public ComponentTagComboBox(TagController tag_controller) {
 		super(FILENAME);
@@ -22,7 +24,6 @@ public class ComponentTagComboBox extends MainComboBox {
 	
 	private void initialize() {
 		addElements();
-		chooseElements();
 		editElements();
 		enterElements();
 	}
@@ -32,16 +33,7 @@ public class ComponentTagComboBox extends MainComboBox {
 			getComboBox().getItems().add(tag);
 		}
 	}
-	
-	private void chooseElements() {
-		this.setOnAction((ActionEvent ev) -> {
-//			System.out.println(current_tag_string);
-			current_tag_string += getComboBox().getSelectionModel().getSelectedItem() + SPACE;
-			this.getEditor().setText(current_tag_string);
-			System.out.println(this.getEditor().getText());
-		});
-	}
-	
+		
 	private void editElements() {
 		getComboBox().addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
 			if(e.isPrimaryButtonDown()) {

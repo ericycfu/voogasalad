@@ -21,6 +21,7 @@ import gui_elements.labels.InteractionDescriptionLabel;
 import gui_elements.labels.InteractionImageChoiceTextLabel;
 import gui_elements.labels.InteractionImageChooserLabel;
 import gui_elements.labels.InteractionNameLabel;
+import gui_elements.labels.InteractionTargetTeamLabel;
 import gui_elements.labels.AllSelectedInteractionTagsLabel;
 import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
 import gui_elements.labels.InteractionVisionRangeLabel;
@@ -147,7 +148,8 @@ public class ComponentAddInteractionsScreen {
   								  new InteractionImageChooserLabel().getLabel(),
   								  interaction_image_choice_text_label.getLabel(),
     							  new CreatedCustomFunctionsLabel().getLabel(),
-    							  new InteractionDescriptionLabel().getLabel());
+    							  new InteractionDescriptionLabel().getLabel(),
+    							  new InteractionTargetTeamLabel().getLabel());
     }
     
     private void setRadioButtons() {
