@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -78,6 +79,12 @@ public final class Reader {
 		System.out.println(obj.getClass().getName());
 		if(obj instanceof GameObjectManager) {
 			((GameObjectManager) obj).setupImages();
+		}
+		else if (obj instanceof Map) {
+			for (Object myAO:  ((Map) obj).keySet()){
+				((AuthoringObject) myAO).resetImageAfterLoad();
+			}
+			System.out.println("making images for map");
 		}
 		else if(obj instanceof GameObject) {
 			((GameObject) obj).setupImages();

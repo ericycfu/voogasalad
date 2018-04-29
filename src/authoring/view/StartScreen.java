@@ -3,6 +3,7 @@ package authoring.view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
@@ -56,7 +57,15 @@ public class StartScreen {
 				//new MakeGameButton(myStage), 
 				ButtonFactory.makeButton("Load Game", e -> {FileChooser myFC = new FileChooser();
 															File myFile = myFC.showOpenDialog(new Stage());
-															new MakeGameScreen(myStage, myFile);
+															try {
+																new MakeGameScreen(myStage, myFile);
+															} catch (ClassNotFoundException e1) {
+																// TODO Auto-generated catch block
+																e1.printStackTrace();
+															} catch (IOException e1) {
+																// TODO Auto-generated catch block
+																e1.printStackTrace();
+															}
 															
 				}, "load_game_button"),
 				new PlayGameButton(myStage)
