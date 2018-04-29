@@ -155,7 +155,7 @@ public class ObjectAttributes implements Serializable{
 	
 	public Map<String, Double> getCosts()
 	{
-		return Collections.unmodifiableMap(buildCosts);
+		return buildCosts;
 	}
 
 	public double getBuildTime() 
