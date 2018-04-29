@@ -3,33 +3,40 @@ package gui_elements.buttons;
 import authoring.view.ComponentAddInteractionsScreen;
 import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.MainComboBox;
+import gui_elements.labels.InteractionImageChoiceTextLabel;
+import gui_elements.labels.MainLabel;
 import gui_elements.panes.AllSelectedInteractionTagsPane;
 import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
+import gui_elements.text_fields.InteractionDescriptionTextField;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
 import interactions.Interaction;
 import interactions.InteractionManager;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 
 public class AddInteractionButton extends MainButton {
 
 	private static final String FILENAME = "add_interaction_button.properties";
+	private static final String IMAGE_PATH_HEADING = "/images/";
 	private static final String ALERT_TITLE = "Interaction Added";
 	private static final String ALERT_MESSAGE = "You successfully added an interaction!";
 	private InteractionManager interaction_manager;
 	private MainComboBox interaction_name_cb;
-	private MainTextField interaction_vision_range_tf;
+	private MainTextField interaction_vision_range_tf, interaction_description_tf;
 	private MainPane all_selected_interaction_tags_pane, created_custom_functions_pane;
+	private MainLabel interaction_image_choice_text_label;
 	private int interaction_id;
 	private ComponentAddInteractionsScreen component_add_interactions_screen;
 	private static final boolean EXPLICIT_SET_ACTION = false;
 
 	public AddInteractionButton(InteractionManager interaction_manager, MainComboBox interaction_name_cb, 
 			MainTextField interaction_vision_range_tf, MainPane all_selected_interaction_tags_pane,
-			MainPane created_custom_functions_pane, ComponentAddInteractionsScreen component_add_interactions_screen, 
+			MainPane created_custom_functions_pane, MainLabel interaction_image_choice_text_label, 
+			MainTextField interaction_description_tf, ComponentAddInteractionsScreen component_add_interactions_screen, 
 			int interaction_id) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.interaction_manager = interaction_manager;
@@ -37,6 +44,8 @@ public class AddInteractionButton extends MainButton {
 		this.interaction_vision_range_tf = (InteractionVisionRangeTextField) interaction_vision_range_tf;
 		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
 		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
+		this.interaction_image_choice_text_label = (InteractionImageChoiceTextLabel) interaction_image_choice_text_label;
+		this.interaction_description_tf = (InteractionDescriptionTextField) interaction_description_tf;
 		this.component_add_interactions_screen = component_add_interactions_screen;
 		this.interaction_id = interaction_id;
 		setAction();
@@ -52,6 +61,8 @@ public class AddInteractionButton extends MainButton {
 			for(Object obj : all_selected_interaction_tags_pane.getPane().getChildren()) {
 				interaction.addTag(((Button) obj).getText());
 			}
+			interaction.setImg(IMAGE_PATH_HEADING + interaction_image_choice_text_label.getText());
+			interaction.setDescription(interaction_description_tf.getText());
 			component_add_interactions_screen.resetElements();
 			component_add_interactions_screen.setInteractionID(interaction_id = interaction_manager.createInteraction());
 			createAlert();

@@ -56,4 +56,7 @@ public class AuthoringController {
 		return myCreatedMapsView;
 	}
 	
+	public void updateBuildCost() {
+		myDesignTab.updateBuildCost();
+	}	
 }

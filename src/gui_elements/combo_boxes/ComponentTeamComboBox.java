@@ -1,5 +1,7 @@
 package gui_elements.combo_boxes;
 
+import gui_elements.tabs.DesignTab;
+
 public class ComponentTeamComboBox extends MainComboBox {
 
 	private static final String FILENAME = "component_team_cb.properties";
@@ -15,5 +17,5 @@ public class ComponentTeamComboBox extends MainComboBox {
 		for(int i = 1; i <= MAX_TEAMS; i++) {
 			getComboBox().getItems().add(i + BLANK);
 		}
-	}
+	}	
 }

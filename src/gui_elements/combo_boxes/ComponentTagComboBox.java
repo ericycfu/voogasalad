@@ -35,11 +35,19 @@ public class ComponentTagComboBox extends MainComboBox {
 	
 	private void chooseElements() {
 		this.setOnAction((ActionEvent ev) -> {
-//			System.out.println(current_tag_string);
-			current_tag_string += getComboBox().getSelectionModel().getSelectedItem() + SPACE;
-			this.getEditor().setText(current_tag_string);
-			System.out.println(this.getEditor().getText());
+			this.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+		        if(!isNowFocused) {
+		            this.setValue(this.getSelectionModel().getSelectedItem());
+		        }
+		    });			
 		});
+//		this.setOnAction((ActionEvent ev) -> {
+//			System.out.println(current_tag_string);
+//			System.out.println(this.getEditor().getText());
+//			current_tag_string += getComboBox().getSelectionModel().getSelectedItem() + SPACE;
+//			this.getEditor().setText(current_tag_string);
+//			System.out.println(this.getEditor().getText());
+//		});
 	}
 	
 	private void editElements() {
