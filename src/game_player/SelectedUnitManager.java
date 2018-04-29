@@ -9,7 +9,6 @@ import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
 import interactions.Interaction;
 import pathfinding.GridMap;
-import pathfinding.Pathfinder;
 import transform_library.Vector2;
 
 public class SelectedUnitManager {
