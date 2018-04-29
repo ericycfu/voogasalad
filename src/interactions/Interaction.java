@@ -141,7 +141,10 @@ public class Interaction implements EngineObject, Serializable {
 	{
 		for(String s : other.getTags())
 		{
-			if(tags.contains(s)) return true;
+			for(String x : tags)
+			{
+				if(s.equals(x)) return true;
+			}
 		}
 		return false;
 	}
