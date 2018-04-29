@@ -18,6 +18,11 @@ public class InteractionManager extends ElementManager implements Serializable {
 		super();
 	}
 
+	public InteractionManager(InteractionManager other)
+	{
+		super(other);
+	}
+	
 	
 	public int createInteraction()
 	{
