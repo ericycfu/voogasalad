@@ -11,6 +11,12 @@
     -fx-stroke: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
     -fx-stroke-width: 1;
 }
+#lobby_info_text {
+    -fx-font: 10px Arial;
+    -fx-fill: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
+    -fx-stroke: linear-gradient(from 0% 0% to 200% 200%, repeat, steelblue 0%, white 50%);
+    -fx-stroke-width: 1;
+}
 
 .lobby_selection_button {
 	-fx-font: 32px Arial;

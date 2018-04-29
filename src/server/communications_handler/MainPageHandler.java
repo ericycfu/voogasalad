@@ -25,17 +25,13 @@ public class MainPageHandler extends CommunicationsHandler {
 				throw new SocketException("Client disconnected");
 			if((input = in.readInt()) == null)
 				return CLASS_REF;
-			
-			System.out.println("Here");
 			if(input == -1)
-				getServer().addLobby(getSocket(), 
-						(GameInstance)in.readObject());
+				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
 			else getServer().addToLobby(input, getSocket());
 			System.out.println("Message received");
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			System.out.println("Oops");
 			return CLASS_REF;}
 	}
@@ -45,6 +41,8 @@ public class MainPageHandler extends CommunicationsHandler {
 		System.out.println(System.currentTimeMillis());
 		try {
 			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				throw new SocketException("Client disconnected");
 			out.writeObject(
 					getServer()
 					.getLobbyManager());

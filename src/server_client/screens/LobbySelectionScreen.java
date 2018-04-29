@@ -75,8 +75,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		setUpCreateButton();
 	}
 
-
-
 	private void setUpCreateButton() {
 		CreateLobbyButton create = new CreateLobbyButton();
 		myPane.getChildren().add(create);

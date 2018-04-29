@@ -41,7 +41,7 @@ public abstract class CommunicationsHandler {
 			return null;
 		}
 	}
-	public abstract String updateServer();
+	public abstract String updateServer() throws SocketException;
 	public abstract void updateClient() throws SocketException;
 
 }
