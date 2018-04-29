@@ -1,5 +1,6 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,8 +26,13 @@ import transform_library.Vector2;
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject, EngineObject {
+public class GameObject  implements InterfaceGameObject, EngineObject, Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String EMPTY = "empty";
 	
 	private int id;
@@ -42,6 +48,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	private boolean isInteractionQueued;
 	private GameObject interactionTarget;
+	private Vector2 emptyPosTarget;
 	
 	private boolean isDead;
 	
@@ -58,6 +65,8 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private boolean isBeingConstructed;
 	
 	private double elapsedTime;
+	
+	
 	
 	/**
 	 *
@@ -89,7 +98,26 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.renderer = new Renderer();
 		propertiesInit();
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param transform
+	 * @param logic
+	 * Constructor for game object given authoring object data
+	 */
+	public GameObject(int id, Transform transform, ObjectLogic logic, String imagePath, double movementSpeed, boolean isBuilding, String name, List<String> tags)
+	{
+		this.id = id;
+		this.transform = transform;
+		this.myObjectLogic = logic;
+		this.movementSpeed = movementSpeed;
+		this.isBuilding = isBuilding;
+		this.renderer = new Renderer(imagePath);
+		this.name = name;
+		this.tags = tags;
+		propertiesInit();
+		
+	}
 	/**
 	 * 
 	 * @param startingPosition
@@ -164,10 +192,10 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		
 		if(isInteractionQueued)
 		{
-			 myObjectLogic.executeInteractions(this, interactionTarget, manager);
+			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 		}
-		//myObjectLogic.checkConditions(this);
-	
+		
+		myObjectLogic.checkConditions(this);
 
 	}
 	
@@ -211,9 +239,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	 */
 	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
+		System.out.println("get into queueInteraction" );
 		isInteractionQueued = true;
 		interactionTarget = other;
-		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap);
+		emptyPosTarget = emptyPos;
+		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap, emptyPos);
 		this.manager = manager;
 	}
 	
@@ -322,6 +352,11 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	public Team getOwner() {
 		return owner;
+	}
+	
+	public void setOwner(Team team)
+	{
+		this.owner = team;
 	}
 
 	public double getMovementSpeed() {

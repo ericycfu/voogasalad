@@ -1,5 +1,7 @@
 package game_object;
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import javafx.scene.image.Image;
@@ -12,7 +14,7 @@ import javafx.scene.image.ImageView;
  * Will deal with java fx logic
  */
 
-public class Renderer {
+public class Renderer implements Serializable{
 	private String myImageLocation;
 	@XStreamOmitField
 	private transient ImageView myDisp;

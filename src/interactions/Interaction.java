@@ -1,5 +1,6 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,17 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction implements EngineObject {
+public class Interaction implements EngineObject, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static enum interactionTargetTeam
+	{
+		OWN, OTHER, ALL;
+	}
+	
 	private int id;
 	private List<String> targetTags;
 	private String name;
@@ -34,6 +44,8 @@ public class Interaction implements EngineObject {
 	//these will be changed by authoring for the interaction
 	private boolean isBuild;
 	private boolean isInstantaneous;
+	
+	private interactionTargetTeam interactionTargetTeam;
 
 	//store functions by id
 	private List<CustomFunction> customFunctions;
@@ -84,16 +96,35 @@ public class Interaction implements EngineObject {
 	 */
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
+		if(!validatedInteractionTarget(current, other)) return;
 		if(matchesTags(other, targetTags)) return;
-		try {
+		try 
+		{
 			for(CustomFunction cFunc : customFunctions)
 			{
 				cFunc.Execute(current, other, manager);
 			}
 		}
-		catch(PropertyNotFoundException p) {
-
+		catch(PropertyNotFoundException p) 
+		{
+			p.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * This helper makes sure that the interaction is only executed 
+	 */
+	private boolean validatedInteractionTarget(GameObject current, GameObject other)
+	{
+		if(this.interactionTargetTeam == interactionTargetTeam.ALL) return true;
+		else if(this.interactionTargetTeam == interactionTargetTeam.OTHER
+				&& current.getOwner().getID() != other.getOwner().getID()) return true;
+		else if(this.interactionTargetTeam == interactionTargetTeam.OWN
+				&& current.getOwner().getID() == other.getOwner().getID()) return true;
+		return false;
+		
 	}
 
 	private boolean matchesTags(GameObject other, List<String> tags)
@@ -122,6 +153,16 @@ public class Interaction implements EngineObject {
 	public void isBuild(boolean val)
 	{
 		this.isBuild = val;
+	}
+	
+	public void setInteractionTargetTeam(interactionTargetTeam setting)
+	{
+		this.interactionTargetTeam = setting;
+	}
+	
+	public interactionTargetTeam getInteractionTargetTeam()
+	{
+		return interactionTargetTeam;
 	}
 	
  	public List<String> getTargetTags()
@@ -174,7 +215,10 @@ public class Interaction implements EngineObject {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -183,6 +227,7 @@ public class Interaction implements EngineObject {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}

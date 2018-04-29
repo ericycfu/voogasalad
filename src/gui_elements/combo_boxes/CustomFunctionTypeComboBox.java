@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import authoring.view.InteractionAddCustomFunctionsScreen;
 import game_object.PropertyNotFoundException;
 import gui_elements.panes.CustomFunctionNamesPane;
 import gui_elements.panes.CustomFunctionsPane;
@@ -16,6 +17,8 @@ import interactions.CustomComponentParameterFormat;
 import interactions.CustomFunction;
 import interactions.InteractionManager;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class CustomFunctionTypeComboBox extends MainComboBox {
 	
@@ -51,8 +54,8 @@ public class CustomFunctionTypeComboBox extends MainComboBox {
     		String type = getComboBox().getSelectionModel().getSelectedItem();
     		custom_function = interaction_manager.getInteraction(interaction_id).generateCustomFunction(type);
     		CustomComponentParameterFormat format = custom_function.getParameterFormat();
+    		createInformationAlert(custom_function, format);
     		List<String> parameterList = format.getParameterList();
-//    		format.addHelpText(custom_function_map.get(type));
     		custom_function_names_pane.getPane().getChildren().clear();
     		custom_functions_pane.getPane().getChildren().clear();
     		for(int i = 0; i < parameterList.size(); i++) {
@@ -94,5 +97,13 @@ public class CustomFunctionTypeComboBox extends MainComboBox {
 	
 	public CustomFunction getCurrentSelectedCustomFunction() {
 		return custom_function;
+	}
+	
+	private void createInformationAlert(CustomFunction custom_function, CustomComponentParameterFormat format) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(custom_function.getName());
+		alert.setHeaderText(null);
+		alert.setContentText(format.getHelpText());
+		alert.showAndWait();
 	}
 }

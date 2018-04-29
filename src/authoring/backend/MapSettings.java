@@ -6,7 +6,6 @@ import java.util.Map;
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 
 public class MapSettings implements AuthoringView {
 	private String mapName;
@@ -16,8 +15,19 @@ public class MapSettings implements AuthoringView {
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
+	private MapEntity map;
 	public MapSettings() {
 		initializeAll();
+	}
+	
+	public void updateSettings(String mapName, int numPlayers, String imagePath, int mapwidth, int mapheight) {
+		this.mapName = mapName;
+		this.numPlayers = numPlayers;
+		this.imagePath = imagePath;
+		this.mapwidth = mapwidth;
+		this.mapheight = mapheight;
+		matchToSize(map);
+		setMapByImage(map);
 	}
 	
 	private void initializeAll() {
@@ -31,12 +41,19 @@ public class MapSettings implements AuthoringView {
 	}
 	
 	public void matchToSize(MapEntity map) {
+		if (this.map == null) {
+			this.map = map;
+		}
 		map.setPrefSize(mapwidth, mapheight);
 	}
 	
 	public void setMapByImage(MapEntity map) {
-		Image image = new Image(getClass().getResourceAsStream(imagePath));
-		map.getChildren().add(new ImageView(image));
+		if (this.map == null) {
+			this.map = map;
+		}
+		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+		map.getChildren().add(image);
+		image.toBack();
 		
 	}
 	
@@ -46,6 +63,18 @@ public class MapSettings implements AuthoringView {
 	
 	public String getName() {
 		return mapName;
+	}
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+	public int getMapHeight() {
+		return mapheight;
+	}
+	public int getMapWidth() {
+		return mapwidth;
+	}
+	public Map<String, Integer> getInitialResources(){
+		return resources;
 	}
 	
 }

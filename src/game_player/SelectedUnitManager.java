@@ -42,22 +42,24 @@ public class SelectedUnitManager {
 	
 	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
 		GameObject top = selectedUnits.get(0);
-		System.out.println("Iam  here instead !");
+		System.out.println("my team: " + top.getOwner() + " target: " + target.getOwner());
 		try {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
-				System.out.println("Iam  here instead !");
 				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
 			}
 			else {
-				System.out.println("Iam  here !");
 				for (GameObject go : selectedUnits){
 					boolean isInteractionValid = false;
+					int goSpecificInteractionID = -1;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-						isInteractionValid = i.getName().equals(interactionName);
+						if (i.getName().equals(interactionName)) {
+							isInteractionValid = true;
+							goSpecificInteractionID = i.getID();
+						}
 					}
 					if (isInteractionValid) {
-						go.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
+						go.queueInteraction(target, goSpecificInteractionID, gom, new GridMap(1000, 1000), position);
 					}
 				}
 			}

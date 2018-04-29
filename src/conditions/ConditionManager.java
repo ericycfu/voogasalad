@@ -1,6 +1,8 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +12,18 @@ import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_object.GameObject;
 
-public class ConditionManager extends ElementManager {
+public class ConditionManager extends ElementManager implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ConditionManager()
-	{}
+	{
+		super();
+	}
 	
 //	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
 	public int createCondition(int comparatorID, String var1, String var2)
@@ -43,9 +52,4 @@ public class ConditionManager extends ElementManager {
 		return (Condition)(this.get(id));
 	}
 		
-	public List<String> availableCustomConditions() {
-		List<String> customConditions = new ArrayList<>();
-		customConditions.add(new Death().getClass().getSimpleName());
-		return customConditions;
-	}
 }

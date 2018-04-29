@@ -9,14 +9,15 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-public class Writer {
+public final class Writer {
 	/**
 	 * writes data to location
 	 * @param location
 	 * @param data
 	 * @throws IOException 
 	 */
-	public void write(String location, List<? extends Object> data) throws IOException {
+	public static void write(String location, List<? extends Object> data) throws IOException {
+		System.out.println(data.size());
 		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);
@@ -34,10 +35,9 @@ public class Writer {
 	 * @throws ClassNotFoundException 
 	 * @throws IOException 
 	 */
-	public void writeNoOverwrite(String location, List<Object> data) throws IOException {
-		Reader reader = new Reader();
+	public static void writeNoOverwrite(String location, List<Object> data) throws IOException {
 		try {
-			List<Object> prevData= reader.read(location);
+			List<Object> prevData= Reader.read(location);
 			data.addAll(prevData);
 		}
 		catch (ClassNotFoundException e) {

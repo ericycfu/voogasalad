@@ -1,15 +1,14 @@
 package game_object;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import conditions.Condition;
 import conditions.ConditionManager;
-import game_engine.EngineObject;
 import interactions.Interaction;
 import interactions.InteractionManager;
 import pathfinding.GridMap;
+import transform_library.Vector2;
 
 
 /**
@@ -19,8 +18,12 @@ import pathfinding.GridMap;
  * attributes and interactions
  */
 
-public class ObjectLogic  
+public class ObjectLogic implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean fulfillsLossCondition;
 	private Interaction currentInteraction;
 	
@@ -58,9 +61,18 @@ public class ObjectLogic
 	 * 
 	 * for now it executes all interactions, later it must be specific interactions
 	 */
-	public void executeInteractions(GameObject current, GameObject interactionTarget, GameObjectManager manager)
+	public void executeInteractions(GameObject current, GameObject interactionTarget, Vector2 emptyPos, GameObjectManager manager)
 	{
-		if(interactionTarget.isUninteractive() || current.isUninteractive()) return;
+		if(current.isUninteractive() || (interactionTarget != null && interactionTarget.isUninteractive())) return;
+		if(interactionTarget == null && emptyPos != null)
+		{
+			if(current.getTransform().getPosition().matches(emptyPos))
+			{
+				current.dequeueMovement();
+				currentInteraction.executeCustomFunctions(current, interactionTarget, manager);
+			}	
+			return;
+		}
 		if(inRange(current, interactionTarget, currentInteraction))
 		{
 			current.dequeueMovement();
@@ -70,17 +82,42 @@ public class ObjectLogic
 		
 	}
 	
+	/**
+	 * 
+	 * @param current
+	 * @param interactionTarget
+	 * @param inter
+	 * @return
+	 * 
+	 * Checks if two objects are in range to do an interaction
+	 */
 	public boolean inRange(GameObject current, GameObject interactionTarget, Interaction inter)
 	{
-		return(current.getTransform().getDisplacement(interactionTarget.getTransform()) >= inter.getRange());
+		double dist = current.getTransform().getDisplacement(interactionTarget.getTransform()); 
+		return (dist < inter.getRange());
 	}
 
-	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager, GridMap gridMap) {
+	/**
+	 * 
+	 * @param id
+	 * @param current
+	 * @param other
+	 * @param manager
+	 * @param gridMap
+	 * @param emptyPos
+	 * The interaction that needs to be executed is set for the player.
+	 */
+	public void setCurrentInteraction(int id, GameObject current, GameObject other, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos) {
 		
 		currentInteraction = interactions.getInteraction(id);
+		if(other == null && emptyPos != null)
+		{
+			current.queueMovement(emptyPos, manager, gridMap);
+			return;
+		}
 		if(!inRange(current, other, currentInteraction))
 		{
-			current.queueMovement(current.getTransform().getPosition(), manager, gridMap);
+			current.queueMovement(other.getTransform().getPosition(), manager, gridMap);
 		}
 
 	}

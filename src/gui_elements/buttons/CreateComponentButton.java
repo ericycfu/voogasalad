@@ -18,6 +18,7 @@ public class CreateComponentButton extends MainButton {
 	private static final String IMAGE_PATH_HEADING = "/images/";
 	private static final String ALERT_TITLE = "Component Created";
 	private static final String ALERT_MESSAGE = "You successfully created a new component!";
+	private static final int DEFAULT_TEAM = 1;
 	private AuthoringObject authoring_object;
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private TextField name_tf, movement_speed_tf;
@@ -29,10 +30,12 @@ public class CreateComponentButton extends MainButton {
 	private TextField build_time_tf;
 	private ComboBox<String> resource_cb;
 	private TextField resource_cost_tf;
+	private ComboBox<String> component_team_cb;
 		
 	public CreateComponentButton(AuthoringObject authoring_object, TextField name_tf, ComboBox<String> tag_cb, 
 			TagController tag_controller, Label image_text_label, TextField movement_speed_tf, ComboBox<String> building_cb, 
-			TextField build_time_tf, ComboBox<String> resource_cb, TextField resource_cost_tf, DesignTab design_tab) {
+			TextField build_time_tf, ComboBox<String> resource_cb, TextField resource_cost_tf, DesignTab design_tab,
+			ComboBox<String> component_team_cb) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.authoring_object = authoring_object;
 		this.name_tf = name_tf;
@@ -45,6 +48,7 @@ public class CreateComponentButton extends MainButton {
 		this.build_time_tf = build_time_tf;
 		this.resource_cb = resource_cb;
 		this.resource_cost_tf = resource_cost_tf;
+		this.component_team_cb = component_team_cb;
 		setAction();
 	}
 
@@ -63,6 +67,11 @@ public class CreateComponentButton extends MainButton {
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));
 			authoring_object.setBuilding(Boolean.parseBoolean(building_cb.getValue()));
 			authoring_object.setBuildTime(Double.parseDouble(build_time_tf.getText()));
+			try {
+				authoring_object.setTeam(Integer.parseInt(component_team_cb.getSelectionModel().getSelectedItem()));
+			} catch(Exception e) {
+				authoring_object.setTeam(DEFAULT_TEAM);
+			}
 //			authoring_object.setBuildCost(resource_cb.getValue(), Double.parseDouble(resource_cost_tf.getText()));
 			CreatedObjects.addObject(authoring_object);
 			design_tab.setNewAuthoringObject();

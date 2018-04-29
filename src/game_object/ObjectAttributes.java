@@ -1,5 +1,6 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +12,12 @@ import java.util.Map;
  * All the attributes of the game object are managed here. Variable must be created before it can be changed or set.
  */
 
-public class ObjectAttributes {
+public class ObjectAttributes implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Double> attributes;
 	private Map<String, Double> maxAttributes;
 	private Map<String, Double> buildCosts;
@@ -23,6 +28,7 @@ public class ObjectAttributes {
 	{
 		attributes = new HashMap<String, Double>();
 		maxAttributes = new HashMap<String, Double>();
+		buildCosts = new HashMap<String, Double>();
 	}
 	
 	public List<String> getAttributeNames() 
@@ -42,13 +48,6 @@ public class ObjectAttributes {
 		}		
 		return list;
 	}
-	
-	private Map<String, Double> getAttributeMap() 
-	{
-		return attributes;
-	}
-	
-	
 	
 	
 	/**
@@ -81,6 +80,19 @@ public class ObjectAttributes {
 		}
 	}
 	
+	public void setMaximumAttributeValue(String attribute, double newMaxValue) throws PropertyNotFoundException
+	{
+		if(attributes.containsKey(attribute) && maxAttributes.containsKey(attribute))
+		{
+			attributes.put(attribute, newMaxValue);
+			maxAttributes.put(attribute, newMaxValue);
+		}
+		else
+		{
+			throw new PropertyNotFoundException("Cannot change non-existent property for unit");
+		}
+	}
+		
 	/**
 	 * 
 	 * @param attribute
@@ -101,6 +113,10 @@ public class ObjectAttributes {
 		if(maxAttributes.containsKey(attribute))
 			return maxAttributes.get(attribute);
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
+	}
+	
+	public Map<String, Double> getCosts() {
+		return buildCosts;
 	}
 	
 	public void setCosts(Map<String, Double> costMap)
