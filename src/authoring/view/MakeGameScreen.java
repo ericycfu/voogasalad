@@ -2,9 +2,13 @@ package authoring.view;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import authoring.backend.AuthoringController;
+import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
+import authoring.backend.MapSettings;
 import game_data.Reader;
 import gui_elements.factories.ButtonFactory;
 import javafx.geometry.Insets;
@@ -14,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import transform_library.Vector2;
 
 public class MakeGameScreen implements AuthoringView {
 	public static final Color INITIAL_COLOR = Color.LIGHTSKYBLUE;
@@ -30,11 +35,14 @@ public class MakeGameScreen implements AuthoringView {
 	}
 	
 	public MakeGameScreen(Stage stage, File myFile) throws ClassNotFoundException, IOException {
-		List<Object> myAuthoringObjects = Reader.read(myFile.getCanonicalPath(), "list");
-		List<Object> myMap = Reader.read(myFile.getCanonicalPath(), "map");
-		List<Object> myMapSettings = Reader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
-		
-		myGame = new GameEntity();
+		//get list of items from the 
+		List<Object> ao = Reader.read(myFile.getCanonicalPath(), "list");
+		List<Object>  myAuthoringObjects = (List<AuthoringObject>) ao.get(0);
+		List<Object> map = Reader.read(myFile.getCanonicalPath(), "map");
+		Map<AuthoringObject, List<Vector2>> myMap = (Map<AuthoringObject, List<Vector2>>) map.get(0);
+		List<Object> mapsettings = Reader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
+		MapSettings myMapSettings = (MapSettings) mapsettings.get(0);
+		myGame = new GameEntity(myAuthoringObjects, myMap, myMapSettings);
 		myStage = stage;
 		setupScreen();
 		
