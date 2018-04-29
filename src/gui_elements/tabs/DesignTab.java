@@ -13,6 +13,7 @@ import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
 import gui_elements.buttons.CreateInteractionsButton;
 import gui_elements.buttons.MainButton;
+import gui_elements.buttons.NewComponentButton;
 import gui_elements.buttons.ComponentImageChooserButton;
 import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
@@ -140,7 +141,8 @@ public class DesignTab extends Tab {
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
-										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton());
+										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
+										 new NewComponentButton(this).getButton());
 	}
 	
 	public void setNewAuthoringObject() {
@@ -193,5 +195,5 @@ public class DesignTab extends Tab {
 			resource_names.add(entry.getKey());
 		}
 		return resource_names;
-	}
+	}	
 }

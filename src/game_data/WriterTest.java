@@ -10,7 +10,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-
+/**
+ * JUnit test for the writer
+ * @author shichengrao
+ *
+ */
 public class WriterTest {
 
 	@Test

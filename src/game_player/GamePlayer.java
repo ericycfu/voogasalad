@@ -103,6 +103,7 @@ public class GamePlayer {
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
 		for (GameObject go : myPossibleUnits) {
+			System.out.println(go.getName() + "this unit is in possible units");
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
@@ -110,8 +111,17 @@ public class GamePlayer {
 						List<String> tags = i.getTargetTags();
 						for (String s : tags) {
 							for (GameObject go2 : myPossibleUnits) {
-								if (s.equals(go2.getName())) {
-									BuildButton sb = new BuildButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
+								boolean isTagMatch = false;
+								for (String s2 : go2.getTags()) {
+									if (s2.equals(s)) {
+										isTagMatch = true;
+									}
+								}
+								if (isTagMatch) {
+									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
+											s, 
+											i.getID(), 
+											i.getDescription() + " " + s, 
 											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
 											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
@@ -128,6 +138,7 @@ public class GamePlayer {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			
 		}
 	}
 	
@@ -140,10 +151,9 @@ public class GamePlayer {
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					System.out.println(ia.getImg());
-					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
-						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go));
+						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 						System.out.println(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID());
 					});
@@ -153,6 +163,9 @@ public class GamePlayer {
 						});
 					}
 					else {
+						System.out.println("something is buildInteraction");
+						System.out.println(ia.isBuild() + "look at this");
+						System.out.println(ia.getTargetTags());
 						sb.setOnAction(e -> {
 							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);
@@ -172,8 +185,7 @@ public class GamePlayer {
 	}
 	
 	private void initializeSingleUnitSelect() {
-		for (GameObject eo : myGameObjectManager.getElements()) {
-			GameObject go = (GameObject)eo;
+		for (GameObject go : myGameObjectManager.getElements()) {
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {

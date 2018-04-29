@@ -83,6 +83,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	public void fill(List<SkillButton> unitSkills) {
 		myGridPane.getChildren().clear();
+		System.out.println(unitSkills);
 		for (int i = 0; i < 12; i++) {
 			if (i < unitSkills.size()) {
 				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
