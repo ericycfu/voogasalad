@@ -20,7 +20,8 @@ public class LobbyManager implements Serializable{
 		nextID = 0;
 	}
 	public int addElementToManager(GameLobby element) {
-		nextID ++;
+		nextID++;
+		element.setID(nextID);
 		lobbies.put(nextID, element);
 		return nextID;
 	}
