@@ -35,7 +35,6 @@ public class ClientHandler implements Runnable {
 				}
 			}
 			catch(SocketException e) {
-				System.out.println("Disconnected");
 				Thread.currentThread().interrupt();
 			}
 		}).start();

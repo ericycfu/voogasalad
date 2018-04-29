@@ -15,6 +15,8 @@ import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
@@ -97,7 +99,6 @@ public class LobbySelectionScreen extends ClientScreen {
 				out.writeInt(-1);
 				out.writeObject(newGame);
 				out.flush();
-				
 			} catch (Exception e2) {
 				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
@@ -109,6 +110,7 @@ public class LobbySelectionScreen extends ClientScreen {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
+			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					ObjectOutputStream out = getOutputStream();
@@ -128,6 +130,13 @@ public class LobbySelectionScreen extends ClientScreen {
 		currentLobbies.setLayoutX(200);
 		currentLobbies.setLayoutY(100);
 		myPane.getChildren().add(currentLobbies);
+		currentLobbies.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LobbyDisplay>() {
+			@Override
+			public void changed(ObservableValue<? extends LobbyDisplay> arg0, LobbyDisplay arg1, LobbyDisplay arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 	}
 	private void setupStage() {

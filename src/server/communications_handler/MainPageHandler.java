@@ -32,13 +32,13 @@ public class MainPageHandler extends CommunicationsHandler {
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(Exception e) {
-			System.out.println("Oops");
+			System.out.println("Oops1");
 			return CLASS_REF;}
 	}
 
 	@Override
 	public void updateClient() throws SocketException {
-		System.out.println(System.currentTimeMillis());
+		getServer().cleanLobbyManager();
 		try {
 			ObjectOutputStream out = getOutputStream();
 			if(out == null)
