@@ -1,5 +1,6 @@
 package game_engine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,8 +16,12 @@ import java.util.Map;
  * Manager itself can only set the id for the gameobject 
  */
 
-public abstract class ElementManager {
+public abstract class ElementManager implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<Integer, EngineObject> elementMap;
 	private int new_ID_val;
 	

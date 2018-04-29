@@ -26,16 +26,12 @@ public class AuthoringObject {
 	public static final int ICON_PREF_HEIGHT = 70;
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
-	private String myImagePath;
-	private String myName;
 	private List<String> myTags;
 	private double myX;
 	private double myY;
-	private double myMovementSpeed;
-	private boolean isBuilding;
-	private double buildTime;
-	private Map<String, Double> buildCost;
+	private Map<String, Double> buildCosts;
 	private ObjectLogic myObjectLogic;
+	private MainComponentPropertyManager myMainComponentPropertyManager;
 	private ObjectAttributes myAttributes;
 	private InteractionManager myInteractions;
 	private ConditionManager myConditionManager;
@@ -54,28 +50,25 @@ public class AuthoringObject {
 	
 	private void defaultObject() {
 		myDragImage = null;		
-		myName = "";
 		myX = 0;
 		myY = 0;
 		myObjectLogic = new ObjectLogic();
+		myMainComponentPropertyManager = new MainComponentPropertyManager();
 		myAttributes = myObjectLogic.accessAttributes();
 		myInteractions = myObjectLogic.accessInteractions();
-		myTags = new ArrayList<String>();
-		myConditionManager = new ConditionManager();
-		myTags = new ArrayList<>();
-		isBuilding = false;
-		buildTime = 0;
-		buildCost = new HashMap<>();
+		myConditionManager = myObjectLogic.accessConditions();
+		myTags = myMainComponentPropertyManager.getTags();
+		buildCosts = myAttributes.getCosts();
 	}
 	
 	private void addTestObject() {
 		setImage(TEST_IMAGE);
-		myName = "Station";
+		myMainComponentPropertyManager.setName("Station");
 	}
 	
 	private void addDuvall() {
 		setImage(TEST_IMAGE_DUVALL);
-		myName = "Final Boss";
+		myMainComponentPropertyManager.setName("Final Boss");
 	}
 	
 	public Image getImage() {
@@ -92,25 +85,25 @@ public class AuthoringObject {
 	}
 	
 	public void setImage(String image_path) {
-		myImagePath = image_path;
+		myMainComponentPropertyManager.setImagePath(image_path);
 		Image image = new Image(getClass().getResourceAsStream(image_path));
 		myDragImage = new DraggableImageView(this, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
 	}
 	
 	public String getName() {
-		return myName;
+		return myMainComponentPropertyManager.getName();
 	}
 	
 	public void setName(String name) {
-		myName = name;
+		myMainComponentPropertyManager.setName(name);
 	}
-	
+
 	public double getMovementSpeed() {
-		return myMovementSpeed;
+		return myMainComponentPropertyManager.getMovementSpeed();
 	}
 	
 	public void setMovementSpeed(double movementSpeed) {
-		myMovementSpeed = movementSpeed;
+		myMainComponentPropertyManager.setMovementSpeed(movementSpeed);
 	}
 	
 	public List<String> getTags() {
@@ -138,24 +131,24 @@ public class AuthoringObject {
 	}
 	
 	public boolean isBuilding() {
-		return isBuilding;
+		return myMainComponentPropertyManager.isBuilding();
 	}
 	
 	public void setBuilding(boolean b) {
-		isBuilding = b;
+		myMainComponentPropertyManager.setBuilding(b);
 	}
 	
 	public double getBuildTime() {
-		return buildTime;
+		return myAttributes.getBuildTime();
 	}
 	
 	public void setBuildTime(double time) {
-		buildTime = time;
+		myAttributes.setBuildTime(time);
 	}
 	
 	public List<String> getBuildCostResources() {
 		List<String> resources = new ArrayList<String>();
-		for(String resource : buildCost.keySet()) {
+		for(String resource : buildCosts.keySet()) {
 			resources.add(resource);
 		}
 		return resources;
@@ -163,14 +156,22 @@ public class AuthoringObject {
 	
 	public List<Double> getBuildCostAmounts() {
 		List<Double> amounts = new ArrayList<Double>();
-		for(double amount : buildCost.values()) {
+		for(double amount : buildCosts.values()) {
 			amounts.add(amount);
 		}
 		return amounts;
 	}
 	
 	public void setBuildCost(String resource, double amount) {
-		buildCost.put(resource, amount);
+		buildCosts.put(resource, amount);
+	}
+	
+	public MainComponentPropertyManager getMainComponentPropertyManager() {
+		return myMainComponentPropertyManager;
+	}
+
+	public ObjectLogic getObjectLogic() {
+		return myObjectLogic;
 	}
 
 	public ObjectAttributes getObjectAttributesInstance() {
@@ -180,6 +181,10 @@ public class AuthoringObject {
 	public InteractionManager getInteractionsManagerInstance() {
 		return myInteractions;
 	}
+	
+	public ConditionManager getConditionManager() {
+		return myConditionManager;
+	}
 
 	public DraggableImageView duplicateImgView() {
 		Image image = myDragImage.getImage();
@@ -188,16 +193,20 @@ public class AuthoringObject {
 		imageview.setAction(newobj);
 		return imageview;
 	}
-
-	public ObjectLogic getObjectLogic() {
-		return myObjectLogic;
-	}
-	
-	public ConditionManager getConditionManager() {
-		return myConditionManager;
-	}
-	
+		
 	public void resetImageAfterLoad() {
-		setImage(myImagePath);
+		setImage(myMainComponentPropertyManager.getImagePath());
+	}
+	
+	public String getImagePath() {
+		return myMainComponentPropertyManager.getImagePath();
+	}
+	
+	public int getTeam() {
+		return myMainComponentPropertyManager.getTeam();
+	}
+	
+	public void setTeam(int team) {
+		myMainComponentPropertyManager.setTeam(team);
 	}
 }

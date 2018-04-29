@@ -1,6 +1,8 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -21,9 +23,13 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction implements EngineObject {
+public class Interaction implements EngineObject, Serializable {
 
-	public static enum interactionTargetTeam
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static enum InteractionTargetTeam
 	{
 		OWN, OTHER, ALL;
 	}
@@ -40,7 +46,8 @@ public class Interaction implements EngineObject {
 	private boolean isBuild;
 	private boolean isInstantaneous;
 	
-	private interactionTargetTeam interactionTargetTeam;
+	private InteractionTargetTeam InteractionTargetTeam;
+	private Map<String, InteractionTargetTeam> targetTeamEnumMap;
 
 	//store functions by id
 	private List<CustomFunction> customFunctions;
@@ -51,13 +58,15 @@ public class Interaction implements EngineObject {
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
 		this.id = id;
+		createTargetTeamEnumMap();
 	}
+	
 	
 	public Interaction(Interaction other)
 	{
 		this.isBuild = other.isBuild;
 		this.isInstantaneous = other.isInstantaneous;
-		this.interactionTargetTeam = other.interactionTargetTeam;
+		this.InteractionTargetTeam = other.InteractionTargetTeam;
 		this.customFunctions = other.customFunctions;
 		this.range = other.range;
 	}
@@ -122,14 +131,23 @@ public class Interaction implements EngineObject {
 	 */
 	private boolean validatedInteractionTarget(GameObject current, GameObject other)
 	{
-		if(this.interactionTargetTeam == interactionTargetTeam.ALL) return true;
-		else if(this.interactionTargetTeam == interactionTargetTeam.OTHER
+		if(this.InteractionTargetTeam == InteractionTargetTeam.ALL) return true;
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OTHER
 				&& current.getOwner().getID() != other.getOwner().getID()) return true;
-		else if(this.interactionTargetTeam == interactionTargetTeam.OWN
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OWN
 				&& current.getOwner().getID() == other.getOwner().getID()) return true;
 		return false;
 		
 	}
+	
+	private void createTargetTeamEnumMap() 
+	{
+		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
+		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
+			targetTeamEnumMap.put(value.toString(), value);
+		}
+	}
+	
 
 	private boolean matchesTags(GameObject other, List<String> tags)
 	{
@@ -162,14 +180,19 @@ public class Interaction implements EngineObject {
 		this.isBuild = val;
 	}
 	
-	public void setInteractionTargetTeam(interactionTargetTeam setting)
+	public void setInteractionTargetTeam(InteractionTargetTeam setting)
 	{
-		this.interactionTargetTeam = setting;
+		this.InteractionTargetTeam = setting;
 	}
 	
-	public interactionTargetTeam getInteractionTargetTeam()
+	public void setInteractionTargetTeam(String setting_string)
 	{
-		return interactionTargetTeam;
+		this.InteractionTargetTeam = targetTeamEnumMap.get(setting_string);
+	}
+	
+	public InteractionTargetTeam getInteractionTargetTeam()
+	{
+		return InteractionTargetTeam;
 	}
 	
  	public List<String> getTargetTags()
@@ -222,7 +245,10 @@ public class Interaction implements EngineObject {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -231,6 +257,7 @@ public class Interaction implements EngineObject {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}

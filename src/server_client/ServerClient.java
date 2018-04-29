@@ -3,6 +3,7 @@ package server_client;
 import java.net.Socket;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import server.RTSServer;
 import server_client.screens.ClientScreen;
@@ -16,6 +17,7 @@ public class ServerClient  extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Socket clientSocket = null;
+		System.out.println(System.currentTimeMillis());
 		do {
 			try {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
@@ -24,14 +26,17 @@ public class ServerClient  extends Application {
 				System.out.println("Fail");
 			}
 		} while (clientSocket == null);
+		System.out.println(System.currentTimeMillis());
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
 		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
-		while(true) {
-			String newClass = currentScreen.updateSelf();
-			if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
-				currentScreen = myScreenFactory.get(newClass);
+		new Thread(() -> {
+			while(true) {
+				String newClass = currentScreen.updateSelf();
+				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
+					Platform.runLater(() -> currentScreen = myScreenFactory.get(newClass));
+				}
 			}
-		}
+		}).start();
 	}
 
 	public static void main(String[] args) {

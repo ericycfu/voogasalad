@@ -1,12 +1,14 @@
 package transform_library;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Rayan
  *	This class will handle transformation in world space for any object.
  */
 
-public class Transform {
+public class Transform implements Serializable {
 	
 	private Vector2 position;
 	private double rotation;

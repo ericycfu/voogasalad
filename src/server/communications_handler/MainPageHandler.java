@@ -1,8 +1,10 @@
 package server.communications_handler;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import game_engine.GameInstance;
 import server.RTSServer;
@@ -13,29 +15,40 @@ public class MainPageHandler extends CommunicationsHandler {
 		super(input, server);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public String updateServer() {
 		try {
-			int input;
-			if((input = getInputStream().readInt()) == -1) {
-				if(input == -1)
-					getServer().addLobby(getSocket(), (GameInstance)getInputStream().readObject());
-				else getServer().addToLobby(input, getSocket());
-				return LobbyHandler.CLASS_REF;
-			}
-			else return CLASS_REF;
+			Integer input;
+			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new SocketException("Client disconnected");
+			if((input = in.readInt()) == null)
+				return CLASS_REF;
+			if(input == -1)
+				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
+			else getServer().addToLobby(input, getSocket());
+			System.out.println("Message received");
+			return LobbyHandler.CLASS_REF;
 		}
-		catch(Exception e) {return CLASS_REF;}
+		catch(Exception e) {
+			System.out.println("Oops1");
+			return CLASS_REF;}
 	}
 
 	@Override
-	public void updateClient() {
-		ObjectOutputStream out;
+	public void updateClient() throws SocketException {
+		getServer().cleanLobbyManager();
 		try {
-			out = new ObjectOutputStream(getSocket().getOutputStream());
-			out.writeObject(getServer());
-		} catch (IOException e) {
-			
+			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				throw new SocketException("Client disconnected");
+			out.writeObject(
+					getServer()
+					.getLobbyManager());
+			out.flush();
+			System.out.println("Write success!");
+		} catch (Exception e) {
 		}
 	}
 

@@ -56,15 +56,12 @@ public class TopPanel {
 	private int menuSpan;
 	private Timeline tl;
 	private Team myTeam;
-	private Reader myReader;
-	private Writer myWriter;
 	private boolean isLoaded;
+
 	
 	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
-		myWriter = new Writer();
-		myReader = new Reader();
 		menuSpan = 0;
 		
 		setupMenu(gom, possibleUnits, xsize, ysize);
@@ -117,7 +114,7 @@ public class TopPanel {
 		listRepresentation.add(gom);
 		listRepresentation.add(possibleUnits);
 		try {
-			myWriter.write(file.getCanonicalPath(), listRepresentation);
+			Writer.write(file.getCanonicalPath(), listRepresentation);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
@@ -129,12 +126,15 @@ public class TopPanel {
 		fc.setInitialDirectory(new File(FILEPATH));
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
+		isLoaded = true;
 		try {
-			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
+			List<Object> gameObjects = Reader.read(file.getCanonicalPath());
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
+			System.out.println(gameObjects.get(1));
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
+			
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -147,13 +147,13 @@ public class TopPanel {
 	}
 	
 	private void setResources() {
-		resourceBoard.getItems().clear();
+		/*resourceBoard.getItems().clear();
 		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
 			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
 		}
-		resourceBoard.getItems().addAll(resources);
+		resourceBoard.getItems().addAll(resources);*/
 	}
 	
 	private void setTime(double timeValue) {
@@ -161,9 +161,11 @@ public class TopPanel {
 	}
 	
 	public boolean getIsLoaded() {
-		boolean temp = isLoaded;
-		isLoaded = false;
-		return temp;
+		return isLoaded;
+	}
+	
+	public void setIsLoaded(boolean val) {
+		isLoaded = val;
 	}
 	
 	public void update() {

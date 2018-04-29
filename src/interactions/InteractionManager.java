@@ -1,17 +1,19 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import conditions.Condition;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
-import game_object.GameObject;
 
-public class InteractionManager extends ElementManager {
+public class InteractionManager extends ElementManager implements Serializable {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public InteractionManager() {
 		super();
 	}

@@ -1,4 +1,6 @@
 package server.communications_handler;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 /**
  * This class is responsible handling the server side of a specific server/client interaction
  * @author andrew
@@ -7,24 +9,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import server.RTSServer;
-import server.RTSServerException;
 
 public abstract class CommunicationsHandler {
 	private Socket communicationSocket;
 	private RTSServer host;
-	private ObjectInputStream in;
-	private ObjectOutputStream out;
 	public CommunicationsHandler(Socket input, RTSServer server) {
 		communicationSocket = input;
 		host = server;
-		try {
-			in = new ObjectInputStream(input.getInputStream());
-			out = new ObjectOutputStream(input.getOutputStream());
-		} catch (IOException e) {
-			throw new RTSServerException("Communication between server and client failed");
-		}
 	}
 	protected Socket getSocket() {
 		return communicationSocket;
@@ -33,12 +27,21 @@ public abstract class CommunicationsHandler {
 		return host;
 	}
 	protected ObjectInputStream getInputStream() {
-		return in;
+		try {
+			return new ObjectInputStream(new BufferedInputStream(getSocket().getInputStream()));
+		} catch (IOException e) {
+			return null;
+		}
 	}
 	protected ObjectOutputStream getOutputStream() {
-		return out;
+		try {
+			return new ObjectOutputStream(new BufferedOutputStream(getSocket().getOutputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-	public abstract String updateServer();
-	public abstract void updateClient();
+	public abstract String updateServer() throws SocketException;
+	public abstract void updateClient() throws SocketException;
 
 }

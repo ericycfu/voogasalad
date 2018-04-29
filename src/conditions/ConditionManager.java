@@ -1,6 +1,8 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +13,11 @@ import game_engine.EngineObject;
 import game_object.GameObject;
 import interactions.Interaction;
 
-public class ConditionManager extends ElementManager {
+public class ConditionManager extends ElementManager implements Serializable {
 
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public ConditionManager()
 	{
 		super();
@@ -25,10 +29,10 @@ public class ConditionManager extends ElementManager {
 	}
 	
 //	public int createCondition(GameObject object, int comparatorID, String var1, String var2)
+
 	public int createCondition(int comparatorID, String var1, String var2)
 	{
 		int newID = calculateID();
-//		Condition condition = new Condition(newID, object, comparatorID, var1, var2);
 		Condition condition = new Condition(newID, comparatorID, var1, var2);
 		this.addElement(condition);
 		return newID;
@@ -50,6 +54,7 @@ public class ConditionManager extends ElementManager {
 	{
 		return (Condition)(this.get(id));
 	}
+
 	
 	public void removeLastAddedCondition()
 	{
@@ -57,5 +62,5 @@ public class ConditionManager extends ElementManager {
 		this.removeElement(conds.get(conds.size()-1));
 	}
 	
-		
+
 }

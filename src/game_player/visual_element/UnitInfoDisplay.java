@@ -44,8 +44,6 @@ public class UnitInfoDisplay implements VisualUpdate {
 		initializeProfilePic();
 		initializeHealthManaInfo();
 		initializeStatusInfo();
-		updateProfilePic(DefaultImage);
-		updateHealthManaInfo(null);
 		updateStatusInfo(null);
 	}
 	
@@ -87,15 +85,16 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myHealthManaInfo.setText(DefaultHealthMana);
 		}
 		else {
+			myHealthManaInfo.setText("");
 			try {
-				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(0);
-				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(1);
-				myHealthManaInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
-						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
-			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
+					myHealthManaInfo.setText(myHealthManaInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+				}
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
 		}
+		
 	}
 	
 	private void updateStatusInfo(GameObject currentUnit) {
@@ -103,12 +102,12 @@ public class UnitInfoDisplay implements VisualUpdate {
 			myStatusInfo.setText(DefaultStatus);
 		}
 		else {
+			myStatusInfo.setText("");
 			try {
-				String temp = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(2);
-				String temp2 = currentUnit.accessLogic().accessAttributes().getAttributeNames().get(3);
-				myStatusInfo.setText(temp + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp)
-						+ "\n" + temp2 + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(temp2));
-			} catch (PropertyNotFoundException | UnmodifiableGameObjectException e) {
+				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
+					myStatusInfo.setText(myStatusInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+				}
+			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
 			}
 		}
@@ -118,6 +117,8 @@ public class UnitInfoDisplay implements VisualUpdate {
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) {
 			updateProfilePic(DefaultImage);
+			updateHealthManaInfo(null);
+			updateStatusInfo(null);
 			return;
 		}
 		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());

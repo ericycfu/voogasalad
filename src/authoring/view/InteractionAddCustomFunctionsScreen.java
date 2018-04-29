@@ -138,16 +138,19 @@ public class InteractionAddCustomFunctionsScreen {
     }
 
     private void setButtons() {
-    	root.getChildren().add(new CustomFunctionsSaveButton(custom_functions_pane,
+    	root.getChildren().add(new CustomFunctionsSaveButton(interaction_manager,
+    														 current_interaction_id,
+    														 custom_functions_pane,
     													     created_custom_functions_pane,
     														 custom_function_type_cb,
     														 this));
     }
-
-    public void resetElements() {
-    }
     
     public Stage getStage() {
     	return stage;
+    }
+    
+    public Scene getScene() {
+    	return myScene;
     }
 }

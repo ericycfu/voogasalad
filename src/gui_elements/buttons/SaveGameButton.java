@@ -28,10 +28,8 @@ public class SaveGameButton extends Button {
 	private static final String ALERT_TITLE = "Component Saved";
 	private static final String ALERT_MESSAGE = "Your component has been saved!";
 	private static final boolean EXPLICIT_SET_ACTION = false;
-	private Writer myWriter;
 	private AuthoringController myAuthoringController;
 	private GameEntity myGameEntity;
-//	private Reader myReader;
 
 	public SaveGameButton(AuthoringController ac, GameEntity gameEntity) {
 //		super(FILENAME, EXPLICIT_SET_ACTION);
@@ -43,16 +41,14 @@ public class SaveGameButton extends Button {
 
 	protected void setAction() {
 		this.setOnAction(value -> {
-			myWriter = new Writer();
-//			myReader = new Reader();
 			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
+				Writer.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
 				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getCurrentMap().getLocations();
 				Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 				
 				List<Map<AuthoringObject, List<Vector2>>> listform = new ArrayList<>();
 				listform.add(changedMap);
-				myWriter.write(Resources.getString(RESOURCES_STRING2), listform);
+				Writer.write(Resources.getString(RESOURCES_STRING2), listform);
 				createAlert();
 			} catch (IOException e) {
 				System.err.println("Could not save created authoring objects");

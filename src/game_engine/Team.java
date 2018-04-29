@@ -1,6 +1,6 @@
 package game_engine;
 
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * 
@@ -8,8 +8,7 @@ import java.util.Map;
  *
  */
 
-public class Team implements EngineObject {
-	
+public class Team implements EngineObject, Serializable {
 	private int id;
 	private String teamName;
 	private ResourceManager resourceManager;

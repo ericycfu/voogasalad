@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import game_engine.GameInstance;
 import javafx.scene.control.Alert;
@@ -42,6 +41,12 @@ public class RTSServer {
 			}
 		}
 		System.out.println("Success!");
+		try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println("Your current IP address : " + ip);
+		}
+		catch(Exception e) {}
+		
 		myLobbyManager = new LobbyManager();
 	}
 	private void listenForConnections() {
@@ -49,16 +54,16 @@ public class RTSServer {
             while (true) {
                 try {
                     Socket socket = myServerSocket.accept();
+                    System.out.println("Connection accepted");
                     ClientHandler task = new ClientHandler(this, socket);
                     Thread newThread = new Thread(task);
                     newThread.start();
                 } catch (IOException e) {
                 }
-                cleanLobbyManager();
             }
        }).start();
 	}
-	private void cleanLobbyManager() {
+	public void cleanLobbyManager() {
 		for(GameLobby g: myLobbyManager.getElements())
 			if(g.getCurrentSize() == 0)
 				myLobbyManager.removeElement(g);
@@ -71,5 +76,8 @@ public class RTSServer {
 	}
 	public GameLobby findPlayer(Socket s) {
 		return myLobbyManager.find(s);
+	}
+	public LobbyManager getLobbyManager() {
+		return myLobbyManager;
 	}
 }

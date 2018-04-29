@@ -1,5 +1,6 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,8 +14,12 @@ import java.util.Map.Entry;
  * All the attributes of the game object are managed here. Variable must be created before it can be changed or set.
  */
 
-public class ObjectAttributes {
+public class ObjectAttributes implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Double> attributes;
 	private Map<String, Double> maxAttributes;
 	private Map<String, Double> buildCosts;
@@ -138,6 +143,7 @@ public class ObjectAttributes {
 			return maxAttributes.get(attribute);
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}
+	
 	
 	public void setCosts(Map<String, Double> costMap)
 	{

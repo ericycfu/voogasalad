@@ -1,5 +1,6 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +21,12 @@ import game_object.UnmodifiableGameObjectException;
  * to act upon, the comparator to use, and the values to compare.
  */
 
-public class Condition implements EngineObject {
+public class Condition implements EngineObject, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private ComparatorManager comparatorManager;
 //	private GameObject host;

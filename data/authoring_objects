@@ -1,1 +1,38 @@
-<object-stream/>
+<object-stream>
+  <authoring.backend.AuthoringObject>
+    <myTags>
+      <string>biological</string>
+    </myTags>
+    <myX>0.0</myX>
+    <myY>0.0</myY>
+    <buildCosts/>
+    <myObjectLogic>
+      <fulfillsLossCondition>false</fulfillsLossCondition>
+      <attributes>
+        <attributes/>
+        <maxAttributes/>
+        <buildCosts reference="../../../buildCosts"/>
+        <buildTime>50.0</buildTime>
+      </attributes>
+      <interactions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+      </interactions>
+      <conditions>
+        <elementMap/>
+        <new__ID__val>1</new__ID__val>
+      </conditions>
+    </myObjectLogic>
+    <myMainComponentPropertyManager>
+      <myImagePath>/images/robert.png</myImagePath>
+      <myName>Marine</myName>
+      <myTags reference="../../myTags"/>
+      <myMovementSpeed>50.0</myMovementSpeed>
+      <isBuilding>true</isBuilding>
+      <myTeam>1</myTeam>
+    </myMainComponentPropertyManager>
+    <myAttributes reference="../myObjectLogic/attributes"/>
+    <myInteractions reference="../myObjectLogic/interactions"/>
+    <myConditionManager reference="../myObjectLogic/conditions"/>
+  </authoring.backend.AuthoringObject>
+</object-stream>
