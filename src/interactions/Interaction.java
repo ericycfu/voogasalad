@@ -107,7 +107,9 @@ public class Interaction implements EngineObject, Serializable {
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		if(!validatedInteractionTarget(current, other)) return;
-		if(matchesTags(other, targetTags)) return;
+		System.out.println("validates");
+		//if(matchesTags(other, targetTags)) return;
+		System.out.println("tags match");
 		try 
 		{
 			for(CustomFunction cFunc : customFunctions)
@@ -141,7 +143,10 @@ public class Interaction implements EngineObject, Serializable {
 	{
 		for(String s : other.getTags())
 		{
-			if(tags.contains(s)) return true;
+			for(String x : tags)
+			{
+				if(s.equals(x)) return true;
+			}
 		}
 		return false;
 	}
@@ -230,7 +235,10 @@ public class Interaction implements EngineObject, Serializable {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -239,6 +247,7 @@ public class Interaction implements EngineObject, Serializable {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}
