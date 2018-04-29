@@ -24,11 +24,13 @@ public class AuthoringObject {
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
 	public static final int ICON_PREF_WIDTH = 70;
 	public static final int ICON_PREF_HEIGHT = 70;
+	public static final int DEFAULT_TEAM = 1;
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
 	private List<String> myTags;
 	private double myX;
 	private double myY;
+	private int myTeam;
 	private Map<String, Double> buildCosts;
 	private ObjectLogic myObjectLogic;
 	private MainComponentPropertyManager myMainComponentPropertyManager;
@@ -46,6 +48,7 @@ public class AuthoringObject {
 		myDragImage = img;
 		myX = 0;
 		myY = 0;
+		myTeam = DEFAULT_TEAM;
 	}
 	
 	private void defaultObject() {
@@ -203,10 +206,10 @@ public class AuthoringObject {
 	}
 	
 	public int getTeam() {
-		return myMainComponentPropertyManager.getTeam();
+		return myTeam;
 	}
 	
 	public void setTeam(int team) {
-		myMainComponentPropertyManager.setTeam(team);
+		myTeam = team;
 	}
 }

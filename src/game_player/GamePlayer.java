@@ -185,8 +185,7 @@ public class GamePlayer {
 	}
 	
 	private void initializeSingleUnitSelect() {
-		for (GameObject eo : myGameObjectManager.getElements()) {
-			GameObject go = (GameObject)eo;
+		for (GameObject go : myGameObjectManager.getElements()) {
 			go.getRenderer().getDisp().toFront();
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
