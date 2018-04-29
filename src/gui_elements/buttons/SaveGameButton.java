@@ -30,7 +30,7 @@ public class SaveGameButton extends Button {
 	private static final boolean EXPLICIT_SET_ACTION = false;
 	private AuthoringController myAuthoringController;
 	private GameEntity myGameEntity;
-
+	private Writer myWriter = new Writer();
 	public SaveGameButton(AuthoringController ac, GameEntity gameEntity) {
 //		super(FILENAME, EXPLICIT_SET_ACTION);
 		myAuthoringController = ac;
@@ -42,13 +42,13 @@ public class SaveGameButton extends Button {
 	protected void setAction() {
 		this.setOnAction(value -> {
 			try {
-				Writer.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
+				myWriter.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
 				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getCurrentMap().getLocations();
 				Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 				
 				List<Map<AuthoringObject, List<Vector2>>> listform = new ArrayList<>();
 				listform.add(changedMap);
-				Writer.write(Resources.getString(RESOURCES_STRING2), listform);
+				myWriter.write(Resources.getString(RESOURCES_STRING2), listform);
 				createAlert();
 			} catch (IOException e) {
 				System.err.println("Could not save created authoring objects");
