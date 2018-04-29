@@ -22,7 +22,11 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import resources.Resources;
 import transform_library.Vector2;
-
+/**
+ * saves the current environment locally and remotely for continued use of both the authoring environment and the rest of the project
+ * @author shichengrao
+ *
+ */
 public class PlayGameButton extends Button {	
 	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
 
@@ -55,12 +59,13 @@ public class PlayGameButton extends Button {
 			listFormMap.add(changedMap);
 			List<MapSettings> listFormMapSettings = new ArrayList<>();
 			listFormMapSettings.add(ac.getCurrentMap().getMapSettings());
+			
 			List<Object> listForm = new ArrayList<>();
 			try {
 				Writer.write(Resources.getString("AUTHOR_LOCATION_OBJECTS"), gameEntity.getCreatedObjects().getAuthoringObjects());
 				Writer.write(Resources.getString("AUTHOR_LOCATION_MAP"), listFormMap);
 				Writer.write(Resources.getString("AUTHOR_LOCATION_MAPSETTTINGS"), listFormMapSettings);
-				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
+				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,gameEntity.getResourceManager());
 				listForm.add(myGOM);
 				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
 				Set<GameObject> possibleObjects = new HashSet<>();
