@@ -1,9 +1,11 @@
 package game_object;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -116,6 +118,11 @@ public class ObjectAttributes {
 		{
 			buildCosts.put(map.getKey(), map.getValue());
 		}
+	}
+	
+	public Map<String, Double> getCosts()
+	{
+		return Collections.unmodifiableMap(buildCosts);
 	}
 
 	public double getBuildTime() 

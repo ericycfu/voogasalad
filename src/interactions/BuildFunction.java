@@ -1,8 +1,14 @@
 package interactions;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import game_engine.InvalidResourceValueException;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.PropertyNotFoundException;
+import game_object.UnmodifiableGameObjectException;
 
 /**
  * 
@@ -25,6 +31,19 @@ public class BuildFunction implements CustomFunction {
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
 		if(other == null) return;
+		try 
+		{
+			Map<String, Double> costs = other.accessLogic().accessAttributes().getCosts();
+			for(Map.Entry<String, Double> entry : costs.entrySet())
+			{
+				String resource = entry.getKey();
+				if(current.getOwner().getResourceManager().getResource(resource) < entry.getValue()) return;
+			}
+		} 
+		catch (UnmodifiableGameObjectException | InvalidResourceValueException e) {
+			e.printStackTrace();
+		}
+		
 		manager.copyGameObject(other, current.getOwner());
 		other.queueBuilding();
 	}

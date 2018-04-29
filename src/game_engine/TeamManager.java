@@ -27,7 +27,7 @@ public class TeamManager extends ElementManager {
 	public int createTeam(String teamName, ResourceManager resourceManager)
 	{
 		int newID = calculateID();
-		Team team = new Team(newID, teamName, resourceManager);
+		Team team = new Team(newID, resourceManager);
 		this.addElement(team);
 		return newID;
 	}

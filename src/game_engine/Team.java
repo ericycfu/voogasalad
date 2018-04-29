@@ -9,15 +9,15 @@ import java.util.Map;
  */
 
 public class Team implements EngineObject {
+	
 	private int id;
 	private String teamName;
-	//private Map<String, Double> availableResources;
 	private ResourceManager resourceManager;
 	
-	public Team(int id, String teamName, ResourceManager resourceManager)
+	public Team(int id, ResourceManager resourceManager)
 	{
 		this.id = id;
-		this.teamName = teamName;
+		this.teamName = "Team " + id;
 		this.resourceManager = resourceManager;
 	}
 	

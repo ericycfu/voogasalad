@@ -33,6 +33,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
+	
 
 	private Team owner;
 	
