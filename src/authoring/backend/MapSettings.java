@@ -3,6 +3,8 @@ package authoring.backend;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +17,8 @@ public class MapSettings implements AuthoringView {
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
-	private MapEntity map;
+	@XStreamOmitField
+	private transient MapEntity map;
 	public MapSettings() {
 		initializeAll();
 	}
