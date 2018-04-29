@@ -110,6 +110,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.myObjectLogic = logic;
 		this.movementSpeed = manager.getMovementSpeed();
 		this.isBuilding = manager.isBuilding();
+		System.out.println("manager.isBuilding" + manager.isBuilding());
 		this.renderer = new Renderer(manager.getImagePath());
 		this.name = manager.getName();
 		this.tags = manager.getTags();
@@ -159,7 +160,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
-		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;

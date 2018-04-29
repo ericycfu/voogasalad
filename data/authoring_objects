@@ -1,7 +1,7 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>farm</string>
+      <string>asdw</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
@@ -9,18 +9,8 @@
     <myObjectLogic>
       <fulfillsLossCondition>false</fulfillsLossCondition>
       <attributes>
-        <attributes>
-          <entry>
-            <string>Health</string>
-            <double>100.0</double>
-          </entry>
-        </attributes>
-        <maxAttributes>
-          <entry>
-            <string>Health</string>
-            <double>100.0</double>
-          </entry>
-        </maxAttributes>
+        <attributes/>
+        <maxAttributes/>
         <buildCosts reference="../../../buildCosts"/>
         <buildTime>10.0</buildTime>
       </attributes>
@@ -34,134 +24,10 @@
       </conditions>
     </myObjectLogic>
     <myMainComponentPropertyManager>
-      <myImagePath>/images/robert.png</myImagePath>
-      <myName>Farmer1</myName>
+      <myImagePath>/images/rcd.png</myImagePath>
+      <myName>asasda</myName>
       <myTags reference="../../myTags"/>
       <myMovementSpeed>10.0</myMovementSpeed>
-      <isBuilding>false</isBuilding>
-      <myTeam>1</myTeam>
-    </myMainComponentPropertyManager>
-    <myAttributes reference="../myObjectLogic/attributes"/>
-    <myInteractions reference="../myObjectLogic/interactions"/>
-    <myConditionManager reference="../myObjectLogic/conditions"/>
-  </authoring.backend.AuthoringObject>
-  <authoring.backend.AuthoringObject>
-    <myTags>
-      <string>farm</string>
-    </myTags>
-    <myX>0.0</myX>
-    <myY>0.0</myY>
-    <buildCosts/>
-    <myObjectLogic>
-      <fulfillsLossCondition>false</fulfillsLossCondition>
-      <attributes>
-        <attributes>
-          <entry>
-            <string>Health</string>
-            <double>200.0</double>
-          </entry>
-        </attributes>
-        <maxAttributes>
-          <entry>
-            <string>Health</string>
-            <double>200.0</double>
-          </entry>
-        </maxAttributes>
-        <buildCosts reference="../../../buildCosts"/>
-        <buildTime>5.0</buildTime>
-      </attributes>
-      <interactions>
-        <elementMap/>
-        <new__ID__val>1</new__ID__val>
-      </interactions>
-      <conditions>
-        <elementMap/>
-        <new__ID__val>1</new__ID__val>
-      </conditions>
-    </myObjectLogic>
-    <myMainComponentPropertyManager>
-      <myImagePath>/images/ghoul.png</myImagePath>
-      <myName>Farmer2</myName>
-      <myTags reference="../../myTags"/>
-      <myMovementSpeed>5.0</myMovementSpeed>
-      <isBuilding>false</isBuilding>
-      <myTeam>1</myTeam>
-    </myMainComponentPropertyManager>
-    <myAttributes reference="../myObjectLogic/attributes"/>
-    <myInteractions reference="../myObjectLogic/interactions"/>
-    <myConditionManager reference="../myObjectLogic/conditions"/>
-  </authoring.backend.AuthoringObject>
-  <authoring.backend.AuthoringObject>
-    <myTags>
-      <string>building</string>
-    </myTags>
-    <myX>0.0</myX>
-    <myY>0.0</myY>
-    <buildCosts/>
-    <myObjectLogic>
-      <fulfillsLossCondition>false</fulfillsLossCondition>
-      <attributes>
-        <attributes>
-          <entry>
-            <string>Mana</string>
-            <double>200.0</double>
-          </entry>
-          <entry>
-            <string>Health</string>
-            <double>200.0</double>
-          </entry>
-        </attributes>
-        <maxAttributes>
-          <entry>
-            <string>Mana</string>
-            <double>200.0</double>
-          </entry>
-          <entry>
-            <string>Health</string>
-            <double>200.0</double>
-          </entry>
-        </maxAttributes>
-        <buildCosts reference="../../../buildCosts"/>
-        <buildTime>10.0</buildTime>
-      </attributes>
-      <interactions>
-        <elementMap>
-          <entry>
-            <int>1</int>
-            <interactions.Interaction>
-              <id>1</id>
-              <targetTags>
-                <string>farm</string>
-              </targetTags>
-              <name>Build</name>
-              <imagePath>/images/arrow_up.png</imagePath>
-              <isBuild>false</isBuild>
-              <isInstantaneous>false</isInstantaneous>
-              <customFunctions>
-                <interactions.BuildFunction>
-                  <NAME>BuildFunction</NAME>
-                  <format>
-                    <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                    <parameterFields/>
-                  </format>
-                </interactions.BuildFunction>
-              </customFunctions>
-              <range>100.0</range>
-            </interactions.Interaction>
-          </entry>
-        </elementMap>
-        <new__ID__val>3</new__ID__val>
-      </interactions>
-      <conditions>
-        <elementMap/>
-        <new__ID__val>1</new__ID__val>
-      </conditions>
-    </myObjectLogic>
-    <myMainComponentPropertyManager>
-      <myImagePath>/images/station.png</myImagePath>
-      <myName>FarmerBuilding</myName>
-      <myTags reference="../../myTags"/>
-      <myMovementSpeed>0.0</myMovementSpeed>
       <isBuilding>true</isBuilding>
       <myTeam>1</myTeam>
     </myMainComponentPropertyManager>
