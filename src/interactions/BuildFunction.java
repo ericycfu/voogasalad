@@ -44,7 +44,7 @@ public class BuildFunction implements CustomFunction {
 			e.printStackTrace();
 		}
 		
-		manager.copyGameObject(other, current.getOwner());
+		manager.copyGameObject(other);
 		other.queueBuilding();
 	}
 
