@@ -8,17 +8,19 @@ import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
 import game_player.GamePlayer;
 import game_player.SelectedUnitManager;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Region;
 import pathfinding.GridMap;
 import transform_library.Vector2;
 
 public class MainDisplay implements VisualUpdate {
+	
+	private static final double MOVEBUTTONSIZE = 60;
 	
 	private double myCurrentXCoor = 0; // current MAP-x-coordinate of window left corner
 	private double myCurrentYCoor = 0; 
@@ -40,10 +42,10 @@ public class MainDisplay implements VisualUpdate {
 	private double myMouseYFinalPosition;
 	private boolean isMultipleSelectAvailable;
 	
-	private boolean isUpHovered;
-	private boolean isDownHovered;
-	private boolean isLeftHovered;
-	private boolean isRightHovered;
+	private BooleanProperty isUpHovered;
+	private BooleanProperty isDownHovered;
+	private BooleanProperty isLeftHovered;
+	private BooleanProperty isRightHovered;
 	
 	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height, ImageView map) {
 		myUnitActionDisp = uadisp;
@@ -53,21 +55,30 @@ public class MainDisplay implements VisualUpdate {
 		myMainDisplay = new Group();
 		myWidth = width;
 		myHeight = height;
-		initialize();
 		myMap = map;
-		//myMap.setFill(Color.GREEN);
+		initialize();
+		myMainDisplay.getChildren().addAll(myMap, myDisplayables, myMoveWindowButtons);
+	}
+	
+	private void initialize() {
+		myDisplayables = new Group();
+		initializeMapClick();
+		initializeMultipleUnitSelect();
+		initializeMoveButtons();
+	}
+	
+	private void initializeMapClick() {
 		myMap.setOnMouseClicked(e -> {
 			double mouseX = e.getX();
 			double mouseY = e.getY();
-			if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() == -1) {
+			if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() == -1) {
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
-			else if (e.getButton()==MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
+			else if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
 				int ID = this.myUnitActionDisp.getCurrentActionID();
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-						System.out.println(myUnitActionDisp.getBuildTarget().getName());
 						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
 						unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
@@ -78,66 +89,67 @@ public class MainDisplay implements VisualUpdate {
 					myUnitActionDisp.setCurrentActionID(-1);
 				} catch (UnmodifiableGameObjectException e1) {
 					// do nothing
-				}
-				
-				
+				}	
 			}
-			System.out.println(this.myUnitActionDisp.getCurrentActionID());
 		});
-
 		myMap.toBack();
-		myMainDisplay.getChildren().add(myMap);
-		myMainDisplay.getChildren().addAll(myDisplayables, myMoveWindowButtons);
-		initializeMultipleUnitSelect();
 	}
 	
-	private void initialize() {
-		myDisplayables = new Group();
-		initializeMoveButtons();
+	private void initializeMultipleUnitSelect() {
+		myMap.setOnMousePressed(e -> {
+			if (e.getButton()==MouseButton.PRIMARY) {
+				myMouseXInitPosition = e.getSceneX();
+				myMouseYInitPosition = e.getY() - GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT;
+				isMultipleSelectAvailable = true;
+			}
+		});
+		myMap.setOnMouseReleased(e -> {
+			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
+				mySelectedUnitManager.clear();
+				this.myUnitActionDisp.setCurrentActionID(-1);
+				myMouseXFinalPosition = e.getSceneX();
+				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT;
+				for (GameObject go : myDisplayGameObjects) {
+					if (isInSelectionWindow(go.getRenderer().getDisp().getX(), go.getRenderer().getDisp().getY())) {
+						mySelectedUnitManager.add(go);
+					}
+				}
+			}
+			isMultipleSelectAvailable = false;
+		});
 	}
-	
+
 	private void initializeMoveButtons() {
 		myMoveWindowButtons = new Group();
 		
-		Button right = new Button();
-		right.setLayoutX(myWidth - 60);
-		right.setLayoutY(myHeight/2 - 60);
-		right.setGraphic(new ImageView(new Image("arrow_right.png")));
-		right.setOnMouseEntered(e -> {
-			isRightHovered = true;
-		});
-		right.setOnMouseExited(e -> isRightHovered = false);
-		myMoveWindowButtons.getChildren().add(right);
+		isRightHovered = new SimpleBooleanProperty(false);
+		Button right = new MoveButton("right", isRightHovered, myWidth - MOVEBUTTONSIZE, myHeight/2 - MOVEBUTTONSIZE);
 		
-		Button left = new Button();
-		left.setLayoutX(0);
-		left.setLayoutY(myHeight/2 - 60);
-		left.setGraphic(new ImageView(new Image("arrow_left.png")));
-		left.setOnMouseEntered(e -> {
-			isLeftHovered = true;
-		});
-		left.setOnMouseExited(e -> isLeftHovered = false);
-		myMoveWindowButtons.getChildren().add(left);
+		isLeftHovered = new SimpleBooleanProperty(false);
+		Button left = new MoveButton("left", isLeftHovered, 0, myHeight/2 - MOVEBUTTONSIZE);
 		
-		Button up = new Button();
-		up.setLayoutX(myWidth/2 - 60);
-		up.setLayoutY(0);
-		up.setGraphic(new ImageView(new Image("arrow_up.png")));
-		up.setOnMouseEntered(e -> {
-			isUpHovered = true;
-		});
-		up.setOnMouseExited(e -> isUpHovered = false);
-		myMoveWindowButtons.getChildren().add(up);
+		isUpHovered = new SimpleBooleanProperty(false);
+		Button up = new MoveButton("up", isUpHovered, myWidth/2 - MOVEBUTTONSIZE, 0);
 		
-		Button down = new Button();
-		down.setLayoutX(myWidth/2 - 60);
-		down.setLayoutY(myHeight - 60);
-		down.setGraphic(new ImageView(new Image("arrow_down.png")));
-		down.setOnMouseEntered(e -> {
-			isDownHovered = true;
-		});
-		down.setOnMouseExited(e -> isDownHovered = false);
-		myMoveWindowButtons.getChildren().add(down);
+		isDownHovered = new SimpleBooleanProperty(false);
+		Button down = new MoveButton("down", isDownHovered, myWidth/2 - MOVEBUTTONSIZE, myHeight - MOVEBUTTONSIZE);
+		
+		myMoveWindowButtons.getChildren().addAll(right, left, up, down);
+	}
+	
+	private void updateCurrentXYCoor() {
+		if (isDownHovered.getValue() && myCurrentYCoor < myHeight*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
+			myCurrentYCoor += GamePlayer.WINDOW_STEP_SIZE;
+		}
+		if (isUpHovered.getValue() && myCurrentYCoor > 0) {
+			myCurrentYCoor -= GamePlayer.WINDOW_STEP_SIZE;
+		}
+		if (isLeftHovered.getValue() && myCurrentXCoor > 0) {
+			myCurrentXCoor -= GamePlayer.WINDOW_STEP_SIZE;
+		}
+		if (isRightHovered.getValue() && myCurrentXCoor < myWidth*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_X) {
+			myCurrentXCoor += GamePlayer.WINDOW_STEP_SIZE;
+		}
 	}
 	
 	@Override
@@ -147,7 +159,6 @@ public class MainDisplay implements VisualUpdate {
 		for (GameObject go : myDisplayGameObjects) {
 			double xloc = translateX(go.getTransform().getPosition().getX());
 			double yloc = translateY(go.getTransform().getPosition().getY());
-			//System.out.println(xloc);
 			go.getRenderer().getDisp().setX(xloc);
 			go.getRenderer().getDisp().setY(yloc);
 			imgvList.add(go.getRenderer().getDisp());
@@ -162,21 +173,8 @@ public class MainDisplay implements VisualUpdate {
 		for (ImageView imgv : imgvList) {
 			myDisplayables.getChildren().add(imgv);
 		}
-		
-		if (isDownHovered && myCurrentYCoor < myHeight*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
-			myCurrentYCoor += GamePlayer.WINDOW_STEP_SIZE;
-		}
-		if (isUpHovered && myCurrentYCoor > 0) {
-			myCurrentYCoor -= GamePlayer.WINDOW_STEP_SIZE;
-		}
-		if (isLeftHovered && myCurrentXCoor > 0) {
-			myCurrentXCoor -= GamePlayer.WINDOW_STEP_SIZE;
-		}
-		if (isRightHovered && myCurrentXCoor < myWidth*GamePlayer.MAP_DISPLAY_RATIO - GamePlayer.SCENE_SIZE_X) {
-			myCurrentXCoor += GamePlayer.WINDOW_STEP_SIZE;
-		}
+		updateCurrentXYCoor();
 		updateCurrentWindow();
-		
 	}
 
 	@Override
@@ -202,36 +200,18 @@ public class MainDisplay implements VisualUpdate {
 		return y + myCurrentYCoor;
 	}
 	
+	public double getMapWidth() {
+		return myMap.getFitWidth();
+	}
+	
+	public double getMapHeight() {
+		return myMap.getFitHeight();
+	}
+	
 	private void updateCurrentWindow() {
 		myMap.setX(-myCurrentXCoor);
 		myMap.setY(-myCurrentYCoor);
 	}
-	
-	private void initializeMultipleUnitSelect() {
-		myMap.setOnMousePressed(e -> {
-			if (e.getButton()==MouseButton.PRIMARY) {
-				myMouseXInitPosition = e.getSceneX();
-				myMouseYInitPosition = e.getY() - GamePlayer.SCENE_SIZE_Y*GamePlayer.TOP_HEIGHT;
-				isMultipleSelectAvailable = true;
-			}
-		});
-		myMap.setOnMouseReleased(e -> {
-			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
-				mySelectedUnitManager.clear();
-				this.myUnitActionDisp.setCurrentActionID(-1);
-				myMouseXFinalPosition = e.getSceneX();
-				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y*GamePlayer.TOP_HEIGHT;
-				for (GameObject go : myDisplayGameObjects) {
-					if (isInSelectionWindow(go.getRenderer().getDisp().getX(), go.getRenderer().getDisp().getY())) {
-						mySelectedUnitManager.add(go);
-					}
-				}
-			}
-			isMultipleSelectAvailable = false;
-			
-		});
-	}
-	
 	
 	private boolean isInSelectionWindow(double x, double y) {
 		boolean isX;
@@ -263,16 +243,10 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private boolean isXInWindow(double x) {
-		if (x>myCurrentXCoor & x<myCurrentXCoor+GamePlayer.SCENE_SIZE_X) {
-			return true;
-		}
-		return false;
+		return x > myCurrentXCoor & x < myCurrentXCoor + GamePlayer.SCENE_SIZE_X;
 	}
 	
 	private boolean isYInWindow(double y) {
-		if (y>myCurrentYCoor & y<myCurrentYCoor+GamePlayer.SCENE_SIZE_Y*(1-GamePlayer.TOP_HEIGHT-GamePlayer.BOTTOM_HEIGHT)) {
-			return true;
-		}
-		return false;
+		return y > myCurrentYCoor & y < myCurrentYCoor + GamePlayer.SCENE_SIZE_Y * (1 - GamePlayer.TOP_HEIGHT - GamePlayer.BOTTOM_HEIGHT);
 	}
 }
