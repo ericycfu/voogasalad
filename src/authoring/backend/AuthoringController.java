@@ -38,7 +38,9 @@ public class AuthoringController {
 	
 	public void updateMap(MapEntity map) {
 		myMap = map;
-		myMapSettingsTab.update();
+		if (myMapSettingsTab != null) {
+			myMapSettingsTab.update();
+		}
 	}
 	
 	public void updateObject(AuthoringObject obj) {

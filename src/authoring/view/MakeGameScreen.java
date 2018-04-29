@@ -1,5 +1,7 @@
 package authoring.view;
 
+import java.io.File;
+
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
 import gui_elements.factories.ButtonFactory;
@@ -25,6 +27,13 @@ public class MakeGameScreen implements AuthoringView {
 		setupScreen();
 	}
 	
+	public MakeGameScreen(Stage stage, File myFile) {
+		myGame = new GameEntity();
+		myStage = stage;
+		setupScreen();
+		
+	}
+
 	private void setupScreen() {
 		myAuthoringController = new AuthoringController();
 		HBox box = new HBox();
