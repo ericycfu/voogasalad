@@ -73,6 +73,7 @@ public class CurrentLobbyScreen extends ClientScreen {
 		myPane.setId("lobby_selection_screen");
 		myScene = new Scene(myPane);
 		myScene.getStylesheets().add(STYLE_PATH);
+		getStage().setScene(myScene);
 	}
 
 	@Override
@@ -84,11 +85,8 @@ public class CurrentLobbyScreen extends ClientScreen {
 				return CLASS_REF;
 			obj = in.readObject();
 			System.out.println(obj.getClass().getName());
-			if(obj instanceof String) {
-				switch((String)(obj)) {
-					case "Leave": return LobbySelectionScreen.CLASS_REF;
-					case "Start": return null;//todo return GamePlayer thing
-				}
+			if(obj instanceof LobbyManager) {
+				return LobbySelectionScreen.CLASS_REF;
 			}
 			GameLobby currentLobby = (GameLobby) obj;
 			System.out.println("1");

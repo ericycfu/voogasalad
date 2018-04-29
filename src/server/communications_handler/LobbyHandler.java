@@ -10,7 +10,7 @@ import server.RTSServer;
 
 public class LobbyHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "Lobby";
-	public static final String REMOVE_OPTION = "Remove";
+	public static final String REMOVE_OPTION = "Leave";
 	public static final String START_GAME = "Start";
 	public static final String ENTER_GAME = "Play";
 	private GameLobby currentLobby;
@@ -26,7 +26,9 @@ public class LobbyHandler extends CommunicationsHandler {
 			if((input = (String)getInputStream().readObject()) != null) {
 				switch(input) {
 					case REMOVE_OPTION: currentLobby.removePlayer(getSocket());
-									getOutputStream().writeObject("Left");
+									ObjectOutputStream out = getOutputStream();
+									out.writeObject("Left");
+									out.flush();
 									return MainPageHandler.CLASS_REF;
 					case START_GAME:
 									if(getSocket().equals(currentLobby.getHost())) {
@@ -49,7 +51,7 @@ public class LobbyHandler extends CommunicationsHandler {
 		try {
 			ObjectOutputStream out = getOutputStream();
 			if(out == null)
-				return;
+				throw new SocketException("Disconnected");
 			System.out.println("Writing lobby");
 			if(currentLobby.isRunning())
 				out.writeObject(START_GAME);
@@ -59,7 +61,7 @@ public class LobbyHandler extends CommunicationsHandler {
 			}
 			out.flush();
 			System.out.println("Lobby writing finished");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return;
 		}
 	}
