@@ -43,7 +43,7 @@ public class Writer {
 	 */
 	public void writeNoOverwrite(String location, List<Object> data) throws IOException {
 		try {
-			List<Object> prevData= Reader.read(location);
+			List<Object> prevData= myReader.read(location);
 			data.addAll(prevData);
 		}
 		catch (ClassNotFoundException e) {
