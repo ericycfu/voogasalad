@@ -41,9 +41,9 @@ public class ObjectLogic implements Serializable
 	public ObjectLogic(ObjectLogic other)
 	{
 		this.fulfillsLossCondition = other.fulfillsLossCondition;
-		this.attributes = new ObjectAttributes(attributes);
-		this.interactions = new InteractionManager(interactions);
-		this.conditions = new ConditionManager(conditions);
+		this.attributes = new ObjectAttributes(other.attributes);
+		this.interactions = new InteractionManager(other.interactions);
+		this.conditions = new ConditionManager(other.conditions);
 	}
 	
 	public ObjectAttributes accessAttributes()

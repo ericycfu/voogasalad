@@ -40,9 +40,9 @@ public class ObjectAttributes implements Serializable{
 	public ObjectAttributes(ObjectAttributes other)
 	{
 		this.buildTime = other.buildTime;
-		this.buildCosts = copyMap(buildCosts);
-		this.attributes = copyMap(attributes);
-		this.maxAttributes = copyMap(maxAttributes);
+		this.buildCosts = copyMap(other.buildCosts);
+		this.attributes = copyMap(other.attributes);
+		this.maxAttributes = copyMap(other.maxAttributes);
 	}
 	
 	public List<String> getAttributeNames() 

@@ -146,6 +146,10 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	 */
 	public GameObject(int id, GameObject other)
 	{
+		if(other == null)
+		{
+			System.out.println("other null");
+		}
 		this.id = id;
 		this.name = other.name;
 		this.tags = other.tags;
@@ -153,6 +157,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.isBuilding = other.isBuilding;
 		this.movementSpeed = other.movementSpeed;
 		this.propertiesInit();
+		
 		this.transform = new Transform(other.getTransform());
 		this.myObjectLogic = new ObjectLogic(other.myObjectLogic);
 		this.renderer = new Renderer(other.renderer);
