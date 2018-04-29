@@ -30,7 +30,6 @@ public class MainDisplay implements VisualUpdate {
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private SelectedUnitManager mySelectedUnitManager;
-	//private double currentPressedLocation; 
 	private Group myMainDisplay;
 	private ImageView myMap;
 	private GameObjectManager myGameObjectManager;
@@ -183,13 +182,11 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	public double translateX(double x) {
-		double retX = x - myCurrentXCoor;
-		return retX;
+		return x - myCurrentXCoor;
 	}
 	
 	public double translateY(double y) {
-		double retY = y - myCurrentYCoor;
-		return retY;
+		return y - myCurrentYCoor;
 	}
 	
 	public double detranslateX(double x){
