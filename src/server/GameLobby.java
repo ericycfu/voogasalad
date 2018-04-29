@@ -80,7 +80,8 @@ public class GameLobby implements Serializable{
 		return playerIDs.get(s);
 	}
 	public void addPlayer(Socket toAdd) {
-		playerIDs.put(toAdd, nextID++);
+		playerIDs.put(toAdd, nextID);
+		nextID++;
 		if(isRunning)
 			return;
 		int min_index = 0;

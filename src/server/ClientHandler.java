@@ -17,10 +17,15 @@ public class ClientHandler implements Runnable {
 	@Override
 	public void run() {
 		new Thread(() -> {
+			try {
 			while(true) {
-				String newHandler =  myCommunicationsHandler.updateServer();
+					String newHandler =  myCommunicationsHandler.updateServer();
 				if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
 					myCommunicationsHandler = myCHFactory.get(newHandler);
+			}
+			}
+			catch(SocketException e) {
+				Thread.currentThread().interrupt();
 			}
 		}).start();
 		new Thread(() -> {
@@ -30,7 +35,6 @@ public class ClientHandler implements Runnable {
 				}
 			}
 			catch(SocketException e) {
-				System.out.println("Disconnected");
 				Thread.currentThread().interrupt();
 			}
 		}).start();

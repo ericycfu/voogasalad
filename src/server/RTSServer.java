@@ -60,11 +60,10 @@ public class RTSServer {
                     newThread.start();
                 } catch (IOException e) {
                 }
-                cleanLobbyManager();
             }
        }).start();
 	}
-	private void cleanLobbyManager() {
+	public void cleanLobbyManager() {
 		for(GameLobby g: myLobbyManager.getElements())
 			if(g.getCurrentSize() == 0)
 				myLobbyManager.removeElement(g);
