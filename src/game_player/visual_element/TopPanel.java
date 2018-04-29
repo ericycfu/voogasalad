@@ -19,8 +19,6 @@ import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,7 +53,6 @@ public class TopPanel {
 	public static final double TAWIDTH = 0.25;
 	
 	private GridPane myPane;
-	private MenuButton menu;
 	private TextArea time;
 	private ComboBox<String> resourceBoard;
 	private int menuSpan;
