@@ -12,8 +12,8 @@ public class LobbyDisplay extends GridPane {
 	public LobbyDisplay() {
 		setPrefHeight(100);
 		setPrefWidth(300);
-		setHgap(10);
-	    setVgap(10);
+		setHgap(0);
+	    setVgap(0);
 	    setPadding(new Insets(0, 10, 0, 10));
 	}
 	public void update(GameLobby serverInfo) {

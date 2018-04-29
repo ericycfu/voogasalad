@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
+/**
+ * JUnit test for the reader
+ * @author shichengrao
+ *
+ */
 public class ReaderTest {
 
 	@Test

@@ -2,6 +2,7 @@ package interactions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -28,7 +29,7 @@ public class Interaction implements EngineObject, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static enum interactionTargetTeam
+	public static enum InteractionTargetTeam
 	{
 		OWN, OTHER, ALL;
 	}
@@ -45,7 +46,8 @@ public class Interaction implements EngineObject, Serializable {
 	private boolean isBuild;
 	private boolean isInstantaneous;
 	
-	private interactionTargetTeam interactionTargetTeam;
+	private InteractionTargetTeam InteractionTargetTeam;
+	private Map<String, InteractionTargetTeam> targetTeamEnumMap;
 
 	//store functions by id
 	private List<CustomFunction> customFunctions;
@@ -56,6 +58,14 @@ public class Interaction implements EngineObject, Serializable {
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
 		this.id = id;
+		createTargetTeamEnumMap();
+	}
+	
+	private void createTargetTeamEnumMap() {
+		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
+		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
+			targetTeamEnumMap.put(value.toString(), value);
+		}
 	}
 
 
@@ -97,7 +107,9 @@ public class Interaction implements EngineObject, Serializable {
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		if(!validatedInteractionTarget(current, other)) return;
-		if(matchesTags(other, targetTags)) return;
+		System.out.println("validates");
+		//if(matchesTags(other, targetTags)) return;
+		System.out.println("tags match");
 		try 
 		{
 			for(CustomFunction cFunc : customFunctions)
@@ -118,10 +130,10 @@ public class Interaction implements EngineObject, Serializable {
 	 */
 	private boolean validatedInteractionTarget(GameObject current, GameObject other)
 	{
-		if(this.interactionTargetTeam == interactionTargetTeam.ALL) return true;
-		else if(this.interactionTargetTeam == interactionTargetTeam.OTHER
+		if(this.InteractionTargetTeam == InteractionTargetTeam.ALL) return true;
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OTHER
 				&& current.getOwner().getID() != other.getOwner().getID()) return true;
-		else if(this.interactionTargetTeam == interactionTargetTeam.OWN
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OWN
 				&& current.getOwner().getID() == other.getOwner().getID()) return true;
 		return false;
 		
@@ -155,14 +167,19 @@ public class Interaction implements EngineObject, Serializable {
 		this.isBuild = val;
 	}
 	
-	public void setInteractionTargetTeam(interactionTargetTeam setting)
+	public void setInteractionTargetTeam(InteractionTargetTeam setting)
 	{
-		this.interactionTargetTeam = setting;
+		this.InteractionTargetTeam = setting;
 	}
 	
-	public interactionTargetTeam getInteractionTargetTeam()
+	public void setInteractionTargetTeam(String setting_string)
 	{
-		return interactionTargetTeam;
+		this.InteractionTargetTeam = targetTeamEnumMap.get(setting_string);
+	}
+	
+	public InteractionTargetTeam getInteractionTargetTeam()
+	{
+		return InteractionTargetTeam;
 	}
 	
  	public List<String> getTargetTags()

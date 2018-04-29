@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import authoring.backend.MainComponentPropertyManager;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
@@ -14,7 +15,7 @@ import transform_library.Vector2;
 
 /**
  * 
- * @author Rayan
+ * @author Rayan, shichengrao
  * Allows access to the gameobjects in the scene by runnning their update methods.
  * Allows the game engine to restrict access of gameobjects from the game player
  */
@@ -56,10 +57,10 @@ public class GameObjectManager extends ElementManager implements Serializable{
 		return newID;
 	}
 	
-	public int createGameObject(Transform transform, ObjectLogic logic, String imagePath, double movementSpeed,  boolean isBuilding, String name, List<String> tags)
+	public int createGameObject(Transform transform, ObjectLogic logic, MainComponentPropertyManager manager, Team team )
 	{
 		int newID = calculateID();
-		GameObject obj = new GameObject(newID, transform, logic, imagePath, movementSpeed, isBuilding, name, tags);
+		GameObject obj = new GameObject(newID, transform, logic, manager, team);
 		this.addElement(obj);
 		return newID;
 	}
@@ -67,7 +68,10 @@ public class GameObjectManager extends ElementManager implements Serializable{
 	public int copyGameObject(GameObject other, Team t)
 	{
 		int newID = calculateID();
+		System.out.println("other: " + other.getMovementSpeed());
 		GameObject copy = new GameObject(newID, t, other);
+		System.out.println("newly built unit: "+copy.isBuilding());
+		System.out.println("newly built unit: "+copy.getMovementSpeed());
 		this.addElement(copy);
 		return newID;
 	}

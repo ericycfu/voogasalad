@@ -14,10 +14,10 @@ public class Team implements EngineObject, Serializable {
 	//private Map<String, Double> availableResources;
 	private ResourceManager resourceManager;
 	
-	public Team(int id, String teamName, ResourceManager resourceManager)
+	public Team(int id, ResourceManager resourceManager)
 	{
 		this.id = id;
-		this.teamName = teamName;
+		this.teamName = "Team " + id;
 		this.resourceManager = resourceManager;
 	}
 	
