@@ -10,6 +10,7 @@ import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.ObjectLogic;
 import transform_library.Transform;
 import transform_library.Vector2;
 /**
@@ -44,7 +45,9 @@ public final class AuthoringToGameObject {
 	public static List<GameObject> convertList(List<AuthoringObject> list){
 		List<GameObject> gameObjectList = new ArrayList<>();
 		for(AuthoringObject AO: list) {
-			gameObjectList.add(new GameObject(0,new Transform(new Vector2(0,0)), AO.getObjectLogic(), AO.getMainComponentPropertyManager(), null));
+			Transform trans = new Transform(new Vector2(0,0));
+			ObjectLogic logic = new ObjectLogic(AO.getObjectLogic());
+			gameObjectList.add(new GameObject(0, trans, logic, AO.getMainComponentPropertyManager(), null));
 		}
 		
 		
