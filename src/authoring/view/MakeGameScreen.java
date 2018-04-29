@@ -1,9 +1,11 @@
 package authoring.view;
 
 import java.io.File;
+import java.io.IOException;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
+import game_data.Reader;
 import gui_elements.factories.ButtonFactory;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -27,7 +29,11 @@ public class MakeGameScreen implements AuthoringView {
 		setupScreen();
 	}
 	
-	public MakeGameScreen(Stage stage, File myFile) {
+	public MakeGameScreen(Stage stage, File myFile) throws ClassNotFoundException, IOException {
+		List<Object> myAuthoringObjects = Reader.read(myFile.getCanonicalPath(), "list");
+		List<Object> myMap = Reader.read(myFile.getCanonicalPath(), "map");
+		List<Object> myMapSettings = Reader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
+		
 		myGame = new GameEntity();
 		myStage = stage;
 		setupScreen();
