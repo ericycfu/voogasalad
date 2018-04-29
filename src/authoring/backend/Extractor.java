@@ -14,6 +14,14 @@ public class Extractor {
 		return "";
 	}
 	
+	public static int extractTextFieldInt(Node n) {
+		if (n instanceof TextField) {
+			String s = ((TextField) n).getText();
+			return Integer.parseInt(s);
+		}
+		return 0;
+	}
+	
 	public static String extractComboBox(Node n) {
 		if (n instanceof ComboBox) {
 			String symbol = (String) ((ComboBox) n).getValue();

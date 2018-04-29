@@ -3,29 +3,31 @@ package gui_elements.buttons;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.GameEntity;
+import authoring.backend.MapSettings;
 import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_player.GamePlayer;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import resources.Resources;
 import transform_library.Vector2;
-
+/**
+ * saves the current environment locally and remotely for continued use of both the authoring environment and the rest of the project
+ * @author shichengrao
+ *
+ */
 public class PlayGameButton extends Button {	
-	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
-	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
-	private static final String INITIAL_MAP_STRING = "INITIALIZATION_LOCATION_MAP";
-	private static final String INITIAL_LIST_STRING = "INITIALIZATION_LOCATION_LIST";
 	private AuthoringController ac;
 	private GameEntity gameEntity;
 	public PlayGameButton(AuthoringController ac, GameEntity game) {
@@ -48,23 +50,24 @@ public class PlayGameButton extends Button {
 	protected void setAction() {
 		this.setOnAction(value -> {
 			System.out.print("Playing game!");
-			Writer myWriter = new Writer();
-//			myReader = new Reader();
 			
 			Map<AuthoringObject, List<DraggableImageView>> map = ac.getCurrentMap().getLocations();
 			Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
-			List<Map<AuthoringObject, List<Vector2>>> listFormMap = new ArrayList<>();
-			listFormMap.add(changedMap);
+			List<Object> listForAuthor = new ArrayList<>();
+			List<Object> listForGame = new ArrayList<>();
 			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), gameEntity.getCreatedObjects().getAuthoringObjects());
-				myWriter.write(Resources.getString(RESOURCES_STRING2), listFormMap);
-				List<GameObjectManager> listFormGOM = new ArrayList<>();
-				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map);
-				listFormGOM.add(myGOM);
-				myWriter.write(Resources.getString(INITIAL_MAP_STRING), listFormGOM);
-				List<GameObject> possibleObjects = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
-				myWriter.write(Resources.getString(INITIAL_LIST_STRING),possibleObjects);
-				//GamePlayer gamePlayer = new GamePlayer(myGOM);
+				listForAuthor.add(gameEntity.getCreatedObjects().getAuthoringObjects());
+				listForAuthor.add(changedMap);
+				listForAuthor.add(ac.getCurrentMap().getMapSettings());
+				Writer.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
+				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,gameEntity.getResourceManager());
+				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
+				Set<GameObject> possibleObjects = new HashSet<>();
+				possibleObjects.addAll(possibleObjectsList);
+				listForGame.add(myGOM);
+				listForGame.add(possibleObjects);
+				listForGame.add(ac.getCurrentMap().getMapSettings());
+				Writer.write(Resources.getString("INITIALIZATION_LOCATION"),listForGame);
 				System.out.println("Object saved");
 			} catch (IOException e) {
 				System.err.println("Could not save created authoring objects");

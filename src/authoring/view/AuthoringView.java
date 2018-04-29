@@ -1,7 +1,11 @@
 package authoring.view;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
 public interface AuthoringView {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
+	public static final String IMAGE_PATH = "/images/";
 	public static final String TITLE_PROPERTY = "title";
 	public static final String WIDTH_PROPERTY = "width";
 	public static final String HEIGHT_PROPERTY = "height";
@@ -9,6 +13,7 @@ public interface AuthoringView {
 	public static final String DEFAULT_LABEL = "default_authoring_label";
 	public static final String DEFAULT_TITLE = "default_authoring_title";
 	
+	public static final Paint DEFAULT_BACKGROUND = Color.WHITE;
 	public static final int PANEL_WIDTH = 700;
 	public static final int PANEL_HEIGHT = 580;
 }

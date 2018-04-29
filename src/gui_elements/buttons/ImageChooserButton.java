@@ -24,6 +24,6 @@ public class ImageChooserButton extends Button {
 	}
 	
 	public String getFilePath() {
-		return file.getPath();
+		return file.getName();
 	}
 }

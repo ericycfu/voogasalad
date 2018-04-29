@@ -1,16 +1,15 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
+import authoring.backend.MainComponentPropertyManager;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
-import javafx.scene.image.Image;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -18,15 +17,20 @@ import transform_library.Vector2;
 
 /**
  * 
- * @author andrew, Rayan
+ * @author andrew, Rayan, shichengrao
  * 
  * Any object that will be shown on the world screen will be of the GameObject type. 
  * 
  * Has a Transform object for operations relating to positioning in world space
  *
  */
-public class GameObject implements InterfaceGameObject, EngineObject {
+public class GameObject  implements InterfaceGameObject, EngineObject, Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String EMPTY = "empty";
 	
 	private int id;
@@ -93,7 +97,28 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		this.renderer = new Renderer();
 		propertiesInit();
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param transform
+	 * @param logic
+	 * Constructor for game object given authoring object data
+	 */
+	public GameObject(int id, Transform transform, ObjectLogic logic, MainComponentPropertyManager manager, Team team)
+	{
+		this.id = id;
+		this.transform = transform;
+		this.myObjectLogic = logic;
+		this.movementSpeed = manager.getMovementSpeed();
+		this.isBuilding = manager.isBuilding();
+		System.out.println("manager.isBuilding" + manager.isBuilding());
+		this.renderer = new Renderer(manager.getImagePath());
+		this.name = manager.getName();
+		this.tags = manager.getTags();
+		this.owner = team;
+		propertiesInit();
+		
+	}
 	/**
 	 * 
 	 * @param startingPosition
@@ -136,7 +161,6 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		isInteractionQueued = false;
 		interactionTarget = null;
 		isDead = false;
-		isBuilding = false;
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;
@@ -156,6 +180,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 		
 		if(isBeingConstructed)
 		{
+			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
 				this.dequeueBuilding();
@@ -247,6 +272,7 @@ public class GameObject implements InterfaceGameObject, EngineObject {
 	
 	public void queueBuilding()
 	{
+		System.out.println("goes to queu");
 		setIsUninteractive(true);
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();

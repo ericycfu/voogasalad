@@ -7,7 +7,9 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
+import authoring.backend.AuthoringController;
 import authoring.backend.Extractor;
+import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
@@ -30,24 +32,28 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
+	private MapSettings settings;
+	private GameEntity game;
+	private AuthoringController authoring_controller;
 	private ResourceManager myResourceManager;
+	private HBox lossConditionBox;
 	private HBox resourcesBox;
-	private Writer myWriter;
-	private Reader myReader;
 	private VBox contentBox;
 	
-	public MapSettingsView(MapSettings settings) {
+	public MapSettingsView(AuthoringController authoring_controller, GameEntity game) {
+		this.authoring_controller = authoring_controller;
+		settings = authoring_controller.getCurrentMap().getMapSettings();
+		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
-		myResourceManager = new ResourceManager();
-		myWriter = new Writer();
-		myReader = new Reader();
+		myResourceManager = game.getResourceManager();
 	}
 	
 	private void initializeAll() {
 		initializeTitle();
 		VBox myVBox = new VBox();
 		initializeSettings(myVBox);
+		initializeLossConditions(myVBox);
 		initializeResources(myVBox);
 		this.getChildren().add(myVBox);
 		setupButton();
@@ -60,6 +66,12 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		box.setPadding(new Insets(50, 50, 0, 50));
 		rootBox.getChildren().add(box);
 	}
+	
+	private void initializeLossConditions(VBox rootBox) {
+		lossConditionBox = new HBox();
+		rootBox.getChildren().add(lossConditionBox);
+	}
+	
 	
 	private void initializeResources(VBox rootBox) {
 		resourcesBox = new HBox();
@@ -80,6 +92,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeLabelBox(HBox rootBox) {
 		VBox box = new VBox();
 		String[] labels = {
+				"Map name:",
 				"Number of players:", 
 				"Loss condition:", 
 				"Image selection:",
@@ -98,6 +111,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeContent(HBox rootBox) {
 		contentBox = new VBox();
 		contentBox.getChildren().addAll(
+				new TextField(),
 				new TextField(),
 				new ComboBox(),
 				new ImageChooserButton(),
@@ -118,11 +132,20 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	
 	private void saveConditions() {
 		String mapName = Extractor.extractTextField(contentBox.getChildren().get(0));
-		String filePath = Extractor.extractImagePath(contentBox.getChildren().get(2));
-		int width = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(3)));
-		int height = Integer.parseInt(Extractor.extractImagePath(contentBox.getChildren().get(4)));
-
+		int numPlayers = Extractor.extractTextFieldInt(contentBox.getChildren().get(1));
+		String imagePath = IMAGE_PATH + Extractor.extractImagePath(contentBox.getChildren().get(3));
+		System.out.print(imagePath);
+		int mapwidth = Extractor.extractTextFieldInt(contentBox.getChildren().get(4));
+		int mapheight = Extractor.extractTextFieldInt(contentBox.getChildren().get(5));
+		settings.updateSettings(mapName, numPlayers, imagePath, mapwidth, mapheight);
 	}
+	
+	private void newLossConditionLine(HBox rootBox) {
+		HBox line = new HBox();
+		
+	}
+	
+	
 	private void initializeResources(HBox rootBox) {
 		VBox myVBox = new VBox();
 		rootBox.getChildren().add(myVBox);
@@ -168,23 +191,25 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		box.setPadding(new Insets(0, 25, 0, 25));
 	}
 	private void saveSettings() {
-		VBox myRootBox = (VBox) this.getChildren().get(0);
+		VBox myRootBox = (VBox) this.getChildren().get(1);
 		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
 		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
 		try {
-			myWriter.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
+			Writer.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//this try/catch statement below likely goes into the player so they can get the list of resources?
-		try {
+		/*try {
 			System.out.println("creating the list");
 			List<Entry<String, Double>> myList = new ArrayList<Entry<String, Double>>();
 			List<Object> initialList = new ArrayList<Object>();
-			initialList = myReader.read("src/gui_elements/tabs/test");
+			initialList = Reader.read("src/gui_elements/tabs/test");
 			for (Object myObj : initialList) {
 				myList.add((Entry<String, Double>) myObj);
 			}
+			//this is the constructor that gameplayer will use
+			ResourceManager newManager = new ResourceManager(myList);
 			System.out.println(myList.get(0));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -192,7 +217,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	private void saveMapConfiguration(VBox myBox) {
@@ -213,6 +238,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		
 	}
 	private void saveResources(VBox myBox) {
+		myResourceManager.clearManager();
 		for (Node myNode : myBox.getChildren()) {
 			try {
 				HBox currentHBox = (HBox) myNode;
@@ -224,6 +250,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			//nothing really wrong here, just nothign to get because not a textfield, change this later
 			}
 		}
+		authoring_controller.updateBuildCost();
 	}
 
 }

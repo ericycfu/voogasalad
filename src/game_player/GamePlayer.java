@@ -14,8 +14,10 @@ import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import game_player.alert.AlertMaker;
+import game_player.visual_element.BuildButton;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
@@ -33,6 +35,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pathfinding.GridMap;
 import scenemanager.NullEndConditionException;
@@ -100,6 +103,7 @@ public class GamePlayer {
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
 		for (GameObject go : myPossibleUnits) {
+			System.out.println(go.getName() + "this unit is in possible units");
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
@@ -107,10 +111,19 @@ public class GamePlayer {
 						List<String> tags = i.getTargetTags();
 						for (String s : tags) {
 							for (GameObject go2 : myPossibleUnits) {
-								if (s.equals(go2.getName())) {
-									SkillButton sb = new SkillButton(go2.getRenderer().getDisp().getImage(), s, i.getID(), i.getDescription() + " " + s, 
-											SCENE_SIZE_Y*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH, 
-											SCENE_SIZE_X*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
+								boolean isTagMatch = false;
+								for (String s2 : go2.getTags()) {
+									if (s2.equals(s)) {
+										isTagMatch = true;
+									}
+								}
+								if (isTagMatch) {
+									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
+											s, 
+											i.getID(), 
+											i.getDescription() + " " + s, 
+											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
+											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
 										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
 										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
@@ -125,26 +138,22 @@ public class GamePlayer {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			
 		}
 	}
 	
 	private void unitSkillMapInitialize() {
-		//unitBuildsMapInitialize();
-		
+		unitBuildsMapInitialize();
+		myUnitSkills.clear();
+		System.out.println(myPossibleUnits);
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					SkillButton sb = new SkillButton(ia.getImg(), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH);
-					System.out.println(SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					System.out.println(ia.getID());
-					System.out.println(sb.getInteractionID());
-					List<GameObject> temp = new ArrayList<>();
-					temp.add(go);
+					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
-						this.myUnitDisplay.getUnitActionDisp().update(temp);
+						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 						System.out.println(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID());
 					});
@@ -152,21 +161,26 @@ public class GamePlayer {
 						sb.setOnAction(e->{
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
 						});
-						skillList.add(sb);
 					}
 					else {
+						System.out.println("something is buildInteraction");
+						System.out.println(ia.isBuild() + "look at this");
+						System.out.println(ia.getTargetTags());
 						sb.setOnAction(e -> {
 							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);
-							myUnitDisplay.getUnitActionDisp().build(sblist);
+							myUnitDisplay.getUnitActionDisp().fill(sblist);
 						});
 					}
+					skillList.add(sb);
 				}
 				skillList.add(cancel);
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			System.out.println(go.getName());
 			myUnitSkills.put(go.getName(), skillList);
+			System.out.println(skillList.size());
 		}
 	}
 	
@@ -237,6 +251,13 @@ public class GamePlayer {
 	}
 	
 	public void update(List<GameObject> gameobject) {
+		if (myTopPanel.getIsLoaded()) {
+			unitSkillMapInitialize();
+			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
+			myTopPanel.setIsLoaded(false);
+		}
+		initializeSingleUnitSelect();
+		
 		//myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
@@ -247,29 +268,19 @@ public class GamePlayer {
 		else {
 			myScene.setCursor(Cursor.DEFAULT);
 		}
+
 		
-		/**
-		try {
-			checkEnd();
-		} catch (NullEndConditionException e) {
-			new AlertMaker("End Condition", "No end condition is defined");
-		}
-		**/
 	}
 	
 	// TO-DO: set select when a new unit is created
 	
-	private void checkEnd() throws NullEndConditionException {
-		EndStateWrapper esw = mySceneManager.checkEndCondition();
-		if (esw.getState().equals(EndState.WIN)) {
-			
-		}
-		else if (esw.getState().equals(EndState.LOSE)) {
-			
-		}
-		else {
-			
-		}
+	private void end(String result) {
+		myRoot.getChildren().clear();
+		Text text = new Text(result);
+		text.setLayoutX(SCENE_SIZE_X/2-100);
+		text.setLayoutY(SCENE_SIZE_Y/2-100);
+		myRoot.getChildren().add(text);
 	}
+	
 	
 }

@@ -1,17 +1,8 @@
 package game_engine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import conditions.Condition;
-import game_object.GameObject;
-import interactions.Interaction;
-
-import java.util.TreeMap;
-import java.util.AbstractMap.SimpleEntry;
 
 /**
  * 
@@ -49,6 +40,6 @@ public class TeamManager extends ElementManager {
 		return (Team)(this.get(id));
 	}
 	public int getSize() {
-		return getElements().size();
+		return getElementsRaw().size();
 	}
 }

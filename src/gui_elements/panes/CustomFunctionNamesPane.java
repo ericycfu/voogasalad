@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
