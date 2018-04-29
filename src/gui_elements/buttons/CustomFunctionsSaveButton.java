@@ -79,6 +79,7 @@ public class CustomFunctionsSaveButton extends MainButton {
 			interaction_add_custom_functions_screen.getStage().close();
 			interaction.addCustomFunction(custom_function);
 			interaction.isBuild(custom_function.getName().equals(BUILD_FUNCTION));
+			System.out.println(interaction.isBuild());
 			createSuccessAlert();
 		});
 	}
