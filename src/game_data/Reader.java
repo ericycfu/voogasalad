@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -78,6 +80,17 @@ public final class Reader {
 		System.out.println(obj.getClass().getName());
 		if(obj instanceof GameObjectManager) {
 			((GameObjectManager) obj).setupImages();
+		}
+		else if (obj instanceof Map) {
+			for (Object myObj:  ((Map) obj).keySet()){
+				setUpNonSerializable(myObj);
+			}
+			System.out.println("making images for map");
+		}
+		else if(obj instanceof Set) {
+			for(Object myObj: (Set) obj) {
+				setUpNonSerializable(myObj);
+			}
 		}
 		else if(obj instanceof GameObject) {
 			((GameObject) obj).setupImages();
