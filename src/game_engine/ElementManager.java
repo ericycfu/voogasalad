@@ -92,6 +92,7 @@ public abstract class ElementManager implements Serializable {
 	 */
 	public void addElement(EngineObject obj)
 	{
+		new_ID_val++;
 		elementMap.put(obj.getID(), obj);
 		new_ID_val++;
 	}
