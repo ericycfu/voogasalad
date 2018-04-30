@@ -15,6 +15,7 @@ import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
@@ -48,7 +49,6 @@ public class LobbySelectionScreen extends ClientScreen {
 	public static final String IOALERTBODY = "Unable to create lobby!";
 
 	private FileChooser myGameChooser;
-	private FileChooser myMapChooser;
 	private ListView<LobbyDisplay> currentLobbies;
 	private Pane myPane;
 	private Scene myScene; 
@@ -68,9 +68,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		myGameChooser = new FileChooser();
 		myGameChooser.setTitle(GAME_CHOOSER_TITLE);
 		myGameChooser.setInitialDirectory(new File(DATA_PATH));
-		myMapChooser = new FileChooser();
-		myMapChooser.setTitle(MAP_CHOOSER_TITLE);
-		myGameChooser.setInitialDirectory(new File(DATA_PATH));
 	}
 	private void setupContent() {
 		setUpLobbyDisplays();
@@ -85,7 +82,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		create.setLayoutY(520);
 		create.setOnAction(e -> {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
-			File chosenMap = myMapChooser.showOpenDialog(getStage());
 			try {
 				List<Object> gameObjects = myReader.read(chosenGame.getCanonicalPath());
 				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
@@ -95,7 +91,7 @@ public class LobbySelectionScreen extends ClientScreen {
 				for(GameObject g: possibleUnits) {
 					currentGameInfo.addReferenceGameObject(g);
 				}
-				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenMap.getCanonicalPath());
+				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenGame.getCanonicalPath());
 				ObjectOutputStream out = getOutputStream();
 				out.writeInt(-1);
 				out.writeObject(newGame);
@@ -168,17 +164,21 @@ public class LobbySelectionScreen extends ClientScreen {
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();
+			
 			while(numLobbies < currentLobbies.getItems().size()) {
-				currentLobbies.getItems().remove(0);
+				Platform.runLater(() -> currentLobbies.getItems().remove(0));
 			}
 			while(numLobbies > currentLobbies.getItems().size()) {
-				currentLobbies.getItems().add(new LobbyDisplay());
+				Platform.runLater(() -> currentLobbies.getItems().add(new LobbyDisplay()));
 			}
+			Platform.runLater(() -> {
 			for(int x = 0; x < lobbies.getElements().size(); x++) {
 				currentLobbies.getItems().get(x).update(lobbies.getElements().get(x));
 			}
+			});
 			return CLASS_REF;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return CLASS_REF;
 		}
 
