@@ -17,16 +17,13 @@ public class ServerClient  extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Socket clientSocket = null;
-		System.out.println(System.currentTimeMillis());
 		do {
 			try {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
 			}
 			catch(Exception e){
-				System.out.println("Fail");
 			}
 		} while (clientSocket == null);
-		System.out.println(System.currentTimeMillis());
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
 		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
 		new Thread(() -> {

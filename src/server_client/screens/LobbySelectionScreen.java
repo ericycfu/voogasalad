@@ -97,7 +97,6 @@ public class LobbySelectionScreen extends ClientScreen {
 				out.writeObject(newGame);
 				out.flush();
 			} catch (Exception e2) {
-				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
@@ -107,7 +106,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
-			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					ObjectOutputStream out = getOutputStream();
@@ -164,21 +162,19 @@ public class LobbySelectionScreen extends ClientScreen {
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();
-			
+			Platform.runLater(() -> { 
 			while(numLobbies < currentLobbies.getItems().size()) {
-				Platform.runLater(() -> currentLobbies.getItems().remove(0));
+				currentLobbies.getItems().remove(0);
 			}
 			while(numLobbies > currentLobbies.getItems().size()) {
-				Platform.runLater(() -> currentLobbies.getItems().add(new LobbyDisplay()));
+				currentLobbies.getItems().add(new LobbyDisplay());
 			}
-			Platform.runLater(() -> {
 			for(int x = 0; x < lobbies.getElements().size(); x++) {
 				currentLobbies.getItems().get(x).update(lobbies.getElements().get(x));
 			}
 			});
 			return CLASS_REF;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CLASS_REF;
 		}
 

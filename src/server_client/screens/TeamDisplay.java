@@ -9,7 +9,7 @@ public class TeamDisplay extends GridPane {
 	private int ID;
 	public TeamDisplay(int ID) {
 		setPrefHeight(100);
-		setPrefWidth(800);
+		setPrefWidth(700);
 		setHgap(0);
 	    setVgap(0);
 	    setPadding(new Insets(10, 10, 10, 10));
