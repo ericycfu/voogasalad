@@ -32,7 +32,6 @@ public class MainPageHandler extends CommunicationsHandler {
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {
-			e.printStackTrace();
 			return CLASS_REF;}
 	}
 
