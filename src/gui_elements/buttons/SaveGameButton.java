@@ -54,7 +54,7 @@ public class SaveGameButton extends Button {
 				System.err.println("Could not save created authoring objects");
 			}
 			
-			CreatedObjects.getAuthoringObjects().clear();			
+			myGameEntity.getCreatedObjects().getAuthoringObjects().clear();			
 		});
 	}
 	

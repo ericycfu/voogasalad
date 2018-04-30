@@ -63,7 +63,7 @@ public class PlayGameButton extends Button {
 				listForAuthor.add(gameEntity.getResourceManager());
 				myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,gameEntity.getResourceManager());
-				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
+				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(gameEntity.getCreatedObjects().getAuthoringObjects());
 				Set<GameObject> possibleObjects = new HashSet<>();
 				possibleObjects.addAll(possibleObjectsList);
 				listForGame.add(myGOM);
