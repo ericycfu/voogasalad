@@ -19,7 +19,7 @@ import game_object.GameObjectManager;
  * @author shichengrao
  *
  */
-public final class Reader {
+public class Reader {
 	/**
 	 * reads all data at target location
 	 * @param location
@@ -28,7 +28,7 @@ public final class Reader {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static List<Object> read(String location) throws IOException, ClassNotFoundException{
+	public List<Object> read(String location) throws IOException, ClassNotFoundException{
 		XStream xstream = new XStream(new DomDriver());
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
@@ -55,7 +55,7 @@ public final class Reader {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static List<Object> read(String location, String category) throws ClassNotFoundException, IOException{
+	public List<Object> read(String location, String category) throws ClassNotFoundException, IOException{
 		XStream xstream = new XStream(new DomDriver());
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
@@ -75,7 +75,7 @@ public final class Reader {
 		}
 		return result;
 	}
-	private static void setUpNonSerializable(Object obj) {
+	private void setUpNonSerializable(Object obj) {
 		System.out.println(obj.getClass().getName());
 		if(obj instanceof GameObjectManager) {
 			((GameObjectManager) obj).setupImages();

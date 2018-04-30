@@ -62,6 +62,8 @@ public class TopPanel {
 	private Timeline tl;
 	private Team myTeam;
 	private boolean isLoaded;
+	private Writer myWriter = new Writer();
+	private Reader myReader = new Reader();
 
 	
 	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
@@ -120,7 +122,7 @@ public class TopPanel {
 		listRepresentation.add(gom);
 		listRepresentation.add(possibleUnits);
 		try {
-			Writer.write(file.getCanonicalPath(), listRepresentation);
+			myWriter.write(file.getCanonicalPath(), listRepresentation);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		} catch (NullPointerException e) {
@@ -136,7 +138,7 @@ public class TopPanel {
 		File file = fc.showOpenDialog(stage);
 		isLoaded = true;
 		try {
-			List<Object> gameObjects = Reader.read(file.getCanonicalPath());
+			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
