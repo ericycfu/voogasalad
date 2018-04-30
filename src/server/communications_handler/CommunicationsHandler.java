@@ -1,4 +1,8 @@
 package server.communications_handler;
+/**
+ * Denotes a server class responsible for communicating and processing information from the client
+ * @author andrew
+ */
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 /**
@@ -9,9 +13,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 
 import server.RTSServer;
+import server.RTSServerException;
 
 public abstract class CommunicationsHandler {
 	private Socket communicationSocket;
@@ -26,6 +30,10 @@ public abstract class CommunicationsHandler {
 	protected RTSServer getServer() {
 		return host;
 	}
+	/**
+	 * Makes a new ObjectInputStream and returns it
+	 * @return new ObjectInputStream
+	 */
 	protected ObjectInputStream getInputStream() {
 		try {
 			return new ObjectInputStream(new BufferedInputStream(getSocket().getInputStream()));
@@ -33,15 +41,26 @@ public abstract class CommunicationsHandler {
 			return null;
 		}
 	}
+	/**
+	 * Makes a new ObjectOutputStream and returns it
+	 * @return new ObjectOutputStream
+	 */
 	protected ObjectOutputStream getOutputStream() {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(getSocket().getOutputStream()));
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
-	public abstract String updateServer();
-	public abstract void updateClient() throws SocketException;
+	/**
+	 * @return This method processes information from the client and updates the server as necessary
+	 * @throws RTSServerException if a disconnect occurs
+	 */
+	public abstract String updateServer() throws RTSServerException;
+	/**
+	 * This method writes information about the server to the client
+	 * @throws RTSServerException if a disconnect occurs
+	 */
+	public abstract void updateClient() throws RTSServerException;
 
 }

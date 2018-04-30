@@ -60,7 +60,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	private void showExistingConditions() {
 		for (Condition c: conditionManager.getElements()) {
 			List<String> info = c.getInfo();
-			setLine(info.get(0), info.get(1), info.get(2), info.get(3));
+			setLine(info.get(0), info.get(1), info.get(2), c);
 		}
 		newLine();
 	}
@@ -90,18 +90,26 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void setLine(String attribute, String comparator, String value, String condition) {
+	private void setLine(String attribute, String comparator, String value, Condition condition) {
 		addLine(TextFieldFactory.makeTextField(attribute),
 				ComboBoxFactory.makeComboBox(comparatorSelect(), comparator),
 				TextFieldFactory.makeTextField(value),
-				new ComboBox()
-//				new CustomConditionComboBox(conditionManager)
-//				ComboBoxFactory.makeComboBox(customConditionSelect(), condition)
-				);
+				ButtonFactory.makeButton(
+						"Add Custom Condition",
+						e -> new EditCustomConditionsScreen(conditionManager, condition)));
 	}
 	
 	private void newLine() {
-		addLine(new TextField(), comparatorSelect(), new TextField(), new CustomConditionComboBox());
+		TextField attribute = new TextField();
+		ComboBox comparator = comparatorSelect();
+		TextField value = new TextField();
+		addLine(attribute, comparator, value, ButtonFactory.makeButton(
+				"Add Custom Condition",
+				e -> new EditCustomConditionsScreen(
+						conditionManager, 
+						attribute.getText(), 
+						extractComparatorId(comparator), 
+						value.getText())));
 	}
 	
 	private void addLine(Node a, Node b, Node c, Node d) {
@@ -111,6 +119,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		grid.add(d, COLUMNS[3], currentRow);
 		currentRow += 1;
 	}
+	
 		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private ComboBox comparatorSelect() {
@@ -130,26 +139,26 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	private void setupButtons() {
 		HBox box = new HBox();
 		Button addLineButton = ButtonFactory.makeButton("Add Condition", e -> newLine());
-		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions()); 
-		box.getChildren().addAll(addLineButton, saveButton);
+//		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions()); 
+		box.getChildren().add(addLineButton);
+//		box.getChildren().addAll(addLineButton, saveButton);
 		box.setPadding(new Insets(10, 10, 10, 10));
 		box.setSpacing(5);
 		root.getChildren().add(box);
 		box.toFront();
 	}
 	
-	private void saveConditions() {
-		conditionManager.clearManager();
-		for (int i=1; i<currentRow; i++) {
-			String attribute = Extractor.extractTextField(findNode(i,COLUMNS[0]));
-			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));
-			String value = Extractor.extractTextField(findNode(i,COLUMNS[2]));
-			String conditionString = Extractor.extractComboBox(findNode(i,COLUMNS[3]));
-			int conditionId = conditionManager.createCondition(comparatorId, attribute, value);
-			conditionManager.getCondition(conditionId).addCustomCondition(conditionString);
-
-		}
-	}
+//	private void saveConditions() {
+//		conditionManager.clearManager();
+//		for (int i=1; i<currentRow; i++) {
+//			String attribute = Extractor.extractTextField(findNode(i,COLUMNS[0]));
+//			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));
+//			String value = Extractor.extractTextField(findNode(i,COLUMNS[2]));
+//			String conditionString = Extractor.extractComboBox(findNode(i,COLUMNS[3]));
+//			int conditionId = conditionManager.createCondition(comparatorId, attribute, value);
+//			conditionManager.getCondition(conditionId).addCustomCondition(conditionString);
+//		}
+//	}
 	
 	private int extractComparatorId(Node n) {
 		if (n instanceof ComboBox) {

@@ -78,6 +78,8 @@ public class CustomFunctionsSaveButton extends MainButton {
 			created_custom_functions_pane.addButton(custom_function_type_cb.getComboBox().getSelectionModel().getSelectedItem(), format);
 			interaction_add_custom_functions_screen.getStage().close();
 			interaction.addCustomFunction(custom_function);
+			interaction.isBuild(custom_function.getName().equals(BUILD_FUNCTION));
+			System.out.println(interaction.isBuild());
 			createSuccessAlert();
 		});
 	}

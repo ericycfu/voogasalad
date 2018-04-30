@@ -1,5 +1,8 @@
 package server;
-
+/**
+ * This entity stores all GameLobbies currently active.
+ * @author andrew
+ */
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -9,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LobbyManager implements Serializable{
-	/**
-	 * This entity stores all GameLobbies currently active.
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Map<Integer,GameLobby> lobbies;
 	private int nextID;
@@ -19,16 +20,26 @@ public class LobbyManager implements Serializable{
 		lobbies = new HashMap<>();
 		nextID = 0;
 	}
-	public int addElementToManager(GameLobby element) {
-		nextID ++;
+	/**
+	 * Adds the GameLobby to the manager and assigns it an ID
+	 * @param element gameLobby to add
+	 */
+	public void addElementToManager(GameLobby element) {
+		nextID++;
+		element.setID(nextID);
 		lobbies.put(nextID, element);
-		return nextID;
 	}
-
+	/**
+	 * Removes the given GameLobby from this object
+	 * @param element GameLobby to remove
+	 */
 	public void removeElement(GameLobby element) {
 		lobbies.remove(element.getID());	
 	}
-
+	/**
+	 * returns an unmodifiable list of all GameLobbies
+	 * @return
+	 */
 	public List<GameLobby> getElements() {
 		List<GameLobby> gameLobbies = new ArrayList<>();
 		for(GameLobby g: lobbies.values())
@@ -40,6 +51,11 @@ public class LobbyManager implements Serializable{
 	public GameLobby get(int ID) {
 		return lobbies.get(ID);
 	}
+	/**
+	 * Finds the GameLobby
+	 * @param player the player to find
+	 * @return the GameLobby containing the player, null if no active lobbies contain the player
+	 */
 	public GameLobby find(Socket player) {
 		for(GameLobby g: lobbies.values()) {
 			if (g.contains(player))

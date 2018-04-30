@@ -3,6 +3,8 @@ package authoring.backend;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +17,8 @@ public class MapSettings implements AuthoringView {
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
-	private MapEntity map;
+	@XStreamOmitField
+	private transient MapEntity map;
 	public MapSettings() {
 		initializeAll();
 	}
@@ -40,17 +43,22 @@ public class MapSettings implements AuthoringView {
 		imagePath = "/images/tt.jpg";
 	}
 	
+	public void setMap(MapEntity map) {
+		this.map = map;
+	}
+	
 	public void matchToSize(MapEntity map) {
 		if (this.map == null) {
-			this.map = map;
+			setMap(map);
 		}
 		map.setPrefSize(mapwidth, mapheight);
 	}
 	
 	public void setMapByImage(MapEntity map) {
 		if (this.map == null) {
-			this.map = map;
+			setMap(map);
 		}
+		System.out.println(imagePath);
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
 		image.toBack();

@@ -8,4 +8,18 @@ public class TextFieldFactory {
 		t.setText(text);
 		return t;
 	}
+	
+	public static TextField makeTextField(String text, String prompt) {
+		TextField t = new TextField();
+		t.setText(text);
+		t.setPromptText(prompt);
+		return t;
+	}
+	
+	public static TextField makeTextFieldPrompt(String text) {
+		TextField t = new TextField();
+		t.setPromptText(text);
+		return t;
+	}
+
 }

@@ -1,9 +1,10 @@
 package server;
 /**
- * This class is the Server. The Server doesn't really have a front-end but it does 
+ * This class is the Server. The Server doesn't really have a front-end other than 1 alert but it does manage all the lobbies and all client connections
+ * Server logging will come at a future date
+ * @author andrew
  */
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,10 +21,16 @@ public class RTSServer {
 	public RTSServer() {
 		initialize();
 	}
+	/**
+	 * Initializes the server and starts server threads
+	 */
 	public void initialize() {
 		createServer();
 		listenForConnections();	 
 	}
+	/**
+	 * Initializes the ServerSocket and LobbyManager
+	 */
 	private void createServer() {
 		myServerSocket = null;
 		while(myServerSocket == null) {
@@ -40,41 +47,54 @@ public class RTSServer {
 				} catch (InterruptedException e1) {}
 			}
 		}
-		System.out.println("Success!");
-		try {
-            InetAddress ip = InetAddress.getLocalHost();
-            System.out.println("Your current IP address : " + ip);
-		}
-		catch(Exception e) {}
 		
 		myLobbyManager = new LobbyManager();
 	}
+	/**
+	 * Starts and runs the thread that listens for clients and starts the ClientHandler
+	 */
 	private void listenForConnections() {
 		new Thread(() -> {
             while (true) {
                 try {
                     Socket socket = myServerSocket.accept();
-                    System.out.println("Connection accepted");
                     ClientHandler task = new ClientHandler(this, socket);
                     Thread newThread = new Thread(task);
                     newThread.start();
                 } catch (IOException e) {
                 }
-                cleanLobbyManager();
             }
        }).start();
 	}
-	private void cleanLobbyManager() {
+	/**
+	 * Clears LobbyManager of empty lobbies
+	 */
+	public void cleanLobbyManager() {
 		for(GameLobby g: myLobbyManager.getElements())
 			if(g.getCurrentSize() == 0)
 				myLobbyManager.removeElement(g);
 	}
+	/**
+	 * Adds a new Lobby with the given host and the loaded GameInstance
+	 * @param initial Player who creates the Lobby
+	 * @param gi game to create lobby from
+	 */
 	public void addLobby(Socket initial, GameInstance gi) {
 		myLobbyManager.addElementToManager(new GameLobby(initial, gi));
 	}
+	/**
+	 * Adds the player to the Lobby with the given ID
+	 * @param ID ID of lobby to add to
+	 * @param s player to add
+	 */
 	public void addToLobby(int ID, Socket s) {
 		myLobbyManager.get(ID).addPlayer(s);
 	}
+	/**
+	 * Find the player in the LobbyManager
+	 * @param s player to find
+	 * @return Lobby containing the player
+	 */
 	public GameLobby findPlayer(Socket s) {
 		return myLobbyManager.find(s);
 	}

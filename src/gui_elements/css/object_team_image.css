@@ -1,0 +1,23 @@
+.image-border-team1 {
+    -fx-border-color: #f0f8ff;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
+}
+
+.image-border-team2 {
+    -fx-border-color: red;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
+}
+
+.image-border-team3 {
+    -fx-border-color: green;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
+}
+
+.image-border-team4 {
+    -fx-border-color: orange;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
+}
