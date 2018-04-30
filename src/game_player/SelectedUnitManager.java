@@ -38,8 +38,9 @@ public class SelectedUnitManager {
 	public void move(Vector2 target, GameObjectManager gom, GridMap gridmap) {
 		System.out.println(" x: " + target.getX() + " y: " + target.getY());
 		for (GameObject go : selectedUnits) {
-			System.out.println(go.getTransform().getPosition().getX());
-			go.queueMovement(target, gom, gridmap);
+			if (!target.matches(go.getTransform().getPosition())) {
+				go.queueMovement(target, gom, gridmap);
+			}
 		}
 	}
 	
