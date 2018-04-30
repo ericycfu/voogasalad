@@ -1,5 +1,6 @@
 <object-stream>
   <game__object.GameObjectManager>
+<<<<<<< HEAD
     <elementMap>
       <entry>
         <int>1</int>
@@ -386,6 +387,10 @@
       </entry>
     </elementMap>
     <new__ID__val>5</new__ID__val>
+=======
+    <elementMap/>
+    <new__ID__val>1</new__ID__val>
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -400,6 +405,7 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
+<<<<<<< HEAD
           <attributes/>
           <maxAttributes/>
 <<<<<<< HEAD
@@ -467,6 +473,8 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
+=======
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
           <attributes>
             <entry>
               <string>Health</string>
@@ -530,17 +538,6 @@
             </entry>
           </elementMap>
           <new__ID__val>3</new__ID__val>
-=======
-              <null/>
-              <double>12.0</double>
-            </entry>
-          </buildCosts>
-          <buildTime>12.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
->>>>>>> 1e5ffe6ebd3e6df838b946ca14e677b5aecfc61e
         </interactions>
         <conditions>
           <elementMap/>
@@ -548,24 +545,22 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
-      <name>a</name>
+      <name>b</name>
       <tags>
-        <string>a</string>
+        <string>b</string>
       </tags>
-      <isBuilding>false</isBuilding>
+      <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>12.0</movementSpeed>
+      <movementSpeed>121.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
       <isBeingConstructed>false</isBeingConstructed>
       <elapsedTime>0.0</elapsedTime>
     </game__object.GameObject>
-<<<<<<< HEAD
-=======
     <game__object.GameObject>
       <id>0</id>
       <transform>
@@ -578,12 +573,22 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes/>
-          <maxAttributes/>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </maxAttributes>
           <buildCosts>
             <entry>
               <null/>
-              <double>12.0</double>
+              <double>100.0</double>
             </entry>
           </buildCosts>
           <buildTime>12.0</buildTime>
@@ -600,6 +605,7 @@
       </myObjectLogic>
       <renderer>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
       <name>Marine</name>
@@ -607,29 +613,40 @@
         <string>Biological</string>
 =======
         <myImageLocation>/images/ghoul.png</myImageLocation>
+=======
+        <myImageLocation>/images/rcd.png</myImageLocation>
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
       </renderer>
-      <name>b</name>
+      <name>a</name>
       <tags>
+<<<<<<< HEAD
         <string>b</string>
 >>>>>>> b7b32e5c17bce034a35f1a55ed87ae1fafe8aaed
+=======
+        <string>a</string>
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
       </tags>
-      <isBuilding>true</isBuilding>
+      <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <movementSpeed>50.0</movementSpeed>
 =======
       <movementSpeed>121.0</movementSpeed>
 >>>>>>> b7b32e5c17bce034a35f1a55ed87ae1fafe8aaed
+=======
+      <movementSpeed>5.0</movementSpeed>
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
       <isBeingConstructed>false</isBeingConstructed>
       <elapsedTime>0.0</elapsedTime>
     </game__object.GameObject>
->>>>>>> 1e5ffe6ebd3e6df838b946ca14e677b5aecfc61e
   </set>
   <authoring.backend.MapSettings>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <mapName>Default map</mapName>
     <numPlayers>4</numPlayers>
@@ -647,5 +664,14 @@
     <mapheight>12</mapheight>
     <imagePath>/images/arrow_down.png</imagePath>
 >>>>>>> b7b32e5c17bce034a35f1a55ed87ae1fafe8aaed
+=======
+    <mapName>Default map</mapName>
+    <numPlayers>1</numPlayers>
+    <lossCondition></lossCondition>
+    <resources/>
+    <mapwidth>1000</mapwidth>
+    <mapheight>1000</mapheight>
+    <imagePath>/images/tt.jpg</imagePath>
+>>>>>>> 7e24081088652cdd46ac87410563ba8908ebe2f8
   </authoring.backend.MapSettings>
 </object-stream>
