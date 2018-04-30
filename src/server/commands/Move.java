@@ -1,5 +1,8 @@
 package server.commands;
-
+/**
+ * Instructs the game to move a unit to new coordinates
+ * @author andrew
+ */
 import game_engine.GameInstance;
 
 public class Move extends Command {

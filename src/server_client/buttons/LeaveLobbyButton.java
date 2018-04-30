@@ -1,5 +1,8 @@
 package server_client.buttons;
-
+/**
+ * Button responsible for leaving a lobby
+ * @author andrew
+ */
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 

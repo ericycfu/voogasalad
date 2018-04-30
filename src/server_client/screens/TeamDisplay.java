@@ -1,5 +1,8 @@
 package server_client.screens;
-
+/**
+ * Displays information about a particular team
+ * @author andrew
+ */
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -9,12 +12,16 @@ public class TeamDisplay extends GridPane {
 	private int ID;
 	public TeamDisplay(int ID) {
 		setPrefHeight(100);
-		setPrefWidth(800);
+		setPrefWidth(700);
 		setHgap(0);
 	    setVgap(0);
 	    setPadding(new Insets(10, 10, 10, 10));
 	    this.ID = ID;
 	}
+	/**
+	 * Updates this object to reflect information from the Lobby
+	 * @param toDisplay
+	 */
 	public void update(GameLobby toDisplay) {
 		getChildren().clear();
 		Text lobbyText = new Text("TEAM " + ID + "	 Players: " + toDisplay.getNumPlayers(ID));
