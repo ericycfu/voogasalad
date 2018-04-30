@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import server.GameLobby;
@@ -53,20 +54,27 @@ public class CurrentLobbyScreen extends ClientScreen {
 		teamList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TeamDisplay>() {
 			@Override
 			public void changed(ObservableValue<? extends TeamDisplay> arg0, TeamDisplay arg1, TeamDisplay arg2) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
-
+		setUpText();
+		
+	}
+	private void setUpText() {
 		playerID = new Text();
 		playerID.setLayoutX(100);
 		playerID.setLayoutY(50);
 		playerID.setFill(Color.WHITE);
+		playerID.setFont(new Font("Verdana",40));
+		myPane.getChildren().add(playerID);
 		currentTeam = new Text();
-		currentTeam.setLayoutX(500);
+		currentTeam.setLayoutX(600);
 		currentTeam.setLayoutY(50);
 		currentTeam.setFill(Color.WHITE);
+		currentTeam.setFont(new Font("Verdana",40));
+		myPane.getChildren().add(currentTeam);
+		
 	}
+
 	private void setUpButtons() {
 		LeaveLobbyButton leave = new LeaveLobbyButton(getOutputStream());
 		myPane.getChildren().add(leave);
