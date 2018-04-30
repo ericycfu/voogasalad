@@ -1,5 +1,8 @@
 package game_player;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +43,7 @@ import javafx.stage.Stage;
 import pathfinding.GridMap;
 import scenemanager.NullEndConditionException;
 import scenemanager.SceneManager;
+import server_client.screens.ClientScreen;
 import transform_library.Vector2;
 
 /**
@@ -47,7 +51,7 @@ import transform_library.Vector2;
  * @author Siyuan Chen
  *
  */
-public class GamePlayer {
+public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
@@ -73,9 +77,11 @@ public class GamePlayer {
 	private Scene myScene;
 	private Team myTeam;
 	private ImageView myMap;
-	
+	private Socket mySocket;
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
+	private OutputStream myOutputStream;
+	private InputStream myInputStream;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
@@ -96,8 +102,18 @@ public class GamePlayer {
 	
 	// network constructor
 	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
+		super(,socket)
 		myPossibleUnits = allPossibleUnits;
 		mySceneManager = scenemanager;
+		mySocket = socket;
+		try {
+			myOutputStream = socket.getOutputStream();
+			myInputStream = socket.getInputStream();
+		} catch (IOException e) {
+			new AlertMaker("Communication failure.", "Communication with the current server failed.");
+		}
+		
+		unitSkillMapInitialize();
 	}
 	
 	private void unitBuildsMapInitialize() {
@@ -141,6 +157,7 @@ public class GamePlayer {
 			
 		}
 	}
+
 	
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
@@ -276,11 +293,12 @@ public class GamePlayer {
 		else {
 			myScene.setCursor(Cursor.DEFAULT);
 		}
-
-		
 	}
-	
-	// TO-DO: set select when a new unit is created
+
+	private void receiveFromServer() {
+		
+		//gom team time chat 
+	}
 	
 	private void end(String result) {
 		myRoot.getChildren().clear();
@@ -288,6 +306,18 @@ public class GamePlayer {
 		text.setLayoutX(SCENE_SIZE_X/2-100);
 		text.setLayoutY(SCENE_SIZE_Y/2-100);
 		myRoot.getChildren().add(text);
+	}
+
+	@Override
+	protected void setUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String updateSelf() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

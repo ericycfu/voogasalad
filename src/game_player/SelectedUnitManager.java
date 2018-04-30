@@ -1,5 +1,6 @@
 package game_player;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,22 +17,22 @@ public class SelectedUnitManager {
 	private List<GameObject> selectedUnits;
 	private Team myTeam;
 	private int myTeamID;
+	private OutputStream myOutputStream;
 	
 	public SelectedUnitManager(Team team) {
 		selectedUnits = new ArrayList<GameObject>();
 		myTeam = team;
-		//myTeamID = myTeam.getID();
+		myTeamID = myTeam.getID();
 	}
 	
 	public void clear() {
 		selectedUnits.clear();
-		System.out.println("this get aclled" );
 	}
 	
 	public void add(GameObject go) {
-		//if (go.getOwner().getID()==myTeamID) {
+		if (go.getOwner().getID()==myTeamID) {
 			selectedUnits.add(go);
-		//}
+		}
 	}
 	
 	public void move(Vector2 target, GameObjectManager gom, GridMap gridmap) {
@@ -53,28 +54,19 @@ public class SelectedUnitManager {
 					boolean isInteractionValid = false;
 					int goSpecificInteractionID = -1;
 					for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-						//System.out.println(i.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
 						if (i.getName().equals(interactionName)) {
 							isInteractionValid = true;
 							goSpecificInteractionID = i.getID();
 						}
 					}
 					if (isInteractionValid) {
-						try {
-							System.out.println(go.accessLogic().accessAttributes().getAttribute("Health"));
-							System.out.println(target.accessLogic().accessAttributes().getAttribute("Health"));
-						} catch (PropertyNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 						go.queueInteraction(target, goSpecificInteractionID, gom, new GridMap(1000, 1000), position);
 					}
 				}
 			}
 		} catch (UnmodifiableGameObjectException e) {
-			
+			// do nothing
 		}
-		
 	}
 	
 	public List<GameObject> getSelectedUnits(){
