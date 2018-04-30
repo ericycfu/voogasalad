@@ -56,23 +56,28 @@ public class GameLobby implements Serializable{
 		 out.writeObject(numPlayers);
 		 ImageIO.write(loadedMap.getBackground(), "png", out);
 	 }
-	 private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+	 @SuppressWarnings("unchecked")
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		 in.defaultReadObject();
-		 @SuppressWarnings("unchecked")
 		List<Integer>[] playersPerTeam = (List<Integer>[])in.readObject();
-		 for(int x = 0; x < in.readInt(); x++) {
+		 myPlayers = (List<Socket>[]) new ArrayList[numTeams];
+		 for(int x = 0; x < playersPerTeam.length; x++) {
 			 myPlayers[x] = new ArrayList<>();
 			 for(int y = 0; y < playersPerTeam[x].size(); y++) {
 				 myPlayers[x].add(null);
 			 }
 		 }
-
-		 loadedMap = new GameInstance(ImageIO.read(in));
+		 try {
+			 loadedMap = new GameInstance(ImageIO.read(in));
+		 }
+		 catch(Exception e) {
+			 loadedMap = new GameInstance(null);
+		 }
 	}
 	public int getTeamID(Socket s) {
 		for(int x = 0; x < myPlayers.length; x++) {
 			if(myPlayers[x].contains(s))
-				return x;
+				return x+1;
 		}
 		return -1;
 	}
@@ -97,16 +102,21 @@ public class GameLobby implements Serializable{
 		if(!isRunning)
 			myPlayers[index].add(toAdd);
 	}
-	public void removePlayer(Socket toRemove) {
-		for(int x = 0; x < numTeams; x++) {
-			if(myPlayers[x].contains(toRemove))
-				myPlayers[x].remove(toRemove);
-		}
+	public void remove(Socket toRemove) {
 		playerIDs.remove(toRemove);
+		removeFromTeam(toRemove);
+	}
+	public void removeFromTeam(Socket toRemove) {
+		for(int x = 0; x < numTeams; x++) {
+			if(myPlayers[x].contains(toRemove)) {
+				myPlayers[x].remove(toRemove);
+			}
+		}
+		
 	}
 	public void changeTeam(int newTeam, Socket toAdd) {
-		removePlayer(toAdd);
-		addPlayer(newTeam,toAdd);
+		removeFromTeam(toAdd);
+		addPlayer(newTeam-1,toAdd);
 	}
 	public void setID(int newID) {
 		ID = newID;
@@ -131,7 +141,7 @@ public class GameLobby implements Serializable{
 		return null;
 	}
 	public boolean isTeamEmpty(int team_ID) {
-		return myPlayers[team_ID].isEmpty();
+		return myPlayers[team_ID-1].isEmpty();
 	}
 	public boolean isRunning() {
 		return isRunning;
@@ -144,5 +154,8 @@ public class GameLobby implements Serializable{
 	}
 	public int getNumTeams() {
 		return numTeams;
+	}
+	public int getNumPlayers(int team_ID) {
+		return myPlayers[team_ID-1].size();
 	}
 }
