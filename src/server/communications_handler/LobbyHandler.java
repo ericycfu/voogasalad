@@ -1,5 +1,6 @@
 package server.communications_handler;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -25,6 +26,8 @@ public class LobbyHandler extends CommunicationsHandler {
 		try {
 			String input;
 			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new RTSServerException("Client DCed");
 			if((input = (String)in.readObject()) != null) {
 				switch(input) {
 				case REMOVE_OPTION: currentLobby.remove(getSocket());
@@ -48,7 +51,7 @@ public class LobbyHandler extends CommunicationsHandler {
 			}
 			else return CLASS_REF;
 		}
-		catch(Exception e) {
+		catch(IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			return CLASS_REF;}
 	}

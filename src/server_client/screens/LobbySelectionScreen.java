@@ -97,7 +97,6 @@ public class LobbySelectionScreen extends ClientScreen {
 				out.writeObject(newGame);
 				out.flush();
 			} catch (Exception e2) {
-				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
@@ -164,14 +163,13 @@ public class LobbySelectionScreen extends ClientScreen {
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();
-			
+			Platform.runLater(() -> { 
 			while(numLobbies < currentLobbies.getItems().size()) {
-				Platform.runLater(() -> currentLobbies.getItems().remove(0));
+				currentLobbies.getItems().remove(0);
 			}
 			while(numLobbies > currentLobbies.getItems().size()) {
-				Platform.runLater(() -> currentLobbies.getItems().add(new LobbyDisplay()));
+				currentLobbies.getItems().add(new LobbyDisplay());
 			}
-			Platform.runLater(() -> {
 			for(int x = 0; x < lobbies.getElements().size(); x++) {
 				currentLobbies.getItems().get(x).update(lobbies.getElements().get(x));
 			}

@@ -28,7 +28,6 @@ public class MainPageHandler extends CommunicationsHandler {
 			if(input == -1)
 				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
 			else getServer().addToLobby(input, getSocket());
-			System.out.println("Message received");
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {

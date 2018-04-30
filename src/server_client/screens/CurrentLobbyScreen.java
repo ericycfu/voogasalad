@@ -61,9 +61,11 @@ public class CurrentLobbyScreen extends ClientScreen {
 		playerID = new Text();
 		playerID.setLayoutX(100);
 		playerID.setLayoutY(50);
+		playerID.setFill(Color.WHITE);
 		currentTeam = new Text();
-		currentTeam.setLayoutX(100);
+		currentTeam.setLayoutX(500);
 		currentTeam.setLayoutY(50);
+		currentTeam.setFill(Color.WHITE);
 	}
 	private void setUpButtons() {
 		LeaveLobbyButton leave = new LeaveLobbyButton(getOutputStream());
@@ -113,7 +115,7 @@ public class CurrentLobbyScreen extends ClientScreen {
 				return CLASS_REF;
 			obj = in.readObject();
 			System.out.println(obj.getClass().getName());
-			if(obj instanceof LobbyManager) {
+			if(obj instanceof String || obj instanceof LobbyManager) {
 				return LobbySelectionScreen.CLASS_REF;
 			}
 			GameLobby lobby = (GameLobby) obj;
