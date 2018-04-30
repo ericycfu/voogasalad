@@ -65,7 +65,6 @@ public class EditCustomConditionsScreen implements AuthoringView {
 	
 	private void loadSaved() {
 		for (CustomCondition c: condition.getCustomConditions()) {
-			System.out.print(c.toString());
 			loadLine(c);
 		}
 	}
@@ -86,7 +85,8 @@ public class EditCustomConditionsScreen implements AuthoringView {
 	
 	private void loadLine(CustomCondition c) {
 		HBox line = new HBox();
-		String conditionName = c.toString().split(".")[1].split("@")[0];
+		String conditionName = Extractor.extractConditionName(c);
+		System.out.print(conditionName);
 		line.getChildren().add(customConditionSelect(line, conditionName));
 		CustomComponentParameterFormat format = c.getParameterFormat();
 		List<String> parameters = format.getParameterList();
@@ -123,7 +123,7 @@ public class EditCustomConditionsScreen implements AuthoringView {
 		clearConditionParameters(line);
 		String conditionName = (String) box.getValue();
 		Condition c = new Condition(0, 0, "", "");
-		CustomCondition customCondition = c.addCustomCondition(conditionName);
+		CustomCondition customCondition = c.generateCustomCondition(conditionName);
 		CustomComponentParameterFormat format = customCondition.getParameterFormat();
 		List<String> parameters = format.getParameterList();
 		for (int i=0; i<parameters.size(); i++) {
@@ -183,14 +183,12 @@ public class EditCustomConditionsScreen implements AuthoringView {
 		if (nodeOne instanceof ComboBox) {
 			conditionName = (String) ((ComboBox) nodeOne).getValue();
 		}
-		CustomCondition customCondition = condition.addCustomCondition(conditionName);
+		CustomCondition customCondition = condition.generateCustomCondition(conditionName);
+		condition.addCustomCondition(customCondition);
 		CustomComponentParameterFormat format = customCondition.getParameterFormat();
 		List<String> parameters = format.getParameterList();
 		for (int i=0; i<parameters.size(); i++) {
 			format.setFieldValue(parameters.get(i), Extractor.extractTextField(box.getChildren().get(i+1)));
 		}
 	}
-	
-	
-	
 }

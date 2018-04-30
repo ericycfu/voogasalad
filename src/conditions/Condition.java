@@ -116,7 +116,7 @@ public class Condition implements EngineObject, Serializable{
 			System.out.println("variable cannot be modified");
 		}
 	}
-	
+		
 	private double getVariableVal(String var) throws PropertyNotFoundException, UnmodifiableGameObjectException
 	{
 		if (var.matches("([0-9]*)\\.([0-9]*)"))

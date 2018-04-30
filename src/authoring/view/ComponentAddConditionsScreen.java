@@ -148,17 +148,17 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		box.toFront();
 	}
 	
-	private void saveConditions() {
-		conditionManager.clearManager();
-		for (int i=1; i<currentRow; i++) {
-			String attribute = Extractor.extractTextField(findNode(i,COLUMNS[0]));
-			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));
-			String value = Extractor.extractTextField(findNode(i,COLUMNS[2]));
-			String conditionString = Extractor.extractComboBox(findNode(i,COLUMNS[3]));
-			int conditionId = conditionManager.createCondition(comparatorId, attribute, value);
-			conditionManager.getCondition(conditionId).addCustomCondition(conditionString);
-		}
-	}
+//	private void saveConditions() {
+//		conditionManager.clearManager();
+//		for (int i=1; i<currentRow; i++) {
+//			String attribute = Extractor.extractTextField(findNode(i,COLUMNS[0]));
+//			int comparatorId = extractComparatorId(findNode(i,COLUMNS[1]));
+//			String value = Extractor.extractTextField(findNode(i,COLUMNS[2]));
+//			String conditionString = Extractor.extractComboBox(findNode(i,COLUMNS[3]));
+//			int conditionId = conditionManager.createCondition(comparatorId, attribute, value);
+//			conditionManager.getCondition(conditionId).addCustomCondition(conditionString);
+//		}
+//	}
 	
 	private int extractComparatorId(Node n) {
 		if (n instanceof ComboBox) {
