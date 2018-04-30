@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>332.0</x>
-              <y>100.0</y>
+              <x>436.0</x>
+              <y>166.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -18,22 +18,22 @@
               <attributes>
                 <entry>
                   <string>Health</string>
-                  <double>50.0</double>
+                  <double>100.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
-                  <double>50.0</double>
+                  <double>100.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts>
                 <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
+                  <null/>
+                  <double>100.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>10.0</buildTime>
+              <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -42,11 +42,11 @@
                   <interactions.Interaction>
                     <id>1</id>
                     <targetTags>
-                      <string>Biological</string>
+                      <string>prof</string>
                     </targetTags>
                     <name>Attack</name>
-                    <imagePath>/images/</imagePath>
-                    <description></description>
+                    <imagePath>/images/attack_icon.png</imagePath>
+                    <description>attack</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -64,12 +64,32 @@
                         <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
                       </entry>
                     </targetTeamEnumMap>
-                    <customFunctions/>
-                    <range>500.0</range>
+                    <customFunctions>
+                      <interactions.ModifyVariable>
+                        <NAME>ModifyVariable</NAME>
+                        <VARIABLE>Variable</VARIABLE>
+                        <DELTA>Delta</DELTA>
+                        <RATE>Rate</RATE>
+                        <format>
+                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Variable</string>
+                              <string>Health</string>
+                            </entry>
+                            <entry>
+                              <string>Delta</string>
+                              <string>-10</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.ModifyVariable>
+                    </customFunctions>
+                    <range>100.0</range>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>10</new__ID__val>
+              <new__ID__val>7</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -86,14 +106,14 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>Marine</name>
+          <name>duvall</name>
           <tags>
-            <string></string>
+            <string>prof</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -107,8 +127,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>92.0</x>
-              <y>419.0</y>
+              <x>342.0</x>
+              <y>133.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -123,12 +143,12 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>Marine</name>
+          <name>duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -142,8 +162,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>443.0</x>
-              <y>372.0</y>
+              <x>234.0</x>
+              <y>103.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -158,12 +178,12 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>Marine</name>
+          <name>duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -190,22 +210,22 @@
           <attributes>
             <entry>
               <string>Health</string>
-              <double>50.0</double>
+              <double>100.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
-              <double>50.0</double>
+              <double>100.0</double>
             </entry>
           </maxAttributes>
           <buildCosts>
             <entry>
-              <string>Gold</string>
-              <double>50.0</double>
+              <null/>
+              <double>100.0</double>
             </entry>
           </buildCosts>
-          <buildTime>10.0</buildTime>
+          <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -214,11 +234,11 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>Biological</string>
+                  <string>prof</string>
                 </targetTags>
                 <name>Attack</name>
-                <imagePath>/images/</imagePath>
-                <description></description>
+                <imagePath>/images/attack_icon.png</imagePath>
+                <description>attack</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -236,12 +256,32 @@
                     <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
                   </entry>
                 </targetTeamEnumMap>
-                <customFunctions/>
-                <range>500.0</range>
+                <customFunctions>
+                  <interactions.ModifyVariable>
+                    <NAME>ModifyVariable</NAME>
+                    <VARIABLE>Variable</VARIABLE>
+                    <DELTA>Delta</DELTA>
+                    <RATE>Rate</RATE>
+                    <format>
+                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Variable</string>
+                          <string>Health</string>
+                        </entry>
+                        <entry>
+                          <string>Delta</string>
+                          <string>-10</string>
+                        </entry>
+                      </parameterFields>
+                    </format>
+                  </interactions.ModifyVariable>
+                </customFunctions>
+                <range>100.0</range>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>10</new__ID__val>
+          <new__ID__val>7</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -249,16 +289,16 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/rcd.png</myImageLocation>
       </renderer>
-      <name>Marine</name>
+      <name>duvall</name>
       <tags>
-        <string></string>
+        <string>prof</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>50.0</movementSpeed>
+      <movementSpeed>10.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -268,7 +308,7 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>4</numPlayers>
+    <numPlayers>1</numPlayers>
     <lossCondition></lossCondition>
     <resources/>
     <mapwidth>1000</mapwidth>

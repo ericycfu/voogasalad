@@ -35,7 +35,6 @@ public final class AuthoringToGameObject {
 				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),AO.getObjectLogic(), AO.getMainComponentPropertyManager(), convert(AO, RM));
 			}
 		}
-		
 		return GOM;
 	}
 	/**
