@@ -1,18 +1,69 @@
 <object-stream>
-  <game__object.GameObjectManager>
-    <elementMap/>
-    <new__ID__val>1</new__ID__val>
-  </game__object.GameObjectManager>
-  <set>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
+  <list>
+    <authoring.backend.AuthoringObject>
+      <myTags>
+        <string>a</string>
+      </myTags>
+      <myX>0.0</myX>
+      <myY>0.0</myY>
+      <myTeam>1</myTeam>
+      <buildCosts>
+        <entry>
+          <null/>
+          <double>100.0</double>
+        </entry>
+      </buildCosts>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>200.0</double>
+            </entry>
+          </maxAttributes>
+          <buildCosts reference="../../../buildCosts"/>
+          <buildTime>12.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <myMainComponentPropertyManager>
+        <myImagePath>/images/rcd.png</myImagePath>
+        <myName>a</myName>
+        <myTags reference="../../myTags"/>
+        <myMovementSpeed>5.0</myMovementSpeed>
+        <isBuilding>false</isBuilding>
+      </myMainComponentPropertyManager>
+      <myAttributes reference="../myObjectLogic/attributes"/>
+      <myInteractions reference="../myObjectLogic/interactions"/>
+      <myConditionManager reference="../myObjectLogic/conditions"/>
+    </authoring.backend.AuthoringObject>
+    <authoring.backend.AuthoringObject>
+      <myTags>
+        <string>b</string>
+      </myTags>
+      <myX>0.0</myX>
+      <myY>0.0</myY>
+      <myTeam>1</myTeam>
+      <buildCosts>
+        <entry>
+          <null/>
+          <double>100.0</double>
+        </entry>
+      </buildCosts>
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
@@ -28,12 +79,7 @@
               <double>1000.0</double>
             </entry>
           </maxAttributes>
-          <buildCosts>
-            <entry>
-              <null/>
-              <double>100.0</double>
-            </entry>
-          </buildCosts>
+          <buildCosts reference="../../../buildCosts"/>
           <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
@@ -85,82 +131,19 @@
           <new__ID__val>1</new__ID__val>
         </conditions>
       </myObjectLogic>
-      <renderer>
-        <myImageLocation>/images/ghoul.png</myImageLocation>
-      </renderer>
-      <name>b</name>
-      <tags>
-        <string>b</string>
-      </tags>
-      <isBuilding>true</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>121.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-    </game__object.GameObject>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
-      <myObjectLogic>
-        <fulfillsLossCondition>false</fulfillsLossCondition>
-        <attributes>
-          <attributes>
-            <entry>
-              <string>Health</string>
-              <double>200.0</double>
-            </entry>
-          </attributes>
-          <maxAttributes>
-            <entry>
-              <string>Health</string>
-              <double>200.0</double>
-            </entry>
-          </maxAttributes>
-          <buildCosts>
-            <entry>
-              <null/>
-              <double>100.0</double>
-            </entry>
-          </buildCosts>
-          <buildTime>12.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </interactions>
-        <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </conditions>
-      </myObjectLogic>
-      <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
-      </renderer>
-      <name>a</name>
-      <tags>
-        <string>a</string>
-      </tags>
-      <isBuilding>false</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>5.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-    </game__object.GameObject>
-  </set>
+      <myMainComponentPropertyManager>
+        <myImagePath>/images/ghoul.png</myImagePath>
+        <myName>b</myName>
+        <myTags reference="../../myTags"/>
+        <myMovementSpeed>121.0</myMovementSpeed>
+        <isBuilding>true</isBuilding>
+      </myMainComponentPropertyManager>
+      <myAttributes reference="../myObjectLogic/attributes"/>
+      <myInteractions reference="../myObjectLogic/interactions"/>
+      <myConditionManager reference="../myObjectLogic/conditions"/>
+    </authoring.backend.AuthoringObject>
+  </list>
+  <map/>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>1</numPlayers>
@@ -170,4 +153,7 @@
     <mapheight>1000</mapheight>
     <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
+  <game__engine.ResourceManager>
+    <resourceMap/>
+  </game__engine.ResourceManager>
 </object-stream>
