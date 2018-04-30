@@ -8,8 +8,14 @@ import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-
+/**
+ * static class for writing data
+ * @author shichengrao
+ *
+ */
 public class Writer {
+	
+	Reader myReader = new Reader();
 	/**
 	 * writes data to location
 	 * @param location
@@ -17,6 +23,7 @@ public class Writer {
 	 * @throws IOException 
 	 */
 	public void write(String location, List<? extends Object> data) throws IOException {
+		System.out.println(data.size());
 		XStream xstream = new XStream(new DomDriver());
 		File file = new File(location);
 		FileWriter writer = new FileWriter(file);
@@ -35,9 +42,8 @@ public class Writer {
 	 * @throws IOException 
 	 */
 	public void writeNoOverwrite(String location, List<Object> data) throws IOException {
-		Reader reader = new Reader();
 		try {
-			List<Object> prevData= reader.read(location);
+			List<Object> prevData= myReader.read(location);
 			data.addAll(prevData);
 		}
 		catch (ClassNotFoundException e) {

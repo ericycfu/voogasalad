@@ -1,5 +1,6 @@
 package transform_library;
 
+import java.io.Serializable;
 
 /**
  * 
@@ -9,7 +10,7 @@ package transform_library;
  *	The positions stored here are taken from the origin i.e. from 0,0
  */
 
-public class Vector2 {
+public class Vector2 implements Serializable{
 	
 	private double x;
 	private double y;
@@ -151,6 +152,11 @@ public class Vector2 {
 	public double getDotProduct(Vector2 b)
 	{
 		return (x * b.getX() + y * b.getY());
+	}
+	
+	public boolean matches(Vector2 other)
+	{
+		return(this.x == other.x && this.y == other.y);
 	}
 	
 	

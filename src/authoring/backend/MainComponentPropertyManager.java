@@ -52,5 +52,5 @@ public class MainComponentPropertyManager {
 	
 	public void setBuilding(boolean b) {
 		isBuilding = b;
-	}
+	}	
 }

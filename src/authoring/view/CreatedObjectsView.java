@@ -8,6 +8,7 @@ import authoring.backend.DraggableScrollPane;
 import authoring.backend.MapEntity;
 import authoring.backend.ObjectSelectionImageView;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -17,6 +18,7 @@ import observables.Listener;
 public class CreatedObjectsView extends ScrollPane implements AuthoringView, Listener {
 	public static final int THUMBNAIL_WIDTH = 150;
 	public static final int THUMBNAIL_HEIGHT = 150;
+	private static final String STYLE_PATH = "gui_elements/css/object_team_image.css";
 	private AuthoringController authorcontroller;
 	private CreatedObjects createdobjects;
 	private MapEntity map;
@@ -27,6 +29,7 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 		map = ac.getCurrentMap();
 		cb.addListener(this);
 		setupBox();
+		this.getStylesheets().add(STYLE_PATH);
 	}
 	
 	private void setupBox() {

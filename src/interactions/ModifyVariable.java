@@ -40,7 +40,6 @@ public class ModifyVariable implements CustomFunction {
 		{
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
-		
 		} 
 		catch (PropertyNotFoundException e) 
 		{
@@ -58,8 +57,12 @@ public class ModifyVariable implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {		
 		
+		
+		if(other == null) return;
 		try 
 		{
+			this.variable = format.getParameterValue(VARIABLE);
+			this.delta = format.getParameterValue(DELTA);
 			ParameterParser p = new ParameterParser();
 			double deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
@@ -72,6 +75,7 @@ public class ModifyVariable implements CustomFunction {
 			{
 				double finalDelta = (prevVal + deltaVal) - maxVal;
 				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
+
 			}
 			current.dequeueInteraction();
 		} 
@@ -95,7 +99,6 @@ public class ModifyVariable implements CustomFunction {
 				+ "can either be a number or an attribute in the player");
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
-		format.addStringField(RATE);		
 	}
 
 

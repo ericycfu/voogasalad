@@ -1,5 +1,7 @@
 package game_object;
 
+import java.io.Serializable;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import javafx.scene.image.Image;
@@ -12,8 +14,11 @@ import javafx.scene.image.ImageView;
  * Will deal with java fx logic
  */
 
-public class Renderer {
+public class Renderer implements Serializable{
 	private String myImageLocation;
+	public final static double TEMP_OPACITY = 0.5;
+	public final static double NORMAL_OPACITY = 1;
+
 	@XStreamOmitField
 	private transient ImageView myDisp;
 	
@@ -23,11 +28,25 @@ public class Renderer {
 		myDisp = new ImageView(new Image(imageLocation));
 	}
 	
+	public Renderer(Renderer other)
+	{
+		this.myImageLocation = other.myImageLocation;
+		setupImage();
+	}
+	
 	public ImageView getDisp() {
 		return myDisp;
 	}
 	public void setupImage() {
 		myDisp = new ImageView(new Image(myImageLocation));
+	}
+	
+	public String getImagePath() {
+		return myImageLocation;
+	}
+	
+	public void setDisp(ImageView disp) {
+		myDisp = disp;
 	}
 	public Renderer()
 	{

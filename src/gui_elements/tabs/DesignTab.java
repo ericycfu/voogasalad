@@ -1,14 +1,19 @@
 package gui_elements.tabs;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
 import authoring.backend.TagController;
+import game_engine.ResourceManager;
 import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
 import gui_elements.buttons.CreateInteractionsButton;
 import gui_elements.buttons.MainButton;
-import gui_elements.buttons.SaveGameButton;
+import gui_elements.buttons.NewComponentButton;
 import gui_elements.buttons.ComponentImageChooserButton;
 import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
@@ -36,12 +41,14 @@ import observables.Listener;
 
 public class DesignTab extends Tab {
 
-	private final String TAB_TEXT = "Design";
+	private static final String TAB_TEXT = "Design";
+	private static final String CREATE_COMPONENT = "Create Component";
+	private static final String UPDATE_COMPONENT = "Update Component";	
 	private Group design_root;
 	private MainTextField component_name_tf, component_movement_speed_tf, component_build_time_tf, component_build_cost_tf;
 	private MainComboBox component_tag_cb, building_cb, component_resource_cb;
 	private MainLabel component_image_choice_text_label;
-	private MainButton component_image_chooser_button;
+	private MainButton component_image_chooser_button, create_component_button;
 	private AuthoringObject authoring_object;
 	private TagController tag_controller;
 	private AuthoringController authoring_controller;
@@ -79,85 +86,72 @@ public class DesignTab extends Tab {
 										 new CreateComponentTitleLabel(),
 										 new ComponentImageChooserLabel().getLabel(),
 										 (component_image_choice_text_label = new ComponentImageChoiceTextLabel()).getLabel(),
-//										 new ComponentProductionCostLabel().getLabel(),
 										 new ComponentTagLabel().getLabel(),
 										 new ComponentMovementSpeedLabel().getLabel(),
 										 new ComponentBuildingLabel().getLabel(),
 										 new ComponentConstructionTimeLabel().getLabel(),
 										 new ComponentBuildCostLabel().getLabel());
-	
-//										 new InteractionComponentPropertyLabel().getLabel(),
-//										 new InteractionAutomaticLabel().getLabel(),
-//										 new InteractionAutomaticYesLabel().getLabel(),
-//										 new InteractionAutomaticNoLabel().getLabel(),
-//										 new InteractionAutomaticKeyRequestLabel().getLabel(),
-//										 new InteractionComponentTagLabel().getLabel(),
-//										 new InteractionQuantityLabel().getLabel(),
 	}
 		
 	private void setTextFields() {
-//		component_health_tf = new ComponentHealthTextField();
 		component_name_tf = new ComponentNameTextField();
 		component_movement_speed_tf = new ComponentMovementSpeedTextField();
 		component_build_time_tf = new ComponentBuildTimeTextField();
-		component_build_cost_tf = new ComponentBuildCostTextField();
-
-		
+		component_build_cost_tf = new ComponentBuildCostTextField();		
 //		interaction_automatic_key_tf = new InteractionAutomaticKeyTextField();
-//		interaction_quantity_tf = new InteractionQuantityTextField();
 		
 		design_root.getChildren().addAll(
-//										 component_health_tf.getTextField(),
 										 component_name_tf.getTextField(),
 										 component_movement_speed_tf.getTextField(),
 										 component_build_time_tf.getTextField(),
 										 component_build_cost_tf.getTextField());
 //										 interaction_automatic_key_tf.getTextField(),
-//										 interaction_quantity_tf.getTextField(),
-//										 interaction_type_tf.getTextField());
 	}
 	
 	private void setComboBoxes() {
 		component_tag_cb = new ComponentTagComboBox(tag_controller);
 		building_cb = new BuildingComboBox();
 		component_resource_cb = new ComponentResourceComboBox();
-//		interaction_component_property_cb = new InteractionComponentPropertyComboBox();
 		
 		design_root.getChildren().addAll(component_tag_cb.getComboBox(),
 										building_cb.getComboBox(),
 										component_resource_cb.getComboBox());
-//										 interaction_component_property_cb.getComboBox(),
 	}
 	
 	private void setButtons() {
 		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
+		create_component_button = new CreateComponentButton(authoring_object,
+															component_name_tf.getTextField(),
+															component_tag_cb.getComboBox(),
+															tag_controller,
+															component_image_choice_text_label.getLabel(),
+															component_movement_speed_tf.getTextField(),
+															building_cb.getComboBox(),
+															component_build_time_tf.getTextField(),
+															component_resource_cb.getComboBox(),
+															component_build_cost_tf.getTextField(),
+															this,
+															game_entity);
 		
 		design_root.getChildren().addAll(
 										 component_image_chooser_button.getButton(),
-										 new CreateComponentButton(authoring_object,
-												 component_name_tf.getTextField(),
-												 component_tag_cb.getComboBox(),
-												 tag_controller,
-												 component_image_choice_text_label.getLabel(),
-												 component_movement_speed_tf.getTextField(),
-												 building_cb.getComboBox(),
-												 component_build_time_tf.getTextField(),
-												 component_resource_cb.getComboBox(),
-												 component_build_cost_tf.getTextField(),
-												 this).getButton(),
+										 create_component_button.getButton(),
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
-										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton());
+										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
+										 new NewComponentButton(this).getButton());
 	}
 	
 	public void setNewAuthoringObject() {
 		authoring_object = new AuthoringObject();
+		create_component_button.getButton().setText(CREATE_COMPONENT);
 		initialize();
 	}
 	
 	public void assignCurrentAuthoringObject() {
 		authoring_object = authoring_controller.getCurrentObject();
+		create_component_button.getButton().setText(UPDATE_COMPONENT);
 		initialize();
 		assignComponents();
 	}
@@ -179,9 +173,25 @@ public class DesignTab extends Tab {
 			tag_string += tag + " ";
 		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
 		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
-		building_cb.getEditor().setText(String.valueOf(authoring_object.isBuilding()));
+		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
-//		component_build_cost_tf.setText(authoring_object.get);
+		component_image_choice_text_label.setText(authoring_object.getImagePath());
 	}
-
+	
+	public void updateBuildCost() {
+		ResourceManager resource_manager = game_entity.getResourceManager();
+		List<Entry<String, Double>> resource_entries = resource_manager.getResourceEntries();
+		List<String> resource_names = getResourceNames(resource_entries);
+		for(String resource_entry : resource_names) {
+			component_resource_cb.getItems().add(resource_entry);
+		}
+	}
+	
+	public List<String> getResourceNames(List<Entry<String, Double>> resource_entries) {
+		List<String> resource_names = new ArrayList<String>();
+		for(Entry<String, Double> entry : resource_entries) {
+			resource_names.add(entry.getKey());
+		}
+		return resource_names;
+	}	
 }

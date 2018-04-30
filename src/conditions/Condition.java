@@ -1,5 +1,6 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +21,12 @@ import game_object.UnmodifiableGameObjectException;
  * to act upon, the comparator to use, and the values to compare.
  */
 
-public class Condition implements EngineObject {
+public class Condition implements EngineObject, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private ComparatorManager comparatorManager;
 //	private GameObject host;
@@ -48,12 +53,15 @@ public class Condition implements EngineObject {
 	}
 
 	
-	public CustomCondition addCustomCondition(String type)
+	public void addCustomCondition(CustomCondition cc)
+	{
+		customConditions.add(cc);
+	}
+	
+	public CustomCondition generateCustomCondition(String conditionName)
 	{
 		CustomConditionFactory factory = new CustomConditionFactory();
-		CustomCondition cc = factory.getCustomCondition(type);
-		customConditions.add(cc);
-		return cc;
+		return factory.getCustomCondition(conditionName);
 	}
 
 	@Override

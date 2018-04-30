@@ -2,45 +2,53 @@
   <map>
     <entry>
       <authoring.backend.AuthoringObject>
-        <myImagePath>/images/rcd.png</myImagePath>
-        <myName>ABC</myName>
         <myTags>
-          <string>HELLO</string>
+          <string>biological</string>
         </myTags>
         <myX>0.0</myX>
         <myY>0.0</myY>
-        <myMovementSpeed>23.0</myMovementSpeed>
-        <isBuilding>false</isBuilding>
-        <buildTime>4.0</buildTime>
-        <buildCost/>
+        <buildCosts/>
         <myObjectLogic>
           <fulfillsLossCondition>false</fulfillsLossCondition>
           <attributes>
             <attributes/>
             <maxAttributes/>
-            <buildTime>0.0</buildTime>
+            <buildCosts reference="../../../buildCosts"/>
+            <buildTime>50.0</buildTime>
           </attributes>
           <interactions>
             <elementMap/>
             <new__ID__val>1</new__ID__val>
-            <interactionIndexMap class="tree-map"/>
           </interactions>
           <conditions>
             <elementMap/>
             <new__ID__val>1</new__ID__val>
           </conditions>
         </myObjectLogic>
+        <myMainComponentPropertyManager>
+          <myImagePath>/images/robert.png</myImagePath>
+          <myName>Marine</myName>
+          <myTags reference="../../myTags"/>
+          <myMovementSpeed>50.0</myMovementSpeed>
+          <isBuilding>true</isBuilding>
+          <myTeam>1</myTeam>
+        </myMainComponentPropertyManager>
         <myAttributes reference="../myObjectLogic/attributes"/>
         <myInteractions reference="../myObjectLogic/interactions"/>
-        <myConditionManager>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </myConditionManager>
+        <myConditionManager reference="../myObjectLogic/conditions"/>
       </authoring.backend.AuthoringObject>
       <list>
         <transform__library.Vector2>
-          <x>403.0</x>
-          <y>410.0</y>
+          <x>120.0</x>
+          <y>129.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>356.0</x>
+          <y>98.0</y>
+        </transform__library.Vector2>
+        <transform__library.Vector2>
+          <x>275.0</x>
+          <y>334.0</y>
         </transform__library.Vector2>
       </list>
     </entry>

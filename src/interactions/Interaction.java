@@ -1,6 +1,8 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -21,8 +23,17 @@ import transform_library.Transform;
  * @author andrew, Rayan
  *
  */
-public class Interaction implements EngineObject {
+public class Interaction implements EngineObject, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static enum InteractionTargetTeam
+	{
+		OWN, OTHER, ALL;
+	}
+	
 	private int id;
 	private List<String> targetTags;
 	private String name;
@@ -34,6 +45,9 @@ public class Interaction implements EngineObject {
 	//these will be changed by authoring for the interaction
 	private boolean isBuild;
 	private boolean isInstantaneous;
+	
+	private InteractionTargetTeam InteractionTargetTeam;
+	private Map<String, InteractionTargetTeam> targetTeamEnumMap;
 
 	//store functions by id
 	private List<CustomFunction> customFunctions;
@@ -44,6 +58,17 @@ public class Interaction implements EngineObject {
 		customFunctions = new ArrayList<>();
 		targetTags = new ArrayList<>();
 		this.id = id;
+		createTargetTeamEnumMap();
+	}
+	
+	
+	public Interaction(Interaction other)
+	{
+		this.isBuild = other.isBuild;
+		this.isInstantaneous = other.isInstantaneous;
+		this.InteractionTargetTeam = other.InteractionTargetTeam;
+		this.customFunctions = other.customFunctions;
+		this.range = other.range;
 	}
 
 
@@ -84,23 +109,57 @@ public class Interaction implements EngineObject {
 	 */
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
-		if(matchesTags(other, targetTags)) return;
-		try {
+		
+		if(!validatedInteractionTarget(current, other)) return;
+		System.out.println("validates");
+		//if(matchesTags(other, targetTags)) return;
+		System.out.println("tags match");
+		try 
+		{
 			for(CustomFunction cFunc : customFunctions)
 			{
 				cFunc.Execute(current, other, manager);
 			}
 		}
-		catch(PropertyNotFoundException p) {
-
+		catch(PropertyNotFoundException p) 
+		{
+			p.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * This helper makes sure that the interaction is only executed 
+	 */
+	private boolean validatedInteractionTarget(GameObject current, GameObject other)
+	{
+		if(this.InteractionTargetTeam == InteractionTargetTeam.ALL) return true;
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OTHER
+				&& current.getOwner().getID() != other.getOwner().getID()) return true;
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OWN
+				&& current.getOwner().getID() == other.getOwner().getID()) return true;
+		return false;
+		
+	}
+	
+	private void createTargetTeamEnumMap() 
+	{
+		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
+		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
+			targetTeamEnumMap.put(value.toString(), value);
+		}
+	}
+	
 
 	private boolean matchesTags(GameObject other, List<String> tags)
 	{
 		for(String s : other.getTags())
 		{
-			if(tags.contains(s)) return true;
+			for(String x : tags)
+			{
+				if(s.equals(x)) return true;
+			}
 		}
 		return false;
 	}
@@ -122,6 +181,21 @@ public class Interaction implements EngineObject {
 	public void isBuild(boolean val)
 	{
 		this.isBuild = val;
+	}
+	
+	public void setInteractionTargetTeam(InteractionTargetTeam setting)
+	{
+		this.InteractionTargetTeam = setting;
+	}
+	
+	public void setInteractionTargetTeam(String setting_string)
+	{
+		this.InteractionTargetTeam = targetTeamEnumMap.get(setting_string);
+	}
+	
+	public InteractionTargetTeam getInteractionTargetTeam()
+	{
+		return InteractionTargetTeam;
 	}
 	
  	public List<String> getTargetTags()
@@ -174,7 +248,10 @@ public class Interaction implements EngineObject {
 		return description;
 	}
 
-
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -183,6 +260,7 @@ public class Interaction implements EngineObject {
 	{
 		return customFunctions;
 	}
+	
 	public void setImageFromPath() {
 		img = new Image(imagePath);
 	}

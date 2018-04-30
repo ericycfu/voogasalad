@@ -4,6 +4,7 @@ import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import interactions.CustomComponentParameterFormat;
+import interactions.ParameterParser;
 
 /**
  * @author Rayan
@@ -13,11 +14,11 @@ import interactions.CustomComponentParameterFormat;
 public class Upgrade implements CustomCondition {
 
 	public final String VARIABLE = "Attribute";
-	public final String DELTA = "Delta";
+	public final String PARAMETER = "New Maximum Value";
 	private CustomComponentParameterFormat format;
 	
 	private String attribute;
-	private double delta;
+	private String delta;
 	
 	public Upgrade()
 	{
@@ -27,13 +28,16 @@ public class Upgrade implements CustomCondition {
 	
 	@Override
 	public void Execute(GameObject current) {
-		
-		double prevVal;
+			
+		ParameterParser p = new ParameterParser();
 		
 		try 
 		{
-			prevVal = current.accessLogic().accessAttributes().getAttribute(attribute);
-			current.accessLogic().accessAttributes().setAttributeValue(attribute, prevVal + delta);
+			this.attribute = format.getParameterValue(VARIABLE);
+			this.delta = format.getParameterValue(PARAMETER);
+			double deltaVal = p.assignValidatedValue(PARAMETER, current);
+			double prevVal = current.accessLogic().accessAttributes().getMaxAttributeVal(attribute);
+			current.accessLogic().accessAttributes().setMaximumAttributeValue(attribute, prevVal + deltaVal);
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
@@ -53,7 +57,7 @@ public class Upgrade implements CustomCondition {
 		try 
 		{
 			this.attribute = format.getParameterValue(VARIABLE);
-			this.delta = Double.parseDouble(format.getParameterValue(DELTA));
+			this.delta = format.getParameterValue(PARAMETER);
 		} 
 		catch (PropertyNotFoundException e) 
 		{

@@ -8,6 +8,8 @@ import java.util.Properties;
 import authoring.backend.TagController;
 import gui_elements.buttons.EditComponentTagsSaveButton;
 import gui_elements.buttons.EditCustomFunctionsSaveButton;
+import gui_elements.combo_boxes.ComponentTagComboBox;
+import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.panes.EditComponentTagsPane;
 import gui_elements.panes.EditCustomFunctionsPane;
 import gui_elements.panes.MainPane;
@@ -30,13 +32,15 @@ public class EditComponentTagsScreen {
     private Stage stage;
     private MainPane edit_component_tags_pane;
     private TagController tag_controller;
+    private ComponentTagComboBox component_tag_cb;
     
 	// Additional setup for the add-interactions screen.
     private Scene myScene;
     private static Group root;
     
-    public EditComponentTagsScreen(TagController tag_controller) {
+    public EditComponentTagsScreen(TagController tag_controller, MainComboBox component_tag_cb) {
     	this.tag_controller = tag_controller;
+    	this.component_tag_cb = (ComponentTagComboBox) component_tag_cb;
     	initialize();
     }
 
@@ -111,6 +115,7 @@ public class EditComponentTagsScreen {
     private void setButtons() {
     	root.getChildren().add(new EditComponentTagsSaveButton(tag_controller,
     													       edit_component_tags_pane,
+    													       component_tag_cb,
     													       this));
     }
 

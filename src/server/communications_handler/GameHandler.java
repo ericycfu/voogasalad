@@ -1,6 +1,7 @@
 package server.communications_handler;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import game_engine.GameInstance;
@@ -29,7 +30,7 @@ public class GameHandler extends CommunicationsHandler {
 			String input;
 			while((input = (String)getInputStream().readObject()) != null) {
 				if(!input.split("\\s+")[0].equals("Leave")) {
-					runningGameLobby.removePlayer(getSocket());
+					runningGameLobby.remove(getSocket());
 					return MainPageHandler.CLASS_REF;
 				}
 				if(input.equals("Save")) {
@@ -51,11 +52,13 @@ public class GameHandler extends CommunicationsHandler {
 	public void updateClient() {
 		if(runningGame.getIsRunning()) {
 		try {
-			getOutputStream().writeObject(runningGame.getGameObjects());
-			getOutputStream().writeObject(runningGame.getTeamManager().get(team_ID));
-			getOutputStream().writeDouble(runningGame.getGameTime());
-			getOutputStream().writeObject(runningGame.getChat());
+			ObjectOutputStream out =getOutputStream();
+			out.writeObject(runningGame.getGameObjects());
+			out.writeObject(runningGame.getTeamManager().get(team_ID));
+			out.writeDouble(runningGame.getGameTime());
+			out.writeObject(runningGame.getChat());
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		}
 	}

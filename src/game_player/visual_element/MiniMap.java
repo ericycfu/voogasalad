@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game_object.GameObject;
+import game_player.GamePlayer;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -14,13 +15,16 @@ import javafx.scene.shape.Rectangle;
  * 
  * Clicking on the MiniMap moves the selected units to corresponding location on the real map.
  * 
- * @author FY
+ * @author Frank Yin
  *
  */
 public class MiniMap implements VisualUpdate {
-	public static final double UNITMINIMAPRATIO = 1.0/80;
-	public static final double MINIMAPDISPLAYXRATIO = 1.0/4/MainDisplay.MAP_DISPLAY_RATIO;
-	public static final double MINIMAPDISPLAYYRATIO = 1.0/3/MainDisplay.MAP_DISPLAY_RATIO;
+	
+	public static final Color DEFAULTMINIMAPBGCOLOR = Color.BEIGE;
+	public static final Color DEFAULTMINIMAPSIDECOLOR = Color.BLACK;
+	public static final double UNITMINIMAPRATIO = 1.0 / 80;
+	public static final double MINIMAPDISPLAYXRATIO = 1.0 / 4 / GamePlayer.MAP_DISPLAY_RATIO;
+	public static final double MINIMAPDISPLAYYRATIO = 1.0 / 3 / GamePlayer.MAP_DISPLAY_RATIO;
 	private Group myMiniMap;
 	private Rectangle myMiniMapDisplay;
 	private Group myVisibleUnits;
@@ -40,8 +44,8 @@ public class MiniMap implements VisualUpdate {
 	
 	private void initializeMiniMapBackground() {
 		myMiniMapDisplay = new Rectangle(myWidth, myHeight);
-		myMiniMapDisplay.setFill(Color.BEIGE);
-		myMiniMapDisplay.setStroke(Color.BLACK);
+		myMiniMapDisplay.setFill(DEFAULTMINIMAPBGCOLOR);
+		myMiniMapDisplay.setStroke(DEFAULTMINIMAPSIDECOLOR);
 		myMiniMap.getChildren().add(myMiniMapDisplay);
 	}
 	
@@ -72,7 +76,7 @@ public class MiniMap implements VisualUpdate {
 	}
 	
 	/**
-	 * returns the current mini-map to 
+	 * returns the current mini-map
 	 * @return
 	 */
 	@Override

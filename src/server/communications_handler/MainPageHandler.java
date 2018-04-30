@@ -1,52 +1,52 @@
 package server.communications_handler;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import game_engine.GameInstance;
 import server.RTSServer;
 import server.RTSServerException;
 
 public class MainPageHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "MainPage";
-	private BufferedReader in;
 	public MainPageHandler(Socket input, RTSServer server) {
 		super(input, server);
+	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public String updateServer() throws RTSServerException {
 		try {
-			in = new BufferedReader(
-					new InputStreamReader(getSocket().getInputStream()));
-		} catch (IOException e) {
-			throw new RTSServerException("Unable to connect to server");
+			Integer input;
+			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new RTSServerException("Client disconnected");
+			if((input = in.readInt()) == null)
+				return CLASS_REF;
+			if(input == -1)
+				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
+			else getServer().addToLobby(input, getSocket());
+			System.out.println("Message received");
+			return LobbyHandler.CLASS_REF;
 		}
+		catch(IOException | ClassNotFoundException e) {
+			return CLASS_REF;}
 	}
 
 	@Override
-	public String updateServer() {
+	public void updateClient() throws RTSServerException {
+		getServer().cleanLobbyManager();
 		try {
-			String input;
-			if((input = in.readLine()) != null) {
-				int lobbyID = Integer.parseInt(input);
-				if(lobbyID == -1)
-					getServer().addLobby(getSocket(), null);
-				else getServer().addToLobby(lobbyID, getSocket());
-				return LobbyHandler.CLASS_REF;
-			}
-			else return CLASS_REF;
-		}
-		catch(IOException e) {return CLASS_REF;}
-		
-	}
-
-	@Override
-	public void updateClient() {
-		ObjectOutputStream out;
-		try {
-			out = new ObjectOutputStream(getSocket().getOutputStream());
-			out.writeObject(getServer());
-		} catch (IOException e) {
-			
+			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				throw new RTSServerException("Client disconnected");
+			out.writeObject(
+					getServer()
+					.getLobbyManager());
+			out.flush();
+		} catch (Exception e) {
 		}
 	}
 

@@ -3,10 +3,14 @@ package authoring.view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
+import gui_elements.factories.ButtonFactory;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class StartScreen {
@@ -47,9 +52,24 @@ public class StartScreen {
 	private void setupContent() {
 		VBox box = new VBox();
 		box.getChildren().addAll(
-				new StartScreenText(), 
-				new MakeGameButton(myStage), 
-				new PlayGameButton(myStage));
+				new StartScreenText(),
+				ButtonFactory.makeButton("Make Game", e -> new MakeGameSelect(myStage), "image_button"),
+				//new MakeGameButton(myStage), 
+				ButtonFactory.makeButton("Load Game", e -> {FileChooser myFC = new FileChooser();
+															File myFile = myFC.showOpenDialog(new Stage());
+															try {
+																new MakeGameScreen(myStage, myFile);
+															} catch (ClassNotFoundException e1) {
+																// TODO Auto-generated catch block
+																e1.printStackTrace();
+															} catch (IOException e1) {
+																// TODO Auto-generated catch block
+																e1.printStackTrace();
+															}
+															
+				}, "load_game_button"),
+				new PlayGameButton(myStage)
+				);
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
 		box.setSpacing(10);

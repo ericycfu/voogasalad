@@ -6,15 +6,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import authoring.backend.AuthoringObject;
 import game_object.GameObject;
-import game_object.Renderer;
-import javafx.scene.image.Image;
-
+import game_object.GameObjectManager;
+/**
+ * static class for loading data
+ * @author shichengrao
+ *
+ */
 public class Reader {
 	/**
 	 * reads all data at target location
@@ -29,16 +33,18 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		try {
-			while(true) {
+		while(true) {
+			try {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				result.add(obj);
+				}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
 			}
 		}
-		catch(EOFException e) {
-			//not real error, just signifies end of file
-		}
+	
 		return result;
 	}
 	/**
@@ -54,33 +60,44 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		try {
-			while(true) {
+		while(true) {
+			try {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
-				
+				}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
 			}
-		}
-		catch(EOFException e) {
-			//not real error, just signifies end of file
 		}
 		return result;
 	}
 	private void setUpNonSerializable(Object obj) {
 		System.out.println(obj.getClass().getName());
-		try {
-			System.out.println("we are pre image");
-			((GameObject) obj).setupImages();
-			System.out.println("we are post image");
+		if(obj instanceof GameObjectManager) {
+			((GameObjectManager) obj).setupImages();
 		}
-		catch(ClassCastException e) {
-			//if it is an authoring object
-			//replace with code to get image url
+		else if (obj instanceof Map) {
+			for (Object myObj:  ((Map) obj).keySet()){
+				setUpNonSerializable(myObj);
+			}
+			System.out.println("making images for map");
+		}
+		else if(obj instanceof Iterable) {
+			for(Object myObj: (Iterable) obj) {
+				setUpNonSerializable(myObj);
+			}
+		}
+		else if(obj instanceof GameObject) {
+			((GameObject) obj).setupImages();
+		}
+		else if(obj instanceof AuthoringObject) {
 			((AuthoringObject) obj).resetImageAfterLoad();
 		}
+		
 	}
 
 }

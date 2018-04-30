@@ -2,6 +2,7 @@ package game_data;
 
 import static org.junit.Assert.*;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,28 +10,33 @@ import java.util.List;
 
 import org.junit.Test;
 
+
+
+/**
+ * JUnit test for the reader
+ * @author shichengrao
+ *
+ */
 public class ReaderTest {
+	Writer myWriter = new Writer();
+	Reader myReader = new Reader();
 
 	@Test
 	public void testReadingFile() {
-		Writer w = new Writer();
-		Reader r = new Reader();
 		List<Object> stuff = new ArrayList<>();
 		stuff.add("hi");
 		stuff.add(3);
 		try {
-			w.write("src/game_data/test", stuff);
+			myWriter.write("src/game_data/test", stuff);
 		} catch (IOException e) {
 			fail("we fucked up");
 		}
 		List<Object> recovery = new ArrayList<>();
 		try {
-			recovery = r.read("src/game_data/test");
-		} catch (ClassNotFoundException e) {
+			recovery = myReader.read("src/game_data/test");
+		} catch (ClassNotFoundException | IOException e) {
 			fail("we fucked up");
-		} catch (IOException e) {
-			fail("we fucked up");
-		}
+		} 
 		for(int i = 0; i < stuff.size();i++) {
 			if(!stuff.get(i).equals(recovery.get(i))) {
 				fail("elements differ");
@@ -43,22 +49,18 @@ public class ReaderTest {
 	}
 	@Test
 	public void testReadSpecific() {
-		Writer w = new Writer();
-		Reader r = new Reader();
 		List<Object> stuff = new ArrayList<>();
 		stuff.add("hi");
 		stuff.add(3);
 		try {
-			w.write("src/game_data/test", stuff);
+			myWriter.write("src/game_data/test", stuff);
 		} catch (IOException e) {
 			fail("we fucked up");
 		}
 		List<Object> recovery = new ArrayList<>();
 		try {
-			recovery = r.read("src/game_data/test","java.lang.String");
-		} catch (ClassNotFoundException e) {
-			fail("we fucked up");
-		} catch (IOException e) {
+			recovery = myReader.read("src/game_data/test","java.lang.String");
+		} catch (ClassNotFoundException | IOException e) {
 			fail("we fucked up");
 		}
 		if(recovery.size() > 1) {
@@ -68,9 +70,8 @@ public class ReaderTest {
 	}
 	@Test
 	public void testInvalidFileName() {
-		Reader r = new Reader();
 		try {
-			r.read("\\\\/:*AAAAA?\\\"<>|3*7.pdf");
+			myReader.read("\\\\/:*AAAAA?\\\"<>|3*7.pdf");
 			fail("we fucked up");
 		} catch (ClassNotFoundException e) {
 			fail("we fucked up");
@@ -80,15 +81,12 @@ public class ReaderTest {
 	}
 	@Test
 	public void testNoFileFound() {
-		Reader r = new Reader();
 		try {
-			r.read("hi");
-			fail("we fucked up");
-		} catch (ClassNotFoundException e) {
+			myReader.read("hi");
 			fail("we fucked up");
 		} catch (FileNotFoundException e) {
 			return;
-		} catch(IOException e) {
+		} catch(IOException | ClassNotFoundException e) {
 			fail("we fucked up");
 		}
 	}

@@ -16,6 +16,10 @@ public class CreatedMaps implements Speaker {
 		listeners = new ArrayList<>();
 	}
 	
+	public void addMap(MapEntity myMap) {
+		createdmaps.add(myMap);
+	}
+	
 	public List<MapEntity> getCreatedMaps() {
 		return createdmaps;
 	}

@@ -1,32 +1,26 @@
 package game_object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
-import conditions.Condition;
+import authoring.backend.MainComponentPropertyManager;
 import game_engine.ElementManager;
 import game_engine.EngineObject;
 import game_engine.Team;
-import pathfinding.GridMap;
-import pathfinding.Pathfinder;
 import transform_library.Transform;
 import transform_library.Vector2;
 
 /**
  * 
- * @author Rayan
+ * @author Rayan, shichengrao
  * Allows access to the gameobjects in the scene by runnning their update methods.
  * Allows the game engine to restrict access of gameobjects from the game player
  */
 
-public class GameObjectManager extends ElementManager {
+public class GameObjectManager extends ElementManager implements Serializable{
 
 	
 	public GameObjectManager()
@@ -63,19 +57,21 @@ public class GameObjectManager extends ElementManager {
 		return newID;
 	}
 	
-	public int createGameObject(Transform transform, ObjectLogic logic)
+	public int createGameObject(Transform transform, ObjectLogic logic, MainComponentPropertyManager manager, Team team )
 	{
 		int newID = calculateID();
-		GameObject obj = new GameObject(newID, transform, logic);
+		GameObject obj = new GameObject(newID, transform, logic, manager, team);
 		this.addElement(obj);
 		return newID;
 	}
 	
-	public int copyGameObject(GameObject other, Team t)
+	public int copyGameObject(GameObject other)
 	{
 		int newID = calculateID();
-		GameObject copy = new GameObject(newID, t, other);
+		System.out.println("new id: " + newID);
+		GameObject copy = new GameObject(newID, other);
 		this.addElement(copy);
+		
 		return newID;
 	}
 	
@@ -153,6 +149,14 @@ public class GameObjectManager extends ElementManager {
 	public GameObject getGameObject(int id)
 	{
 		return (GameObject)(this.get(id));
+	}
+	
+	public void setupImages() {
+		for(EngineObject g : getElements())
+		{
+			GameObject gObj = (GameObject) g;
+			gObj.setupImages();
+		}
 	}
 	
 }

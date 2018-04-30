@@ -27,8 +27,11 @@ public class GatherUnlimitedResource implements CustomFunction{
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
+		if(other == null) return;
 		try 
 		{
+			this.resource = format.getParameterValue(RESOURCE);
+			this.gatherRate = format.getParameterValue(GATHER_RATE);
 			double deltaVal;
 			ParameterParser p = new ParameterParser();
 			deltaVal = p.assignValidatedValue(gatherRate, current);

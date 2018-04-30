@@ -22,6 +22,11 @@ public class MapEntity extends Pane implements AuthoringView {
 		mapsettings.setMapByImage(this);
 	}
 	
+	public MapEntity(MapSettings myMapSettings, Map<AuthoringObject, List<DraggableImageView>> myMapEntityMap) {
+		mapsettings = myMapSettings;
+		locations = myMapEntityMap;
+	}
+
 	public void addToMap(AuthoringObject obj, DraggableImageView dragimg) {
 		if (locations.get(obj) == null) 
 			locations.put(obj, new ArrayList<DraggableImageView>());
