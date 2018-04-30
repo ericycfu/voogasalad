@@ -130,7 +130,8 @@ public class DesignTab extends Tab {
 															component_build_time_tf.getTextField(),
 															component_resource_cb.getComboBox(),
 															component_build_cost_tf.getTextField(),
-															this);
+															this,
+															game_entity);
 		
 		design_root.getChildren().addAll(
 										 component_image_chooser_button.getButton(),
