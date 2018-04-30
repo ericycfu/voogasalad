@@ -52,7 +52,6 @@ public class LobbyHandler extends CommunicationsHandler {
 			else return CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {
-			e.printStackTrace();
 			return CLASS_REF;}
 	}
 

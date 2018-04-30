@@ -83,7 +83,6 @@ public class CurrentLobbyScreen extends ClientScreen {
 		Button change = new ChangeTeamButton();
 		change.setOnAction(e -> {
 			TeamDisplay current = teamList.getSelectionModel().getSelectedItem();
-			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					System.out.println("Changing");
@@ -93,7 +92,6 @@ public class CurrentLobbyScreen extends ClientScreen {
 					out.flush();
 					System.out.println(current.getID());
 				} catch (IOException e1) {
-					e1.printStackTrace();
 				}
 		});
 		myPane.getChildren().add(change);
@@ -122,7 +120,6 @@ public class CurrentLobbyScreen extends ClientScreen {
 			if(in == null)
 				return CLASS_REF;
 			obj = in.readObject();
-			System.out.println(obj.getClass().getName());
 			if(obj instanceof String || obj instanceof LobbyManager) {
 				return LobbySelectionScreen.CLASS_REF;
 			}
@@ -138,7 +135,6 @@ public class CurrentLobbyScreen extends ClientScreen {
 			playerID.setText("Player Number: "+ in.readInt());
 			return CLASS_REF;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CLASS_REF;
 		}
 	}

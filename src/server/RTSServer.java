@@ -54,7 +54,6 @@ public class RTSServer {
             while (true) {
                 try {
                     Socket socket = myServerSocket.accept();
-                    System.out.println("Connection accepted");
                     ClientHandler task = new ClientHandler(this, socket);
                     Thread newThread = new Thread(task);
                     newThread.start();

@@ -22,7 +22,6 @@ public class ServerClient  extends Application {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
 			}
 			catch(Exception e){
-				System.out.println("Fail");
 			}
 		} while (clientSocket == null);
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);

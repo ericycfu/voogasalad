@@ -106,7 +106,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
-			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					ObjectOutputStream out = getOutputStream();
@@ -176,7 +175,6 @@ public class LobbySelectionScreen extends ClientScreen {
 			});
 			return CLASS_REF;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CLASS_REF;
 		}
 
