@@ -1,5 +1,7 @@
 package server_client.screens;
-
+/**
+ * This screen denotes how the Client displays and communicates when the player is in the lobby
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -44,7 +46,9 @@ public class CurrentLobbyScreen extends ClientScreen {
 		setUpContent();
 		
 	}
-
+	/** Sets up the TeamList
+	 * 
+	 */
 	private void setUpContent() {
 		teamList = new ListView<>();
 		myPane.getChildren().add(teamList);
@@ -59,6 +63,9 @@ public class CurrentLobbyScreen extends ClientScreen {
 		setUpText();
 		
 	}
+	/**
+	 * Sets up the text info on the Screen
+	 */
 	private void setUpText() {
 		playerID = new Text();
 		playerID.setLayoutX(100);
@@ -74,7 +81,9 @@ public class CurrentLobbyScreen extends ClientScreen {
 		myPane.getChildren().add(currentTeam);
 		
 	}
-
+	/**
+	 * Sets up all buttons on the screen
+	 */
 	private void setUpButtons() {
 		LeaveLobbyButton leave = new LeaveLobbyButton(getOutputStream());
 		myPane.getChildren().add(leave);
@@ -102,7 +111,9 @@ public class CurrentLobbyScreen extends ClientScreen {
 		play.setLayoutX(380);
 		play.setLayoutY(520);
 	}
-
+	/**
+	 * Sets up the pane and Scene and switches the Screen
+	 */
 	private void setUpScene() {
 		myPane = new Pane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));

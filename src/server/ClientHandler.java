@@ -1,5 +1,8 @@
 package server;
-
+/**
+ * This class runs a thread handling all communciations on the server side with a particular client
+ * @author andrew
+ */
 import java.net.Socket;
 import java.net.SocketException;
 
