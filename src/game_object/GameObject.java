@@ -17,7 +17,7 @@ import transform_library.Vector2;
 
 /**
  * 
- * @author andrew, Rayan, shichengrao
+ * @author Rayan, andrew, shichengrao
  * 
  * Any object that will be shown on the world screen will be of the GameObject type. 
  * 
@@ -37,6 +37,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	private Transform transform;	
 	private ObjectLogic myObjectLogic;
 	private Renderer renderer;
+	
 
 	private Team owner;
 	
@@ -143,16 +144,25 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	 * @param other
 	 * Constructor that deep copies an object.
 	 */
-	public GameObject(int id, Team t, GameObject other)
+	public GameObject(int id, GameObject other)
 	{
+		if(other == null)
+		{
+			System.out.println("other null");
+		}
 		this.id = id;
 		this.name = other.name;
 		this.tags = other.tags;
-		this.owner = t;
+		this.owner = other.owner;
+		this.isBuilding = other.isBuilding;
+		this.movementSpeed = other.movementSpeed;
 		this.propertiesInit();
-		this.transform = other.transform;
-		this.renderer = other.renderer;
-		this.myObjectLogic = other.myObjectLogic;
+		
+		this.transform = new Transform(other.getTransform());
+		this.myObjectLogic = new ObjectLogic(other.myObjectLogic);
+		this.renderer = new Renderer(other.renderer);
+
+
 	}
 	
 	private void propertiesInit()
@@ -182,6 +192,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
+				System.out.println("done building");
 				this.dequeueBuilding();
 			}
 		}
@@ -276,12 +287,14 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isBeingConstructed = true;
 		this.buildTimer = new Timer();
 		buildTimer.setTimerOn(true);
+		this.renderer.getDisp().setOpacity(Renderer.TEMP_OPACITY);
 		buildTimer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()
 	{
 		this.setIsUninteractive(false);
+		this.renderer.getDisp().setOpacity(Renderer.NORMAL_OPACITY);
 		isBeingConstructed = false;
 	}
 	
@@ -371,6 +384,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	public void setElapsedTime(double time)
 	{
 		this.elapsedTime += time;
+		//System.out.println("Time " + elapsedTime);
 	}
 	public void setupImages() {
 		renderer.setupImage();

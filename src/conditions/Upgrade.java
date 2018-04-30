@@ -33,6 +33,8 @@ public class Upgrade implements CustomCondition {
 		
 		try 
 		{
+			this.attribute = format.getParameterValue(VARIABLE);
+			this.delta = format.getParameterValue(PARAMETER);
 			double deltaVal = p.assignValidatedValue(PARAMETER, current);
 			double prevVal = current.accessLogic().accessAttributes().getMaxAttributeVal(attribute);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(attribute, prevVal + deltaVal);

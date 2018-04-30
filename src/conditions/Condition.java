@@ -53,12 +53,15 @@ public class Condition implements EngineObject, Serializable{
 	}
 
 	
-	public CustomCondition addCustomCondition(String type)
+	public void addCustomCondition(CustomCondition cc)
+	{
+		customConditions.add(cc);
+	}
+	
+	public CustomCondition generateCustomCondition(String conditionName)
 	{
 		CustomConditionFactory factory = new CustomConditionFactory();
-		CustomCondition cc = factory.getCustomCondition(type);
-		customConditions.add(cc);
-		return cc;
+		return factory.getCustomCondition(conditionName);
 	}
 
 	@Override
