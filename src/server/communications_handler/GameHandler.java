@@ -61,7 +61,6 @@ public class GameHandler extends CommunicationsHandler {
 			out.writeDouble(runningGame.getGameTime());
 			out.writeObject(runningGame.getChat());
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		}
 	}
