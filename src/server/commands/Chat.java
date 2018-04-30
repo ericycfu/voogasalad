@@ -1,5 +1,8 @@
 package server.commands;
-
+/**
+ * Adds a message to the chat
+ * @author andrew
+ */
 import game_engine.GameInstance;
 
 public class Chat extends Command{

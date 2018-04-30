@@ -1,5 +1,7 @@
 package server.communications_handler;
-
+/**
+ * This class handles server side communications for a player in a lobby
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

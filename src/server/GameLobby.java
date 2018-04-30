@@ -1,5 +1,7 @@
 package server;
-
+/**
+ * This class denotes a lobby of players tied to a particular GameInstance
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -27,7 +29,6 @@ public class GameLobby implements Serializable{
 	private boolean isRunning;
 	private int ID;
 	private int numTeams;
-	
 	@SuppressWarnings("unchecked")
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
 		numTeams = toRun.getTeamManager().getSize();
@@ -43,6 +44,11 @@ public class GameLobby implements Serializable{
 		
 		addPlayer(lobbyHost);
 	}
+	/**
+	 * Overrides Java serialization for this object
+	 * @param out
+	 * @throws IOException
+	 */
 	 @SuppressWarnings("unchecked")
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		 out.defaultWriteObject();
@@ -56,6 +62,12 @@ public class GameLobby implements Serializable{
 		 ImageIO.write(loadedMap.getBackground(), "png", out);
 	 }
 	 @SuppressWarnings("unchecked")
+	 /**
+	  * Overrides Java deserialization for this object
+	  * @param in
+	  * @throws IOException
+	  * @throws ClassNotFoundException
+	  */
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		 in.defaultReadObject();
 		List<Integer>[] playersPerTeam = (List<Integer>[])in.readObject();
@@ -73,6 +85,11 @@ public class GameLobby implements Serializable{
 			 loadedMap = new GameInstance(null);
 		 }
 	}
+	 /**
+	  * Returns the team number that the player is on, 0 if team not found
+	  * @param s
+	  * @return
+	  */
 	public int getTeamID(Socket s) {
 		for(int x = 0; x < myPlayers.length; x++) {
 			if(myPlayers[x].contains(s))
@@ -80,9 +97,18 @@ public class GameLobby implements Serializable{
 		}
 		return -1;
 	}
+	/**
+	 * Returns the individual ID associated with the player
+	 * @param s
+	 * @return
+	 */
 	public int getPlayerID(Socket s) {
 		return playerIDs.get(s);
 	}
+	/**
+	 * Adds the given player to the team with the least 
+	 * @param toAdd
+	 */
 	public void addPlayer(Socket toAdd) {
 		playerIDs.put(toAdd, nextID);
 		nextID++;
@@ -97,14 +123,27 @@ public class GameLobby implements Serializable{
 		addPlayer(min_index, toAdd);
 		
 	}
+	/**
+	 * Adds a player to the specified team number
+	 * @param index index of team to add to
+	 * @param toAdd player to add
+	 */
 	public void addPlayer(int index, Socket toAdd) {
 		if(!isRunning)
 			myPlayers[index].add(toAdd);
 	}
+	/**
+	 * Removes player from the lobby and from the ID list
+	 * @param toRemove
+	 */
 	public void remove(Socket toRemove) {
 		playerIDs.remove(toRemove);
 		removeFromTeam(toRemove);
 	}
+	/**
+	 * Remove player from the specific team
+	 * @param toRemove player to remove
+	 */
 	public void removeFromTeam(Socket toRemove) {
 		for(int x = 0; x < numTeams; x++) {
 			if(myPlayers[x].contains(toRemove)) {
@@ -113,6 +152,11 @@ public class GameLobby implements Serializable{
 		}
 		
 	}
+	/**
+	 * Changes the team of the given player
+	 * @param newTeam new team ID
+	 * @param toAdd the player changing
+	 */
 	public void changeTeam(int newTeam, Socket toAdd) {
 		removeFromTeam(toAdd);
 		addPlayer(newTeam-1,toAdd);
@@ -132,6 +176,11 @@ public class GameLobby implements Serializable{
 	public boolean contains(Socket s) {
 		return playerIDs.keySet().contains(s);
 	}
+	/**
+	 * Returns the host of the team, who is the person who can start the game.
+	 * Returns null if the lobby is empty
+	 * @return
+	 */
 	public Socket getHost() {
 		int min_ID = Collections.min(playerIDs.values());
 		for(Socket s: playerIDs.keySet())
@@ -139,6 +188,11 @@ public class GameLobby implements Serializable{
 				return s;
 		return null;
 	}
+	/**
+	 * Checks whether 
+	 * @param team_ID
+	 * @return true if team has no players, false otherwise
+	 */
 	public boolean isTeamEmpty(int team_ID) {
 		return myPlayers[team_ID-1].isEmpty();
 	}

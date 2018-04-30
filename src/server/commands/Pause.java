@@ -1,5 +1,7 @@
 package server.commands;
-
+/**
+ * Instructs the GameInstance to pause the game
+ */
 import game_engine.GameInstance;
 
 public class Pause extends Command{

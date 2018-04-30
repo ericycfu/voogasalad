@@ -1,5 +1,8 @@
 package server.communications_handler;
-
+/**
+ * This class handles communications while the player is in game 
+ * @author andrew
+ */
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;

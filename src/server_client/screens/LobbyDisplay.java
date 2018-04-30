@@ -1,5 +1,8 @@
 package server_client.screens;
-
+/**
+ * Displays the information for a particular lobby in the LobbyManager
+ * @author andrew
+ */
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -15,6 +18,10 @@ public class LobbyDisplay extends GridPane {
 
 	    setPadding(new Insets(10, 10, 10, 10));
 	}
+	/**
+	 * Updates this object to reflect the information in the GameLobby
+	 * @param toDisplay the new GameLobby
+	 */
 	public void update(GameLobby toDisplay) {
 		getChildren().clear();
 		ID = toDisplay.getID();
@@ -23,6 +30,10 @@ public class LobbyDisplay extends GridPane {
 		add(lobbyText,0,0);
 
 	}
+	/**
+	 * Returns the ID of the lobby that last updated this object
+	 * @return the ID of the last GameLobby passed into update()
+	 */
 	public int getID() {
 		return ID;
 	}
