@@ -1,5 +1,8 @@
 package server.commands;
-
+/**
+ * This command instructs the game to queue a non-build interaction between 2 GameObjects
+ * @author andrew
+ */
 import game_engine.GameInstance;
 
 public class Interact extends Command {

@@ -1,5 +1,8 @@
 package server_client.buttons;
-
+/**
+ * Button responsible for changing teams in a lobby.
+ * @author andrew
+ */
 import javafx.scene.control.Button;
 
 public class ChangeTeamButton extends Button {

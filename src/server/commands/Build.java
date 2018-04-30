@@ -1,9 +1,9 @@
 package server.commands;
-
+/**
+ * This command instructs the server to build a new GameObject
+ * @author andrew
+ */
 import game_engine.GameInstance;
-import game_object.GameObject;
-import transform_library.Transform;
-import transform_library.Vector2;
 
 public class Build extends Command {
 

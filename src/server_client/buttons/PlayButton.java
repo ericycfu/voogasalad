@@ -1,5 +1,8 @@
 package server_client.buttons;
-
+/**
+ * Responsible for starting the game from a lobby
+ * @author andrew
+ */
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 

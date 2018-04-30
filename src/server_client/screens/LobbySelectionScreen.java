@@ -1,5 +1,8 @@
 package server_client.screens;
-
+/**
+ * Handles graphical display and server communication while the player is lobbyless
+ * @author andrew
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -69,12 +72,17 @@ public class LobbySelectionScreen extends ClientScreen {
 		myGameChooser.setTitle(GAME_CHOOSER_TITLE);
 		myGameChooser.setInitialDirectory(new File(DATA_PATH));
 	}
+	/**
+	 * sets up the information and buttons that are displayed
+	 */
 	private void setupContent() {
 		setUpLobbyDisplays();
 		setUpJoinButton();
 		setUpCreateButton();
 	}
-
+	/**
+	 * Sets up the button that allows the user to create the new Lobby
+	 */
 	private void setUpCreateButton() {
 		CreateLobbyButton create = new CreateLobbyButton();
 		myPane.getChildren().add(create);
@@ -102,11 +110,13 @@ public class LobbySelectionScreen extends ClientScreen {
 		});
 
 	}
+	/**
+	 * Sets up the Join Lobby button 
+	 */
 	private void setUpJoinButton() {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
-			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					ObjectOutputStream out = getOutputStream();
@@ -120,6 +130,9 @@ public class LobbySelectionScreen extends ClientScreen {
 		join.setLayoutY(520);
 
 	}
+	/**
+	 * Sets up the ListView that displays Lobby information
+	 */
 	private void setUpLobbyDisplays() {
 		currentLobbies = new ListView<LobbyDisplay>();
 		currentLobbies.setPrefSize(800, 400);
@@ -135,6 +148,9 @@ public class LobbySelectionScreen extends ClientScreen {
 		});
 
 	}
+	/**
+	 * Sets up the Stage
+	 */
 	private void setupStage() {
 		getStage().setScene(myScene);
 		getStage().setTitle(TITLE);
@@ -176,7 +192,6 @@ public class LobbySelectionScreen extends ClientScreen {
 			});
 			return CLASS_REF;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CLASS_REF;
 		}
 

@@ -1,5 +1,7 @@
 package server.communications_handler;
-
+/**
+ * This class handles server side communications for a player in a lobby
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -52,7 +54,6 @@ public class LobbyHandler extends CommunicationsHandler {
 			else return CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {
-			e.printStackTrace();
 			return CLASS_REF;}
 	}
 
