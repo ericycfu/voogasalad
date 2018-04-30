@@ -5,20 +5,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import server.GameLobby;
 
-public class LobbyDisplay extends GridPane {
+public class TeamDisplay extends GridPane {
 	private int ID;
-	public LobbyDisplay() {
+	public TeamDisplay(int ID) {
 		setPrefHeight(100);
 		setPrefWidth(800);
 		setHgap(0);
 	    setVgap(0);
-
 	    setPadding(new Insets(10, 10, 10, 10));
+	    this.ID = ID;
 	}
 	public void update(GameLobby toDisplay) {
 		getChildren().clear();
-		ID = toDisplay.getID();
-		Text lobbyText = new Text("LOBBY " + ID + "			Teams: " + toDisplay.getNumTeams());
+		Text lobbyText = new Text("TEAM " + ID + "	 Players: " + toDisplay.getNumPlayers(ID));
 		lobbyText.setId("lobby_main_text");
 		add(lobbyText,0,0);
 

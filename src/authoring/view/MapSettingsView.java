@@ -53,10 +53,10 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		this.authoring_controller = authoring_controller;
 		authoring_controller.updateMap(game.getCreatedMaps().getCreatedMaps().get(DEFAULT_MAP));
 		settings = authoring_controller.getCurrentMap().getMapSettings();
+		myResourceManager = game.getResourceManager();
 		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
-		myResourceManager = game.getResourceManager();
 		updateResources();
 	}
 	public MapSettingsView(MapSettings settings) {
@@ -201,15 +201,16 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			}
 		};
 		myHBox.getChildren().add(ButtonFactory.makeButton("Add New Resource Entry", myHandler));
-		for (int i = 0; i <= settings.getInitialResources().keySet().size(); i += 1) {
+		System.out.println(myResourceManager);
+		System.out.println(myResourceManager.getResourceEntries());
+		for (int i = 0; i <= myResourceManager.getResourceEntries().size(); i += 1) {
 			myVBox.getChildren().add(createResourceEntry());
 			System.out.println("am creating resource entry");
 		}
-		Set<Entry<String, Integer>> myResourceEntries = settings.getInitialResources().entrySet();
-		int index = 0;
-		for (Entry<String, Integer> entry: myResourceEntries) {
-			((TextField) ((HBox) myVBox.getChildren().get(index)).getChildren().get(0)).setText(entry.getKey());
-			((TextField) ((HBox) myVBox.getChildren().get(index)).getChildren().get(1)).setText(Integer.toString(entry.getValue()));
+		List<Entry<String, Double>> myResourceEntries = myResourceManager.getResourceEntries();
+		for (int i = 0; i < myResourceEntries.size(); i += 1) {
+			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(0)).setText(myResourceEntries.get(i).getKey());
+			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(1)).setText(Double.toString(myResourceEntries.get(i).getValue()));
 		}
 		((HBox)myVBox.getChildren().get(myVBox.getChildren().size()-1)).getChildren().add(ButtonFactory.makeButton("Save Settings", mySavingHandler));
 		standardBox(myVBox);
@@ -233,13 +234,16 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	private void saveSettings() {
 		VBox myRootBox = (VBox) this.getChildren().get(1);
-		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
+		System.out.println(myRootBox.getChildren().size());
+		System.out.println(((HBox) myRootBox.getChildren().get(2)).getChildren().size());
+		saveResources((VBox)((HBox) myRootBox.getChildren().get(2)).getChildren().get(0));
 		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
-		try {
+		/*try {
 			myWriter.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
 		//this try/catch statement below likely goes into the player so they can get the list of resources?
 		/*try {
 			System.out.println("creating the list");
