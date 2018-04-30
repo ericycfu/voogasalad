@@ -168,6 +168,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		System.out.print(imagePath);
 		int mapwidth = Extractor.extractTextFieldInt(contentBox.getChildren().get(4));
 		int mapheight = Extractor.extractTextFieldInt(contentBox.getChildren().get(5));
+		System.out.println(imagePath);
 		settings.updateSettings(mapName, numPlayers, imagePath, mapwidth, mapheight);
 	}
 	
