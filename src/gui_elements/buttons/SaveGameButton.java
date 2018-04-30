@@ -4,72 +4,49 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.DraggableImageView;
 import authoring.backend.GameEntity;
-
+import authoring.backend.SaveAuthoringGameState;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import game_data.AuthoringToGameObject;
 import game_data.Writer;
+import game_object.GameObject;
+import game_object.GameObjectManager;
 import resources.Resources;
 import transform_library.Vector2;
 
 public class SaveGameButton extends Button {
 
 	private static final String FILENAME = "save_game_button.properties";
-	private static final String RESOURCES_STRING = "AUTHOR_LOCATION_OBJECTS";
-	private static final String RESOURCES_STRING2 = "AUTHOR_LOCATION_MAP";
-	private static final String ALERT_TITLE = "Component Saved";
-	private static final String ALERT_MESSAGE = "Your component has been saved!";
-	private static final boolean EXPLICIT_SET_ACTION = false;
-	private AuthoringController myAuthoringController;
-	private GameEntity myGameEntity;
-	private Writer myWriter = new Writer();
-	public SaveGameButton(AuthoringController ac, GameEntity gameEntity) {
+	private static final String ALERT_TITLE = "Game Design Saved";
+	private static final String ALERT_MESSAGE = "Your game design has been saved!";
+//	private static final boolean EXPLICIT_SET_ACTION = false;
+	private AuthoringController authoring_controller;
+	private GameEntity game_entity;
+	
+	public SaveGameButton(AuthoringController authoring_controller, GameEntity game_entity) {
 //		super(FILENAME, EXPLICIT_SET_ACTION);
-		myAuthoringController = ac;
-		myGameEntity = gameEntity;
+		this.authoring_controller = authoring_controller;
+		this.game_entity = game_entity;
 		this.setText("Save Game");
 		setAction();
 	}
 
-	protected void setAction() {
+	private void setAction() {
 		this.setOnAction(value -> {
-			try {
-				myWriter.write(Resources.getString(RESOURCES_STRING), myGameEntity.getCreatedObjects().getAuthoringObjects());
-				Map<AuthoringObject, List<DraggableImageView>> map = myAuthoringController.getCurrentMap().getLocations();
-				Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
-				
-				List<Map<AuthoringObject, List<Vector2>>> listform = new ArrayList<>();
-				listform.add(changedMap);
-				myWriter.write(Resources.getString(RESOURCES_STRING2), listform);
-				createAlert();
-			} catch (IOException e) {
-				System.err.println("Could not save created authoring objects");
-			}
-			
-			myGameEntity.getCreatedObjects().getAuthoringObjects().clear();			
+			new SaveAuthoringGameState(authoring_controller, game_entity);
+			createAlert();
 		});
-	}
-	
-	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<DraggableImageView>> originalMap) {
-		Map<AuthoringObject, List<Vector2>> newMap = new HashMap<>();
-		for (AuthoringObject obj: originalMap.keySet()) {
-			List<DraggableImageView> list = originalMap.get(obj);
-			List<Vector2> newList = new ArrayList();
-			for (DraggableImageView img: list) {
-				Vector2 v = new Vector2(img.getX(), img.getY());
-				newList.add(v);
-			}
-			newMap.put(obj, newList);
-		}
-		return newMap;
 	}
 
 	private void createAlert() {
