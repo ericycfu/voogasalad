@@ -61,7 +61,7 @@ public class GameInstance implements Serializable{
 		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(0);
+		MapSettings mapProperties = (MapSettings) (myReader.read(filepath).get(0));
 		System.out.println(mapProperties.getNumPlayers());
 		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
 			ResourceManager rm = new ResourceManager();
