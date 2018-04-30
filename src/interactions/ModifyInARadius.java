@@ -36,6 +36,7 @@ public class ModifyInARadius implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
+		
 		Transform curTrans = current.getTransform();
 		ParameterParser p = new ParameterParser();
 		for(GameObject g : manager.getElements())
@@ -44,6 +45,9 @@ public class ModifyInARadius implements CustomFunction {
 			double distance = curTrans.getDisplacement(otherTrans);			
 			try 
 			{
+				this.variable = format.getParameterValue(VARIABLE);
+				this.delta = format.getParameterValue(DELTA);
+				this.radius = format.getParameterValue(RADIUS);
 				if(distance >= p.assignValidatedValue(radius, current)) return;
 				double deltaVal = p.assignValidatedValue(delta, current);
 				double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);

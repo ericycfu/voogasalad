@@ -1,5 +1,6 @@
 package authoring.backend;
 
+import authoring.view.ObjectTeamSelectionScreen;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 

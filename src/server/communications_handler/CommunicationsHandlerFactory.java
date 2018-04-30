@@ -1,5 +1,7 @@
 package server.communications_handler;
-
+/**
+ * This factory creates a new CommunicationsHandler based on the given String
+ */
 import java.net.Socket;
 import server.RTSServer;
 import server.RTSServerException;
@@ -12,12 +14,18 @@ public class CommunicationsHandlerFactory {
 		hostServer = server;
 		connectionSocket = connection;
 	}
+	/**
+	 * Returns the CommunicationsHandler from the given className
+	 * @param className new class name
+	 * @return corresponding Handler
+	 */
 	public CommunicationsHandler get(String className) {
 		
 		try {
 			Class<?> clazz = Class.forName(PACKAGE_NAME + className + "Handler");
 			return (CommunicationsHandler) clazz.getConstructor(Socket.class,RTSServer.class).newInstance(connectionSocket,hostServer);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RTSServerException("Unable to correctly handle input");
 		}
 	}

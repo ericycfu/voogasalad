@@ -1,12 +1,17 @@
 package server;
-
+/**
+ * This class denotes a lobby of players tied to a particular GameInstance
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -19,10 +24,11 @@ public class GameLobby implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private transient List<Socket>[] myPlayers;
 	private transient GameInstance loadedMap;
+	private transient Map<Socket, Integer> playerIDs;
+	private int nextID;
 	private boolean isRunning;
 	private int ID;
 	private int numTeams;
-	
 	@SuppressWarnings("unchecked")
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
 		numTeams = toRun.getTeamManager().getSize();
@@ -30,50 +36,82 @@ public class GameLobby implements Serializable{
 		for(int x = 0; x < numTeams; x++){
 			myPlayers[x] = new ArrayList<>();
 		}
-		myPlayers[0].add(lobbyHost);
+		playerIDs = new HashMap<>();
+		nextID = 1;
+		
 		loadedMap = toRun;
 		isRunning = false;
+		
+		addPlayer(lobbyHost);
 	}
-	 private void writeObject(ObjectOutputStream out) throws IOException{
+	/**
+	 * Overrides Java serialization for this object
+	 * @param out
+	 * @throws IOException
+	 */
+	 @SuppressWarnings("unchecked")
+	private void writeObject(ObjectOutputStream out) throws IOException{
 		 out.defaultWriteObject();
-		 int[] numPlayers = new int[numTeams];
+		 List<Integer>[] numPlayers = (List<Integer>[])new ArrayList[numTeams];
 		 for(int x = 0; x < numTeams; x++) {
-			 numPlayers[x] = myPlayers[x].size();
+			 numPlayers[x] = new ArrayList<>();
+			 for(Socket s: myPlayers[x])
+				 numPlayers[x].add(playerIDs.get(s));
 		 }
 		 out.writeObject(numPlayers);
 		 ImageIO.write(loadedMap.getBackground(), "png", out);
 	 }
-	 private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+	 @SuppressWarnings("unchecked")
+	 /**
+	  * Overrides Java deserialization for this object
+	  * @param in
+	  * @throws IOException
+	  * @throws ClassNotFoundException
+	  */
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		 in.defaultReadObject();
-		 int[] playersPerTeam = (int[])in.readObject();
-		 for(int x = 0; x < in.readInt(); x++) {
+		List<Integer>[] playersPerTeam = (List<Integer>[])in.readObject();
+		 myPlayers = (List<Socket>[]) new ArrayList[numTeams];
+		 for(int x = 0; x < playersPerTeam.length; x++) {
 			 myPlayers[x] = new ArrayList<>();
-			 for(int y = 0; y < playersPerTeam[x]; y++) {
+			 for(int y = 0; y < playersPerTeam[x].size(); y++) {
 				 myPlayers[x].add(null);
 			 }
 		 }
-
-		 loadedMap = new GameInstance(ImageIO.read(in));
+		 try {
+			 loadedMap = new GameInstance(ImageIO.read(in));
+		 }
+		 catch(Exception e) {
+			 loadedMap = new GameInstance(null);
+		 }
 	}
+	 /**
+	  * Returns the team number that the player is on, 0 if team not found
+	  * @param s
+	  * @return
+	  */
 	public int getTeamID(Socket s) {
 		for(int x = 0; x < myPlayers.length; x++) {
 			if(myPlayers[x].contains(s))
-				return x;
+				return x+1;
 		}
 		return -1;
 	}
+	/**
+	 * Returns the individual ID associated with the player
+	 * @param s
+	 * @return
+	 */
 	public int getPlayerID(Socket s) {
-		int playerID = 1;
-		for(int x = 0; x < myPlayers.length; x++) {
-			for(int y = 0; y < myPlayers[x].size(); y++) {
-				if(myPlayers[x].get(y).equals(s))
-					return playerID;
-				playerID++;
-			}
-		}
-		return -1;
+		return playerIDs.get(s);
 	}
+	/**
+	 * Adds the given player to the team with the least 
+	 * @param toAdd
+	 */
 	public void addPlayer(Socket toAdd) {
+		playerIDs.put(toAdd, nextID);
+		nextID++;
 		if(isRunning)
 			return;
 		int min_index = 0;
@@ -85,19 +123,43 @@ public class GameLobby implements Serializable{
 		addPlayer(min_index, toAdd);
 		
 	}
+	/**
+	 * Adds a player to the specified team number
+	 * @param index index of team to add to
+	 * @param toAdd player to add
+	 */
 	public void addPlayer(int index, Socket toAdd) {
 		if(!isRunning)
 			myPlayers[index].add(toAdd);
 	}
-	public void removePlayer(Socket toRemove) {
-		for(int x = 0; x < numTeams; x++) {
-			if(myPlayers[x].contains(toRemove))
-				myPlayers[x].remove(toRemove);
-		}
+	/**
+	 * Removes player from the lobby and from the ID list
+	 * @param toRemove
+	 */
+	public void remove(Socket toRemove) {
+		playerIDs.remove(toRemove);
+		removeFromTeam(toRemove);
 	}
+	/**
+	 * Remove player from the specific team
+	 * @param toRemove player to remove
+	 */
+	public void removeFromTeam(Socket toRemove) {
+		for(int x = 0; x < numTeams; x++) {
+			if(myPlayers[x].contains(toRemove)) {
+				myPlayers[x].remove(toRemove);
+			}
+		}
+		
+	}
+	/**
+	 * Changes the team of the given player
+	 * @param newTeam new team ID
+	 * @param toAdd the player changing
+	 */
 	public void changeTeam(int newTeam, Socket toAdd) {
-		removePlayer(toAdd);
-		addPlayer(newTeam,toAdd);
+		removeFromTeam(toAdd);
+		addPlayer(newTeam-1,toAdd);
 	}
 	public void setID(int newID) {
 		ID = newID;
@@ -109,27 +171,30 @@ public class GameLobby implements Serializable{
 		isRunning = true;
 	}
 	public int getCurrentSize() {
-		int total = 0;
-		for(int x = 0; x < numTeams; x++)
-			total += myPlayers[x].size();
-		return total;
+		return playerIDs.size();
 	}
 	public boolean contains(Socket s) {
-		for(int x = 0; x < numTeams; x++) {
-			if(myPlayers[x].contains(s))
-				return true;
-		}
-		return false;
+		return playerIDs.keySet().contains(s);
 	}
+	/**
+	 * Returns the host of the team, who is the person who can start the game.
+	 * Returns null if the lobby is empty
+	 * @return
+	 */
 	public Socket getHost() {
-		for(int x = 0; x < numTeams; x++) {
-			if(!myPlayers[x].isEmpty())
-				return myPlayers[x].get(0);
-		}
+		int min_ID = Collections.min(playerIDs.values());
+		for(Socket s: playerIDs.keySet())
+			if(playerIDs.get(s) == min_ID)
+				return s;
 		return null;
 	}
+	/**
+	 * Checks whether 
+	 * @param team_ID
+	 * @return true if team has no players, false otherwise
+	 */
 	public boolean isTeamEmpty(int team_ID) {
-		return myPlayers[team_ID].isEmpty();
+		return myPlayers[team_ID-1].isEmpty();
 	}
 	public boolean isRunning() {
 		return isRunning;
@@ -139,5 +204,11 @@ public class GameLobby implements Serializable{
 	}
 	public GameInstance getCurrentGameInstance() {
 		return loadedMap;
+	}
+	public int getNumTeams() {
+		return numTeams;
+	}
+	public int getNumPlayers(int team_ID) {
+		return myPlayers[team_ID-1].size();
 	}
 }

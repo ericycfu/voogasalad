@@ -1,12 +1,14 @@
 package transform_library;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Rayan
  *	This class will handle transformation in world space for any object.
  */
 
-public class Transform {
+public class Transform implements Serializable {
 	
 	private Vector2 position;
 	private double rotation;
@@ -21,6 +23,11 @@ public class Transform {
 	{
 		this.position = position;
 		this.rotation = rotation;
+	}
+	
+	public Transform(Transform other)
+	{
+		this.position = new Vector2(other.position.getX(), other.position.getY());
 	}
 	
 	public Vector2 getPosition()

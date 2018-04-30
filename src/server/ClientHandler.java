@@ -1,6 +1,10 @@
 package server;
-
+/**
+ * This class runs a thread handling all communciations on the server side with a particular client
+ * @author andrew
+ */
 import java.net.Socket;
+import java.net.SocketException;
 
 import server.communications_handler.CommunicationsHandler;
 import server.communications_handler.CommunicationsHandlerFactory;
@@ -15,10 +19,28 @@ public class ClientHandler implements Runnable {
 	}
 	@Override
 	public void run() {
-		String newHandler =  myCommunicationsHandler.updateServer();
-		myCommunicationsHandler.updateClient();
-		if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
-			myCommunicationsHandler = myCHFactory.get(newHandler);
+		new Thread(() -> {
+			try {
+			while(true) {
+					String newHandler =  myCommunicationsHandler.updateServer();
+				if(!myCommunicationsHandler.getClass().getSimpleName().startsWith(newHandler))
+					myCommunicationsHandler = myCHFactory.get(newHandler);
+			}
+			}
+			catch(RTSServerException e) {
+				Thread.currentThread().interrupt();
+			}
+		}).start();
+		new Thread(() -> {
+			try {
+				while(true) {
+					myCommunicationsHandler.updateClient();
+				}
+			}
+			catch(RTSServerException e) {
+				Thread.currentThread().interrupt();
+			}
+		}).start();
 	}
 
 }

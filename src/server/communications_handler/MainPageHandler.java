@@ -1,11 +1,15 @@
 package server.communications_handler;
-
+/**
+ * This class handles server-side communications for a player on the main page
+ */
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import game_engine.GameInstance;
 import server.RTSServer;
+import server.RTSServerException;
 
 public class MainPageHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "MainPage";
@@ -13,29 +17,37 @@ public class MainPageHandler extends CommunicationsHandler {
 		super(input, server);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
-	public String updateServer() {
+	public String updateServer() throws RTSServerException {
 		try {
-			int input;
-			if((input = getInputStream().readInt()) == -1) {
-				if(input == -1)
-					getServer().addLobby(getSocket(), (GameInstance)getInputStream().readObject());
-				else getServer().addToLobby(input, getSocket());
-				return LobbyHandler.CLASS_REF;
-			}
-			else return CLASS_REF;
+			Integer input;
+			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new RTSServerException("Client disconnected");
+			if((input = in.readInt()) == null)
+				return CLASS_REF;
+			if(input == -1)
+				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
+			else getServer().addToLobby(input, getSocket());
+			return LobbyHandler.CLASS_REF;
 		}
-		catch(Exception e) {return CLASS_REF;}
+		catch(IOException | ClassNotFoundException e) {
+			return CLASS_REF;}
 	}
 
 	@Override
-	public void updateClient() {
-		ObjectOutputStream out;
+	public void updateClient() throws RTSServerException {
+		getServer().cleanLobbyManager();
 		try {
-			out = new ObjectOutputStream(getSocket().getOutputStream());
-			out.writeObject(getServer());
-		} catch (IOException e) {
-			
+			ObjectOutputStream out = getOutputStream();
+			if(out == null)
+				throw new RTSServerException("Client disconnected");
+			out.writeObject(
+					getServer()
+					.getLobbyManager());
+			out.flush();
+		} catch (Exception e) {
 		}
 	}
 

@@ -1,12 +1,14 @@
 package server_client.screens;
-
+/**
+ * Responsible for initializing the correct ClientScreen from the given String
+ * @author andrew
+ */
 import java.net.Socket;
 
 import javafx.stage.Stage;
 import server.RTSServerException;
 
 public class ScreenFactory {
-	public static final String PACKAGE_NAME = "server_client.screens.";
 	private Socket dedicatedConnection;
 	private Stage createdStage;
 	public ScreenFactory(Socket connection, Stage primaryStage) {
@@ -14,11 +16,11 @@ public class ScreenFactory {
 		createdStage = primaryStage;
 	}
 	public ClientScreen get(String className) {
-		try {
-			Class<?> clazz = Class.forName(PACKAGE_NAME + className + "Screen");
-			return (ClientScreen) clazz.getConstructor(Stage.class,Socket.class).newInstance(createdStage,dedicatedConnection);
-		} catch (Exception e) {
-			throw new RTSServerException("Unable to correctly handle input");
+		switch(className) {
+			case LobbySelectionScreen.CLASS_REF: return new LobbySelectionScreen(createdStage, dedicatedConnection);
+			case CurrentLobbyScreen.CLASS_REF: return new CurrentLobbyScreen(createdStage, dedicatedConnection);
+			// case "GamePlayer": return new GamePlayer(createdStage,dedicatedConnection);
+			default: throw new RTSServerException("class not found");
 		}
 	}
 }

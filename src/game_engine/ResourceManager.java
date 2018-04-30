@@ -1,10 +1,12 @@
 package game_engine;
 
+import java.io.Serializable;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import game_object.PropertyNotFoundException;
@@ -16,7 +18,7 @@ import game_object.PropertyNotFoundException;
  * Has certain limitations to ensure that improperly named resources are ignored.
  * To use: This 
  */
-public class ResourceManager {
+public class ResourceManager implements Serializable {
 
 	private Map<String, Double> resourceMap;
 	
