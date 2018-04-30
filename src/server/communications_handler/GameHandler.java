@@ -30,7 +30,7 @@ public class GameHandler extends CommunicationsHandler {
 			String input;
 			while((input = (String)getInputStream().readObject()) != null) {
 				if(!input.split("\\s+")[0].equals("Leave")) {
-					runningGameLobby.removePlayer(getSocket());
+					runningGameLobby.remove(getSocket());
 					return MainPageHandler.CLASS_REF;
 				}
 				if(input.equals("Save")) {
@@ -49,7 +49,7 @@ public class GameHandler extends CommunicationsHandler {
 	}
 
 	@Override
-	public void updateClient() throws SocketException{
+	public void updateClient() {
 		if(runningGame.getIsRunning()) {
 		try {
 			getOutputStream().writeObject(runningGame.getGameObjects());

@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 
 import server.RTSServer;
+import server.RTSServerException;
 
 public abstract class CommunicationsHandler {
 	private Socket communicationSocket;
@@ -37,11 +37,10 @@ public abstract class CommunicationsHandler {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(getSocket().getOutputStream()));
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
-	public abstract String updateServer() throws SocketException;
-	public abstract void updateClient() throws SocketException;
+	public abstract String updateServer() throws RTSServerException;
+	public abstract void updateClient() throws RTSServerException;
 
 }
