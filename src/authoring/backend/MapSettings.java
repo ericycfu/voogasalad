@@ -58,6 +58,7 @@ public class MapSettings implements AuthoringView {
 		if (this.map == null) {
 			setMap(map);
 		}
+		System.out.println(imagePath);
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
 		image.toBack();

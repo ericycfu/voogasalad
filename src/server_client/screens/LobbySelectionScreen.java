@@ -52,6 +52,7 @@ public class LobbySelectionScreen extends ClientScreen {
 	private ListView<LobbyDisplay> currentLobbies;
 	private Pane myPane;
 	private Scene myScene; 
+	private Reader myReader = new Reader();
 
 	public LobbySelectionScreen(Stage primaryStage, Socket clientSocket) {
 		super(primaryStage, clientSocket);
@@ -82,7 +83,7 @@ public class LobbySelectionScreen extends ClientScreen {
 		create.setOnAction(e -> {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
 			try {
-				List<Object> gameObjects = Reader.read(chosenGame.getCanonicalPath());
+				List<Object> gameObjects = myReader.read(chosenGame.getCanonicalPath());
 				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
 				@SuppressWarnings("unchecked")
 				Set<GameObject> possibleUnits = ((Set<GameObject>) gameObjects.get(1));

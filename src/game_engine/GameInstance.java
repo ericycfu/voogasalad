@@ -42,7 +42,9 @@ public class GameInstance implements Serializable{
 	private List<ChatEntry> chat;
 	private double mapHeight;
 	private double mapWidth;
-
+	private Reader myReader = new Reader();
+	private Writer myWriter = new Writer();
+	
 	public GameInstance(GameInfo g, GameObjectManager gom, String filepath) {
 
 		myGameInfo = g;
@@ -59,7 +61,7 @@ public class GameInstance implements Serializable{
 		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		MapSettings mapProperties = (MapSettings)Reader.read(filepath).get(2);
+		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(0);
 		System.out.println(mapProperties.getNumPlayers());
 		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
 			ResourceManager rm = new ResourceManager();
@@ -83,7 +85,7 @@ public class GameInstance implements Serializable{
 	public void save(String filepath) throws IOException {
 		List<Object> toWrite = new ArrayList<>();
 		toWrite.add(this);
-		Writer.write(filepath,toWrite);
+		myWriter.write(filepath,toWrite);
 	}
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		out.defaultWriteObject();
