@@ -22,7 +22,7 @@ public class SelectedUnitManager {
 	public SelectedUnitManager(Team team) {
 		selectedUnits = new ArrayList<GameObject>();
 		myTeam = team;
-		myTeamID = myTeam.getID();
+		//myTeamID = myTeam.getID();
 	}
 	
 	public void clear() {
@@ -30,20 +30,22 @@ public class SelectedUnitManager {
 	}
 	
 	public void add(GameObject go) {
-		if (go.getOwner().getID()==myTeamID) {
+		//if (go.getOwner().getID()==myTeamID) {
 			selectedUnits.add(go);
-		}
+		//}
 	}
 	
 	public void move(Vector2 target, GameObjectManager gom, GridMap gridmap) {
+		System.out.println(" x: " + target.getX() + " y: " + target.getY());
 		for (GameObject go : selectedUnits) {
+			System.out.println(go.getTransform().getPosition().getX());
 			go.queueMovement(target, gom, gridmap);
 		}
 	}
 	
 	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
 		GameObject top = selectedUnits.get(0);
-		System.out.println("my team: " + top.getOwner() + " target: " + target.getOwner());
+		System.out.println("my team: " + top.getOwner().getID() + " target: " + target.getOwner());
 		try {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {

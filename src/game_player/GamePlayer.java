@@ -51,7 +51,7 @@ import transform_library.Vector2;
  * @author Siyuan Chen
  *
  */
-public class GamePlayer extends ClientScreen {
+public class GamePlayer {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
@@ -86,6 +86,7 @@ public class GamePlayer extends ClientScreen {
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
+		//super(null, null);
 		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
@@ -101,8 +102,8 @@ public class GamePlayer extends ClientScreen {
 	}
 	
 	// network constructor
-	public GamePlayer(GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
-		super(,socket)
+	public GamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
+		//super(stage, socket);
 		myPossibleUnits = allPossibleUnits;
 		mySceneManager = scenemanager;
 		mySocket = socket;
@@ -308,17 +309,6 @@ public class GamePlayer extends ClientScreen {
 		myRoot.getChildren().add(text);
 	}
 
-	@Override
-	protected void setUp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String updateSelf() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 }
