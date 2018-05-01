@@ -66,7 +66,7 @@ public class Condition implements EngineObject, Serializable{
 	
 	public List<CustomCondition> getCustomConditions()
 	{
-		return java.util.Collections.unmodifiableList(customConditions);
+		return customConditions;
 	}
 
 	@Override
