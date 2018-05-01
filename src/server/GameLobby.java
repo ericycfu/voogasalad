@@ -59,7 +59,6 @@ public class GameLobby implements Serializable{
 				 numPlayers[x].add(playerIDs.get(s));
 		 }
 		 out.writeObject(numPlayers);
-		 ImageIO.write(loadedMap.getBackground(), "png", out);
 	 }
 	 @SuppressWarnings("unchecked")
 	 /**
@@ -78,12 +77,7 @@ public class GameLobby implements Serializable{
 				 myPlayers[x].add(null);
 			 }
 		 }
-		 try {
-			 loadedMap = new GameInstance(ImageIO.read(in));
-		 }
-		 catch(Exception e) {
-			 loadedMap = new GameInstance(null);
-		 }
+
 	}
 	 /**
 	  * Returns the team number that the player is on, 0 if team not found

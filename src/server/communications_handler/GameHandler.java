@@ -24,6 +24,7 @@ public class GameHandler extends CommunicationsHandler {
 		runningGame = runningGameLobby.getCurrentGameInstance();
 		player_ID = runningGameLobby.getPlayerID(input);
 		myInterpreter = new GameCommandInterpreter(runningGame);
+		team_ID = runningGameLobby.getTeamID(input);
 	}
 
 	public static final String CLASS_REF = "GAME";
@@ -60,6 +61,7 @@ public class GameHandler extends CommunicationsHandler {
 			out.writeObject(runningGame.getTeamManager().get(team_ID));
 			out.writeDouble(runningGame.getGameTime());
 			out.writeObject(runningGame.getChat());
+			out.flush();
 		} catch (IOException e) {
 		}
 		}

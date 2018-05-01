@@ -35,7 +35,12 @@ public class ServerClient  extends Application {
 			while(true) {
 				String newClass = currentScreen.updateSelf();
 				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
+					System.out.println("Switching to " + newClass);
 					Platform.runLater(() -> currentScreen = myScreenFactory.get(newClass));
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		}).start();

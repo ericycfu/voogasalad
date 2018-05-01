@@ -27,12 +27,14 @@ public class MainPageHandler extends CommunicationsHandler {
 				throw new RTSServerException("Client disconnected");
 			if((input = in.readInt()) == null)
 				return CLASS_REF;
+			System.out.println("Message received");
 			if(input == -1)
 				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
 			else getServer().addToLobby(input, getSocket());
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {
+			e.printStackTrace();
 			return CLASS_REF;}
 	}
 
