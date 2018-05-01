@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_object;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
-import authoring.backend.Extractor;
+
+import authoring.support.Extractor;
+import authoring.view.AuthoringView;
 import conditions.Condition;
 import conditions.ConditionManager;
 import conditions.CustomCondition;
@@ -26,44 +28,33 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditCustomConditionsScreen implements AuthoringView {
+public class EditCustomConditionsScreen extends ParameterSelect implements AuthoringView {
 	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
 	private ConditionManager cm;
-	private Stage stage;
-	private VBox root;
 	private Condition condition;
 	
 	public EditCustomConditionsScreen(ConditionManager cm, Condition condition) {
+		super();
 		this.cm = cm;
 		this.condition = condition;
-		initializeScene();
-		initializeButtons();
 		loadSaved();
 		addLine();
-		
 	}
 	
 	public EditCustomConditionsScreen(ConditionManager cm, String attribute, int comparator, String value) {
+		super();
 		this.cm = cm;
-		initializeScene();
 		initializeCondition(attribute, comparator, value);
-		initializeButtons();
 		addLine();
-
 	}
 	
-	private void initializeScene() {
-		root = new VBox();
-		root.setPadding(new Insets(10, 10, 10, 10));
-		Scene scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT/2, DEFAULT_BACKGROUND);
-		stage = new Stage();
-		stage.setScene(scene);
+	@Override
+	protected void customize() {
 		stage.setTitle("Edit Custom Conditions");
-		stage.setResizable(false);
-		stage.show();
 	}
 	
-	private void loadSaved() {
+	@Override
+	protected void loadSaved() {
 		for (CustomCondition c: condition.getCustomConditions()) {
 			loadLine(c);
 		}
@@ -74,34 +65,17 @@ public class EditCustomConditionsScreen implements AuthoringView {
 		condition = cm.getCondition(id);
 	}
 	
-	private void initializeButtons() {
-//		HBox box = new HBox();
-		root.getChildren().add(ButtonFactory.makeButton("Add Custom Function", e -> addLine()));
-		root.getChildren().add(ButtonFactory.makeButton("Save", e -> saveAll()));
-//		root.getChildren().add(box);
-//		startRow += 1;
-//		currRow += 1;
-	}
-	
 	private void loadLine(CustomCondition c) {
 		HBox line = new HBox();
 		String conditionName = Extractor.extractConditionName(c);
-		System.out.print(conditionName);
 		line.getChildren().add(customConditionSelect(line, conditionName));
 		CustomComponentParameterFormat format = c.getParameterFormat();
-		List<String> parameters = format.getParameterList();
-		for (String p: parameters) {
-			String value;
-			try {
-				value = format.getParameterValue(p);
-			} catch (PropertyNotFoundException e) {
-				value = "";
-			}
-			line.getChildren().add(TextFieldFactory.makeTextField(value, p));
-		}
+		super.loadParameters(line, format);
 		root.getChildren().add(line);
 	}
-	private void addLine() {
+	
+	@Override
+	protected void addLine() {
 		HBox line = new HBox();
 		line.getChildren().add(customConditionSelect(line));
 		root.getChildren().add(line);
@@ -120,45 +94,13 @@ public class EditCustomConditionsScreen implements AuthoringView {
 	}
 	
 	private void newConditionParameters(ComboBox box, HBox line) {
-		clearConditionParameters(line);
+		super.clearConditionParameters(line);
 		String conditionName = (String) box.getValue();
 		Condition c = new Condition(0, 0, "", "");
 		CustomCondition customCondition = c.generateCustomCondition(conditionName);
 		CustomComponentParameterFormat format = customCondition.getParameterFormat();
-		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
-			line.getChildren().add(addParameterField(parameters.get(i)));
-		}
+		super.setParameterFields(line, format);
 	}
-	
-	private void clearConditionParameters(HBox line) {
-		for (Node node: line.getChildren()) {
-			if (node instanceof TextField) {
-				line.getChildren().remove(node);
-			}
-		}
-	}
-	
-	private TextField addParameterField(String text) {
-		return TextFieldFactory.makeTextFieldPrompt(text);
-	}
-
-		
-//	private List<String> availableCustomConditions() {
-//		Properties properties = new Properties();
-//		InputStream input = this.getClass().getResourceAsStream(PROPERTIES_PATH);
-//		try {
-//			properties.load(input);
-//			List<String> list = new ArrayList<>();
-//			for (Object c: properties.values()) {
-//				list.add((String) c);
-//			}
-//			return list;
-//		} catch (IOException e) {
-//			System.err.print("Invalid properties file");
-//		}
-//		return null;
-//	}
 	
 	private List<String> availableCustomConditions() {
 		List<String> list = new ArrayList<>();
@@ -167,28 +109,23 @@ public class EditCustomConditionsScreen implements AuthoringView {
 		return list;
 	}
 	
-	private void saveAll() {
-//		cm.clearManager();
-		for (Node node: root.getChildren()) {
-			if (node instanceof HBox) {
-				extractInfo((HBox) node);
-			}
-		}
-		stage.close();
+	@Override
+	protected void clear() {
+		condition.getCustomConditions().clear();
 	}
 	
-	private void extractInfo(HBox box) {
-		Node nodeOne = box.getChildren().get(0);
-		String conditionName = "";
-		if (nodeOne instanceof ComboBox) {
-			conditionName = (String) ((ComboBox) nodeOne).getValue();
-		}
-		CustomCondition customCondition = condition.generateCustomCondition(conditionName);
-		condition.addCustomCondition(customCondition);
-		CustomComponentParameterFormat format = customCondition.getParameterFormat();
-		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
-			format.setFieldValue(parameters.get(i), Extractor.extractTextField(box.getChildren().get(i+1)));
+	@Override
+	protected void save(HBox line, ComboBox comboBox) {
+		String conditionName = (String) (comboBox.getValue());
+		if (conditionName != "") {
+			CustomCondition customCondition = condition.generateCustomCondition(conditionName);
+			condition.addCustomCondition(customCondition);
+			CustomComponentParameterFormat format = customCondition.getParameterFormat();
+			List<String> parameters = format.getParameterList();
+			for (int i=0; i<parameters.size(); i++) {
+				format.setFieldValue(parameters.get(i), Extractor.extractTextField(line.getChildren().get(i+1)));
+			}
 		}
 	}
 }
+

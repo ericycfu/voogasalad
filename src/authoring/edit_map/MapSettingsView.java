@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_map;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +9,10 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 
 import authoring.backend.AuthoringController;
-import authoring.backend.Extractor;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
+import authoring.support.Extractor;
+import authoring.view.AuthoringView;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
@@ -42,7 +43,8 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private VBox contentBox;
 	private TextField mapName = new TextField();
 	private TextField numPlayers = new TextField();
-	private ComboBox lossCondition = new ComboBox();
+//	private ComboBox lossCondition = new ComboBox();
+//	private LossConditionsScreen lossCondition;
 	private ImageChooserButton imageChooserButton = new ImageChooserButton();
 	private TextField mapWidth = new TextField();
 	private TextField mapHeight = new TextField();
@@ -138,7 +140,9 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		contentBox.getChildren().addAll(
 				mapName,
 				numPlayers,
-				lossCondition,
+//				lossCondition,
+				ButtonFactory.makeButton("Add Loss Condition", 
+						e -> new LossConditionsScreen(settings.getEndConditions())),
 				imageChooserButton,
 				mapWidth,
 				mapHeight);
