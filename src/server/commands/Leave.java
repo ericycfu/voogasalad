@@ -1,5 +1,8 @@
 package server.commands;
-
+/**
+ * Tells the server that the player will leave the game
+ * @author andrew
+ */
 import game_engine.GameInstance;
 
 public class Leave extends Command {

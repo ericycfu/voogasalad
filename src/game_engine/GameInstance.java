@@ -1,12 +1,10 @@
 package game_engine;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,9 @@ public class GameInstance implements Serializable{
 	private List<ChatEntry> chat;
 	private double mapHeight;
 	private double mapWidth;
-
+	private transient Reader myReader = new Reader();
+	private transient Writer myWriter = new Writer();
+	
 	public GameInstance(GameInfo g, GameObjectManager gom, String filepath) {
 
 		myGameInfo = g;
@@ -59,8 +59,7 @@ public class GameInstance implements Serializable{
 		background = i;
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		MapSettings mapProperties = (MapSettings)Reader.read(filepath).get(0);
-		System.out.println(mapProperties.getNumPlayers());
+		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(2);
 		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
 			ResourceManager rm = new ResourceManager();
 			for(String s: mapProperties.getInitialResources().keySet()) {
@@ -71,9 +70,6 @@ public class GameInstance implements Serializable{
 		mapHeight = mapProperties.getMapHeight();
 		mapWidth = mapProperties.getMapWidth();
 		background = ImageIO.read(this.getClass().getResourceAsStream(mapProperties.getImagePath()));
-		if(background == null)
-			System.out.println("The Image is null");
-		else System.out.println("Image successfully loaded");
 	}
 	/**
 	 * Saves the information in the GameInstance to the specified file
@@ -83,7 +79,7 @@ public class GameInstance implements Serializable{
 	public void save(String filepath) throws IOException {
 		List<Object> toWrite = new ArrayList<>();
 		toWrite.add(this);
-		Writer.write(filepath,toWrite);
+		myWriter.write(filepath,toWrite);
 	}
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		out.defaultWriteObject();

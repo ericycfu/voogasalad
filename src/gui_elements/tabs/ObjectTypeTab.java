@@ -1,8 +1,8 @@
 package gui_elements.tabs;
 
-import authoring.view.CreatedObjectsView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
+import authoring.created_items.CreatedObjectsView;
 import javafx.scene.Node;
 
 public class ObjectTypeTab extends Tab {

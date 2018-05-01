@@ -1,5 +1,8 @@
-package authoring.backend;
+package authoring.support;
 
+import authoring.backend.AuthoringController;
+import authoring.backend.MapEntity;
+import authoring.view.DraggableScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

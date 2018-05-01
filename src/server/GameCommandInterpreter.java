@@ -5,7 +5,7 @@ import server.commands.Command;
 import server.commands.CommandFactory;
 
 /**
- * This class is responsible for converting commands from a player to the 
+ * This class is responsible for converting commands from a player to actions in the game
  * @author andrew
  *
  */

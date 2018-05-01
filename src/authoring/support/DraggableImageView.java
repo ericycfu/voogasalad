@@ -1,6 +1,8 @@
-package authoring.backend;
+package authoring.support;
 
-import authoring.view.ObjectTeamSelectionScreen;
+import authoring.backend.AuthoringObject;
+import authoring.edit_map.ObjectTeamSelectionScreen;
+import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,10 +10,13 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class DraggableImageView extends ImageView {
 
 	private static final String TEAM = "Team ";
+	private static final String CSS_STYLE = "image-border-team";
 	private double mouseX;
     private double mouseY;
 
@@ -40,22 +45,22 @@ public class DraggableImageView extends ImageView {
     public DraggableImageView(AuthoringObject obj, Image image, double width, double height) {
 		this(image, width, height);
 		setAction(obj);
-}
+    }
         
     public void setAction(AuthoringObject obj) {
-	    	this.setOnMousePressed(e -> {
-	    		mouseX = e.getSceneX();
-	    		mouseY = e.getSceneY();
+	    this.setOnMousePressed(e -> {
+	    	mouseX = e.getSceneX();
+	    	mouseY = e.getSceneY();
 	    });
 			
 		this.setOnMouseDragged(event -> {
-			   double deltaX = event.getSceneX() - mouseX ;
-			   double deltaY = event.getSceneY() - mouseY ; 		
-			   obj.changeX(obj.getX() + deltaX);
-			   obj.changeY(obj.getY() + deltaY);
-			   obj.updateImage();
-			   mouseX = event.getSceneX();
-			   mouseY = event.getSceneY();
+			double deltaX = event.getSceneX() - mouseX ;
+			double deltaY = event.getSceneY() - mouseY ; 		
+			obj.changeX(obj.getX() + deltaX);
+			obj.changeY(obj.getY() + deltaY);
+			obj.updateImage();
+			mouseX = event.getSceneX();
+			mouseY = event.getSceneY();
 		});
 		
 		this.setOnMouseClicked(ex -> {
@@ -64,10 +69,18 @@ public class DraggableImageView extends ImageView {
 			}
 		});
 		
-		updateToolTip(obj);
+		updateImageProperties(obj);
     }
     
-    public void updateToolTip(AuthoringObject authoring_object) {
+    public void updateImageProperties(AuthoringObject authoring_object) {
+//    	HBox hbox_inner = new HBox();
+//    	hbox_inner.setStyle("-fx-border-image-color: #f0f8ff; -fx-border-image-style: solid; -fx-border-width: 5;");
+//    	HBox hbox_outer = new HBox();
+//        String style_outer = "-fx-border-color: #f0f8ff; -fx-border-width: 10;";
+//        hbox_outer.setStyle(style_outer);
+//        hbox_inner.getChildren().add(this);
+//        hbox_outer.getChildren().add(hbox_inner);
+//    	this.getStyleClass().add("image-border-team" + authoring_object.getTeam());
 		Tooltip.install(this, new Tooltip("Team " + authoring_object.getTeam()));
     }
     

@@ -7,8 +7,13 @@
           <id>1</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>229.0</x>
               <y>32.0</y>
+=======
+              <x>386.0</x>
+              <y>150.0</y>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,12 +22,66 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
+<<<<<<< HEAD
               <buildCosts/>
               <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
               <new__ID__val>1</new__ID__val>
+=======
+              <buildCosts>
+                <entry>
+                  <null/>
+                  <double>100.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>100.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>prof</string>
+                    </targetTags>
+                    <name>build</name>
+                    <imagePath>/images/arrow_up.png</imagePath>
+                    <description>build</description>
+                    <isBuild>true</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>1000.0</range>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
             </interactions>
             <conditions>
               <elementMap/>
@@ -30,7 +89,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD
             <myImageLocation>/images/rcd.png</myImageLocation>
+=======
+            <myImageLocation>/images/station.png</myImageLocation>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           </renderer>
           <owner>
             <id>1</id>
@@ -39,15 +102,25 @@
               <resourceMap/>
             </resourceManager>
           </owner>
+<<<<<<< HEAD
           <name>DUVALL</name>
           <tags>
             <string>PROF</string>
             <string>PROF</string>
+=======
+          <name>building</name>
+          <tags>
+            <string>building</string>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+<<<<<<< HEAD
           <movementSpeed>10.0</movementSpeed>
+=======
+          <movementSpeed>0.0</movementSpeed>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -56,13 +129,18 @@
         </game__object.GameObject>
       </entry>
       <entry>
-        <int>3</int>
+        <int>4</int>
         <game__object.GameObject>
-          <id>3</id>
+          <id>4</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>23.0</x>
               <y>31.0</y>
+=======
+              <x>216.0</x>
+              <y>146.0</y>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -71,7 +149,16 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
+<<<<<<< HEAD
               <buildCosts/>
+=======
+              <buildCosts>
+                <entry>
+                  <null/>
+                  <double>100.0</double>
+                </entry>
+              </buildCosts>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
               <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
@@ -124,7 +211,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD
             <myImageLocation>/images/station.png</myImageLocation>
+=======
+            <myImageLocation>/images/robert.png</myImageLocation>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           </renderer>
           <owner>
             <id>1</id>
@@ -133,6 +224,7 @@
               <resourceMap/>
             </resourceManager>
           </owner>
+<<<<<<< HEAD
           <name>BUILDING</name>
           <tags>
             <string>BUILDING</string>
@@ -141,6 +233,16 @@
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>0.0</movementSpeed>
+=======
+          <name>duvall</name>
+          <tags>
+            <string>prof</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>10.0</movementSpeed>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -149,7 +251,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>5</new__ID__val>
+    <new__ID__val>7</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -166,7 +268,16 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
+<<<<<<< HEAD
           <buildCosts/>
+=======
+          <buildCosts>
+            <entry>
+              <null/>
+              <double>100.0</double>
+            </entry>
+          </buildCosts>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
@@ -176,9 +287,15 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
+<<<<<<< HEAD
                   <string>PROF</string>
                 </targetTags>
                 <name>Build</name>
+=======
+                  <string>prof</string>
+                </targetTags>
+                <name>build</name>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
                 <imagePath>/images/arrow_up.png</imagePath>
                 <description>build</description>
                 <isBuild>true</isBuild>
@@ -211,7 +328,11 @@
               </interactions.Interaction>
             </entry>
           </elementMap>
+<<<<<<< HEAD
           <new__ID__val>5</new__ID__val>
+=======
+          <new__ID__val>7</new__ID__val>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
         </interactions>
         <conditions>
           <elementMap/>
@@ -221,9 +342,15 @@
       <renderer>
         <myImageLocation>/images/station.png</myImageLocation>
       </renderer>
+<<<<<<< HEAD
       <name>BUILDING</name>
       <tags>
         <string>BUILDING</string>
+=======
+      <name>building</name>
+      <tags>
+        <string>building</string>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
       </tags>
       <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
@@ -249,7 +376,16 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
+<<<<<<< HEAD
           <buildCosts/>
+=======
+          <buildCosts>
+            <entry>
+              <null/>
+              <double>100.0</double>
+            </entry>
+          </buildCosts>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
           <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
@@ -262,12 +398,20 @@
         </conditions>
       </myObjectLogic>
       <renderer>
+<<<<<<< HEAD
         <myImageLocation>/images/rcd.png</myImageLocation>
       </renderer>
       <name>DUVALL</name>
       <tags>
         <string>PROF</string>
         <string>PROF</string>
+=======
+        <myImageLocation>/images/robert.png</myImageLocation>
+      </renderer>
+      <name>duvall</name>
+      <tags>
+        <string>prof</string>
+>>>>>>> 2854afc3f767265b2c237370633378083d79b8ae
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>

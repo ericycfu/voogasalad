@@ -1,16 +1,18 @@
-package authoring.view;
+package authoring.edit_map;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JFileChooser;
 
 import authoring.backend.AuthoringController;
-import authoring.backend.Extractor;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
+import authoring.support.Extractor;
+import authoring.view.AuthoringView;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
@@ -39,14 +41,25 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private HBox lossConditionBox;
 	private HBox resourcesBox;
 	private VBox contentBox;
+	private TextField mapName = new TextField();
+	private TextField numPlayers = new TextField();
+//	private ComboBox lossCondition = new ComboBox();
+//	private LossConditionsScreen lossCondition;
+	private ImageChooserButton imageChooserButton = new ImageChooserButton();
+	private TextField mapWidth = new TextField();
+	private TextField mapHeight = new TextField();
+	private Writer myWriter = new Writer();
+	private static final int DEFAULT_MAP = 0;
 	
 	public MapSettingsView(AuthoringController authoring_controller, GameEntity game) {
 		this.authoring_controller = authoring_controller;
+		authoring_controller.updateMap(game.getCreatedMaps().getCreatedMaps().get(DEFAULT_MAP));
 		settings = authoring_controller.getCurrentMap().getMapSettings();
+		myResourceManager = game.getResourceManager();
 		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
-		myResourceManager = game.getResourceManager();
+		updateResources();
 	}
 	public MapSettingsView(MapSettings settings) {
 		
@@ -55,6 +68,11 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	
 	public void setMapSettings(MapSettings settings) {
 		this.settings = settings;
+		
+	}
+	
+	private void updateResources() {
+		
 		
 	}
 	
@@ -120,12 +138,20 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private void initializeContent(HBox rootBox) {
 		contentBox = new VBox();
 		contentBox.getChildren().addAll(
-				new TextField(),
-				new TextField(),
-				new ComboBox(),
-				new ImageChooserButton(),
-				new TextField(),
-				new TextField());
+				mapName,
+				numPlayers,
+//				lossCondition,
+				ButtonFactory.makeButton("Add Loss Condition", 
+						e -> new LossConditionsScreen(settings.getEndConditions())),
+				imageChooserButton,
+				mapWidth,
+				mapHeight);
+		mapName.setText(settings.getName());
+		numPlayers.setText(Integer.toString(settings.getNumPlayers()));
+		//get loss condition
+		//get image chooser button?
+		mapWidth.setText(Integer.toString(settings.getMapWidth()));
+		mapHeight.setText(Integer.toString(settings.getMapHeight()));
 		standardBox(contentBox);
 		contentBox.setSpacing(32);
 		rootBox.getChildren().add(contentBox);
@@ -146,6 +172,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		System.out.print(imagePath);
 		int mapwidth = Extractor.extractTextFieldInt(contentBox.getChildren().get(4));
 		int mapheight = Extractor.extractTextFieldInt(contentBox.getChildren().get(5));
+		System.out.println(imagePath);
 		settings.updateSettings(mapName, numPlayers, imagePath, mapwidth, mapheight);
 	}
 	
@@ -178,7 +205,17 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			}
 		};
 		myHBox.getChildren().add(ButtonFactory.makeButton("Add New Resource Entry", myHandler));
-		myVBox.getChildren().add(createResourceEntry());
+		System.out.println(myResourceManager);
+		System.out.println(myResourceManager.getResourceEntries());
+		for (int i = 0; i <= myResourceManager.getResourceEntries().size(); i += 1) {
+			myVBox.getChildren().add(createResourceEntry());
+			System.out.println("am creating resource entry");
+		}
+		List<Entry<String, Double>> myResourceEntries = myResourceManager.getResourceEntries();
+		for (int i = 0; i < myResourceEntries.size(); i += 1) {
+			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(0)).setText(myResourceEntries.get(i).getKey());
+			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(1)).setText(Double.toString(myResourceEntries.get(i).getValue()));
+		}
 		((HBox)myVBox.getChildren().get(myVBox.getChildren().size()-1)).getChildren().add(ButtonFactory.makeButton("Save Settings", mySavingHandler));
 		standardBox(myVBox);
 	}
@@ -201,13 +238,16 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	}
 	private void saveSettings() {
 		VBox myRootBox = (VBox) this.getChildren().get(1);
-		saveResources((VBox)((HBox) myRootBox.getChildren().get(1)).getChildren().get(0));
+		System.out.println(myRootBox.getChildren().size());
+		System.out.println(((HBox) myRootBox.getChildren().get(2)).getChildren().size());
+		saveResources((VBox)((HBox) myRootBox.getChildren().get(2)).getChildren().get(0));
 		saveMapConfiguration((VBox)((HBox) myRootBox.getChildren().get(0)).getChildren().get(1));
-		try {
-			Writer.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
+		/*try {
+			myWriter.write("src/gui_elements/tabs/test", myResourceManager.getResourceEntries());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
 		//this try/catch statement below likely goes into the player so they can get the list of resources?
 		/*try {
 			System.out.println("creating the list");

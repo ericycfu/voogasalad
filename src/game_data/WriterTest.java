@@ -17,13 +17,14 @@ import org.junit.Test;
  */
 public class WriterTest {
 
+	private Writer myWriter = new Writer();
 	@Test
 	public void testCorrectWriting() {
 		List<Object> stuff = new ArrayList<>();
 		stuff.add("hi");
 		stuff.add(3);
 		try {
-			Writer.write("src/game_data/test", stuff);
+			myWriter.write("src/game_data/test", stuff);
 		} catch (IOException e) {
 			fail("we fucked up");
 		}
@@ -36,7 +37,7 @@ public class WriterTest {
 		stuff.add("hi");
 		stuff.add(3);
 		try {
-			Writer.write("\\\\/:*AAAAA?\\\"<>|3*7.pdf", stuff);
+			myWriter.write("\\\\/:*AAAAA?\\\"<>|3*7.pdf", stuff);
 			fail("we fucked up");
 		} catch (IOException e) {
 			return;

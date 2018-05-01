@@ -2,9 +2,9 @@ package gui_elements.buttons;
 
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.DraggableImageView;
 import authoring.backend.TagController;
-import authoring.view.ObjectTeamSelectionScreen;
+import authoring.edit_map.ObjectTeamSelectionScreen;
+import authoring.support.DraggableImageView;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.combo_boxes.ObjectTeamComboBox;
 import gui_elements.tabs.DesignTab;
@@ -38,11 +38,8 @@ public class ObjectTeamSaveButton extends MainButton {
 		getButton().setOnAction(value -> {
 			String team_selected = object_team_cb.getSelectionModel().getSelectedItem();
 			authoring_object.setTeam(Integer.parseInt(team_selected));
-			draggable_image_view.updateToolTip(authoring_object);
+			draggable_image_view.updateImageProperties(authoring_object);
 			object_team_selection_screen.getStage().close();
 		});
-	}
-	
-	private void createAlert() {
-	}
+	}	
 }

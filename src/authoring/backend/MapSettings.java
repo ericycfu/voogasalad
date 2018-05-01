@@ -1,6 +1,8 @@
 package authoring.backend;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -8,11 +10,13 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import scenemanager.EndCondition;
+import scenemanager.SceneManager;
 
 public class MapSettings implements AuthoringView {
 	private String mapName;
 	private int numPlayers;
-	private String lossCondition;
+	private List<EndCondition> endConditions;
 	private Map<String, Integer> resources;
 	private int mapwidth;
 	private int mapheight;
@@ -23,6 +27,16 @@ public class MapSettings implements AuthoringView {
 		initializeAll();
 	}
 	
+	private void initializeAll() {
+		mapName = "Default map";
+		numPlayers = 1;
+		endConditions = new ArrayList<>();
+		resources = new HashMap<>();
+		mapwidth = 1000;
+		mapheight = 1000;
+		imagePath = "/images/tt.jpg";
+	}
+	
 	public void updateSettings(String mapName, int numPlayers, String imagePath, int mapwidth, int mapheight) {
 		this.mapName = mapName;
 		this.numPlayers = numPlayers;
@@ -31,16 +45,6 @@ public class MapSettings implements AuthoringView {
 		this.mapheight = mapheight;
 		matchToSize(map);
 		setMapByImage(map);
-	}
-	
-	private void initializeAll() {
-		mapName = "Default map";
-		numPlayers = 1;
-		lossCondition = "";
-		resources = new HashMap<>();
-		mapwidth = 1000;
-		mapheight = 1000;
-		imagePath = "/images/tt.jpg";
 	}
 	
 	public void setMap(MapEntity map) {
@@ -58,6 +62,7 @@ public class MapSettings implements AuthoringView {
 		if (this.map == null) {
 			setMap(map);
 		}
+		System.out.println(imagePath);
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
 		image.toBack();
@@ -82,6 +87,9 @@ public class MapSettings implements AuthoringView {
 	}
 	public Map<String, Integer> getInitialResources(){
 		return resources;
+	}
+	public List<EndCondition> getEndConditions() {
+		return endConditions;
 	}
 	
 }

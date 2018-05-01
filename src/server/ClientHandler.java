@@ -1,5 +1,8 @@
 package server;
-
+/**
+ * This class runs a thread handling all communciations on the server side with a particular client
+ * @author andrew
+ */
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -24,7 +27,7 @@ public class ClientHandler implements Runnable {
 					myCommunicationsHandler = myCHFactory.get(newHandler);
 			}
 			}
-			catch(SocketException e) {
+			catch(RTSServerException e) {
 				Thread.currentThread().interrupt();
 			}
 		}).start();
@@ -34,7 +37,7 @@ public class ClientHandler implements Runnable {
 					myCommunicationsHandler.updateClient();
 				}
 			}
-			catch(SocketException e) {
+			catch(RTSServerException e) {
 				Thread.currentThread().interrupt();
 			}
 		}).start();
