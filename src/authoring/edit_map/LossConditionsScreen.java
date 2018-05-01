@@ -1,10 +1,11 @@
-package authoring.edit_object;
+package authoring.edit_map;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import authoring.backend.Extractor;
+import authoring.edit_object.ParameterSelect;
+import authoring.support.Extractor;
 import conditions.Condition;
 import conditions.CustomCondition;
 import game_object.PropertyNotFoundException;

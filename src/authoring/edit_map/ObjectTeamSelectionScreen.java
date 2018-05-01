@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_map;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.DraggableImageView;
+import authoring.support.DraggableImageView;
 import gui_elements.buttons.ObjectTeamSaveButton;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.combo_boxes.ObjectTeamComboBox;

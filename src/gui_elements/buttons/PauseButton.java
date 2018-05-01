@@ -1,6 +1,6 @@
 package gui_elements.buttons;
 
-import authoring.backend.AnimationHandler;
+import authoring.support.AnimationHandler;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

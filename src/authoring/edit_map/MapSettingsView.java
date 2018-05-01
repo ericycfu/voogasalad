@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_map;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 
 import authoring.backend.AuthoringController;
-import authoring.backend.Extractor;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
-import authoring.edit_object.LossConditionsScreen;
+import authoring.support.Extractor;
+import authoring.view.AuthoringView;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
