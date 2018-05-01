@@ -1,4 +1,4 @@
-package authoring.backend;
+package authoring.support;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

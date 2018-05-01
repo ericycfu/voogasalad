@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import authoring.backend.AuthoringObject;
-import authoring.backend.Extractor;
+import authoring.support.Extractor;
 import authoring.view.AuthoringView;
 import conditions.Comparator;
 import conditions.ComparatorManager;

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import authoring.support.DraggableImageView;
 import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;

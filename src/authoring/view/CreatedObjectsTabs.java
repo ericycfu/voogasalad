@@ -3,6 +3,8 @@ package authoring.view;
 import authoring.backend.AuthoringController;
 import authoring.backend.CreatedObjects;
 import authoring.backend.GameEntity;
+import authoring.created_items.CreatedMapsView;
+import authoring.created_items.CreatedObjectsView;
 import gui_elements.factories.ButtonFactory;
 import gui_elements.tabs.ObjectTypeTab;
 import javafx.scene.control.Button;

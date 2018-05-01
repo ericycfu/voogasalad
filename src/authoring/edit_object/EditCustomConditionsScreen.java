@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
-import authoring.backend.Extractor;
+
+import authoring.support.Extractor;
 import authoring.view.AuthoringView;
 import conditions.Condition;
 import conditions.ConditionManager;
