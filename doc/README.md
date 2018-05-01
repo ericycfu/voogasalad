@@ -47,6 +47,7 @@ All .css and .properties files are required.
 ### Design Decisions
 * Some elements don't really apply to RTS's, such as different levels or high scores. These game elements have been ignored.
 * It is assumed that all necessary image resources are loaded. The game itself can be created on 1 computer.
+
 ### Impressions
 * This project was a large undertaking and introduced the team to something resemblant of a real-world project environment. With so many group members and several subgroups, communication between members and clarity about what needed to be done was key. This project was stressful at times but was very educational and a formative experience.
 
