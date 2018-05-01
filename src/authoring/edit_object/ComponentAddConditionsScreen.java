@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_object;
 
 import javafx.geometry.Insets;
 
@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import authoring.backend.AuthoringObject;
 import authoring.backend.Extractor;
+import authoring.view.AuthoringView;
 import conditions.Comparator;
 import conditions.ComparatorManager;
 import conditions.Condition;

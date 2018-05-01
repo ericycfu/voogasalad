@@ -22,7 +22,10 @@ public class AllUnitsDead implements EndCondition {
 	private CustomComponentParameterFormat format;
 	
 	public AllUnitsDead()
-	{}
+	{
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
 	
 	@Override
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {

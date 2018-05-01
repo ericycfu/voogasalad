@@ -1,10 +1,10 @@
-package authoring.view;
+package authoring.edit_object;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+import authoring.view.AuthoringView;
 import game_object.ObjectAttributes;
 import gui_elements.buttons.AddAttributeButton;
 import gui_elements.buttons.AttributeApplyAndOkButton;

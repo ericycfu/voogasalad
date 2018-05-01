@@ -18,7 +18,7 @@ public class EndConditionFactory {
 		Class<?> clazz;
 		try 
 		{
-			clazz = Class.forName("interactions." + type);
+			clazz = Class.forName("scenemanager." + type);
 			EndCondition comm = (EndCondition)clazz.newInstance();
 			return comm;
 		} 
