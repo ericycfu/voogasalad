@@ -18,4 +18,5 @@ public interface CustomFunction {
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);
 	public String getName();
+	public boolean isRepetitive();
 }

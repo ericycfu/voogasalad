@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Random;
 
 import authoring.backend.MainComponentPropertyManager;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
+import interactions.Interaction;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -217,11 +219,13 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			if(!transform.MoveTowards(new Transform(activeWaypoints.peek()), movementSpeed))
 			{
 				activeWaypoints.remove();
-				if(activeWaypoints.isEmpty()) dequeueMovement();
+				if(activeWaypoints.isEmpty()) 
+					dequeueMovement();
 			}
 		}
 	}
 	
+
 	public void setIsBuilding(boolean val)
 	{
 		this.isBuilding = val;
@@ -261,10 +265,15 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	/**
 	 * Interaction dequeued after it is completed or cancelled
 	 */
-	public void dequeueInteraction()
+	public void dequeueInteraction(int interId)
 	{
-		isInteractionQueued = false;
-		interactionTarget = null;
+		Interaction inter = this.myObjectLogic.accessInteractions().getInteraction(interId);
+		if(!inter.isRepetitive())
+		{
+			isInteractionQueued = false;
+			interactionTarget = null;
+		}
+		
 	}
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)

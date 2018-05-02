@@ -48,6 +48,8 @@ public class Interaction implements EngineObject, Serializable {
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
+	
+	private double rate;
 
 	public Interaction(int id)
 	{
@@ -118,6 +120,7 @@ public class Interaction implements EngineObject, Serializable {
 			{
 				cFunc.Execute(current, other, manager);
 			}
+			current.dequeueInteraction(this.id);
 		}
 		catch(PropertyNotFoundException p) 
 		{
@@ -170,11 +173,34 @@ public class Interaction implements EngineObject, Serializable {
 		return false;
 	}
 
+	public void setRate(double rate)
+	{
+		this.rate = rate;
+	}
+	
+	public double getRate()
+	{
+		//must change later
+		return 1;
+	}
+	
 	public void setRange(double range)
 	{
 		this.range = range;
 	}
 
+	public boolean isRepetitive()
+	{
+		for(CustomFunction cfunc : this.customFunctions)
+		{
+			if(!cfunc.isRepetitive())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public double getRange() {
 		return range;
 	}

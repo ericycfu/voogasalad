@@ -113,4 +113,10 @@ public class ModifyInARadius implements CustomFunction {
 		return NAME;
 	}
 
+	@Override
+	public boolean isRepetitive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
