@@ -2,16 +2,15 @@ package authoring.support;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import conditions.CustomCondition;
 import gui_elements.buttons.ImageChooserButton;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import scenemanager.EndCondition;
 
 public class Extractor {
+	
 	public static String extractTextField(Node n) {
 		if (n instanceof TextField) {
 			return ((TextField) n).getText();
@@ -29,8 +28,7 @@ public class Extractor {
 	
 	public static String extractComboBox(Node n) {
 		if (n instanceof ComboBox) {
-			String symbol = (String) ((ComboBox) n).getValue();
-			return symbol;
+			return (String) ((ComboBox) n).getValue();
 		}
 		return "";
 	}

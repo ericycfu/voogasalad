@@ -1,18 +1,11 @@
 package authoring.edit_map;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import authoring.edit_object.ParameterSelect;
 import authoring.support.Extractor;
-import conditions.Condition;
-import conditions.CustomCondition;
-import game_object.PropertyNotFoundException;
 import gui_elements.factories.ComboBoxFactory;
-import gui_elements.factories.TextFieldFactory;
 import interactions.CustomComponentParameterFormat;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import scenemanager.EndCondition;
@@ -22,9 +15,9 @@ public class LossConditionsScreen extends ParameterSelect {
 	private EndConditionFactory factory;
 	private List<EndCondition> endConditions;
 	
-	public LossConditionsScreen(List<EndCondition> endConditions) {
+	public LossConditionsScreen(List<EndCondition> ec) {
 		super();
-		this.endConditions = endConditions;
+		this.endConditions = ec;
 		factory = new EndConditionFactory();
 		loadSaved();
 		addLine();
