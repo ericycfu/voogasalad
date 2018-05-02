@@ -229,8 +229,7 @@ public class GamePlayer extends ClientScreen {
 	
 	private void initialize() {
 		myRoot = new Group();
-		
-		myTopPanel = new TopPanel(myTeam.getID(), myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -272,8 +271,9 @@ public class GamePlayer extends ClientScreen {
 			myTopPanel.setIsLoaded(false);
 		}
 		initializeSingleUnitSelect();
-		
-		//myTopPanel.update(myTime);
+
+		myTopPanel.update();
+
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
