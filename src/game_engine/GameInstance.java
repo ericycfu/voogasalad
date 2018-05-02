@@ -50,20 +50,19 @@ public class GameInstance implements Serializable{
 		myTeamManager = new TeamManager();
 		chat = new ArrayList<ChatEntry>();
 		running = false;
+		myTeamManager = new TeamManager();
+		for(GameObject go : gom.getElements()) {
+			if(myTeamManager.getElements().contains(go.getOwner()))
+				myTeamManager.addElement(go.getOwner());
+		}
 		try {
 			setUp(filepath);
 		}
-		catch(Exception e) {e.printStackTrace();}
+		catch(Exception e) {}
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
+		
 		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(2);
-		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
-			ResourceManager rm = new ResourceManager();
-			for(String s: mapProperties.getInitialResources().keySet()) {
-				rm.addResource(s, mapProperties.getInitialResources().get(s));
-			}
-			myTeamManager.createTeam("Team" + Integer.toString(x+1), rm);
-		}
 		mapHeight = mapProperties.getMapHeight();
 		mapWidth = mapProperties.getMapWidth();
 		background = mapProperties.getImagePath();

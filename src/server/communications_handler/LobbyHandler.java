@@ -48,10 +48,15 @@ public class LobbyHandler extends CommunicationsHandler {
 						currentLobby.setIsRunning(true);
 					}
 					return CLASS_REF;
-				case ENTER_GAME:
-					getOutputStream().writeObject(currentLobby.getCurrentGameInstance());
+
+				default: if(currentLobby.isRunning())
+				{
+					ObjectOutputStream transition = getOutputStream();
+					transition.writeObject(currentLobby.getCurrentGameInstance());
+					transition.flush();
 					return GameHandler.CLASS_REF;
-				default: return CLASS_REF;
+				}
+				return CLASS_REF;
 				}
 			}
 			else return CLASS_REF;
