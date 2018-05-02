@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.DraggableImageView;
+import authoring.support.DraggableImageView;
 import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
@@ -36,7 +36,6 @@ public final class AuthoringToGameObject {
 				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, RM));
 			}
 		}
-		
 		return GOM;
 	}
 	/**

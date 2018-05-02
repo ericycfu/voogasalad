@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import authoring.support.DraggableImageView;
 import conditions.ConditionManager;
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
