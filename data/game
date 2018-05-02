@@ -7,13 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-<<<<<<< HEAD
-              <x>230.0</x>
-              <y>130.0</y>
-=======
               <x>284.0</x>
               <y>179.0</y>
->>>>>>> yy145
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -32,7 +27,6 @@
                   <double>20.0</double>
                 </entry>
               </maxAttributes>
-<<<<<<< HEAD
               <buildCosts>
                 <entry>
                   <null/>
@@ -40,10 +34,6 @@
                 </entry>
               </buildCosts>
               <buildTime>100.0</buildTime>
-=======
-              <buildCosts/>
-              <buildTime>10.0</buildTime>
->>>>>>> yy145
             </attributes>
             <interactions>
               <elementMap>
@@ -118,11 +108,7 @@
           </owner>
           <name>Duvall</name>
           <tags>
-<<<<<<< HEAD
-            <string>prof</string>
-=======
             <string>Prof</string>
->>>>>>> yy145
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -141,13 +127,8 @@
           <id>4</id>
           <transform>
             <position>
-<<<<<<< HEAD
               <x>81.0</x>
               <y>87.0</y>
-=======
-              <x>143.0</x>
-              <y>292.0</y>
->>>>>>> yy145
             </position>
             <rotation>0.0</rotation>
           </transform>
