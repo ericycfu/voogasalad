@@ -46,10 +46,12 @@ public class SelectedUnitManager {
 	
 	public void takeInteraction(Vector2 position, GameObject target, int interactionID, GameObjectManager gom) {
 		GameObject top = selectedUnits.get(0);
-		System.out.println("my team: " + top.getOwner().getID() + " target: " + target.getOwner());
+		//System.out.println("my team: " + top.getOwner().getID() + " target: " + target.getOwner());
 		try {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
+				System.out.println("interaction is queued");
+				System.out.println(target.getName());
 				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
 			}
 			else {
