@@ -2,6 +2,7 @@ package game_player.visual_element;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,6 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
 import gui_elements.factories.ButtonFactory;
-import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -56,28 +56,31 @@ public class TopPanel {
 	private TextArea time;
 	private ComboBox<String> resourceBoard;
 	private int menuSpan;
-	private Timeline tl;
 	private Team myTeam;
 	private boolean isLoaded;
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
 
 	
-	public TopPanel(Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	public TopPanel(Socket socket, Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
 		
-		setupButtons(gom, possibleUnits, xsize, ysize);
+		setupButtons(socket, gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
 		setupResources(xsize, ysize);
 		addToPane(time, resourceBoard);
 	}
 	
-	private void setupButtons(GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		Button[] buttonArray = {
-				ButtonFactory.makeButton(START, e -> tl.play()), 
-				ButtonFactory.makeButton(PAUSE, e -> tl.pause()), 
+				ButtonFactory.makeButton(START, e -> {
+					
+				}), 
+				ButtonFactory.makeButton(PAUSE, e -> {
+					
+				}), 
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 
 				ButtonFactory.makeButton(LOAD, e -> load(gom, possibleUnits))
 		};
@@ -92,7 +95,7 @@ public class TopPanel {
 	private void setupTime(double xsize, double ysize) {
 		time = new TextArea(TIME + COLON + 0);
 		time.setEditable(false);
-		time.setPrefWidth(xsize * TAWIDTH);
+		time.setPrefWidth(xsize / 4);
 		time.setMaxHeight(ysize);
 	}
 	
@@ -100,6 +103,7 @@ public class TopPanel {
 		resourceBoard = new ComboBox<>();
 		resourceBoard.setPromptText(RESOURCE);
 		resourceBoard.setMaxHeight(ysize);
+		resourceBoard.setPrefWidth(xsize / 4);
 	}
 	
 	private void addToPane(Node ... nodes) {
@@ -152,18 +156,14 @@ public class TopPanel {
 		}
 	}
 	
-	public void setTimeline(Timeline timeline) {
-		tl = timeline;
-	}
-	
 	private void setResources() {
-		/*resourceBoard.getItems().clear();
+		resourceBoard.getItems().clear();
 		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
 			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
 		}
-		resourceBoard.getItems().addAll(resources);*/
+		resourceBoard.getItems().addAll(resources);
 	}
 	
 	private void setTime(double timeValue) {
