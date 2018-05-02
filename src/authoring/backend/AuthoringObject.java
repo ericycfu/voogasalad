@@ -192,12 +192,20 @@ public class AuthoringObject {
 		return myConditionManager;
 	}
 
-	public DraggableImageView duplicateImgView() {
+//	public DraggableImageView duplicateImgView() {
+//		Image image = myDragImage.getImage();
+//		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+//		AuthoringObject newobj = new AuthoringObject(imageview);
+//		imageview.setAction(newobj);
+//		return imageview;
+//	}
+	
+	public AuthoringObject duplicateObj() {
 		Image image = myDragImage.getImage();
 		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
 		AuthoringObject newobj = new AuthoringObject(imageview);
 		imageview.setAction(newobj);
-		return imageview;
+		return newobj;
 	}
 		
 	public void resetImageAfterLoad() {

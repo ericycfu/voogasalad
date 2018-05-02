@@ -23,7 +23,7 @@ public class SaveAuthoringGameState {
 	private Writer myWriter = new Writer();
 	
 	public SaveAuthoringGameState(AuthoringController authoring_controller, GameEntity game_entity) {
-		Map<AuthoringObject, List<DraggableImageView>> map = authoring_controller.getCurrentMap().getLocations();
+		Map<AuthoringObject, List<AuthoringObject>> map = authoring_controller.getCurrentMap().getLocations();
 		Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 		List<Object> listForAuthor = new ArrayList<>();
 		List<Object> listForGame = new ArrayList<>();
@@ -50,12 +50,13 @@ public class SaveAuthoringGameState {
 		}
 	}
 	
-	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<DraggableImageView>> originalMap) {
+	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<AuthoringObject>> originalMap) {
 		Map<AuthoringObject, List<Vector2>> newMap = new HashMap<>();
 		for (AuthoringObject obj: originalMap.keySet()) {
-			List<DraggableImageView> list = originalMap.get(obj);
+			List<AuthoringObject> list = originalMap.get(obj);
 			List<Vector2> newList = new ArrayList<Vector2>();
-			for (DraggableImageView img: list) {
+			for (AuthoringObject AO: list) {
+				DraggableImageView img = AO.getDragImage();
 				Vector2 v = new Vector2(img.getX(), img.getY());
 				newList.add(v);
 			}

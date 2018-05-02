@@ -28,10 +28,11 @@ public final class AuthoringToGameObject {
 	 * @param map
 	 * @return
 	 */
-	public static GameObjectManager convertMap(Map<AuthoringObject, List<DraggableImageView>> map, ResourceManager RM) {
+	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM) {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
-			for(DraggableImageView DIV: map.get(AO)) {
+			for(AuthoringObject AO2: map.get(AO)) {
+				DraggableImageView DIV =  AO2.getDragImage();
 				ObjectLogic logic = new ObjectLogic(AO.getObjectLogic());
 				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, RM));
 			}
@@ -73,15 +74,18 @@ public final class AuthoringToGameObject {
 	 * @param list
 	 * @return
 	 */
-	public static List<Team> calculateTeams(Map<AuthoringObject, List<DraggableImageView>> map, ResourceManager RM){
+	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM){
 		List<Team> teams = new ArrayList<>();
 		List<Integer> teamIds = new ArrayList<>();
-		for(AuthoringObject AO: map.keySet()) {
-			System.out.println("This AO has team id of : " + AO.getTeam());
-			if(!teamIds.contains(AO.getTeam())) {
-				teams.add(new Team(AO.getTeam(), (new ResourceManager()).copyResourceManager(RM)));
-				teamIds.add(AO.getTeam());
+		for(List<AuthoringObject> AOs: map.values()) {
+			for(AuthoringObject AO: AOs) {
+				System.out.println("This AO has team id of : " + AO.getTeam());
+				if(!teamIds.contains(AO.getTeam())) {
+					teams.add(new Team(AO.getTeam(), (new ResourceManager()).copyResourceManager(RM)));
+					teamIds.add(AO.getTeam());
+				}
 			}
+				
 		}
 		return teams;
 	}
