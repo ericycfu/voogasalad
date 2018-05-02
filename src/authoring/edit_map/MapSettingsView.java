@@ -161,7 +161,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		HBox box = new HBox();
 		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions());
 		box.getChildren().addAll(saveButton);
-//		box.setPadding(new Insets(0, 0, 0, 0));
+		box.setPadding(new Insets(0, 0, 0, 500));
 		this.getChildren().add(box);
 	}
 	

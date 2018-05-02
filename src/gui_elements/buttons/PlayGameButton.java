@@ -43,11 +43,15 @@ public class PlayGameButton extends Button {
 	
 	public PlayGameButton(Stage stage) {
 		setupText();
-	//	this.setOnAction(e -> );
+	}
+	
+	public PlayGameButton(Stage stage, String style) {
+		setupText();
+		this.getStyleClass().add(style);
+
 	}
 	
 	private void setupText() {
-//		this.getStyleClass().add("make_game_button");
 		this.setText("Play Game");
 		
 	}
