@@ -61,6 +61,10 @@ public class ModifyVariable implements CustomFunction {
 		if(other == null) return;
 		try 
 		{
+			if(current.accessLogic() == other.accessLogic()) 
+			{
+				System.out.println("same logic block");
+			}
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
 			ParameterParser p = new ParameterParser();

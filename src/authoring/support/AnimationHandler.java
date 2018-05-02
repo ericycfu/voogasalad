@@ -1,4 +1,4 @@
-package authoring.backend;
+package authoring.support;
 
 public interface AnimationHandler {
 	void pause();

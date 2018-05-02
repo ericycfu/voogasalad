@@ -2,7 +2,7 @@ package gui_elements.buttons;
 
 import java.util.List;
 
-import authoring.view.InteractionAddCustomFunctionsScreen;
+import authoring.edit_object.InteractionAddCustomFunctionsScreen;
 import gui_elements.combo_boxes.CustomFunctionTypeComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.panes.CreatedCustomFunctionsPane;

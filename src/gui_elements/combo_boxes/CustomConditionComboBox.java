@@ -1,6 +1,6 @@
 package gui_elements.combo_boxes;
 
-import authoring.view.EditCustomConditionsScreen;
+import authoring.edit_object.EditCustomConditionsScreen;
 import conditions.ConditionManager;
 import gui_elements.factories.ComboBoxFactory;
 import javafx.scene.control.ComboBox;

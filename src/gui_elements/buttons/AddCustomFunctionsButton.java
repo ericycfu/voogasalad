@@ -1,7 +1,7 @@
 package gui_elements.buttons;
 
-import authoring.view.ComponentAddInteractionsScreen;
-import authoring.view.InteractionAddCustomFunctionsScreen;
+import authoring.edit_object.ComponentAddInteractionsScreen;
+import authoring.edit_object.InteractionAddCustomFunctionsScreen;
 import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import interactions.InteractionManager;

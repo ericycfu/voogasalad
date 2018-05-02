@@ -7,89 +7,27 @@
           <id>1</id>
           <transform>
             <position>
-              <x>230.0</x>
-              <y>130.0</y>
+              <x>386.0</x>
+              <y>62.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </maxAttributes>
+              <attributes/>
+              <maxAttributes/>
               <buildCosts>
                 <entry>
-                  <null/>
-                  <double>100.0</double>
+                  <string>1</string>
+                  <double>1.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>10.0</buildTime>
+              <buildTime>1.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags>
-                      <string>prof</string>
-                    </targetTags>
-                    <name>Attack</name>
-                    <imagePath>/images/attack_icon.png</imagePath>
-                    <description>attack</description>
-                    <isBuild>false</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions>
-                      <interactions.ModifyVariable>
-                        <NAME>ModifyVariable</NAME>
-                        <VARIABLE>Variable</VARIABLE>
-                        <DELTA>Delta</DELTA>
-                        <RATE>Rate</RATE>
-                        <format>
-                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                          <parameterFields>
-                            <entry>
-                              <string>Variable</string>
-                              <string>Health</string>
-                            </entry>
-                            <entry>
-                              <string>Delta</string>
-                              <string>-10</string>
-                            </entry>
-                          </parameterFields>
-                        </format>
-                      </interactions.ModifyVariable>
-                    </customFunctions>
-                    <range>50.0</range>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -97,7 +35,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/silk.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -106,14 +44,14 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>Duvall</name>
+          <name>a</name>
           <tags>
-            <string>prof</string>
+            <string>a</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
+          <movementSpeed>1.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -127,42 +65,27 @@
           <id>4</id>
           <transform>
             <position>
-              <x>81.0</x>
-              <y>87.0</y>
+              <x>60.0</x>
+              <y>128.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </maxAttributes>
+              <attributes/>
+              <maxAttributes/>
               <buildCosts>
                 <entry>
-                  <null/>
-                  <double>100.0</double>
+                  <string>1</string>
+                  <double>1.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>10.0</buildTime>
+              <buildTime>1.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
-                </entry>
-              </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -170,7 +93,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/silk.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -179,12 +102,12 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>Duvall</name>
+          <name>a</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
+          <movementSpeed>1.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -208,81 +131,19 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes>
-            <entry>
-              <string>Health</string>
-              <double>100.0</double>
-            </entry>
-          </attributes>
-          <maxAttributes>
-            <entry>
-              <string>Health</string>
-              <double>100.0</double>
-            </entry>
-          </maxAttributes>
+          <attributes/>
+          <maxAttributes/>
           <buildCosts>
             <entry>
-              <null/>
-              <double>100.0</double>
+              <string>1</string>
+              <double>1.0</double>
             </entry>
           </buildCosts>
-          <buildTime>10.0</buildTime>
+          <buildTime>1.0</buildTime>
         </attributes>
         <interactions>
-          <elementMap>
-            <entry>
-              <int>1</int>
-              <interactions.Interaction>
-                <id>1</id>
-                <targetTags>
-                  <string>prof</string>
-                </targetTags>
-                <name>Attack</name>
-                <imagePath>/images/attack_icon.png</imagePath>
-                <description>attack</description>
-                <isBuild>false</isBuild>
-                <isInstantaneous>false</isInstantaneous>
-                <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                <targetTeamEnumMap>
-                  <entry>
-                    <string>OTHER</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>ALL</string>
-                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>OWN</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                </targetTeamEnumMap>
-                <customFunctions>
-                  <interactions.ModifyVariable>
-                    <NAME>ModifyVariable</NAME>
-                    <VARIABLE>Variable</VARIABLE>
-                    <DELTA>Delta</DELTA>
-                    <RATE>Rate</RATE>
-                    <format>
-                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                      <parameterFields>
-                        <entry>
-                          <string>Variable</string>
-                          <string>Health</string>
-                        </entry>
-                        <entry>
-                          <string>Delta</string>
-                          <string>-10</string>
-                        </entry>
-                      </parameterFields>
-                    </format>
-                  </interactions.ModifyVariable>
-                </customFunctions>
-                <range>50.0</range>
-              </interactions.Interaction>
-            </entry>
-          </elementMap>
-          <new__ID__val>7</new__ID__val>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -290,16 +151,16 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/silk.png</myImageLocation>
       </renderer>
-      <name>Duvall</name>
+      <name>a</name>
       <tags>
-        <string>prof</string>
+        <string>a</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>10.0</movementSpeed>
+      <movementSpeed>1.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -310,10 +171,141 @@
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>1</numPlayers>
-    <lossCondition></lossCondition>
+    <endConditions/>
     <resources/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
     <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
+  <scenemanager.SceneManager>
+    <objManager>
+      <elementMap>
+        <entry>
+          <int>1</int>
+          <game__object.GameObject>
+            <id>1</id>
+            <transform>
+              <position>
+                <x>386.0</x>
+                <y>62.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts>
+                  <entry>
+                    <string>1</string>
+                    <double>1.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>1.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/silk.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap/>
+              </resourceManager>
+            </owner>
+            <name>a</name>
+            <tags>
+              <string>a</string>
+            </tags>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>1.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>4</int>
+          <game__object.GameObject>
+            <id>4</id>
+            <transform>
+              <position>
+                <x>60.0</x>
+                <y>128.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts>
+                  <entry>
+                    <string>1</string>
+                    <double>1.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>1.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/silk.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap/>
+              </resourceManager>
+            </owner>
+            <name>a</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>1.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+          </game__object.GameObject>
+        </entry>
+      </elementMap>
+      <new__ID__val>7</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams>
+      <game__engine.Team>
+        <id>1</id>
+        <teamName>Team 1</teamName>
+        <resourceManager>
+          <resourceMap/>
+        </resourceManager>
+      </game__engine.Team>
+    </teams>
+  </scenemanager.SceneManager>
 </object-stream>
