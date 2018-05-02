@@ -1,41 +1,29 @@
 package authoring.edit_map;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.swing.JFileChooser;
-
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
 import authoring.support.Extractor;
 import authoring.view.AuthoringView;
-import game_data.Reader;
-import game_data.Writer;
 import game_engine.ResourceManager;
 import gui_elements.buttons.ImageChooserButton;
 import gui_elements.factories.ButtonFactory;
 import gui_elements.factories.LabelFactory;
-import gui_elements.factories.TextFieldFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MapSettingsView extends Pane implements AuthoringView {
 	private MapSettings settings;
-	private GameEntity game;
 	private AuthoringController authoring_controller;
 	private ResourceManager myResourceManager;
 	private HBox lossConditionBox;
@@ -43,12 +31,9 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private VBox contentBox;
 	private TextField mapName = new TextField();
 	private TextField numPlayers = new TextField();
-//	private ComboBox lossCondition = new ComboBox();
-//	private LossConditionsScreen lossCondition;
 	private ImageChooserButton imageChooserButton = new ImageChooserButton();
 	private TextField mapWidth = new TextField();
 	private TextField mapHeight = new TextField();
-	private Writer myWriter = new Writer();
 	private static final int DEFAULT_MAP = 0;
 	
 	public MapSettingsView(AuthoringController authoring_controller, GameEntity game) {
@@ -56,23 +41,12 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		authoring_controller.updateMap(game.getCreatedMaps().getCreatedMaps().get(DEFAULT_MAP));
 		settings = authoring_controller.getCurrentMap().getMapSettings();
 		myResourceManager = game.getResourceManager();
-		this.game = game;
 		this.getStyleClass().add(STYLE_PATH);
 		initializeAll();
-		updateResources();
 	}
-	public MapSettingsView(MapSettings settings) {
-		
-		
-	}
-	
+
 	public void setMapSettings(MapSettings settings) {
 		this.settings = settings;
-		
-	}
-	
-	private void updateResources() {
-		
 		
 	}
 	
@@ -110,10 +84,6 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	
 	private void initializeTitle() {
 		this.getChildren().add(LabelFactory.makeLabel("Game Settings", DEFAULT_TITLE));
-//		initializeResources(resourcesBox);
-//		box.setPadding(new Insets(100, 50, 0, 50));
-//		resourcesBox.setPadding(new Insets(0, 50, 0, 50));
-//		this.getChildren().add(myVBox);
 	}
 	
 	private void initializeLabelBox(HBox rootBox) {

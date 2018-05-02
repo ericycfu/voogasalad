@@ -1,20 +1,12 @@
 package authoring.backend;
 
-import java.util.List;
-
 import authoring.created_items.CreatedMapsView;
-import authoring.view.AuthoringView;
-import authoring.view.CreatedObjectsTabs;
 import authoring.view.DraggableScrollPane;
-import authoring.view.MakeGameTabs;
 import gui_elements.tabs.DesignTab;
-import gui_elements.tabs.GameSettingsTab;
 import gui_elements.tabs.MapSettingsTab;
-import gui_elements.tabs.PlaceTab;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
 
 public class AuthoringController {
+	
 	private DraggableScrollPane myScroll;
 	private MapEntity myMap;
 	private AuthoringObject myObject;

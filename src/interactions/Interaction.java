@@ -25,6 +25,7 @@ public class Interaction implements EngineObject, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final double DEFAULT_RATE = 1.0;
 	public static enum InteractionTargetTeam
 	{
 		OWN, OTHER, ALL;
@@ -173,15 +174,22 @@ public class Interaction implements EngineObject, Serializable {
 		return false;
 	}
 
-	public void setRate(double rate)
+	public void setRate(String rate)
 	{
-		this.rate = rate;
+		ParameterParser p = new ParameterParser();
+		if(p.isDouble(rate))
+		{
+			this.rate = Double.parseDouble(rate);
+		}
+		else
+		{
+			this.rate = DEFAULT_RATE;
+		}
 	}
 	
 	public double getRate()
 	{
-		//must change later
-		return 1;
+		return rate;
 	}
 	
 	public void setRange(double range)
