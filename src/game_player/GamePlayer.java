@@ -230,7 +230,7 @@ public class GamePlayer extends ClientScreen {
 	private void initialize() {
 		myRoot = new Group();
 		
-		myTopPanel = new TopPanel(myTeam.getID(), myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		//myTopPanel = new TopPanel(myTeam.getID(), myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -286,6 +286,7 @@ public class GamePlayer extends ClientScreen {
 	}
 
 	private void receiveFromServer() {
+		/**
 		ObjectInputStream inputstream = getInputStream();
 		try {
 			myGameObjectManager = (GameObjectManager) inputstream.readObject();
@@ -296,6 +297,7 @@ public class GamePlayer extends ClientScreen {
 			// do nothing
 		}
 		//gom team time chat 
+		 **/
 	}
 	
 	private void end(String result) {
