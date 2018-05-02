@@ -144,6 +144,9 @@ public class ObjectAttributes implements Serializable{
 		else throw new PropertyNotFoundException("Property does not exist for object: " + attribute);
 	}
 	
+	public Map<String, Double> getCosts() {
+		return buildCosts;
+	}
 	
 	public void setCosts(Map<String, Double> costMap)
 	{
@@ -153,11 +156,6 @@ public class ObjectAttributes implements Serializable{
 		}
 	}
 	
-	public Map<String, Double> getCosts()
-	{
-		return buildCosts;
-	}
-
 	public double getBuildTime() 
 	{
 		return buildTime;

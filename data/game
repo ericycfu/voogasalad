@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>194.0</x>
-              <y>341.0</y>
+              <x>0.0</x>
+              <y>0.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,19 +17,11 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
                   <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
-                <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
                 <entry>
                   <string>Health</string>
                   <double>50.0</double>
@@ -67,19 +59,20 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Duvall</name>
+          <name>Marine</name>
           <tags>
             <string>Biological</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>100.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
       <entry>
@@ -88,8 +81,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>445.0</x>
-              <y>104.0</y>
+              <x>367.0</x>
+              <y>96.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -98,19 +91,11 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
                   <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
-                <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
                 <entry>
                   <string>Health</string>
                   <double>50.0</double>
@@ -148,17 +133,18 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Duvall</name>
+          <name>Marine</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>100.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
       <entry>
@@ -167,8 +153,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>115.0</x>
-              <y>78.0</y>
+              <x>135.0</x>
+              <y>313.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -177,19 +163,11 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
                   <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
-                <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
                 <entry>
                   <string>Health</string>
                   <double>50.0</double>
@@ -227,17 +205,18 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Duvall</name>
+          <name>Marine</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>100.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
     </elementMap>
@@ -258,19 +237,11 @@
         <attributes>
           <attributes>
             <entry>
-              <string>Mana</string>
-              <double>0.0</double>
-            </entry>
-            <entry>
               <string>Health</string>
               <double>50.0</double>
             </entry>
           </attributes>
           <maxAttributes>
-            <entry>
-              <string>Mana</string>
-              <double>0.0</double>
-            </entry>
             <entry>
               <string>Health</string>
               <double>50.0</double>
@@ -296,36 +267,276 @@
       <renderer>
         <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
-      <name>Duvall</name>
+      <name>Marine</name>
       <tags>
         <string>Biological</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>100.0</movementSpeed>
+      <movementSpeed>50.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
       <isBeingConstructed>false</isBeingConstructed>
       <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
-    <mapName>Default map</mapName>
+    <mapName>Default_map</mapName>
     <numPlayers>4</numPlayers>
-    <endConditions>  
-      <scenemanager.AllUnitsDead>
-        <NAME>AllUnitsDead</NAME>
+    <endConditions>
+      <scenemanager.LastManStanding>
+        <NAME>LastManStanding</NAME>
         <format>
-          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
           <parameterFields/>
         </format>
-      </scenemanager.AllUnitsDead>
+      </scenemanager.LastManStanding>
     </endConditions>
-    <resources/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <imagePath>/images/map.jpeg</imagePath>
   </authoring.backend.MapSettings>
+  <scenemanager.SceneManager>
+    <objManager>
+      <elementMap>
+        <entry>
+          <int>1</int>
+          <game__object.GameObject>
+            <id>1</id>
+            <transform>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/robert.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
+              </resourceManager>
+            </owner>
+            <name>Marine</name>
+            <tags>
+              <string>Biological</string>
+            </tags>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>50.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>4</int>
+          <game__object.GameObject>
+            <id>4</id>
+            <transform>
+              <position>
+                <x>367.0</x>
+                <y>96.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/robert.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
+              </resourceManager>
+            </owner>
+            <name>Marine</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>50.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>7</int>
+          <game__object.GameObject>
+            <id>7</id>
+            <transform>
+              <position>
+                <x>135.0</x>
+                <y>313.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/robert.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
+              </resourceManager>
+            </owner>
+            <name>Marine</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>50.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+      </elementMap>
+      <new__ID__val>10</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams>
+      <game__engine.Team>
+        <id>1</id>
+        <teamName>Team 1</teamName>
+        <resourceManager>
+          <resourceMap>
+            <entry>
+              <string>Gold</string>
+              <double>50.0</double>
+            </entry>
+          </resourceMap>
+        </resourceManager>
+      </game__engine.Team>
+    </teams>
+  </scenemanager.SceneManager>
 </object-stream>

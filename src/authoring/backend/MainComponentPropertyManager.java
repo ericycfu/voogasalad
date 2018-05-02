@@ -14,7 +14,7 @@ public class MainComponentPropertyManager {
 	public MainComponentPropertyManager() {
 		myImagePath = "";
 		myName = "";
-		myTags = new ArrayList<String>();
+		myTags = new ArrayList<>();
 		isBuilding = false;
 	}
 	

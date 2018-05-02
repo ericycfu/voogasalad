@@ -1,7 +1,6 @@
 package authoring.edit_object;
 
 import java.util.List;
-
 import authoring.support.Extractor;
 import authoring.view.AuthoringView;
 import game_object.PropertyNotFoundException;
@@ -75,10 +74,8 @@ public abstract class ParameterSelect implements AuthoringView {
 	protected abstract void clear();
 	protected void extractInfo(HBox box) {
 		Node nodeOne = box.getChildren().get(0);
-		if (nodeOne instanceof ComboBox) {
-			if (((ComboBox) nodeOne).getValue() != null) {
-				save(box, (ComboBox) nodeOne);
-			}
+		if (nodeOne instanceof ComboBox && ((ComboBox) nodeOne).getValue() != null) {
+			save(box, (ComboBox) nodeOne);
 		}
 	}
 	
