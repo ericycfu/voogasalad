@@ -200,7 +200,6 @@ public class ComponentAddInteractionsScreen {
     													   interaction_name_cb,
     													   interaction_vision_range_tf,
     													   all_selected_interaction_tags_pane,
-    													   created_custom_functions_pane,
     													   interaction_image_choice_text_label,
     													   interaction_description_tf,
     													   interaction_target_team_cb,

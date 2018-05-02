@@ -7,7 +7,6 @@ import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.labels.InteractionImageChoiceTextLabel;
 import gui_elements.labels.MainLabel;
 import gui_elements.panes.AllSelectedInteractionTagsPane;
-import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionDescriptionTextField;
 import gui_elements.text_fields.InteractionRateTextField;
