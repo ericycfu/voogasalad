@@ -22,6 +22,7 @@ import gui_elements.labels.InteractionDescriptionLabel;
 import gui_elements.labels.InteractionImageChoiceTextLabel;
 import gui_elements.labels.InteractionImageChooserLabel;
 import gui_elements.labels.InteractionNameLabel;
+import gui_elements.labels.InteractionRateLabel;
 import gui_elements.labels.InteractionTargetTeamLabel;
 import gui_elements.labels.AllSelectedInteractionTagsLabel;
 import gui_elements.labels.CurrentSelectedInteractionComponentsLabel;
@@ -32,6 +33,7 @@ import gui_elements.panes.CreatedCustomFunctionsPane;
 import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
 import gui_elements.panes.MainPane;
 import gui_elements.text_fields.InteractionDescriptionTextField;
+import gui_elements.text_fields.InteractionRateTextField;
 import gui_elements.text_fields.InteractionVisionRangeTextField;
 import gui_elements.text_fields.MainTextField;
 import interactions.InteractionManager;
@@ -55,7 +57,7 @@ public class ComponentAddInteractionsScreen {
     private TagController tag_controller;
     private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane, created_custom_functions_pane;
     private MainComboBox interaction_component_tag_cb, interaction_name_cb, interaction_target_team_cb;
-    private MainTextField interaction_vision_range_tf, interaction_description_tf;
+    private MainTextField interaction_vision_range_tf, interaction_description_tf, interaction_rate_tf;
     private MainLabel interaction_image_choice_text_label;
 	
 	// Additional setup for the add-interactions screen.
@@ -150,7 +152,8 @@ public class ComponentAddInteractionsScreen {
   								  interaction_image_choice_text_label.getLabel(),
     							  new CreatedCustomFunctionsLabel().getLabel(),
     							  new InteractionDescriptionLabel().getLabel(),
-    							  new InteractionTargetTeamLabel().getLabel());
+    							  new InteractionTargetTeamLabel().getLabel(),
+    							  new InteractionRateLabel().getLabel());
     }
     
     private void setRadioButtons() {
@@ -159,9 +162,11 @@ public class ComponentAddInteractionsScreen {
     private void setTextFields() {
 		interaction_vision_range_tf = new InteractionVisionRangeTextField();
 		interaction_description_tf = new InteractionDescriptionTextField();
+		interaction_rate_tf = new InteractionRateTextField();
 		
 		root.getChildren().addAll(interaction_vision_range_tf.getTextField(),
-								  interaction_description_tf.getTextField());
+								  interaction_description_tf.getTextField(),
+								  interaction_rate_tf.getTextField());
     }
     
     private void setPanes() {
@@ -195,10 +200,10 @@ public class ComponentAddInteractionsScreen {
     													   interaction_name_cb,
     													   interaction_vision_range_tf,
     													   all_selected_interaction_tags_pane,
-    													   created_custom_functions_pane,
     													   interaction_image_choice_text_label,
     													   interaction_description_tf,
     													   interaction_target_team_cb,
+    													   interaction_rate_tf,
     													   this,
     													   interaction_id).getButton(),
     							  new AddCustomFunctionsButton(interaction_manager,
@@ -219,6 +224,7 @@ public class ComponentAddInteractionsScreen {
     	interaction_image_choice_text_label.setText(null);
     	interaction_description_tf.clear();
     	interaction_target_team_cb.getEditor().clear();
+    	interaction_rate_tf.clear();
     }
     
     public int getCurrentInteractionID() {

@@ -1,19 +1,16 @@
 package authoring.backend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import scenemanager.EndCondition;
-import scenemanager.SceneManager;
 
 public class MapSettings implements AuthoringView {
+	public static final int DEFAULT_MAP_SIZE = 1000;
+	
 	private String mapName;
 	private int numPlayers;
 	private List<EndCondition> endConditions;
@@ -30,8 +27,8 @@ public class MapSettings implements AuthoringView {
 		mapName = "Default map";
 		numPlayers = 1;
 		endConditions = new ArrayList<>();
-		mapwidth = 1000;
-		mapheight = 1000;
+		mapwidth = DEFAULT_MAP_SIZE;
+		mapheight = DEFAULT_MAP_SIZE;
 		imagePath = "/images/tt.jpg";
 	}
 	
@@ -91,7 +88,6 @@ public class MapSettings implements AuthoringView {
 	public int getMapWidth() {
 		return mapwidth;
 	}
-
 	public List<EndCondition> getEndConditions() {
 		return endConditions;
 	}

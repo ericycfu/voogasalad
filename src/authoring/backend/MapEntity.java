@@ -37,8 +37,9 @@ public class MapEntity extends Pane implements AuthoringView {
 	}
 
 	public void addToMap(AuthoringObject objBase, AuthoringObject objNew) {
-		if (locations.get(objBase) == null) 
-			locations.put(objBase, new ArrayList<AuthoringObject>());
+		if (locations.get(objBase) == null) {
+			locations.put(objBase, new ArrayList<>());
+		}
 		locations.get(objBase).add(objNew);
 		this.getChildren().add(objNew.getDragImage());
 	}
