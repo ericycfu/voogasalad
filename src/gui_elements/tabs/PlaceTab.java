@@ -6,8 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.control.Tab;
 import authoring.backend.AuthoringController;
 import authoring.backend.CreatedMaps;
-import authoring.backend.DraggableScrollPane;
 import authoring.backend.GameEntity;
+import authoring.view.DraggableScrollPane;
 import javafx.scene.control.Tab;
 
 public class PlaceTab extends Tab {

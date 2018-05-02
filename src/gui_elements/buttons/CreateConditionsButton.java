@@ -6,7 +6,7 @@ import gui_elements.panes.ConditionsPane;
 
 import java.awt.Button;
 
-import authoring.view.ComponentAddConditionsScreen;
+import authoring.edit_object.ComponentAddConditionsScreen;
 public class CreateConditionsButton extends MainButton {
 
 	private static final String FILENAME = "create_conditions_button.properties";

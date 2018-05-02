@@ -1,7 +1,7 @@
 package gui_elements.buttons;
 
 import authoring.backend.TagController;
-import authoring.view.EditComponentTagsScreen;
+import authoring.edit_object.EditComponentTagsScreen;
 import gui_elements.combo_boxes.ComponentTagComboBox;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.panes.EditComponentTagsPane;

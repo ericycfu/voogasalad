@@ -2,7 +2,7 @@ package gui_elements.buttons;
 
 import java.util.List;
 
-import authoring.view.EditCustomFunctionsScreen;
+import authoring.edit_object.EditCustomFunctionsScreen;
 import gui_elements.panes.EditCustomFunctionsPane;
 import gui_elements.panes.MainPane;
 import interactions.CustomComponentParameterFormat;

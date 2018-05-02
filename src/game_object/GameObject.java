@@ -269,7 +269,10 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
 	{
-
+		if(this.isUninteractive)
+		{
+			return;
+		}
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
@@ -282,19 +285,19 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueBuilding()
 	{
-		System.out.println("goes to queu");
 		setIsUninteractive(true);
-		isBeingConstructed = true;
+		this.isBeingConstructed = true;
 		this.buildTimer = new Timer();
-		buildTimer.setTimerOn(true);
-		this.renderer.getDisp().setOpacity(Renderer.TEMP_OPACITY);
-		buildTimer.setInitialTime(elapsedTime);
+		this.buildTimer.setTimerOn(true);
+		this.renderer.reduceOpacity();
+		this.buildTimer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()
 	{
+		System.out.println("deq eueu called");
+		this.renderer.setDefaultOpacity();
 		this.setIsUninteractive(false);
-		this.renderer.getDisp().setOpacity(Renderer.NORMAL_OPACITY);
 		isBeingConstructed = false;
 	}
 	

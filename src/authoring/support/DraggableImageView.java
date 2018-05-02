@@ -1,6 +1,7 @@
-package authoring.backend;
+package authoring.support;
 
-import authoring.view.ObjectTeamSelectionScreen;
+import authoring.backend.AuthoringObject;
+import authoring.edit_map.ObjectTeamSelectionScreen;
 import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;

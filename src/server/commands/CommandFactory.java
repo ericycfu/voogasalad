@@ -1,5 +1,7 @@
 package server.commands;
-
+/**
+ * Factory responsible for creating commands from the given String
+ */
 import game_engine.GameInstance;
 import server.RTSServerException;
 
