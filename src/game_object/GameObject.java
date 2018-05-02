@@ -301,6 +301,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
+		this.isPreviousInteractionQueued = true;
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
