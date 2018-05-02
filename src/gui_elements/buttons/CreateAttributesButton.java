@@ -1,6 +1,6 @@
 package gui_elements.buttons;
 
-import authoring.view.ComponentAddAttributesScreen;
+import authoring.edit_object.ComponentAddAttributesScreen;
 import game_object.ObjectAttributes;
 
 public class CreateAttributesButton extends MainButton {

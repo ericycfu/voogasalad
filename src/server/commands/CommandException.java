@@ -1,5 +1,9 @@
 package server.commands;
-
+/**
+ * Denotes an Exception that occurs in executing commands on the server
+ * @author andrew
+ *
+ */
 public class CommandException extends RuntimeException {
 
 	/**

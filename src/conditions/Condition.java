@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
+import interactions.CustomComponentParameterFormat;
 
 
 /**
@@ -63,21 +63,26 @@ public class Condition implements EngineObject, Serializable{
 		CustomConditionFactory factory = new CustomConditionFactory();
 		return factory.getCustomCondition(conditionName);
 	}
+	
+	public List<CustomCondition> getCustomConditions()
+	{
+		return customConditions;
+	}
 
 	@Override
 	public int getID() {
 		return id;
 	}
 	
-	public List<String> getInfo() {
+	public List<String> getInfo() 
+	{
 		String[] array = {var1, comparatorManager.getSymbolById(comparatorID), var2};
+		
 		List<String> info = new ArrayList<>(Arrays.asList(array));
-		for (CustomCondition c: customConditions) {
-			info.add(c.getClass().getSimpleName());
-		}
+		
 		return info;
 	}
-
+	
 	public void addTag(String t)
 	{
 		tags.add(t);
@@ -88,7 +93,7 @@ public class Condition implements EngineObject, Serializable{
 		tags.remove(t);
 	}
 	
-	public void execute()
+	public void execute(GameObject current)
 	{
 		try 
 		{
@@ -96,7 +101,7 @@ public class Condition implements EngineObject, Serializable{
 			{
 				for(CustomCondition c : customConditions)
 				{
-//					c.Execute(host);
+					c.Execute(current);
 				}
 			}
 		} 
@@ -111,7 +116,7 @@ public class Condition implements EngineObject, Serializable{
 			System.out.println("variable cannot be modified");
 		}
 	}
-	
+		
 	private double getVariableVal(String var) throws PropertyNotFoundException, UnmodifiableGameObjectException
 	{
 		if (var.matches("([0-9]*)\\.([0-9]*)"))
@@ -122,5 +127,6 @@ public class Condition implements EngineObject, Serializable{
 //		return host.accessLogic().accessAttributes().getAttribute(var);
 		return 0;
 	}
+	
 	
 }
