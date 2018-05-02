@@ -13,6 +13,11 @@ public class LastManStanding implements EndCondition {
 	
 	public final String NAME = "LastManStanding";
 	private CustomComponentParameterFormat format;
+	
+	public LastManStanding() {
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
 
 	@Override
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {

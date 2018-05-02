@@ -1,5 +1,8 @@
 package server_client.screens;
-
+/**
+ * Responsible for initializing the correct ClientScreen from the given String
+ * @author andrew
+ */
 import java.net.Socket;
 
 import javafx.stage.Stage;

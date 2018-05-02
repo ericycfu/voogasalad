@@ -1,5 +1,7 @@
 package server.communications_handler;
-
+/**
+ * This class handles server-side communications for a player on the main page
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,7 +30,6 @@ public class MainPageHandler extends CommunicationsHandler {
 			if(input == -1)
 				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
 			else getServer().addToLobby(input, getSocket());
-			System.out.println("Message received");
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {

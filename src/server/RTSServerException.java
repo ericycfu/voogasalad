@@ -3,7 +3,8 @@ package server;
 public class RTSServerException extends RuntimeException {
 
 	/**
-	 * 
+	 * a class Exception for Server- or Client-specific errors
+	 * @author andrew
 	 */
 	private static final long serialVersionUID = 1L;
 	public RTSServerException (String message, Object ... values) {

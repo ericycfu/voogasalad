@@ -1,5 +1,8 @@
 package server_client;
-
+/**
+ * Responsible for running the Client side of the client-server connection
+ * @author andrew
+ */
 import java.net.Socket;
 
 import javafx.application.Application;
@@ -12,21 +15,20 @@ import server_client.screens.ScreenFactory;
 
 public class ServerClient  extends Application {
 	private ClientScreen currentScreen;
-	//todo figure out the backend for this crap AND THE FRONT END FEELSGOODMAN
 	private ScreenFactory myScreenFactory;
+	/**
+	 * Connects the client to the server and starts the communications thread
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Socket clientSocket = null;
-		System.out.println(System.currentTimeMillis());
 		do {
 			try {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
 			}
 			catch(Exception e){
-				System.out.println("Fail");
 			}
 		} while (clientSocket == null);
-		System.out.println(System.currentTimeMillis());
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
 		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
 		new Thread(() -> {
