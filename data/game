@@ -7,16 +7,26 @@
           <id>1</id>
           <transform>
             <position>
-              <x>386.0</x>
-              <y>150.0</y>
+              <x>230.0</x>
+              <y>130.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes/>
-              <maxAttributes/>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </maxAttributes>
               <buildCosts>
                 <entry>
                   <null/>
@@ -34,10 +44,10 @@
                     <targetTags>
                       <string>prof</string>
                     </targetTags>
-                    <name>build</name>
-                    <imagePath>/images/arrow_up.png</imagePath>
-                    <description>build</description>
-                    <isBuild>true</isBuild>
+                    <name>Attack</name>
+                    <imagePath>/images/attack_icon.png</imagePath>
+                    <description>attack</description>
+                    <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
                     <targetTeamEnumMap>
@@ -55,15 +65,27 @@
                       </entry>
                     </targetTeamEnumMap>
                     <customFunctions>
-                      <interactions.BuildFunction>
-                        <NAME>BuildFunction</NAME>
+                      <interactions.ModifyVariable>
+                        <NAME>ModifyVariable</NAME>
+                        <VARIABLE>Variable</VARIABLE>
+                        <DELTA>Delta</DELTA>
+                        <RATE>Rate</RATE>
                         <format>
-                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                          <parameterFields/>
+                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Variable</string>
+                              <string>Health</string>
+                            </entry>
+                            <entry>
+                              <string>Delta</string>
+                              <string>-10</string>
+                            </entry>
+                          </parameterFields>
                         </format>
-                      </interactions.BuildFunction>
+                      </interactions.ModifyVariable>
                     </customFunctions>
-                    <range>1000.0</range>
+                    <range>50.0</range>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
@@ -84,14 +106,14 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>building</name>
+          <name>Duvall</name>
           <tags>
-            <string>building</string>
+            <string>prof</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>0.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -105,27 +127,42 @@
           <id>4</id>
           <transform>
             <position>
-              <x>216.0</x>
-              <y>146.0</y>
+              <x>81.0</x>
+              <y>87.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes/>
-              <maxAttributes/>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </maxAttributes>
               <buildCosts>
                 <entry>
                   <null/>
                   <double>100.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>100.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -142,10 +179,8 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>duvall</name>
-          <tags>
-            <string>prof</string>
-          </tags>
+          <name>Duvall</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
@@ -173,8 +208,18 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes/>
-          <maxAttributes/>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>100.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>100.0</double>
+            </entry>
+          </maxAttributes>
           <buildCosts>
             <entry>
               <null/>
@@ -192,10 +237,10 @@
                 <targetTags>
                   <string>prof</string>
                 </targetTags>
-                <name>build</name>
-                <imagePath>/images/arrow_up.png</imagePath>
-                <description>build</description>
-                <isBuild>true</isBuild>
+                <name>Attack</name>
+                <imagePath>/images/attack_icon.png</imagePath>
+                <description>attack</description>
+                <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
                 <targetTeamEnumMap>
@@ -213,15 +258,27 @@
                   </entry>
                 </targetTeamEnumMap>
                 <customFunctions>
-                  <interactions.BuildFunction>
-                    <NAME>BuildFunction</NAME>
+                  <interactions.ModifyVariable>
+                    <NAME>ModifyVariable</NAME>
+                    <VARIABLE>Variable</VARIABLE>
+                    <DELTA>Delta</DELTA>
+                    <RATE>Rate</RATE>
                     <format>
-                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                      <parameterFields/>
+                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Variable</string>
+                          <string>Health</string>
+                        </entry>
+                        <entry>
+                          <string>Delta</string>
+                          <string>-10</string>
+                        </entry>
+                      </parameterFields>
                     </format>
-                  </interactions.BuildFunction>
+                  </interactions.ModifyVariable>
                 </customFunctions>
-                <range>1000.0</range>
+                <range>50.0</range>
               </interactions.Interaction>
             </entry>
           </elementMap>
@@ -233,57 +290,9 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/station.png</myImageLocation>
-      </renderer>
-      <name>building</name>
-      <tags>
-        <string>building</string>
-      </tags>
-      <isBuilding>false</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-    </game__object.GameObject>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
-      <myObjectLogic>
-        <fulfillsLossCondition>false</fulfillsLossCondition>
-        <attributes>
-          <attributes/>
-          <maxAttributes/>
-          <buildCosts>
-            <entry>
-              <null/>
-              <double>100.0</double>
-            </entry>
-          </buildCosts>
-          <buildTime>100.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </interactions>
-        <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </conditions>
-      </myObjectLogic>
-      <renderer>
         <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
-      <name>duvall</name>
+      <name>Duvall</name>
       <tags>
         <string>prof</string>
       </tags>

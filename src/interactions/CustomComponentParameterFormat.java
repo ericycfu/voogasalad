@@ -1,5 +1,6 @@
 package interactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +15,12 @@ import game_object.PropertyNotFoundException;
  * to create the fields it needs. Also stores the parameter values and how they need to be passed to the backend
  */
 
-public class CustomComponentParameterFormat {
+public class CustomComponentParameterFormat implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String helpText;
 	private Map<String, String> parameterFields;
 	

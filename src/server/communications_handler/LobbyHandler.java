@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import server.GameLobby;
 import server.RTSServer;
@@ -18,8 +19,8 @@ public class LobbyHandler extends CommunicationsHandler {
 	public static final String ENTER_GAME = "Play";
 	public static final String CHANGE_OPTION = "Change";
 	private GameLobby currentLobby;
-	public LobbyHandler(Socket input, RTSServer server) {
-		super(input, server);
+	public LobbyHandler(Socket input, RTSServer server, Logger logger) {
+		super(input, server, logger);
 		currentLobby = server.findPlayer(input);
 	}
 
@@ -36,9 +37,11 @@ public class LobbyHandler extends CommunicationsHandler {
 				ObjectOutputStream out = getOutputStream();
 				out.writeObject("Left");
 				out.flush();
+				log(" left their lobby");
 				return MainPageHandler.CLASS_REF;
 				case CHANGE_OPTION:
 					currentLobby.changeTeam(in.readInt(), getSocket());
+					log(" changed their team");
 					return CLASS_REF;
 				case START_GAME:
 					if(getSocket().equals(currentLobby.getHost())) {

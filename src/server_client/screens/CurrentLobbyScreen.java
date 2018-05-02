@@ -94,12 +94,10 @@ public class CurrentLobbyScreen extends ClientScreen {
 			TeamDisplay current = teamList.getSelectionModel().getSelectedItem();
 			if(current != null)
 				try {
-					System.out.println("Changing");
 					ObjectOutputStream out = getOutputStream();
 					out.writeObject("Change");
 					out.writeInt(current.getID());
 					out.flush();
-					System.out.println(current.getID());
 				} catch (IOException e1) {
 				}
 		});
@@ -139,13 +137,15 @@ public class CurrentLobbyScreen extends ClientScreen {
 			while(lobby.getNumTeams() > teamList.getItems().size())
 				teamList.getItems().add(new TeamDisplay(teamList.getItems().size() + 1));
 			for(int x = 0; x < lobby.getNumTeams(); x++) {
-				teamList.getItems().get(x).update(lobby);
+				if(teamList.getItems().get(x).getNumPlayers() != lobby.getNumPlayers(x + 1))
+					teamList.getItems().get(x).update(lobby);
 			}
 			});
 			currentTeam.setText("Current team: " + in.readInt());
 			playerID.setText("Player Number: "+ in.readInt());
 			return CLASS_REF;
 		} catch (Exception e) {
+			
 			return CLASS_REF;
 		}
 	}
