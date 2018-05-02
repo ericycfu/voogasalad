@@ -85,6 +85,7 @@ public class ObjectLogic implements Serializable
 		{
 			current.dequeueMovement();
 			currentInteraction.executeCustomFunctions(current, interactionTarget, manager);
+			
 		}
 		
 	}

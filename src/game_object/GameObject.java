@@ -177,6 +177,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;
+		this.isPreviousInteractionQueued = false;
 	}
 	
 	/**
@@ -191,6 +192,12 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		 *  3. Update renderer data
 		 */
 		
+		if(this.isUninteractive) 
+			return;
+		
+		moveUpdate();
+		
+		
 		if(isBeingConstructed)
 		{
 			System.out.println("being constructed ");
@@ -204,6 +211,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		{	
 			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
 			{
+				System.out.println("executing");
 				myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 			}
 		}
@@ -215,12 +223,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 			
 		}
-		
-		if(this.isUninteractive) return;
-		
-		moveUpdate();
-		
-		
+	
 		myObjectLogic.checkConditions(this);
 
 	}
@@ -287,8 +290,14 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			isInteractionQueued = false;
 			interactionTarget = null;
 		}
-		this.isPreviousInteractionQueued = true;
-		triggerTimer(this.interactionTimer);
+		else
+		{
+			this.isPreviousInteractionQueued = true;
+			interactionTimer = new Timer();
+			triggerTimer(this.interactionTimer);
+
+		}
+	
 		
 	}
 	
@@ -301,7 +310,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
-		this.isPreviousInteractionQueued = true;
+		this.isPreviousInteractionQueued = false;
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
@@ -319,7 +328,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	private void triggerTimer(Timer timer)
 	{
-		timer = new Timer();
 		timer.setTimerOn(true);
 		timer.setInitialTime(elapsedTime);
 	}

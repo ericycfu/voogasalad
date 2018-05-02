@@ -58,6 +58,7 @@ public class Interaction implements EngineObject, Serializable {
 		targetTags = new ArrayList<>();
 		this.id = id;
 		createTargetTeamEnumMap();
+		rate = DEFAULT_RATE;
 	}
 	
 	
