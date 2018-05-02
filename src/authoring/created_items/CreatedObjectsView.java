@@ -1,16 +1,13 @@
-package authoring.view;
+package authoring.created_items;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.DraggableImageView;
-import authoring.backend.DraggableScrollPane;
 import authoring.backend.MapEntity;
-import authoring.backend.ObjectSelectionImageView;
+import authoring.support.ObjectSelectionImageView;
+import authoring.view.AuthoringView;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import observables.Listener;
@@ -21,12 +18,10 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 	private static final String STYLE_PATH = "gui_elements/css/object_team_image.css";
 	private AuthoringController authorcontroller;
 	private CreatedObjects createdobjects;
-	private MapEntity map;
 	
 	public CreatedObjectsView(AuthoringController ac, CreatedObjects cb) {
 		authorcontroller = ac;
 		createdobjects = cb;
-		map = ac.getCurrentMap();
 		cb.addListener(this);
 		setupBox();
 		this.getStylesheets().add(STYLE_PATH);

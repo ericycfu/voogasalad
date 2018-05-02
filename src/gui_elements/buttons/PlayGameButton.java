@@ -11,10 +11,10 @@ import java.util.Set;
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.DraggableImageView;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
 import authoring.backend.SaveAuthoringGameState;
+import authoring.support.DraggableImageView;
 import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_object.GameObject;
@@ -43,11 +43,15 @@ public class PlayGameButton extends Button {
 	
 	public PlayGameButton(Stage stage) {
 		setupText();
-	//	this.setOnAction(e -> );
+	}
+	
+	public PlayGameButton(Stage stage, String style) {
+		setupText();
+		this.getStyleClass().add(style);
+
 	}
 	
 	private void setupText() {
-//		this.getStyleClass().add("make_game_button");
 		this.setText("Play Game");
 		
 	}

@@ -5,7 +5,7 @@ import server.commands.Command;
 import server.commands.CommandFactory;
 
 /**
- * This class is responsible for converting commands from a player to the 
+ * This class is responsible for converting commands from a player to actions in the game
  * @author andrew
  *
  */
@@ -25,7 +25,7 @@ public class GameCommandInterpreter {
 		for(int x = 1; x <= c.howManyArguments(); x++) {
 			c.addArg(array[x]);
 		}
-		if(array[0].equals("Chat")) {
+		if(array[0].equals("Chat")) { 
 			c.addArg(s.substring(4).substring(s.indexOf(" ") + 1));	
 		}
 		c.act();

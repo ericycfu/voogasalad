@@ -1,11 +1,10 @@
-package authoring.backend;
+package authoring.view;
 
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
-import authoring.backend.DraggableImageView;
+import authoring.backend.AuthoringController;
+import authoring.backend.CreatedMaps;
+import authoring.backend.GameEntity;
+import authoring.backend.MapEntity;
 
 public class DraggableScrollPane extends ScrollPane {
 //	private MapEntity myMap;

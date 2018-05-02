@@ -1,6 +1,6 @@
 package gui_elements.buttons;
 
-import authoring.view.ComponentAddInteractionsScreen;
+import authoring.edit_object.ComponentAddInteractionsScreen;
 import interactions.InteractionManager;
 
 public class InteractionOkButton extends MainButton {

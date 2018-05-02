@@ -2,9 +2,9 @@ package gui_elements.buttons;
 
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.DraggableImageView;
 import authoring.backend.TagController;
-import authoring.view.ObjectTeamSelectionScreen;
+import authoring.edit_map.ObjectTeamSelectionScreen;
+import authoring.support.DraggableImageView;
 import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.combo_boxes.ObjectTeamComboBox;
 import gui_elements.tabs.DesignTab;

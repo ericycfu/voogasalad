@@ -1,9 +1,12 @@
 package server.communications_handler;
-
+/**
+ * This class handles server-side communications for a player on the main page
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import game_engine.GameInstance;
 import server.RTSServer;
@@ -11,8 +14,8 @@ import server.RTSServerException;
 
 public class MainPageHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "MainPage";
-	public MainPageHandler(Socket input, RTSServer server) {
-		super(input, server);
+	public MainPageHandler(Socket input, RTSServer server, Logger logger) {
+		super(input, server, logger);
 	}
 
 	@SuppressWarnings("unused")
@@ -25,10 +28,14 @@ public class MainPageHandler extends CommunicationsHandler {
 				throw new RTSServerException("Client disconnected");
 			if((input = in.readInt()) == null)
 				return CLASS_REF;
-			if(input == -1)
+			if(input == -1) {
 				getServer().addLobby(getSocket(), (GameInstance)in.readObject());
-			else getServer().addToLobby(input, getSocket());
-			System.out.println("Message received");
+				log("created a new lobby");
+			}
+			else {
+				getServer().addToLobby(input, getSocket());
+				log("joined lobby " + input);
+			}
 			return LobbyHandler.CLASS_REF;
 		}
 		catch(IOException | ClassNotFoundException e) {

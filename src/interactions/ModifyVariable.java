@@ -61,6 +61,10 @@ public class ModifyVariable implements CustomFunction {
 		if(other == null) return;
 		try 
 		{
+			if(current.accessLogic() == other.accessLogic()) 
+			{
+				System.out.println("same logic block");
+			}
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
 			ParameterParser p = new ParameterParser();
@@ -77,7 +81,6 @@ public class ModifyVariable implements CustomFunction {
 				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
 
 			}
-			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
@@ -106,6 +109,13 @@ public class ModifyVariable implements CustomFunction {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return NAME;
+	}
+
+
+	@Override
+	public boolean isRepetitive() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

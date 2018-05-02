@@ -1,19 +1,19 @@
 package authoring.backend;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import scenemanager.EndCondition;
 
 public class MapSettings implements AuthoringView {
+	public static final int DEFAULT_MAP_SIZE = 1000;
+	
 	private String mapName;
 	private int numPlayers;
-	private String lossCondition;
-	private Map<String, Integer> resources;
+	private List<EndCondition> endConditions;
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
@@ -23,6 +23,15 @@ public class MapSettings implements AuthoringView {
 		initializeAll();
 	}
 	
+	private void initializeAll() {
+		mapName = "Default map";
+		numPlayers = 1;
+		endConditions = new ArrayList<>();
+		mapwidth = DEFAULT_MAP_SIZE;
+		mapheight = DEFAULT_MAP_SIZE;
+		imagePath = "/images/tt.jpg";
+	}
+	
 	public void updateSettings(String mapName, int numPlayers, String imagePath, int mapwidth, int mapheight) {
 		this.mapName = mapName;
 		this.numPlayers = numPlayers;
@@ -30,17 +39,7 @@ public class MapSettings implements AuthoringView {
 		this.mapwidth = mapwidth;
 		this.mapheight = mapheight;
 		matchToSize(map);
-		setMapByImage(map);
-	}
-	
-	private void initializeAll() {
-		mapName = "Default map";
-		numPlayers = 1;
-		lossCondition = "";
-		resources = new HashMap<>();
-		mapwidth = 1000;
-		mapheight = 1000;
-		imagePath = "/images/tt.jpg";
+		updateMapByImage(map);
 	}
 	
 	public void setMap(MapEntity map) {
@@ -62,7 +61,15 @@ public class MapSettings implements AuthoringView {
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
 		image.toBack();
-		
+	}
+	
+	public void updateMapByImage(MapEntity map) {
+		setMap(map);
+		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+		map.getChildren().remove(0);
+		map.getChildren().add(image);
+		image.toBack();
+
 	}
 	
 	public String getImagePath() {
@@ -81,8 +88,8 @@ public class MapSettings implements AuthoringView {
 	public int getMapWidth() {
 		return mapwidth;
 	}
-	public Map<String, Integer> getInitialResources(){
-		return resources;
+	public List<EndCondition> getEndConditions() {
+		return endConditions;
 	}
 	
 }

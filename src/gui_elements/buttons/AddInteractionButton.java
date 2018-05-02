@@ -1,6 +1,6 @@
 package gui_elements.buttons;
 
-import authoring.view.ComponentAddInteractionsScreen;
+import authoring.edit_object.ComponentAddInteractionsScreen;
 import gui_elements.combo_boxes.InteractionNameComboBox;
 import gui_elements.combo_boxes.InteractionTargetTeamComboBox;
 import gui_elements.combo_boxes.MainComboBox;

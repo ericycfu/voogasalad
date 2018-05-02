@@ -1,8 +1,12 @@
 package server.communications_handler;
-
+/**
+ * This class handles server side communications for a player in a lobby
+ */
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import server.GameLobby;
 import server.RTSServer;
@@ -15,8 +19,8 @@ public class LobbyHandler extends CommunicationsHandler {
 	public static final String ENTER_GAME = "Play";
 	public static final String CHANGE_OPTION = "Change";
 	private GameLobby currentLobby;
-	public LobbyHandler(Socket input, RTSServer server) {
-		super(input, server);
+	public LobbyHandler(Socket input, RTSServer server, Logger logger) {
+		super(input, server, logger);
 		currentLobby = server.findPlayer(input);
 	}
 
@@ -25,15 +29,19 @@ public class LobbyHandler extends CommunicationsHandler {
 		try {
 			String input;
 			ObjectInputStream in = getInputStream();
+			if(in == null)
+				throw new RTSServerException("Client DCed");
 			if((input = (String)in.readObject()) != null) {
 				switch(input) {
 				case REMOVE_OPTION: currentLobby.remove(getSocket());
 				ObjectOutputStream out = getOutputStream();
 				out.writeObject("Left");
 				out.flush();
+				log(" left their lobby");
 				return MainPageHandler.CLASS_REF;
 				case CHANGE_OPTION:
 					currentLobby.changeTeam(in.readInt(), getSocket());
+					log(" changed their team");
 					return CLASS_REF;
 				case START_GAME:
 					if(getSocket().equals(currentLobby.getHost())) {
@@ -48,8 +56,7 @@ public class LobbyHandler extends CommunicationsHandler {
 			}
 			else return CLASS_REF;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch(IOException | ClassNotFoundException e) {
 			return CLASS_REF;}
 	}
 

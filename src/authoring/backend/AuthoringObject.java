@@ -1,22 +1,15 @@
 package authoring.backend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
+import authoring.support.DraggableImageView;
 import conditions.ConditionManager;
 import game_object.ObjectAttributes;
 import game_object.ObjectLogic;
-import game_object.PropertyNotFoundException;
-import interactions.Interaction;
 import interactions.InteractionManager;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import transform_library.Vector2;
 
 public class AuthoringObject {
 	//extends group?
@@ -40,7 +33,7 @@ public class AuthoringObject {
 	
 	public AuthoringObject() {
 		defaultObject();
-		addTestObject();
+//		addTestObject();
 //		addDuvall();
 	}
 		
@@ -64,18 +57,18 @@ public class AuthoringObject {
 		buildCosts = myAttributes.getCosts();
 	}
 	
-	private void addTestObject() {
-		setImage(TEST_IMAGE);
-		myMainComponentPropertyManager.setName("Station");
-	}
-	
-	private void addDuvall() {
-		setImage(TEST_IMAGE_DUVALL);
-		myMainComponentPropertyManager.setName("Final Boss");
-	}
+//	private void addTestObject() {
+//		setImage(TEST_IMAGE);
+//		myMainComponentPropertyManager.setName("Station");
+//	}
+//	
+//	private void addDuvall() {
+//		setImage(TEST_IMAGE_DUVALL);
+//		myMainComponentPropertyManager.setName("Final Boss");
+//	}
 	
 	public Image getImage() {
-		System.out.println("myDragImage: " + myDragImage);
+//		System.out.println("myDragImage: " + myDragImage);
 		System.out.println("DragImage's Image: " + myDragImage.getImage());
 		return myDragImage.getImage();
 	}
@@ -152,7 +145,7 @@ public class AuthoringObject {
 	}
 	
 	public List<String> getBuildCostResources() {
-		List<String> resources = new ArrayList<String>();
+		List<String> resources = new ArrayList<>();
 		for(String resource : buildCosts.keySet()) {
 			resources.add(resource);
 		}
@@ -160,7 +153,7 @@ public class AuthoringObject {
 	}
 	
 	public List<Double> getBuildCostAmounts() {
-		List<Double> amounts = new ArrayList<Double>();
+		List<Double> amounts = new ArrayList<>();
 		for(double amount : buildCosts.values()) {
 			amounts.add(amount);
 		}
@@ -191,12 +184,20 @@ public class AuthoringObject {
 		return myConditionManager;
 	}
 
-	public DraggableImageView duplicateImgView() {
+//	public DraggableImageView duplicateImgView() {
+//		Image image = myDragImage.getImage();
+//		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+//		AuthoringObject newobj = new AuthoringObject(imageview);
+//		imageview.setAction(newobj);
+//		return imageview;
+//	}
+	
+	public AuthoringObject duplicateObj() {
 		Image image = myDragImage.getImage();
 		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
 		AuthoringObject newobj = new AuthoringObject(imageview);
 		imageview.setAction(newobj);
-		return imageview;
+		return newobj;
 	}
 		
 	public void resetImageAfterLoad() {
