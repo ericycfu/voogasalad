@@ -19,9 +19,11 @@ public class DisplayMenu extends HBox {
 	
 	private void initializeButtons() {
 //		this.getChildren().add(ButtonFactory.makeButton("Play Game", e -> playGame()));
-		this.getChildren().add(new PlayGameButton(ac, gameEntity));
-		this.getChildren().add(new SaveGameButton(ac, gameEntity));
-		this.getChildren().add(ButtonFactory.makeButton("Add Map", e -> makeNewMap()));
+		this.getChildren().addAll(
+				new PlayGameButton(ac, gameEntity),
+				new SaveGameButton(ac, gameEntity),
+				ButtonFactory.makeButton("Add Map", e -> makeNewMap())
+				);
 	}
 	
 	private void makeNewMap() {
