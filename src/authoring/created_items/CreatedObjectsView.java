@@ -1,12 +1,13 @@
-package authoring.view;
+package authoring.created_items;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.DraggableImageView;
-import authoring.backend.DraggableScrollPane;
 import authoring.backend.MapEntity;
-import authoring.backend.ObjectSelectionImageView;
+import authoring.support.DraggableImageView;
+import authoring.support.ObjectSelectionImageView;
+import authoring.view.AuthoringView;
+import authoring.view.DraggableScrollPane;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;

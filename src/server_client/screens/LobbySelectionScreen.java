@@ -1,5 +1,8 @@
 package server_client.screens;
-
+/**
+ * Handles graphical display and server communication while the player is lobbyless
+ * @author andrew
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +18,7 @@ import game_engine.GameInstance;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
@@ -48,7 +52,6 @@ public class LobbySelectionScreen extends ClientScreen {
 	public static final String IOALERTBODY = "Unable to create lobby!";
 
 	private FileChooser myGameChooser;
-	private FileChooser myMapChooser;
 	private ListView<LobbyDisplay> currentLobbies;
 	private Pane myPane;
 	private Scene myScene; 
@@ -68,16 +71,18 @@ public class LobbySelectionScreen extends ClientScreen {
 		myGameChooser = new FileChooser();
 		myGameChooser.setTitle(GAME_CHOOSER_TITLE);
 		myGameChooser.setInitialDirectory(new File(DATA_PATH));
-		myMapChooser = new FileChooser();
-		myMapChooser.setTitle(MAP_CHOOSER_TITLE);
-		myGameChooser.setInitialDirectory(new File(DATA_PATH));
 	}
+	/**
+	 * sets up the information and buttons that are displayed
+	 */
 	private void setupContent() {
 		setUpLobbyDisplays();
 		setUpJoinButton();
 		setUpCreateButton();
 	}
-
+	/**
+	 * Sets up the button that allows the user to create the new Lobby
+	 */
 	private void setUpCreateButton() {
 		CreateLobbyButton create = new CreateLobbyButton();
 		myPane.getChildren().add(create);
@@ -85,7 +90,6 @@ public class LobbySelectionScreen extends ClientScreen {
 		create.setLayoutY(520);
 		create.setOnAction(e -> {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
-			File chosenMap = myMapChooser.showOpenDialog(getStage());
 			try {
 				List<Object> gameObjects = myReader.read(chosenGame.getCanonicalPath());
 				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
@@ -95,23 +99,24 @@ public class LobbySelectionScreen extends ClientScreen {
 				for(GameObject g: possibleUnits) {
 					currentGameInfo.addReferenceGameObject(g);
 				}
-				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenMap.getCanonicalPath());
+				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenGame.getCanonicalPath());
 				ObjectOutputStream out = getOutputStream();
 				out.writeInt(-1);
 				out.writeObject(newGame);
 				out.flush();
 			} catch (Exception e2) {
-				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
 
 	}
+	/**
+	 * Sets up the Join Lobby button 
+	 */
 	private void setUpJoinButton() {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
-			System.out.println("Button pressed");
 			if(current != null)
 				try {
 					ObjectOutputStream out = getOutputStream();
@@ -125,6 +130,9 @@ public class LobbySelectionScreen extends ClientScreen {
 		join.setLayoutY(520);
 
 	}
+	/**
+	 * Sets up the ListView that displays Lobby information
+	 */
 	private void setUpLobbyDisplays() {
 		currentLobbies = new ListView<LobbyDisplay>();
 		currentLobbies.setPrefSize(800, 400);
@@ -140,6 +148,9 @@ public class LobbySelectionScreen extends ClientScreen {
 		});
 
 	}
+	/**
+	 * Sets up the Stage
+	 */
 	private void setupStage() {
 		getStage().setScene(myScene);
 		getStage().setTitle(TITLE);
@@ -168,6 +179,7 @@ public class LobbySelectionScreen extends ClientScreen {
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();
+			Platform.runLater(() -> { 
 			while(numLobbies < currentLobbies.getItems().size()) {
 				currentLobbies.getItems().remove(0);
 			}
@@ -177,6 +189,7 @@ public class LobbySelectionScreen extends ClientScreen {
 			for(int x = 0; x < lobbies.getElements().size(); x++) {
 				currentLobbies.getItems().get(x).update(lobbies.getElements().get(x));
 			}
+			});
 			return CLASS_REF;
 		} catch (Exception e) {
 			return CLASS_REF;

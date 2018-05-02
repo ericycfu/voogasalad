@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
-import authoring.view.EditCustomFunctionsScreen;
+import authoring.edit_object.EditCustomFunctionsScreen;
 import interactions.CustomComponentParameterFormat;
 import interactions.CustomFunction;
 import interactions.InteractionManager;

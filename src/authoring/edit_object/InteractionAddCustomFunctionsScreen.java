@@ -1,4 +1,4 @@
-package authoring.view;
+package authoring.edit_object;
 
 import java.io.FileInputStream;
 import java.io.IOException;

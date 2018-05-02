@@ -1,6 +1,8 @@
-package authoring.backend;
+package authoring.support;
 
-import authoring.view.ObjectTeamSelectionScreen;
+import authoring.backend.AuthoringController;
+import authoring.backend.AuthoringObject;
+import authoring.edit_map.ObjectTeamSelectionScreen;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -21,3 +23,5 @@ public class ObjectSelectionImageView extends ImageView {
 		});
 	}
 }
+
+
