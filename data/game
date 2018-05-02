@@ -33,7 +33,7 @@
                   <double>100.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>10.0</buildTime>
+              <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -97,7 +97,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/station.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -226,7 +226,7 @@
               <double>100.0</double>
             </entry>
           </buildCosts>
-          <buildTime>10.0</buildTime>
+          <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -309,7 +309,7 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>4</numPlayers>
+    <numPlayers>1</numPlayers>
     <lossCondition></lossCondition>
     <resources/>
     <mapwidth>1000</mapwidth>

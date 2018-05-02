@@ -1,7 +1,7 @@
 package gui_elements.combo_boxes;
 
 import authoring.backend.TagController;
-import authoring.view.EditComponentTagsScreen;
+import authoring.edit_object.EditComponentTagsScreen;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;

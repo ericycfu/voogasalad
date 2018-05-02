@@ -30,6 +30,11 @@ public class ResourceVictory implements EndCondition {
 	private String resource;
 	private double threshold;
 	
+	public ResourceVictory() {
+		format = new CustomComponentParameterFormat();
+		setParameterFormatFields();
+	}
+	
 	@Override
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects) {
 		

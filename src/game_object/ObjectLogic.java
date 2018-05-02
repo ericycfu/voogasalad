@@ -134,7 +134,7 @@ public class ObjectLogic implements Serializable
 	{
 		for(Condition condition : conditions.getElements())
 		{
-			condition.execute();
+			condition.execute(current);
 		}
 	}
 	

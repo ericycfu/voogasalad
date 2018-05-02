@@ -1,43 +1,48 @@
-package authoring.view;
+package authoring.edit_object;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import authoring.backend.AuthoringObject;
-import authoring.backend.DraggableImageView;
-import gui_elements.buttons.ObjectTeamSaveButton;
-import gui_elements.combo_boxes.MainComboBox;
-import gui_elements.combo_boxes.ObjectTeamComboBox;
-import gui_elements.labels.ObjectTeamLabel;
+import authoring.view.AuthoringView;
+import game_object.ObjectAttributes;
+import gui_elements.buttons.AddAttributeButton;
+import gui_elements.buttons.AttributeApplyAndOkButton;
+import gui_elements.labels.AttributeNameLabel;
+import gui_elements.labels.AttributeValueLabel;
+import gui_elements.labels.ComponentAttributesTitleLabel;
+import gui_elements.panes.AttributeNamesPane;
+import gui_elements.panes.AttributeValuesPane;
+import gui_elements.panes.MainPane;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ObjectTeamSelectionScreen {
-	
+public class ComponentAddAttributesScreen implements AuthoringView {
 	private final Paint BACKGROUND = Color.BLACK;
-    private final String PROPERTY_FILENAME = "data/object_team_selection_screen.properties";
+    private final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
     private final String TITLE_PROPERTY = "title";
     private final String WIDTH_PROPERTY = "width";
     private final String HEIGHT_PROPERTY = "height";
     private String title;
     private int screen_width, screen_height;
     private Stage stage;
-    private AuthoringObject authoring_object;
-    private MainComboBox object_team_cb;
-    private DraggableImageView draggable_image_view;
-    
-	// Additional setup for the add-interactions screen.
+    private ObjectAttributes objAttributesInstance;
+    private MainPane attribute_names_pane, attribute_values_pane;
+
+	// Additional setup for the add-attributes screen.
     private Scene myScene;
     private static Group root;
     
-    public ObjectTeamSelectionScreen(DraggableImageView draggable_image_view, AuthoringObject authoring_object) {
-    	this.draggable_image_view = draggable_image_view;
-    	this.authoring_object= authoring_object;
+    public ComponentAddAttributesScreen(ObjectAttributes objAttributesInstance) {
+    	this.objAttributesInstance = objAttributesInstance;
     	initialize();
     }
 
@@ -57,7 +62,7 @@ public class ObjectTeamSelectionScreen {
 	}
 
 	/**
-	 * Sets the stage for the add-interactions screen.
+	 * Sets the stage for the add-attributes screen.
 	 */
 	private void setStage() {
 		stage = new Stage();
@@ -65,9 +70,6 @@ public class ObjectTeamSelectionScreen {
 		stage.setTitle(title);
 		stage.show();
 		stage.setResizable(false);
-//		stage.setOnCloseRequest(e -> {
-//			e.consume();
-//		});
 	}
 
 	/**
@@ -100,29 +102,38 @@ public class ObjectTeamSelectionScreen {
     
     private void setGUIComponents() {
     	setLabels();
+    	setPanes();
     	setComboBoxes();
+    	setRadioButtons();
     	setButtons();
     }
-        
+    
     private void setLabels() {
-    	root.getChildren().add(new ObjectTeamLabel().getLabel());
-    }
-
-    private void setComboBoxes() {
-    	
-    	object_team_cb = new ObjectTeamComboBox(authoring_object);
-    	
-    	root.getChildren().add(object_team_cb.getComboBox());
+    	root.getChildren().addAll(new ComponentAttributesTitleLabel().getLabel(),
+    					   	      new AttributeNameLabel().getLabel(),
+    						      new AttributeValueLabel().getLabel());
     }
     
-    private void setButtons() {
-    	root.getChildren().add(new ObjectTeamSaveButton(authoring_object,
-    													object_team_cb,
-    													draggable_image_view,
-    													this).getButton());
+    private void setPanes() {
+    	attribute_names_pane = new AttributeNamesPane(objAttributesInstance);
+    	attribute_values_pane = new AttributeValuesPane(objAttributesInstance);
+    	    	
+    	root.getChildren().addAll(attribute_names_pane.getPane(),
+    							  attribute_values_pane.getPane());
     }
-
-    public Stage getStage() {
-    	return stage;
+    
+    private void setComboBoxes() {
+    }
+    
+    private void setRadioButtons() {
+    }
+        
+    private void setButtons() {
+    	root.getChildren().addAll(new AddAttributeButton(attribute_names_pane.getPane(), 
+    												     attribute_values_pane.getPane()),
+    						   new AttributeApplyAndOkButton(attribute_names_pane.getPane(),
+    								   						 attribute_values_pane.getPane(),
+    								   						 stage,
+    								   						 objAttributesInstance));
     }
 }

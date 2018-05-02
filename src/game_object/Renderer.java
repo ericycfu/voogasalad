@@ -45,6 +45,17 @@ public class Renderer implements Serializable{
 		return myImageLocation;
 	}
 	
+	public void reduceOpacity()
+	{
+		System.out.println("reduced");
+		getDisp().setOpacity(Renderer.TEMP_OPACITY);
+	}
+	
+	public void setDefaultOpacity()
+	{
+		getDisp().setOpacity(Renderer.NORMAL_OPACITY);
+	}
+	
 	public void setDisp(ImageView disp) {
 		myDisp = disp;
 	}
