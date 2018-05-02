@@ -5,18 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import authoring.backend.AuthoringObject;
 import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
 import javafx.scene.image.Image;
-import transform_library.Transform;
 
 /**
  * Codes for an action that occurs in the game. Different actions might simulate a GameObject acting on itself or acting on another object
@@ -97,8 +93,10 @@ public class Interaction implements EngineObject, Serializable {
 	}
 	
 	
-	public void addAllCustomFunctions(List<String> types) {
-		for(String type : types) {
+	public void addAllCustomFunctions(List<String> types)
+	{
+		for(String type : types) 
+		{
 			generateCustomFunction(type);
 		}
 	}
@@ -110,10 +108,10 @@ public class Interaction implements EngineObject, Serializable {
 	public void executeCustomFunctions(GameObject current, GameObject other, GameObjectManager manager)
 	{
 		
-		if(!validatedInteractionTarget(current, other)) return;
-		System.out.println("validates");
-		//if(matchesTags(other, targetTags)) return;
-		System.out.println("tags match");
+		if(!validatedInteractionTarget(current, other)) 
+			return;
+		if(matchesTags(other, targetTags)) 
+			return;
 		try 
 		{
 			for(CustomFunction cFunc : customFunctions)
@@ -134,19 +132,27 @@ public class Interaction implements EngineObject, Serializable {
 	 */
 	private boolean validatedInteractionTarget(GameObject current, GameObject other)
 	{
-		if(this.InteractionTargetTeam == InteractionTargetTeam.ALL) return true;
-		else if(this.InteractionTargetTeam == InteractionTargetTeam.OTHER
-				&& current.getOwner().getID() != other.getOwner().getID()) return true;
-		else if(this.InteractionTargetTeam == InteractionTargetTeam.OWN
-				&& current.getOwner().getID() == other.getOwner().getID()) return true;
+		if(this.InteractionTargetTeam == InteractionTargetTeam.ALL)
+		{
+			return true;
+		}
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OTHER && current.getOwner().getID() != other.getOwner().getID())
+		{
+			return true;
+		}
+		else if(this.InteractionTargetTeam == InteractionTargetTeam.OWN && current.getOwner().getID() == other.getOwner().getID())
+		{
+			return true;
+		}
 		return false;
 		
 	}
 	
 	private void createTargetTeamEnumMap() 
 	{
-		targetTeamEnumMap = new HashMap<String, InteractionTargetTeam>();
-		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) {
+		targetTeamEnumMap = new HashMap<>();
+		for(InteractionTargetTeam value : this.InteractionTargetTeam.values()) 
+		{
 			targetTeamEnumMap.put(value.toString(), value);
 		}
 	}

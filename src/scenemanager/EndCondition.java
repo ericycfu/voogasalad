@@ -11,9 +11,9 @@ import interactions.CustomComponentParameterFormat;
  * 
  * @author Rayan
  * Interface for creating end condition modules
- */
-
-public interface EndCondition {
+	 */
+	
+	public interface EndCondition {
 
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects);
 	public CustomComponentParameterFormat getParameterFormat();
