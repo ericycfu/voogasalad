@@ -31,6 +31,9 @@ public class ServerClient  extends Application {
 		} while (clientSocket == null);
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
 		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
+		start();
+	}
+	private void start() {
 		new Thread(() -> {
 			while(true) {
 				String newClass = currentScreen.updateSelf();
@@ -38,7 +41,7 @@ public class ServerClient  extends Application {
 					System.out.println("Switching to " + newClass);
 					Platform.runLater(() -> currentScreen = myScreenFactory.get(newClass));
 					try {
-						Thread.sleep(3000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					}
 				}

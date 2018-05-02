@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-
 import game_engine.GameInstance;
 
 public class GameLobby implements Serializable{

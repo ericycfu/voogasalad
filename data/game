@@ -309,7 +309,7 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
+    <numPlayers>4</numPlayers>
     <lossCondition></lossCondition>
     <resources/>
     <mapwidth>1000</mapwidth>

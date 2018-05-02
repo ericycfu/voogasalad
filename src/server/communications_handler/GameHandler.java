@@ -6,6 +6,7 @@ package server.communications_handler;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import game_engine.GameInstance;
 import server.GameCommandInterpreter;
@@ -18,8 +19,8 @@ public class GameHandler extends CommunicationsHandler {
 	private GameLobby runningGameLobby;
 	private int player_ID;
 	private int team_ID;
-	public GameHandler(Socket input, RTSServer server) {
-		super(input, server);
+	public GameHandler(Socket input, RTSServer server, Logger logger) {
+		super(input, server, logger);
 		runningGameLobby = server.findPlayer(input);
 		runningGame = runningGameLobby.getCurrentGameInstance();
 		player_ID = runningGameLobby.getPlayerID(input);
