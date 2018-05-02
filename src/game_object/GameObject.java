@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Random;
 
 import authoring.backend.MainComponentPropertyManager;
 import game_engine.EngineObject;
 import game_engine.Team;
 import game_engine.Timer;
+import interactions.Interaction;
 import pathfinding.GridMap;
 import pathfinding.Pathfinder;
 import transform_library.Transform;
@@ -61,10 +63,12 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	private boolean isUninteractive;
 	
 	private Timer buildTimer;
+	private Timer interactionTimer;
 	private boolean isBeingConstructed;
 	
 	private double elapsedTime;
 	
+	private boolean isPreviousInteractionQueued;
 	
 	
 	/**
@@ -192,19 +196,30 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
-				System.out.println("done building");
 				this.dequeueBuilding();
 			}
+		}
+		
+		if(this.isPreviousInteractionQueued)
+		{	
+			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
+			{
+				myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+			}
+		}
+		else
+		{
+			if(isInteractionQueued)
+			{
+				 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+			}
+			
 		}
 		
 		if(this.isUninteractive) return;
 		
 		moveUpdate();
 		
-		if(isInteractionQueued)
-		{
-			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
-		}
 		
 		myObjectLogic.checkConditions(this);
 
@@ -217,11 +232,13 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			if(!transform.MoveTowards(new Transform(activeWaypoints.peek()), movementSpeed))
 			{
 				activeWaypoints.remove();
-				if(activeWaypoints.isEmpty()) dequeueMovement();
+				if(activeWaypoints.isEmpty()) 
+					dequeueMovement();
 			}
 		}
 	}
 	
+
 	public void setIsBuilding(boolean val)
 	{
 		this.isBuilding = val;
@@ -256,15 +273,23 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		emptyPosTarget = emptyPos;
 		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap, emptyPos);
 		this.manager = manager;
+		this.isPreviousInteractionQueued = false;
 	}
 	
 	/**
 	 * Interaction dequeued after it is completed or cancelled
 	 */
-	public void dequeueInteraction()
+	public void dequeueInteraction(int interId)
 	{
-		isInteractionQueued = false;
-		interactionTarget = null;
+		Interaction inter = this.myObjectLogic.accessInteractions().getInteraction(interId);
+		if(!inter.isRepetitive())
+		{
+			isInteractionQueued = false;
+			interactionTarget = null;
+		}
+		this.isPreviousInteractionQueued = true;
+		triggerTimer(this.interactionTimer);
+		
 	}
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
@@ -276,6 +301,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
+		this.isPreviousInteractionQueued = true;
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
@@ -287,10 +313,15 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		setIsUninteractive(true);
 		this.isBeingConstructed = true;
-		this.buildTimer = new Timer();
-		this.buildTimer.setTimerOn(true);
+		triggerTimer(this.buildTimer);
 		this.renderer.reduceOpacity();
-		this.buildTimer.setInitialTime(elapsedTime);
+	}
+	
+	private void triggerTimer(Timer timer)
+	{
+		timer = new Timer();
+		timer.setTimerOn(true);
+		timer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()

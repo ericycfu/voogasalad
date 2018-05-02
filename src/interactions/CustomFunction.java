@@ -20,4 +20,5 @@ public interface CustomFunction extends Serializable {
 	public void setParameterFormatFields();
 	public void setParameters(CustomComponentParameterFormat toFormat);
 	public String getName();
+	public boolean isRepetitive();
 }

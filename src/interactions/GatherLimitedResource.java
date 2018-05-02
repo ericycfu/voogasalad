@@ -39,7 +39,6 @@ public class GatherLimitedResource implements CustomFunction {
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
 			double currentResourceVal = other.accessLogic().accessAttributes().getAttribute(resource);
 			other.accessLogic().accessAttributes().setAttributeValue(resource, currentResourceVal - deltaVal);
-			current.dequeueInteraction();
 			
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException | InvalidResourceValueException e) 
@@ -85,6 +84,12 @@ public class GatherLimitedResource implements CustomFunction {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return NAME;
+	}
+
+	@Override
+	public boolean isRepetitive() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
