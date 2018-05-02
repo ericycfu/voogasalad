@@ -18,9 +18,7 @@ import java.util.Map;
 
 public abstract class ElementManager implements Serializable {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Map<Integer, EngineObject> elementMap;
 	private int new_ID_val;
