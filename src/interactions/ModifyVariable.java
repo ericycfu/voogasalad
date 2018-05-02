@@ -57,9 +57,16 @@ public class ModifyVariable implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {		
 		
+		
 		if(other == null) return;
 		try 
 		{
+			if(current.accessLogic() == other.accessLogic()) 
+			{
+				System.out.println("same logic block");
+			}
+			this.variable = format.getParameterValue(VARIABLE);
+			this.delta = format.getParameterValue(DELTA);
 			ParameterParser p = new ParameterParser();
 			double deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);

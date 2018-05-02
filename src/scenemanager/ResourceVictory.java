@@ -36,6 +36,8 @@ public class ResourceVictory implements EndCondition {
 		Set<Integer> teamIDSet = new HashSet<>();
 		try
 		{
+			this.resource = format.getParameterValue(RESOURCE);
+			this.threshold = Double.parseDouble(format.getParameterValue(THRESHOLD));
 			for(GameObject o : gameObjects)
 			{
 				Team team = o.getOwner();
@@ -48,7 +50,7 @@ public class ResourceVictory implements EndCondition {
 			}
 			return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);
 		} 
-		catch (InvalidResourceValueException e) 
+		catch (InvalidResourceValueException | PropertyNotFoundException e) 
 		{
 			e.printStackTrace();
 			return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);

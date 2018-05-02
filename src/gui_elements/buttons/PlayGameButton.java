@@ -30,6 +30,7 @@ import transform_library.Vector2;
 public class PlayGameButton extends Button {	
 	private AuthoringController ac;
 	private GameEntity gameEntity;
+	private Writer myWriter = new Writer();
 	public PlayGameButton(AuthoringController ac, GameEntity game) {
 		this.ac = ac;
 		this.gameEntity = game;
@@ -59,15 +60,16 @@ public class PlayGameButton extends Button {
 				listForAuthor.add(gameEntity.getCreatedObjects().getAuthoringObjects());
 				listForAuthor.add(changedMap);
 				listForAuthor.add(ac.getCurrentMap().getMapSettings());
-				Writer.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
+				listForAuthor.add(gameEntity.getResourceManager());
+				myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
 				GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,gameEntity.getResourceManager());
-				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(CreatedObjects.getAuthoringObjects());
+				List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(gameEntity.getCreatedObjects().getAuthoringObjects());
 				Set<GameObject> possibleObjects = new HashSet<>();
 				possibleObjects.addAll(possibleObjectsList);
 				listForGame.add(myGOM);
 				listForGame.add(possibleObjects);
 				listForGame.add(ac.getCurrentMap().getMapSettings());
-				Writer.write(Resources.getString("INITIALIZATION_LOCATION"),listForGame);
+				myWriter.write(Resources.getString("INITIALIZATION_LOCATION"),listForGame);
 				System.out.println("Object saved");
 			} catch (IOException e) {
 				System.err.println("Could not save created authoring objects");

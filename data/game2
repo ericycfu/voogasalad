@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>436.0</x>
-              <y>166.0</y>
+              <x>229.0</x>
+              <y>128.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -18,13 +18,13 @@
               <attributes>
                 <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>200.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>200.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts>
@@ -33,7 +33,7 @@
                   <double>100.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>100.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -42,7 +42,7 @@
                   <interactions.Interaction>
                     <id>1</id>
                     <targetTags>
-                      <string>prof</string>
+                      <string>melee</string>
                     </targetTags>
                     <name>Attack</name>
                     <imagePath>/images/attack_icon.png</imagePath>
@@ -85,11 +85,11 @@
                         </format>
                       </interactions.ModifyVariable>
                     </customFunctions>
-                    <range>100.0</range>
+                    <range>50.0</range>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <new__ID__val>3</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -97,7 +97,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -106,14 +106,14 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>duvall</name>
+          <name>Duvall</name>
           <tags>
-            <string>prof</string>
+            <string>melee</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
+          <movementSpeed>3.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -122,19 +122,19 @@
         </game__object.GameObject>
       </entry>
       <entry>
-        <int>4</int>
+        <int>2</int>
         <game__object.GameObject>
-          <id>4</id>
+          <id>2</id>
           <transform>
             <position>
-              <x>342.0</x>
-              <y>133.0</y>
+              <x>84.0</x>
+              <y>73.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -143,47 +143,12 @@
               <resourceMap/>
             </resourceManager>
           </owner>
-          <name>duvall</name>
+          <name>Duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>7</int>
-        <game__object.GameObject>
-          <id>7</id>
-          <transform>
-            <position>
-              <x>234.0</x>
-              <y>103.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic reference="../../../entry/game__object.GameObject/myObjectLogic"/>
-          <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
-          </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap/>
-            </resourceManager>
-          </owner>
-          <name>duvall</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
+          <movementSpeed>3.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -192,7 +157,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>10</new__ID__val>
+    <new__ID__val>3</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -210,13 +175,13 @@
           <attributes>
             <entry>
               <string>Health</string>
-              <double>100.0</double>
+              <double>200.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
-              <double>100.0</double>
+              <double>200.0</double>
             </entry>
           </maxAttributes>
           <buildCosts>
@@ -225,7 +190,7 @@
               <double>100.0</double>
             </entry>
           </buildCosts>
-          <buildTime>100.0</buildTime>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -234,7 +199,7 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>prof</string>
+                  <string>melee</string>
                 </targetTags>
                 <name>Attack</name>
                 <imagePath>/images/attack_icon.png</imagePath>
@@ -277,11 +242,11 @@
                     </format>
                   </interactions.ModifyVariable>
                 </customFunctions>
-                <range>100.0</range>
+                <range>50.0</range>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>7</new__ID__val>
+          <new__ID__val>3</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -289,16 +254,16 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
-      <name>duvall</name>
+      <name>Duvall</name>
       <tags>
-        <string>prof</string>
+        <string>melee</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>10.0</movementSpeed>
+      <movementSpeed>3.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>

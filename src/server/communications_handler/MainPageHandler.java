@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 
 import game_engine.GameInstance;
 import server.RTSServer;
+import server.RTSServerException;
 
 public class MainPageHandler extends CommunicationsHandler {
 	public static final String CLASS_REF = "MainPage";
@@ -17,12 +17,12 @@ public class MainPageHandler extends CommunicationsHandler {
 
 	@SuppressWarnings("unused")
 	@Override
-	public String updateServer() {
+	public String updateServer() throws RTSServerException {
 		try {
 			Integer input;
 			ObjectInputStream in = getInputStream();
 			if(in == null)
-				throw new SocketException("Client disconnected");
+				throw new RTSServerException("Client disconnected");
 			if((input = in.readInt()) == null)
 				return CLASS_REF;
 			if(input == -1)
@@ -31,23 +31,21 @@ public class MainPageHandler extends CommunicationsHandler {
 			System.out.println("Message received");
 			return LobbyHandler.CLASS_REF;
 		}
-		catch(Exception e) {
-			System.out.println("Oops1");
+		catch(IOException | ClassNotFoundException e) {
 			return CLASS_REF;}
 	}
 
 	@Override
-	public void updateClient() throws SocketException {
+	public void updateClient() throws RTSServerException {
 		getServer().cleanLobbyManager();
 		try {
 			ObjectOutputStream out = getOutputStream();
 			if(out == null)
-				throw new SocketException("Client disconnected");
+				throw new RTSServerException("Client disconnected");
 			out.writeObject(
 					getServer()
 					.getLobbyManager());
 			out.flush();
-			System.out.println("Write success!");
 		} catch (Exception e) {
 		}
 	}

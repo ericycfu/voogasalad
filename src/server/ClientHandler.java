@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
 					myCommunicationsHandler = myCHFactory.get(newHandler);
 			}
 			}
-			catch(SocketException e) {
+			catch(RTSServerException e) {
 				Thread.currentThread().interrupt();
 			}
 		}).start();
@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable {
 					myCommunicationsHandler.updateClient();
 				}
 			}
-			catch(SocketException e) {
+			catch(RTSServerException e) {
 				Thread.currentThread().interrupt();
 			}
 		}).start();

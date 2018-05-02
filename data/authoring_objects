@@ -1,28 +1,34 @@
 <object-stream>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>Shit</string>
+      <string>a</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
-    <buildCosts/>
+    <myTeam>1</myTeam>
+    <buildCosts>
+      <entry>
+        <null/>
+        <double>100.0</double>
+      </entry>
+    </buildCosts>
     <myObjectLogic>
       <fulfillsLossCondition>false</fulfillsLossCondition>
       <attributes>
         <attributes>
           <entry>
             <string>Health</string>
-            <double>100.0</double>
+            <double>200.0</double>
           </entry>
         </attributes>
         <maxAttributes>
           <entry>
             <string>Health</string>
-            <double>100.0</double>
+            <double>200.0</double>
           </entry>
         </maxAttributes>
         <buildCosts reference="../../../buildCosts"/>
-        <buildTime>5.0</buildTime>
+        <buildTime>12.0</buildTime>
       </attributes>
       <interactions>
         <elementMap/>
@@ -34,12 +40,11 @@
       </conditions>
     </myObjectLogic>
     <myMainComponentPropertyManager>
-      <myImagePath>/images/robert.png</myImagePath>
-      <myName>RealShit1</myName>
+      <myImagePath>/images/rcd.png</myImagePath>
+      <myName>a</myName>
       <myTags reference="../../myTags"/>
-      <myMovementSpeed>10.0</myMovementSpeed>
+      <myMovementSpeed>5.0</myMovementSpeed>
       <isBuilding>false</isBuilding>
-      <myTeam>1</myTeam>
     </myMainComponentPropertyManager>
     <myAttributes reference="../myObjectLogic/attributes"/>
     <myInteractions reference="../myObjectLogic/interactions"/>
@@ -47,24 +52,30 @@
   </authoring.backend.AuthoringObject>
   <authoring.backend.AuthoringObject>
     <myTags>
-      <string>Shit</string>
+      <string>b</string>
     </myTags>
     <myX>0.0</myX>
     <myY>0.0</myY>
-    <buildCosts/>
+    <myTeam>1</myTeam>
+    <buildCosts>
+      <entry>
+        <null/>
+        <double>100.0</double>
+      </entry>
+    </buildCosts>
     <myObjectLogic>
       <fulfillsLossCondition>false</fulfillsLossCondition>
       <attributes>
         <attributes>
           <entry>
             <string>Health</string>
-            <double>200.0</double>
+            <double>1000.0</double>
           </entry>
         </attributes>
         <maxAttributes>
           <entry>
             <string>Health</string>
-            <double>200.0</double>
+            <double>1000.0</double>
           </entry>
         </maxAttributes>
         <buildCosts reference="../../../buildCosts"/>
@@ -77,35 +88,38 @@
             <interactions.Interaction>
               <id>1</id>
               <targetTags>
-                <string>Shit</string>
+                <string>Farmer</string>
               </targetTags>
-              <name>Attack</name>
-              <imagePath>/images/arrow_down.png</imagePath>
-              <description>Attack = 10</description>
-              <isBuild>false</isBuild>
+              <name>Build</name>
+              <imagePath>/images/arrow_left.png</imagePath>
+              <description>build</description>
+              <isBuild>true</isBuild>
               <isInstantaneous>false</isInstantaneous>
+              <InteractionTargetTeam>ALL</InteractionTargetTeam>
+              <targetTeamEnumMap>
+                <entry>
+                  <string>OTHER</string>
+                  <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                </entry>
+                <entry>
+                  <string>ALL</string>
+                  <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                </entry>
+                <entry>
+                  <string>OWN</string>
+                  <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                </entry>
+              </targetTeamEnumMap>
               <customFunctions>
-                <interactions.ModifyVariable>
-                  <NAME>ModifyVariable</NAME>
-                  <VARIABLE>Variable</VARIABLE>
-                  <DELTA>Delta</DELTA>
-                  <RATE>Rate</RATE>
+                <interactions.BuildFunction>
+                  <NAME>BuildFunction</NAME>
                   <format>
-                    <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
-                    <parameterFields>
-                      <entry>
-                        <string>Variable</string>
-                        <string>Health</string>
-                      </entry>
-                      <entry>
-                        <string>Delta</string>
-                        <string>-10</string>
-                      </entry>
-                    </parameterFields>
+                    <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                    <parameterFields/>
                   </format>
-                </interactions.ModifyVariable>
+                </interactions.BuildFunction>
               </customFunctions>
-              <range>300.0</range>
+              <range>2000.0</range>
             </interactions.Interaction>
           </entry>
         </elementMap>
@@ -118,82 +132,10 @@
     </myObjectLogic>
     <myMainComponentPropertyManager>
       <myImagePath>/images/ghoul.png</myImagePath>
-      <myName>RealShit2</myName>
+      <myName>b</myName>
       <myTags reference="../../myTags"/>
-      <myMovementSpeed>10.0</myMovementSpeed>
-      <isBuilding>false</isBuilding>
-      <myTeam>1</myTeam>
-    </myMainComponentPropertyManager>
-    <myAttributes reference="../myObjectLogic/attributes"/>
-    <myInteractions reference="../myObjectLogic/interactions"/>
-    <myConditionManager reference="../myObjectLogic/conditions"/>
-  </authoring.backend.AuthoringObject>
-  <authoring.backend.AuthoringObject>
-    <myTags>
-      <string>Building</string>
-    </myTags>
-    <myX>0.0</myX>
-    <myY>0.0</myY>
-    <buildCosts/>
-    <myObjectLogic>
-      <fulfillsLossCondition>false</fulfillsLossCondition>
-      <attributes>
-        <attributes>
-          <entry>
-            <string>Health</string>
-            <double>1000.0</double>
-          </entry>
-        </attributes>
-        <maxAttributes>
-          <entry>
-            <string>Health</string>
-            <double>1000.0</double>
-          </entry>
-        </maxAttributes>
-        <buildCosts reference="../../../buildCosts"/>
-        <buildTime>10.0</buildTime>
-      </attributes>
-      <interactions>
-        <elementMap>
-          <entry>
-            <int>1</int>
-            <interactions.Interaction>
-              <id>1</id>
-              <targetTags>
-                <string>Shit</string>
-              </targetTags>
-              <name>Build</name>
-              <imagePath>/images/arrow_up.png</imagePath>
-              <description>Build shits</description>
-              <isBuild>true</isBuild>
-              <isInstantaneous>false</isInstantaneous>
-              <customFunctions>
-                <interactions.BuildFunction>
-                  <NAME>BuildFunction</NAME>
-                  <format>
-                    <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                    <parameterFields/>
-                  </format>
-                </interactions.BuildFunction>
-              </customFunctions>
-              <range>300.0</range>
-            </interactions.Interaction>
-          </entry>
-        </elementMap>
-        <new__ID__val>3</new__ID__val>
-      </interactions>
-      <conditions>
-        <elementMap/>
-        <new__ID__val>1</new__ID__val>
-      </conditions>
-    </myObjectLogic>
-    <myMainComponentPropertyManager>
-      <myImagePath>/images/station.png</myImagePath>
-      <myName>ShitBuilding</myName>
-      <myTags reference="../../myTags"/>
-      <myMovementSpeed>0.0</myMovementSpeed>
+      <myMovementSpeed>121.0</myMovementSpeed>
       <isBuilding>true</isBuilding>
-      <myTeam>1</myTeam>
     </myMainComponentPropertyManager>
     <myAttributes reference="../myObjectLogic/attributes"/>
     <myInteractions reference="../myObjectLogic/interactions"/>
