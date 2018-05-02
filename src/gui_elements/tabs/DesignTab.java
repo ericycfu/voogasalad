@@ -3,7 +3,6 @@ package gui_elements.tabs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
@@ -37,7 +36,6 @@ import gui_elements.text_fields.ComponentNameTextField;
 import gui_elements.text_fields.MainTextField;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
-import observables.Listener;
 
 public class DesignTab extends Tab {
 
@@ -169,8 +167,9 @@ public class DesignTab extends Tab {
 	public void assignComponents() {
 		component_name_tf.setText(authoring_object.getName());
 		String tag_string = "";
-		for(String tag : authoring_object.getTags())
+		for(String tag : authoring_object.getTags()) {
 			tag_string += tag + " ";
+		}
 		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
 		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
@@ -188,7 +187,7 @@ public class DesignTab extends Tab {
 	}
 	
 	public List<String> getResourceNames(List<Entry<String, Double>> resource_entries) {
-		List<String> resource_names = new ArrayList<String>();
+		List<String> resource_names = new ArrayList<>();
 		for(Entry<String, Double> entry : resource_entries) {
 			resource_names.add(entry.getKey());
 		}
