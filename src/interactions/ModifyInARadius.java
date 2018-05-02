@@ -14,10 +14,10 @@ import transform_library.Transform;
 
 public class ModifyInARadius implements CustomFunction {
 	
-	public final String NAME = "ModifyInARadius";
-	public final String VARIABLE = "Variable";
-	public final String DELTA = "Delta";
-	public final String RADIUS = "Radius";
+	public static final String NAME = "ModifyInARadius";
+	public static final String VARIABLE = "Variable";
+	public static final String DELTA = "Delta";
+	public static final String RADIUS = "Radius";
 	
 	private CustomComponentParameterFormat format;
 	
@@ -61,7 +61,6 @@ public class ModifyInARadius implements CustomFunction {
 					double finalDelta = (prevVal + deltaVal) - maxVal;
 					other.accessLogic().accessAttributes().setAttributeValue(variable, finalDelta);
 				}
-				current.dequeueInteraction();
 			}
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{

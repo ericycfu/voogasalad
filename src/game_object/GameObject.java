@@ -63,10 +63,12 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	private boolean isUninteractive;
 	
 	private Timer buildTimer;
+	private Timer interactionTimer;
 	private boolean isBeingConstructed;
 	
 	private double elapsedTime;
 	
+	private boolean isPreviousInteractionQueued;
 	
 	
 	/**
@@ -194,19 +196,30 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
-				System.out.println("done building");
 				this.dequeueBuilding();
 			}
+		}
+		
+		if(this.isPreviousInteractionQueued)
+		{	
+			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
+			{
+				myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+			}
+		}
+		else
+		{
+			if(isInteractionQueued)
+			{
+				 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+			}
+			
 		}
 		
 		if(this.isUninteractive) return;
 		
 		moveUpdate();
 		
-		if(isInteractionQueued)
-		{
-			 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
-		}
 		
 		myObjectLogic.checkConditions(this);
 
@@ -260,6 +273,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		emptyPosTarget = emptyPos;
 		this.myObjectLogic.setCurrentInteraction(id, this, other, manager, gridMap, emptyPos);
 		this.manager = manager;
+		this.isPreviousInteractionQueued = false;
 	}
 	
 	/**
@@ -273,6 +287,8 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			isInteractionQueued = false;
 			interactionTarget = null;
 		}
+		this.isPreviousInteractionQueued = true;
+		triggerTimer(this.interactionTimer);
 		
 	}
 	
@@ -296,10 +312,15 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		setIsUninteractive(true);
 		this.isBeingConstructed = true;
-		this.buildTimer = new Timer();
-		this.buildTimer.setTimerOn(true);
+		triggerTimer(this.buildTimer);
 		this.renderer.reduceOpacity();
-		this.buildTimer.setInitialTime(elapsedTime);
+	}
+	
+	private void triggerTimer(Timer timer)
+	{
+		timer = new Timer();
+		timer.setTimerOn(true);
+		timer.setInitialTime(elapsedTime);
 	}
 	
 	public void dequeueBuilding()
