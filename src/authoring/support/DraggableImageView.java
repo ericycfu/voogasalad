@@ -2,16 +2,9 @@ package authoring.support;
 
 import authoring.backend.AuthoringObject;
 import authoring.edit_map.ObjectTeamSelectionScreen;
-import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class DraggableImageView extends ImageView {
 

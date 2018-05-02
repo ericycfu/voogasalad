@@ -2,7 +2,6 @@ package authoring.view;
 
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
-import game_data.Writer;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.buttons.SaveGameButton;
 import gui_elements.factories.ButtonFactory;
