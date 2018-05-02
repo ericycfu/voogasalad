@@ -74,7 +74,7 @@ public abstract class ParameterSelect implements AuthoringView {
 	protected abstract void clear();
 	protected void extractInfo(HBox box) {
 		Node nodeOne = box.getChildren().get(0);
-		if (nodeOne instanceof ComboBox & ((ComboBox) nodeOne).getValue() != null) {
+		if (nodeOne instanceof ComboBox && ((ComboBox) nodeOne).getValue() != null) {
 			save(box, (ComboBox) nodeOne);
 		}
 	}

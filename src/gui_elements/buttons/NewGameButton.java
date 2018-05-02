@@ -1,6 +1,5 @@
 package gui_elements.buttons;
 
-import authoring.backend.GameEntity;
 import authoring.view.MakeGameScreen;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
