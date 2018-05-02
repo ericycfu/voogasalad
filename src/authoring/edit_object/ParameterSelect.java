@@ -53,9 +53,11 @@ public abstract class ParameterSelect implements AuthoringView {
 
 	
 	protected void clearConditionParameters(HBox line) {
-		for (Node node: line.getChildren()) {
-			if (node instanceof TextField) {
-				line.getChildren().remove(node);
+		if (line != null) {
+			for (Node node: line.getChildren()) {
+				if (node instanceof TextField) {
+					line.getChildren().remove(node);
+				}
 			}
 		}
 	}

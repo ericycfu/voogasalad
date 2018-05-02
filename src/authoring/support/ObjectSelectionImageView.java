@@ -13,13 +13,14 @@ public class ObjectSelectionImageView extends ImageView {
 		actionImgToScrollPane(obj, ac);
 	}
 	
-	public void actionImgToScrollPane(AuthoringObject obj, AuthoringController ac) {
+	public void actionImgToScrollPane(AuthoringObject objBase, AuthoringController ac) {
 		this.setOnMouseClicked(e -> {
 			if (e.getClickCount() == 2) {
-				DraggableImageView dragimgview = obj.duplicateImgView();
-				ac.getCurrentMap().addToMap(obj, dragimgview);
+//				DraggableImageView dragimgview = obj.duplicateImgView();
+				AuthoringObject newobj = objBase.duplicateObj();
+				ac.getCurrentMap().addToMap(objBase, newobj);
 			}
-			ac.updateObject(obj);
+			ac.updateObject(objBase);
 		});
 	}
 }

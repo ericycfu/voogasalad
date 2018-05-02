@@ -67,8 +67,8 @@ public class StartScreen {
 																e1.printStackTrace();
 															}
 															
-				}, "load_game_button"),
-				new PlayGameButton(myStage)
+				}, "image_button"),
+				new PlayGameButton(myStage, "image_button")
 				);
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));

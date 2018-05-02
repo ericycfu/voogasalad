@@ -3,7 +3,6 @@ package game_engine;
 import java.io.Serializable;
 
 public class ChatEntry implements Serializable{
-
 	/**
 	 * 
 	 */

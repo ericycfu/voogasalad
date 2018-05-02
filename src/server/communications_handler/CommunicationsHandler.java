@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import server.RTSServer;
 import server.RTSServerException;
@@ -20,9 +21,11 @@ import server.RTSServerException;
 public abstract class CommunicationsHandler {
 	private Socket communicationSocket;
 	private RTSServer host;
-	public CommunicationsHandler(Socket input, RTSServer server) {
+	private Logger myLogger;
+	public CommunicationsHandler(Socket input, RTSServer server, Logger logger) {
 		communicationSocket = input;
 		host = server;
+		myLogger = logger;
 	}
 	protected Socket getSocket() {
 		return communicationSocket;
@@ -51,6 +54,12 @@ public abstract class CommunicationsHandler {
 		} catch (IOException e) {
 			return null;
 		}
+	}
+	protected Logger getLogger() {
+		return myLogger;
+	}
+	protected void log(String message) {
+		myLogger.info(getSocket().getInetAddress() + ": " + message);
 	}
 	/**
 	 * @return This method processes information from the client and updates the server as necessary
