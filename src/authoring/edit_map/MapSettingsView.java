@@ -174,6 +174,7 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		int mapheight = Extractor.extractTextFieldInt(contentBox.getChildren().get(5));
 		System.out.println(imagePath);
 		settings.updateSettings(mapName, numPlayers, imagePath, mapwidth, mapheight);
+		authoring_controller.getCreatedMapsView().update();
 	}
 	
 	private void newLossConditionLine(HBox rootBox) {
