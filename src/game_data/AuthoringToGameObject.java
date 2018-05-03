@@ -28,13 +28,13 @@ public final class AuthoringToGameObject {
 	 * @param map
 	 * @return
 	 */
-	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM) {
+	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, List<Team> teamList) {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
 			for(AuthoringObject AO2: map.get(AO)) {
 				DraggableImageView DIV =  AO2.getDragImage();
 				ObjectLogic logic = new ObjectLogic(AO.getObjectLogic());
-				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, RM));
+				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, teamList));
 			}
 		}
 		return GOM;
@@ -61,10 +61,14 @@ public final class AuthoringToGameObject {
 	 * @param RM
 	 * @return
 	 */
-	private static Team convert(AuthoringObject AO, ResourceManager RM) {
-
-		return new Team(AO.getTeam(),(new ResourceManager()).copyResourceManager(RM));
-
+	private static Team convert(AuthoringObject AO, List<Team> teamList) {
+		for(Team team: teamList) {
+			if(AO.getTeam() == team.getID()) {
+				return team;
+			}
+		}
+		System.out.println("Shouldn't ever get here");
+		return null;
 	}
 	
 	/**

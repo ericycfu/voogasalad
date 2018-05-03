@@ -40,11 +40,17 @@ public class BuildFunction implements CustomFunction {
 			Map<String, Double> costs = other.accessLogic().accessAttributes().getCosts();
 			for(Map.Entry<String, Double> entry : costs.entrySet())
 			{
-				//String resource = entry.getKey();
-				//if(current.getOwner().getResourceManager().getResource(resource) < entry.getValue()) return;
+				String resource = entry.getKey();
+				double playerStockpile = current.getOwner().getResourceManager().getResource(resource);
+				if(playerStockpile >= entry.getValue()) 
+				{
+					double delta = playerStockpile - entry.getValue();
+					current.getOwner().getResourceManager().updateResource(resource, delta);
+				}
+	
 			}
 		} 
-		catch (UnmodifiableGameObjectException e) {
+		catch (UnmodifiableGameObjectException | InvalidResourceValueException e) {
 			e.printStackTrace();
 		}
 		

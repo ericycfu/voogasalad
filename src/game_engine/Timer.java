@@ -39,6 +39,7 @@ public class Timer {
 	public boolean timeLimit(double currentTime, double duration)
 	{
 		double elapsed = currentTime - initialTime;
+		System.out.println(elapsed + "elapsed");
 		return (elapsed >= duration);
 		
 	}
