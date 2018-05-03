@@ -1,11 +1,12 @@
 package server_client;
+import java.io.IOException;
 /**
  * Responsible for running the Client side of the client-server connection
  * @author andrew
  */
 import java.net.Socket;
 
-import javafx.application.Application;
+import game_player.alert.AlertMaker;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import server.RTSServer;
@@ -13,15 +14,25 @@ import server_client.screens.ClientScreen;
 import server_client.screens.LobbySelectionScreen;
 import server_client.screens.ScreenFactory;
 
-public class ServerClient  extends Application {
+public class ServerClient {
+	public static final String TITLE = "Server Client";
+	public static final String DISCONNECT_TITLE = "ERROR!";
+	public static final String DISCONNECT_BODY = "Error occured when closing server client";
+	public static final int INITIAL_SCENE_WIDTH = 1200;
+	public static final int INITIAL_SCENE_HEIGHT = 700;
 	private ClientScreen currentScreen;
 	private ScreenFactory myScreenFactory;
+	private Socket clientSocket;
+	private boolean running;
 	/**
 	 * Connects the client to the server and starts the communications thread
 	 */
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		Socket clientSocket = null;
+	public ServerClient(Stage myStage) {
+		running = true;
+		setUp(myStage);
+	}
+	public void setUp(Stage primaryStage) {
+		clientSocket = null;
 		do {
 			try {
 				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
@@ -31,25 +42,35 @@ public class ServerClient  extends Application {
 		} while (clientSocket == null);
 		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
 		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
+		setUpStage(primaryStage);
 		start();
 	}
 	private void start() {
 		new Thread(() -> {
-			while(true) {
+			while(running) {
 				String newClass = currentScreen.updateSelf();
 				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
-					System.out.println("Switching to " + newClass);
-					Platform.runLater(() -> currentScreen = myScreenFactory.get(newClass));
+					Platform.runLater(() -> {currentScreen = myScreenFactory.get(newClass);});
 					try {
-						Thread.sleep(2000);
+						Thread.sleep(1500);
 					} catch (InterruptedException e) {
 					}
 				}
 			}
+			try {
+				clientSocket.close();
+			} catch (IOException e) {
+				new AlertMaker(DISCONNECT_TITLE,DISCONNECT_BODY);
+			}
 		}).start();
 	}
-
-	public static void main(String[] args) {
-		launch(args);
+	
+	private void setUpStage(Stage primaryStage) {
+		primaryStage.setTitle(TITLE);
+		primaryStage.setWidth(INITIAL_SCENE_WIDTH);
+		primaryStage.setHeight(INITIAL_SCENE_HEIGHT);
+		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(e -> {running = false;});
+		primaryStage.show();
 	}
 }

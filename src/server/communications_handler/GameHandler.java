@@ -38,16 +38,8 @@ public class GameHandler extends CommunicationsHandler {
 					runningGameLobby.remove(getSocket());
 					return MainPageHandler.CLASS_REF;
 				}
-				if(input.equals("Save")) {
-					if(!runningGame.getIsRunning())
-						getOutputStream().writeObject(runningGame);
-					return CLASS_REF;
-				}
 				myInterpreter.executeCommand(input);
 			}
-			// if(runningGameLobby.isTeamEmpty(runningGameLobby.getTeamID(getSocket()))
-			// update the game loss condition for that team
-			// TODO if the game has ended, return MainPageHandler.CLASS_REF;
 			return CLASS_REF;
 		}
 		catch(Exception e) {return CLASS_REF;}

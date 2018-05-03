@@ -1,5 +1,6 @@
 package scenemanager;
 
+import java.io.Serializable;
 import java.util.List;
 
 import game_engine.EndStateWrapper;
@@ -13,7 +14,7 @@ import interactions.CustomComponentParameterFormat;
  * Interface for creating end condition modules
 	 */
 	
-	public interface EndCondition {
+	public interface EndCondition extends Serializable {
 
 	public EndStateWrapper check(List<Team> teams, List<GameObject> gameObjects);
 	public CustomComponentParameterFormat getParameterFormat();

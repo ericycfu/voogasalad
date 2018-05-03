@@ -12,6 +12,10 @@ import game_object.GameObject;
  *
  */
 public class GameInfo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public List<GameObject> ListOfGameObjs;
 	public GameInfo() {
 		ListOfGameObjs = new ArrayList<GameObject>();

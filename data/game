@@ -3,7 +3,62 @@
     <elementMap/>
     <new__ID__val>1</new__ID__val>
   </game__object.GameObjectManager>
-  <set/>
+  <set>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>1000.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>1000.0</double>
+            </entry>
+          </maxAttributes>
+          <buildCosts/>
+          <buildTime>1.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/robert.png</myImageLocation>
+      </renderer>
+      <name>asdwa</name>
+      <tags>
+        <string>awdaw</string>
+      </tags>
+      <isBuilding>false</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>1.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+    </game__object.GameObject>
+  </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>4</numPlayers>

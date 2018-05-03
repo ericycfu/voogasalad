@@ -76,7 +76,6 @@ public class Reader {
 		return result;
 	}
 	private void setUpNonSerializable(Object obj) {
-		System.out.println(obj.getClass().getName());
 		if(obj instanceof GameObjectManager) {
 			((GameObjectManager) obj).setupImages();
 		}
@@ -84,7 +83,6 @@ public class Reader {
 			for (Object myObj:  ((Map) obj).keySet()){
 				setUpNonSerializable(myObj);
 			}
-			System.out.println("making images for map");
 		}
 		else if(obj instanceof Iterable) {
 			for(Object myObj: (Iterable) obj) {
