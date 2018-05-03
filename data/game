@@ -7,27 +7,37 @@
           <id>1</id>
           <transform>
             <position>
-              <x>237.0</x>
-              <y>40.0</y>
+              <x>0.0</x>
+              <y>0.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes/>
-              <maxAttributes/>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </maxAttributes>
               <buildCosts>
                 <entry>
-                  <string>1</string>
-                  <double>1.0</double>
+                  <string>Gold</string>
+                  <double>50.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>1.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -35,28 +45,34 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/robert.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
             <teamName>Team 1</teamName>
             <resourceManager>
-              <resourceMap/>
+              <resourceMap>
+                <entry>
+                  <string>Gold</string>
+                  <double>50.0</double>
+                </entry>
+              </resourceMap>
             </resourceManager>
           </owner>
-          <name>a</name>
+          <name>Marine</name>
           <tags>
-            <string>a</string>
+            <string>Biological</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
       <entry>
@@ -65,27 +81,37 @@
           <id>4</id>
           <transform>
             <position>
-              <x>87.0</x>
-              <y>204.0</y>
+              <x>367.0</x>
+              <y>96.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes/>
-              <maxAttributes/>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </maxAttributes>
               <buildCosts>
                 <entry>
-                  <string>1</string>
-                  <double>1.0</double>
+                  <string>Gold</string>
+                  <double>50.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>1.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -93,26 +119,32 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/robert.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
             <teamName>Team 1</teamName>
             <resourceManager>
-              <resourceMap/>
+              <resourceMap>
+                <entry>
+                  <string>Gold</string>
+                  <double>50.0</double>
+                </entry>
+              </resourceMap>
             </resourceManager>
           </owner>
-          <name>a</name>
+          <name>Marine</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
       <entry>
@@ -121,27 +153,37 @@
           <id>7</id>
           <transform>
             <position>
-              <x>41.0</x>
-              <y>62.0</y>
+              <x>135.0</x>
+              <y>313.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes/>
-              <maxAttributes/>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>50.0</double>
+                </entry>
+              </maxAttributes>
               <buildCosts>
                 <entry>
-                  <string>1</string>
-                  <double>1.0</double>
+                  <string>Gold</string>
+                  <double>50.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>1.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -149,26 +191,32 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
+            <myImageLocation>/images/robert.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
             <teamName>Team 1</teamName>
             <resourceManager>
-              <resourceMap/>
+              <resourceMap>
+                <entry>
+                  <string>Gold</string>
+                  <double>50.0</double>
+                </entry>
+              </resourceMap>
             </resourceManager>
           </owner>
-          <name>a</name>
+          <name>Marine</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
+          <movementSpeed>50.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
           <isBeingConstructed>false</isBeingConstructed>
           <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
     </elementMap>
@@ -187,19 +235,29 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes/>
-          <maxAttributes/>
+          <attributes>
+            <entry>
+              <string>Health</string>
+              <double>50.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>Health</string>
+              <double>50.0</double>
+            </entry>
+          </maxAttributes>
           <buildCosts>
             <entry>
-              <string>1</string>
-              <double>1.0</double>
+              <string>Gold</string>
+              <double>50.0</double>
             </entry>
           </buildCosts>
-          <buildTime>1.0</buildTime>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
-          <new__ID__val>1</new__ID__val>
+          <new__ID__val>4</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -207,30 +265,39 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
+        <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
-      <name>a</name>
+      <name>Marine</name>
       <tags>
-        <string>a</string>
+        <string>Biological</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>1.0</movementSpeed>
+      <movementSpeed>50.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
       <isBeingConstructed>false</isBeingConstructed>
       <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
-    <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
-    <endConditions/>
+    <mapName>Default_map</mapName>
+    <numPlayers>4</numPlayers>
+    <endConditions>
+      <scenemanager.LastManStanding>
+        <NAME>LastManStanding</NAME>
+        <format>
+          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
+          <parameterFields/>
+        </format>
+      </scenemanager.LastManStanding>
+    </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <imagePath>/images/map.jpeg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -241,27 +308,37 @@
             <id>1</id>
             <transform>
               <position>
-                <x>237.0</x>
-                <y>40.0</y>
+                <x>0.0</x>
+                <y>0.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes/>
-                <maxAttributes/>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
                 <buildCosts>
                   <entry>
-                    <string>1</string>
-                    <double>1.0</double>
+                    <string>Gold</string>
+                    <double>50.0</double>
                   </entry>
                 </buildCosts>
-                <buildTime>1.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -269,28 +346,34 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
+              <myImageLocation>/images/robert.png</myImageLocation>
             </renderer>
             <owner>
               <id>1</id>
               <teamName>Team 1</teamName>
               <resourceManager>
-                <resourceMap/>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
               </resourceManager>
             </owner>
-            <name>a</name>
+            <name>Marine</name>
             <tags>
-              <string>a</string>
+              <string>Biological</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
+            <movementSpeed>50.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
             <isBeingConstructed>false</isBeingConstructed>
             <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
           </game__object.GameObject>
         </entry>
         <entry>
@@ -299,27 +382,37 @@
             <id>4</id>
             <transform>
               <position>
-                <x>87.0</x>
-                <y>204.0</y>
+                <x>367.0</x>
+                <y>96.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes/>
-                <maxAttributes/>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
                 <buildCosts>
                   <entry>
-                    <string>1</string>
-                    <double>1.0</double>
+                    <string>Gold</string>
+                    <double>50.0</double>
                   </entry>
                 </buildCosts>
-                <buildTime>1.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -327,26 +420,32 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
+              <myImageLocation>/images/robert.png</myImageLocation>
             </renderer>
             <owner>
               <id>1</id>
               <teamName>Team 1</teamName>
               <resourceManager>
-                <resourceMap/>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
               </resourceManager>
             </owner>
-            <name>a</name>
+            <name>Marine</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
+            <movementSpeed>50.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
             <isBeingConstructed>false</isBeingConstructed>
             <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
           </game__object.GameObject>
         </entry>
         <entry>
@@ -355,27 +454,37 @@
             <id>7</id>
             <transform>
               <position>
-                <x>41.0</x>
-                <y>62.0</y>
+                <x>135.0</x>
+                <y>313.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes/>
-                <maxAttributes/>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>50.0</double>
+                  </entry>
+                </maxAttributes>
                 <buildCosts>
                   <entry>
-                    <string>1</string>
-                    <double>1.0</double>
+                    <string>Gold</string>
+                    <double>50.0</double>
                   </entry>
                 </buildCosts>
-                <buildTime>1.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -383,26 +492,32 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
+              <myImageLocation>/images/robert.png</myImageLocation>
             </renderer>
             <owner>
               <id>1</id>
               <teamName>Team 1</teamName>
               <resourceManager>
-                <resourceMap/>
+                <resourceMap>
+                  <entry>
+                    <string>Gold</string>
+                    <double>50.0</double>
+                  </entry>
+                </resourceMap>
               </resourceManager>
             </owner>
-            <name>a</name>
+            <name>Marine</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
+            <movementSpeed>50.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
             <isBeingConstructed>false</isBeingConstructed>
             <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
           </game__object.GameObject>
         </entry>
       </elementMap>
@@ -411,24 +526,15 @@
     <endConditions/>
     <teams>
       <game__engine.Team>
-        <id>2</id>
-        <teamName>Team 2</teamName>
+        <id>1</id>
+        <teamName>Team 1</teamName>
         <resourceManager>
-          <resourceMap/>
-        </resourceManager>
-      </game__engine.Team>
-      <game__engine.Team>
-        <id>4</id>
-        <teamName>Team 4</teamName>
-        <resourceManager>
-          <resourceMap/>
-        </resourceManager>
-      </game__engine.Team>
-      <game__engine.Team>
-        <id>3</id>
-        <teamName>Team 3</teamName>
-        <resourceManager>
-          <resourceMap/>
+          <resourceMap>
+            <entry>
+              <string>Gold</string>
+              <double>50.0</double>
+            </entry>
+          </resourceMap>
         </resourceManager>
       </game__engine.Team>
     </teams>

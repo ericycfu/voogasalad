@@ -18,6 +18,8 @@ public class Renderer implements Serializable{
 	private String myImageLocation;
 	public final static double TEMP_OPACITY = 0.5;
 	public final static double NORMAL_OPACITY = 1;
+	public final static double INVISIBLE_OPACITY = 1;
+
 
 	@XStreamOmitField
 	private transient ImageView myDisp;
@@ -45,10 +47,10 @@ public class Renderer implements Serializable{
 		return myImageLocation;
 	}
 	
-	public void reduceOpacity()
+	public void reduceOpacity(double opacity)
 	{
 		System.out.println("reduced");
-		getDisp().setOpacity(Renderer.TEMP_OPACITY);
+		getDisp().setOpacity(opacity);
 	}
 	
 	public void setDefaultOpacity()

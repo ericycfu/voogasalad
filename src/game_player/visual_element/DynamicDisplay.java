@@ -18,13 +18,11 @@ public class DynamicDisplay implements VisualUpdate {
 	
 	@Override
 	public void update(List<GameObject> gameObjects) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Node getNodes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

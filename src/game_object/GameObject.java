@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Random;
 
 import authoring.backend.MainComponentPropertyManager;
 import game_engine.EngineObject;
@@ -185,16 +184,13 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	 */
 	public void Update()
 	{
-		/**
-		 *  TIMELINE: 
-		 *  1. Update Transform data
-		 *  2. Act upon logic data
-		 *  3. Update renderer data
-		 */
+		if(isDead())
+		{
+			return;
+		}
 		
 		if(isBeingConstructed)
 		{
-			System.out.println("being constructed ");
 			if(buildTimer.timeLimit(elapsedTime, this.myObjectLogic.accessAttributes().getBuildTime()))
 			{
 				this.dequeueBuilding();
@@ -206,25 +202,31 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		
 		moveUpdate();
 		
-		
 		if(this.isPreviousInteractionQueued)
 		{	
 			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
 			{
-				myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+				executeValidatedInteraction();			
 			}
 		}
 		else
 		{
 			if(isInteractionQueued)
 			{
-				 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+				executeValidatedInteraction();			
 			}
 			
 		}
 	
 		myObjectLogic.checkConditions(this);
 
+	}
+	
+	private void executeValidatedInteraction()
+	{
+		if(interactionTarget == null  && emptyPosTarget == null) 
+			return;
+		 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 	}
 	
 	private void moveUpdate()
@@ -294,9 +296,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			this.isPreviousInteractionQueued = true;
 			interactionTimer = new Timer();
 			triggerTimer(this.interactionTimer);
-
 		}
-	
 		
 	}
 	
@@ -323,7 +323,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.isBeingConstructed = true;
 		this.buildTimer = new Timer();
 		triggerTimer(this.buildTimer);
-		this.renderer.reduceOpacity();
+		this.renderer.reduceOpacity(Renderer.TEMP_OPACITY);
 	}
 	
 	private void triggerTimer(Timer timer)
