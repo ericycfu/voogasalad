@@ -1,5 +1,7 @@
 package game_player.visual_element;
 
+import java.net.Socket;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -20,7 +22,7 @@ public class ChatBox {
 	private TextArea myInputBox;
 	private TextArea myChatHistory;
 	
-	public ChatBox(double width, double height) {
+	public ChatBox(Socket socket, double width, double height) {
 		myGroup = new Group();
 		initMyChatHistory(width, height);
 		initMyInputBox(width, height);
@@ -50,9 +52,7 @@ public class ChatBox {
 	
 	private void handleKeyInput(KeyEvent event) {
 		KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
-		
 		if(keyComb1.match(event)) {
-    		// TODO: send to server;
 			displayText(myInputBox.getText()); // for testing purpose
 			myInputBox.clear();
     	}
