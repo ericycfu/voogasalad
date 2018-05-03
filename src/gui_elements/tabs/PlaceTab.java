@@ -1,14 +1,10 @@
 package gui_elements.tabs;
 
-import gui_elements.buttons.PlayGameButton;
-import gui_elements.buttons.SaveGameButton;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
 import authoring.backend.AuthoringController;
-import authoring.backend.CreatedMaps;
 import authoring.backend.GameEntity;
 import authoring.view.DraggableScrollPane;
-import javafx.scene.control.Tab;
 
 public class PlaceTab extends Tab {
 
@@ -37,7 +33,6 @@ public class PlaceTab extends Tab {
 	private void setText() {
 		this.setText("Place");
 		myScroll = new DraggableScrollPane(ac, game);
-//		place_root.getChildren().add(myScroll);
 		ac.addToAuthorController(myScroll);
 		this.setContent(myScroll);
 	}

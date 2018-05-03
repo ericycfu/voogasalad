@@ -58,7 +58,7 @@ public class ChatBox {
 		KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
 		if(keyComb1.match(event)) {
 			ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
-			String msg = CHAT + GamePlayer.SPACE + myInputBox;
+			String msg = CHAT + GamePlayer.SPACE + myInputBox.getText();
 			try {
 				outstream.writeObject(msg);
 				outstream.flush();
@@ -68,7 +68,6 @@ public class ChatBox {
 			myInputBox.clear();
     	}
 	}
-
 
 	public void displayText(String text) {
 		myChatHistory.appendText(text + GamePlayer.LINEBREAK);
