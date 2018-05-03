@@ -2,6 +2,7 @@ package game_player.visual_element;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 public class TopPanel {
 	
 	public static final String START = "Start";
+	public static final String PLAY = "Play";
 	public static final String PAUSE = "Pause";
 	public static final String SAVE = "Save";
 	public static final String LOAD = "Load";
@@ -51,7 +53,8 @@ public class TopPanel {
 	public static final String NPALERTHEAD = "No File Selected";
 	public static final String NPALERTBODY = "Please choose a file to save to!";
 	public static final double SBWIDTH = 0.125;
-	public static final double TAWIDTH = 0.25;
+	public static final double TIMEWIDTH = 0.25;
+	public static final double RESOURCEWIDTH = 0.25;
 	
 	private GridPane myPane;
 	private TextArea time;
@@ -78,7 +81,13 @@ public class TopPanel {
 	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		Button[] buttonArray = {
 				ButtonFactory.makeButton(START, e -> {
-					
+					ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
+					try {
+						outstream.writeObject(PLAY);
+						outstream.flush();
+					} catch (IOException exception) {
+						new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+					}
 				}), 
 				ButtonFactory.makeButton(PAUSE, e -> {
 					
@@ -97,7 +106,7 @@ public class TopPanel {
 	private void setupTime(double xsize, double ysize) {
 		time = new TextArea(TIME + GamePlayer.COLON + 0);
 		time.setEditable(false);
-		time.setPrefWidth(xsize / 4);
+		time.setPrefWidth(xsize * TIMEWIDTH);
 		time.setMaxHeight(ysize);
 	}
 	
@@ -105,7 +114,7 @@ public class TopPanel {
 		resourceBoard = new ComboBox<>();
 		resourceBoard.setPromptText(RESOURCE);
 		resourceBoard.setMaxHeight(ysize);
-		resourceBoard.setPrefWidth(xsize / 4);
+		resourceBoard.setPrefWidth(xsize * RESOURCEWIDTH);
 	}
 	
 	private void addToPane(Node ... nodes) {
