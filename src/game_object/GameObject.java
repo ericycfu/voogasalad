@@ -177,6 +177,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		isUninteractive = false;
 		activeWaypoints = new LinkedList<>();
 		this.elapsedTime = 0;
+		this.isPreviousInteractionQueued = false;
 	}
 	
 	/**
@@ -200,6 +201,12 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 		}
 		
+		if(this.isUninteractive) 
+			return;
+		
+		moveUpdate();
+		
+		
 		if(this.isPreviousInteractionQueued)
 		{	
 			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
@@ -215,12 +222,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 			
 		}
-		
-		if(this.isUninteractive) return;
-		
-		moveUpdate();
-		
-		
+	
 		myObjectLogic.checkConditions(this);
 
 	}
@@ -287,21 +289,27 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			isInteractionQueued = false;
 			interactionTarget = null;
 		}
-		this.isPreviousInteractionQueued = true;
-		triggerTimer(this.interactionTimer);
+		else
+		{
+			this.isPreviousInteractionQueued = true;
+			interactionTimer = new Timer();
+			triggerTimer(this.interactionTimer);
+
+		}
+	
 		
 	}
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
 	{
-		if(this.isUninteractive)
+		if(this.isUninteractive || this.isBuilding)
 		{
 			return;
 		}
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
-		this.isPreviousInteractionQueued = true;
+		this.isPreviousInteractionQueued = false;
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
@@ -313,13 +321,13 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		setIsUninteractive(true);
 		this.isBeingConstructed = true;
+		this.buildTimer = new Timer();
 		triggerTimer(this.buildTimer);
 		this.renderer.reduceOpacity();
 	}
 	
 	private void triggerTimer(Timer timer)
 	{
-		timer = new Timer();
 		timer.setTimerOn(true);
 		timer.setInitialTime(elapsedTime);
 	}

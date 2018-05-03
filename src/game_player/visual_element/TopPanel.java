@@ -155,7 +155,6 @@ public class TopPanel {
 			for (GameObject go : possibleUnits) {
 				go.getRenderer().setDisp(new ImageView(new Image(go.getRenderer().getImagePath())));
 			}
-			
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -186,10 +185,10 @@ public class TopPanel {
 	}
 	
 	public void update() {
-		if (isLoaded) {
+		if(myResourceManager != null) {
 			setResources();
-			setTime(0); // TODO: set time
 		}
+		setTime(0); // TODO: set time
 	}
 	
 	public Node getNodes() {
