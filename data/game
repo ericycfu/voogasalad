@@ -7,33 +7,18 @@
           <id>1</id>
           <transform>
             <position>
-              <x>0.0</x>
-              <y>0.0</y>
+              <x>263.0</x>
+              <y>149.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>2.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
@@ -45,7 +30,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/cancel_icon.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -53,20 +38,20 @@
             <resourceManager>
               <resourceMap>
                 <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
+                  <string>Cookie</string>
+                  <double>0.0</double>
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Marine</name>
+          <name>cookie</name>
           <tags>
-            <string>Biological</string>
+            <string>cookie</string>
           </tags>
-          <isBuilding>false</isBuilding>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>0.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -81,33 +66,18 @@
           <id>4</id>
           <transform>
             <position>
-              <x>367.0</x>
-              <y>96.0</y>
+              <x>96.0</x>
+              <y>193.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>2.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
@@ -119,26 +89,15 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/cancel_icon.png</myImageLocation>
           </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </resourceMap>
-            </resourceManager>
-          </owner>
-          <name>Marine</name>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>cookie</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>0.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -153,8 +112,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>135.0</x>
-              <y>313.0</y>
+              <x>165.0</x>
+              <y>93.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -163,27 +122,74 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
+                  <string>Appetite</string>
+                  <double>100.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
+                  <string>Appetite</string>
+                  <double>100.0</double>
                 </entry>
               </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
+              <buildCosts/>
+              <buildTime>5.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap/>
-              <new__ID__val>4</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>GatherCookie</name>
+                    <imagePath>/images/attack_icon.png</imagePath>
+                    <description>Gather cookies</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.GatherUnlimitedResource>
+                        <NAME>GatherUnlimitedResource</NAME>
+                        <RESOURCE>Resource</RESOURCE>
+                        <GATHER__RATE>Gather Rate</GATHER__RATE>
+                        <format>
+                          <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Gather Rate</string>
+                              <string>10</string>
+                            </entry>
+                            <entry>
+                              <string>Resource</string>
+                              <string>Cookie</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.GatherUnlimitedResource>
+                    </customFunctions>
+                    <range>5.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -191,26 +197,17 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/arrow_down.png</myImageLocation>
           </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </resourceMap>
-            </resourceManager>
-          </owner>
-          <name>Marine</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Clicker</name>
+          <tags>
+            <string>clicker</string>
+          </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>4.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -237,23 +234,114 @@
         <attributes>
           <attributes>
             <entry>
-              <string>Health</string>
-              <double>50.0</double>
+              <string>Appetite</string>
+              <double>100.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
-              <string>Health</string>
-              <double>50.0</double>
+              <string>Appetite</string>
+              <double>100.0</double>
             </entry>
           </maxAttributes>
-          <buildCosts>
+          <buildCosts/>
+          <buildTime>5.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap>
             <entry>
-              <string>Gold</string>
-              <double>50.0</double>
+              <int>1</int>
+              <interactions.Interaction>
+                <id>1</id>
+                <targetTags>
+                  <string>cookie</string>
+                </targetTags>
+                <name>GatherCookie</name>
+                <imagePath>/images/attack_icon.png</imagePath>
+                <description>Gather cookies</description>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.GatherUnlimitedResource>
+                    <NAME>GatherUnlimitedResource</NAME>
+                    <RESOURCE>Resource</RESOURCE>
+                    <GATHER__RATE>Gather Rate</GATHER__RATE>
+                    <format>
+                      <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Gather Rate</string>
+                          <string>10</string>
+                        </entry>
+                        <entry>
+                          <string>Resource</string>
+                          <string>Cookie</string>
+                        </entry>
+                      </parameterFields>
+                    </format>
+                  </interactions.GatherUnlimitedResource>
+                </customFunctions>
+                <range>5.0</range>
+                <rate>1.0</rate>
+              </interactions.Interaction>
             </entry>
-          </buildCosts>
-          <buildTime>10.0</buildTime>
+          </elementMap>
+          <new__ID__val>7</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/arrow_down.png</myImageLocation>
+      </renderer>
+      <name>Clicker</name>
+      <tags>
+        <string>clicker</string>
+      </tags>
+      <isBuilding>false</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>4.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts/>
+          <buildTime>2.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
@@ -265,16 +353,16 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/cancel_icon.png</myImageLocation>
       </renderer>
-      <name>Marine</name>
+      <name>cookie</name>
       <tags>
-        <string>Biological</string>
+        <string>cookie</string>
       </tags>
-      <isBuilding>false</isBuilding>
+      <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>50.0</movementSpeed>
+      <movementSpeed>0.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -284,20 +372,12 @@
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
-    <mapName>Default_map</mapName>
-    <numPlayers>4</numPlayers>
-    <endConditions>
-      <scenemanager.LastManStanding>
-        <NAME>LastManStanding</NAME>
-        <format>
-          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
-          <parameterFields/>
-        </format>
-      </scenemanager.LastManStanding>
-    </endConditions>
+    <mapName>Default map</mapName>
+    <numPlayers>1</numPlayers>
+    <endConditions/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map.jpeg</imagePath>
+    <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -308,33 +388,18 @@
             <id>1</id>
             <transform>
               <position>
-                <x>0.0</x>
-                <y>0.0</y>
+                <x>263.0</x>
+                <y>149.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>2.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
@@ -346,7 +411,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/cancel_icon.png</myImageLocation>
             </renderer>
             <owner>
               <id>1</id>
@@ -354,20 +419,20 @@
               <resourceManager>
                 <resourceMap>
                   <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
+                    <string>Cookie</string>
+                    <double>0.0</double>
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>Marine</name>
+            <name>cookie</name>
             <tags>
-              <string>Biological</string>
+              <string>cookie</string>
             </tags>
-            <isBuilding>false</isBuilding>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>0.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -382,33 +447,18 @@
             <id>4</id>
             <transform>
               <position>
-                <x>367.0</x>
-                <y>96.0</y>
+                <x>96.0</x>
+                <y>193.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>2.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
@@ -420,26 +470,15 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/cancel_icon.png</myImageLocation>
             </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </resourceMap>
-              </resourceManager>
-            </owner>
-            <name>Marine</name>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>cookie</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>0.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -454,8 +493,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>135.0</x>
-                <y>313.0</y>
+                <x>165.0</x>
+                <y>93.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -464,27 +503,74 @@
               <attributes>
                 <attributes>
                   <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
+                    <string>Appetite</string>
+                    <double>100.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
+                    <string>Appetite</string>
+                    <double>100.0</double>
                   </entry>
                 </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
+                <buildCosts/>
+                <buildTime>5.0</buildTime>
               </attributes>
               <interactions>
-                <elementMap/>
-                <new__ID__val>4</new__ID__val>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <interactions.Interaction>
+                      <id>1</id>
+                      <targetTags>
+                        <string>cookie</string>
+                      </targetTags>
+                      <name>GatherCookie</name>
+                      <imagePath>/images/attack_icon.png</imagePath>
+                      <description>Gather cookies</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.GatherUnlimitedResource>
+                          <NAME>GatherUnlimitedResource</NAME>
+                          <RESOURCE>Resource</RESOURCE>
+                          <GATHER__RATE>Gather Rate</GATHER__RATE>
+                          <format>
+                            <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                            <parameterFields>
+                              <entry>
+                                <string>Gather Rate</string>
+                                <string>10</string>
+                              </entry>
+                              <entry>
+                                <string>Resource</string>
+                                <string>Cookie</string>
+                              </entry>
+                            </parameterFields>
+                          </format>
+                        </interactions.GatherUnlimitedResource>
+                      </customFunctions>
+                      <range>5.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>7</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -492,26 +578,17 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/arrow_down.png</myImageLocation>
             </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </resourceMap>
-              </resourceManager>
-            </owner>
-            <name>Marine</name>
-            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Clicker</name>
+            <tags>
+              <string>clicker</string>
+            </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>4.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -525,18 +602,7 @@
     </objManager>
     <endConditions/>
     <teams>
-      <game__engine.Team>
-        <id>1</id>
-        <teamName>Team 1</teamName>
-        <resourceManager>
-          <resourceMap>
-            <entry>
-              <string>Gold</string>
-              <double>50.0</double>
-            </entry>
-          </resourceMap>
-        </resourceManager>
-      </game__engine.Team>
+      <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
     </teams>
   </scenemanager.SceneManager>
 </object-stream>
