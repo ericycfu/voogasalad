@@ -2,10 +2,7 @@ package game_player;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,16 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import game_engine.EndStateWrapper;
-import game_engine.EndStateWrapper.EndState;
-import game_engine.EngineObject;
-import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import game_player.alert.AlertMaker;
+import game_player.selected_unit_manager.MultiPlayerSelectedUnitManager;
+import game_player.selected_unit_manager.SelectedUnitManager;
+import game_player.selected_unit_manager.SinglePlayerSelectedUnitManager;
 import game_player.visual_element.BuildButton;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
@@ -35,7 +29,6 @@ import interactions.Interaction;
 import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -44,10 +37,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pathfinding.GridMap;
-import scenemanager.NullEndConditionException;
 import scenemanager.SceneManager;
 import server_client.screens.ClientScreen;
-import transform_library.Vector2;
 
 /**
  * 
@@ -73,7 +64,6 @@ public class GamePlayer extends ClientScreen {
 	public static final String SERVERALERTHEAD = "Communication Failed";
 	public static final String SERVERALERTBODY = "Please try again.";
 	
-	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
@@ -95,9 +85,6 @@ public class GamePlayer extends ClientScreen {
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null, null);
-		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
-		//Timeline: pause requests to server
-		//super(null, null);
 		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
@@ -105,7 +92,7 @@ public class GamePlayer extends ClientScreen {
 		myGameObjectManager = gameManager;
 		myTeam = team;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);		
+		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
 		initialize();
 		initializeSingleUnitSelect();
 		unitSkillMapInitialize();
@@ -124,7 +111,7 @@ public class GamePlayer extends ClientScreen {
 		myTeam = team;
 		myPossibleUnits = allPossibleUnits;
 		mySceneManager = scenemanager;
-		mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);
+		mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
 		mySocket = socket;
 		initialize();
 		initializeSingleUnitSelect();		

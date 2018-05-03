@@ -1,7 +1,252 @@
 <object-stream>
   <game__object.GameObjectManager>
-    <elementMap/>
-    <new__ID__val>1</new__ID__val>
+    <elementMap>
+      <entry>
+        <int>1</int>
+        <game__object.GameObject>
+          <id>1</id>
+          <transform>
+            <position>
+              <x>482.0</x>
+              <y>131.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>4</int>
+                  <interactions.Interaction>
+                    <id>4</id>
+                    <targetTags>
+                      <string>King</string>
+                    </targetTags>
+                    <name>Attack</name>
+                    <imagePath>/images/attack_icon.png</imagePath>
+                    <description>attack</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.ModifyVariable>
+                        <NAME>ModifyVariable</NAME>
+                        <VARIABLE>Variable</VARIABLE>
+                        <DELTA>Delta</DELTA>
+                        <RATE>Rate</RATE>
+                        <format>
+                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Variable</string>
+                              <string>Health</string>
+                            </entry>
+                            <entry>
+                              <string>Delta</string>
+                              <string>-10</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.ModifyVariable>
+                    </customFunctions>
+                    <range>100.0</range>
+                    <rate>10.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>10</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+          </renderer>
+          <owner>
+            <id>1</id>
+            <teamName>Team 1</teamName>
+            <resourceManager>
+              <resourceMap>
+                <entry>
+                  <string>Score</string>
+                  <double>100.0</double>
+                </entry>
+              </resourceMap>
+            </resourceManager>
+          </owner>
+          <name>LBJ</name>
+          <tags>
+            <string>King</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>10.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>4</int>
+        <game__object.GameObject>
+          <id>4</id>
+          <transform>
+            <position>
+              <x>325.0</x>
+              <y>118.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>4</int>
+                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>10</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>LBJ</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>10.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>7</int>
+        <game__object.GameObject>
+          <id>7</id>
+          <transform>
+            <position>
+              <x>385.0</x>
+              <y>38.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </attributes>
+              <maxAttributes>
+                <entry>
+                  <string>Health</string>
+                  <double>100.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>4</int>
+                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>10</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>LBJ</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>10.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+    </elementMap>
+    <new__ID__val>10</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -19,21 +264,74 @@
           <attributes>
             <entry>
               <string>Health</string>
-              <double>1000.0</double>
+              <double>100.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
-              <double>1000.0</double>
+              <double>100.0</double>
             </entry>
           </maxAttributes>
           <buildCosts/>
-          <buildTime>1.0</buildTime>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
+          <elementMap>
+            <entry>
+              <int>4</int>
+              <interactions.Interaction>
+                <id>4</id>
+                <targetTags>
+                  <string>King</string>
+                </targetTags>
+                <name>Attack</name>
+                <imagePath>/images/attack_icon.png</imagePath>
+                <description>attack</description>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.ModifyVariable>
+                    <NAME>ModifyVariable</NAME>
+                    <VARIABLE>Variable</VARIABLE>
+                    <DELTA>Delta</DELTA>
+                    <RATE>Rate</RATE>
+                    <format>
+                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Variable</string>
+                          <string>Health</string>
+                        </entry>
+                        <entry>
+                          <string>Delta</string>
+                          <string>-10</string>
+                        </entry>
+                      </parameterFields>
+                    </format>
+                  </interactions.ModifyVariable>
+                </customFunctions>
+                <range>100.0</range>
+                <rate>10.0</rate>
+              </interactions.Interaction>
+            </entry>
+          </elementMap>
+          <new__ID__val>10</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -41,16 +339,16 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
-      <name>asdwa</name>
+      <name>LBJ</name>
       <tags>
-        <string>awdaw</string>
+        <string>King</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>1.0</movementSpeed>
+      <movementSpeed>10.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -61,26 +359,285 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>4</numPlayers>
+    <numPlayers>2</numPlayers>
     <endConditions>
-      <scenemanager.AllUnitsDead>
-        <NAME>AllUnitsDead</NAME>
+      <scenemanager.ResourceVictory>
+        <NAME>ResourceVictory</NAME>
+        <RESOURCE>Resource</RESOURCE>
+        <THRESHOLD>Threshold</THRESHOLD>
         <format>
-          <helpText>You lose when all your units and buildings are dead..</helpText>
-          <parameterFields/>
+          <helpText>Victory is achieved through this condition if any player collects more reources than the threshold.</helpText>
+          <parameterFields>
+            <entry>
+              <string>Resource</string>
+              <string>Score</string>
+            </entry>
+            <entry>
+              <string>Threshold</string>
+              <string>10000</string>
+            </entry>
+          </parameterFields>
         </format>
-      </scenemanager.AllUnitsDead>
+        <threshold>0.0</threshold>
+      </scenemanager.ResourceVictory>
     </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map4.jpg</imagePath>
+    <imagePath>/images/map2.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
-      <elementMap/>
-      <new__ID__val>1</new__ID__val>
+      <elementMap>
+        <entry>
+          <int>1</int>
+          <game__object.GameObject>
+            <id>1</id>
+            <transform>
+              <position>
+                <x>482.0</x>
+                <y>131.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts/>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>4</int>
+                    <interactions.Interaction>
+                      <id>4</id>
+                      <targetTags>
+                        <string>King</string>
+                      </targetTags>
+                      <name>Attack</name>
+                      <imagePath>/images/attack_icon.png</imagePath>
+                      <description>attack</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.ModifyVariable>
+                          <NAME>ModifyVariable</NAME>
+                          <VARIABLE>Variable</VARIABLE>
+                          <DELTA>Delta</DELTA>
+                          <RATE>Rate</RATE>
+                          <format>
+                            <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                            <parameterFields>
+                              <entry>
+                                <string>Variable</string>
+                                <string>Health</string>
+                              </entry>
+                              <entry>
+                                <string>Delta</string>
+                                <string>-10</string>
+                              </entry>
+                            </parameterFields>
+                          </format>
+                        </interactions.ModifyVariable>
+                      </customFunctions>
+                      <range>100.0</range>
+                      <rate>10.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>10</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
+            </renderer>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap>
+                  <entry>
+                    <string>Score</string>
+                    <double>100.0</double>
+                  </entry>
+                </resourceMap>
+              </resourceManager>
+            </owner>
+            <name>LBJ</name>
+            <tags>
+              <string>King</string>
+            </tags>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>10.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>4</int>
+          <game__object.GameObject>
+            <id>4</id>
+            <transform>
+              <position>
+                <x>325.0</x>
+                <y>118.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts/>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>4</int>
+                    <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>10</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>LBJ</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>10.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>7</int>
+          <game__object.GameObject>
+            <id>7</id>
+            <transform>
+              <position>
+                <x>385.0</x>
+                <y>38.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </attributes>
+                <maxAttributes>
+                  <entry>
+                    <string>Health</string>
+                    <double>100.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts/>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>4</int>
+                    <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>10</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>LBJ</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>10.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+      </elementMap>
+      <new__ID__val>10</new__ID__val>
     </objManager>
     <endConditions/>
-    <teams/>
+    <teams>
+      <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
+    </teams>
   </scenemanager.SceneManager>
 </object-stream>
