@@ -20,10 +20,10 @@ public class AuthoringObject {
 	public static final int DEFAULT_TEAM = 1;
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
-	private List<String> myTags;
 	private double myX;
 	private double myY;
 	private int myTeam;
+	private List<String> myTags;
 	private Map<String, Double> buildCosts;
 	private ObjectLogic myObjectLogic;
 	private MainComponentPropertyManager myMainComponentPropertyManager;

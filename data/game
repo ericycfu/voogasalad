@@ -1,5 +1,6 @@
 <object-stream>
   <game__object.GameObjectManager>
+<<<<<<< HEAD
     <elementMap>
       <entry>
         <int>1</int>
@@ -181,7 +182,12 @@
       </entry>
     </elementMap>
     <new__ID__val>7</new__ID__val>
+=======
+    <elementMap/>
+    <new__ID__val>1</new__ID__val>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   </game__object.GameObjectManager>
+<<<<<<< HEAD
   <set>
     <game__object.GameObject>
       <id>0</id>
@@ -197,6 +203,7 @@
         <attributes>
           <attributes>
             <entry>
+<<<<<<< HEAD
               <string>Health</string>
               <double>1000.0</double>
             </entry>
@@ -298,22 +305,34 @@
           <attributes>
             <entry>
               <string>Health</string>
+=======
+              <string>health</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
               <double>100.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
+<<<<<<< HEAD
               <string>Health</string>
+=======
+              <string>health</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
               <double>100.0</double>
             </entry>
           </maxAttributes>
           <buildCosts>
             <entry>
+<<<<<<< HEAD
               <string>Gold</string>
               <double>10.0</double>
+=======
+              <string>gold</string>
+              <double>37.0</double>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
             </entry>
           </buildCosts>
-          <buildTime>10.0</buildTime>
+          <buildTime>5.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
@@ -325,16 +344,26 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
+<<<<<<< HEAD
       <name>Farmer1</name>
       <tags>
         <string>Farmer</string>
+=======
+      <name>soldier</name>
+      <tags>
+        <string>asdf</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
+<<<<<<< HEAD
       <movementSpeed>5.0</movementSpeed>
+=======
+      <movementSpeed>3.0</movementSpeed>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -343,6 +372,12 @@
       <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
+<<<<<<< HEAD
+=======
+=======
+  <set/>
+>>>>>>> player
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>4</numPlayers>
@@ -361,6 +396,7 @@
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
+<<<<<<< HEAD
       <elementMap>
         <entry>
           <int>1</int>
@@ -547,5 +583,12 @@
     <teams>
       <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
     </teams>
+=======
+      <elementMap/>
+      <new__ID__val>1</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams/>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   </scenemanager.SceneManager>
 </object-stream>

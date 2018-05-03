@@ -37,7 +37,8 @@ public class MakeGameScreen implements AuthoringView {
 		List<Object> ao = myReader.read(myFile.getCanonicalPath(), "java.util.ArrayList");
 		List<Object>  myAuthoringObjects = (List<Object>) ao.get(0);
 		List<Object> map = myReader.read(myFile.getCanonicalPath(), "java.util.HashMap");
-		Map<AuthoringObject, List<Vector2>> myMap = (Map<AuthoringObject, List<Vector2>>) map.get(0);
+		Map<AuthoringObject, List<AuthoringObject>> myMap = (Map<AuthoringObject, List<AuthoringObject>>) map.get(0);
+//		Map<AuthoringObject, List<Vector2>> myMap = (Map<AuthoringObject, List<Vector2>>) map.get(0);
 		List<Object> mapsettings = myReader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
 		MapSettings myMapSettings = (MapSettings) mapsettings.get(0);
 		List<Object> resourcemanager = myReader.read(myFile.getCanonicalPath(), "game_engine.ResourceManager"); //change category later

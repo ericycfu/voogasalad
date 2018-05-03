@@ -21,9 +21,9 @@ public class Death implements CustomCondition {
 	
 	@Override
 	public void Execute(GameObject current) {
-		System.out.println("death gets executed!");
+		
+		current.getRenderer().makeUnitInvis();
 		current.setIsDead(true);
-		current.getRenderer().reduceOpacity(Renderer.INVISIBLE_OPACITY);
 
 	}
 
@@ -38,10 +38,5 @@ public class Death implements CustomCondition {
 		format.addHelpText("This function will kill the unit it is assigned to");
 	}
 
-	@Override
-	public void setParameters(CustomComponentParameterFormat toFormat) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
