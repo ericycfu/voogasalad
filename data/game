@@ -9,6 +9,7 @@
             <position>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               <x>230.0</x>
               <y>130.0</y>
 =======
@@ -19,12 +20,17 @@
               <x>183.0</x>
               <y>85.0</y>
 >>>>>>> yy145
+=======
+              <x>323.0</x>
+              <y>140.0</y>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
+<<<<<<< HEAD
               <attributes>
                 <entry>
                   <string>Health</string>
@@ -114,6 +120,16 @@
                 </entry>
               </elementMap>
               <new__ID__val>7</new__ID__val>
+=======
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>100.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </interactions>
             <conditions>
               <elementMap>
@@ -170,7 +186,11 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD
             <myImageLocation>/images/robert.png</myImageLocation>
+=======
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
           </renderer>
           <owner>
             <id>1</id>
@@ -179,11 +199,20 @@
               <resourceMap>
                 <entry>
                   <string>Gold</string>
+<<<<<<< HEAD
                   <double>1000.0</double>
+=======
+                  <double>100.0</double>
+                </entry>
+                <entry>
+                  <string>Wood</string>
+                  <double>100.0</double>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
+<<<<<<< HEAD
           <name>Duvall</name>
           <tags>
 <<<<<<< HEAD
@@ -195,6 +224,11 @@
 =======
             <string>Profs</string>
 >>>>>>> yy145
+=======
+          <name>duvall</name>
+          <tags>
+            <string>prof</string>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -216,6 +250,7 @@
             <position>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               <x>81.0</x>
               <y>87.0</y>
 =======
@@ -226,12 +261,17 @@
               <x>226.0</x>
               <y>205.0</y>
 >>>>>>> yy145
+=======
+              <x>168.0</x>
+              <y>159.0</y>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
+<<<<<<< HEAD
               <attributes>
                 <entry>
                   <string>Health</string>
@@ -492,6 +532,44 @@
           <name>FarmerBuilding</name>
           <tags reference="../../../entry[3]/game__object.GameObject/tags"/>
           <isBuilding>true</isBuilding>
+=======
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>100.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
+          </renderer>
+          <owner>
+            <id>1</id>
+            <teamName>Team 1</teamName>
+            <resourceManager>
+              <resourceMap>
+                <entry>
+                  <string>Gold</string>
+                  <double>100.0</double>
+                </entry>
+                <entry>
+                  <string>Wood</string>
+                  <double>100.0</double>
+                </entry>
+              </resourceMap>
+            </resourceManager>
+          </owner>
+          <name>duvall</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>0.0</movementSpeed>
@@ -504,7 +582,11 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
+<<<<<<< HEAD
     <new__ID__val>13</new__ID__val>
+=======
+    <new__ID__val>7</new__ID__val>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -519,6 +601,7 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
+<<<<<<< HEAD
           <attributes>
             <entry>
               <string>Health</string>
@@ -699,6 +782,16 @@
             </entry>
           </elementMap>
           <new__ID__val>7</new__ID__val>
+=======
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts/>
+          <buildTime>100.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
         </interactions>
         <conditions>
           <elementMap>
@@ -755,11 +848,19 @@
         </conditions>
       </myObjectLogic>
       <renderer>
+<<<<<<< HEAD
         <myImageLocation>/images/robert.png</myImageLocation>
       </renderer>
       <name>Duvall</name>
       <tags>
         <string>Profs</string>
+=======
+        <myImageLocation>/images/ghoul.png</myImageLocation>
+      </renderer>
+      <name>duvall</name>
+      <tags>
+        <string>prof</string>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
@@ -775,11 +876,11 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
+    <numPlayers>4</numPlayers>
     <endConditions/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <imagePath>/images/map2.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -790,14 +891,20 @@
             <id>1</id>
             <transform>
               <position>
+<<<<<<< HEAD
                 <x>183.0</x>
                 <y>85.0</y>
+=======
+                <x>323.0</x>
+                <y>140.0</y>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
+<<<<<<< HEAD
                 <attributes>
                   <entry>
                     <string>Health</string>
@@ -812,6 +919,12 @@
                 </maxAttributes>
                 <buildCosts/>
                 <buildTime>5.0</buildTime>
+=======
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>100.0</buildTime>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
               </attributes>
               <interactions>
                 <elementMap>
@@ -925,7 +1038,11 @@
               </conditions>
             </myObjectLogic>
             <renderer>
+<<<<<<< HEAD
               <myImageLocation>/images/robert.png</myImageLocation>
+=======
+              <myImageLocation>/images/ghoul.png</myImageLocation>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </renderer>
             <owner>
               <id>1</id>
@@ -934,14 +1051,28 @@
                 <resourceMap>
                   <entry>
                     <string>Gold</string>
+<<<<<<< HEAD
                     <double>1000.0</double>
+=======
+                    <double>100.0</double>
+                  </entry>
+                  <entry>
+                    <string>Wood</string>
+                    <double>100.0</double>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
+<<<<<<< HEAD
             <name>Duvall</name>
             <tags>
               <string>Profs</string>
+=======
+            <name>duvall</name>
+            <tags>
+              <string>prof</string>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -961,14 +1092,20 @@
             <id>4</id>
             <transform>
               <position>
+<<<<<<< HEAD
                 <x>226.0</x>
                 <y>205.0</y>
+=======
+                <x>168.0</x>
+                <y>159.0</y>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
+<<<<<<< HEAD
                 <attributes>
                   <entry>
                     <string>Health</string>
@@ -983,6 +1120,12 @@
                 </maxAttributes>
                 <buildCosts/>
                 <buildTime>5.0</buildTime>
+=======
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>100.0</buildTime>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
               </attributes>
               <interactions>
                 <elementMap>
@@ -1004,13 +1147,18 @@
               </conditions>
             </myObjectLogic>
             <renderer>
+<<<<<<< HEAD
               <myImageLocation>/images/robert.png</myImageLocation>
+=======
+              <myImageLocation>/images/ghoul.png</myImageLocation>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </renderer>
             <owner>
               <id>1</id>
               <teamName>Team 1</teamName>
               <resourceManager>
                 <resourceMap>
+<<<<<<< HEAD
                   <entry>
                     <string>Gold</string>
                     <double>1000.0</double>
@@ -1196,16 +1344,34 @@
                   <entry>
                     <string>Gold</string>
                     <double>1000.0</double>
+=======
+                  <entry>
+                    <string>Gold</string>
+                    <double>100.0</double>
+                  </entry>
+                  <entry>
+                    <string>Wood</string>
+                    <double>100.0</double>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
+<<<<<<< HEAD
             <name>FarmerBuilding</name>
             <tags reference="../../../entry[3]/game__object.GameObject/tags"/>
             <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
             <movementSpeed>0.0</movementSpeed>
+=======
+            <name>duvall</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>10.0</movementSpeed>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -1215,7 +1381,11 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
+<<<<<<< HEAD
       <new__ID__val>13</new__ID__val>
+=======
+      <new__ID__val>7</new__ID__val>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
     </objManager>
     <endConditions/>
     <teams>
@@ -1226,7 +1396,15 @@
           <resourceMap>
             <entry>
               <string>Gold</string>
+<<<<<<< HEAD
               <double>1000.0</double>
+=======
+              <double>100.0</double>
+            </entry>
+            <entry>
+              <string>Wood</string>
+              <double>100.0</double>
+>>>>>>> a08497d73861f77fb2d0a99a1c72fb534ba41484
             </entry>
           </resourceMap>
         </resourceManager>

@@ -15,7 +15,6 @@ import pathfinding.GridMap;
 import transform_library.Vector2;
 
 public class SelectedUnitManager {
-	private static final String SPACE = " ";
 	private List<GameObject> selectedUnits;
 	private Team myTeam;
 	private int myTeamID;
@@ -44,7 +43,7 @@ public class SelectedUnitManager {
 				go.queueMovement(target, gom, gridmap);
 				/**
 				ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(mySocket);
-				String msg = "Move " + go.getID() + SPACE + target.getX() + SPACE + target.getY();
+				String msg = "Move " + go.getID() + GamePlayer.SPACE + target.getX() + GamePlayer.SPACE + target.getY();
 				try {
 					outstream.writeObject(msg);
 					outstream.flush();
@@ -67,7 +66,7 @@ public class SelectedUnitManager {
 				top.queueInteraction(target, interactionID, gom, new GridMap(1000, 1000), position);
 				/**
 				ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(mySocket);
-				String msg = "Build " + top.getID() + SPACE + target.getName() + SPACE + interactionID + SPACE + position.getX() + SPACE + position.getY();
+				String msg = "Build " + top.getID() + GamePlayer.SPACE + target.getName() + GamePlayer.SPACE + interactionID + GamePlayer.SPACE + position.getX() + GamePlayer.SPACE + position.getY();
 				try {
 					outstream.writeObject(msg);
 					outstream.flush();
@@ -90,7 +89,7 @@ public class SelectedUnitManager {
 						go.queueInteraction(target, goSpecificInteractionID, gom, new GridMap(1000, 1000), position);
 						/**
 						ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(mySocket);
-						String msg = "Interact " + go.getID() + SPACE + target.getID() + SPACE + goSpecificInteractionID + SPACE + position.getX() + SPACE + position.getY();
+						String msg = "Interact " + go.getID() + GamePlayer.SPACE + target.getID() + GamePlayer.SPACE + goSpecificInteractionID + GamePlayer.SPACE + position.getX() + GamePlayer.SPACE + position.getY();
 						try {
 							outstream.writeObject(msg);
 							outstream.flush();
