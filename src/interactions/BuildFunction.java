@@ -39,6 +39,7 @@ public class BuildFunction implements CustomFunction {
 			for(Map.Entry<String, Double> entry : costs.entrySet())
 			{
 				String resource = entry.getKey();
+				if(current.getOwner().getResourceManager().getResource(resource) < entry.getValue()) return;
 				double playerStockpile = current.getOwner().getResourceManager().getResource(resource);
 				if(playerStockpile >= entry.getValue()) 
 				{

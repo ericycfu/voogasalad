@@ -32,7 +32,6 @@ public class UnitDisplay implements VisualUpdate {
 		myUnitDisplay.getChildren().add(myInfoDisp.getNodes());
 		Node actionDisp = myActionDisp.getNodes();
 		actionDisp.setLayoutX(infoDispWidth);
-		System.out.println(actionDisp);
 		myUnitDisplay.getChildren().add(actionDisp);
 	}
 	
