@@ -58,8 +58,8 @@ public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 800;
+	public static final int SCENE_SIZE_X = 900;
+	public static final int SCENE_SIZE_Y = 600;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.49;
@@ -67,6 +67,13 @@ public class GamePlayer extends ClientScreen {
 	public static final double TOP_HEIGHT = 0.05;
 	public static final double CHATBOX_WIDTH = 0.20;
 	public static final double CHATBOX_HEIGHT = 0.30;
+	public static final String LINEBREAK = "\n";
+	public static final String COLON = ": ";
+	public static final String SPACE = " ";
+	public static final String SERVERALERTHEAD = "Communication Failed";
+	public static final String SERVERALERTBODY = "Please try again.";
+	
+	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
@@ -142,7 +149,8 @@ public class GamePlayer extends ClientScreen {
 								}
 								if (isTagMatch) {
 									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											s, i.getID(), i.getDescription() + " " + s, 
+											i.getDescription() + " " + s, 
+											i.getID(), 
 											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
 											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
@@ -215,7 +223,7 @@ public class GamePlayer extends ClientScreen {
 							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-							mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager);
+							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 						}
 					} catch (UnmodifiableGameObjectException e1) {
@@ -229,8 +237,7 @@ public class GamePlayer extends ClientScreen {
 	
 	private void initialize() {
 		myRoot = new Group();
-		
-		myTopPanel = new TopPanel(myTeam, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -250,7 +257,7 @@ public class GamePlayer extends ClientScreen {
 		myRoot.getChildren().add(mainDisp);
 		mainDisp.toBack();
 		
-		myChatBox = new ChatBox(SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getGroup();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
@@ -272,8 +279,7 @@ public class GamePlayer extends ClientScreen {
 			myTopPanel.setIsLoaded(false);
 		}
 		initializeSingleUnitSelect();
-		
-		//myTopPanel.update(myTime);
+		myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
@@ -286,6 +292,7 @@ public class GamePlayer extends ClientScreen {
 	}
 
 	private void receiveFromServer() {
+		/**
 		ObjectInputStream inputstream = getInputStream();
 		try {
 			myGameObjectManager = (GameObjectManager) inputstream.readObject();
@@ -296,6 +303,7 @@ public class GamePlayer extends ClientScreen {
 			// do nothing
 		}
 		//gom team time chat 
+		 **/
 	}
 	
 	private void end(String result) {

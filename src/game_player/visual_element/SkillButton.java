@@ -29,11 +29,11 @@ public class SkillButton extends Button {
 		mySkillDescription = skillDescription;
 		this.setMaxSize(width, height);
 		setPicture(width, height);
-		setDescription();
+		setDescription(mySkillDescription);
 	}
 	
-	private void setDescription() {
-		Tooltip tooltip = new Tooltip(mySkillDescription);
+	public void setDescription(String des) {
+		Tooltip tooltip = new Tooltip(des);
 		this.setTooltip(tooltip);
 	}
 	
