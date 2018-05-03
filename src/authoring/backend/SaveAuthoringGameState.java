@@ -23,20 +23,24 @@ public class SaveAuthoringGameState {
 	private Writer myWriter = new Writer();
 	
 	public SaveAuthoringGameState(AuthoringController authoring_controller, GameEntity game_entity) {
+		List<MapEntity> allMapEntities = game_entity.getCreatedMaps().getCreatedMaps();
+		List<Map<AuthoringObject, List<AuthoringObject>>> allMaps = new ArrayList<>();
+		for(MapEntity mapEntity: allMapEntities) {
+			allMaps.add(mapEntity.getLocations());
+		}
 		Map<AuthoringObject, List<AuthoringObject>> map = authoring_controller.getCurrentMap().getLocations();
-		Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 		List<Object> listForAuthor = new ArrayList<>();
 		List<Object> listForGame = new ArrayList<>();
 		try {
 			listForAuthor.add(game_entity.getCreatedObjects().getAuthoringObjects());
-			listForAuthor.add(changedMap);
+			listForAuthor.add(allMaps);
 			listForAuthor.add(authoring_controller.getCurrentMap().getMapSettings());
 			listForAuthor.add(game_entity.getResourceManager());
 			myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
-			GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,game_entity.getResourceManager());
 			List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(game_entity.getCreatedObjects().getAuthoringObjects());
 			Set<GameObject> possibleObjects = new HashSet<>();
 			List<Team> teamList = AuthoringToGameObject.calculateTeams(map, game_entity.getResourceManager());
+			GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,teamList);
 			SceneManager scenemanager = new SceneManager(teamList, myGOM, authoring_controller.getCurrentMap().getMapSettings().getEndConditions());
 			possibleObjects.addAll(possibleObjectsList);
 			listForGame.add(myGOM);
@@ -50,18 +54,5 @@ public class SaveAuthoringGameState {
 		}
 	}
 	
-	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<AuthoringObject>> originalMap) {
-		Map<AuthoringObject, List<Vector2>> newMap = new HashMap<>();
-		for (AuthoringObject obj: originalMap.keySet()) {
-			List<AuthoringObject> list = originalMap.get(obj);
-			List<Vector2> newList = new ArrayList<Vector2>();
-			for (AuthoringObject AO: list) {
-				DraggableImageView img = AO.getDragImage();
-				Vector2 v = new Vector2(img.getX(), img.getY());
-				newList.add(v);
-			}
-			newMap.put(obj, newList);
-		}
-		return newMap;
-	}
+
 }
