@@ -5,8 +5,10 @@ package server;
  * @author andrew
  */
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,10 +20,14 @@ import game_engine.GameInstance;
 import game_player.alert.AlertMaker;
 
 public class RTSServer {
-	public static final String SERVER_IP = "10.197.12.73";
+	public static final String DEFAULT_SERVER_IP = "10.197.116.66";
 	public static final int PORT_NUMBER = 9098;
 	public static final int RETRY_CONNECTION_DELAY = 10000;
 	public static final String LOG_PATH = "log/";
+	public static final String LOG_DATE_FORMAT = "YYYY-MM-dd_HH-mm-ss";
+	public static final String CREATE_MSG_1 = "Server created at IP ";
+	public static final String CREATE_MSG_2 = " on port ";
+	
 	public static final String ERROR_TITLE = "ERROR!";
 	public static final String ERROR_BODY = "Unable to construct Logger";
 	private ServerSocket myServerSocket;
@@ -46,7 +52,7 @@ public class RTSServer {
 		FileHandler fh;
 		
 		try {
-			Format dateformatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
+			Format dateformatter = new SimpleDateFormat(LOG_DATE_FORMAT);
 			fh = new FileHandler(LOG_PATH + dateformatter.format(new Date()));
 			myLogger.addHandler(fh);
 	        SimpleFormatter formatter = new SimpleFormatter(); 
@@ -67,11 +73,14 @@ public class RTSServer {
 				myServerSocket = new ServerSocket(PORT_NUMBER);
 			}
 			catch(IOException e) {
-				new AlertMaker("Error", "Unable to listen in on port " + PORT_NUMBER);
 				try {
 					Thread.sleep(RETRY_CONNECTION_DELAY);
 				} catch (InterruptedException e1) {}
 			}
+		}
+		try {
+			myLogger.info(CREATE_MSG_1 + InetAddress.getLocalHost() + CREATE_MSG_2 + PORT_NUMBER);
+		} catch (UnknownHostException e) {
 		}
 		
 		myLobbyManager = new LobbyManager();

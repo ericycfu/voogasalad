@@ -30,6 +30,7 @@ public class LobbyHandler extends CommunicationsHandler {
 	@Override
 	public String updateServer() {
 		try {
+			System.out.println("Updating");
 			String input;
 			ObjectInputStream in = getInputStream();
 			if((input = (String)in.readObject()) != null) {
@@ -79,6 +80,7 @@ public class LobbyHandler extends CommunicationsHandler {
 			}
 			out.flush();
 		} catch (SocketException e) {
+			currentLobby.remove(getSocket());
 			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
 		}
 		catch(IOException | NullPointerException | ConcurrentModificationException e) {

@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -61,28 +63,27 @@ public class CurrentLobbyScreen extends ClientScreen {
 	 * Sets up the text info on the Screen
 	 */
 	private void setUpText() {
+		VBox textBox = new VBox(10);
 		playerID = new Text();
-		playerID.setLayoutX(100);
-		playerID.setLayoutY(50);
-		playerID.setFill(Color.WHITE);
-		playerID.setFont(new Font("Verdana",40));
-		myPane.getChildren().add(playerID);
+		playerID.setId("lobby_team_text");
 		currentTeam = new Text();
-		currentTeam.setLayoutX(600);
-		currentTeam.setLayoutY(50);
-		currentTeam.setFill(Color.WHITE);
-		currentTeam.setFont(new Font("Verdana",40));
-		myPane.getChildren().add(currentTeam);
+		currentTeam.setId("lobby_team_text");
+		
+		textBox.getChildren().add(currentTeam);
+		textBox.getChildren().add(playerID);
+		myPane.getChildren().add(textBox);
 		
 	}
 	/**
 	 * Sets up all buttons on the screen
 	 */
 	private void setUpButtons() {
+		HBox buttonBox = new HBox(20);
+		myPane.getChildren().add(buttonBox);
+		buttonBox.setLayoutX(150);
+		buttonBox.setLayoutY(520);
 		LeaveLobbyButton leave = new LeaveLobbyButton(getOutputStream());
-		myPane.getChildren().add(leave);
-		leave.setLayoutX(700);
-		leave.setLayoutY(520);
+		
 		Button change = new ChangeTeamButton();
 		change.setOnAction(e -> {
 			TeamDisplay current = teamList.getSelectionModel().getSelectedItem();
@@ -96,12 +97,11 @@ public class CurrentLobbyScreen extends ClientScreen {
 				}
 		});
 		myPane.getChildren().add(change);
-		change.setLayoutX(60);
-		change.setLayoutY(520);
 		Button play = new PlayButton(getOutputStream());
 		myPane.getChildren().add(play);
-		play.setLayoutX(380);
-		play.setLayoutY(520);
+		buttonBox.getChildren().add(change);
+		buttonBox.getChildren().add(play);
+		buttonBox.getChildren().add(leave);
 	}
 	/**
 	 * Sets up the pane and Scene and switches the Screen

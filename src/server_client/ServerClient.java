@@ -35,7 +35,7 @@ public class ServerClient {
 		clientSocket = null;
 		do {
 			try {
-				clientSocket = new Socket(RTSServer.SERVER_IP, RTSServer.PORT_NUMBER);
+				clientSocket = new Socket(RTSServer.DEFAULT_SERVER_IP, RTSServer.PORT_NUMBER);
 			}
 			catch(Exception e){
 			}

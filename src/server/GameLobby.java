@@ -31,6 +31,7 @@ public class GameLobby implements Serializable{
 	@SuppressWarnings("unchecked")
 	public GameLobby(Socket lobbyHost, GameInstance toRun) {
 		numTeams = toRun.getTeamManager().getSize();
+		System.out.println(numTeams);
 		myPlayers = (List<Socket>[]) new ArrayList[numTeams];
 		for(int x = 0; x < numTeams; x++){
 			myPlayers[x] = new ArrayList<>();
