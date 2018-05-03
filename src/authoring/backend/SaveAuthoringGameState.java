@@ -24,12 +24,11 @@ public class SaveAuthoringGameState {
 	
 	public SaveAuthoringGameState(AuthoringController authoring_controller, GameEntity game_entity) {
 		Map<AuthoringObject, List<AuthoringObject>> map = authoring_controller.getCurrentMap().getLocations();
-		Map<AuthoringObject, List<Vector2>> changedMap = turnImageViewToVector2(map);
 		List<Object> listForAuthor = new ArrayList<>();
 		List<Object> listForGame = new ArrayList<>();
 		try {
 			listForAuthor.add(game_entity.getCreatedObjects().getAuthoringObjects());
-			listForAuthor.add(changedMap);
+			listForAuthor.add(map);
 			listForAuthor.add(authoring_controller.getCurrentMap().getMapSettings());
 			listForAuthor.add(game_entity.getResourceManager());
 			myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
@@ -50,18 +49,5 @@ public class SaveAuthoringGameState {
 		}
 	}
 	
-	private Map<AuthoringObject, List<Vector2>> turnImageViewToVector2(Map<AuthoringObject, List<AuthoringObject>> originalMap) {
-		Map<AuthoringObject, List<Vector2>> newMap = new HashMap<>();
-		for (AuthoringObject obj: originalMap.keySet()) {
-			List<AuthoringObject> list = originalMap.get(obj);
-			List<Vector2> newList = new ArrayList<Vector2>();
-			for (AuthoringObject AO: list) {
-				DraggableImageView img = AO.getDragImage();
-				Vector2 v = new Vector2(img.getX(), img.getY());
-				newList.add(v);
-			}
-			newMap.put(obj, newList);
-		}
-		return newMap;
-	}
+
 }
