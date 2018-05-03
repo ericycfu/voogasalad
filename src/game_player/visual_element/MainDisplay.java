@@ -118,8 +118,9 @@ public class MainDisplay implements VisualUpdate {
 						mySelectedUnitManager.add(go);
 					}
 				}
+				mySelectionBox.setVisible(false);
 			}
-			mySelectionBox.setVisible(false);
+			
 			isMultipleSelectAvailable = false;
 		});
 	}
