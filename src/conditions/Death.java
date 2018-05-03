@@ -1,6 +1,7 @@
 package conditions;
 
 import game_object.GameObject;
+import game_object.Renderer;
 import interactions.CustomComponentParameterFormat;
 
 /**
@@ -22,6 +23,7 @@ public class Death implements CustomCondition {
 	public void Execute(GameObject current) {
 		System.out.println("death gets executed!");
 		current.setIsDead(true);
+		current.getRenderer().reduceOpacity(Renderer.INVISIBLE_OPACITY);
 
 	}
 
