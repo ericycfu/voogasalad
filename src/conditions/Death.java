@@ -39,10 +39,5 @@ public class Death implements CustomCondition {
 		format.addHelpText("This function will kill the unit it is assigned to");
 	}
 
-	@Override
-	public void setParameters(CustomComponentParameterFormat toFormat) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

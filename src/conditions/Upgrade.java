@@ -8,17 +8,21 @@ import interactions.ParameterParser;
 
 /**
  * @author Rayan
- * This CustomCondition allows users to upgrade their stats.
+ * This CustomCondition allows users to upgrade their unit's stats.
  */
 
 public class Upgrade implements CustomCondition {
 
-	public final String VARIABLE = "Attribute";
-	public final String PARAMETER = "New Maximum Value";
+	public static final String VARIABLE = "Attribute";
+	public static final String PARAMETER = "New Maximum Value";
+	public static final String UPGRADE_VARIABLE = "Upgrade Variable";
+	public static final String UPGRADE_VARIABLE_DELTA = "Upgrade Variable Delta";
+	
+	
 	private CustomComponentParameterFormat format;
 	
 	private String attribute;
-	private String delta;
+	private String upgradeVar;
 	
 	public Upgrade()
 	{
@@ -28,16 +32,24 @@ public class Upgrade implements CustomCondition {
 	
 	@Override
 	public void Execute(GameObject current) {
-			
-		ParameterParser p = new ParameterParser();
-		
+					
 		try 
 		{
 			this.attribute = format.getParameterValue(VARIABLE);
-			this.delta = format.getParameterValue(PARAMETER);
+			ParameterParser p = new ParameterParser();
 			double deltaVal = p.assignValidatedValue(PARAMETER, current);
+			
+			this.upgradeVar = format.getParameterValue(UPGRADE_VARIABLE);
+			double upgradeDelta = p.assignValidatedValue(UPGRADE_VARIABLE_DELTA, current);
+			
 			double prevVal = current.accessLogic().accessAttributes().getMaxAttributeVal(attribute);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(attribute, prevVal + deltaVal);
+			
+			double prevDelta = current.accessLogic().accessAttributes().getMaxAttributeVal(upgradeVar);
+			current.accessLogic().accessAttributes().setAttributeValue(upgradeVar, prevDelta + upgradeDelta);
+			current.accessLogic().accessAttributes().setMaximumAttributeValue(upgradeVar, prevDelta + upgradeDelta);
+			
+			
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
@@ -51,29 +63,15 @@ public class Upgrade implements CustomCondition {
 		// TODO Auto-generated method stub
 		return format;
 	}
-	
-	public void setParameters(CustomComponentParameterFormat format)
-	{
-		try 
-		{
-			this.attribute = format.getParameterValue(VARIABLE);
-			this.delta = format.getParameterValue(PARAMETER);
-		} 
-		catch (PropertyNotFoundException e) 
-		{
-			System.out.println("Improper custom function variable assignment");
-		}
-		catch (NumberFormatException e)
-		{
-			System.out.println("Improper format for variable");
-		}
-	}
 
 	@Override
 	public void setParameterFormatFields() {
-		format.addHelpText("This custom condition modifies the unit's base attribute.");
-		format.addStringField("VARIABLE");
-		format.addStringField("DELTA");
+		format.addHelpText("This custom condition modifies the unit's base attribute. Upgrade Variable is the"
+				+ " variable that is checked for upgrade. Upgrade Variable Delta increases or decreases that upgrade threshold");
+		format.addStringField(VARIABLE);
+		format.addStringField(PARAMETER);
+		format.addStringField(UPGRADE_VARIABLE);
+		format.addStringField(UPGRADE_VARIABLE_DELTA);
 		
 	}	
 
