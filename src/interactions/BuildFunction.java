@@ -42,6 +42,13 @@ public class BuildFunction implements CustomFunction {
 			{
 				String resource = entry.getKey();
 				if(current.getOwner().getResourceManager().getResource(resource) < entry.getValue()) return;
+				double playerStockpile = current.getOwner().getResourceManager().getResource(resource);
+				if(playerStockpile >= entry.getValue()) 
+				{
+					double delta = playerStockpile - entry.getValue();
+					current.getOwner().getResourceManager().updateResource(resource, delta);
+				}
+	
 			}
 		} 
 		catch (UnmodifiableGameObjectException | InvalidResourceValueException e) {
