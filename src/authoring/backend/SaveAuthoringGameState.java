@@ -23,12 +23,17 @@ public class SaveAuthoringGameState {
 	private Writer myWriter = new Writer();
 	
 	public SaveAuthoringGameState(AuthoringController authoring_controller, GameEntity game_entity) {
+		List<MapEntity> allMapEntities = game_entity.getCreatedMaps().getCreatedMaps();
+		List<Map<AuthoringObject, List<AuthoringObject>>> allMaps = new ArrayList<>();
+		for(MapEntity mapEntity: allMapEntities) {
+			allMaps.add(mapEntity.getLocations());
+		}
 		Map<AuthoringObject, List<AuthoringObject>> map = authoring_controller.getCurrentMap().getLocations();
 		List<Object> listForAuthor = new ArrayList<>();
 		List<Object> listForGame = new ArrayList<>();
 		try {
 			listForAuthor.add(game_entity.getCreatedObjects().getAuthoringObjects());
-			listForAuthor.add(map);
+			listForAuthor.add(allMaps);
 			listForAuthor.add(authoring_controller.getCurrentMap().getMapSettings());
 			listForAuthor.add(game_entity.getResourceManager());
 			myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
