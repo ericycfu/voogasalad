@@ -18,6 +18,10 @@ public class ResourceApplyButton extends MainButton {
 	private static final boolean NO_EXPLICIT_SET_ACTION = false;
 	private static final double DEFAULT_RESOURCE_VALUE = 0.0;
 	
+	public ResourceApplyButton() {
+		super(FILENAME, NO_EXPLICIT_SET_ACTION);
+	}
+	
 	public ResourceApplyButton(Pane resource_names_pane, Pane resource_values_pane,
 			Stage stage, ObjectAttributes objAttributesInstance) {
 		super(FILENAME, NO_EXPLICIT_SET_ACTION);

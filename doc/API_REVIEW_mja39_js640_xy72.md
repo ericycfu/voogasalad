@@ -5,7 +5,7 @@ mja39, js640, xy72
 #### Part 1
 
 * What about your API/design is intended to be flexible?
-    * (js640, mja39) Our API is designed to support creatable custom elements with any combination of attributes. It also features a modular UI split into different design elements that can be changed independantly, making it easier to add new panels, buttons, windows, etc. Furthermore, the designs of our graphical elements are controlled by CSS files, which makes it easier to change the look of the different parts of the UI in one place.
+    * (js640, mja39) Our API is designed to support creatable custom elements with any combination of attributes. It also features a modular UI split into different design elements that can be changed independently, making it easier to add new panels, buttons, windows, etc. Furthermore, the designs of our graphical elements are controlled by CSS files, which makes it easier to change the look of the different parts of the UI in one place.
     * (xy72) Our team's API allows users to specify a variety of settings (attributes/interactions) to synthesize into custom made GameObjects. Created instances of GUI elements individually, and allows placement anywhere. 
 
 * How is your API/design encapsulating your implementation decisions?
