@@ -47,6 +47,8 @@ public class SelfModifyVariable implements CustomFunction {
 				current.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
 
 			}
+			current.getRenderer().flashUnit();
+
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{

@@ -1,5 +1,9 @@
 <object-stream>
   <game__object.GameObjectManager>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
     <elementMap>
       <entry>
         <int>1</int>
@@ -7,8 +11,13 @@
           <id>1</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>482.0</x>
               <y>131.0</y>
+=======
+              <x>110.0</x>
+              <y>123.0</y>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -18,21 +27,38 @@
               <attributes>
                 <entry>
                   <string>Health</string>
+<<<<<<< HEAD
                   <double>100.0</double>
+=======
+                  <double>1000.0</double>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
+<<<<<<< HEAD
                   <double>100.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts/>
+=======
+                  <double>1000.0</double>
+                </entry>
+              </maxAttributes>
+              <buildCosts>
+                <entry>
+                  <string>Gold</string>
+                  <double>100.0</double>
+                </entry>
+              </buildCosts>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
               <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
                 <entry>
+<<<<<<< HEAD
                   <int>4</int>
                   <interactions.Interaction>
                     <id>4</id>
@@ -43,6 +69,18 @@
                     <imagePath>/images/attack_icon.png</imagePath>
                     <description>attack</description>
                     <isBuild>false</isBuild>
+=======
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>Farmer</string>
+                    </targetTags>
+                    <name>Build</name>
+                    <imagePath>/images/arrow_up.png</imagePath>
+                    <description>Build</description>
+                    <isBuild>true</isBuild>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
                     <targetTeamEnumMap>
@@ -60,6 +98,7 @@
                       </entry>
                     </targetTeamEnumMap>
                     <customFunctions>
+<<<<<<< HEAD
                       <interactions.ModifyVariable>
                         <NAME>ModifyVariable</NAME>
                         <VARIABLE>Variable</VARIABLE>
@@ -86,6 +125,22 @@
                 </entry>
               </elementMap>
               <new__ID__val>10</new__ID__val>
+=======
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>1000.0</range>
+                    <rate>0.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             </interactions>
             <conditions>
               <elementMap/>
@@ -101,12 +156,18 @@
             <resourceManager>
               <resourceMap>
                 <entry>
+<<<<<<< HEAD
                   <string>Score</string>
                   <double>100.0</double>
+=======
+                  <string>Gold</string>
+                  <double>1000.0</double>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
+<<<<<<< HEAD
           <name>LBJ</name>
           <tags>
             <string>King</string>
@@ -115,6 +176,16 @@
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>10.0</movementSpeed>
+=======
+          <name>FarmerBuilding</name>
+          <tags>
+            <string>Building</string>
+          </tags>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -129,8 +200,13 @@
           <id>4</id>
           <transform>
             <position>
+<<<<<<< HEAD
               <x>325.0</x>
               <y>118.0</y>
+=======
+              <x>277.0</x>
+              <y>158.0</y>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -149,6 +225,7 @@
                   <double>100.0</double>
                 </entry>
               </maxAttributes>
+<<<<<<< HEAD
               <buildCosts/>
               <buildTime>10.0</buildTime>
             </attributes>
@@ -221,6 +298,19 @@
                 </entry>
               </elementMap>
               <new__ID__val>10</new__ID__val>
+=======
+              <buildCosts>
+                <entry>
+                  <string>Gold</string>
+                  <double>10.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             </interactions>
             <conditions>
               <elementMap/>
@@ -228,6 +318,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD
             <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
@@ -237,6 +328,19 @@
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>10.0</movementSpeed>
+=======
+            <myImageLocation>/images/robert.png</myImageLocation>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Farmer1</name>
+          <tags>
+            <string>Farmer</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>5.0</movementSpeed>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -246,8 +350,17 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
+<<<<<<< HEAD
     <new__ID__val>10</new__ID__val>
+=======
+    <new__ID__val>7</new__ID__val>
+=======
+    <elementMap/>
+    <new__ID__val>1</new__ID__val>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
   </game__object.GameObjectManager>
+<<<<<<< HEAD
   <set>
     <game__object.GameObject>
       <id>0</id>
@@ -263,6 +376,7 @@
         <attributes>
           <attributes>
             <entry>
+<<<<<<< HEAD
               <string>Health</string>
               <double>100.0</double>
             </entry>
@@ -273,8 +387,130 @@
               <double>100.0</double>
             </entry>
           </maxAttributes>
+<<<<<<< HEAD
           <buildCosts/>
           <buildTime>10.0</buildTime>
+=======
+          <buildCosts>
+            <entry>
+              <string>Gold</string>
+              <double>100.0</double>
+            </entry>
+          </buildCosts>
+          <buildTime>10.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap>
+            <entry>
+              <int>1</int>
+              <interactions.Interaction>
+                <id>1</id>
+                <targetTags>
+                  <string>Farmer</string>
+                </targetTags>
+                <name>Build</name>
+                <imagePath>/images/arrow_up.png</imagePath>
+                <description>Build</description>
+                <isBuild>true</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.BuildFunction>
+                    <NAME>BuildFunction</NAME>
+                    <format>
+                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                      <parameterFields/>
+                    </format>
+                  </interactions.BuildFunction>
+                </customFunctions>
+                <range>1000.0</range>
+                <rate>0.0</rate>
+              </interactions.Interaction>
+            </entry>
+          </elementMap>
+          <new__ID__val>7</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
+      </renderer>
+      <name>FarmerBuilding</name>
+      <tags>
+        <string>Building</string>
+      </tags>
+      <isBuilding>true</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>0.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes>
+            <entry>
+              <string>Health</string>
+=======
+              <string>health</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+              <double>100.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+<<<<<<< HEAD
+              <string>Health</string>
+=======
+              <string>health</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+              <double>100.0</double>
+            </entry>
+          </maxAttributes>
+          <buildCosts>
+            <entry>
+<<<<<<< HEAD
+              <string>Gold</string>
+              <double>10.0</double>
+=======
+              <string>gold</string>
+              <double>37.0</double>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+            </entry>
+          </buildCosts>
+          <buildTime>5.0</buildTime>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
         </attributes>
         <interactions>
           <elementMap>
@@ -341,14 +577,34 @@
       <renderer>
         <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
+<<<<<<< HEAD
       <name>LBJ</name>
       <tags>
         <string>King</string>
+=======
+<<<<<<< HEAD
+      <name>Farmer1</name>
+      <tags>
+        <string>Farmer</string>
+=======
+      <name>soldier</name>
+      <tags>
+        <string>asdf</string>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
+<<<<<<< HEAD
       <movementSpeed>10.0</movementSpeed>
+=======
+<<<<<<< HEAD
+      <movementSpeed>5.0</movementSpeed>
+=======
+      <movementSpeed>3.0</movementSpeed>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -357,6 +613,12 @@
       <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
+<<<<<<< HEAD
+=======
+=======
+  <set/>
+>>>>>>> player
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>2</numPlayers>
@@ -387,6 +649,10 @@
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
       <elementMap>
         <entry>
           <int>1</int>
@@ -394,8 +660,13 @@
             <id>1</id>
             <transform>
               <position>
+<<<<<<< HEAD
                 <x>482.0</x>
                 <y>131.0</y>
+=======
+                <x>110.0</x>
+                <y>123.0</y>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -405,21 +676,38 @@
                 <attributes>
                   <entry>
                     <string>Health</string>
+<<<<<<< HEAD
                     <double>100.0</double>
+=======
+                    <double>1000.0</double>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
                     <string>Health</string>
+<<<<<<< HEAD
                     <double>100.0</double>
                   </entry>
                 </maxAttributes>
                 <buildCosts/>
+=======
+                    <double>1000.0</double>
+                  </entry>
+                </maxAttributes>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>100.0</double>
+                  </entry>
+                </buildCosts>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                 <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
                   <entry>
+<<<<<<< HEAD
                     <int>4</int>
                     <interactions.Interaction>
                       <id>4</id>
@@ -430,6 +718,18 @@
                       <imagePath>/images/attack_icon.png</imagePath>
                       <description>attack</description>
                       <isBuild>false</isBuild>
+=======
+                    <int>1</int>
+                    <interactions.Interaction>
+                      <id>1</id>
+                      <targetTags>
+                        <string>Farmer</string>
+                      </targetTags>
+                      <name>Build</name>
+                      <imagePath>/images/arrow_up.png</imagePath>
+                      <description>Build</description>
+                      <isBuild>true</isBuild>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
                       <targetTeamEnumMap>
@@ -447,6 +747,7 @@
                         </entry>
                       </targetTeamEnumMap>
                       <customFunctions>
+<<<<<<< HEAD
                         <interactions.ModifyVariable>
                           <NAME>ModifyVariable</NAME>
                           <VARIABLE>Variable</VARIABLE>
@@ -473,6 +774,22 @@
                   </entry>
                 </elementMap>
                 <new__ID__val>10</new__ID__val>
+=======
+                        <interactions.BuildFunction>
+                          <NAME>BuildFunction</NAME>
+                          <format>
+                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                            <parameterFields/>
+                          </format>
+                        </interactions.BuildFunction>
+                      </customFunctions>
+                      <range>1000.0</range>
+                      <rate>0.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>7</new__ID__val>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
               </interactions>
               <conditions>
                 <elementMap/>
@@ -488,12 +805,18 @@
               <resourceManager>
                 <resourceMap>
                   <entry>
+<<<<<<< HEAD
                     <string>Score</string>
                     <double>100.0</double>
+=======
+                    <string>Gold</string>
+                    <double>1000.0</double>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
+<<<<<<< HEAD
             <name>LBJ</name>
             <tags>
               <string>King</string>
@@ -502,6 +825,16 @@
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
             <movementSpeed>10.0</movementSpeed>
+=======
+            <name>FarmerBuilding</name>
+            <tags>
+              <string>Building</string>
+            </tags>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -516,8 +849,13 @@
             <id>4</id>
             <transform>
               <position>
+<<<<<<< HEAD
                 <x>325.0</x>
                 <y>118.0</y>
+=======
+                <x>277.0</x>
+                <y>158.0</y>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -536,6 +874,7 @@
                     <double>100.0</double>
                   </entry>
                 </maxAttributes>
+<<<<<<< HEAD
                 <buildCosts/>
                 <buildTime>10.0</buildTime>
               </attributes>
@@ -608,6 +947,19 @@
                   </entry>
                 </elementMap>
                 <new__ID__val>10</new__ID__val>
+=======
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>10.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
               </interactions>
               <conditions>
                 <elementMap/>
@@ -615,6 +967,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
+<<<<<<< HEAD
               <myImageLocation>/images/ghoul.png</myImageLocation>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
@@ -624,6 +977,19 @@
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
             <movementSpeed>10.0</movementSpeed>
+=======
+              <myImageLocation>/images/robert.png</myImageLocation>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Farmer1</name>
+            <tags>
+              <string>Farmer</string>
+            </tags>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>5.0</movementSpeed>
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -633,11 +999,27 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
+<<<<<<< HEAD
       <new__ID__val>10</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>
       <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
     </teams>
+=======
+      <new__ID__val>7</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams>
+      <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
+    </teams>
+=======
+      <elementMap/>
+      <new__ID__val>1</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams/>
+>>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+>>>>>>> 3ff7afe0bebec49d600d46e16effe56a975c9f30
   </scenemanager.SceneManager>
 </object-stream>

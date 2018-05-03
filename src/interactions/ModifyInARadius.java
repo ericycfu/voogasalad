@@ -61,6 +61,8 @@ public class ModifyInARadius implements CustomFunction {
 					double finalDelta = (prevVal + deltaVal) - maxVal;
 					other.accessLogic().accessAttributes().setAttributeValue(variable, finalDelta);
 				}
+				other.getRenderer().flashUnit();
+
 			}
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{
