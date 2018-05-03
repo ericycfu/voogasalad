@@ -34,8 +34,6 @@ public class BuildFunction implements CustomFunction {
 		if(other == null) return;
 		try 
 		{
-			System.out.println("builder " + current.getName());
-			System.out.println("buildee " + other.getName());
 
 			Map<String, Double> costs = other.accessLogic().accessAttributes().getCosts();
 			for(Map.Entry<String, Double> entry : costs.entrySet())
