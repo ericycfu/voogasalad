@@ -15,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import pathfinding.GridMap;
 import transform_library.Vector2;
 
@@ -27,6 +29,7 @@ public class MainDisplay implements VisualUpdate {
 	private double myWidth;
 	private double myHeight;
 	private List<GameObject> myDisplayGameObjects;
+	private Rectangle mySelectionBox;
 	private Group myDisplayables;
 	private Group myMoveWindowButtons;
 	private SelectedUnitManager mySelectedUnitManager;
@@ -81,10 +84,10 @@ public class MainDisplay implements VisualUpdate {
 						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
 						System.out.println("build unit name: " + unitToBeBuilt.getName());
 						unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
-						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager);
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 					}
 					else {
-						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager);
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 					}
 					myUnitActionDisp.setCurrentActionID(-1);
 				} catch (UnmodifiableGameObjectException e1) {
@@ -97,14 +100,15 @@ public class MainDisplay implements VisualUpdate {
 	
 	private void initializeMultipleUnitSelect() {
 		myMap.setOnMousePressed(e -> {
-			if (e.getButton()==MouseButton.PRIMARY) {
+			if (e.getButton() == MouseButton.PRIMARY) {
 				myMouseXInitPosition = e.getSceneX();
 				myMouseYInitPosition = e.getY() - GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT;
+				createSelectionBox();
 				isMultipleSelectAvailable = true;
 			}
 		});
 		myMap.setOnMouseReleased(e -> {
-			if (isMultipleSelectAvailable && e.getButton()==MouseButton.PRIMARY) {
+			if (isMultipleSelectAvailable && e.getButton() == MouseButton.PRIMARY) {
 				mySelectedUnitManager.clear();
 				this.myUnitActionDisp.setCurrentActionID(-1);
 				myMouseXFinalPosition = e.getSceneX();
@@ -114,11 +118,36 @@ public class MainDisplay implements VisualUpdate {
 						mySelectedUnitManager.add(go);
 					}
 				}
+				mySelectionBox.setVisible(false);
 			}
+			
 			isMultipleSelectAvailable = false;
 		});
 	}
 
+	private void createSelectionBox() {
+		mySelectionBox = new Rectangle();
+		mySelectionBox.setX(myMouseXInitPosition);
+		mySelectionBox.setY(myMouseYInitPosition + GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT);
+		mySelectionBox.setStroke(Color.BLACK);
+		mySelectionBox.setFill(Color.TRANSPARENT);
+		myMainDisplay.getChildren().add(mySelectionBox);
+		myMap.setOnMouseDragged(e -> {
+			if(e.getButton() == MouseButton.PRIMARY) {
+				double xDiff = e.getSceneX() - myMouseXInitPosition;
+				double yDiff = e.getSceneY() - myMouseYInitPosition - 2 * GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT;
+				if(xDiff < 0) {
+					mySelectionBox.setX(myMouseXInitPosition + xDiff);
+				}
+				if(yDiff < 0) {
+					mySelectionBox.setY(myMouseYInitPosition + GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT + yDiff);
+				}
+				mySelectionBox.setWidth(Math.abs(xDiff));
+				mySelectionBox.setHeight(Math.abs(yDiff));
+			}
+		});
+	}
+	
 	private void initializeMoveButtons() {
 		myMoveWindowButtons = new Group();
 		
@@ -212,21 +241,8 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private boolean isInSelectionWindow(double x, double y) {
-		boolean isX;
-		boolean isY;
-		if (myMouseXInitPosition < myMouseXFinalPosition) {
-			isX = (x < myMouseXFinalPosition) && (x > myMouseXInitPosition);
-		}
-		else {
-			isX = (x > myMouseXFinalPosition) && (x < myMouseXInitPosition);
-		}
-		
-		if (myMouseYInitPosition < myMouseYFinalPosition) {
-			isY = (y < myMouseYFinalPosition) && (y > myMouseYInitPosition);
-		}
-		else {
-			isY = (y > myMouseXFinalPosition) && (y < myMouseXInitPosition);
-		}
+		boolean isX = Math.abs(x - myMouseXInitPosition) < Math.abs(myMouseXInitPosition - myMouseXFinalPosition) && Math.abs(x - myMouseXFinalPosition) < Math.abs(myMouseXInitPosition - myMouseXFinalPosition);
+		boolean isY = Math.abs(y - myMouseYInitPosition) < Math.abs(myMouseYInitPosition - myMouseYFinalPosition) && Math.abs(y - myMouseYFinalPosition) < Math.abs(myMouseYInitPosition - myMouseYFinalPosition);
 		return isX && isY;
 	}
 	

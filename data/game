@@ -1,5 +1,6 @@
 <object-stream>
   <game__object.GameObjectManager>
+<<<<<<< HEAD
     <elementMap>
       <entry>
         <int>1</int>
@@ -465,6 +466,12 @@
       <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
+=======
+    <elementMap/>
+    <new__ID__val>1</new__ID__val>
+  </game__object.GameObjectManager>
+  <set/>
+>>>>>>> 70a4d42c556d3db1f6348b6bccff54c7f85d6448
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
     <numPlayers>1</numPlayers>
@@ -475,6 +482,7 @@
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
+<<<<<<< HEAD
       <elementMap>
         <entry>
           <int>1</int>
@@ -786,5 +794,12 @@
     <teams>
       <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
     </teams>
+=======
+      <elementMap/>
+      <new__ID__val>1</new__ID__val>
+    </objManager>
+    <endConditions/>
+    <teams/>
+>>>>>>> 70a4d42c556d3db1f6348b6bccff54c7f85d6448
   </scenemanager.SceneManager>
 </object-stream>

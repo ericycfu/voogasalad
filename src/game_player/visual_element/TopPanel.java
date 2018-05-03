@@ -2,6 +2,7 @@ package game_player.visual_element;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
+import game_player.GamePlayer;
 import game_player.alert.AlertMaker;
 import gui_elements.factories.ButtonFactory;
 import javafx.scene.Node;
@@ -34,12 +36,12 @@ import javafx.stage.Stage;
 public class TopPanel {
 	
 	public static final String START = "Start";
+	public static final String PLAY = "Play";
 	public static final String PAUSE = "Pause";
 	public static final String SAVE = "Save";
 	public static final String LOAD = "Load";
 	public static final String TIME = "Time";
 	public static final String RESOURCE = "Resources";
-	public static final String COLON = ": ";
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
 	public static final String LOADTEXT = "Load Game";
@@ -51,7 +53,8 @@ public class TopPanel {
 	public static final String NPALERTHEAD = "No File Selected";
 	public static final String NPALERTBODY = "Please choose a file to save to!";
 	public static final double SBWIDTH = 0.125;
-	public static final double TAWIDTH = 0.25;
+	public static final double TIMEWIDTH = 0.25;
+	public static final double RESOURCEWIDTH = 0.25;
 	
 	private GridPane myPane;
 	private TextArea time;
@@ -78,7 +81,13 @@ public class TopPanel {
 	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		Button[] buttonArray = {
 				ButtonFactory.makeButton(START, e -> {
-					
+					ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
+					try {
+						outstream.writeObject(PLAY);
+						outstream.flush();
+					} catch (IOException exception) {
+						new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+					}
 				}), 
 				ButtonFactory.makeButton(PAUSE, e -> {
 					
@@ -95,9 +104,9 @@ public class TopPanel {
 	}
 	
 	private void setupTime(double xsize, double ysize) {
-		time = new TextArea(TIME + COLON + 0);
+		time = new TextArea(TIME + GamePlayer.COLON + 0);
 		time.setEditable(false);
-		time.setPrefWidth(xsize / 4);
+		time.setPrefWidth(xsize * TIMEWIDTH);
 		time.setMaxHeight(ysize);
 	}
 	
@@ -105,7 +114,7 @@ public class TopPanel {
 		resourceBoard = new ComboBox<>();
 		resourceBoard.setPromptText(RESOURCE);
 		resourceBoard.setMaxHeight(ysize);
-		resourceBoard.setPrefWidth(xsize / 4);
+		resourceBoard.setPrefWidth(xsize * RESOURCEWIDTH);
 	}
 	
 	private void addToPane(Node ... nodes) {
@@ -167,13 +176,13 @@ public class TopPanel {
 		List<Entry<String, Double>> entryList = myResourceManager.getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
-			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
+			resources[i] = entryList.get(i).getKey() + GamePlayer.COLON + entryList.get(i).getValue();
 		}
 		resourceBoard.getItems().addAll(resources);
 	}
 	
 	private void setTime(double timeValue) {
-		time.setText(TIME + COLON + timeValue);
+		time.setText(TIME + GamePlayer.COLON + timeValue);
 	}
 	
 	public boolean getIsLoaded() {
