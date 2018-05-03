@@ -58,21 +58,19 @@ public class MiniMap implements VisualUpdate {
 	
 	private List<GameObject> filter(List<GameObject> gameObjects) {
 		List<GameObject> minimapObjects = new ArrayList<GameObject>();
-		for (GameObject object : gameObjects) {
-			minimapObjects.add(object);
-		}
+		gameObjects.forEach(go -> minimapObjects.add(go));
 		return minimapObjects;
 	}
 	
 	private void displayUnits(List<GameObject> currentVisibleUnits) {
-		for (GameObject object: currentVisibleUnits) {
+		currentVisibleUnits.forEach(go -> {
 			Rectangle unitSquare = new Rectangle(myWidth * UNITMINIMAPRATIO, myWidth * UNITMINIMAPRATIO);
-			unitSquare.setX(object.getTransform().getPosition().getX() * MINIMAPDISPLAYXRATIO);
-			unitSquare.setY(object.getTransform().getPosition().getY() * MINIMAPDISPLAYYRATIO);
+			unitSquare.setX(go.getTransform().getPosition().getX() * MINIMAPDISPLAYXRATIO);
+			unitSquare.setY(go.getTransform().getPosition().getY() * MINIMAPDISPLAYYRATIO);
 			//unitSquare.setFill(object.getPlayerColor());
 			unitSquare.setFill(Color.BLUE);
 			myVisibleUnits.getChildren().add(unitSquare);
-		}
+		});
 	}
 	
 	/**

@@ -1,12 +1,11 @@
 package scenemanager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import game_engine.EndStateWrapper;
 import game_engine.Team;
-import game_object.GameObject;
 import game_object.GameObjectManager;
 
 /**
@@ -15,7 +14,7 @@ import game_object.GameObjectManager;
  * The Scene Manager checks for win conditions.
  */
 
-public class SceneManager {
+public class SceneManager implements Serializable {
  
 	private GameObjectManager objManager;
 	
@@ -40,6 +39,9 @@ public class SceneManager {
 		}
 		
 		throw new NullEndConditionException("No End Conditions have been made for your game");
+	}
+	public List<Team> getTeams(){
+		return teams;
 	}
 
 }

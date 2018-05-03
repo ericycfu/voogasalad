@@ -6,6 +6,7 @@ import authoring.backend.SaveAuthoringGameState;
 import game_data.Writer;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import server_client.ServerClient;
 /**
  * saves the current environment locally and remotely for continued use of both the authoring environment and the rest of the project
  * @author shichengrao
@@ -44,5 +45,6 @@ public class PlayGameButton extends Button {
 			System.out.print("Playing game!");
 			new SaveAuthoringGameState(authoring_controller, game_entity);
 		});
+		
 	}
 }

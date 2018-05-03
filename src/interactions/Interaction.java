@@ -25,7 +25,7 @@ public class Interaction implements EngineObject, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final double DEFAULT_RATE = 1.0;
+	public static final double DEFAULT_RATE = 30.0;
 	public static enum InteractionTargetTeam
 	{
 		OWN, OTHER, ALL;
@@ -50,7 +50,7 @@ public class Interaction implements EngineObject, Serializable {
 	private List<CustomFunction> customFunctions;
 	private double range;
 	
-	private double rate;
+	private double rate = DEFAULT_RATE;
 
 	public Interaction(int id)
 	{

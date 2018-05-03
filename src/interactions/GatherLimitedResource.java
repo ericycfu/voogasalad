@@ -39,7 +39,8 @@ public class GatherLimitedResource implements CustomFunction {
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
 			double currentResourceVal = other.accessLogic().accessAttributes().getAttribute(resource);
 			other.accessLogic().accessAttributes().setAttributeValue(resource, currentResourceVal - deltaVal);
-			
+			other.getRenderer().flashUnit();
+
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException | InvalidResourceValueException e) 
 		{

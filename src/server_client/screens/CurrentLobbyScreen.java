@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -25,6 +23,8 @@ import server.LobbyManager;
 import server_client.buttons.ChangeTeamButton;
 import server_client.buttons.LeaveLobbyButton;
 import server_client.buttons.PlayButton;
+import server_client.screens.display.TeamDisplay;
+import server_client.screens.display.TeamListView;
 
 public class CurrentLobbyScreen extends ClientScreen {
 	public static final String CLASS_REF = "CurrentLobby";
@@ -50,16 +50,10 @@ public class CurrentLobbyScreen extends ClientScreen {
 	 * 
 	 */
 	private void setUpContent() {
-		teamList = new ListView<>();
+		teamList = new TeamListView();
 		myPane.getChildren().add(teamList);
-		teamList.setPrefSize(800, 400);
 		teamList.setLayoutX(200);
 		teamList.setLayoutY(100);
-		teamList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TeamDisplay>() {
-			@Override
-			public void changed(ObservableValue<? extends TeamDisplay> arg0, TeamDisplay arg1, TeamDisplay arg2) {
-			}
-		});
 		setUpText();
 		
 	}
