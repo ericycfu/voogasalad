@@ -199,6 +199,7 @@ public class DesignTab extends Tab {
 		building_cb.getEditor().clear();
 		component_build_time_tf.clear();
 		component_build_cost_tf.clear();
+		updateBuildCost();
 		updateBuildCostDisplayText();
 	}
 	
