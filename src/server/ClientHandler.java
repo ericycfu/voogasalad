@@ -4,7 +4,7 @@ package server;
  * @author andrew
  */
 import java.net.Socket;
-import java.net.SocketException;
+import java.util.logging.Logger;
 
 import server.communications_handler.CommunicationsHandler;
 import server.communications_handler.CommunicationsHandlerFactory;
@@ -13,8 +13,8 @@ import server.communications_handler.MainPageHandler;
 public class ClientHandler implements Runnable {
 	private CommunicationsHandlerFactory myCHFactory;
 	private CommunicationsHandler myCommunicationsHandler;
-	public ClientHandler(RTSServer server, Socket socket) {
-		myCHFactory = new CommunicationsHandlerFactory(server,socket);
+	public ClientHandler(RTSServer server, Socket socket, Logger logger) {
+		myCHFactory = new CommunicationsHandlerFactory(server,socket,logger);
 		myCommunicationsHandler = myCHFactory.get(MainPageHandler.CLASS_REF);
 	}
 	@Override

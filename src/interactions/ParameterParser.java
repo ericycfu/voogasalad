@@ -16,7 +16,7 @@ public class ParameterParser {
 	
 	public ParameterParser(){}
 	
-	private boolean isDouble(String text)
+	public boolean isDouble(String text)
 	{
 		String decimalPattern = "^-*\\d*\\.?\\d+$";  
 		return (Pattern.matches(decimalPattern, text));

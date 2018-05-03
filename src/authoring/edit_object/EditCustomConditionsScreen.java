@@ -1,35 +1,19 @@
 package authoring.edit_object;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Properties;
-
 import authoring.support.Extractor;
 import authoring.view.AuthoringView;
 import conditions.Condition;
 import conditions.ConditionManager;
 import conditions.CustomCondition;
-import game_object.PropertyNotFoundException;
-import gui_elements.factories.ButtonFactory;
 import gui_elements.factories.ComboBoxFactory;
-import gui_elements.factories.TextFieldFactory;
 import interactions.CustomComponentParameterFormat;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class EditCustomConditionsScreen extends ParameterSelect implements AuthoringView {
-	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
+//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
 	private ConditionManager cm;
 	private Condition condition;
 	
@@ -117,7 +101,7 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 	@Override
 	protected void save(HBox line, ComboBox comboBox) {
 		String conditionName = (String) (comboBox.getValue());
-		if (conditionName != "") {
+		if (conditionName.length() > 0) {
 			CustomCondition customCondition = condition.generateCustomCondition(conditionName);
 			condition.addCustomCondition(customCondition);
 			CustomComponentParameterFormat format = customCondition.getParameterFormat();
