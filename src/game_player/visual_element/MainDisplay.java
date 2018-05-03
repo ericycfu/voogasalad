@@ -212,21 +212,8 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private boolean isInSelectionWindow(double x, double y) {
-		boolean isX;
-		boolean isY;
-		if (myMouseXInitPosition < myMouseXFinalPosition) {
-			isX = (x < myMouseXFinalPosition) && (x > myMouseXInitPosition);
-		}
-		else {
-			isX = (x > myMouseXFinalPosition) && (x < myMouseXInitPosition);
-		}
-		
-		if (myMouseYInitPosition < myMouseYFinalPosition) {
-			isY = (y < myMouseYFinalPosition) && (y > myMouseYInitPosition);
-		}
-		else {
-			isY = (y > myMouseXFinalPosition) && (y < myMouseXInitPosition);
-		}
+		boolean isX = Math.abs(x - myMouseXInitPosition) < Math.abs(myMouseXInitPosition - myMouseXFinalPosition) && Math.abs(x - myMouseXFinalPosition) < Math.abs(myMouseXInitPosition - myMouseXFinalPosition);
+		boolean isY = Math.abs(y - myMouseYInitPosition) < Math.abs(myMouseYInitPosition - myMouseYFinalPosition) && Math.abs(y - myMouseYFinalPosition) < Math.abs(myMouseYInitPosition - myMouseYFinalPosition);
 		return isX && isY;
 	}
 	
