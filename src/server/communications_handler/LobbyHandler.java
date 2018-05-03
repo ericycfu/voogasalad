@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.ConcurrentModificationException;
 import java.util.logging.Logger;
 
 import server.GameLobby;
@@ -18,6 +20,7 @@ public class LobbyHandler extends CommunicationsHandler {
 	public static final String START_GAME = "Start";
 	public static final String ENTER_GAME = "Play";
 	public static final String CHANGE_OPTION = "Change";
+	public static final String LEAVE_MESSAGE = "Left";
 	private GameLobby currentLobby;
 	public LobbyHandler(Socket input, RTSServer server, Logger logger) {
 		super(input, server, logger);
@@ -29,29 +32,27 @@ public class LobbyHandler extends CommunicationsHandler {
 		try {
 			String input;
 			ObjectInputStream in = getInputStream();
-			if(in == null)
-				throw new RTSServerException("Client DCed");
 			if((input = (String)in.readObject()) != null) {
 				switch(input) {
-				case REMOVE_OPTION: currentLobby.remove(getSocket());
-				ObjectOutputStream out = getOutputStream();
-				out.writeObject("Left");
-				out.flush();
+				case REMOVE_OPTION: informClientOfLeave();
 				log(" left their lobby");
 				return MainPageHandler.CLASS_REF;
-				case CHANGE_OPTION:
-					currentLobby.changeTeam(in.readInt(), getSocket());
-					log(" changed their team");
-					return CLASS_REF;
+				case CHANGE_OPTION: currentLobby.changeTeam(in.readInt(), getSocket());
+				log(" changed their team");
+				return CLASS_REF;
 				case START_GAME:
 					if(getSocket().equals(currentLobby.getHost())) {
 						currentLobby.setIsRunning(true);
 					}
 					return CLASS_REF;
-				case ENTER_GAME:
-					getOutputStream().writeObject(currentLobby.getCurrentGameInstance());
+
+				default: if(currentLobby.isRunning()) {
+					ObjectOutputStream transition = getOutputStream();
+					transition.writeObject(currentLobby.getCurrentGameInstance());
+					transition.flush();
 					return GameHandler.CLASS_REF;
-				default: return CLASS_REF;
+				}
+				return CLASS_REF;
 				}
 			}
 			else return CLASS_REF;
@@ -59,21 +60,28 @@ public class LobbyHandler extends CommunicationsHandler {
 		catch(IOException | ClassNotFoundException e) {
 			return CLASS_REF;}
 	}
-
+	private void informClientOfLeave() throws IOException {
+		currentLobby.remove(getSocket());
+		ObjectOutputStream out = getOutputStream();
+		out.writeObject(LEAVE_MESSAGE);
+		out.flush();
+	}
 	@Override
 	public void updateClient() {
 		try {
 			ObjectOutputStream out = getOutputStream();
-			if(out == null)
-				throw new RTSServerException("Disconnected");
 			if(currentLobby.isRunning())
 				out.writeObject(START_GAME);
-			else { out.writeObject(currentLobby);
-			out.writeInt(currentLobby.getTeamID(getSocket()));
-			out.writeInt(currentLobby.getPlayerID(getSocket()));
+			else {
+				out.writeObject(currentLobby);
+				out.writeInt(currentLobby.getTeamID(getSocket()));
+				out.writeInt(currentLobby.getPlayerID(getSocket()));
 			}
 			out.flush();
-		} catch (Exception e) {
+		} catch (SocketException e) {
+			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
+		}
+		catch(IOException | NullPointerException | ConcurrentModificationException e) {
 			return;
 		}
 	}

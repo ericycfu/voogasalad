@@ -1,7 +1,10 @@
 package game_player;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -51,12 +54,12 @@ import transform_library.Vector2;
  * @author Siyuan Chen
  *
  */
-public class GamePlayer {
+public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 800;
+	public static final int SCENE_SIZE_X = 900;
+	public static final int SCENE_SIZE_Y = 600;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.49;
@@ -64,6 +67,13 @@ public class GamePlayer {
 	public static final double TOP_HEIGHT = 0.05;
 	public static final double CHATBOX_WIDTH = 0.20;
 	public static final double CHATBOX_HEIGHT = 0.30;
+	public static final String LINEBREAK = "\n";
+	public static final String COLON = ": ";
+	public static final String SPACE = " ";
+	public static final String SERVERALERTHEAD = "Communication Failed";
+	public static final String SERVERALERTBODY = "Please try again.";
+	
+	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
@@ -80,10 +90,11 @@ public class GamePlayer {
 	private Socket mySocket;
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
-	private OutputStream myOutputStream;
-	private InputStream myInputStream;
+	private Stage myStage;
+	private double myTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
+		super(null, null);
 		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
 		//Timeline: pause requests to server
 		//super(null, null);
@@ -94,33 +105,35 @@ public class GamePlayer {
 		myGameObjectManager = gameManager;
 		myTeam = team;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SelectedUnitManager(myTeam);		
+		mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);		
 		initialize();
 		initializeSingleUnitSelect();
-		myTopPanel.setTimeline(timeline);
 		unitSkillMapInitialize();
 	}
 	
 	// network constructor
 	public GamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
-		//super(stage, socket);
+		super(stage, socket);
+		myStage = stage;
+		
+		myMap = new ImageView(new Image("map4.jpg"));
+		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
+		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
+		
+		myGameObjectManager = gom;
+		myTeam = team;
 		myPossibleUnits = allPossibleUnits;
 		mySceneManager = scenemanager;
+		mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);
 		mySocket = socket;
-		try {
-			myOutputStream = socket.getOutputStream();
-			myInputStream = socket.getInputStream();
-		} catch (IOException e) {
-			new AlertMaker("Communication failure.", "Communication with the current server failed.");
-		}
-		
+		initialize();
+		initializeSingleUnitSelect();		
 		unitSkillMapInitialize();
 	}
 	
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
 		for (GameObject go : myPossibleUnits) {
-			System.out.println(go.getName() + "this unit is in possible units");
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
@@ -136,9 +149,7 @@ public class GamePlayer {
 								}
 								if (isTagMatch) {
 									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											s, 
-											i.getID(), 
-											i.getDescription() + " " + s, 
+											s, i.getID(), i.getDescription() + " " + s, 
 											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
 											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
@@ -163,26 +174,15 @@ public class GamePlayer {
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
 		myUnitSkills.clear();
-		System.out.println(myPossibleUnits);
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					if (ia.getCustomFunctions().size()!=0) {
-						System.out.println("got into this step"+ia.getName());
-					try {
-						System.out.println("delta value: "+ia.getCustomFunction(0).getParameterFormat().getParameterValue("Delta"));
-					} catch (PropertyNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					}
 					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
 						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
-						System.out.println(this.myUnitDisplay.getUnitActionDisp().getCurrentActionID());
 					});
 					if (!ia.isBuild()) {
 						sb.setOnAction(e->{
@@ -190,9 +190,6 @@ public class GamePlayer {
 						});
 					}
 					else {
-						System.out.println("something is buildInteraction");
-						System.out.println(ia.isBuild() + "look at this");
-						System.out.println(ia.getTargetTags());
 						sb.setOnAction(e -> {
 							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
 							sblist.add(cancel);
@@ -205,9 +202,7 @@ public class GamePlayer {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
-			System.out.println(go.getName());
 			myUnitSkills.put(go.getName(), skillList);
-			System.out.println(skillList.size());
 		}
 	}
 	
@@ -227,9 +222,8 @@ public class GamePlayer {
 							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-							mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager);
+							mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
-							System.out.println(ID);
 						}
 					} catch (UnmodifiableGameObjectException e1) {
 							// do nothing
@@ -242,8 +236,8 @@ public class GamePlayer {
 	
 	private void initialize() {
 		myRoot = new Group();
-		
-		myTopPanel = new TopPanel(myTeam, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -263,28 +257,31 @@ public class GamePlayer {
 		myRoot.getChildren().add(mainDisp);
 		mainDisp.toBack();
 		
-		myChatBox = new ChatBox(SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getGroup();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);
 	
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
+		//myStage.setScene(myScene);
 	}
 
 	public Scene getScene() {
 		return myScene;
 	}
 	
-	public void update(List<GameObject> gameobject) {
+	public void update() {
+		List<GameObject> gameobject = myGameObjectManager.getElements();
 		if (myTopPanel.getIsLoaded()) {
 			unitSkillMapInitialize();
-			this.myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
+			myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
 			myTopPanel.setIsLoaded(false);
 		}
 		initializeSingleUnitSelect();
-		
-		//myTopPanel.update();
+
+		myTopPanel.update();
+
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
@@ -297,8 +294,18 @@ public class GamePlayer {
 	}
 
 	private void receiveFromServer() {
-		
+		/**
+		ObjectInputStream inputstream = getInputStream();
+		try {
+			myGameObjectManager = (GameObjectManager) inputstream.readObject();
+			myTeam = (Team) inputstream.readObject();
+			myTime = inputstream.readDouble();
+			myChatBox.displayText(inputstream.readObject().toString());
+		} catch (ClassNotFoundException | IOException e) {
+			// do nothing
+		}
 		//gom team time chat 
+		 **/
 	}
 	
 	private void end(String result) {
@@ -309,6 +316,24 @@ public class GamePlayer {
 		myRoot.getChildren().add(text);
 	}
 
-	
+	@Override
+	protected void setUp() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String updateSelf() {
+		receiveFromServer();
+		update();
+		return "GamePlayer";
+	}
+
+	public static ObjectOutputStream getObjectOutputStream(Socket socket) {
+		try {
+			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+		} catch (IOException e) {
+			return null;
+		}
+	}
 	
 }

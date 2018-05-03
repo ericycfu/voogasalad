@@ -2,7 +2,7 @@ package observables;
 
 /**
  * 
- * @author elizabethshulman
+ * @author elizabethshulman, xlany
  *
  * This interface conceptually mirrors Java's built-in Observer class. Its intent
  * is to enable an object to track and respond to changes in another object's behavior.

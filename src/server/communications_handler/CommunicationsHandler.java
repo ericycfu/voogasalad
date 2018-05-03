@@ -19,6 +19,7 @@ import server.RTSServer;
 import server.RTSServerException;
 
 public abstract class CommunicationsHandler {
+	public static final String DISCONNECT_MESSAGE = "Client disconnected";
 	private Socket communicationSocket;
 	private RTSServer host;
 	private Logger myLogger;
@@ -41,7 +42,7 @@ public abstract class CommunicationsHandler {
 		try {
 			return new ObjectInputStream(new BufferedInputStream(getSocket().getInputStream()));
 		} catch (IOException e) {
-			return null;
+			throw new RTSServerException("Client disconnected");
 		}
 	}
 	/**
@@ -52,7 +53,7 @@ public abstract class CommunicationsHandler {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(getSocket().getOutputStream()));
 		} catch (IOException e) {
-			return null;
+			throw new RTSServerException("Client disconnected");
 		}
 	}
 	protected Logger getLogger() {
