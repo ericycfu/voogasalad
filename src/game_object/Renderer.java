@@ -24,7 +24,7 @@ public class Renderer implements Serializable{
 	public final static double NORMAL_OPACITY = 1;
 	public final static double INVISIBLE_OPACITY = 0.1;
 	public final static double FLASH_DURATION = 0.05;
-
+	public final static Color INTERACTION_COLOR = Color.RED;
 
 	@XStreamOmitField
 	private transient ImageView myDisp;
@@ -118,7 +118,7 @@ public class Renderer implements Serializable{
 		lighting.setSpecularConstant(0);
 		lighting.setSpecularExponent(0);
 		lighting.setSurfaceScale(0);
-		lighting.setLight(new Light.Distant(45, 45, Color.RED));
+		lighting.setLight(new Light.Distant(45, 45, INTERACTION_COLOR));
 		litImg.setEffect(lighting);
 	}
 	
