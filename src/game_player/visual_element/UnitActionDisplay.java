@@ -26,9 +26,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	public UnitActionDisplay(double width, double height, Map<String, List<SkillButton>> unitSkills) {
 		myUnitSkills = unitSkills;
 		myCellWidth = width/ACTION_GRID_WIDTH;
-		System.out.println("cell width" + myCellWidth);
 		myCellHeight = height/ACTION_GRID_HEIGHT;
-		System.out.println("cell height" + myCellHeight);
 		myGridPane = new GridPane();
 		myGridPane.setPrefWidth(width);
 		myGridPane.setPrefHeight(height);
@@ -75,15 +73,11 @@ public class UnitActionDisplay implements VisualUpdate{
 		
 		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
-		System.out.println(gameObject.getName());
-		System.out.println(myUnitSkills);
 		fill(unitSkills);
-		System.out.println(((ImageView)unitSkills.get(0).getGraphic()).getImage());
 	}
 	
 	public void fill(List<SkillButton> unitSkills) {
 		myGridPane.getChildren().clear();
-		System.out.println(unitSkills);
 		for (int i = 0; i < 12; i++) {
 			if (i < unitSkills.size()) {
 				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);

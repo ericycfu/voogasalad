@@ -154,7 +154,7 @@ public class TestMain extends Application {
 	}
 	
 	private void step(double timeElapsed) {
-		myGP.update(myGOM.getElements());
+		myGP.update();
 		myGOM.runGameObjectLoop(SECOND_DELAY);
 	}
 }
