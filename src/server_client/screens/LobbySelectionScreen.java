@@ -19,10 +19,7 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -33,6 +30,8 @@ import server.GameLobby;
 import server.LobbyManager;
 import server_client.buttons.CreateLobbyButton;
 import server_client.buttons.JoinLobbyButton;
+import server_client.screens.display.LobbyDisplay;
+import server_client.screens.display.LobbyListView;
 
 public class LobbySelectionScreen extends ClientScreen {
 	public static final String CLASS_REF = "LobbySelection";
@@ -40,19 +39,17 @@ public class LobbySelectionScreen extends ClientScreen {
 	public static final String DATA_PATH = "data/";
 	public static final String STYLE_PATH = "gui_elements/css/ServerClient.css";
 
-	public static final String TITLE = "Server Client";
+	
 	public static final String GAME_CHOOSER_TITLE = "Choose a game to load!";
 	public static final String MAP_CHOOSER_TITLE = "Choose a map to run!";
 	public static final Color INITIAL_COLOR = Color.WHITE;
-	public static final int INITIAL_SCENE_WIDTH = 1200;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
 
 	public static final String IOALERTHEAD = "ERROR!";
 
 	public static final String IOALERTBODY = "Unable to create lobby!";
 
 	private FileChooser myGameChooser;
-	private ListView<LobbyDisplay> currentLobbies;
+	private LobbyListView currentLobbies;
 	private Pane myPane;
 	private Scene myScene; 
 	private Reader myReader = new Reader();
@@ -92,7 +89,7 @@ public class LobbySelectionScreen extends ClientScreen {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
 			try {
 				List<Object> gameObjects = myReader.read(chosenGame.getCanonicalPath());
-				GameObjectManager gom = (GameObjectManager)gameObjects.get(0); // TODO: don't create new
+				GameObjectManager gom = (GameObjectManager)gameObjects.get(0);
 				@SuppressWarnings("unchecked")
 				Set<GameObject> possibleUnits = ((Set<GameObject>) gameObjects.get(1));
 				GameInfo currentGameInfo = new GameInfo();
@@ -108,7 +105,6 @@ public class LobbySelectionScreen extends ClientScreen {
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
-
 	}
 	/**
 	 * Sets up the Join Lobby button 
@@ -134,18 +130,10 @@ public class LobbySelectionScreen extends ClientScreen {
 	 * Sets up the ListView that displays Lobby information
 	 */
 	private void setUpLobbyDisplays() {
-		currentLobbies = new ListView<LobbyDisplay>();
-		currentLobbies.setPrefSize(800, 400);
+		currentLobbies = new LobbyListView();
 		currentLobbies.setLayoutX(200);
 		currentLobbies.setLayoutY(100);
 		myPane.getChildren().add(currentLobbies);
-		currentLobbies.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LobbyDisplay>() {
-			@Override
-			public void changed(ObservableValue<? extends LobbyDisplay> arg0, LobbyDisplay arg1, LobbyDisplay arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 
 	}
 	/**
@@ -153,11 +141,7 @@ public class LobbySelectionScreen extends ClientScreen {
 	 */
 	private void setupStage() {
 		getStage().setScene(myScene);
-		getStage().setTitle(TITLE);
-		getStage().setWidth(INITIAL_SCENE_WIDTH);
-		getStage().setHeight(INITIAL_SCENE_HEIGHT);
-		getStage().setResizable(false);
-		getStage().show();
+		
 	}
 
 	@Override
@@ -169,26 +153,23 @@ public class LobbySelectionScreen extends ClientScreen {
 
 	@Override
 	public String updateSelf() {
-		Object obj;
 		try {
 			ObjectInputStream in = getInputStream();
 			if(in == null)
 				return CLASS_REF;
-			obj = in.readObject();
+			Object obj = in.readObject();
 			if(obj instanceof GameLobby)
 				return CurrentLobbyScreen.CLASS_REF;
 			LobbyManager lobbies = (LobbyManager) obj;
 			int numLobbies = lobbies.getElements().size();
+			
 			Platform.runLater(() -> { 
-			while(numLobbies < currentLobbies.getItems().size()) {
-				currentLobbies.getItems().remove(0);
-			}
-			while(numLobbies > currentLobbies.getItems().size()) {
-				currentLobbies.getItems().add(new LobbyDisplay());
-			}
-			for(int x = 0; x < lobbies.getElements().size(); x++) {
-				currentLobbies.getItems().get(x).update(lobbies.getElements().get(x));
-			}
+			while(numLobbies < currentLobbies.getItems().size())
+				currentLobbies.remove();
+			while(numLobbies > currentLobbies.getItems().size())
+				currentLobbies.add();
+			for(int x = 0; x < lobbies.getElements().size(); x++)
+				currentLobbies.update(x, lobbies.getElements().get(x));
 			});
 			return CLASS_REF;
 		} catch (Exception e) {

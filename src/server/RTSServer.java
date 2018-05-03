@@ -18,7 +18,7 @@ import game_engine.GameInstance;
 import game_player.alert.AlertMaker;
 
 public class RTSServer {
-	public static final String SERVER_IP = "127.0.0.1";
+	public static final String SERVER_IP = "10.197.12.73";
 	public static final int PORT_NUMBER = 9098;
 	public static final int RETRY_CONNECTION_DELAY = 10000;
 	public static final String LOG_PATH = "log/";

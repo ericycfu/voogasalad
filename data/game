@@ -1,179 +1,9 @@
 <object-stream>
   <game__object.GameObjectManager>
-    <elementMap>
-      <entry>
-        <int>1</int>
-        <game__object.GameObject>
-          <id>1</id>
-          <transform>
-            <position>
-              <x>237.0</x>
-              <y>40.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts>
-                <entry>
-                  <string>1</string>
-                  <double>1.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>1.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
-          </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap/>
-            </resourceManager>
-          </owner>
-          <name>a</name>
-          <tags>
-            <string>a</string>
-          </tags>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>4</int>
-        <game__object.GameObject>
-          <id>4</id>
-          <transform>
-            <position>
-              <x>87.0</x>
-              <y>204.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts>
-                <entry>
-                  <string>1</string>
-                  <double>1.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>1.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
-          </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap/>
-            </resourceManager>
-          </owner>
-          <name>a</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>7</int>
-        <game__object.GameObject>
-          <id>7</id>
-          <transform>
-            <position>
-              <x>41.0</x>
-              <y>62.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts>
-                <entry>
-                  <string>1</string>
-                  <double>1.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>1.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/rcd.png</myImageLocation>
-          </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap/>
-            </resourceManager>
-          </owner>
-          <name>a</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-        </game__object.GameObject>
-      </entry>
-    </elementMap>
-    <new__ID__val>10</new__ID__val>
+    <elementMap/>
+    <new__ID__val>1</new__ID__val>
   </game__object.GameObjectManager>
+<<<<<<< HEAD
   <set>
     <game__object.GameObject>
       <id>0</id>
@@ -187,15 +17,25 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes/>
-          <maxAttributes/>
+          <attributes>
+            <entry>
+              <string>health</string>
+              <double>100.0</double>
+            </entry>
+          </attributes>
+          <maxAttributes>
+            <entry>
+              <string>health</string>
+              <double>100.0</double>
+            </entry>
+          </maxAttributes>
           <buildCosts>
             <entry>
-              <string>1</string>
-              <double>1.0</double>
+              <string>gold</string>
+              <double>37.0</double>
             </entry>
           </buildCosts>
-          <buildTime>1.0</buildTime>
+          <buildTime>5.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
@@ -207,230 +47,49 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/rcd.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
-      <name>a</name>
+      <name>soldier</name>
       <tags>
-        <string>a</string>
+        <string>asdf</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>1.0</movementSpeed>
+      <movementSpeed>3.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
       <isBeingConstructed>false</isBeingConstructed>
       <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
+=======
+  <set/>
+>>>>>>> player
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
-    <endConditions/>
+    <numPlayers>4</numPlayers>
+    <endConditions>
+      <scenemanager.AllUnitsDead>
+        <NAME>AllUnitsDead</NAME>
+        <format>
+          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <parameterFields/>
+        </format>
+      </scenemanager.AllUnitsDead>
+    </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <imagePath>/images/map4.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
-      <elementMap>
-        <entry>
-          <int>1</int>
-          <game__object.GameObject>
-            <id>1</id>
-            <transform>
-              <position>
-                <x>237.0</x>
-                <y>40.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes/>
-                <maxAttributes/>
-                <buildCosts>
-                  <entry>
-                    <string>1</string>
-                    <double>1.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>1.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
-            </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap/>
-              </resourceManager>
-            </owner>
-            <name>a</name>
-            <tags>
-              <string>a</string>
-            </tags>
-            <isBuilding>false</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-          </game__object.GameObject>
-        </entry>
-        <entry>
-          <int>4</int>
-          <game__object.GameObject>
-            <id>4</id>
-            <transform>
-              <position>
-                <x>87.0</x>
-                <y>204.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes/>
-                <maxAttributes/>
-                <buildCosts>
-                  <entry>
-                    <string>1</string>
-                    <double>1.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>1.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
-            </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap/>
-              </resourceManager>
-            </owner>
-            <name>a</name>
-            <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-          </game__object.GameObject>
-        </entry>
-        <entry>
-          <int>7</int>
-          <game__object.GameObject>
-            <id>7</id>
-            <transform>
-              <position>
-                <x>41.0</x>
-                <y>62.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes/>
-                <maxAttributes/>
-                <buildCosts>
-                  <entry>
-                    <string>1</string>
-                    <double>1.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>1.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/rcd.png</myImageLocation>
-            </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap/>
-              </resourceManager>
-            </owner>
-            <name>a</name>
-            <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-          </game__object.GameObject>
-        </entry>
-      </elementMap>
-      <new__ID__val>10</new__ID__val>
+      <elementMap/>
+      <new__ID__val>1</new__ID__val>
     </objManager>
     <endConditions/>
-    <teams>
-      <game__engine.Team>
-        <id>2</id>
-        <teamName>Team 2</teamName>
-        <resourceManager>
-          <resourceMap/>
-        </resourceManager>
-      </game__engine.Team>
-      <game__engine.Team>
-        <id>4</id>
-        <teamName>Team 4</teamName>
-        <resourceManager>
-          <resourceMap/>
-        </resourceManager>
-      </game__engine.Team>
-      <game__engine.Team>
-        <id>3</id>
-        <teamName>Team 3</teamName>
-        <resourceManager>
-          <resourceMap/>
-        </resourceManager>
-      </game__engine.Team>
-    </teams>
+    <teams/>
   </scenemanager.SceneManager>
 </object-stream>
