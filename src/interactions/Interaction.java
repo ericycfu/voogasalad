@@ -25,6 +25,7 @@ public class Interaction implements EngineObject, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final double DEFAULT_RATE = 1.0;
 	public static enum InteractionTargetTeam
 	{
 		OWN, OTHER, ALL;
@@ -48,6 +49,8 @@ public class Interaction implements EngineObject, Serializable {
 	//store functions by id
 	private List<CustomFunction> customFunctions;
 	private double range;
+	
+	private double rate;
 
 	public Interaction(int id)
 	{
@@ -55,6 +58,7 @@ public class Interaction implements EngineObject, Serializable {
 		targetTags = new ArrayList<>();
 		this.id = id;
 		createTargetTeamEnumMap();
+		rate = DEFAULT_RATE;
 	}
 	
 	
@@ -118,6 +122,7 @@ public class Interaction implements EngineObject, Serializable {
 			{
 				cFunc.Execute(current, other, manager);
 			}
+			current.dequeueInteraction(this.id);
 		}
 		catch(PropertyNotFoundException p) 
 		{
@@ -170,11 +175,41 @@ public class Interaction implements EngineObject, Serializable {
 		return false;
 	}
 
+	public void setRate(String rate)
+	{
+		ParameterParser p = new ParameterParser();
+		if(p.isDouble(rate))
+		{
+			this.rate = Double.parseDouble(rate);
+		}
+		else
+		{
+			this.rate = DEFAULT_RATE;
+		}
+	}
+	
+	public double getRate()
+	{
+		return rate;
+	}
+	
 	public void setRange(double range)
 	{
 		this.range = range;
 	}
 
+	public boolean isRepetitive()
+	{
+		for(CustomFunction cfunc : this.customFunctions)
+		{
+			if(!cfunc.isRepetitive())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public double getRange() {
 		return range;
 	}

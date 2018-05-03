@@ -7,17 +7,26 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import game_engine.GameInstance;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import game_player.alert.AlertMaker;
 
 public class RTSServer {
-	public static final String SERVER_IP = "10.197.114.35";
+	public static final String SERVER_IP = "127.0.0.1";
 	public static final int PORT_NUMBER = 9098;
 	public static final int RETRY_CONNECTION_DELAY = 10000;
+	public static final String LOG_PATH = "log/";
+	public static final String ERROR_TITLE = "ERROR!";
+	public static final String ERROR_BODY = "Unable to construct Logger";
 	private ServerSocket myServerSocket;
 	private LobbyManager myLobbyManager;
+	private Logger myLogger;
 	public RTSServer() {
 		initialize();
 	}
@@ -25,8 +34,28 @@ public class RTSServer {
 	 * Initializes the server and starts server threads
 	 */
 	public void initialize() {
+		createLogger();
 		createServer();
 		listenForConnections();	 
+	}
+	/**
+	 * Sets up the logger to write information to a new file
+	 */
+	private void createLogger() {
+		myLogger = Logger.getLogger(getClass().getSimpleName());
+		FileHandler fh;
+		
+		try {
+			Format dateformatter = new SimpleDateFormat("YYYY-MM-dd_hh-mm-ss");
+			fh = new FileHandler(LOG_PATH + dateformatter.format(new Date()));
+			myLogger.addHandler(fh);
+	        SimpleFormatter formatter = new SimpleFormatter(); 
+		    fh.setFormatter(formatter);
+
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Initializes the ServerSocket and LobbyManager
@@ -38,10 +67,7 @@ public class RTSServer {
 				myServerSocket = new ServerSocket(PORT_NUMBER);
 			}
 			catch(IOException e) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Error");
-				alert.setContentText("Unable to listen in on port " + PORT_NUMBER);
-				alert.show();
+				new AlertMaker("Error", "Unable to listen in on port " + PORT_NUMBER);
 				try {
 					Thread.sleep(RETRY_CONNECTION_DELAY);
 				} catch (InterruptedException e1) {}
@@ -58,7 +84,8 @@ public class RTSServer {
             while (true) {
                 try {
                     Socket socket = myServerSocket.accept();
-                    ClientHandler task = new ClientHandler(this, socket);
+                    myLogger.info("Connected to client IP " + socket.getInetAddress());
+                    ClientHandler task = new ClientHandler(this, socket, myLogger);
                     Thread newThread = new Thread(task);
                     newThread.start();
                 } catch (IOException e) {

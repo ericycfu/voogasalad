@@ -11,6 +11,7 @@ import java.util.Set;
 
 import game_data.Reader;
 import game_data.Writer;
+import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
@@ -56,16 +57,17 @@ public class TopPanel {
 	private TextArea time;
 	private ComboBox<String> resourceBoard;
 	private int menuSpan;
-	private Team myTeam;
+	private int myTeamID;
+	private ResourceManager myResourceManager;
 	private boolean isLoaded;
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
-
 	
-	public TopPanel(Socket socket, Team team, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
+		myTeamID = teamID;
 		
 		setupButtons(socket, gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
@@ -137,14 +139,19 @@ public class TopPanel {
 		fc.setInitialDirectory(new File(FILEPATH));
 		fc.setTitle(LOADTEXT);
 		File file = fc.showOpenDialog(stage);
-		isLoaded = true;
 		try {
+			isLoaded = true;
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
 			System.out.println(gameObjects.get(1));
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
+			int index = 0;
+			while(gom.getElements().get(index).getOwner().getID() != myTeamID) {
+				index++;
+			}
+			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
 			for (GameObject go : possibleUnits) {
 				go.getRenderer().setDisp(new ImageView(new Image(go.getRenderer().getImagePath())));
 			}
@@ -158,7 +165,7 @@ public class TopPanel {
 	
 	private void setResources() {
 		resourceBoard.getItems().clear();
-		List<Entry<String, Double>> entryList = myTeam.getResourceManager().getResourceEntries();
+		List<Entry<String, Double>> entryList = myResourceManager.getResourceEntries();
 		String[] resources = new String[entryList.size()];
 		for(int i = 0; i < entryList.size(); i++) {
 			resources[i] = entryList.get(i).getKey() + COLON + entryList.get(i).getValue();
@@ -179,8 +186,10 @@ public class TopPanel {
 	}
 	
 	public void update() {
-		setResources();
-		setTime(0); // TODO: set time
+		if (isLoaded) {
+			setResources();
+			setTime(0); // TODO: set time
+		}
 	}
 	
 	public Node getNodes() {
