@@ -135,9 +135,8 @@ public class GamePlayer {
 								}
 								if (isTagMatch) {
 									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											s, 
-											i.getID(), 
 											i.getDescription() + " " + s, 
+											i.getID(), 
 											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
 											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
 									sb.setOnAction(e -> {
@@ -217,7 +216,7 @@ public class GamePlayer {
 							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-							mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager);
+							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager);
 							myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
 							System.out.println(ID);
 						}
