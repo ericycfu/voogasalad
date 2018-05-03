@@ -7,13 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-<<<<<<< HEAD
-              <x>369.0</x>
-              <y>200.0</y>
-=======
-              <x>0.0</x>
-              <y>0.0</y>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+              <x>339.0</x>
+              <y>162.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -21,16 +16,15 @@
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
               <attributes>
-<<<<<<< HEAD
                 <entry>
                   <string>Health</string>
-                  <double>200.0</double>
+                  <double>1000.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
-                  <double>200.0</double>
+                  <double>1000.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts/>
@@ -39,15 +33,15 @@
             <interactions>
               <elementMap>
                 <entry>
-                  <int>1</int>
+                  <int>4</int>
                   <interactions.Interaction>
-                    <id>1</id>
+                    <id>4</id>
                     <targetTags>
-                      <string>Melee</string>
+                      <string>Prof</string>
                     </targetTags>
                     <name>Attack</name>
                     <imagePath>/images/attack_icon.png</imagePath>
-                    <description>Attack - 10</description>
+                    <description>Attack - 50</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -80,7 +74,7 @@
                             </entry>
                             <entry>
                               <string>Delta</string>
-                              <string>-30</string>
+                              <string>-50</string>
                             </entry>
                           </parameterFields>
                         </format>
@@ -91,39 +85,64 @@
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
-=======
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>4</new__ID__val>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+              <new__ID__val>10</new__ID__val>
             </interactions>
             <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <conditions.Condition>
+                    <id>1</id>
+                    <comparatorManager>
+                      <comparatorMap>
+                        <entry>
+                          <int>0</int>
+                          <conditions.LessThan>
+                            <sign>&lt;</sign>
+                            <id>0</id>
+                          </conditions.LessThan>
+                        </entry>
+                        <entry>
+                          <int>1</int>
+                          <conditions.GreaterThan>
+                            <sign>&gt;</sign>
+                            <id>1</id>
+                          </conditions.GreaterThan>
+                        </entry>
+                        <entry>
+                          <int>2</int>
+                          <conditions.NotEqualsTo>
+                            <sign>!=</sign>
+                          </conditions.NotEqualsTo>
+                        </entry>
+                        <entry>
+                          <int>3</int>
+                          <conditions.EqualsTo>
+                            <sign>==</sign>
+                            <id>3</id>
+                          </conditions.EqualsTo>
+                        </entry>
+                      </comparatorMap>
+                    </comparatorManager>
+                    <var1>Health</var1>
+                    <var2>0</var2>
+                    <comparatorID>0</comparatorID>
+                    <customConditions>
+                      <conditions.Death>
+                        <format>
+                          <helpText>This function will kill the unit it is assigned to</helpText>
+                          <parameterFields/>
+                        </format>
+                      </conditions.Death>
+                    </customConditions>
+                  </conditions.Condition>
+                </entry>
+              </elementMap>
+              <new__ID__val>4</new__ID__val>
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
           <owner>
             <id>1</id>
@@ -132,29 +151,19 @@
               <resourceMap>
                 <entry>
                   <string>Gold</string>
-                  <double>50.0</double>
+                  <double>1000.0</double>
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
-<<<<<<< HEAD
-          <name>Ghoul</name>
+          <name>Duvall</name>
           <tags>
-            <string>Melee</string>
-=======
-          <name>Marine</name>
-          <tags>
-            <string>Biological</string>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+            <string>Prof</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-<<<<<<< HEAD
-          <movementSpeed>5.0</movementSpeed>
-=======
-          <movementSpeed>50.0</movementSpeed>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -169,13 +178,8 @@
           <id>4</id>
           <transform>
             <position>
-<<<<<<< HEAD
-              <x>111.0</x>
-              <y>166.0</y>
-=======
-              <x>367.0</x>
-              <y>96.0</y>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+              <x>184.0</x>
+              <y>133.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -183,16 +187,15 @@
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
               <attributes>
-<<<<<<< HEAD
                 <entry>
                   <string>Health</string>
-                  <double>200.0</double>
+                  <double>1000.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
-                  <double>200.0</double>
+                  <double>1000.0</double>
                 </entry>
               </maxAttributes>
               <buildCosts/>
@@ -201,61 +204,32 @@
             <interactions>
               <elementMap>
                 <entry>
-                  <int>1</int>
+                  <int>4</int>
                   <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
-=======
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>50.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>4</new__ID__val>
+              <new__ID__val>10</new__ID__val>
             </interactions>
             <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>4</new__ID__val>
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </resourceMap>
-            </resourceManager>
-          </owner>
-          <name>Marine</name>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -270,8 +244,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>135.0</x>
-              <y>313.0</y>
+              <x>40.0</x>
+              <y>71.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -281,63 +255,47 @@
               <attributes>
                 <entry>
                   <string>Health</string>
-                  <double>50.0</double>
+                  <double>1000.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
                   <string>Health</string>
-                  <double>50.0</double>
+                  <double>1000.0</double>
                 </entry>
               </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </buildCosts>
+              <buildCosts/>
               <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap/>
-              <new__ID__val>4</new__ID__val>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+              <elementMap>
+                <entry>
+                  <int>4</int>
+                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>10</new__ID__val>
             </interactions>
             <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>4</new__ID__val>
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
           </renderer>
-<<<<<<< HEAD
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Ghoul</name>
-=======
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap>
-                <entry>
-                  <string>Gold</string>
-                  <double>50.0</double>
-                </entry>
-              </resourceMap>
-            </resourceManager>
-          </owner>
-          <name>Marine</name>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+          <name>Duvall</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-<<<<<<< HEAD
-          <movementSpeed>5.0</movementSpeed>
-=======
-          <movementSpeed>50.0</movementSpeed>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+          <movementSpeed>10.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -347,7 +305,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>7</new__ID__val>
+    <new__ID__val>10</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -363,16 +321,15 @@
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
           <attributes>
-<<<<<<< HEAD
             <entry>
               <string>Health</string>
-              <double>200.0</double>
+              <double>1000.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
               <string>Health</string>
-              <double>200.0</double>
+              <double>1000.0</double>
             </entry>
           </maxAttributes>
           <buildCosts/>
@@ -381,15 +338,15 @@
         <interactions>
           <elementMap>
             <entry>
-              <int>1</int>
+              <int>4</int>
               <interactions.Interaction>
-                <id>1</id>
+                <id>4</id>
                 <targetTags>
-                  <string>Melee</string>
+                  <string>Prof</string>
                 </targetTags>
                 <name>Attack</name>
                 <imagePath>/images/attack_icon.png</imagePath>
-                <description>Attack - 10</description>
+                <description>Attack - 50</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -422,7 +379,7 @@
                         </entry>
                         <entry>
                           <string>Delta</string>
-                          <string>-30</string>
+                          <string>-50</string>
                         </entry>
                       </parameterFields>
                     </format>
@@ -433,58 +390,73 @@
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>7</new__ID__val>
-=======
-            <entry>
-              <string>Health</string>
-              <double>50.0</double>
-            </entry>
-          </attributes>
-          <maxAttributes>
-            <entry>
-              <string>Health</string>
-              <double>50.0</double>
-            </entry>
-          </maxAttributes>
-          <buildCosts>
-            <entry>
-              <string>Gold</string>
-              <double>50.0</double>
-            </entry>
-          </buildCosts>
-          <buildTime>10.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap/>
-          <new__ID__val>4</new__ID__val>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+          <new__ID__val>10</new__ID__val>
         </interactions>
         <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
+          <elementMap>
+            <entry>
+              <int>1</int>
+              <conditions.Condition>
+                <id>1</id>
+                <comparatorManager>
+                  <comparatorMap>
+                    <entry>
+                      <int>0</int>
+                      <conditions.LessThan>
+                        <sign>&lt;</sign>
+                        <id>0</id>
+                      </conditions.LessThan>
+                    </entry>
+                    <entry>
+                      <int>1</int>
+                      <conditions.GreaterThan>
+                        <sign>&gt;</sign>
+                        <id>1</id>
+                      </conditions.GreaterThan>
+                    </entry>
+                    <entry>
+                      <int>2</int>
+                      <conditions.NotEqualsTo>
+                        <sign>!=</sign>
+                      </conditions.NotEqualsTo>
+                    </entry>
+                    <entry>
+                      <int>3</int>
+                      <conditions.EqualsTo>
+                        <sign>==</sign>
+                        <id>3</id>
+                      </conditions.EqualsTo>
+                    </entry>
+                  </comparatorMap>
+                </comparatorManager>
+                <var1>Health</var1>
+                <var2>0</var2>
+                <comparatorID>0</comparatorID>
+                <customConditions>
+                  <conditions.Death>
+                    <format>
+                      <helpText>This function will kill the unit it is assigned to</helpText>
+                      <parameterFields/>
+                    </format>
+                  </conditions.Death>
+                </customConditions>
+              </conditions.Condition>
+            </entry>
+          </elementMap>
+          <new__ID__val>4</new__ID__val>
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
       </renderer>
-<<<<<<< HEAD
-      <name>Ghoul</name>
+      <name>Duvall</name>
       <tags>
-        <string>Melee</string>
-=======
-      <name>Marine</name>
-      <tags>
-        <string>Biological</string>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+        <string>Prof</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-<<<<<<< HEAD
-      <movementSpeed>5.0</movementSpeed>
-=======
-      <movementSpeed>50.0</movementSpeed>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+      <movementSpeed>10.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -494,20 +466,12 @@
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
-    <mapName>Default_map</mapName>
-    <numPlayers>4</numPlayers>
-    <endConditions>
-      <scenemanager.LastManStanding>
-        <NAME>LastManStanding</NAME>
-        <format>
-          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
-          <parameterFields/>
-        </format>
-      </scenemanager.LastManStanding>
-    </endConditions>
+    <mapName>Default map</mapName>
+    <numPlayers>1</numPlayers>
+    <endConditions/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map.jpeg</imagePath>
+    <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -518,13 +482,8 @@
             <id>1</id>
             <transform>
               <position>
-<<<<<<< HEAD
-                <x>369.0</x>
-                <y>200.0</y>
-=======
-                <x>0.0</x>
-                <y>0.0</y>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+                <x>339.0</x>
+                <y>162.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -532,16 +491,15 @@
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
                 <attributes>
-<<<<<<< HEAD
                   <entry>
                     <string>Health</string>
-                    <double>200.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
                     <string>Health</string>
-                    <double>200.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </maxAttributes>
                 <buildCosts/>
@@ -550,15 +508,15 @@
               <interactions>
                 <elementMap>
                   <entry>
-                    <int>1</int>
+                    <int>4</int>
                     <interactions.Interaction>
-                      <id>1</id>
+                      <id>4</id>
                       <targetTags>
-                        <string>Melee</string>
+                        <string>Prof</string>
                       </targetTags>
                       <name>Attack</name>
                       <imagePath>/images/attack_icon.png</imagePath>
-                      <description>Attack - 10</description>
+                      <description>Attack - 50</description>
                       <isBuild>false</isBuild>
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -591,7 +549,7 @@
                               </entry>
                               <entry>
                                 <string>Delta</string>
-                                <string>-30</string>
+                                <string>-50</string>
                               </entry>
                             </parameterFields>
                           </format>
@@ -602,39 +560,64 @@
                     </interactions.Interaction>
                   </entry>
                 </elementMap>
-                <new__ID__val>7</new__ID__val>
-=======
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>4</new__ID__val>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+                <new__ID__val>10</new__ID__val>
               </interactions>
               <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <conditions.Condition>
+                      <id>1</id>
+                      <comparatorManager>
+                        <comparatorMap>
+                          <entry>
+                            <int>0</int>
+                            <conditions.LessThan>
+                              <sign>&lt;</sign>
+                              <id>0</id>
+                            </conditions.LessThan>
+                          </entry>
+                          <entry>
+                            <int>1</int>
+                            <conditions.GreaterThan>
+                              <sign>&gt;</sign>
+                              <id>1</id>
+                            </conditions.GreaterThan>
+                          </entry>
+                          <entry>
+                            <int>2</int>
+                            <conditions.NotEqualsTo>
+                              <sign>!=</sign>
+                            </conditions.NotEqualsTo>
+                          </entry>
+                          <entry>
+                            <int>3</int>
+                            <conditions.EqualsTo>
+                              <sign>==</sign>
+                              <id>3</id>
+                            </conditions.EqualsTo>
+                          </entry>
+                        </comparatorMap>
+                      </comparatorManager>
+                      <var1>Health</var1>
+                      <var2>0</var2>
+                      <comparatorID>0</comparatorID>
+                      <customConditions>
+                        <conditions.Death>
+                          <format>
+                            <helpText>This function will kill the unit it is assigned to</helpText>
+                            <parameterFields/>
+                          </format>
+                        </conditions.Death>
+                      </customConditions>
+                    </conditions.Condition>
+                  </entry>
+                </elementMap>
+                <new__ID__val>4</new__ID__val>
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
             </renderer>
             <owner>
               <id>1</id>
@@ -643,29 +626,19 @@
                 <resourceMap>
                   <entry>
                     <string>Gold</string>
-                    <double>50.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
-<<<<<<< HEAD
-            <name>Ghoul</name>
+            <name>Duvall</name>
             <tags>
-              <string>Melee</string>
-=======
-            <name>Marine</name>
-            <tags>
-              <string>Biological</string>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+              <string>Prof</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-<<<<<<< HEAD
-            <movementSpeed>5.0</movementSpeed>
-=======
-            <movementSpeed>50.0</movementSpeed>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+            <movementSpeed>10.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -680,13 +653,8 @@
             <id>4</id>
             <transform>
               <position>
-<<<<<<< HEAD
-                <x>111.0</x>
-                <y>166.0</y>
-=======
-                <x>367.0</x>
-                <y>96.0</y>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+                <x>184.0</x>
+                <y>133.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -694,16 +662,15 @@
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
                 <attributes>
-<<<<<<< HEAD
                   <entry>
                     <string>Health</string>
-                    <double>200.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
                     <string>Health</string>
-                    <double>200.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </maxAttributes>
                 <buildCosts/>
@@ -712,61 +679,32 @@
               <interactions>
                 <elementMap>
                   <entry>
-                    <int>1</int>
+                    <int>4</int>
                     <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                   </entry>
                 </elementMap>
-                <new__ID__val>7</new__ID__val>
-=======
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>50.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>4</new__ID__val>
+                <new__ID__val>10</new__ID__val>
               </interactions>
               <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>4</new__ID__val>
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
             </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </resourceMap>
-              </resourceManager>
-            </owner>
-            <name>Marine</name>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Duvall</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>10.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -781,8 +719,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>135.0</x>
-                <y>313.0</y>
+                <x>40.0</x>
+                <y>71.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -792,63 +730,47 @@
                 <attributes>
                   <entry>
                     <string>Health</string>
-                    <double>50.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
                     <string>Health</string>
-                    <double>50.0</double>
+                    <double>1000.0</double>
                   </entry>
                 </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </buildCosts>
+                <buildCosts/>
                 <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
-                <elementMap/>
-                <new__ID__val>4</new__ID__val>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+                <elementMap>
+                  <entry>
+                    <int>4</int>
+                    <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>10</new__ID__val>
               </interactions>
               <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>4</new__ID__val>
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
             </renderer>
-<<<<<<< HEAD
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Ghoul</name>
-=======
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap>
-                  <entry>
-                    <string>Gold</string>
-                    <double>50.0</double>
-                  </entry>
-                </resourceMap>
-              </resourceManager>
-            </owner>
-            <name>Marine</name>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+            <name>Duvall</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-<<<<<<< HEAD
-            <movementSpeed>5.0</movementSpeed>
-=======
-            <movementSpeed>50.0</movementSpeed>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
+            <movementSpeed>10.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -858,26 +780,11 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
-      <new__ID__val>7</new__ID__val>
+      <new__ID__val>10</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>
-<<<<<<< HEAD
       <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
-=======
-      <game__engine.Team>
-        <id>1</id>
-        <teamName>Team 1</teamName>
-        <resourceManager>
-          <resourceMap>
-            <entry>
-              <string>Gold</string>
-              <double>50.0</double>
-            </entry>
-          </resourceMap>
-        </resourceManager>
-      </game__engine.Team>
->>>>>>> 5d07632e623334d670977c7d9a51ff1647ac20fb
     </teams>
   </scenemanager.SceneManager>
 </object-stream>
