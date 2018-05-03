@@ -345,11 +345,19 @@
   </set>
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
-    <endConditions/>
+    <numPlayers>4</numPlayers>
+    <endConditions>
+      <scenemanager.AllUnitsDead>
+        <NAME>AllUnitsDead</NAME>
+        <format>
+          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <parameterFields/>
+        </format>
+      </scenemanager.AllUnitsDead>
+    </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <imagePath>/images/map4.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
