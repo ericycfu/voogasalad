@@ -1,14 +1,6 @@
 package gui_elements.tabs;
 
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import game_object.ObjectAttributes;
 import gui_elements.buttons.AddResourceButton;
-import gui_elements.buttons.ResourceApplyButton;
 import gui_elements.combo_boxes.ChooseAmountComboBox;
 import gui_elements.combo_boxes.ChooseAmountComboBox1;
 import gui_elements.combo_boxes.ChooseResourceComboBox;
@@ -25,12 +17,9 @@ import gui_elements.labels.NumPlayersLabel;
 import gui_elements.labels.StartingAmountLabel;
 import gui_elements.labels.StartingAmountLabel1;
 import gui_elements.panes.MainPane;
-import gui_elements.panes.ResourceAmountPane;
-import gui_elements.panes.ResourceNamePane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.GridPane;
@@ -44,10 +33,10 @@ public class GameSettingsTab extends Tab {
 	, choose_resource_label1, starting_amount_label1;
 	private GridPane setting_pane;
 	private MainPane resource_name_pane, resource_amount_pane;
-	private ObjectAttributes objAttr;
-	private MainComboBox num_players_cb, loss_condition_cb, create_resource_cb,
+//	private ObjectAttributes objAttr;
+	private MainComboBox num_players_cb, loss_condition_cb,
 	choose_resource_cb, choose_amount_cb, choose_resource_cb1, choose_amount_cb1;
-	private Stage stage;
+//	private Stage stage;
 
 	public GameSettingsTab() {
 		//		ObjectAttributes objAttr) {

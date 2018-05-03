@@ -35,7 +35,7 @@ public class GameInstance implements Serializable{
 	private GameInfo myGameInfo;
 	private GameObjectManager myObjectManager;
 	private TeamManager myTeamManager;
-	private transient BufferedImage background;
+	private String background;
 	private double gameTime;
 	private List<ChatEntry> chat;
 	private double mapHeight;
@@ -55,9 +55,6 @@ public class GameInstance implements Serializable{
 		}
 		catch(Exception e) {e.printStackTrace();}
 	}
-	public GameInstance(BufferedImage i) {
-		background = i;
-	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
 		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(2);
 		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
@@ -69,7 +66,7 @@ public class GameInstance implements Serializable{
 		}
 		mapHeight = mapProperties.getMapHeight();
 		mapWidth = mapProperties.getMapWidth();
-		background = ImageIO.read(this.getClass().getResourceAsStream(mapProperties.getImagePath()));
+		background = mapProperties.getImagePath();
 	}
 	/**
 	 * Saves the information in the GameInstance to the specified file
@@ -81,14 +78,6 @@ public class GameInstance implements Serializable{
 		toWrite.add(this);
 		myWriter.write(filepath,toWrite);
 	}
-	private void writeObject(ObjectOutputStream out) throws IOException{
-		out.defaultWriteObject();
-		ImageIO.write(getBackground(), "png", out);
-	}
-	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-		in.defaultReadObject();
-		background = ImageIO.read(in);
-	}
 
 	/**
 	 * Read commands from the file that is updated by the GamePlayer
@@ -97,7 +86,7 @@ public class GameInstance implements Serializable{
 	public void executeCommand(int source_id, int target_id, int interaction_ID, int xcor, int ycor) {
 		if(!running)
 			return;
-		GridMap currentGridMap = new GridMap(background.getHeight(), background.getWidth());
+		GridMap currentGridMap = new GridMap(mapHeight, mapWidth);
 		myObjectManager.getGameObject(source_id).queueInteraction(myObjectManager.getGameObject(target_id), interaction_ID, myObjectManager, currentGridMap, new Vector2(xcor,ycor));
 	}
 
@@ -154,7 +143,7 @@ public class GameInstance implements Serializable{
 	public TeamManager getTeamManager() {
 		return myTeamManager;
 	}
-	public BufferedImage getBackground() {
+	public String getBackground() {
 		return background;
 	}
 	public double getGameTime(){

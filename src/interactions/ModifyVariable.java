@@ -81,7 +81,6 @@ public class ModifyVariable implements CustomFunction {
 				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
 
 			}
-			current.dequeueInteraction();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
@@ -110,6 +109,13 @@ public class ModifyVariable implements CustomFunction {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return NAME;
+	}
+
+
+	@Override
+	public boolean isRepetitive() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

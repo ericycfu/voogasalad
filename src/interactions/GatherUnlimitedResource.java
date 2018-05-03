@@ -38,7 +38,6 @@ public class GatherUnlimitedResource implements CustomFunction{
 			
 			double prevVal = current.getOwner().getResourceManager().getResource(resource);
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
-			current.dequeueInteraction();
 			
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException | InvalidResourceValueException e) 
@@ -83,6 +82,12 @@ public class GatherUnlimitedResource implements CustomFunction{
 	public String getName() {
 		// TODO Auto-generated method stub
 		return NAME;
+	}
+
+	@Override
+	public boolean isRepetitive() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

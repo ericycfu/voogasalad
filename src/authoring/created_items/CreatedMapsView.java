@@ -1,11 +1,9 @@
 package authoring.created_items;
 
 import authoring.backend.AuthoringController;
-import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedMaps;
 import authoring.backend.MapEntity;
 import authoring.support.MapSelectionImageView;
-import authoring.support.ObjectSelectionImageView;
 import authoring.view.DraggableScrollPane;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;

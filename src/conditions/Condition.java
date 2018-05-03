@@ -93,7 +93,7 @@ public class Condition implements EngineObject, Serializable{
 		tags.remove(t);
 	}
 	
-	public void execute()
+	public void execute(GameObject current)
 	{
 		try 
 		{
@@ -101,7 +101,7 @@ public class Condition implements EngineObject, Serializable{
 			{
 				for(CustomCondition c : customConditions)
 				{
-//					c.Execute(host);
+					c.Execute(current);
 				}
 			}
 		} 
