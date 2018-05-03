@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import server_client.ServerClient;
 
 public class StartScreen implements AuthoringView {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
@@ -56,7 +57,7 @@ public class StartScreen implements AuthoringView {
 															}
 															
 				}, "image_button"),
-				new PlayGameButton(myStage, "image_button")
+				ButtonFactory.makeButton("Play Game", e -> {new ServerClient(new Stage());}, "image_button")
 				);
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));

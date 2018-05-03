@@ -1,4 +1,4 @@
-package server_client.screens;
+package server_client.screens.display;
 import javafx.scene.text.Text;
 import server.GameLobby;
 

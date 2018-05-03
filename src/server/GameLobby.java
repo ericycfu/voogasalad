@@ -23,6 +23,7 @@ public class GameLobby implements Serializable{
 	private transient List<Socket>[] myPlayers;
 	private transient GameInstance loadedMap;
 	private transient Map<Socket, Integer> playerIDs;
+	private String mapName;
 	private int nextID;
 	private boolean isRunning;
 	private int ID;
@@ -36,7 +37,7 @@ public class GameLobby implements Serializable{
 		}
 		playerIDs = new HashMap<>();
 		nextID = 1;
-		
+		mapName = toRun.getName();
 		loadedMap = toRun;
 		isRunning = false;
 		
@@ -202,5 +203,8 @@ public class GameLobby implements Serializable{
 	}
 	public int getNumPlayers(int team_ID) {
 		return myPlayers[team_ID-1].size();
+	}
+	public String getMapName() {
+		return mapName;
 	}
 }
