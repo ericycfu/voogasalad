@@ -62,6 +62,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 	@Override
 	public void update() {
 		setupBox();
+		
 	}
 
 }

@@ -81,7 +81,7 @@ public class StartScreen {
 		myStage.setTitle(TITLE);
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
-		myStage.setResizable(false);
+//		myStage.setResizable(false);
 		myStage.show();
 	}	
 }
