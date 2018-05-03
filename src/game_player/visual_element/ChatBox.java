@@ -69,7 +69,6 @@ public class ChatBox {
     	}
 	}
 
-
 	public void displayText(String text) {
 		myChatHistory.appendText(text + GamePlayer.LINEBREAK);
 	}
