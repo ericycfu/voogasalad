@@ -2,13 +2,11 @@ package authoring.backend;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import authoring.support.DraggableImageView;
 import game_data.AuthoringToGameObject;
 import game_data.Writer;
 import game_engine.Team;
@@ -16,7 +14,6 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import resources.Resources;
 import scenemanager.SceneManager;
-import transform_library.Vector2;
 
 public class SaveAuthoringGameState {
 
