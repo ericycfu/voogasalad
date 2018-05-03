@@ -5,8 +5,11 @@ import java.io.Serializable;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import game_engine.Timer;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 /**
  * 
@@ -31,6 +34,9 @@ public class Renderer implements Serializable{
 	private boolean isHit;
 	private double elapsedTime;
 
+	private ImageView litImg;
+	private ImageView unLitImg;
+	
 	public Renderer(String imageLocation)
 	{
 		myImageLocation = imageLocation;
@@ -49,7 +55,10 @@ public class Renderer implements Serializable{
 		return myDisp;
 	}
 	public void setupImage() {
-		myDisp = new ImageView(new Image(myImageLocation));
+		litImg = new ImageView(new Image(myImageLocation));
+		unLitImg = new ImageView(new Image(myImageLocation));
+		myDisp = unLitImg;
+		setUpLitImg();
 	}
 	
 	public String getImagePath() {
@@ -73,9 +82,13 @@ public class Renderer implements Serializable{
 			if(invisTimer.timeLimit(elapsedTime, FLASH_DURATION))
 			{
 				deFlashUnit();
-			}
-				
+			}		
 		}
+	}
+	
+	public void makeUnitInvis()
+	{
+		myDisp.setVisible(false);
 	}
 	
 	public void setElapsedTime(double time)
@@ -87,18 +100,33 @@ public class Renderer implements Serializable{
 		myDisp = disp;
 	}
 	
+	
+	
 	public void flashUnit()
 	{
-		getDisp().setOpacity(Renderer.INVISIBLE_OPACITY);
+		//getDisp().setOpacity(Renderer.INVISIBLE_OPACITY);
+		this.myDisp = litImg;
 		this.isHit = true;
 		invisTimer = new Timer();
 		invisTimer.setInitialTime(elapsedTime);
 	}
 	
+	private void setUpLitImg()
+	{
+		Lighting lighting = new Lighting();
+		lighting.setDiffuseConstant(1);
+		lighting.setSpecularConstant(0);
+		lighting.setSpecularExponent(0);
+		lighting.setSurfaceScale(0);
+		lighting.setLight(new Light.Distant(45, 45, Color.RED));
+		litImg.setEffect(lighting);
+	}
+	
 	public void deFlashUnit()
 	{
 		this.isHit = false;
-		getDisp().setOpacity(Renderer.NORMAL_OPACITY);
+		//getDisp().setOpacity(Renderer.NORMAL_OPACITY);
+		this.myDisp = unLitImg;
 	}
 	
 	public Renderer()

@@ -22,8 +22,8 @@ public class Death implements CustomCondition {
 	@Override
 	public void Execute(GameObject current) {
 		
-		System.out.println("executing");
-		current.getRenderer().reduceOpacity(Renderer.INVISIBLE_OPACITY);
+		//current.getRenderer().reduceOpacity(Renderer.INVISIBLE_OPACITY);
+		current.getRenderer().makeUnitInvis();
 		current.setIsDead(true);
 
 	}
