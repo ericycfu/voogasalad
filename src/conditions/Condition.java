@@ -10,6 +10,7 @@ import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 import interactions.CustomComponentParameterFormat;
+import interactions.ParameterParser;
 
 
 /**
@@ -39,14 +40,11 @@ public class Condition implements EngineObject, Serializable{
 	private List<CustomCondition> customConditions;
 
 	
-//	public Condition(int id, GameObject object, int comparatorID, String var1, String var2)
 	public Condition(int id, int comparatorID, String var1, String var2)
-
 	{
 		this.id = id;
 		comparatorManager = new ComparatorManager();
 		customConditions = new ArrayList<>();
-//		host = object;
 		this.var1 = var1;
 		this.var2 = var2;
 		this.comparatorID = comparatorID;
@@ -97,11 +95,10 @@ public class Condition implements EngineObject, Serializable{
 	{
 		try 
 		{
-			if(comparatorManager.getComparatorResult(comparatorID, getVariableVal(var1), getVariableVal(var2)))
+			if(comparatorManager.getComparatorResult(comparatorID, getVariableVal(var1, current), getVariableVal(var2, current)))
 			{
 				for(CustomCondition c : customConditions)
 				{
-					System.out.println("condition is here " + c.getClass().getName());
 					c.Execute(current);
 				}
 			}
@@ -118,15 +115,10 @@ public class Condition implements EngineObject, Serializable{
 		}
 	}
 		
-	private double getVariableVal(String var) throws PropertyNotFoundException, UnmodifiableGameObjectException
+	private double getVariableVal(String var, GameObject current) throws PropertyNotFoundException, UnmodifiableGameObjectException
 	{
-		if (var.matches("([0-9]*)\\.([0-9]*)"))
-		{
-			return Double.parseDouble(var);
-		}
-		
-//		return host.accessLogic().accessAttributes().getAttribute(var);
-		return 0;
+		ParameterParser p = new ParameterParser();
+		return p.assignValidatedValue(var, current);
 	}
 	
 	
