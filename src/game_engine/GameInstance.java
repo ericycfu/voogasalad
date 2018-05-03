@@ -1,14 +1,9 @@
 package game_engine;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import authoring.backend.MapSettings;
 import game_data.Reader;
@@ -16,6 +11,7 @@ import game_data.Writer;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import pathfinding.GridMap;
+import scenemanager.SceneManager;
 import transform_library.Transform;
 import transform_library.Vector2;
 
@@ -40,6 +36,8 @@ public class GameInstance implements Serializable{
 	private List<ChatEntry> chat;
 	private double mapHeight;
 	private double mapWidth;
+	private String mapName;
+	private SceneManager mySceneManager;
 	private transient Reader myReader = new Reader();
 	private transient Writer myWriter = new Writer();
 	
@@ -50,20 +48,20 @@ public class GameInstance implements Serializable{
 		myTeamManager = new TeamManager();
 		chat = new ArrayList<ChatEntry>();
 		running = false;
+		myTeamManager = new TeamManager();
 		try {
 			setUp(filepath);
 		}
-		catch(Exception e) {e.printStackTrace();}
+		catch(Exception e) {}
 	}
 	public void setUp(String filepath) throws ClassNotFoundException, IOException {
+		
 		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(2);
-		for(int x = 0; x < mapProperties.getNumPlayers(); x++) {
-			ResourceManager rm = new ResourceManager();
-			for(String s: mapProperties.getInitialResources().keySet()) {
-				rm.addResource(s, mapProperties.getInitialResources().get(s));
-			}
-			myTeamManager.createTeam("Team" + Integer.toString(x+1), rm);
+		mySceneManager = (SceneManager) myReader.read(filepath).get(3);
+		for(Team t: mySceneManager.getTeams()) {
+			myTeamManager.addElement(t);
 		}
+		mapName = mapProperties.getName();
 		mapHeight = mapProperties.getMapHeight();
 		mapWidth = mapProperties.getMapWidth();
 		background = mapProperties.getImagePath();
@@ -151,5 +149,8 @@ public class GameInstance implements Serializable{
 	}
 	public List<ChatEntry> getChat(){
 		return chat;
+	}
+	public String getName() {
+		return mapName;
 	}
 }
