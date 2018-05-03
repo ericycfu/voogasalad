@@ -58,8 +58,8 @@ public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 800;
+	public static final int SCENE_SIZE_X = 900;
+	public static final int SCENE_SIZE_Y = 600;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.49;
@@ -249,7 +249,7 @@ public class GamePlayer extends ClientScreen {
 		myRoot.getChildren().add(mainDisp);
 		mainDisp.toBack();
 		
-		myChatBox = new ChatBox(SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getGroup();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
