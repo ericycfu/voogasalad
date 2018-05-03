@@ -1,6 +1,5 @@
 <object-stream>
   <game__object.GameObjectManager>
-<<<<<<< HEAD
     <elementMap>
       <entry>
         <int>1</int>
@@ -8,78 +7,22 @@
           <id>1</id>
           <transform>
             <position>
-              <x>110.0</x>
-              <y>123.0</y>
+              <x>336.0</x>
+              <y>206.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>1000.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>1000.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts>
-                <entry>
-                  <string>Gold</string>
-                  <double>100.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>10.0</buildTime>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>100.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags>
-                      <string>Farmer</string>
-                    </targetTags>
-                    <name>Build</name>
-                    <imagePath>/images/arrow_up.png</imagePath>
-                    <description>Build</description>
-                    <isBuild>true</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions>
-                      <interactions.BuildFunction>
-                        <NAME>BuildFunction</NAME>
-                        <format>
-                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                          <parameterFields/>
-                        </format>
-                      </interactions.BuildFunction>
-                    </customFunctions>
-                    <range>1000.0</range>
-                    <rate>0.0</rate>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -88,6 +31,8 @@
           </myObjectLogic>
           <renderer>
             <myImageLocation>/images/ghoul.png</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner>
             <id>1</id>
@@ -101,9 +46,9 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>FarmerBuilding</name>
+          <name>UnlimitedMine</name>
           <tags>
-            <string>Building</string>
+            <string>Mine</string>
           </tags>
           <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -123,37 +68,79 @@
           <id>4</id>
           <transform>
             <position>
-              <x>277.0</x>
-              <y>158.0</y>
+              <x>103.0</x>
+              <y>115.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
-              <attributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </maxAttributes>
+              <attributes/>
+              <maxAttributes/>
               <buildCosts>
                 <entry>
                   <string>Gold</string>
-                  <double>10.0</double>
+                  <double>100.0</double>
                 </entry>
               </buildCosts>
               <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>Mine</string>
+                    </targetTags>
+                    <name>UnlimitedGather</name>
+                    <imagePath>/images/arrow_down.png</imagePath>
+                    <description>Gather resources (unlimited)</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.GatherUnlimitedResource>
+                        <NAME>GatherUnlimitedResource</NAME>
+                        <RESOURCE>Resource</RESOURCE>
+                        <GATHER__RATE>Gather Rate</GATHER__RATE>
+                        <format>
+                          <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Gather Rate</string>
+                              <string>50</string>
+                            </entry>
+                            <entry>
+                              <string>Resource</string>
+                              <string>Gold</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.GatherUnlimitedResource>
+                    </customFunctions>
+                    <range>5.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -162,11 +149,13 @@
           </myObjectLogic>
           <renderer>
             <myImageLocation>/images/robert.png</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Farmer1</name>
+          <name>Miner1</name>
           <tags>
-            <string>Farmer</string>
+            <string>Miner</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -182,12 +171,7 @@
       </entry>
     </elementMap>
     <new__ID__val>7</new__ID__val>
-=======
-    <elementMap/>
-    <new__ID__val>1</new__ID__val>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   </game__object.GameObjectManager>
-<<<<<<< HEAD
   <set>
     <game__object.GameObject>
       <id>0</id>
@@ -201,19 +185,8 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes>
-            <entry>
-<<<<<<< HEAD
-              <string>Health</string>
-              <double>1000.0</double>
-            </entry>
-          </attributes>
-          <maxAttributes>
-            <entry>
-              <string>Health</string>
-              <double>1000.0</double>
-            </entry>
-          </maxAttributes>
+          <attributes/>
+          <maxAttributes/>
           <buildCosts>
             <entry>
               <string>Gold</string>
@@ -229,12 +202,12 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>Farmer</string>
+                  <string>Mine</string>
                 </targetTags>
-                <name>Build</name>
-                <imagePath>/images/arrow_up.png</imagePath>
-                <description>Build</description>
-                <isBuild>true</isBuild>
+                <name>UnlimitedGather</name>
+                <imagePath>/images/arrow_down.png</imagePath>
+                <description>Gather resources (unlimited)</description>
+                <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
                 <targetTeamEnumMap>
@@ -252,16 +225,27 @@
                   </entry>
                 </targetTeamEnumMap>
                 <customFunctions>
-                  <interactions.BuildFunction>
-                    <NAME>BuildFunction</NAME>
+                  <interactions.GatherUnlimitedResource>
+                    <NAME>GatherUnlimitedResource</NAME>
+                    <RESOURCE>Resource</RESOURCE>
+                    <GATHER__RATE>Gather Rate</GATHER__RATE>
                     <format>
-                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                      <parameterFields/>
+                      <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Gather Rate</string>
+                          <string>50</string>
+                        </entry>
+                        <entry>
+                          <string>Resource</string>
+                          <string>Gold</string>
+                        </entry>
+                      </parameterFields>
                     </format>
-                  </interactions.BuildFunction>
+                  </interactions.GatherUnlimitedResource>
                 </customFunctions>
-                <range>1000.0</range>
-                <rate>0.0</rate>
+                <range>5.0</range>
+                <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
@@ -273,16 +257,18 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/ghoul.png</myImageLocation>
+        <myImageLocation>/images/robert.png</myImageLocation>
+        <isHit>false</isHit>
+        <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>FarmerBuilding</name>
+      <name>Miner1</name>
       <tags>
-        <string>Building</string>
+        <string>Miner</string>
       </tags>
-      <isBuilding>true</isBuilding>
+      <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
+      <movementSpeed>5.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -302,37 +288,10 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
-          <attributes>
-            <entry>
-              <string>Health</string>
-=======
-              <string>health</string>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
-              <double>100.0</double>
-            </entry>
-          </attributes>
-          <maxAttributes>
-            <entry>
-<<<<<<< HEAD
-              <string>Health</string>
-=======
-              <string>health</string>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
-              <double>100.0</double>
-            </entry>
-          </maxAttributes>
-          <buildCosts>
-            <entry>
-<<<<<<< HEAD
-              <string>Gold</string>
-              <double>10.0</double>
-=======
-              <string>gold</string>
-              <double>37.0</double>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
-            </entry>
-          </buildCosts>
-          <buildTime>5.0</buildTime>
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts/>
+          <buildTime>100.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
@@ -345,25 +304,17 @@
       </myObjectLogic>
       <renderer>
         <myImageLocation>/images/ghoul.png</myImageLocation>
+        <isHit>false</isHit>
+        <elapsedTime>0.0</elapsedTime>
       </renderer>
-<<<<<<< HEAD
-      <name>Farmer1</name>
+      <name>UnlimitedMine</name>
       <tags>
-        <string>Farmer</string>
-=======
-      <name>soldier</name>
-      <tags>
-        <string>asdf</string>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+        <string>Mine</string>
       </tags>
-      <isBuilding>false</isBuilding>
+      <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-<<<<<<< HEAD
-      <movementSpeed>5.0</movementSpeed>
-=======
-      <movementSpeed>3.0</movementSpeed>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
+      <movementSpeed>0.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -372,31 +323,16 @@
       <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
     </game__object.GameObject>
   </set>
-<<<<<<< HEAD
-=======
-=======
-  <set/>
->>>>>>> player
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   <authoring.backend.MapSettings>
     <mapName>Default map</mapName>
-    <numPlayers>4</numPlayers>
-    <endConditions>
-      <scenemanager.AllUnitsDead>
-        <NAME>AllUnitsDead</NAME>
-        <format>
-          <helpText>You lose when all your units and buildings are dead..</helpText>
-          <parameterFields/>
-        </format>
-      </scenemanager.AllUnitsDead>
-    </endConditions>
+    <numPlayers>1</numPlayers>
+    <endConditions/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map4.jpg</imagePath>
+    <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
-<<<<<<< HEAD
       <elementMap>
         <entry>
           <int>1</int>
@@ -404,78 +340,22 @@
             <id>1</id>
             <transform>
               <position>
-                <x>110.0</x>
-                <y>123.0</y>
+                <x>336.0</x>
+                <y>206.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>1000.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>1000.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts>
-                  <entry>
-                    <string>Gold</string>
-                    <double>100.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>10.0</buildTime>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>100.0</buildTime>
               </attributes>
               <interactions>
-                <elementMap>
-                  <entry>
-                    <int>1</int>
-                    <interactions.Interaction>
-                      <id>1</id>
-                      <targetTags>
-                        <string>Farmer</string>
-                      </targetTags>
-                      <name>Build</name>
-                      <imagePath>/images/arrow_up.png</imagePath>
-                      <description>Build</description>
-                      <isBuild>true</isBuild>
-                      <isInstantaneous>false</isInstantaneous>
-                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                      <targetTeamEnumMap>
-                        <entry>
-                          <string>OTHER</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>ALL</string>
-                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>OWN</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                      </targetTeamEnumMap>
-                      <customFunctions>
-                        <interactions.BuildFunction>
-                          <NAME>BuildFunction</NAME>
-                          <format>
-                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                            <parameterFields/>
-                          </format>
-                        </interactions.BuildFunction>
-                      </customFunctions>
-                      <range>1000.0</range>
-                      <rate>0.0</rate>
-                    </interactions.Interaction>
-                  </entry>
-                </elementMap>
-                <new__ID__val>7</new__ID__val>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -484,6 +364,8 @@
             </myObjectLogic>
             <renderer>
               <myImageLocation>/images/ghoul.png</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner>
               <id>1</id>
@@ -497,9 +379,9 @@
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>FarmerBuilding</name>
+            <name>UnlimitedMine</name>
             <tags>
-              <string>Building</string>
+              <string>Mine</string>
             </tags>
             <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -519,37 +401,79 @@
             <id>4</id>
             <transform>
               <position>
-                <x>277.0</x>
-                <y>158.0</y>
+                <x>103.0</x>
+                <y>115.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
             <myObjectLogic>
               <fulfillsLossCondition>false</fulfillsLossCondition>
               <attributes>
-                <attributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>100.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Health</string>
-                    <double>100.0</double>
-                  </entry>
-                </maxAttributes>
+                <attributes/>
+                <maxAttributes/>
                 <buildCosts>
                   <entry>
                     <string>Gold</string>
-                    <double>10.0</double>
+                    <double>100.0</double>
                   </entry>
                 </buildCosts>
                 <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <interactions.Interaction>
+                      <id>1</id>
+                      <targetTags>
+                        <string>Mine</string>
+                      </targetTags>
+                      <name>UnlimitedGather</name>
+                      <imagePath>/images/arrow_down.png</imagePath>
+                      <description>Gather resources (unlimited)</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.GatherUnlimitedResource>
+                          <NAME>GatherUnlimitedResource</NAME>
+                          <RESOURCE>Resource</RESOURCE>
+                          <GATHER__RATE>Gather Rate</GATHER__RATE>
+                          <format>
+                            <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                            <parameterFields>
+                              <entry>
+                                <string>Gather Rate</string>
+                                <string>50</string>
+                              </entry>
+                              <entry>
+                                <string>Resource</string>
+                                <string>Gold</string>
+                              </entry>
+                            </parameterFields>
+                          </format>
+                        </interactions.GatherUnlimitedResource>
+                      </customFunctions>
+                      <range>5.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>7</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -558,11 +482,13 @@
             </myObjectLogic>
             <renderer>
               <myImageLocation>/images/robert.png</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Farmer1</name>
+            <name>Miner1</name>
             <tags>
-              <string>Farmer</string>
+              <string>Miner</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -583,12 +509,5 @@
     <teams>
       <game__engine.Team reference="../../objManager/elementMap/entry/game__object.GameObject/owner"/>
     </teams>
-=======
-      <elementMap/>
-      <new__ID__val>1</new__ID__val>
-    </objManager>
-    <endConditions/>
-    <teams/>
->>>>>>> ec0fc0e32d03241da5d100013fc30ec00ee217f3
   </scenemanager.SceneManager>
 </object-stream>
