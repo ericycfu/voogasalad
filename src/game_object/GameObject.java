@@ -322,6 +322,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		setIsUninteractive(true);
 		this.isBeingConstructed = true;
+		this.buildTimer = new Timer();
 		triggerTimer(this.buildTimer);
 		this.renderer.reduceOpacity();
 	}
