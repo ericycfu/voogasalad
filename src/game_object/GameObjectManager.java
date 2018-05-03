@@ -95,10 +95,8 @@ public class GameObjectManager extends ElementManager implements Serializable{
 	 */
 	public void runGameObjectLoop(double stepTime)
 	{
-		
 		for(GameObject obj : getElements())
 		{
-			if(obj.isDead()) continue;
 			obj.setElapsedTime(stepTime);
 			obj.Update();
 		}

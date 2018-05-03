@@ -220,11 +220,18 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		}
 	
 		myObjectLogic.checkConditions(this);
+		renderer.updateRenderer();
 
 	}
 	
 	private void executeValidatedInteraction()
 	{
+		if(interactionTarget.isDead())
+		{
+			isInteractionQueued = false;
+			interactionTarget = null;
+			isPreviousInteractionQueued = false;
+		}
 		if(interactionTarget == null  && emptyPosTarget == null) 
 			return;
 		 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
@@ -272,7 +279,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	 */
 	public void queueInteraction(GameObject other, int id, GameObjectManager manager, GridMap gridMap, Vector2 emptyPos)
 	{
-		System.out.println("get into queueInteraction" );
 		isInteractionQueued = true;
 		interactionTarget = other;
 		emptyPosTarget = emptyPos;
@@ -307,10 +313,10 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		{
 			return;
 		}
+		this.isPreviousInteractionQueued = false;
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
-		this.isPreviousInteractionQueued = false;
 		if(!activeWaypoints.isEmpty())
 		{
 			isMovementQueued = true;
@@ -427,8 +433,9 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	public void setElapsedTime(double time)
 	{
 		this.elapsedTime += time;
-		//System.out.println("Time " + elapsedTime);
+		this.renderer.setElapsedTime(time);
 	}
+	
 	public void setupImages() {
 		renderer.setupImage();
 		myObjectLogic.setupImage();

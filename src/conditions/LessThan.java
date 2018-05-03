@@ -17,7 +17,7 @@ public class LessThan implements Comparator{
 	 * Returns true if val1 < val2
 	 */
 	public boolean compare(double val1, double val2) {
-		// TODO Auto-generated method stub
+		
 		return (val1 < val2);
 	}
 

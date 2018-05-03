@@ -38,7 +38,8 @@ public class GatherUnlimitedResource implements CustomFunction{
 			
 			double prevVal = current.getOwner().getResourceManager().getResource(resource);
 			current.getOwner().getResourceManager().updateResource(resource, prevVal + deltaVal);
-			
+			other.getRenderer().flashUnit();
+
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException | InvalidResourceValueException e) 
 		{
