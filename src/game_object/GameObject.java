@@ -220,6 +220,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		}
 	
 		myObjectLogic.checkConditions(this);
+		renderer.updateRenderer();
 
 	}
 	
@@ -427,8 +428,9 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	public void setElapsedTime(double time)
 	{
 		this.elapsedTime += time;
-		//System.out.println("Time " + elapsedTime);
+		this.renderer.setElapsedTime(time);
 	}
+	
 	public void setupImages() {
 		renderer.setupImage();
 		myObjectLogic.setupImage();

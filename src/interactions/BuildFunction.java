@@ -30,7 +30,6 @@ public class BuildFunction implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
-		
 		if(other == null) return;
 		try 
 		{

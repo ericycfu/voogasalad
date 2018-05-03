@@ -78,6 +78,7 @@ public class ModifyVariable implements CustomFunction {
 				other.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + finalDelta);
 
 			}
+			other.getRenderer().flashUnit();
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{

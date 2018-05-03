@@ -101,6 +101,7 @@ public class Condition implements EngineObject, Serializable{
 			{
 				for(CustomCondition c : customConditions)
 				{
+					System.out.println("condition is here " + c.getClass().getName());
 					c.Execute(current);
 				}
 			}
