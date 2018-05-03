@@ -29,7 +29,7 @@ public class MakeGameSelect implements AuthoringView {
 	private void setupScreen() {
 		myPane = new BorderPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
-		myPane.setId("start_screen");
+		myPane.setId("game_select_screen");
 		// # -> setId
 		// . -> getStyleClass.add
 		Scene scene = new Scene(myPane);
@@ -49,13 +49,16 @@ public class MakeGameSelect implements AuthoringView {
 		for (int i=0; i<NUM_GAMES/2; i++) {
 			row1.getChildren().add(new NewGameButton(i+1, myStage));
 		}
+		row1.setSpacing(10);
 		HBox row2 = new HBox();
 		row2.setAlignment(Pos.CENTER);
 		for (int j=NUM_GAMES/2; j<NUM_GAMES; j++) {
 			row2.getChildren().add(new NewGameButton(j+1, myStage));
 		}
+		row2.setSpacing(10);
 		VBox box = new VBox();
 		box.getChildren().addAll(row1, row2);
+		box.setSpacing(20);
 		box.setAlignment(Pos.CENTER);
 		myPane.setCenter(box);
 	}

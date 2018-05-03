@@ -12,8 +12,14 @@
     -fx-stroke-width: 1;
 }
 
+#game_select_screen {
+	-fx-background-image: url("/images/blue.jpg");
+	-fx-background-repeat: stretch;
+	-fx-background-position: 0 center;
+}
+
 .image_button {
-    	-fx-font: 48px Arial;
+    -fx-font: 48px Arial;
     -fx-text-fill: steelblue;
     -fx-pref-width: 400px;
     -fx-pref-height: 100px;
@@ -25,17 +31,35 @@
 	-fx-border-color: white;
 }
 
-.new_game_button {
-	-fx-font: 32px Arial;
-    -fx-pref-width: 300px;
-    -fx-pref-height: 300px;
+
+.new_game_button{
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 16px;
+    -fx-padding: 10 20 10 20;
+
 }
 
-.new_game_button:hover {
-	-fx-background-image:none;
-	-fx-border-width: 2px;
-	-fx-border-color: white;
+.new_game_button:hover{
+  	-fx-spacing: 5px;
+  	-fx-border-color: white, 
+  		linear-gradient(white 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+	-fx-background-radius: 5,4,3,5;
+	-fx-background-inses: 0 1, 2, 0;
+	
 }
+
 
 .back_button {
 	-fx-font: 18px Arial;
