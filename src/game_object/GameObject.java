@@ -192,12 +192,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		 *  3. Update renderer data
 		 */
 		
-		if(this.isUninteractive) 
-			return;
-		
-		moveUpdate();
-		
-		
 		if(isBeingConstructed)
 		{
 			System.out.println("being constructed ");
@@ -207,11 +201,16 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 		}
 		
+		if(this.isUninteractive) 
+			return;
+		
+		moveUpdate();
+		
+		
 		if(this.isPreviousInteractionQueued)
 		{	
 			if(interactionTimer.timeLimit(elapsedTime, this.myObjectLogic.getCurrentInteraction().getRate()))
 			{
-				System.out.println("executing");
 				myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 			}
 		}
@@ -303,7 +302,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	public void queueMovement(Vector2 target, GameObjectManager manager, GridMap gridmap)
 	{
-		if(this.isUninteractive)
+		if(this.isUninteractive || this.isBuilding)
 		{
 			return;
 		}
@@ -322,6 +321,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		setIsUninteractive(true);
 		this.isBeingConstructed = true;
+		this.buildTimer = new Timer();
 		triggerTimer(this.buildTimer);
 		this.renderer.reduceOpacity();
 	}
