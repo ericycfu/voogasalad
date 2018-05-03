@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import game_data.Reader;
+import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.Renderer;
@@ -139,9 +140,8 @@ public class TestMain extends Application {
         animation.getKeyFrames().add(frame);
         animation.play();
         
-		GamePlayer gp = new GamePlayer(animation, gom, null, possibleunits);
-        myGP = gp;
-		Scene scene = gp.getScene();  
+		myGP = new GamePlayer(animation, gom, null, possibleunits);
+		Scene scene = myGP.getScene();  
         gpStage.setScene(scene);
         gpStage.show();
         //myGP.update(myGOM.getElements());

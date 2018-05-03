@@ -7,7 +7,7 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
 import game_player.GamePlayer;
-import game_player.SelectedUnitManager;
+import game_player.selected_unit_manager.SelectedUnitManager;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Group;
