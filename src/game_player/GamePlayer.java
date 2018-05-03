@@ -67,6 +67,13 @@ public class GamePlayer extends ClientScreen {
 	public static final double TOP_HEIGHT = 0.05;
 	public static final double CHATBOX_WIDTH = 0.20;
 	public static final double CHATBOX_HEIGHT = 0.30;
+	public static final String LINEBREAK = "\n";
+	public static final String COLON = ": ";
+	public static final String SPACE = " ";
+	public static final String SERVERALERTHEAD = "Communication Failed";
+	public static final String SERVERALERTBODY = "Please try again.";
+	
+	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
 	private MiniMap myMiniMap;
