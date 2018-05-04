@@ -155,6 +155,8 @@ public abstract class TopPanel {
 			gom.transferGameObjects((GameObjectManager) gameObjects.get(GOMINDEX));
 			possibleUnits.clear();
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
+			System.out.println(gom.getElements().get(1).getOwner().getID());
+			System.out.println(myTeamID);
 			myResourceManager = gom.getElements().stream().filter(go -> go.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
 			resize(gom.getElements());
 			resize(possibleUnits);
