@@ -90,7 +90,13 @@ public final class AuthoringToGameObject {
 					teamIds.add(AO.getTeam());
 				}
 			}
-		mapSettings.setNumPlayers(teamIds.size());
+		if(!teamIds.isEmpty()) {
+			mapSettings.setNumPlayers(teamIds.size());
+		}
+		else {
+			mapSettings.setNumPlayers(1);
+			teams.add(new Team(1,  (new ResourceManager()).copyResourceManager(RM)));
+		}
 		}
 		return teams;
 	}
