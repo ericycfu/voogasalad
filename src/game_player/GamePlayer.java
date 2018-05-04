@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import authoring.backend.MapSettings;
+import game_engine.ChatEntry;
 import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
@@ -296,14 +297,17 @@ public class GamePlayer extends ClientScreen {
 			Object obj;
 			do {
 				obj = inputstream.readObject();
-			} while(!(obj instanceof GameObjectManager));
+			} while(!(obj instanceof GameInstance));
+			GameInstance gi = (GameInstance)obj;
 			synchronized (myGameObjectManager){
-				GameObjectManager gom = (GameObjectManager) obj;
+				GameObjectManager gom = gi.getGameObjects();
 				updateGameObjectManager(gom);
 			}
-			myTeam = (Team) inputstream.readObject();
-			myChatBox.displayText(inputstream.readObject().toString());
-			mySceneManager = (SceneManager)inputstream.readObject();
+			myTeam = (Team) gi.getTeamManager().getTeam(inputstream.readInt());
+			List<ChatEntry> chat = gi.getChat();
+			for(ChatEntry c: chat)
+				myChatBox.displayText(c.convertToString());
+			mySceneManager = gi.getSceneManager();
 		} catch (Exception e) {
 			return;
 		}
@@ -334,7 +338,6 @@ public class GamePlayer extends ClientScreen {
 				team_ID = in.readInt();
 			}
 			catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 		setUpBackend(gi, team_ID);
