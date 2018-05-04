@@ -1,4 +1,4 @@
-package server_client.screens;
+package server_client.screens.display;
 import javafx.scene.text.Text;
 import server.GameLobby;
 
@@ -14,7 +14,7 @@ public class LobbyDisplay extends GridPaneDisplay {
 	public void update(GameLobby toDisplay) {
 		getChildren().clear();
 		ID = toDisplay.getID();
-		Text lobbyText = new Text("LOBBY " + ID + "			Teams: " + toDisplay.getNumTeams());
+		Text lobbyText = new Text("[LOBBY " + ID + "]	 Map: " + toDisplay.getMapName() + "		Teams: " + toDisplay.getNumTeams());
 		lobbyText.setId("lobby_main_text");
 		add(lobbyText,0,0);
 	}

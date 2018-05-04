@@ -28,12 +28,13 @@ public final class AuthoringToGameObject {
 	 * @param map
 	 * @return
 	 */
-	public static GameObjectManager convertMap(Map<AuthoringObject, List<DraggableImageView>> map, ResourceManager RM) {
+	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, List<Team> teamList) {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
-			for(DraggableImageView DIV: map.get(AO)) {
+			for(AuthoringObject AO2: map.get(AO)) {
+				DraggableImageView DIV =  AO2.getDragImage();
 				ObjectLogic logic = new ObjectLogic(AO.getObjectLogic());
-				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, RM));
+				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, teamList));
 			}
 		}
 		return GOM;
@@ -60,9 +61,36 @@ public final class AuthoringToGameObject {
 	 * @param RM
 	 * @return
 	 */
-	private static Team convert(AuthoringObject AO, ResourceManager RM) {
-
-		return new Team(AO.getTeam(),(new ResourceManager()).copyResourceManager(RM));
-
+	private static Team convert(AuthoringObject AO, List<Team> teamList) {
+		for(Team team: teamList) {
+			if(AO.getTeam() == team.getID()) {
+				return team;
+			}
+		}
+		System.out.println("Shouldn't ever get here");
+		return null;
+	}
+	
+	/**
+	 * sees how many teams authoring has, and makes the correct amount
+	 * @param resourceManager 
+	 * @param map 
+	 * @param list
+	 * @return
+	 */
+	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM){
+		List<Team> teams = new ArrayList<>();
+		List<Integer> teamIds = new ArrayList<>();
+		for(List<AuthoringObject> AOs: map.values()) {
+			for(AuthoringObject AO: AOs) {
+				System.out.println("This AO has team id of : " + AO.getTeam());
+				if(!teamIds.contains(AO.getTeam())) {
+					teams.add(new Team(AO.getTeam(), (new ResourceManager()).copyResourceManager(RM)));
+					teamIds.add(AO.getTeam());
+				}
+			}
+				
+		}
+		return teams;
 	}
 }

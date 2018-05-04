@@ -1,16 +1,10 @@
 package authoring.view;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import gui_elements.buttons.MakeGameButton;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,18 +12,13 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import server_client.ServerClient;
 
-public class StartScreen {
+public class StartScreen implements AuthoringView {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
-
 	public static final String TITLE = "Rap Tilt Swagger";
-	public static final Color INITIAL_COLOR = Color.WHITE;
-	public static final int INITIAL_SCENE_WIDTH = 1200;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
 	private Stage myStage;
 	private 	StackPane myPane;
 	private Scene myScene; 
@@ -43,7 +32,7 @@ public class StartScreen {
 	
 	private void setupScreen() {
 		myPane = new StackPane();
-		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
+		myPane.setBackground(new Background(new BackgroundFill(DEFAULT_BACKGROUND, null, null)));
 		myPane.setId("start_screen");
 		myScene = new Scene(myPane);
 		myScene.getStylesheets().add(STYLE_PATH);
@@ -67,12 +56,12 @@ public class StartScreen {
 																e1.printStackTrace();
 															}
 															
-				}, "load_game_button"),
-				new PlayGameButton(myStage)
+				}, "image_button"),
+				ButtonFactory.makeButton("Play Game", e -> {new ServerClient(new Stage());}, "image_button")
 				);
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
-		box.setSpacing(10);
+		box.setSpacing(SPACING_SMALL);
 		myPane.getChildren().add(box);
 	}
 	
@@ -81,7 +70,7 @@ public class StartScreen {
 		myStage.setTitle(TITLE);
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
-		myStage.setResizable(false);
+//		myStage.setResizable(false);
 		myStage.show();
 	}	
 }

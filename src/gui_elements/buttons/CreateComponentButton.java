@@ -1,5 +1,8 @@
 package gui_elements.buttons;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
 import authoring.backend.GameEntity;
@@ -29,13 +32,12 @@ public class CreateComponentButton extends MainButton {
 	private DesignTab design_tab;
 	private ComboBox<String> building_cb;
 	private TextField build_time_tf;
-	private ComboBox<String> resource_cb;
-	private TextField resource_cost_tf;
+	private Map<String, Double> resource_cost_map;
 	private GameEntity game_entity;
 		
 	public CreateComponentButton(AuthoringObject authoring_object, TextField name_tf, ComboBox<String> tag_cb, 
 			TagController tag_controller, Label image_text_label, TextField movement_speed_tf, ComboBox<String> building_cb, 
-			TextField build_time_tf, ComboBox<String> resource_cb, TextField resource_cost_tf, DesignTab design_tab,
+			TextField build_time_tf, Map<String, Double> resource_cost_map, DesignTab design_tab,
 			GameEntity game_entity) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
 		this.authoring_object = authoring_object;
@@ -47,8 +49,7 @@ public class CreateComponentButton extends MainButton {
 		this.design_tab = design_tab;
 		this.building_cb = building_cb;
 		this.build_time_tf = build_time_tf;
-		this.resource_cb = resource_cb;
-		this.resource_cost_tf = resource_cost_tf;
+		this.resource_cost_map = resource_cost_map;
 		this.game_entity = game_entity;
 		setAction();
 	}
@@ -69,7 +70,9 @@ public class CreateComponentButton extends MainButton {
 			authoring_object.setBuilding(Boolean.parseBoolean(building_cb.getValue()));
 			authoring_object.setBuildTime(Double.parseDouble(build_time_tf.getText()));
 			authoring_object.setTeam(DEFAULT_TEAM);
-			authoring_object.setBuildCost(resource_cb.getValue(), Double.parseDouble(resource_cost_tf.getText()));
+			for (Entry<String, Double> entry: resource_cost_map.entrySet()) {
+				authoring_object.setBuildCost(entry.getKey(), entry.getValue());
+			}
 			game_entity.getCreatedObjects().addObject(authoring_object);
 			design_tab.setNewAuthoringObject();
 			design_tab.resetComponents();

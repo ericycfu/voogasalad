@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface Speaker {
 	
-	public  List<Listener> myListeners = new ArrayList<Listener>();
+	public  List<Listener> myListeners = new ArrayList<>();
 	
 	/**
 	 * Adds a Listener object to myListeners, enabling it to receive notification

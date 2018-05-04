@@ -5,12 +5,10 @@ import gui_elements.buttons.NewGameButton;
 import gui_elements.texts.MakeGameText;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -20,7 +18,6 @@ public class MakeGameSelect implements AuthoringView {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final int NUM_GAMES = 6;
 	private BorderPane myPane;
-	private Scene myScene;
 	private Stage myStage;
 	public MakeGameSelect(Stage stage) {
 		myStage = stage;
@@ -32,10 +29,12 @@ public class MakeGameSelect implements AuthoringView {
 	private void setupScreen() {
 		myPane = new BorderPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
-//		myPane.setId("start_screen");
-		myScene = new Scene(myPane);
-		myScene.getStylesheets().add(STYLE_PATH);
-		myStage.setScene(myScene);
+		myPane.setId("start_screen");
+		// # -> setId
+		// . -> getStyleClass.add
+		Scene scene = new Scene(myPane);
+		scene.getStylesheets().add(STYLE_PATH);
+		myStage.setScene(scene);
 	}
 	
 	private void setupTitle() {

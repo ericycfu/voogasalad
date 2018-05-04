@@ -1,9 +1,10 @@
 package gui_elements.tabs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
@@ -14,6 +15,8 @@ import gui_elements.buttons.CreateConditionsButton;
 import gui_elements.buttons.CreateInteractionsButton;
 import gui_elements.buttons.MainButton;
 import gui_elements.buttons.NewComponentButton;
+import gui_elements.buttons.BuildCostAddButton;
+import gui_elements.buttons.BuildCostClearButton;
 import gui_elements.buttons.ComponentImageChooserButton;
 import gui_elements.buttons.CreateComponentButton;
 import gui_elements.combo_boxes.BuildingComboBox;
@@ -34,10 +37,12 @@ import gui_elements.text_fields.ComponentBuildCostTextField;
 import gui_elements.text_fields.ComponentBuildTimeTextField;
 import gui_elements.text_fields.ComponentMovementSpeedTextField;
 import gui_elements.text_fields.ComponentNameTextField;
+import gui_elements.text_fields.DisplayBuildCostsTextField;
 import gui_elements.text_fields.MainTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
-import observables.Listener;
 
 public class DesignTab extends Tab {
 
@@ -45,7 +50,7 @@ public class DesignTab extends Tab {
 	private static final String CREATE_COMPONENT = "Create Component";
 	private static final String UPDATE_COMPONENT = "Update Component";	
 	private Group design_root;
-	private MainTextField component_name_tf, component_movement_speed_tf, component_build_time_tf, component_build_cost_tf;
+	private MainTextField component_name_tf, component_movement_speed_tf, component_build_time_tf, component_build_cost_tf, display_build_costs_tf;
 	private MainComboBox component_tag_cb, building_cb, component_resource_cb;
 	private MainLabel component_image_choice_text_label;
 	private MainButton component_image_chooser_button, create_component_button;
@@ -53,10 +58,14 @@ public class DesignTab extends Tab {
 	private TagController tag_controller;
 	private AuthoringController authoring_controller;
 	private GameEntity game_entity;
+	private Map<String, Double> myBuildCosts;
+	private String buildCostsDisplayText;
 	
 	public DesignTab(AuthoringController authoring_controller, GameEntity game_entity) {
 		this.authoring_controller = authoring_controller;
 		this.game_entity = game_entity;
+		myBuildCosts = new HashMap<String, Double>();
+		buildCostsDisplayText = "";
 		authoring_controller.addToAuthorController(this);
 		authoring_object = new AuthoringObject();
 		tag_controller = new TagController();
@@ -98,13 +107,17 @@ public class DesignTab extends Tab {
 		component_movement_speed_tf = new ComponentMovementSpeedTextField();
 		component_build_time_tf = new ComponentBuildTimeTextField();
 		component_build_cost_tf = new ComponentBuildCostTextField();		
+		display_build_costs_tf = new DisplayBuildCostsTextField();
+		display_build_costs_tf.setDisable(true);
+		display_build_costs_tf.setText(buildCostsDisplayText);
 //		interaction_automatic_key_tf = new InteractionAutomaticKeyTextField();
 		
 		design_root.getChildren().addAll(
 										 component_name_tf.getTextField(),
 										 component_movement_speed_tf.getTextField(),
 										 component_build_time_tf.getTextField(),
-										 component_build_cost_tf.getTextField());
+										 component_build_cost_tf.getTextField(),
+										 display_build_costs_tf.getTextField());
 //										 interaction_automatic_key_tf.getTextField(),
 	}
 	
@@ -112,7 +125,6 @@ public class DesignTab extends Tab {
 		component_tag_cb = new ComponentTagComboBox(tag_controller);
 		building_cb = new BuildingComboBox();
 		component_resource_cb = new ComponentResourceComboBox();
-		
 		design_root.getChildren().addAll(component_tag_cb.getComboBox(),
 										building_cb.getComboBox(),
 										component_resource_cb.getComboBox());
@@ -128,8 +140,7 @@ public class DesignTab extends Tab {
 															component_movement_speed_tf.getTextField(),
 															building_cb.getComboBox(),
 															component_build_time_tf.getTextField(),
-															component_resource_cb.getComboBox(),
-															component_build_cost_tf.getTextField(),
+															myBuildCosts,
 															this,
 															game_entity);
 		
@@ -140,7 +151,31 @@ public class DesignTab extends Tab {
 										 new CreateInteractionsButton(authoring_object,
 												 					  tag_controller).getButton(),
 										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
-										 new NewComponentButton(this).getButton());
+										 new NewComponentButton(this).getButton(),
+										 new BuildCostAddButton(e->{addToBuildCostMap();			
+										 }).getButton(),
+										 new BuildCostClearButton(e->{clearBuildCostMap();
+										 }).getButton());
+	}
+	
+	private void addToBuildCostMap() {
+		if ((component_resource_cb.getValue()!= null) && !(component_build_cost_tf.getText().equals(""))) {
+			myBuildCosts.put(component_resource_cb.getValue(), Double.parseDouble(component_build_cost_tf.getText()));
+
+		}
+		updateBuildCostDisplayText();
+	}
+	private void clearBuildCostMap() {
+		myBuildCosts.clear();
+		display_build_costs_tf.setText(buildCostsDisplayText);
+	}
+	
+	private void updateBuildCostDisplayText() {
+		buildCostsDisplayText = "";
+		for (Entry<String, Double> entry: myBuildCosts.entrySet()) {
+			buildCostsDisplayText += entry.getKey() + " " + entry.getValue() + "; ";
+		}
+		display_build_costs_tf.setText(buildCostsDisplayText);
 	}
 	
 	public void setNewAuthoringObject() {
@@ -164,31 +199,36 @@ public class DesignTab extends Tab {
 		building_cb.getEditor().clear();
 		component_build_time_tf.clear();
 		component_build_cost_tf.clear();
+		updateBuildCost();
+		updateBuildCostDisplayText();
 	}
 	
 	public void assignComponents() {
 		component_name_tf.setText(authoring_object.getName());
 		String tag_string = "";
-		for(String tag : authoring_object.getTags())
+		for(String tag : authoring_object.getTags()) {
 			tag_string += tag + " ";
+		}
 		component_tag_cb.getEditor().setText(tag_string.substring(0, tag_string.length() - 1));
 		component_movement_speed_tf.setText(authoring_object.getMovementSpeed() + "");
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 		component_image_choice_text_label.setText(authoring_object.getImagePath());
+
 	}
 	
 	public void updateBuildCost() {
 		ResourceManager resource_manager = game_entity.getResourceManager();
 		List<Entry<String, Double>> resource_entries = resource_manager.getResourceEntries();
 		List<String> resource_names = getResourceNames(resource_entries);
+		component_resource_cb.getItems().clear();
 		for(String resource_entry : resource_names) {
 			component_resource_cb.getItems().add(resource_entry);
 		}
 	}
 	
 	public List<String> getResourceNames(List<Entry<String, Double>> resource_entries) {
-		List<String> resource_names = new ArrayList<String>();
+		List<String> resource_names = new ArrayList<>();
 		for(Entry<String, Double> entry : resource_entries) {
 			resource_names.add(entry.getKey());
 		}

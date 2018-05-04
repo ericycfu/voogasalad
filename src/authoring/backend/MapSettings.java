@@ -1,23 +1,19 @@
 package authoring.backend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import scenemanager.EndCondition;
-import scenemanager.SceneManager;
 
 public class MapSettings implements AuthoringView {
+	public static final int DEFAULT_MAP_SIZE = 1000;
+	
 	private String mapName;
 	private int numPlayers;
 	private List<EndCondition> endConditions;
-	private Map<String, Integer> resources;
 	private int mapwidth;
 	private int mapheight;
 	private String imagePath;
@@ -31,9 +27,8 @@ public class MapSettings implements AuthoringView {
 		mapName = "Default map";
 		numPlayers = 1;
 		endConditions = new ArrayList<>();
-		resources = new HashMap<>();
-		mapwidth = 1000;
-		mapheight = 1000;
+		mapwidth = DEFAULT_MAP_SIZE;
+		mapheight = DEFAULT_MAP_SIZE;
 		imagePath = "/images/tt.jpg";
 	}
 	
@@ -44,7 +39,7 @@ public class MapSettings implements AuthoringView {
 		this.mapwidth = mapwidth;
 		this.mapheight = mapheight;
 		matchToSize(map);
-		setMapByImage(map);
+		updateMapByImage(map);
 	}
 	
 	public void setMap(MapEntity map) {
@@ -66,7 +61,15 @@ public class MapSettings implements AuthoringView {
 		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
 		map.getChildren().add(image);
 		image.toBack();
-		
+	}
+	
+	public void updateMapByImage(MapEntity map) {
+		setMap(map);
+		ImageView image = new ImageView(new Image(getClass().getResourceAsStream(imagePath)));
+		map.getChildren().remove(0);
+		map.getChildren().add(image);
+		image.toBack();
+
 	}
 	
 	public String getImagePath() {
@@ -84,9 +87,6 @@ public class MapSettings implements AuthoringView {
 	}
 	public int getMapWidth() {
 		return mapwidth;
-	}
-	public Map<String, Integer> getInitialResources(){
-		return resources;
 	}
 	public List<EndCondition> getEndConditions() {
 		return endConditions;

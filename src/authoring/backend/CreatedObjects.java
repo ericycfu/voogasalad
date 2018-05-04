@@ -5,9 +5,8 @@ import java.util.List;
 
 import observables.Listener;
 import observables.Speaker;
-import observables.StaticSpeaker;
 
-public class CreatedObjects implements StaticSpeaker {
+public class CreatedObjects implements Speaker {
 	
 	private List<AuthoringObject> myAuthoringObjects;
 	private List<Listener> myListeners;
@@ -46,17 +45,17 @@ public class CreatedObjects implements StaticSpeaker {
 	public int getSize() {
 		return myAuthoringObjects.size();
 	}
-
+	@Override
 	public void addListener(Listener l) {
 		myListeners.add(l);
 	}
-
+	@Override
 	public void removeListener(Listener l) {
 		myListeners.remove(l);
 		
 	}
-	
-	private void notifyListeners() {
+	@Override
+	public void notifyListeners() {
 		for (Listener l: myListeners) {
 			l.update();
 		}
