@@ -189,7 +189,8 @@ public class ComponentAddInteractionsScreen {
 														  interaction_vision_range_tf,
 														  interaction_rate_tf,
 														  interaction_target_team_cb,
-														  interaction_description_tf);
+														  interaction_description_tf,
+														  interaction_image_choice_text_label);
     	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, 
     																	   all_selected_interaction_tags_pane,
     																	   current_selected_interaction_components_pane);
@@ -227,7 +228,7 @@ public class ComponentAddInteractionsScreen {
     	interaction_vision_range_tf.clear();
     	interaction_image_choice_text_label.setText(null);
     	interaction_description_tf.clear();
-    	interaction_target_team_cb.getComboBox().getEditor().clear();
+    	interaction_target_team_cb.getSelectionModel().clearSelection();
     	interaction_rate_tf.clear();
     }
     
