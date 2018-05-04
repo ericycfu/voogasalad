@@ -16,7 +16,7 @@ public class SingleTopPanel extends TopPanel {
 	public SingleTopPanel(int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		super(teamID, gom, possibleUnits, xsize, ysize);
 		getButtons().get(0).setOnAction(e -> {
-			myTimeline.play();
+			startTimeline();
 		});
 		getButtons().get(1).setOnAction(e -> {
 			myTimeline.pause();

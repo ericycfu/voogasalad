@@ -7,11 +7,9 @@ import java.util.HashSet;
 import com.thoughtworks.xstream.io.StreamException;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
-import game_player.GamePlayer;
 import game_player.SinglePlayerGamePlayer;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +20,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import server_client.ServerClient;
 
 public class StartScreen implements AuthoringView {
@@ -38,7 +35,6 @@ public class StartScreen implements AuthoringView {
 	private Scene myScene; 
 	private GameObjectManager myGOM;
 	private SinglePlayerGamePlayer myGP;
-	private Timeline myTimeline;
 
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
@@ -93,7 +89,7 @@ public class StartScreen implements AuthoringView {
 	}
 	
 	private void singlePlayerGame() {
-		myGP.resetTime();
+		myGP.reset();
 		Stage mystage = new Stage();
 		Scene scene = myGP.getScene();
 		mystage.setScene(scene);
