@@ -23,9 +23,9 @@ import javafx.scene.Node;
 public class ComponentAddConditionsScreen implements AuthoringView {
 //	private final String PROPERTY_FILENAME = "data/component_add_conditions_screen.properties";
 	private static final String TITLE = "Create Component Attributes";
-	private static final Insets PANE_INSETS = new Insets(100, 50, 100, 50);
 	private static final int[] COLUMNS = {0, 2, 4, 10};
-//	private static final int SPACING_SMALL = 5;
+	private static final Insets PANE_INSETS = new Insets(100, 50, 100, 50);
+	private static final int SPACING_SMALL = 5;
 	private Stage stage;
 	private ConditionManager conditionManager;
 	private ComparatorManager comparatorManager;
@@ -69,7 +69,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private void newPane() {
 		grid = new GridPane();
-		grid.setHgap(SPACING_SMALL/2);
+		grid.setHgap(SPACING_SMALL / 2);
 		grid.setVgap(SPACING_SMALL);
 		grid.setPadding(PANE_INSETS);
 		root.getChildren().add(grid);
@@ -172,7 +172,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		}
 		return -1;
 	}
-		
+	
 //	@SuppressWarnings("unused")
 //	private Node findNode(int row, int col) {
 //		Node result = null;
