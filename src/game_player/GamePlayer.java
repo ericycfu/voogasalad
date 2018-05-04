@@ -136,16 +136,14 @@ public class GamePlayer extends ClientScreen {
 									}
 								}
 								if (isTagMatch) {
-									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											i.getDescription() + " " + s, 
-											i.getID(), 
-											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
-											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, go2);
-									sb.setOnAction(e -> {
+									BuildButton bb = new BuildButton(new Image(go2.getRenderer().getImagePath()), i.getDescription() + SPACE + s, i.getID(), 
+											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
+											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
+									bb.setOnAction(e -> {
 										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
 										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
 									});
-									skillList.add(sb);
+									skillList.add(bb);
 								}
 							}
 						}
@@ -208,7 +206,7 @@ public class GamePlayer extends ClientScreen {
 					int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
 					try {
 						if (ID==-1) {
-							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(),myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
