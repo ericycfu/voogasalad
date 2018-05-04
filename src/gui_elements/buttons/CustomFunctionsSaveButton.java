@@ -67,14 +67,15 @@ public class CustomFunctionsSaveButton extends MainButton {
 				return;
 			}
 			CustomComponentParameterFormat format = custom_function.getParameterFormat();
-			List<String> parameterList = format.getParameterList();
 			ObservableList<Node> valueList = custom_functions_pane.getPane().getChildren();
 			if(!fieldsAreValid(valueList)) {
 				createInvalidFieldsError();
 				return;
 			}
-			for(int i = 0; i < parameterList.size(); i++)
+			List<String> parameterList = format.getParameterList();
+			for(int i = 0; i < parameterList.size(); i++) {
 				format.setFieldValue(parameterList.get(i), ((TextField) valueList.get(i)).getText());
+			}
 			created_custom_functions_pane.addButton(custom_function_type_cb.getComboBox().getSelectionModel().getSelectedItem(), format);
 			interaction_add_custom_functions_screen.getStage().close();
 			interaction.addCustomFunction(custom_function);
@@ -87,8 +88,9 @@ public class CustomFunctionsSaveButton extends MainButton {
 	private boolean buildCustomFunctionAlreadyCreated(Interaction interaction) {
 		for(CustomFunction custom_function : interaction.getCustomFunctions()) {
 			String name = custom_function.getName();
-			if(name.equals(BUILD_FUNCTION))
+			if(name.equals(BUILD_FUNCTION)) {
 				return true;
+			}
 		}
 		return false;
 	}

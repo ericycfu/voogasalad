@@ -4,6 +4,7 @@ package server.communications_handler;
  * @author andrew
  */
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
@@ -35,16 +36,21 @@ public class GameHandler extends CommunicationsHandler {
 	public String updateServer() {
 		try {
 			String input;
-			while((input = (String)getInputStream().readObject()) != null) {
-				if(!input.split("\\s+")[0].equals("Leave")) {
+			ObjectInputStream in = getInputStream();
+			if((input = (String)in.readObject()) != null) {
+				System.out.println(input);
+				if(input.split("\\s+")[0].equals("Leave")) {
 					runningGameLobby.remove(getSocket());
 					return MainPageHandler.CLASS_REF;
 				}
 				myInterpreter.executeCommand(input);
+
 			}
 			return CLASS_REF;
 		}
-		catch(Exception e) {return CLASS_REF;}
+		catch(IOException | ClassCastException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return CLASS_REF;}
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class ServerClient {
 			start();
 		}
 		catch(Exception e){
-			new AlertMaker(DISCONNECT_TITLE,INITIALIZATION_BODY);
+			AlertMaker.makeAlert(DISCONNECT_TITLE,INITIALIZATION_BODY);
 		}
 
 	}

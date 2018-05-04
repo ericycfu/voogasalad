@@ -1,6 +1,7 @@
 package game_player.visual_element;
 
 import java.io.IOException;
+
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
@@ -14,6 +15,12 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * This class allows the in-game conversation implementation for the Player. Multi-player mode requires the server to transmit the strings sent from each player to all the currently in-game players. 
+ * 
+ * @author Eddie Yang
+ *
+ */
 public class ChatBox {
 	
 	private static final String PROMPT = "Enter here to chat: ";
@@ -26,6 +33,13 @@ public class ChatBox {
 	private TextArea myInputBox;
 	private TextArea myChatHistory;
 	
+	/**
+	 * The constructor of the chat box takes the socket for communication purposes and its size parameters. 
+	 * 
+	 * @param socket
+	 * @param width
+	 * @param height
+	 */
 	public ChatBox(Socket socket, double width, double height) {
 		myGroup = new Group();
 		initMyChatHistory(width, height);
@@ -68,11 +82,21 @@ public class ChatBox {
 			myInputBox.clear();
     	}
 	}
-
+	
+	/**
+	 * This is called by the GamePlayer class so that the string is constantly set by the user. 
+	 * 
+	 * @param text
+	 */
 	public void displayText(String text) {
 		myChatHistory.appendText(text + GamePlayer.LINEBREAK);
 	}
 	
+	/**
+	 * This returns the group to higher-hierarchy classes. 
+	 * 
+	 * @return
+	 */
 	public Node getNodes() {
 		return myGroup;
 	}
