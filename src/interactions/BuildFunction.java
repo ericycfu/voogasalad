@@ -30,7 +30,6 @@ public class BuildFunction implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) 
 	{
-		
 		if(other == null) return;
 		try 
 		{
@@ -54,6 +53,7 @@ public class BuildFunction implements CustomFunction {
 		}
 		
 		int newObjId = manager.copyGameObject(other);
+		manager.getGameObject(newObjId).setOwner(current.getOwner());
 		manager.getGameObject(newObjId).queueBuilding();
 	}
 
