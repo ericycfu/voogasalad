@@ -60,10 +60,13 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
+		
 		while(true) {
 			try {
 				Object obj = in.readObject();
+				System.out.println(obj.getClass().getName());
 				setUpNonSerializable(obj);
+				System.out.println(obj.getClass().getName());
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}

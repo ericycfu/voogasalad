@@ -53,6 +53,7 @@ public class BuildFunction implements CustomFunction {
 		}
 		
 		int newObjId = manager.copyGameObject(other);
+		manager.getGameObject(newObjId).setOwner(current.getOwner());
 		manager.getGameObject(newObjId).queueBuilding();
 	}
 

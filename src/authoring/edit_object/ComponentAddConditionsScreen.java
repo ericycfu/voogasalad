@@ -12,7 +12,6 @@ import gui_elements.factories.ComboBoxFactory;
 import gui_elements.factories.TextFieldFactory;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -25,17 +24,9 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 //	private final String PROPERTY_FILENAME = "data/component_add_conditions_screen.properties";
 	private static final String TITLE = "Create Component Attributes";
 	private static final int[] COLUMNS = {0, 2, 4, 10};
-	private static final int PANE_HGAP = 5;
-	private static final int PANE_VGAP = 10;
-	private static final int PANE_INSET_TOP = 100;
-	private static final int PANE_INSET_RIGHT = 50;
-	private static final int PANE_INSET_BOTTOM = 100;
-	private static final int PANE_INSET_LEFT = 50;
-	private static final int BOX_INSET_TOP = 10;
-	private static final int BOX_INSET_RIGHT = 10;
-	private static final int BOX_INSET_BOTTOM = 10;
-	private static final int BOX_INSET_LEFT = 10;
-	private static final int BOX_SPACING = 5;
+	private static final Insets PANE_INSETS = new Insets(100, 50, 100, 50);
+	private static final int SPACING_SMALL = 5;
+	private Stage stage;
 	private ConditionManager conditionManager;
 	private ComparatorManager comparatorManager;
 	private Group root;
@@ -69,7 +60,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		root = new Group();
 		Scene scene = new Scene(root, PANEL_WIDTH, PANEL_HEIGHT, DEFAULT_BACKGROUND);
 		scene.getStylesheets().add(STYLE_PATH);
-		Stage stage = new Stage();
+		stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle(TITLE);
 		stage.setResizable(false);
@@ -78,9 +69,9 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private void newPane() {
 		grid = new GridPane();
-		grid.setHgap(PANE_HGAP);
-		grid.setVgap(PANE_VGAP);
-		grid.setPadding(new Insets(PANE_INSET_TOP, PANE_INSET_RIGHT, PANE_INSET_BOTTOM, PANE_INSET_LEFT));
+		grid.setHgap(SPACING_SMALL / 2);
+		grid.setVgap(SPACING_SMALL);
+		grid.setPadding(PANE_INSETS);
 		root.getChildren().add(grid);
 		setTitles();
 	}
@@ -89,7 +80,6 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		addLine(new Label("Attribute"), new Label("Comparator"), new Label("Value"), new Label("Condition Triggered"));
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void setLine(String attribute, String comparator, String value, Condition condition) {
 		addLine(TextFieldFactory.makeTextField(attribute),
 				ComboBoxFactory.makeComboBox(comparatorSelect(), comparator),
@@ -101,6 +91,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private void newLine() {
 		TextField attribute = new TextField();
+		@SuppressWarnings("rawtypes")
 		ComboBox comparator = comparatorSelect();
 		TextField value = new TextField();
 		addLine(attribute, comparator, value, ButtonFactory.makeButton(
@@ -125,7 +116,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	}
 	
 		
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("rawtypes")
 	private ComboBox comparatorSelect() {
 		return ComboBoxFactory.makeComboBox(comparatorManager.getComparatorSigns());
 	}
@@ -142,12 +133,12 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private void setupButtons() {
 		HBox box = new HBox();
-		Button addLineButton = ButtonFactory.makeButton("Add Condition", e -> newLine());
 //		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions()); 
-		box.getChildren().add(addLineButton);
-//		box.getChildren().addAll(addLineButton, saveButton);
-		box.setPadding(new Insets(BOX_INSET_TOP, BOX_INSET_RIGHT, BOX_INSET_BOTTOM, BOX_INSET_LEFT));
-		box.setSpacing(BOX_SPACING);
+		box.getChildren().addAll(
+				ButtonFactory.makeButton("Add Line", e -> newLine()),
+				ButtonFactory.makeButton("Save", e -> stage.close()));
+		box.setPadding(LINE_INSETS);
+		box.setSpacing(SPACING_SMALL);
 		root.getChildren().add(box);
 		box.toFront();
 	}
@@ -166,6 +157,7 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private int extractComparatorId(Node n) {
 		if (n instanceof ComboBox) {
+			@SuppressWarnings("rawtypes")
 			String symbol = (String) ((ComboBox) n).getValue();
 			return matchComparatorId(symbol);
 		}
@@ -180,16 +172,18 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 		}
 		return -1;
 	}
-		
-	private Node findNode(int row, int col) {
-		Node result = null;
-		for (Node node : grid.getChildren()) {
-			if ((node instanceof TextField || node instanceof ComboBox) &&
-				(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == col)) {
-	            result = node;
-	            break;
-			}
-	    }
-	    return result;
-	}	
+	
+//	@SuppressWarnings("unused")
+//	private Node findNode(int row, int col) {
+//		Node result = null;
+//		for (Node node : grid.getChildren()) {
+//			if (node instanceof TextField || node instanceof ComboBox) {
+//				if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == col) {
+//		            result = node;
+//		            break;
+//		        }
+//			}
+//	    }
+//	    return result;
+//	}	
 }

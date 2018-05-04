@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 
- * @author elizabethshulman
+ * @author elizabethshulman, xlany
  *
  * Modeled after Java's built-in Observable class, Speaker enables an object to register Listeners to
  * track changes in its behavior.
