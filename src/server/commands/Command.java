@@ -1,5 +1,6 @@
 package server.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import game_engine.GameInstance;
@@ -15,6 +16,7 @@ public abstract class Command {
 	private GameInstance game; 
 	public Command(int numVars, GameInstance g) {
 		numArgs = numVars;
+		args = new ArrayList<>();
 		game  = g;
 	}
 	/**
@@ -51,7 +53,7 @@ public abstract class Command {
 	protected int getArgValue(int index) {
 		String s = getArgString(index);
 		try {
-			return Integer.parseInt(s);
+			return (int)Double.parseDouble(s);
 		}
 		catch(NumberFormatException e) {
 			throw new CommandException("Argument is not an integer");

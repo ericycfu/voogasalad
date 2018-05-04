@@ -99,7 +99,6 @@ public abstract class GamePlayer extends ClientScreen {
 	private Team myTeam;
 	private MapSettings myMapSettings;
 	private ImageView myMap;
-	private Socket mySocket;
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
@@ -230,7 +229,7 @@ public abstract class GamePlayer extends ClientScreen {
 
 	private void initialize() {
 		myRoot = new Group();
-		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new TopPanel(getSocket(), 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
 		myRoot.getChildren().add(myTopPanel.getNodes());
 
@@ -251,12 +250,11 @@ public abstract class GamePlayer extends ClientScreen {
 		myRoot.getChildren().add(mainDisp);
 		mainDisp.toBack();
 
-		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		myChatBox = new ChatBox(getSocket(), SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getNodes();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);
-		
 		getStage().setResizable(true);
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 		getStage().setScene(myScene);
@@ -270,17 +268,19 @@ public abstract class GamePlayer extends ClientScreen {
 	}
 
 	public void update() {
-		List<GameObject> gameobject = myGameObjectManager.getElements();
+		List<GameObject> gameobject  = myGameObjectManager.getElements();
+
 		if (myTopPanel.getIsLoaded()) {
 			unitSkillMapInitialize();
 			myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
 			myTopPanel.setIsLoaded(false);
 		}
+		myMainDisplay.update(gameobject);
 		initializeSingleUnitSelect();
 		myTopPanel.update();
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
-		myMainDisplay.update(gameobject);
+		
 		if (myUnitDisplay.getUnitActionDisp().getCurrentActionID()!=-1) {
 			myScene.setCursor(Cursor.CROSSHAIR);
 		}
@@ -296,11 +296,10 @@ public abstract class GamePlayer extends ClientScreen {
 			Object obj;
 			do {
 				obj = inputstream.readObject();
-				System.out.println(obj.getClass().getCanonicalName());
 			} while(!(obj instanceof GameObjectManager));
 			synchronized (myGameObjectManager){
-				myGameObjectManager = (GameObjectManager) obj;
-				myGameObjectManager.setupImages();
+				GameObjectManager gom = (GameObjectManager) obj;
+				updateGameObjectManager(gom);
 			}
 			myTeam = (Team) inputstream.readObject();
 			myTime.setValue(inputstream.readDouble());
@@ -321,6 +320,10 @@ public abstract class GamePlayer extends ClientScreen {
 
 	@Override
 	protected void setUp() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+		}
 		GameInstance gi = null;
 		int team_ID = -1;
 		ObjectInputStream in = getInputStream();
@@ -331,7 +334,7 @@ public abstract class GamePlayer extends ClientScreen {
 				team_ID = in.readInt();
 			}
 			catch (Exception e) {
-				
+				e.printStackTrace();
 			}
 		}
 		setUpBackend(gi, team_ID);
@@ -351,7 +354,7 @@ public abstract class GamePlayer extends ClientScreen {
 				g.setupImages();
 			}
 			mySceneManager = gi.getSceneManager();
-			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
+			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, getSocket());
 			myUnitSkills = new HashMap<>();
 			initialize();
 			initializeSingleUnitSelect();		
@@ -361,6 +364,18 @@ public abstract class GamePlayer extends ClientScreen {
 			AlertMaker.makeAlert("Error","Unable to play game");
 		}
 		
+	}
+	private void updateGameObjectManager(GameObjectManager gom) {
+		for(GameObject g: gom.getElements()) {
+			GameObject toUpdate = myGameObjectManager.getGameObject(g.getID());
+			if(toUpdate != null) {
+				toUpdate.setTransform(g.getTransform());
+				try {
+					toUpdate.setObjectLogic(g.accessLogic());
+				} catch (UnmodifiableGameObjectException e) {
+				}
+			}
+		}
 	}
 
 	@Override
@@ -374,7 +389,6 @@ public abstract class GamePlayer extends ClientScreen {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
