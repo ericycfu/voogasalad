@@ -1,6 +1,7 @@
 package gui_elements.tabs;
 
 import gui_elements.buttons.AddResourceButton;
+import gui_elements.buttons.ResourceApplyButton;
 import gui_elements.combo_boxes.ChooseAmountComboBox;
 import gui_elements.combo_boxes.ChooseAmountComboBox1;
 import gui_elements.combo_boxes.ChooseResourceComboBox;

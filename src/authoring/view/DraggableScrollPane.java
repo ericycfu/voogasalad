@@ -19,11 +19,16 @@ public class DraggableScrollPane extends ScrollPane {
 	}
 	
 	private void initializeDefault() {
-		MapEntity map = createdmaps.makeNewMap();
-		authoringcontroller.updateMap(map);
-		this.setContent(map);
+		MapEntity initialMap;
+		if (createdmaps.getSize() == 0) {
+			initialMap = createdmaps.makeNewMap();
+		}
+		else {
+			initialMap = createdmaps.getObjectByIndex(0);
+		}
+		authoringcontroller.updateMap(initialMap);
+		this.setContent(initialMap);
 		authoringcontroller.getCreatedMapsView().update();
-		
 		this.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 		this.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 	}
