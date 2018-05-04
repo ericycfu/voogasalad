@@ -23,6 +23,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The pane that holds all of the entries that set the parameters for the map and resources.
+ * @author Eric Fu
+ * @author Xiaolan You
+ *
+ */
+
 public class MapSettingsView extends Pane implements AuthoringView {
 	private static final Insets MAIN_INSETS = new Insets(50, 50, 0, 50);
 	private static final Insets BOX_INSETS = new Insets(0, 25, 0, 25);
@@ -40,7 +47,11 @@ public class MapSettingsView extends Pane implements AuthoringView {
 	private TextField mapWidth = new TextField();
 	private TextField mapHeight = new TextField();
 	private static final int DEFAULT_MAP = 0;
-	
+	/**
+	 * Creates the view
+	 * @param authoring_controller  the controller responsible for communication between several nodes
+	 * @param game the entity that represents the game being created
+	 */
 	public MapSettingsView(AuthoringController authoring_controller, GameEntity game) {
 		this.authoring_controller = authoring_controller;
 		authoring_controller.updateMap(game.getCreatedMaps().getCreatedMaps().get(DEFAULT_MAP));
@@ -50,6 +61,10 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		initializeAll();
 	}
 
+	/**
+	 * sets the map settings
+	 * @param settings the map settings that will be set to populate the entries in the pane
+	 */
 	public void setMapSettings(MapSettings settings) {
 		this.settings = settings;
 		

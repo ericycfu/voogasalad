@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 /**
  * static class for writing data
  * @author shichengrao
- *
+ * @author Eric Fu
  */
 public class Writer {
 	
