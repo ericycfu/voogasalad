@@ -103,6 +103,7 @@ public class GamePlayer extends ClientScreen {
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
+	private double gameTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null);
@@ -305,8 +306,11 @@ public class GamePlayer extends ClientScreen {
 			}
 			myTeam = (Team) gi.getTeamManager().getTeam(inputstream.readInt());
 			List<ChatEntry> chat = gi.getChat();
-			for(ChatEntry c: chat)
-				myChatBox.displayText(c.convertToString());
+			for(ChatEntry c: chat) {
+				if(c.getTime() >= gameTime)
+					myChatBox.displayText(c.convertToString());
+			}
+			gameTime = gi.getGameTime();
 			mySceneManager = gi.getSceneManager();
 		} catch (Exception e) {
 			return;
@@ -359,6 +363,7 @@ public class GamePlayer extends ClientScreen {
 			mySceneManager = gi.getSceneManager();
 			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, getSocket());
 			myUnitSkills = new HashMap<>();
+			gameTime = 0;
 			initialize();
 			initializeSingleUnitSelect();		
 			unitSkillMapInitialize();

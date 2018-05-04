@@ -62,9 +62,10 @@ public class GameHandler extends CommunicationsHandler {
 			out.writeObject(runningGame);
 			out.writeInt(team_ID);
 			out.flush();
+			Thread.sleep(20);
 		} catch (SocketException e) {
 			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			return;
 		}
 		}
