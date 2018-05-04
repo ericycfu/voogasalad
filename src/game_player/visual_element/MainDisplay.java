@@ -20,6 +20,16 @@ import javafx.scene.shape.Rectangle;
 import pathfinding.GridMap;
 import transform_library.Vector2;
 
+/**
+ * The MainDisplay class displays all the units currently in the view of the user and establishes the interactions (unit-to-map and unit-to-unit) correctly. 
+ * 
+ * It records its relative position on the map, based on which all existing game units get filtered to have the ones on the current view be displayed. 
+ * 
+ * Group selection is implemented in this class so that the user is allowed 
+ * 
+ * @author Frank Yin, Siyuan Chen
+ *
+ */
 public class MainDisplay implements VisualUpdate {
 	
 	private static final double MOVEBUTTONSIZE = 60;
@@ -49,6 +59,15 @@ public class MainDisplay implements VisualUpdate {
 	private BooleanProperty isLeftHovered;
 	private BooleanProperty isRightHovered;
 	
+	/**
+	 * constructor for main display
+	 * @param selectedUnitManager selectedUnitManager of Gameplayer current instance
+	 * @param gom current instance of GameObjectManager
+	 * @param uadisp current instance of UnitActionDisplay
+	 * @param width MainDisplay width
+	 * @param height MainDisplay height
+	 * @param map game map
+	 */
 	public MainDisplay(SelectedUnitManager selectedUnitManager, GameObjectManager gom, UnitActionDisplay uadisp, double width, double height, ImageView map) {
 		myUnitActionDisp = uadisp;
 		myGameObjectManager = gom;
@@ -155,10 +174,6 @@ public class MainDisplay implements VisualUpdate {
 		mySelectionBox.setStroke(Color.BLACK);
 		mySelectionBox.setFill(Color.TRANSPARENT);
 		myMainDisplay.getChildren().add(mySelectionBox);
-		setSelectionBoxEvent();
-	}
-	
-	private void setSelectionBoxEvent() {
 		myMap.setOnMouseDragged(e -> {
 			if(e.getButton() == MouseButton.PRIMARY) {
 				double xDiff = e.getSceneX() - myMouseXInitPosition;
@@ -209,6 +224,9 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	@Override
+	/**
+	 * updates main display, its window and displayed units per frame
+	 */
 	public void update(List<GameObject> gameObjects) {
 		myDisplayGameObjects = filterDisplayGameObjects(gameObjects);
 		List<ImageView> imgvList = new ArrayList<>();
@@ -227,18 +245,11 @@ public class MainDisplay implements VisualUpdate {
 		updateCurrentXYCoor();
 		updateCurrentWindow();
 	}
-	
-	private void updatePositionChanges(List<ImageView> imgvList) {
-		for (GameObject go : myDisplayGameObjects) {
-			double xloc = translateX(go.getTransform().getPosition().getX());
-			double yloc = translateY(go.getTransform().getPosition().getY());
-			go.getRenderer().getDisp().setX(xloc);
-			go.getRenderer().getDisp().setY(yloc);
-			imgvList.add(go.getRenderer().getDisp());
-		}	
-	}
 
 	@Override
+	/**
+	 * gets current javafx node objects in main display
+	 */
 	public Node getNodes() {
 		return myMainDisplay;
 	}
@@ -280,9 +291,11 @@ public class MainDisplay implements VisualUpdate {
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
 		List<GameObject> ret = new ArrayList<>();
-		gameobjects.stream()
-			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY()))
-			.forEach(go -> ret.add(go));
+		for (GameObject go : gameobjects) {
+			if (isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY())) {
+				ret.add(go);
+			}
+		}
 		return ret;
 	}
 	

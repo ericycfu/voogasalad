@@ -150,7 +150,8 @@ public class DesignTab extends Tab implements AuthoringView{
 										 create_component_button.getButton(),
 										 new CreateAttributesButton(authoring_object.getObjectAttributesInstance()).getButton(),
 										 new CreateInteractionsButton(authoring_object,
-												 					  tag_controller).getButton(),
+												 					  tag_controller,
+												 					  component_tag_cb).getButton(),
 										 new CreateConditionsButton(authoring_object.getConditionManager()).getButton(),
 										 new NewComponentButton(this).getButton(),
 										 new BuildCostAddButton(e->{addToBuildCostMap();			

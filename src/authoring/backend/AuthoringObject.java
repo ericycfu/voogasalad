@@ -203,9 +203,9 @@ public class AuthoringObject {
 //		return imageview;
 //	}
 	
-	public AuthoringObject duplicateObj() {
+	public AuthoringObject duplicateObj(AuthoringObject objBase, MapEntity map_entity) {
 		Image image = myDragImage.getImage();
-		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+		DraggableImageView imageview = new DraggableImageView(objBase, map_entity, image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
 		AuthoringObject newobj = new AuthoringObject(imageview);
 		imageview.setAction(newobj);
 		return newobj;

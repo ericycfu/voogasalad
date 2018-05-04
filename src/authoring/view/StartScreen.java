@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
+import com.thoughtworks.xstream.io.StreamException;
 import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
 import game_player.GamePlayer;
@@ -28,16 +29,21 @@ public class StartScreen implements AuthoringView {
 	
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
 	public static final String TITLE = "Rap Tilt Swagger";
-    private final int FRAMES_PER_SECOND = 60;
-    private final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public static final int FRAMES_PER_SECOND = 60;
+    public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     
 	private Stage myStage;
 	private StackPane myPane;
 	private Scene myScene; 
+	private GameObjectManager myGOM;
+	private SinglePlayerGamePlayer myGP;
+	private Timeline myTimeline;
 
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
+		myGOM = new GameObjectManager();
+		myGP = new SinglePlayerGamePlayer(myGOM, new HashSet<>());
 		setupScreen();
 		setupContent();
 		setupStage();
@@ -64,6 +70,9 @@ public class StartScreen implements AuthoringView {
 															} catch (ClassNotFoundException | IOException | NullPointerException e2) {
 																AlertMaker.makeAlert("Error with Loading Game", "You have not selected a file or the file has an incorrect format");
 															}
+															catch(StreamException e3) {
+																
+															}
 															
 				}, "image_button"),
 				ButtonFactory.makeButton("Play Game", e -> new ServerClient(new Stage()), "image_button"),
@@ -84,23 +93,23 @@ public class StartScreen implements AuthoringView {
 	}
 	
 	private void singlePlayerGame() {
+		myGOM = new GameObjectManager();
+		myGP = new SinglePlayerGamePlayer(myGOM, new HashSet<>());
 		Stage mystage = new Stage();
-		GameObjectManager myGom = new GameObjectManager();
-		SinglePlayerGamePlayer myGP = new SinglePlayerGamePlayer(myGom, new HashSet<>());
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                act -> step(SECOND_DELAY, myGP, myGom));
-        Timeline animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(frame);
-        animation.play();
-		myGP.setTimeline(animation);
 		Scene scene = myGP.getScene();
 		mystage.setScene(scene);
 		mystage.show();
 	}
 	
-	private void step(double timeElapsed, SinglePlayerGamePlayer gp, GameObjectManager gom) {
-		gp.update();
-		gom.runGameObjectLoop(SECOND_DELAY);
+	public SinglePlayerGamePlayer getGP() {
+		return myGP;
+	}
+	
+	public GameObjectManager getGOM() {
+		return myGOM;
+	}
+
+	public void setTimeline(Timeline animation) {
+		myGP.setTimeline(animation);
 	}
 }

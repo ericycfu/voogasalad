@@ -33,6 +33,7 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
+		int counter = 0;
 		while(true) {
 			try {
 				Object obj = in.readObject();
@@ -41,6 +42,10 @@ public class Reader {
 				}
 			catch(EOFException e) {
 				//not real error, just signifies end of file
+				break;
+			}
+			counter += 1;
+			if (counter == Integer.MAX_VALUE) {
 				break;
 			}
 		}
@@ -60,7 +65,7 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		
+		int counter = 0;
 		while(true) {
 			try {
 				Object obj = in.readObject();
@@ -70,11 +75,16 @@ public class Reader {
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
+				counter += 1;
+				if (counter == Integer.MAX_VALUE) {
+					break;
+				}
 			}
 			catch(EOFException e) {
 				//not real error, just signifies end of file
 				break;
 			}
+			
 		}
 		return result;
 	}
