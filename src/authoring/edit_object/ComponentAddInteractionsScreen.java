@@ -100,9 +100,6 @@ public class ComponentAddInteractionsScreen {
 		stage.setTitle(title);
 		stage.show();
 		stage.setResizable(false);
-		stage.setOnCloseRequest(e -> {
-			e.consume();
-		});
 	}
 
 	/**
