@@ -86,7 +86,6 @@ public class ObjectTeamSelectionScreen {
 			System.err.println("Display file input does not exist!");
 		} catch (Exception ey) {
 			System.err.println("The properties for the display could not be retrieved completely.");
-
     	} finally {
     		if (input != null) {
     			try {

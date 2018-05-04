@@ -14,7 +14,7 @@ public class ObjectSelectionImageView extends ImageView {
 	public void actionImgToScrollPane(AuthoringObject objBase, AuthoringController ac) {
 		this.setOnMouseClicked(e -> {
 			if (e.getClickCount() == 2) {
-				AuthoringObject newobj = objBase.duplicateObj();
+				AuthoringObject newobj = objBase.duplicateObj(objBase, ac.getCurrentMap());
 				ac.getCurrentMap().addToMap(objBase, newobj);
 			}
 			ac.updateObject(objBase);

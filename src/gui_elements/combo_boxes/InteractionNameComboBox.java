@@ -44,8 +44,8 @@ public class InteractionNameComboBox extends MainComboBox {
 	
 	private void addElements() {
 //		System.out.println("Number of interactions just as interaction screen pops up: " + interaction_manager.getElements().size());
-		for(int i = 1; i < interaction_manager.getElements().size(); i++) {
-			getComboBox().getItems().add(interaction_manager.getInteraction(i).getName());
+		for(int i = 0; i < interaction_manager.getElements().size() - 1; i++) {
+			getComboBox().getItems().add(interaction_manager.getElements().get(i).getName());
 		}
 	}
 	
@@ -60,6 +60,8 @@ public class InteractionNameComboBox extends MainComboBox {
 	    		all_selected_interaction_tags_pane.setToOldInteractionMode();
 	    		interaction_vision_range_tf.setText(interaction.getRange() + BLANK_TEXT);
 	    		interaction_rate_tf.setText(Double.toString(interaction.getRate()));
+	    		System.out.println(interaction.getInteractionTargetTeam().toString());
+	    		System.out.println(interaction_target_team_cb.getItems().size());	    		
 	    		interaction_target_team_cb.getSelectionModel().select(interaction.getInteractionTargetTeam().toString());
 	    		interaction_description_tf.setText(interaction.getDescription());
 	    		List<CustomFunction> custom_functions = interaction.getCustomFunctions();

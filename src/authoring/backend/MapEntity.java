@@ -58,6 +58,13 @@ public class MapEntity extends Pane implements AuthoringView {
 		this.getChildren().add(objNew.getDragImage());
 	}
 	
+	public void removeFromMap(AuthoringObject objBase, AuthoringObject objOld) {
+		if (locations.containsKey(objBase)) {
+			locations.get(objBase).remove(objOld);
+		}
+		this.getChildren().remove(objOld.getDragImage());
+	}
+	
 	public String getImagePath() {
 		return mapsettings.getImagePath();
 	}

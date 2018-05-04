@@ -32,5 +32,4 @@ public class DraggableScrollPane extends ScrollPane {
 		this.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 		this.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 	}
-
 }
