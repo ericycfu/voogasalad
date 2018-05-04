@@ -51,7 +51,15 @@ import server_client.screens.ClientScreen;
  * 
  * @author Siyuan Chen, Frank Yin
  *
- * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
+ * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, MiniMap, etc.)
+ * 
+ * The assignments of the sub-components are defined in this class. 
+ * 
+ * The maps corresponding to the correct setups of the game are initialized for each loaded game. 
+ * 
+ * All the update methods are called in Player so that all the existing units reflect their current states for each frame during the game. 
+ * 
+ * Single-player mode and multi-player mode are supported for testing purposes and gaming purposes, respectively. 
  * 
  */
 public class GamePlayer extends ClientScreen {
