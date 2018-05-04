@@ -68,6 +68,7 @@ public class MakeGameScreen implements AuthoringView {
 		Scene scene = new Scene(box);
 		scene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(scene);
+		box.setId("make_game_screen");
 	}
 	
 }

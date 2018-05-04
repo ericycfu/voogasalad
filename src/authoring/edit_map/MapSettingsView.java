@@ -106,17 +106,17 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		standardBox(box);
 		box.setSpacing(SPACING_SMALL * 4);
 		rootBox.getChildren().add(box);
-
 	}
 	
 	private void initializeContent(HBox rootBox) {
 		contentBox = new VBox();
+		Button addLossConditionButton = ButtonFactory.makeButton("Add Loss Condition", 
+				e -> new LossConditionsScreen(settings.getEndConditions()));
 		contentBox.getChildren().addAll(
 				mapName,
 				numPlayers,
 //				lossCondition,
-				ButtonFactory.makeButton("Add Loss Condition", 
-						e -> new LossConditionsScreen(settings.getEndConditions())),
+				addLossConditionButton,
 				imageChooserButton,
 				mapWidth,
 				mapHeight);
@@ -129,11 +129,14 @@ public class MapSettingsView extends Pane implements AuthoringView {
 		standardBox(contentBox);
 		contentBox.setSpacing(SPACING_SMALL * 3.2);
 		rootBox.getChildren().add(contentBox);
+		addLossConditionButton.getStyleClass().add("map_setting_buttons");
+		imageChooserButton.getStyleClass().add("map_setting_buttons");
 	}
 	
 	private void setupButton() {
 		HBox box = new HBox();
 		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions());
+		saveButton.getStyleClass().add("save_button");
 		box.getChildren().addAll(saveButton);
 		box.setPadding(BUTTON_INSETS);
 		this.getChildren().add(box);
@@ -173,7 +176,9 @@ public class MapSettingsView extends Pane implements AuthoringView {
 				saveSettings();
 			}
 		};
-		myHBox.getChildren().add(ButtonFactory.makeButton("Add New Resource Entry", myHandler));
+		Button AddNewResourceEntryButton = ButtonFactory.makeButton("Add New Resource Entry", myHandler);
+		AddNewResourceEntryButton.getStyleClass().add("map_setting_buttons");
+		myHBox.getChildren().add(AddNewResourceEntryButton);
 		System.out.println(myResourceManager);
 		System.out.println(myResourceManager.getResourceEntries());
 		for (int i = 0; i <= myResourceManager.getResourceEntries().size(); i += 1) {
@@ -185,7 +190,9 @@ public class MapSettingsView extends Pane implements AuthoringView {
 			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(0)).setText(myResourceEntries.get(i).getKey());
 			((TextField) ((HBox) myVBox.getChildren().get(i+1)).getChildren().get(1)).setText(Double.toString(myResourceEntries.get(i).getValue()));
 		}
-		((HBox)myVBox.getChildren().get(myVBox.getChildren().size()-1)).getChildren().add(ButtonFactory.makeButton("Save Settings", mySavingHandler));
+		Button SaveSettingsButton = ButtonFactory.makeButton("Save Settings", mySavingHandler);
+		SaveSettingsButton.getStyleClass().add("map_setting_buttons");
+		((HBox)myVBox.getChildren().get(myVBox.getChildren().size()-1)).getChildren().add(SaveSettingsButton);
 		standardBox(myVBox);
 	}
 	
