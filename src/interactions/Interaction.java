@@ -50,7 +50,7 @@ public class Interaction implements EngineObject, Serializable {
 	private List<CustomFunction> customFunctions;
 	private double range;
 	
-	private double rate;
+	private double rate = DEFAULT_RATE;
 
 	public Interaction(int id)
 	{

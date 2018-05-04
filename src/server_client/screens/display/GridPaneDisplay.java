@@ -1,4 +1,4 @@
-package server_client.screens;
+package server_client.screens.display;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import server.GameLobby;

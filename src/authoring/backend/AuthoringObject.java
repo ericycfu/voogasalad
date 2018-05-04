@@ -20,10 +20,10 @@ public class AuthoringObject {
 	public static final int DEFAULT_TEAM = 1;
 	@XStreamOmitField
 	private transient DraggableImageView myDragImage;
-	private List<String> myTags;
 	private double myX;
 	private double myY;
 	private int myTeam;
+	private List<String> myTags;
 	private Map<String, Double> buildCosts;
 	private ObjectLogic myObjectLogic;
 	private MainComponentPropertyManager myMainComponentPropertyManager;
@@ -66,6 +66,13 @@ public class AuthoringObject {
 //		setImage(TEST_IMAGE_DUVALL);
 //		myMainComponentPropertyManager.setName("Final Boss");
 //	}
+	
+	public void setDragImage(String imagePath, double x, double y) {
+		Image image = new Image(getClass().getResourceAsStream(imagePath));
+		myDragImage = new DraggableImageView(this, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
+		myDragImage.setX(x);
+		myDragImage.setY(y);
+	}
 	
 	public Image getImage() {
 //		System.out.println("myDragImage: " + myDragImage);
@@ -113,11 +120,13 @@ public class AuthoringObject {
 	}
 	
 	public double getX() {
-		return myDragImage.getX();
+//		return myDragImage.getX();
+		return myX;
 	}
 	
 	public double getY() {
-		return myDragImage.getY();
+//		return myDragImage.getY();
+		return myY;
 	}
 	
 	public void changeX(double newX) {
@@ -161,7 +170,7 @@ public class AuthoringObject {
 	}
 	
 	public void setBuildCost(String resource, double amount) {
-		//buildCosts.put(resource, amount);
+		buildCosts.put(resource, amount);
 	}
 	
 	public MainComponentPropertyManager getMainComponentPropertyManager() {

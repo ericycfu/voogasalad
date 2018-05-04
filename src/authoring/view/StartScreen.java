@@ -2,7 +2,6 @@ package authoring.view;
 
 import java.io.File;
 import java.io.IOException;
-import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
 import javafx.geometry.Insets;
@@ -14,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import server_client.ServerClient;
 
 public class StartScreen implements AuthoringView {
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
@@ -47,16 +47,12 @@ public class StartScreen implements AuthoringView {
 															File myFile = myFC.showOpenDialog(new Stage());
 															try {
 																new MakeGameScreen(myStage, myFile);
-															} catch (ClassNotFoundException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
-															} catch (IOException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
+															} catch (ClassNotFoundException | IOException e2) {
+																
 															}
 															
 				}, "image_button"),
-				new PlayGameButton(myStage, "image_button")
+				ButtonFactory.makeButton("Play Game", e -> {new ServerClient(new Stage());}, "image_button")
 				);
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
@@ -69,7 +65,7 @@ public class StartScreen implements AuthoringView {
 		myStage.setTitle(TITLE);
 		myStage.setWidth(INITIAL_SCENE_WIDTH);
 		myStage.setHeight(INITIAL_SCENE_HEIGHT);
-//		myStage.setResizable(false);
+		myStage.setResizable(false);
 		myStage.show();
 	}	
 }

@@ -16,7 +16,8 @@ public class MapSelectionImageView extends ImageView {
 	
 	public void actionMapToScrollPane(MapEntity map, DraggableScrollPane dragscroll, AuthoringController ac) {
 		this.setOnMouseClicked(e -> {
-			dragscroll.setContent(map);
+//			dragscroll.setContent(map);
+			ac.getScroll().setContent(map);
 			ac.updateMap(map);
 		});
 	}

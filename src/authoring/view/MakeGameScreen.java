@@ -10,21 +10,19 @@ import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_engine.ResourceManager;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import transform_library.Vector2;
 
 public class MakeGameScreen implements AuthoringView {
 	public static final Color INITIAL_COLOR = Color.LIGHTSKYBLUE;
 
 	private Stage myStage;
-	private Scene myScene;
+//	private Scene myScene;
 	private GameEntity myGame;
-	private AuthoringController myAuthoringController;
+//	private AuthoringController myAuthoringController;
 	private Reader myReader = new Reader();
 	public MakeGameScreen (Stage stage) {
 		myGame = new GameEntity();
@@ -32,42 +30,47 @@ public class MakeGameScreen implements AuthoringView {
 		setupScreen();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public MakeGameScreen(Stage stage, File myFile) throws ClassNotFoundException, IOException {
 		//get list of items from the 
 		List<Object> ao = myReader.read(myFile.getCanonicalPath(), "java.util.ArrayList");
 		List<Object>  myAuthoringObjects = (List<Object>) ao.get(0);
-		List<Object> map = myReader.read(myFile.getCanonicalPath(), "java.util.HashMap");
-		Map<AuthoringObject, List<Vector2>> myMap = (Map<AuthoringObject, List<Vector2>>) map.get(0);
-		List<Object> mapsettings = myReader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
-		MapSettings myMapSettings = (MapSettings) mapsettings.get(0);
+		List<Object> myMaps = (List<Object>) ao.get(1);
+		List<Object> myMapSettings = (List<Object>) ao.get(2);
+//		Map<AuthoringObject, List<AuthoringObject>> myMap = (Map<AuthoringObject, List<AuthoringObject>>) maps.get(0);
+//		Map<AuthoringObject, List<Vector2>> myMap = (Map<AuthoringObject, List<Vector2>>) map.get(0);
+//		List<Object> mapsettings = myReader.read(myFile.getCanonicalPath(), "authoring.backend.MapSettings");
+//		MapSettings myMapSettings = (MapSettings) mapsettings.get(0);
 		List<Object> resourcemanager = myReader.read(myFile.getCanonicalPath(), "game_engine.ResourceManager"); //change category later
 		ResourceManager myResourceManager = (ResourceManager) resourcemanager.get(0);
 		System.out.println("Resource Manager size: " + myResourceManager.getResourceEntries().size());
 		System.out.println("First entry of reosurce manager: " + myResourceManager.getResourceEntries().get(0));
-		myGame = new GameEntity(myAuthoringObjects, myMap, myMapSettings, myResourceManager);
+//		myGame = new GameEntity(myAuthoringObjects, maps, myMapSettings, myResourceManager);
+		myGame = new GameEntity(myAuthoringObjects, myMaps, myMapSettings, myResourceManager);
 		myStage = stage;
 		setupScreen();
 		
 	}
 
 	private void setupScreen() {
-		myAuthoringController = new AuthoringController();
+		AuthoringController authoringController = new AuthoringController();
 		HBox box = new HBox();
 //		box.setId("start_screen");
 		VBox inner = new VBox();
 		inner.getChildren().addAll(
 				//need to populate the entries with the information from myGame
-				new DisplayMenu(myAuthoringController, myGame),
-				new CreatedObjectsTabs(myAuthoringController, myGame));
+				new DisplayMenu(authoringController, myGame, myStage),
+				new CreatedObjectsTabs(authoringController, myGame));
 		box.getChildren().addAll(
-				new MakeGameTabs(myAuthoringController, myGame),
+				new MakeGameTabs(authoringController, myGame),
 				inner);
 
-		box.setPadding(new Insets(10, 10, 10, 10));
+		box.setPadding(LINE_INSETS);
 		box.setSpacing(SPACING_SMALL);
-		myScene = new Scene(box);
-		myScene.getStylesheets().add(STYLE_PATH);
-		myStage.setScene(myScene);
+		Scene scene = new Scene(box);
+		scene.getStylesheets().add(STYLE_PATH);
+		myStage.setScene(scene);
+		box.setId("make_game_screen");
 	}
 	
 }

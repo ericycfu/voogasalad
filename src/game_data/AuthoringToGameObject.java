@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.backend.AuthoringObject;
+import authoring.backend.MapSettings;
 import authoring.support.DraggableImageView;
 import game_engine.ResourceManager;
 import game_engine.Team;
@@ -28,13 +29,13 @@ public final class AuthoringToGameObject {
 	 * @param map
 	 * @return
 	 */
-	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM) {
+	public static GameObjectManager convertMap(Map<AuthoringObject, List<AuthoringObject>> map, List<Team> teamList) {
 		GameObjectManager GOM = new GameObjectManager();
 		for(AuthoringObject AO: map.keySet()) {
 			for(AuthoringObject AO2: map.get(AO)) {
 				DraggableImageView DIV =  AO2.getDragImage();
 				ObjectLogic logic = new ObjectLogic(AO.getObjectLogic());
-				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, RM));
+				GOM.createGameObject(new Transform(new Vector2(DIV.getX(), DIV.getY())),logic, AO.getMainComponentPropertyManager(), convert(AO, teamList));
 			}
 		}
 		return GOM;
@@ -61,10 +62,14 @@ public final class AuthoringToGameObject {
 	 * @param RM
 	 * @return
 	 */
-	private static Team convert(AuthoringObject AO, ResourceManager RM) {
-
-		return new Team(AO.getTeam(),(new ResourceManager()).copyResourceManager(RM));
-
+	private static Team convert(AuthoringObject AO, List<Team> teamList) {
+		for(Team team: teamList) {
+			if(AO.getTeam() == team.getID()) {
+				return team;
+			}
+		}
+		System.out.println("Shouldn't ever get here");
+		return null;
 	}
 	
 	/**
@@ -74,7 +79,7 @@ public final class AuthoringToGameObject {
 	 * @param list
 	 * @return
 	 */
-	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM){
+	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM, MapSettings mapSettings){
 		List<Team> teams = new ArrayList<>();
 		List<Integer> teamIds = new ArrayList<>();
 		for(List<AuthoringObject> AOs: map.values()) {
@@ -85,7 +90,13 @@ public final class AuthoringToGameObject {
 					teamIds.add(AO.getTeam());
 				}
 			}
-				
+		if(!teamIds.isEmpty()) {
+			mapSettings.setNumPlayers(teamIds.size());
+		}
+		else {
+			mapSettings.setNumPlayers(1);
+			teams.add(new Team(1,  (new ResourceManager()).copyResourceManager(RM)));
+		}
 		}
 		return teams;
 	}

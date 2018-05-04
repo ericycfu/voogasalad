@@ -46,7 +46,7 @@ public class TopPanel {
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
 	public static final String LOADTEXT = "Load Game";
-	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF);";
+	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF;";
 	public static final String CLASSALERTHEAD = "ClassNotFoundException";
 	public static final String CLASSALERTBODY = "Incorrect class type!";
 	public static final String IOALERTHEAD = "FileNotFound";
@@ -161,14 +161,49 @@ public class TopPanel {
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager) gameObjects.get(GOMINDEX));
 			possibleUnits.clear();
-			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
-			possibleUnits.forEach(pu -> pu.getRenderer().setDisp(new ImageView(new Image(pu.getRenderer().getImagePath()))));
-			myResourceManager = gom.getElements().stream().filter(o -> o.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
+			System.out.println(gameObjects.get(1));
+			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
+			int index = 0;
+			while(gom.getElements().get(index).getOwner().getID() != myTeamID) {
+				index++;
+			}
+			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
+			possibleUnits.stream()
+				.filter(go -> go.isBuilding())
+				.forEach(go -> {
+					setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT);
+				});
+			possibleUnits.stream()
+				.filter(go -> !go.isBuilding())
+				.forEach(go -> {
+					setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT);
+				});
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
+	}
+	
+	private void setGameObjectRenderer(GameObject go, int x, int y) {
+		ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
+		imgv.setFitWidth(x);
+		imgv.setFitHeight(y);
+		go.getRenderer().setDisp(imgv);
+	}
+	
+	private void setResources() {
+		resourceBoard.getItems().clear();
+		List<Entry<String, Double>> entryList = myResourceManager.getResourceEntries();
+		String[] resources = new String[entryList.size()];
+		for(int i = 0; i < entryList.size(); i++) {
+			resources[i] = entryList.get(i).getKey() + GamePlayer.COLON + entryList.get(i).getValue();
+		}
+		resourceBoard.getItems().addAll(resources);
+	}
+	
+	private void setTime(double timeValue) {
+		time.setText(TIME + GamePlayer.COLON + timeValue);
 	}
 	
 	public boolean getIsLoaded() {
