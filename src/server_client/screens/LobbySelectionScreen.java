@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Set;
 
+import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_engine.GameInfo;
 import game_engine.GameInstance;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import scenemanager.SceneManager;
 import server.GameLobby;
 import server.LobbyManager;
 import server_client.buttons.CreateLobbyButton;
@@ -101,7 +103,9 @@ public class LobbySelectionScreen extends ClientScreen {
 				for(GameObject g: possibleUnits) {
 					currentGameInfo.addReferenceGameObject(g);
 				}
-				GameInstance newGame = new GameInstance(currentGameInfo, gom, chosenGame.getCanonicalPath());
+				MapSettings mapset = (MapSettings)gameObjects.get(2);
+				SceneManager sc = (SceneManager)gameObjects.get(3);
+				GameInstance newGame = new GameInstance(currentGameInfo, gom, mapset, sc);
 				ObjectOutputStream out = getOutputStream();
 				out.writeInt(-1);
 				out.writeObject(newGame);
