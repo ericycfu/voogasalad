@@ -1,7 +1,6 @@
 package game_player;
 
 import java.io.BufferedOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -12,9 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 import authoring.backend.MapSettings;
-import game_engine.EndStateWrapper;
-import game_engine.EndStateWrapper.EndState;
-import game_engine.EngineObject;
 import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
@@ -36,7 +32,6 @@ import interactions.Interaction;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -55,7 +50,8 @@ import server_client.screens.ClientScreen;
  * @author Siyuan Chen
  *
  */
-public class GamePlayer extends ClientScreen {
+public abstract class GamePlayer extends ClientScreen {
+	
 	public static final String CLASS_REF = "GamePlayer";
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
@@ -101,9 +97,7 @@ public class GamePlayer extends ClientScreen {
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null);
-		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
-		//Timeline: pause requests to server
-		//super(null, null);
+
 		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
@@ -253,14 +247,13 @@ public class GamePlayer extends ClientScreen {
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);
-		/**
+		
 		getStage().setResizable(true);
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 		getStage().setScene(myScene);
 		getStage().setHeight(SCENE_SIZE_Y);
 		getStage().setWidth(SCENE_SIZE_X);
 		getStage().setResizable(false);
-		**/
 	}
 
 	public Scene getScene() {
