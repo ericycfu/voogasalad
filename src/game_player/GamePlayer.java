@@ -128,45 +128,29 @@ public class GamePlayer extends ClientScreen {
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
-				/**
 				go.accessLogic().accessInteractions().getElements().stream()
 					.filter(i -> i.isBuild())
-					.forEach(i -> i.getTargetTags().stream()
-									.forEach(tag -> {
-										myPossibleUnits.stream()
-											.
-									}));
-				**/
-				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
-					if (i.isBuild()) {
-						List<String> tags = i.getTargetTags();
-						for (String s : tags) {
-							for (GameObject go2 : myPossibleUnits) {
-								boolean isTagMatch = false;
-								for (String s2 : go2.getTags()) {
-									if (s2.equals(s)) {
-										isTagMatch = true;
-									}
-								}
-								if (isTagMatch) {
-									BuildButton bb = new BuildButton(new Image(go2.getRenderer().getImagePath()), i.getDescription() + SPACE + s, i.getID(), 
-											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
-											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
-									bb.setOnAction(e -> {
-										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
-										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
+					.forEach(i -> {
+						i.getTargetTags().stream()
+							.forEach(tag -> {
+								myPossibleUnits.stream()
+									.filter(o -> o.getTags().stream().anyMatch(s -> s.equals(tag)))
+									.forEach(o -> {
+										BuildButton bb = new BuildButton(new Image(o.getRenderer().getImagePath()), i.getDescription() + SPACE + tag, i.getID(), 
+												SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
+												SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, o);
+										bb.setOnAction(e -> {
+											myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
+											myUnitDisplay.getUnitActionDisp().setBuildTarget(o);
+										});
+										skillList.add(bb);
 									});
-									skillList.add(bb);
-								}
-							}
-						}
+							});
 						myUnitBuilds.put(go.getName(), skillList);
-					}
-				}
+					});
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
-			
 		}
 	}
 
@@ -176,34 +160,42 @@ public class GamePlayer extends ClientScreen {
 		myUnitSkills.clear();
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
-			SkillButton cancel = new SkillButton(new Image(SkillButton.CANCEL_BUTTON_IMAGE_PATH), SkillButton.CANCEL_BUTTON_NAME, -1, SkillButton.CANCEL_BUTTON_DESCRIPTION, SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
+			skillList.add(makeCancelButton(go.getName()));
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
-					cancel.setOnAction(e -> {
-						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
-						this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
-					});
-					if (!ia.isBuild()) {
-						sb.setOnAction(e->{
-							myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
-						});
-					}
-					else {
-						sb.setOnAction(e -> {
-							List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
-							sblist.add(cancel);
-							myUnitDisplay.getUnitActionDisp().fill(sblist);
-						});
-					}
-					skillList.add(sb);
+					skillList.add(makeInteractionButton(ia, go));
 				}
-				skillList.add(cancel);
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
 			myUnitSkills.put(go.getName(), skillList);
 		}
+	}
+	
+	private SkillButton makeCancelButton(String name) {
+		SkillButton cancel = new SkillButton(new Image(SkillButton.CANCEL_BUTTON_IMAGE_PATH), SkillButton.CANCEL_BUTTON_NAME, -1, SkillButton.CANCEL_BUTTON_DESCRIPTION, SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
+		cancel.setOnAction(e -> {
+			this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(name));
+			this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
+		});
+		return cancel;
+	}
+	
+	private SkillButton makeInteractionButton(Interaction ia, GameObject go) {
+		SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO);
+		if (!ia.isBuild()) {
+			sb.setOnAction(e->{
+				myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
+			});
+		}
+		else {
+			sb.setOnAction(e -> {
+				List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
+				sblist.add(makeCancelButton(go.getName()));
+				myUnitDisplay.getUnitActionDisp().fill(sblist);
+			});
+		}
+		return sb;
 	}
 	
 	private void initializeSingleUnitSelect() {
@@ -228,8 +220,7 @@ public class GamePlayer extends ClientScreen {
 					} catch (UnmodifiableGameObjectException e1) {
 							// do nothing
 					}
-				}
-				
+				}	
 			});
 		}
 	}
@@ -258,7 +249,7 @@ public class GamePlayer extends ClientScreen {
 		mainDisp.toBack();
 		
 		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
-		Node chatBox = myChatBox.getGroup();
+		Node chatBox = myChatBox.getNodes();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);

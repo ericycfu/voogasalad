@@ -88,7 +88,6 @@ public class MainDisplay implements VisualUpdate {
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 					}
 					else {
-						
 						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 					}
 					myUnitActionDisp.setCurrentActionID(-1);

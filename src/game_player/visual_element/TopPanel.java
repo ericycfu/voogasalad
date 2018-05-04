@@ -163,24 +163,25 @@ public class TopPanel {
 			possibleUnits.stream()
 				.filter(go -> go.isBuilding())
 				.forEach(go -> {
-					ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
-					imgv.setFitHeight(GamePlayer.BUILDING_HEIGHT);
-					imgv.setFitWidth(GamePlayer.BUILDING_WIDTH);
-					go.getRenderer().setDisp(imgv);
+					setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT);
 				});
 			possibleUnits.stream()
 				.filter(go -> !go.isBuilding())
 				.forEach(go -> {
-					ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
-					imgv.setFitHeight(GamePlayer.UNIT_HEIGHT);
-					imgv.setFitWidth(GamePlayer.UNIT_WIDTH);
-					go.getRenderer().setDisp(imgv);
+					setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT);
 				});
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
+	}
+	
+	private void setGameObjectRenderer(GameObject go, int x, int y) {
+		ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
+		imgv.setFitWidth(x);
+		imgv.setFitHeight(y);
+		go.getRenderer().setDisp(imgv);
 	}
 	
 	private void setResources() {
