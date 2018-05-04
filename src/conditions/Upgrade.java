@@ -51,6 +51,7 @@ public class Upgrade implements CustomCondition {
 			double prevDelta = current.accessLogic().accessAttributes().getMaxAttributeVal(upgradeVar);
 			current.accessLogic().accessAttributes().setAttributeValue(upgradeVar, prevDelta + upgradeDelta);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(upgradeVar, prevDelta + upgradeDelta);
+			current.getRenderer().flashUnit();
 			
 			
 		} 
