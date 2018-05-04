@@ -38,7 +38,6 @@ public class GameHandler extends CommunicationsHandler {
 			String input;
 			ObjectInputStream in = getInputStream();
 			if((input = (String)in.readObject()) != null) {
-				System.out.println(input);
 				if(input.split("\\s+")[0].equals("Leave")) {
 					runningGameLobby.remove(getSocket());
 					return MainPageHandler.CLASS_REF;

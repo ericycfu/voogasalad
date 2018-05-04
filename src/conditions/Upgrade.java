@@ -57,7 +57,6 @@ public class Upgrade implements CustomCondition {
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
-			e.printStackTrace();
 		}
 		
 	}

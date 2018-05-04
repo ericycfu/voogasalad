@@ -106,13 +106,9 @@ public class Condition implements EngineObject, Serializable{
 			}
 		} 
 		catch (PropertyNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			System.out.println("Variable does not exist in the object");
 		} 
 		catch (UnmodifiableGameObjectException e) {
-		
-			e.printStackTrace();
 			System.out.println("variable cannot be modified");
 		}
 	}

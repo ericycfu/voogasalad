@@ -56,7 +56,6 @@ public class ResourceVictory implements EndCondition {
 		} 
 		catch (InvalidResourceValueException | PropertyNotFoundException e) 
 		{
-			e.printStackTrace();
 			return new EndStateWrapper("", EndStateWrapper.EndState.CONTINUE, null);
 		}
 		

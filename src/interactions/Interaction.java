@@ -126,7 +126,6 @@ public class Interaction implements EngineObject, Serializable {
 		}
 		catch(PropertyNotFoundException p) 
 		{
-			p.printStackTrace();
 		}
 	}
 	
