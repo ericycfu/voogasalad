@@ -371,6 +371,7 @@ public class GamePlayer extends ClientScreen {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
