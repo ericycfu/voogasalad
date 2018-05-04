@@ -185,7 +185,10 @@ public class ComponentAddInteractionsScreen {
 		interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane,
 														  created_custom_functions_pane,
 														  interaction_manager,
-														  interaction_vision_range_tf);
+														  interaction_vision_range_tf,
+														  interaction_rate_tf,
+														  interaction_target_team_cb,
+														  interaction_description_tf);
     	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, 
     																	   all_selected_interaction_tags_pane,
     																	   current_selected_interaction_components_pane);
