@@ -33,18 +33,11 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		while(true) {
-			try {
+		while(in.available()>0) {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				result.add(obj);
-				}
-			catch(EOFException e) {
-				//not real error, just signifies end of file
-				break;
-			}
 		}
-	
 		return result;
 	}
 	/**
