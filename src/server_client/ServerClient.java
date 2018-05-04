@@ -18,6 +18,7 @@ public class ServerClient {
 	public static final String TITLE = "Server Client";
 	public static final String DISCONNECT_TITLE = "ERROR!";
 	public static final String DISCONNECT_BODY = "Error occured when closing server client";
+	public static final String INITIALIZATION_BODY = "Cannot connect to server; try again!";
 	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 800;
 	private ClientScreen currentScreen;
@@ -33,17 +34,17 @@ public class ServerClient {
 	}
 	public void setUp(Stage primaryStage) {
 		clientSocket = null;
-		do {
-			try {
-				clientSocket = new Socket(RTSServer.DEFAULT_SERVER_IP, RTSServer.PORT_NUMBER);
-			}
-			catch(Exception e){
-			}
-		} while (clientSocket == null);
-		myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
-		currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
-		setUpStage(primaryStage);
-		start();
+		try {
+			clientSocket = new Socket(RTSServer.DEFAULT_SERVER_IP, RTSServer.PORT_NUMBER);
+			myScreenFactory = new ScreenFactory(clientSocket,primaryStage);
+			currentScreen = myScreenFactory.get(LobbySelectionScreen.CLASS_REF);
+			setUpStage(primaryStage);
+			start();
+		}
+		catch(Exception e){
+			new AlertMaker(DISCONNECT_TITLE,INITIALIZATION_BODY);
+		}
+
 	}
 	private void start() {
 		new Thread(() -> {
@@ -64,7 +65,7 @@ public class ServerClient {
 			}
 		}).start();
 	}
-	
+
 	private void setUpStage(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
 		primaryStage.setWidth(INITIAL_SCENE_WIDTH);

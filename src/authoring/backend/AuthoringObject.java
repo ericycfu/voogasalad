@@ -203,9 +203,14 @@ public class AuthoringObject {
 //		return imageview;
 //	}
 	
-	public AuthoringObject duplicateObj() {
+	public AuthoringObject duplicateObj(AuthoringObject objBase, MapEntity map_entity) {
 		Image image = myDragImage.getImage();
 		DraggableImageView imageview = new DraggableImageView(image, myDragImage.getFitWidth(), myDragImage.getFitHeight());
+		imageview.setOnMouseClicked(ex -> {
+			if(ex.isControlDown() && ex.getClickCount() == 1) {
+				map_entity.removeFromMap(objBase, this);
+			}
+		});
 		AuthoringObject newobj = new AuthoringObject(imageview);
 		imageview.setAction(newobj);
 		return newobj;

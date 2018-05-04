@@ -291,7 +291,6 @@ public class GamePlayer extends ClientScreen {
 				obj = inputstream.readObject();
 				System.out.println(obj.getClass().getCanonicalName());
 			} while(!(obj instanceof GameObjectManager));
-			System.out.println("ASDASD");
 			synchronized (myGameObjectManager){
 				myGameObjectManager = (GameObjectManager) obj;
 				myGameObjectManager.setupImages();
