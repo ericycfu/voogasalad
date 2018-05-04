@@ -28,7 +28,6 @@ import game_player.visual_element.UnitActionDisplay;
 import game_player.visual_element.UnitDisplay;
 import interactions.Interaction;
 import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
