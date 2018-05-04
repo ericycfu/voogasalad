@@ -23,8 +23,9 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private static final String MOVE_SPEED = "Move Speed";
 	private static final String DEFAULT_Property_Status = "Name: N/A\nTeam: N/A";
 	private static final String DEFAULT_STATUS = "Damage: N/A\nArmor: N/A";
-	private static final double PROPERTY_RATIO = 1/4;
-	private static final double STATUS_RATIO = 3/4;
+	private static final double PROPERTY_RATIO = 0.25;
+	private static final double STATUS_RATIO = 0.75;
+	private static final double PROFILE_RATIO = 0.33333;
 	private double myHeight; 
 	private double myWidth; 
 	private GridPane myUnitInfoDisplay;
@@ -57,7 +58,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private void initializeProfilePic() {
 		myCurrentUnitImageView = new ImageView(DEFAULT_IMAGE);
 		myCurrentUnitImageView.setFitHeight(myHeight);
-		myCurrentUnitImageView.setFitWidth(myWidth/3);
+		myCurrentUnitImageView.setFitWidth(myWidth*PROFILE_RATIO);
 		myCurrentUnitImageView.setX(myWidth*PROPERTY_RATIO - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myCurrentUnitImageView.setY(myHeight*PROPERTY_RATIO - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myUnitInfoDisplay.add(myCurrentUnitImageView, 0, 0, 1, 1);
@@ -65,7 +66,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeDisplayComponent(TextArea comp, double height, double width, double xcoorRatio, double ycoorRatio) {
 		comp.setPrefHeight(height);
-		comp.setPrefWidth(width/3);
+		comp.setPrefWidth(width*PROFILE_RATIO);
 		comp.setLayoutX(width*xcoorRatio - comp.getWidth());
 		comp.setLayoutY(width*ycoorRatio - comp.getHeight());
 		comp.setEditable(false);
