@@ -103,7 +103,6 @@ public abstract class GamePlayer extends ClientScreen {
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
-	private DoubleProperty myTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null);

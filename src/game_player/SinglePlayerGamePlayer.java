@@ -10,139 +10,150 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import authoring.backend.MapSettings;
-import game_engine.Team;
-import game_object.GameObject;
-import game_object.GameObjectManager;
-import game_object.UnmodifiableGameObjectException;
-import game_player.selected_unit_manager.MultiPlayerSelectedUnitManager;
-import game_player.selected_unit_manager.SelectedUnitManager;
-import game_player.selected_unit_manager.SinglePlayerSelectedUnitManager;
-import game_player.visual_element.BuildButton;
-import game_player.visual_element.ChatBox;
-import game_player.visual_element.MainDisplay;
-import game_player.visual_element.MiniMap;
+	import authoring.backend.MapSettings;
+	import game_engine.EndStateWrapper;
+	import game_engine.EndStateWrapper.EndState;
+	import game_engine.EngineObject;
+	import game_engine.GameInstance;
+	import game_engine.Team;
+	import game_object.GameObject;
+	import game_object.GameObjectManager;
+	import game_object.UnmodifiableGameObjectException;
+	import game_player.selected_unit_manager.MultiPlayerSelectedUnitManager;
+	import game_player.selected_unit_manager.SelectedUnitManager;
+	import game_player.selected_unit_manager.SinglePlayerSelectedUnitManager;
+	import game_player.visual_element.BuildButton;
+	import game_player.visual_element.ChatBox;
+	import game_player.visual_element.MainDisplay;
+	import game_player.visual_element.MiniMap;
+import game_player.visual_element.SingleTopPanel;
 import game_player.visual_element.SkillButton;
-import game_player.visual_element.TopPanel;
-import game_player.visual_element.UnitActionDisplay;
-import game_player.visual_element.UnitDisplay;
-import interactions.Interaction;
-import javafx.animation.Timeline;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import pathfinding.GridMap;
-import scenemanager.SceneManager;
-/**
- * 
- * @author Siyuan Chen, Frank Yin
- *
- * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
- * 
- */
+	import game_player.visual_element.TopPanel;
+	import game_player.visual_element.UnitActionDisplay;
+	import game_player.visual_element.UnitDisplay;
+	import interactions.Interaction;
+	import javafx.animation.Timeline;
+	import javafx.beans.property.DoubleProperty;
+	import javafx.beans.property.SimpleDoubleProperty;
+	import javafx.scene.Cursor;
+	import javafx.scene.Group;
+	import javafx.scene.Node;
+	import javafx.scene.Scene;
+	import javafx.scene.image.Image;
+	import javafx.scene.image.ImageView;
+	import javafx.scene.input.MouseButton;
+	import javafx.scene.text.Text;
+	import javafx.stage.Stage;
+	import pathfinding.GridMap;
+	import scenemanager.SceneManager;
+	import server_client.screens.ClientScreen;
+
+	/**
+	 * 
+	 * @author Siyuan Chen, Frank Yin
+	 *
+	 * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
+	 * 
+	 */
 public class SinglePlayerGamePlayer {
-
-	public static final double WINDOW_STEP_SIZE = 10;
-	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 1200;
-	public static final int SCENE_SIZE_Y = 800;
-	public static final double BOTTOM_HEIGHT = 0.25;
-	public static final double MINIMAP_WIDTH = 0.25;
-	public static final double INFO_DISPLAY_WIDTH = 0.49;
-	public static final double ACTION_DISPLAY_WIDTH = 0.25;
-	public static final double TOP_HEIGHT = 0.05;
-	public static final double CHATBOX_WIDTH = 0.20;
-	public static final double CHATBOX_HEIGHT = 0.30;
-	public static final String LINEBREAK = "\n";
-	public static final String EMPTY = "";
-	public static final String COLON = ": ";
-	public static final String SPACE = " ";
-	public static final String SERVERALERTHEAD = "Communication Failed";
-	public static final String SERVERALERTBODY = "Please try again.";
-	public static final int UNIT_HEIGHT = 50;
-	public static final int UNIT_WIDTH = 50;
-	public static final int BUILDING_HEIGHT = 100;
-	public static final int BUILDING_WIDTH = 100;
-
-	private GameObjectManager myGameObjectManager;
-	private TopPanel myTopPanel;
-	private MiniMap myMiniMap;
-	private UnitDisplay myUnitDisplay;
-	private MainDisplay myMainDisplay;
-	private ChatBox myChatBox;
-	private Group myRoot;
-	private Map<String, List<SkillButton>> myUnitSkills;
-	private Map<String, List<SkillButton>> myUnitBuilds;
-	private SelectedUnitManager mySelectedUnitManager;
-	private Scene myScene;
-	private Team myTeam;
-	private MapSettings myMapSettings;
-	private ImageView myMap;
-	private Socket mySocket;
-	private Set<GameObject> myPossibleUnits;
-	private SceneManager mySceneManager;
-	private Stage myStage;
-	private Timeline myTimeline;
-
-	public SinglePlayerGamePlayer(GameObjectManager gameManager,Set<GameObject> allPossibleUnits) {
-		myMap = new ImageView(new Image("map4.jpg"));
-		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
-		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
-		myPossibleUnits = allPossibleUnits;
-		myGameObjectManager = gameManager;
-		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
-		initialize();
-		initializeSingleUnitSelect();
-		unitSkillMapInitialize();
-	}
-
-	// network constructor
-	public SinglePlayerGamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
-		myStage = stage;
-
-		myMap = new ImageView(new Image("map4.jpg"));
-		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
-		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
-
-		myGameObjectManager = gom;
-		myTeam = team;
-		myPossibleUnits = allPossibleUnits;
-		mySceneManager = scenemanager;
-		mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
-		mySocket = socket;
-		initialize();
-		initializeSingleUnitSelect();		
-		unitSkillMapInitialize();
-	}
-
-	private void unitBuildsMapInitialize() {
-		myUnitBuilds = new HashMap<>();
-		for (GameObject go : myPossibleUnits) {
-			List<SkillButton> skillList = new ArrayList<>();
-			try {
-				go.accessLogic().accessInteractions().getElements().stream()
-				.filter(i -> i.isBuild())
-				.forEach(i -> {
-					i.getTargetTags().stream()
-					.forEach(tag -> {
-						myPossibleUnits.stream()
-						.filter(o -> o.getTags().stream().anyMatch(s -> s.equals(tag)))
-						.forEach(o -> {
-							BuildButton bb = new BuildButton(new Image(o.getRenderer().getImagePath()), i.getDescription() + SPACE + tag, i.getID(), 
-									SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
-									SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, o);
-							bb.setOnAction(e -> {
-								myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
-								myUnitDisplay.getUnitActionDisp().setBuildTarget(o);
-							});
-							skillList.add(bb);
+		
+		public static final double WINDOW_STEP_SIZE = 10;
+		public static final double MAP_DISPLAY_RATIO = 4;
+		public static final int SCENE_SIZE_X = 900;
+		public static final int SCENE_SIZE_Y = 600;
+		public static final double BOTTOM_HEIGHT = 0.25;
+		public static final double MINIMAP_WIDTH = 0.25;
+		public static final double INFO_DISPLAY_WIDTH = 0.49;
+		public static final double ACTION_DISPLAY_WIDTH = 0.25;
+		public static final double TOP_HEIGHT = 0.05;
+		public static final double CHATBOX_WIDTH = 0.20;
+		public static final double CHATBOX_HEIGHT = 0.30;
+		public static final String LINEBREAK = "\n";
+		public static final String EMPTY = "";
+		public static final String COLON = ": ";
+		public static final String SPACE = " ";
+		public static final String SERVERALERTHEAD = "Communication Failed";
+		public static final String SERVERALERTBODY = "Please try again.";
+		public static final int UNIT_HEIGHT = 50;
+		public static final int UNIT_WIDTH = 50;
+		public static final int BUILDING_HEIGHT = 100;
+		public static final int BUILDING_WIDTH = 100;
+		
+		private GameObjectManager myGameObjectManager;
+		private TopPanel myTopPanel;
+		private MiniMap myMiniMap;
+		private UnitDisplay myUnitDisplay;
+		private MainDisplay myMainDisplay;
+		private ChatBox myChatBox;
+		private Group myRoot;
+		private Map<String, List<SkillButton>> myUnitSkills;
+		private Map<String, List<SkillButton>> myUnitBuilds;
+		private SelectedUnitManager mySelectedUnitManager;
+		private Scene myScene;
+		private Team myTeam;
+		private MapSettings myMapSettings;
+		private ImageView myMap;
+		private Socket mySocket;
+		private Set<GameObject> myPossibleUnits;
+		private SceneManager mySceneManager;
+		private Stage myStage;
+		
+		public SinglePlayerGamePlayer(GameObjectManager gameManager,Set<GameObject> allPossibleUnits) {
+			myMap = new ImageView(new Image("map4.jpg"));
+			myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
+			myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
+			myPossibleUnits = allPossibleUnits;
+			myGameObjectManager = gameManager;
+			myUnitSkills = new HashMap<>();
+			mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
+			initialize();
+			initializeSingleUnitSelect();
+			unitSkillMapInitialize();
+		}
+		
+		// network constructor
+		public SinglePlayerGamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
+			myStage = stage;
+			
+			myMap = new ImageView(new Image("map4.jpg"));
+			myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
+			myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
+			
+			myGameObjectManager = gom;
+			myTeam = team;
+			myPossibleUnits = allPossibleUnits;
+			mySceneManager = scenemanager;
+			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
+			mySocket = socket;
+			initialize();
+			initializeSingleUnitSelect();		
+			unitSkillMapInitialize();
+		}
+		
+		private void unitBuildsMapInitialize() {
+			myUnitBuilds = new HashMap<>();
+			for (GameObject go : myPossibleUnits) {
+				List<SkillButton> skillList = new ArrayList<>();
+				try {
+					go.accessLogic().accessInteractions().getElements().stream()
+						.filter(i -> i.isBuild())
+						.forEach(i -> {
+							i.getTargetTags().stream()
+								.forEach(tag -> {
+									myPossibleUnits.stream()
+										.filter(o -> o.getTags().stream().anyMatch(s -> s.equals(tag)))
+										.forEach(o -> {
+											BuildButton bb = new BuildButton(new Image(o.getRenderer().getImagePath()), i.getDescription() + SPACE + tag, i.getID(), 
+													SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
+													SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, o);
+											bb.setOnAction(e -> {
+												myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
+												myUnitDisplay.getUnitActionDisp().setBuildTarget(o);
+											});
+											skillList.add(bb);
+										});
+								});
+							myUnitBuilds.put(go.getName(), skillList);
 						});
 					});
 					myUnitBuilds.put(go.getName(), skillList);
@@ -221,7 +232,10 @@ public class SinglePlayerGamePlayer {
 				}	
 			});
 		}
-	}
+		
+		private void initialize() {
+			myRoot = new Group();
+			myTopPanel = new SingleTopPanel(1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
 	private void initialize() {
 		myRoot = new Group();
@@ -312,8 +326,10 @@ public class SinglePlayerGamePlayer {
 		}
 	}
 
-	public void setTimeline(Timeline animation) {
-		myTimeline = animation;
+		public void setTimeline(Timeline animation) {
+			((SingleTopPanel) myTopPanel).setTimeline(animation);
+		}
+		
 	}
 
 
