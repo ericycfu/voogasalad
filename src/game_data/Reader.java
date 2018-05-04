@@ -33,11 +33,23 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		while(in.available()>0) {
+		int counter = 0;
+		while(true) {
+			try {
 				Object obj = in.readObject();
 				setUpNonSerializable(obj);
 				result.add(obj);
+				}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
+			}
+			counter += 1;
+			if (counter == Integer.MAX_VALUE) {
+				break;
+			}
 		}
+	
 		return result;
 	}
 	/**
@@ -53,15 +65,26 @@ public class Reader {
 		FileReader reader = new FileReader(location);
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
-		
-		while(in.available()>0) {
+		int counter = 0;
+		while(true) {
+			try {
 				Object obj = in.readObject();
-				//System.out.println(obj.getClass().getName());
+				System.out.println(obj.getClass().getName());
 				setUpNonSerializable(obj);
-				//System.out.println(obj.getClass().getName());
+				System.out.println(obj.getClass().getName());
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
+				counter += 1;
+				if (counter == Integer.MAX_VALUE) {
+					break;
+				}
+			}
+			catch(EOFException e) {
+				//not real error, just signifies end of file
+				break;
+			}
+			
 		}
 		return result;
 	}
