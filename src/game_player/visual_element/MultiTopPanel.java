@@ -40,4 +40,9 @@ public class MultiTopPanel extends TopPanel {
 	public void setTimeTA(int time) {
 		
 	}
+
+	@Override
+	public void startTimeline() {
+		
+	}
 }

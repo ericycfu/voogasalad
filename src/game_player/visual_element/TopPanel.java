@@ -158,7 +158,7 @@ public abstract class TopPanel {
 			myResourceManager = gom.getElements().stream().filter(go -> go.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
 			resize(gom.getElements());
 			resize(possibleUnits);
-			count = 0;
+			resetTime();
 			startTimeline();
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
@@ -191,8 +191,8 @@ public abstract class TopPanel {
 	}
 	
 	public void update() {
-		count++;
 		if(myResourceManager != null) {
+			count++;
 			resourceBoard.getItems().clear();
 			myResourceManager.getResourceEntries().forEach(entry -> resourceBoard.getItems().add(entry.getKey() + GamePlayer.COLON + entry.getValue()));
 		}
@@ -209,5 +209,9 @@ public abstract class TopPanel {
 	
 	public Node getNodes() {
 		return myPane;
+	}
+
+	public void resetTime() {
+		count = 0;
 	}
 }
