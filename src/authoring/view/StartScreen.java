@@ -3,6 +3,8 @@ package authoring.view;
 import java.io.File;
 import java.io.IOException;
 
+import com.thoughtworks.xstream.io.StreamException;
+
 import game_player.alert.AlertMaker;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
@@ -51,6 +53,9 @@ public class StartScreen implements AuthoringView {
 																new MakeGameScreen(myStage, myFile);
 															} catch (ClassNotFoundException | IOException | NullPointerException e2) {
 																AlertMaker.makeAlert("Error with Loading Game", "You have not selected a file or the file has an incorrect format");
+															}
+															catch(StreamException e3) {
+																
 															}
 															
 				}, "image_button"),
