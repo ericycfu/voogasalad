@@ -158,7 +158,8 @@ public abstract class TopPanel {
 			myResourceManager = gom.getElements().stream().filter(go -> go.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
 			resize(gom.getElements());
 			resize(possibleUnits);
-			resetTime();
+			count = 0;
+			startTimeline();
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -177,9 +178,9 @@ public abstract class TopPanel {
 		go.getRenderer().resize(x, y);
 	}
 	
-	public abstract void resetTime();
-	
 	public abstract void setTimeTA(int time);
+	
+	public abstract void startTimeline();
 	
 	public boolean getIsLoaded() {
 		return isLoaded;
