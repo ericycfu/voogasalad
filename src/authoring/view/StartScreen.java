@@ -71,7 +71,7 @@ public class StartScreen implements AuthoringView {
 															}
 															
 				}, "image_button"),
-				ButtonFactory.makeButton("Play Game", e -> new ServerClient(new Stage()), "image_button"),
+				ButtonFactory.makeButton("Multiplayer", e -> new ServerClient(new Stage()), "image_button"),
 				ButtonFactory.makeButton("Single Player", e -> singlePlayerGame(), "image_button"));
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
