@@ -139,7 +139,6 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		this.tags = tags;
 		this.owner = t;
 		propertiesInit();
-
 	}
 	
 	/**
@@ -234,7 +233,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		}
 		if(interactionTarget == null  && emptyPosTarget == null) 
 			return;
-		 myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
+		myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 	}
 	
 	private void moveUpdate()
