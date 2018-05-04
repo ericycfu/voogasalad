@@ -3,7 +3,10 @@ package game_engine;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import authoring.backend.MapSettings;
 import game_data.Reader;
@@ -41,25 +44,30 @@ public class GameInstance implements Serializable{
 	private transient Reader myReader = new Reader();
 	private transient Writer myWriter = new Writer();
 	
-	public GameInstance(GameInfo g, GameObjectManager gom, String filepath) {
+	public GameInstance(GameInfo g, GameObjectManager gom, MapSettings mapset, SceneManager sm) {
 
 		myGameInfo = g;
 		myObjectManager = gom;
 		myTeamManager = new TeamManager();
 		chat = new ArrayList<ChatEntry>();
 		running = false;
-		myTeamManager = new TeamManager();
+		
+		mySceneManager = sm;
 		try {
-			setUp(filepath);
+			setUp(mapset);
 		}
 		catch(Exception e) {}
 	}
-	public void setUp(String filepath) throws ClassNotFoundException, IOException {
-		
-		MapSettings mapProperties = (MapSettings) myReader.read(filepath).get(2);
-		mySceneManager = (SceneManager) myReader.read(filepath).get(3);
-		for(Team t: mySceneManager.getTeams()) {
-			myTeamManager.addElement(t);
+	public void setUp(MapSettings mapProperties) throws ClassNotFoundException, IOException {
+		myTeamManager = new TeamManager();
+		ResourceManager initialResources = mySceneManager.getTeams().get(0).getResourceManager();
+		myTeamManager.addElement(mySceneManager.getTeams().get(0));
+		for(int x = 2; x <= mapProperties.getNumPlayers(); x++) {
+			Map<String,Double> initial = new HashMap<>();
+			for(Entry<String,Double> s: initialResources.getResourceEntries()) {
+				initial.put(s.getKey(), s.getValue());
+			}
+			myTeamManager.createTeam("Player " + x, new ResourceManager(initial));
 		}
 		mapName = mapProperties.getName();
 		mapHeight = mapProperties.getMapHeight();

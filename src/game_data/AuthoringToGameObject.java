@@ -90,6 +90,7 @@ public final class AuthoringToGameObject {
 					teamIds.add(AO.getTeam());
 				}
 			}
+		System.out.println(teamIds.size());
 		if(!teamIds.isEmpty()) {
 			mapSettings.setNumPlayers(teamIds.size());
 		}
