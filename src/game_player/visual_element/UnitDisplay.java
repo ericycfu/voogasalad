@@ -6,7 +6,6 @@ import java.util.Map;
 import game_object.GameObject;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 
 /**
  * 
@@ -14,10 +13,10 @@ import javafx.scene.image.Image;
  *
  */
 public class UnitDisplay implements VisualUpdate {
+	public static final String WHITE_BACKGROUND_CSS = "-fx-background-color: #FFFFFF;";
 	private UnitInfoDisplay myInfoDisp;
 	private UnitActionDisplay myActionDisp;
 	private Map<String, List<SkillButton>> myUnitSkillsMap;
-	private Map<String, Image> mySkillImagesMap;
 	private Group myUnitDisplay;
 	
 	public UnitDisplay(double infoDispWidth, double infoDispHeight, double actionDispWidth, double actionDispHeight, Map<String, List<SkillButton>> unitSkills) {
@@ -49,6 +48,5 @@ public class UnitDisplay implements VisualUpdate {
 	public UnitActionDisplay getUnitActionDisp() {
 		return myActionDisp;
 	}
-	
 	
 }

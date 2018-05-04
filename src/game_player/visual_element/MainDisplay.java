@@ -78,27 +78,35 @@ public class MainDisplay implements VisualUpdate {
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
 			else if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
-				int ID = this.myUnitActionDisp.getCurrentActionID();
-				try {
-					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
-						System.out.println("build unit name: " + unitToBeBuilt.getName());
-						unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
-						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
-					}
-					else {
-						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
-					}
-					myUnitActionDisp.setCurrentActionID(-1);
-				} catch (UnmodifiableGameObjectException e1) {
-					// do nothing
-				}	
+				initializeMapClickInteraction(mouseX, mouseY);
 			}
 		});
 		myMap.toBack();
 	}
 	
+	private void initializeMapClickInteraction(double mouseX, double mouseY) {
+		int ID = this.myUnitActionDisp.getCurrentActionID();
+		try {
+			if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+				GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
+				unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+				mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+			}
+			else {
+				mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+			}
+			myUnitActionDisp.defaultCurrentActionID();
+		} catch (UnmodifiableGameObjectException e1) {
+			// do nothing
+		}	
+	}
+	
 	private void initializeMultipleUnitSelect() {
+		setMultipleUnitSelectStartEvent();
+		setMultipleUnitSelectEndEvent();
+	}
+	
+	private void setMultipleUnitSelectStartEvent() {
 		myMap.setOnMousePressed(e -> {
 			if (e.getButton() == MouseButton.PRIMARY) {
 				myMouseXInitPosition = e.getSceneX();
@@ -107,10 +115,13 @@ public class MainDisplay implements VisualUpdate {
 				isMultipleSelectAvailable = true;
 			}
 		});
+	}
+	
+	private void setMultipleUnitSelectEndEvent() {
 		myMap.setOnMouseReleased(e -> {
 			if (isMultipleSelectAvailable && e.getButton() == MouseButton.PRIMARY) {
 				mySelectedUnitManager.clear();
-				this.myUnitActionDisp.setCurrentActionID(-1);
+				myUnitActionDisp.defaultCurrentActionID();
 				myMouseXFinalPosition = e.getSceneX();
 				myMouseYFinalPosition = e.getY() - GamePlayer.SCENE_SIZE_Y * GamePlayer.TOP_HEIGHT;
 				for (GameObject go : myDisplayGameObjects) {
@@ -120,7 +131,6 @@ public class MainDisplay implements VisualUpdate {
 				}
 				mySelectionBox.setVisible(false);
 			}
-			
 			isMultipleSelectAvailable = false;
 		});
 	}
@@ -132,6 +142,10 @@ public class MainDisplay implements VisualUpdate {
 		mySelectionBox.setStroke(Color.BLACK);
 		mySelectionBox.setFill(Color.TRANSPARENT);
 		myMainDisplay.getChildren().add(mySelectionBox);
+		setSelectionBoxEvent();
+	}
+	
+	private void setSelectionBoxEvent() {
 		myMap.setOnMouseDragged(e -> {
 			if(e.getButton() == MouseButton.PRIMARY) {
 				double xDiff = e.getSceneX() - myMouseXInitPosition;
@@ -185,13 +199,7 @@ public class MainDisplay implements VisualUpdate {
 	public void update(List<GameObject> gameObjects) {
 		myDisplayGameObjects = filterDisplayGameObjects(gameObjects);
 		List<ImageView> imgvList = new ArrayList<>();
-		for (GameObject go : myDisplayGameObjects) {
-			double xloc = translateX(go.getTransform().getPosition().getX());
-			double yloc = translateY(go.getTransform().getPosition().getY());
-			go.getRenderer().getDisp().setX(xloc);
-			go.getRenderer().getDisp().setY(yloc);
-			imgvList.add(go.getRenderer().getDisp());
-		}	
+		updatePositionChanges(imgvList);			
 		for (int i = myDisplayables.getChildren().size() - 1; i >= 0; i--) {
 			Node n = myDisplayables.getChildren().get(i);
 			if (!imgvList.contains(n)) {
@@ -204,6 +212,16 @@ public class MainDisplay implements VisualUpdate {
 		}
 		updateCurrentXYCoor();
 		updateCurrentWindow();
+	}
+	
+	private void updatePositionChanges(List<ImageView> imgvList) {
+		for (GameObject go : myDisplayGameObjects) {
+			double xloc = translateX(go.getTransform().getPosition().getX());
+			double yloc = translateY(go.getTransform().getPosition().getY());
+			go.getRenderer().getDisp().setX(xloc);
+			go.getRenderer().getDisp().setY(yloc);
+			imgvList.add(go.getRenderer().getDisp());
+		}	
 	}
 
 	@Override
@@ -248,11 +266,9 @@ public class MainDisplay implements VisualUpdate {
 	
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
 		List<GameObject> ret = new ArrayList<>();
-		for (GameObject go : gameobjects) {
-			if (isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY())) {
-				ret.add(go);
-			}
-		}
+		gameobjects.stream()
+			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY()))
+			.forEach(go -> ret.add(go));
 		return ret;
 	}
 	

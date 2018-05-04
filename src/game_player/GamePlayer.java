@@ -59,6 +59,7 @@ public class GamePlayer extends ClientScreen {
 	public static final double CHATBOX_WIDTH = 0.20;
 	public static final double CHATBOX_HEIGHT = 0.30;
 	public static final String LINEBREAK = "\n";
+	public static final String EMPTY = "";
 	public static final String COLON = ": ";
 	public static final String SPACE = " ";
 	public static final String SERVERALERTHEAD = "Communication Failed";
@@ -170,7 +171,7 @@ public class GamePlayer extends ClientScreen {
 					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
-						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+						this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 					});
 					if (!ia.isBuild()) {
 						sb.setOnAction(e->{
@@ -201,7 +202,7 @@ public class GamePlayer extends ClientScreen {
 				if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
 					mySelectedUnitManager.add(go);
-					myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+					myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 				}
 				if (e.getButton()==MouseButton.SECONDARY) {
 					int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
@@ -211,7 +212,7 @@ public class GamePlayer extends ClientScreen {
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
-							myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+							myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 						}
 					} catch (UnmodifiableGameObjectException e1) {
 							// do nothing
