@@ -38,8 +38,9 @@ public class MakeGameSelect implements AuthoringView {
 	}
 	
 	private void setupTitle() {
-		HBox box = new HBox();
-		box.getChildren().addAll(new MakeGameText(), new BackButton());
+		VBox box = new VBox();
+		box.getChildren().addAll(new MakeGameText(), new BackButton(myStage));
+		box.setSpacing(20);
 		myPane.setTop(box);
 	}
 	
