@@ -35,16 +35,19 @@ public class Upgrade implements CustomCondition {
 					
 		try 
 		{
+			System.out.println("executed");
 			this.attribute = format.getParameterValue(VARIABLE);
+			String delta = format.getParameterValue(PARAMETER);
 			ParameterParser p = new ParameterParser();
-			double deltaVal = p.assignValidatedValue(PARAMETER, current);
-			
+			double deltaVal = p.assignValidatedValue(delta, current);
+			System.out.println(PARAMETER);
 			this.upgradeVar = format.getParameterValue(UPGRADE_VARIABLE);
-			double upgradeDelta = p.assignValidatedValue(UPGRADE_VARIABLE_DELTA, current);
+			String upgradeVarDelta = format.getParameterValue(UPGRADE_VARIABLE_DELTA);
+			double upgradeDelta = p.assignValidatedValue(upgradeVarDelta, current);
 			
 			double prevVal = current.accessLogic().accessAttributes().getMaxAttributeVal(attribute);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(attribute, prevVal + deltaVal);
-			
+			System.out.println("new max experience: "+ prevVal + deltaVal);
 			double prevDelta = current.accessLogic().accessAttributes().getMaxAttributeVal(upgradeVar);
 			current.accessLogic().accessAttributes().setAttributeValue(upgradeVar, prevDelta + upgradeDelta);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(upgradeVar, prevDelta + upgradeDelta);

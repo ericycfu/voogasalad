@@ -13,7 +13,6 @@ import java.util.Set;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
-import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.GamePlayer;
@@ -45,7 +44,7 @@ public class TopPanel {
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
 	public static final String LOADTEXT = "Load Game";
-	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF);";
+	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF;";
 	public static final String CLASSALERTHEAD = "ClassNotFoundException";
 	public static final String CLASSALERTBODY = "Incorrect class type!";
 	public static final String IOALERTHEAD = "FileNotFound";
@@ -161,9 +160,22 @@ public class TopPanel {
 				index++;
 			}
 			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
-			for (GameObject go : possibleUnits) {
-				go.getRenderer().setDisp(new ImageView(new Image(go.getRenderer().getImagePath())));
-			}
+			possibleUnits.stream()
+				.filter(go -> go.isBuilding())
+				.forEach(go -> {
+					ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
+					imgv.setFitHeight(GamePlayer.BUILDING_HEIGHT);
+					imgv.setFitWidth(GamePlayer.BUILDING_WIDTH);
+					go.getRenderer().setDisp(imgv);
+				});
+			possibleUnits.stream()
+				.filter(go -> !go.isBuilding())
+				.forEach(go -> {
+					ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
+					imgv.setFitHeight(GamePlayer.UNIT_HEIGHT);
+					imgv.setFitWidth(GamePlayer.UNIT_WIDTH);
+					go.getRenderer().setDisp(imgv);
+				});
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {

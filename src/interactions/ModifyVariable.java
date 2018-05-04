@@ -64,6 +64,7 @@ public class ModifyVariable implements CustomFunction {
 			
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
+			System.out.println("current delta value: " + delta);
 			ParameterParser p = new ParameterParser();
 			double deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);

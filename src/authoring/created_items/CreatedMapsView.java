@@ -14,6 +14,7 @@ import observables.Listener;
 public class CreatedMapsView extends ScrollPane implements Listener {
 	public static final int THUMBNAIL_WIDTH = 150;
 	public static final int THUMBNAIL_HEIGHT = 150;
+	public static final Insets CREATED_VIEW_INSETS = new Insets(10, 10, 0, 10);
 	private AuthoringController authoringcontroller;
 //	private DraggableScrollPane dragscroll;
 	private CreatedMaps createdmaps;
@@ -34,7 +35,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		for (int i=0; i<size; i++) {
 			rootBox.getChildren().add(setupIndivBox(createdmaps.getObjectByIndex(i)));
 		}
-		if (size != 0) {
+		if (size > 0) {
 			this.setContent(rootBox);
 		}
 	}
@@ -43,13 +44,13 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		VBox box = new VBox();
 		box.getChildren().add(extractImage(map));
 		box.getChildren().add(new Text(extractName(map)));
-		box.setPadding(new Insets(10, 10, 0, 10));
+		box.setPadding(CREATED_VIEW_INSETS);
 		return box;
 	}
 	
 	private MapSelectionImageView extractImage(MapEntity map) {
-		DraggableScrollPane scroll = authoringcontroller.getScroll();
-		MapSelectionImageView imgview = new MapSelectionImageView(map, scroll, authoringcontroller);
+		DraggableScrollPane dragscroll = authoringcontroller.getScroll();
+		MapSelectionImageView imgview = new MapSelectionImageView(map, dragscroll, authoringcontroller);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 		return imgview;
@@ -63,6 +64,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 	public void update() {
 		rootBox.getChildren().clear();
 		setupBox();
+		
 	}
 
 }

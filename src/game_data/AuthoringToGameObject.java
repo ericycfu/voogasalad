@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import authoring.backend.AuthoringObject;
+import authoring.backend.MapSettings;
 import authoring.support.DraggableImageView;
 import game_engine.ResourceManager;
 import game_engine.Team;
@@ -78,7 +79,7 @@ public final class AuthoringToGameObject {
 	 * @param list
 	 * @return
 	 */
-	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM){
+	public static List<Team> calculateTeams(Map<AuthoringObject, List<AuthoringObject>> map, ResourceManager RM, MapSettings mapSettings){
 		List<Team> teams = new ArrayList<>();
 		List<Integer> teamIds = new ArrayList<>();
 		for(List<AuthoringObject> AOs: map.values()) {
@@ -89,7 +90,7 @@ public final class AuthoringToGameObject {
 					teamIds.add(AO.getTeam());
 				}
 			}
-				
+		mapSettings.setNumPlayers(teamIds.size());
 		}
 		return teams;
 	}

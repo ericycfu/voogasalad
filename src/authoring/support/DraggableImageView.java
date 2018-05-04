@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView;
 
 public class DraggableImageView extends ImageView {
 
-	private static final String TEAM = "Team ";
-	private static final String CSS_STYLE = "image-border-team";
+//	private static final String TEAM = "Team ";
+//	private static final String CSS_STYLE = "image-border-team";
 	private double mouseX;
     private double mouseY;
 

@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import authoring.backend.AuthoringObject;
 import authoring.backend.TagController;
@@ -45,11 +47,14 @@ import javafx.stage.Stage;
 
 public class ComponentAddInteractionsScreen {
 
-	private final Paint BACKGROUND = Color.BLACK;
-    private final String PROPERTY_FILENAME = "data/component_add_interactions_screen.properties";
-    private final String TITLE_PROPERTY = "title";
-    private final String WIDTH_PROPERTY = "width";
-    private final String HEIGHT_PROPERTY = "height";
+	private static final Paint BACKGROUND = Color.BLACK;
+    private static final String PROPERTY_FILENAME = "data/component_add_interactions_screen.properties";
+    private static final String TITLE_PROPERTY = "title";
+    private static final String WIDTH_PROPERTY = "width";
+    private static final String HEIGHT_PROPERTY = "height";
+    private static final String CATCH_IO_EXCEPTION_STRING = "Display file input does not exist!";
+	private static final String CATCH_GENERAL_EXCEPTION_STRING = "The properties for the display could not be retrieved completely.";
+	private static final String FINALLY_IO_EXCEPTION_STRING = "Display file input cannot close!";
     private String title;
     private int screen_width, screen_height, interaction_id;
     private Stage stage;
@@ -62,13 +67,12 @@ public class ComponentAddInteractionsScreen {
 	
 	// Additional setup for the add-interactions screen.
     private Scene myScene;
-    private static Group root;
+    private Group root;
     
     public ComponentAddInteractionsScreen(AuthoringObject authoring_object, TagController tag_controller) {
     	this.tag_controller = tag_controller;
     	interaction_manager = authoring_object.getInteractionsManagerInstance();
     	interaction_id = interaction_manager.createInteraction();
-    	System.out.println(interaction_id);
     	initialize();
     }
 
@@ -96,9 +100,6 @@ public class ComponentAddInteractionsScreen {
 		stage.setTitle(title);
 		stage.show();
 		stage.setResizable(false);
-		stage.setOnCloseRequest(e -> {
-			e.consume();
-		});
 	}
 
 	/**
@@ -114,24 +115,28 @@ public class ComponentAddInteractionsScreen {
 			screen_width = Integer.parseInt(menu_properties.getProperty(WIDTH_PROPERTY));
 			screen_height = Integer.parseInt(menu_properties.getProperty(HEIGHT_PROPERTY));
 		} catch (IOException ex) {
-			System.err.println("Display file input does not exist!");
+			logError(ex, Level.SEVERE, CATCH_IO_EXCEPTION_STRING);
 		} catch (Exception ey) {
-			System.err.println("The properties for the display could not be retrieved completely.");
-
+			logError(ey, Level.SEVERE, CATCH_GENERAL_EXCEPTION_STRING);
     	} finally {
     		if (input != null) {
     			try {
     				input.close();
     			} catch (IOException e) {
-    				System.err.println("Display file input cannot close!");
+    				logError(e, Level.SEVERE, FINALLY_IO_EXCEPTION_STRING);
     			}
     		}
     	}
     }
-    
+	
+	private void logError(Exception e, Level level, String error) {
+		Logger logger = Logger.getAnonymousLogger();
+		Exception ex = new Exception(e);
+		logger.log(level, error, ex);
+	}
+	
     private void setGUIComponents() {
     	setLabels();
-    	setRadioButtons();
     	setTextFields();
     	setPanes();
     	setComboBoxes();
@@ -156,9 +161,6 @@ public class ComponentAddInteractionsScreen {
     							  new InteractionRateLabel().getLabel());
     }
     
-    private void setRadioButtons() {
-    }
-            
     private void setTextFields() {
 		interaction_vision_range_tf = new InteractionVisionRangeTextField();
 		interaction_description_tf = new InteractionDescriptionTextField();
