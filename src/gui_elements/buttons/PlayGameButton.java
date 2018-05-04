@@ -44,7 +44,6 @@ public class PlayGameButton extends Button {
 	
 	protected void setAction() {
 		this.setOnAction(value -> {
-			System.out.print("Playing game!");
 			new SaveAuthoringGameState(authoring_controller, game_entity);
 		});
 		
