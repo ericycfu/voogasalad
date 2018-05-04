@@ -5,6 +5,7 @@ import authoring.backend.GameEntity;
 import gui_elements.buttons.PlayGameButton;
 import gui_elements.buttons.SaveGameButton;
 import gui_elements.factories.ButtonFactory;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -21,12 +22,16 @@ public class DisplayMenu extends HBox {
 	
 	private void initializeButtons() {
 //		this.getChildren().add(ButtonFactory.makeButton("Play Game", e -> playGame()));
+		Button AddMapButton = ButtonFactory.makeButton("Add Map", e -> makeNewMap());
+		AddMapButton.getStyleClass().add("map_setting_buttons");
+		Button HomeButton = ButtonFactory.makeButton("Home", e -> new StartScreen(stage));
+		HomeButton.getStyleClass().add("save_button");
 		this.getChildren().addAll(
 				new PlayGameButton(ac, gameEntity),
 				new SaveGameButton(ac, gameEntity),
-				ButtonFactory.makeButton("Add Map", e -> makeNewMap()),
-				ButtonFactory.makeButton("Home", e -> new StartScreen(stage))
-				);
+				AddMapButton,
+				HomeButton
+			);
 	}
 	
 	private void makeNewMap() {

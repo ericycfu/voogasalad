@@ -9,11 +9,15 @@
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
     <elementMap>
       <entry>
-        <int>1</int>
+        <int>64</int>
         <game__object.GameObject>
-          <id>1</id>
+          <id>64</id>
           <transform>
             <position>
+<<<<<<< HEAD
+              <x>445.0</x>
+              <y>426.0</y>
+=======
 <<<<<<< HEAD
               <x>122.0</x>
               <y>220.0</y>
@@ -21,6 +25,7 @@
               <x>185.0</x>
               <y>169.0</y>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -53,12 +58,12 @@
               </maxAttributes>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
               <buildCosts/>
-              <buildTime>10.0</buildTime>
+              <buildTime>0.0</buildTime>
             </attributes>
             <interactions>
 <<<<<<< HEAD
               <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -66,6 +71,9 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+<<<<<<< HEAD
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+=======
             <myImageLocation>/images/robert.png</myImageLocation>
 =======
               <elementMap>
@@ -216,6 +224,7 @@
           <renderer>
             <myImageLocation>/images/ghoul.png</myImageLocation>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
@@ -227,13 +236,16 @@
               <resourceMap>
                 <entry>
                   <string>Gold</string>
-                  <double>10.0</double>
+                  <double>500.0</double>
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Final boss</name>
+          <name>Path blocker</name>
           <tags>
+<<<<<<< HEAD
+            <string>Blocker</string>
+=======
             <string>Prof</string>
 =======
               <resourceMap/>
@@ -243,15 +255,164 @@
           <tags>
             <string>Ghoul</string>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
           </tags>
-          <isBuilding>false</isBuilding>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>1</int>
+        <game__object.GameObject>
+          <id>1</id>
+          <transform>
+            <position>
+              <x>265.0</x>
+              <y>83.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>34</int>
+        <game__object.GameObject>
+          <id>34</id>
+          <transform>
+            <position>
+              <x>397.0</x>
+              <y>109.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>67</int>
+        <game__object.GameObject>
+          <id>67</id>
+          <transform>
+            <position>
+              <x>493.0</x>
+              <y>466.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+<<<<<<< HEAD
+          <movementSpeed>0.0</movementSpeed>
+=======
 <<<<<<< HEAD
           <movementSpeed>20.0</movementSpeed>
 =======
           <movementSpeed>10.0</movementSpeed>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -267,12 +428,17 @@
           <transform>
             <position>
 <<<<<<< HEAD
+              <x>230.0</x>
+              <y>138.0</y>
+=======
+<<<<<<< HEAD
               <x>196.0</x>
               <y>161.0</y>
 =======
               <x>133.0</x>
               <y>391.0</y>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -305,12 +471,12 @@
               </maxAttributes>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
               <buildCosts/>
-              <buildTime>10.0</buildTime>
+              <buildTime>0.0</buildTime>
             </attributes>
             <interactions>
 <<<<<<< HEAD
               <elementMap/>
-              <new__ID__val>1</new__ID__val>
+              <new__ID__val>4</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -318,6 +484,57 @@
             </conditions>
           </myObjectLogic>
           <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>37</int>
+        <game__object.GameObject>
+          <id>37</id>
+          <transform>
+            <position>
+              <x>447.0</x>
+              <y>136.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+<<<<<<< HEAD
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+=======
             <myImageLocation>/images/robert.png</myImageLocation>
 =======
               <elementMap>
@@ -341,24 +558,33 @@
           <renderer>
             <myImageLocation>/images/ghoul.png</myImageLocation>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
 <<<<<<< HEAD
+          <name>Path blocker</name>
+=======
+<<<<<<< HEAD
           <name>Final boss</name>
 =======
           <name>Ghoul</name>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
           <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+<<<<<<< HEAD
+          <movementSpeed>0.0</movementSpeed>
+=======
 <<<<<<< HEAD
           <movementSpeed>20.0</movementSpeed>
 =======
           <movementSpeed>10.0</movementSpeed>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -374,12 +600,17 @@
           <transform>
             <position>
 <<<<<<< HEAD
+              <x>253.0</x>
+              <y>184.0</y>
+=======
+<<<<<<< HEAD
               <x>265.0</x>
               <y>98.0</y>
 =======
               <x>423.0</x>
               <y>237.0</y>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -404,10 +635,21 @@
               </maxAttributes>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
               <buildCosts/>
-              <buildTime>10.0</buildTime>
+              <buildTime>0.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
+<<<<<<< HEAD
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+=======
 <<<<<<< HEAD
               <new__ID__val>1</new__ID__val>
 =======
@@ -420,10 +662,19 @@
           </myObjectLogic>
           <renderer>
             <myImageLocation>/images/robert.png</myImageLocation>
+>>>>>>> player
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
+<<<<<<< HEAD
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+=======
           <name>Duvall</name>
           <tags>
             <string>Prof</string>
@@ -432,6 +683,7 @@
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>5.0</movementSpeed>
+>>>>>>> player
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -441,6 +693,15 @@
         </game__object.GameObject>
       </entry>
       <entry>
+<<<<<<< HEAD
+        <int>40</int>
+        <game__object.GameObject>
+          <id>40</id>
+          <transform>
+            <position>
+              <x>516.0</x>
+              <y>168.0</y>
+=======
         <int>10</int>
         <game__object.GameObject>
           <id>10</id>
@@ -448,12 +709,19 @@
             <position>
               <x>479.0</x>
               <y>106.0</y>
+>>>>>>> player
             </position>
             <rotation>0.0</rotation>
           </transform>
           <myObjectLogic>
             <fulfillsLossCondition>false</fulfillsLossCondition>
             <attributes>
+<<<<<<< HEAD
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+=======
               <attributes>
                 <entry>
                   <string>Health</string>
@@ -468,11 +736,15 @@
               </maxAttributes>
               <buildCosts/>
               <buildTime>10.0</buildTime>
+>>>>>>> player
             </attributes>
             <interactions>
               <elementMap/>
               <new__ID__val>4</new__ID__val>
+<<<<<<< HEAD
+=======
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
             </interactions>
             <conditions>
               <elementMap/>
@@ -480,17 +752,24 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
 <<<<<<< HEAD
+          <name>Path blocker</name>
+=======
+<<<<<<< HEAD
           <name>Final boss</name>
+>>>>>>> player
           <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
+<<<<<<< HEAD
+          <movementSpeed>0.0</movementSpeed>
+=======
           <movementSpeed>20.0</movementSpeed>
 =======
           <name>Duvall</name>
@@ -500,6 +779,728 @@
           <isDead>false</isDead>
           <movementSpeed>5.0</movementSpeed>
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+<<<<<<< HEAD
+      <entry>
+        <int>10</int>
+        <game__object.GameObject>
+          <id>10</id>
+          <transform>
+            <position>
+              <x>315.0</x>
+              <y>197.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>43</int>
+        <game__object.GameObject>
+          <id>43</id>
+          <transform>
+            <position>
+              <x>566.0</x>
+              <y>216.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>13</int>
+        <game__object.GameObject>
+          <id>13</id>
+          <transform>
+            <position>
+              <x>254.0</x>
+              <y>227.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>46</int>
+        <game__object.GameObject>
+          <id>46</id>
+          <transform>
+            <position>
+              <x>532.0</x>
+              <y>263.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>16</int>
+        <game__object.GameObject>
+          <id>16</id>
+          <transform>
+            <position>
+              <x>203.0</x>
+              <y>246.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>49</int>
+        <game__object.GameObject>
+          <id>49</id>
+          <transform>
+            <position>
+              <x>491.0</x>
+              <y>303.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>19</int>
+        <game__object.GameObject>
+          <id>19</id>
+          <transform>
+            <position>
+              <x>178.0</x>
+              <y>293.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>52</int>
+        <game__object.GameObject>
+          <id>52</id>
+          <transform>
+            <position>
+              <x>436.0</x>
+              <y>297.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>22</int>
+        <game__object.GameObject>
+          <id>22</id>
+          <transform>
+            <position>
+              <x>215.0</x>
+              <y>338.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>55</int>
+        <game__object.GameObject>
+          <id>55</id>
+          <transform>
+            <position>
+              <x>371.0</x>
+              <y>291.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>25</int>
+        <game__object.GameObject>
+          <id>25</id>
+          <transform>
+            <position>
+              <x>274.0</x>
+              <y>363.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>58</int>
+        <game__object.GameObject>
+          <id>58</id>
+          <transform>
+            <position>
+              <x>450.0</x>
+              <y>346.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>28</int>
+        <game__object.GameObject>
+          <id>28</id>
+          <transform>
+            <position>
+              <x>231.0</x>
+              <y>406.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>61</int>
+        <game__object.GameObject>
+          <id>61</id>
+          <transform>
+            <position>
+              <x>501.0</x>
+              <y>386.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>31</int>
+        <game__object.GameObject>
+          <id>31</id>
+          <transform>
+            <position>
+              <x>189.0</x>
+              <y>433.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>0.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap/>
+              <new__ID__val>4</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/tree.jpg</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Path blocker</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -509,12 +1510,16 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
+    <new__ID__val>70</new__ID__val>
+=======
+    </elementMap>
 <<<<<<< HEAD
     <new__ID__val>10</new__ID__val>
 =======
     <new__ID__val>13</new__ID__val>
 >>>>>>> yy145
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -529,6 +1534,12 @@
       <myObjectLogic>
         <fulfillsLossCondition>false</fulfillsLossCondition>
         <attributes>
+<<<<<<< HEAD
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts/>
+          <buildTime>0.0</buildTime>
+=======
 <<<<<<< HEAD
           <attributes/>
           <maxAttributes/>
@@ -632,6 +1643,7 @@
           </maxAttributes>
           <buildCosts/>
           <buildTime>10.0</buildTime>
+>>>>>>> player
         </attributes>
         <interactions>
           <elementMap/>
@@ -643,6 +1655,15 @@
         </conditions>
       </myObjectLogic>
       <renderer>
+<<<<<<< HEAD
+        <myImageLocation>/images/tree.jpg</myImageLocation>
+        <isHit>false</isHit>
+        <elapsedTime>0.0</elapsedTime>
+      </renderer>
+      <name>Path blocker</name>
+      <tags>
+        <string>Blocker</string>
+=======
         <myImageLocation>/images/robert.png</myImageLocation>
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
@@ -991,10 +2012,14 @@
         <string>Ghoul</string>
 >>>>>>> yy145
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
       </tags>
-      <isBuilding>false</isBuilding>
+      <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
+<<<<<<< HEAD
+      <movementSpeed>0.0</movementSpeed>
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
       <movementSpeed>20.0</movementSpeed>
@@ -1007,6 +2032,7 @@
       <movementSpeed>10.0</movementSpeed>
 >>>>>>> yy145
 >>>>>>> a09046050ad7c188f108265e7c74856e28e33c23
+>>>>>>> player
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -1016,6 +2042,11 @@
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
+<<<<<<< HEAD
+    <mapName>TurretDefense</mapName>
+    <numPlayers>1</numPlayers>
+    <endConditions>
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
     <mapName>Default map</mapName>
@@ -1038,6 +2069,7 @@
     <mapName>Basketball</mapName>
     <numPlayers>2</numPlayers>
     <endConditions>
+>>>>>>> player
       <scenemanager.ResourceVictory>
         <NAME>ResourceVictory</NAME>
         <RESOURCE>Resource</RESOURCE>
@@ -1047,33 +2079,32 @@
           <parameterFields>
             <entry>
               <string>Resource</string>
-              <string>Score</string>
+              <string>Points</string>
             </entry>
             <entry>
               <string>Threshold</string>
-              <string>100</string>
+              <string>1000</string>
             </entry>
           </parameterFields>
         </format>
         <threshold>0.0</threshold>
       </scenemanager.ResourceVictory>
     </endConditions>
-    <mapwidth>1000</mapwidth>
-    <mapheight>1000</mapheight>
-    <imagePath>/images/basketballcourt.jpg</imagePath>
->>>>>>> player
+    <mapwidth>500</mapwidth>
+    <mapheight>500</mapheight>
+    <imagePath>/images/map_road.png</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
       <elementMap>
         <entry>
-          <int>1</int>
+          <int>64</int>
           <game__object.GameObject>
-            <id>1</id>
+            <id>64</id>
             <transform>
               <position>
-                <x>122.0</x>
-                <y>220.0</y>
+                <x>445.0</x>
+                <y>426.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -1083,11 +2114,11 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>10.0</buildTime>
+                <buildTime>0.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -1095,7 +2126,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
@@ -1106,19 +2137,163 @@
                 <resourceMap>
                   <entry>
                     <string>Gold</string>
-                    <double>10.0</double>
+                    <double>500.0</double>
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>Final boss</name>
+            <name>Path blocker</name>
             <tags>
-              <string>Prof</string>
+              <string>Blocker</string>
             </tags>
-            <isBuilding>false</isBuilding>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>20.0</movementSpeed>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>1</int>
+          <game__object.GameObject>
+            <id>1</id>
+            <transform>
+              <position>
+                <x>265.0</x>
+                <y>83.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>34</int>
+          <game__object.GameObject>
+            <id>34</id>
+            <transform>
+              <position>
+                <x>397.0</x>
+                <y>109.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>67</int>
+          <game__object.GameObject>
+            <id>67</id>
+            <transform>
+              <position>
+                <x>493.0</x>
+                <y>466.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -1133,8 +2308,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>196.0</x>
-                <y>161.0</y>
+                <x>230.0</x>
+                <y>138.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -1144,11 +2319,11 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>10.0</buildTime>
+                <buildTime>0.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -1156,17 +2331,65 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Final boss</name>
+            <name>Path blocker</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>20.0</movementSpeed>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>37</int>
+          <game__object.GameObject>
+            <id>37</id>
+            <transform>
+              <position>
+                <x>447.0</x>
+                <y>136.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -1181,8 +2404,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>265.0</x>
-                <y>98.0</y>
+                <x>253.0</x>
+                <y>184.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -1192,11 +2415,11 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>10.0</buildTime>
+                <buildTime>0.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
-                <new__ID__val>1</new__ID__val>
+                <new__ID__val>4</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -1204,17 +2427,785 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Final boss</name>
+            <name>Path blocker</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>20.0</movementSpeed>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>40</int>
+          <game__object.GameObject>
+            <id>40</id>
+            <transform>
+              <position>
+                <x>516.0</x>
+                <y>168.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>10</int>
+          <game__object.GameObject>
+            <id>10</id>
+            <transform>
+              <position>
+                <x>315.0</x>
+                <y>197.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>43</int>
+          <game__object.GameObject>
+            <id>43</id>
+            <transform>
+              <position>
+                <x>566.0</x>
+                <y>216.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>13</int>
+          <game__object.GameObject>
+            <id>13</id>
+            <transform>
+              <position>
+                <x>254.0</x>
+                <y>227.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>46</int>
+          <game__object.GameObject>
+            <id>46</id>
+            <transform>
+              <position>
+                <x>532.0</x>
+                <y>263.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>16</int>
+          <game__object.GameObject>
+            <id>16</id>
+            <transform>
+              <position>
+                <x>203.0</x>
+                <y>246.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>49</int>
+          <game__object.GameObject>
+            <id>49</id>
+            <transform>
+              <position>
+                <x>491.0</x>
+                <y>303.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>19</int>
+          <game__object.GameObject>
+            <id>19</id>
+            <transform>
+              <position>
+                <x>178.0</x>
+                <y>293.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>52</int>
+          <game__object.GameObject>
+            <id>52</id>
+            <transform>
+              <position>
+                <x>436.0</x>
+                <y>297.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>22</int>
+          <game__object.GameObject>
+            <id>22</id>
+            <transform>
+              <position>
+                <x>215.0</x>
+                <y>338.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>55</int>
+          <game__object.GameObject>
+            <id>55</id>
+            <transform>
+              <position>
+                <x>371.0</x>
+                <y>291.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>25</int>
+          <game__object.GameObject>
+            <id>25</id>
+            <transform>
+              <position>
+                <x>274.0</x>
+                <y>363.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>58</int>
+          <game__object.GameObject>
+            <id>58</id>
+            <transform>
+              <position>
+                <x>450.0</x>
+                <y>346.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>28</int>
+          <game__object.GameObject>
+            <id>28</id>
+            <transform>
+              <position>
+                <x>231.0</x>
+                <y>406.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>61</int>
+          <game__object.GameObject>
+            <id>61</id>
+            <transform>
+              <position>
+                <x>501.0</x>
+                <y>386.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>31</int>
+          <game__object.GameObject>
+            <id>31</id>
+            <transform>
+              <position>
+                <x>189.0</x>
+                <y>433.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>0.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap/>
+                <new__ID__val>4</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/tree.jpg</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Path blocker</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -1224,7 +3215,7 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
-      <new__ID__val>10</new__ID__val>
+      <new__ID__val>70</new__ID__val>
     </objManager>
     <endConditions/>
 <<<<<<< HEAD

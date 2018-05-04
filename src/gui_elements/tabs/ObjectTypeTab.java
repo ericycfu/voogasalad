@@ -6,6 +6,7 @@ import javafx.scene.Node;
 public class ObjectTypeTab extends Tab {
 	public ObjectTypeTab(String s) {
 		this.setText(s);
+		this.getStyleClass().add("tab_title");
 	}
 	
 	public ObjectTypeTab(String s, Node content) {
