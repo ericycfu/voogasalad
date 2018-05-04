@@ -18,6 +18,5 @@ public class MakeGameTabs extends TabPane implements AuthoringView {
 		this.setPrefSize(800, 900);
 		this.getStyleClass().add("tab_pane");
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-	}
-	
+	}	
 }

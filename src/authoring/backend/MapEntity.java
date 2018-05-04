@@ -30,10 +30,24 @@ public class MapEntity extends Pane implements AuthoringView {
 //		locations = myMapEntityMap;
 //	}
 	
-	public MapEntity(MapSettings myMapSettings, Map<AuthoringObject, List<AuthoringObject>> myMapEntityMap) {
+	public MapEntity(Map<AuthoringObject, List<AuthoringObject>> myMapEntityMap, MapSettings myMapSettings) {
 		mapsettings = myMapSettings;
 		locations = myMapEntityMap;
+		addImageToMap(locations);
+		mapsettings.matchToSize(this);
+		mapsettings.setMapByImage(this);
 
+	}
+	
+	private void addImageToMap(Map<AuthoringObject, List<AuthoringObject>> locations) {
+		for (AuthoringObject key: locations.keySet()) {
+			List<AuthoringObject> objects = locations.get(key);
+			
+			for (AuthoringObject obj : objects) {
+				obj.setDragImage(key.getImagePath(), obj.getX(), obj.getY());
+				this.getChildren().add(obj.getDragImage());
+			}
+		}
 	}
 
 	public void addToMap(AuthoringObject objBase, AuthoringObject objNew) {
