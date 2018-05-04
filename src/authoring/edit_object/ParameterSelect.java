@@ -17,24 +17,30 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public abstract class ParameterSelect implements AuthoringView {
+
 	protected Stage stage;
+	protected Scene scene;
 	protected VBox root;
 
 	public ParameterSelect() {
 		initializeScene();
+		initializeStage();
 		initializeButtons();
 		customize();
 	}
 	
 	protected void initializeScene() {
 		root = new VBox();
+		scene = new Scene (root, 1.2*PANEL_WIDTH, PANEL_HEIGHT / 2, DEFAULT_BACKGROUND);
 		root.setPadding(LINE_INSETS);
-		Scene scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT/2, DEFAULT_BACKGROUND);
+	}
+	
+	protected void initializeStage() {
 		stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle("Edit Custom Conditions");
 		stage.setResizable(false);
-		stage.show();
+		stage.show();		
 	}
 	
 	protected void initializeButtons() {
@@ -95,14 +101,14 @@ public abstract class ParameterSelect implements AuthoringView {
 	
 	protected void setParameters(HBox box, CustomComponentParameterFormat format) {
 		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
+		for (int i = 0; i<parameters.size(); i++) {
 			format.setFieldValue(parameters.get(i), Extractor.extractTextField(box.getChildren().get(i+1)));
 		}
 	}
 	
 	protected void setParameterFields(HBox line, CustomComponentParameterFormat format) {
 		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
+		for (int i = 0; i<parameters.size(); i++) {
 			line.getChildren().add(TextFieldFactory.makeTextFieldPrompt(parameters.get(i)));
 		}
 	}	

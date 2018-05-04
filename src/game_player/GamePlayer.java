@@ -17,6 +17,9 @@ import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
 import game_player.alert.AlertMaker;
+import game_player.selected_unit_manager.MultiPlayerSelectedUnitManager;
+import game_player.selected_unit_manager.SelectedUnitManager;
+import game_player.selected_unit_manager.SinglePlayerSelectedUnitManager;
 import game_player.visual_element.BuildButton;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
@@ -60,11 +63,11 @@ public class GamePlayer extends ClientScreen {
 	public static final double CHATBOX_WIDTH = 0.20;
 	public static final double CHATBOX_HEIGHT = 0.30;
 	public static final String LINEBREAK = "\n";
+	public static final String EMPTY = "";
 	public static final String COLON = ": ";
 	public static final String SPACE = " ";
 	public static final String SERVERALERTHEAD = "Communication Failed";
 	public static final String SERVERALERTBODY = "Please try again.";
-
 
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
@@ -96,7 +99,7 @@ public class GamePlayer extends ClientScreen {
 		myGameObjectManager = gameManager;
 		myTeam = team;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);		
+		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
 		initialize();
 		initializeSingleUnitSelect();
 		unitSkillMapInitialize();
@@ -105,7 +108,6 @@ public class GamePlayer extends ClientScreen {
 	// network constructor
 	public GamePlayer(Stage stage, Socket socket) {
 		super(stage, socket);
-		
 		
 	}
 
@@ -127,9 +129,10 @@ public class GamePlayer extends ClientScreen {
 								}
 								if (isTagMatch) {
 									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											s, i.getID(), i.getDescription() + " " + s, 
-											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
-											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
+											i.getDescription() + " " + s, 
+											i.getID(), 
+											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
+											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, go2);
 									sb.setOnAction(e -> {
 										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
 										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
@@ -154,13 +157,13 @@ public class GamePlayer extends ClientScreen {
 		myUnitSkills.clear();
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
-			SkillButton cancel = new SkillButton(new Image("cancel_icon.png"), "Cancel", -1, "Restore the interaction to default", SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
+			SkillButton cancel = new SkillButton(new Image(SkillButton.CANCEL_BUTTON_IMAGE_PATH), SkillButton.CANCEL_BUTTON_NAME, -1, SkillButton.CANCEL_BUTTON_DESCRIPTION, SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
 					SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 0.8*SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT);
 					cancel.setOnAction(e -> {
 						this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(go.getName()));
-						this.myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+						this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 					});
 					if (!ia.isBuild()) {
 						sb.setOnAction(e->{
@@ -191,7 +194,7 @@ public class GamePlayer extends ClientScreen {
 				if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
 					mySelectedUnitManager.add(go);
-					myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+					myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 				}
 				if (e.getButton()==MouseButton.SECONDARY) {
 					int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
@@ -200,8 +203,8 @@ public class GamePlayer extends ClientScreen {
 							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-							mySelectedUnitManager.takeInteraction(go.getTransform().getPosition(), go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
-							myUnitDisplay.getUnitActionDisp().setCurrentActionID(-1);
+							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+							myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 						}
 					} catch (UnmodifiableGameObjectException e1) {
 						// do nothing
@@ -260,9 +263,7 @@ public class GamePlayer extends ClientScreen {
 			myTopPanel.setIsLoaded(false);
 		}
 		initializeSingleUnitSelect();
-
 		myTopPanel.update();
-
 		myMiniMap.update(gameobject);
 		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
 		myMainDisplay.update(gameobject);
@@ -325,7 +326,7 @@ public class GamePlayer extends ClientScreen {
 				g.setupImages();
 			}
 			mySceneManager = gi.getSceneManager();
-			mySelectedUnitManager = new SelectedUnitManager(myTeam, mySocket);
+			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
 			myUnitSkills = new HashMap<>();
 			initialize();
 			initializeSingleUnitSelect();		

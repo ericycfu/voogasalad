@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>7.0</x>
-              <y>38.0</y>
+              <x>306.0</x>
+              <y>374.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,37 +17,34 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </maxAttributes>
-              <buildCosts/>
-              <buildTime>15.0</buildTime>
+              <buildCosts>
+                <entry>
+                  <string>Gold</string>
+                  <double>3.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
                 <entry>
-                  <int>4</int>
+                  <int>1</int>
                   <interactions.Interaction>
-                    <id>4</id>
+                    <id>1</id>
                     <targetTags/>
                     <name>Attack</name>
                     <imagePath>/images/attack_icon.png</imagePath>
-                    <description>Attack</description>
+                    <description></description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -85,13 +82,32 @@
                           </parameterFields>
                         </format>
                       </interactions.ModifyVariable>
+                      <interactions.ModifyVariable>
+                        <NAME>ModifyVariable</NAME>
+                        <VARIABLE>Variable</VARIABLE>
+                        <DELTA>Delta</DELTA>
+                        <RATE>Rate</RATE>
+                        <format>
+                          <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Variable</string>
+                              <string>Health</string>
+                            </entry>
+                            <entry>
+                              <string>Delta</string>
+                              <string>2</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.ModifyVariable>
                     </customFunctions>
-                    <range>10.0</range>
-                    <rate>30.0</rate>
+                    <range>50.0</range>
+                    <rate>1.0</rate>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>10</new__ID__val>
+              <new__ID__val>16</new__ID__val>
             </interactions>
             <conditions>
               <elementMap>
@@ -178,23 +194,29 @@
                         </entry>
                       </comparatorMap>
                     </comparatorManager>
-                    <var1>Mana</var1>
-                    <var2>0</var2>
+                    <var1>Health</var1>
+                    <var2>200</var2>
                     <comparatorID>1</comparatorID>
                     <customConditions>
                       <conditions.Upgrade>
-                        <VARIABLE>Attribute</VARIABLE>
-                        <PARAMETER>New Maximum Value</PARAMETER>
                         <format>
-                          <helpText>This custom condition modifies the unit&apos;s base attribute.</helpText>
+                          <helpText>This custom condition modifies the unit&apos;s base attribute. Upgrade Variable is the variable that is checked for upgrade. Upgrade Variable Delta increases or decreases that upgrade threshold</helpText>
                           <parameterFields>
                             <entry>
-                              <string>VARIABLE</string>
+                              <string>Attribute</string>
                               <string>Health</string>
                             </entry>
                             <entry>
-                              <string>DELTA</string>
+                              <string>Upgrade Variable Delta</string>
                               <string>20</string>
+                            </entry>
+                            <entry>
+                              <string>New Maximum Value</string>
+                              <string>200</string>
+                            </entry>
+                            <entry>
+                              <string>Upgrade Variable</string>
+                              <string>Health</string>
                             </entry>
                           </parameterFields>
                         </format>
@@ -207,7 +229,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/rcd.jpeg</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
@@ -245,8 +267,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>514.0</x>
-              <y>67.0</y>
+              <x>495.0</x>
+              <y>162.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -255,35 +277,32 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </maxAttributes>
-              <buildCosts/>
-              <buildTime>15.0</buildTime>
+              <buildCosts>
+                <entry>
+                  <string>Gold</string>
+                  <double>3.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
                 <entry>
-                  <int>4</int>
+                  <int>1</int>
                   <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                 </entry>
               </elementMap>
-              <new__ID__val>10</new__ID__val>
+              <new__ID__val>16</new__ID__val>
             </interactions>
             <conditions>
               <elementMap>
@@ -300,7 +319,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/rcd.jpeg</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
@@ -325,8 +344,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>323.0</x>
-              <y>335.0</y>
+              <x>125.0</x>
+              <y>89.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -335,35 +354,32 @@
             <attributes>
               <attributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </attributes>
               <maxAttributes>
                 <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
                   <string>Health</string>
-                  <double>100.0</double>
+                  <double>50.0</double>
                 </entry>
               </maxAttributes>
-              <buildCosts/>
-              <buildTime>15.0</buildTime>
+              <buildCosts>
+                <entry>
+                  <string>Gold</string>
+                  <double>3.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
                 <entry>
-                  <int>4</int>
+                  <int>1</int>
                   <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                 </entry>
               </elementMap>
-              <new__ID__val>10</new__ID__val>
+              <new__ID__val>16</new__ID__val>
             </interactions>
             <conditions>
               <elementMap>
@@ -380,87 +396,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
-            <isHit>false</isHit>
-            <elapsedTime>0.0</elapsedTime>
-          </renderer>
-          <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Marine</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>10.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>10</int>
-        <game__object.GameObject>
-          <id>10</id>
-          <transform>
-            <position>
-              <x>210.0</x>
-              <y>154.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes>
-                <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </attributes>
-              <maxAttributes>
-                <entry>
-                  <string>Mana</string>
-                  <double>0.0</double>
-                </entry>
-                <entry>
-                  <string>Health</string>
-                  <double>100.0</double>
-                </entry>
-              </maxAttributes>
-              <buildCosts/>
-              <buildTime>15.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap>
-                <entry>
-                  <int>4</int>
-                  <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
-                </entry>
-              </elementMap>
-              <new__ID__val>10</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
-                </entry>
-                <entry>
-                  <int>4</int>
-                  <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry[2]/conditions.Condition"/>
-                </entry>
-              </elementMap>
-              <new__ID__val>7</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
+            <myImageLocation>/images/rcd.jpeg</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
@@ -480,7 +416,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>13</new__ID__val>
+    <new__ID__val>10</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -497,37 +433,34 @@
         <attributes>
           <attributes>
             <entry>
-              <string>Mana</string>
-              <double>0.0</double>
-            </entry>
-            <entry>
               <string>Health</string>
-              <double>100.0</double>
+              <double>50.0</double>
             </entry>
           </attributes>
           <maxAttributes>
             <entry>
-              <string>Mana</string>
-              <double>0.0</double>
-            </entry>
-            <entry>
               <string>Health</string>
-              <double>100.0</double>
+              <double>50.0</double>
             </entry>
           </maxAttributes>
-          <buildCosts/>
-          <buildTime>15.0</buildTime>
+          <buildCosts>
+            <entry>
+              <string>Gold</string>
+              <double>3.0</double>
+            </entry>
+          </buildCosts>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
             <entry>
-              <int>4</int>
+              <int>1</int>
               <interactions.Interaction>
-                <id>4</id>
+                <id>1</id>
                 <targetTags/>
                 <name>Attack</name>
                 <imagePath>/images/attack_icon.png</imagePath>
-                <description>Attack</description>
+                <description></description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -565,13 +498,32 @@
                       </parameterFields>
                     </format>
                   </interactions.ModifyVariable>
+                  <interactions.ModifyVariable>
+                    <NAME>ModifyVariable</NAME>
+                    <VARIABLE>Variable</VARIABLE>
+                    <DELTA>Delta</DELTA>
+                    <RATE>Rate</RATE>
+                    <format>
+                      <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                      <parameterFields>
+                        <entry>
+                          <string>Variable</string>
+                          <string>Health</string>
+                        </entry>
+                        <entry>
+                          <string>Delta</string>
+                          <string>2</string>
+                        </entry>
+                      </parameterFields>
+                    </format>
+                  </interactions.ModifyVariable>
                 </customFunctions>
-                <range>10.0</range>
-                <rate>30.0</rate>
+                <range>50.0</range>
+                <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>10</new__ID__val>
+          <new__ID__val>16</new__ID__val>
         </interactions>
         <conditions>
           <elementMap>
@@ -658,23 +610,29 @@
                     </entry>
                   </comparatorMap>
                 </comparatorManager>
-                <var1>Mana</var1>
-                <var2>0</var2>
+                <var1>Health</var1>
+                <var2>200</var2>
                 <comparatorID>1</comparatorID>
                 <customConditions>
                   <conditions.Upgrade>
-                    <VARIABLE>Attribute</VARIABLE>
-                    <PARAMETER>New Maximum Value</PARAMETER>
                     <format>
-                      <helpText>This custom condition modifies the unit&apos;s base attribute.</helpText>
+                      <helpText>This custom condition modifies the unit&apos;s base attribute. Upgrade Variable is the variable that is checked for upgrade. Upgrade Variable Delta increases or decreases that upgrade threshold</helpText>
                       <parameterFields>
                         <entry>
-                          <string>VARIABLE</string>
+                          <string>Attribute</string>
                           <string>Health</string>
                         </entry>
                         <entry>
-                          <string>DELTA</string>
+                          <string>Upgrade Variable Delta</string>
                           <string>20</string>
+                        </entry>
+                        <entry>
+                          <string>New Maximum Value</string>
+                          <string>200</string>
+                        </entry>
+                        <entry>
+                          <string>Upgrade Variable</string>
+                          <string>Health</string>
                         </entry>
                       </parameterFields>
                     </format>
@@ -687,7 +645,7 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/robert.png</myImageLocation>
+        <myImageLocation>/images/rcd.jpeg</myImageLocation>
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
@@ -708,16 +666,9 @@
     </game__object.GameObject>
   </set>
   <authoring.backend.MapSettings>
-    <mapName>Default map</mapName>
-    <numPlayers>1</numPlayers>
+    <mapName>VIXX_SUCKS</mapName>
+    <numPlayers>3</numPlayers>
     <endConditions>
-      <scenemanager.LastManStanding>
-        <NAME>LastManStanding</NAME>
-        <format>
-          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
-          <parameterFields/>
-        </format>
-      </scenemanager.LastManStanding>
       <scenemanager.AllUnitsDead>
         <NAME>AllUnitsDead</NAME>
         <format>
@@ -726,9 +677,9 @@
         </format>
       </scenemanager.AllUnitsDead>
     </endConditions>
-    <mapwidth>1000</mapwidth>
-    <mapheight>1000</mapheight>
-    <imagePath>/images/tt.jpg</imagePath>
+    <mapwidth>2000</mapwidth>
+    <mapheight>2000</mapheight>
+    <imagePath>/images/map.jpeg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -739,8 +690,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>7.0</x>
-                <y>38.0</y>
+                <x>306.0</x>
+                <y>374.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -749,37 +700,34 @@
               <attributes>
                 <attributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </maxAttributes>
-                <buildCosts/>
-                <buildTime>15.0</buildTime>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>3.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
                   <entry>
-                    <int>4</int>
+                    <int>1</int>
                     <interactions.Interaction>
-                      <id>4</id>
+                      <id>1</id>
                       <targetTags/>
                       <name>Attack</name>
                       <imagePath>/images/attack_icon.png</imagePath>
-                      <description>Attack</description>
+                      <description></description>
                       <isBuild>false</isBuild>
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -817,13 +765,32 @@
                             </parameterFields>
                           </format>
                         </interactions.ModifyVariable>
+                        <interactions.ModifyVariable>
+                          <NAME>ModifyVariable</NAME>
+                          <VARIABLE>Variable</VARIABLE>
+                          <DELTA>Delta</DELTA>
+                          <RATE>Rate</RATE>
+                          <format>
+                            <helpText>This function allows you to change a variable in another object when the interaction occurs. Variable = Variable you can change. Delta = The change that must take place. The Delta can either be a number or an attribute in the player</helpText>
+                            <parameterFields>
+                              <entry>
+                                <string>Variable</string>
+                                <string>Health</string>
+                              </entry>
+                              <entry>
+                                <string>Delta</string>
+                                <string>2</string>
+                              </entry>
+                            </parameterFields>
+                          </format>
+                        </interactions.ModifyVariable>
                       </customFunctions>
-                      <range>10.0</range>
-                      <rate>30.0</rate>
+                      <range>50.0</range>
+                      <rate>1.0</rate>
                     </interactions.Interaction>
                   </entry>
                 </elementMap>
-                <new__ID__val>10</new__ID__val>
+                <new__ID__val>16</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap>
@@ -910,23 +877,29 @@
                           </entry>
                         </comparatorMap>
                       </comparatorManager>
-                      <var1>Mana</var1>
-                      <var2>0</var2>
+                      <var1>Health</var1>
+                      <var2>200</var2>
                       <comparatorID>1</comparatorID>
                       <customConditions>
                         <conditions.Upgrade>
-                          <VARIABLE>Attribute</VARIABLE>
-                          <PARAMETER>New Maximum Value</PARAMETER>
                           <format>
-                            <helpText>This custom condition modifies the unit&apos;s base attribute.</helpText>
+                            <helpText>This custom condition modifies the unit&apos;s base attribute. Upgrade Variable is the variable that is checked for upgrade. Upgrade Variable Delta increases or decreases that upgrade threshold</helpText>
                             <parameterFields>
                               <entry>
-                                <string>VARIABLE</string>
+                                <string>Attribute</string>
                                 <string>Health</string>
                               </entry>
                               <entry>
-                                <string>DELTA</string>
+                                <string>Upgrade Variable Delta</string>
                                 <string>20</string>
+                              </entry>
+                              <entry>
+                                <string>New Maximum Value</string>
+                                <string>200</string>
+                              </entry>
+                              <entry>
+                                <string>Upgrade Variable</string>
+                                <string>Health</string>
                               </entry>
                             </parameterFields>
                           </format>
@@ -939,7 +912,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/rcd.jpeg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
@@ -977,8 +950,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>514.0</x>
-                <y>67.0</y>
+                <x>495.0</x>
+                <y>162.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -987,35 +960,32 @@
               <attributes>
                 <attributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </maxAttributes>
-                <buildCosts/>
-                <buildTime>15.0</buildTime>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>3.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
                   <entry>
-                    <int>4</int>
+                    <int>1</int>
                     <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                   </entry>
                 </elementMap>
-                <new__ID__val>10</new__ID__val>
+                <new__ID__val>16</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap>
@@ -1032,7 +1002,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/rcd.jpeg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
@@ -1057,8 +1027,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>323.0</x>
-                <y>335.0</y>
+                <x>125.0</x>
+                <y>89.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -1067,35 +1037,32 @@
               <attributes>
                 <attributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </attributes>
                 <maxAttributes>
                   <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
                     <string>Health</string>
-                    <double>100.0</double>
+                    <double>50.0</double>
                   </entry>
                 </maxAttributes>
-                <buildCosts/>
-                <buildTime>15.0</buildTime>
+                <buildCosts>
+                  <entry>
+                    <string>Gold</string>
+                    <double>3.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
                   <entry>
-                    <int>4</int>
+                    <int>1</int>
                     <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
                   </entry>
                 </elementMap>
-                <new__ID__val>10</new__ID__val>
+                <new__ID__val>16</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap>
@@ -1112,87 +1079,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
-              <isHit>false</isHit>
-              <elapsedTime>0.0</elapsedTime>
-            </renderer>
-            <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Marine</name>
-            <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>10.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-          </game__object.GameObject>
-        </entry>
-        <entry>
-          <int>10</int>
-          <game__object.GameObject>
-            <id>10</id>
-            <transform>
-              <position>
-                <x>210.0</x>
-                <y>154.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes>
-                  <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
-                    <string>Health</string>
-                    <double>100.0</double>
-                  </entry>
-                </attributes>
-                <maxAttributes>
-                  <entry>
-                    <string>Mana</string>
-                    <double>0.0</double>
-                  </entry>
-                  <entry>
-                    <string>Health</string>
-                    <double>100.0</double>
-                  </entry>
-                </maxAttributes>
-                <buildCosts/>
-                <buildTime>15.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap>
-                  <entry>
-                    <int>4</int>
-                    <interactions.Interaction reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
-                  </entry>
-                </elementMap>
-                <new__ID__val>10</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap>
-                  <entry>
-                    <int>1</int>
-                    <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry/conditions.Condition"/>
-                  </entry>
-                  <entry>
-                    <int>4</int>
-                    <conditions.Condition reference="../../../../../../../entry/game__object.GameObject/myObjectLogic/conditions/elementMap/entry[2]/conditions.Condition"/>
-                  </entry>
-                </elementMap>
-                <new__ID__val>7</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
+              <myImageLocation>/images/rcd.jpeg</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
@@ -1212,7 +1099,7 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
-      <new__ID__val>13</new__ID__val>
+      <new__ID__val>10</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>
