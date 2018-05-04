@@ -13,7 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * The screen of the authoring environment that 
+ * @author Eric Fu
+ *
+ */
 public class MakeGameScreen implements AuthoringView {
 	public static final Color INITIAL_COLOR = Color.LIGHTSKYBLUE;
 

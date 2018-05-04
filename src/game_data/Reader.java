@@ -17,7 +17,7 @@ import game_object.GameObjectManager;
 /**
  * static class for loading data
  * @author shichengrao
- *
+ * @author Eric Fu
  */
 public class Reader {
 	/**

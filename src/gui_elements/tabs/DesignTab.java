@@ -44,6 +44,12 @@ import gui_elements.text_fields.MainTextField;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
 
+/**
+ * @author Aditya Sridhar
+ * @author Eric Fu
+ *
+ */
+
 public class DesignTab extends Tab implements AuthoringView{
 
 	private static final String TAB_TEXT = "Design";

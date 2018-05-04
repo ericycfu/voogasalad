@@ -109,7 +109,10 @@ public class GameInstance implements Serializable{
 		if(!running)
 			return;
 		Vector2 v = new Vector2(xcor,ycor);
+		try {
 		myObjectManager.getGameObject(id).queueMovement(v,myObjectManager,getNewGridMap());
+		}
+		catch(Exception e) {}
 	}
 	public GridMap getNewGridMap() {
 		return new GridMap(mapHeight, mapWidth);

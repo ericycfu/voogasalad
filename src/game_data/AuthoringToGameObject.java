@@ -17,7 +17,7 @@ import transform_library.Vector2;
 /**
  * for converting objects in the authoring environment to objects usable by player and engine
  * @author shichengrao
- *
+ * @author Eric Fu
  */
 public final class AuthoringToGameObject {
 
