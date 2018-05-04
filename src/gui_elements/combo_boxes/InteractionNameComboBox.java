@@ -30,20 +30,26 @@ public class InteractionNameComboBox extends MainComboBox {
 	private InteractionImageChoiceTextLabel interaction_image_choice_text_label;
 
 	public InteractionNameComboBox(MainPane all_selected_interaction_tags_pane, MainPane created_custom_functions_pane,
-			InteractionManager interaction_manager, MainTextField interaction_vision_range_tf, MainTextField interaction_rate_tf,
-			MainComboBox interaction_target_team_cb, MainTextField interaction_description_tf, MainLabel interaction_image_choice_text_label) {
+			MainTextField interaction_vision_range_tf, MainTextField interaction_rate_tf, MainComboBox interaction_target_team_cb, 
+			MainTextField interaction_description_tf, MainLabel interaction_image_choice_text_label) {
 		super(FILENAME);
 		this.all_selected_interaction_tags_pane = (AllSelectedInteractionTagsPane) all_selected_interaction_tags_pane;
 		this.created_custom_functions_pane = (CreatedCustomFunctionsPane) created_custom_functions_pane;
-		this.interaction_manager = interaction_manager;
 		this.interaction_vision_range_tf = (InteractionVisionRangeTextField) interaction_vision_range_tf;
 		this.interaction_rate_tf = (InteractionRateTextField) interaction_rate_tf;
 		this.interaction_target_team_cb = (InteractionTargetTeamComboBox) interaction_target_team_cb;
 		this.interaction_description_tf = (InteractionDescriptionTextField) interaction_description_tf;
 		this.interaction_image_choice_text_label = (InteractionImageChoiceTextLabel) interaction_image_choice_text_label;
 		getComboBox().setEditable(true);
+	}
+	
+	public void setInteractionManager(InteractionManager interaction_manager) {
+		this.interaction_manager = interaction_manager;
+	}
+	
+	public void initialize() {
 		addElements();
-		chooseElements();
+		chooseElements();		
 	}
 	
 	private void addElements() {

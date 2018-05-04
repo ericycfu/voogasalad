@@ -82,7 +82,6 @@ public class AuthoringObject {
 		myDragImage.setX(x);
 		myDragImage.setY(y);
 	}
-
 	
 	public Image getImage() {
 //		System.out.println("myDragImage: " + myDragImage);
