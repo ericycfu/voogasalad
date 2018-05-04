@@ -20,6 +20,12 @@ import javafx.scene.shape.Rectangle;
 import pathfinding.GridMap;
 import transform_library.Vector2;
 
+/**
+ * 
+ * 
+ * @author Frank Yin
+ *
+ */
 public class MainDisplay implements VisualUpdate {
 	
 	private static final double MOVEBUTTONSIZE = 60;
