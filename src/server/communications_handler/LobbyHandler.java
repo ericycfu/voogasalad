@@ -21,39 +21,45 @@ public class LobbyHandler extends CommunicationsHandler {
 	public static final String ENTER_GAME = "Play";
 	public static final String CHANGE_OPTION = "Change";
 	public static final String LEAVE_MESSAGE = "Left";
+	private boolean writeHold;
 	private GameLobby currentLobby;
 	public LobbyHandler(Socket input, RTSServer server, Logger logger) {
 		super(input, server, logger);
 		currentLobby = server.findPlayer(input);
+		writeHold = false;
 	}
 
 	@Override
 	public String updateServer() {
 		try {
-			System.out.println("Updating");
 			String input;
 			ObjectInputStream in = getInputStream();
 			if((input = (String)in.readObject()) != null) {
 				switch(input) {
 				case REMOVE_OPTION: informClientOfLeave();
-				log(" left their lobby");
-				return MainPageHandler.CLASS_REF;
+									log(" left their lobby");
+									return MainPageHandler.CLASS_REF;
 				case CHANGE_OPTION: currentLobby.changeTeam(in.readInt(), getSocket());
-				log(" changed their team");
-				return CLASS_REF;
+									log(" changed their team");
+									return CLASS_REF;
 				case START_GAME:
 					if(getSocket().equals(currentLobby.getHost())) {
 						currentLobby.setIsRunning(true);
+						ObjectOutputStream out = getOutputStream();
+						out.writeObject(START_GAME);
+						out.flush();
 					}
 					return CLASS_REF;
-
-				default: if(currentLobby.isRunning()) {
-					ObjectOutputStream transition = getOutputStream();
-					transition.writeObject(currentLobby.getCurrentGameInstance());
-					transition.flush();
-					return GameHandler.CLASS_REF;
-				}
-				return CLASS_REF;
+				case ENTER_GAME:
+					if(currentLobby.isRunning()) {
+						ObjectOutputStream out = getOutputStream();
+						out.writeObject(currentLobby.getCurrentGameInstance());
+						out.writeInt(currentLobby.getTeamID(getSocket()));
+						out.flush();
+						return GameHandler.CLASS_REF;
+					}
+					return CLASS_REF;
+				default: return CLASS_REF;
 				}
 			}
 			else return CLASS_REF;
@@ -69,16 +75,21 @@ public class LobbyHandler extends CommunicationsHandler {
 	}
 	@Override
 	public void updateClient() {
+		if(writeHold)
+			return;
 		try {
 			ObjectOutputStream out = getOutputStream();
-			if(currentLobby.isRunning())
-				out.writeObject(START_GAME);
-			else {
+			if(!currentLobby.isRunning()) {
 				out.writeObject(currentLobby);
 				out.writeInt(currentLobby.getTeamID(getSocket()));
 				out.writeInt(currentLobby.getPlayerID(getSocket()));
 			}
+			else {
+				out.writeObject(START_GAME);
+				writeHold = true;
+			}
 			out.flush();
+			
 		} catch (SocketException e) {
 			currentLobby.remove(getSocket());
 			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);

@@ -19,7 +19,7 @@ public class ServerClient {
 	public static final String DISCONNECT_TITLE = "ERROR!";
 	public static final String DISCONNECT_BODY = "Error occured when closing server client";
 	public static final int INITIAL_SCENE_WIDTH = 1200;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
+	public static final int INITIAL_SCENE_HEIGHT = 800;
 	private ClientScreen currentScreen;
 	private ScreenFactory myScreenFactory;
 	private Socket clientSocket;
@@ -52,7 +52,7 @@ public class ServerClient {
 				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
 					Platform.runLater(() -> {currentScreen = myScreenFactory.get(newClass);});
 					try {
-						Thread.sleep(1500);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 					}
 				}

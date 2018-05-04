@@ -5,6 +5,7 @@ package server_client.screens;
  */
 import java.net.Socket;
 
+import game_player.GamePlayer;
 import javafx.stage.Stage;
 import server.RTSServerException;
 
@@ -19,7 +20,7 @@ public class ScreenFactory {
 		switch(className) {
 			case LobbySelectionScreen.CLASS_REF: return new LobbySelectionScreen(createdStage, dedicatedConnection);
 			case CurrentLobbyScreen.CLASS_REF: return new CurrentLobbyScreen(createdStage, dedicatedConnection);
-			// case "GamePlayer": return new GamePlayer(createdStage,dedicatedConnection);
+			case GamePlayer.CLASS_REF: return new GamePlayer(createdStage,dedicatedConnection);
 			default: throw new RTSServerException("class not found");
 		}
 	}

@@ -153,4 +153,7 @@ public class GameInstance implements Serializable{
 	public String getName() {
 		return mapName;
 	}
+	public SceneManager getSceneManager() {
+		return mySceneManager;
+	}
 }

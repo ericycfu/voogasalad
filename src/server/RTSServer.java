@@ -107,7 +107,7 @@ public class RTSServer {
 	 */
 	public void cleanLobbyManager() {
 		for(GameLobby g: myLobbyManager.getElements())
-			if(g.getCurrentSize() == 0)
+			if(g.getCurrentSize() == 0 || g.isRunning())
 				myLobbyManager.removeElement(g);
 	}
 	/**

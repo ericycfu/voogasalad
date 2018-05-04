@@ -14,6 +14,7 @@ import server.GameLobby;
 import server.RTSServer;
 
 public class GameHandler extends CommunicationsHandler {
+	public static final String CLASS_REF = "Game";
 	private GameCommandInterpreter myInterpreter;
 	private GameInstance runningGame;
 	private GameLobby runningGameLobby;
@@ -24,11 +25,10 @@ public class GameHandler extends CommunicationsHandler {
 		runningGameLobby = server.findPlayer(input);
 		runningGame = runningGameLobby.getCurrentGameInstance();
 		player_ID = runningGameLobby.getPlayerID(input);
-		myInterpreter = new GameCommandInterpreter(runningGame);
+		myInterpreter = new GameCommandInterpreter(runningGame,player_ID);
 		team_ID = runningGameLobby.getTeamID(input);
+		runningGame.play();
 	}
-
-	public static final String CLASS_REF = "GAME";
 	@Override
 	public String updateServer() {
 		try {
@@ -56,6 +56,7 @@ public class GameHandler extends CommunicationsHandler {
 			out.writeObject(runningGame.getChat());
 			out.flush();
 		} catch (IOException e) {
+			return;
 		}
 		}
 	}

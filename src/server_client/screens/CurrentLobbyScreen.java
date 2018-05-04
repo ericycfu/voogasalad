@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import game_player.GamePlayer;
+import gui_elements.factories.ButtonFactory;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,14 +19,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import server.GameLobby;
 import server.LobbyManager;
+import server.communications_handler.LobbyHandler;
 import server_client.buttons.ChangeTeamButton;
 import server_client.buttons.LeaveLobbyButton;
-import server_client.buttons.PlayButton;
+import server_client.screens.display.GridPaneDisplay;
 import server_client.screens.display.TeamDisplay;
 import server_client.screens.display.TeamListView;
 
@@ -54,8 +56,8 @@ public class CurrentLobbyScreen extends ClientScreen {
 	private void setUpContent() {
 		teamList = new TeamListView();
 		myPane.getChildren().add(teamList);
-		teamList.setLayoutX(200);
-		teamList.setLayoutY(100);
+		teamList.setLayoutX(GridPaneDisplay.DEFAULT_POS);
+		teamList.setLayoutY(2.*GridPaneDisplay.DEFAULT_POS);
 		setUpText();
 		
 	}
@@ -80,7 +82,7 @@ public class CurrentLobbyScreen extends ClientScreen {
 	private void setUpButtons() {
 		HBox buttonBox = new HBox(20);
 		myPane.getChildren().add(buttonBox);
-		buttonBox.setLayoutX(150);
+		buttonBox.setLayoutX(50);
 		buttonBox.setLayoutY(520);
 		LeaveLobbyButton leave = new LeaveLobbyButton(getOutputStream());
 		
@@ -97,7 +99,13 @@ public class CurrentLobbyScreen extends ClientScreen {
 				}
 		});
 		myPane.getChildren().add(change);
-		Button play = new PlayButton(getOutputStream());
+		Button play = ButtonFactory.makeButton("Play Game", e -> {
+			try {
+				ObjectOutputStream out = getOutputStream();
+				out.writeObject(LobbyHandler.START_GAME);
+				out.flush();
+			} catch (IOException e1) {
+			}},"lobby_selection_button");
 		myPane.getChildren().add(play);
 		buttonBox.getChildren().add(change);
 		buttonBox.getChildren().add(play);
@@ -120,28 +128,33 @@ public class CurrentLobbyScreen extends ClientScreen {
 		Object obj;
 		try {
 			ObjectInputStream in = getInputStream();
-			if(in == null)
-				return CLASS_REF;
 			obj = in.readObject();
-			if(obj instanceof String || obj instanceof LobbyManager) {
+			if(obj.equals(LobbyHandler.LEAVE_MESSAGE) || obj instanceof LobbyManager) {
 				return LobbySelectionScreen.CLASS_REF;
 			}
-			GameLobby lobby = (GameLobby) obj;
-			Platform.runLater(() -> {
+			if(obj.equals("Start")) {
+				ObjectOutputStream out = getOutputStream();
+				out.writeObject(LobbyHandler.ENTER_GAME);
+				out.flush();
+				return GamePlayer.CLASS_REF;
+			}
+			updateDisplay((GameLobby) obj, in.readInt(), in.readInt());
+			return CLASS_REF;
+		} catch (Exception e) {
+			return CLASS_REF;
+		}
+	}
+	private void updateDisplay(GameLobby lobby, int team, int player) {
+		Platform.runLater(() -> {
 			while(lobby.getNumTeams() > teamList.getItems().size())
 				teamList.getItems().add(new TeamDisplay(teamList.getItems().size() + 1));
 			for(int x = 0; x < lobby.getNumTeams(); x++) {
 				if(teamList.getItems().get(x).getNumPlayers() != lobby.getNumPlayers(x + 1))
 					teamList.getItems().get(x).update(lobby);
 			}
+			currentTeam.setText("Current Team: " + team);
+			playerID.setText("Player #: " + team);
 			});
-			currentTeam.setText("Current team: " + in.readInt());
-			playerID.setText("Player Number: "+ in.readInt());
-			return CLASS_REF;
-		} catch (Exception e) {
-			
-			return CLASS_REF;
-		}
 	}
 
 }
