@@ -253,12 +253,14 @@ public class GamePlayer extends ClientScreen {
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);
+		/**
 		getStage().setResizable(true);
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
 		getStage().setScene(myScene);
 		getStage().setHeight(SCENE_SIZE_Y);
 		getStage().setWidth(SCENE_SIZE_X);
 		getStage().setResizable(false);
+		**/
 	}
 
 	public Scene getScene() {
