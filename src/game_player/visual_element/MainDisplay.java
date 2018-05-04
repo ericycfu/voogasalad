@@ -288,10 +288,10 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private boolean isXInWindow(double x) {
-		return x > myCurrentXCoor & x < myCurrentXCoor + GamePlayer.SCENE_SIZE_X;
+		return x > myCurrentXCoor && x < myCurrentXCoor + GamePlayer.SCENE_SIZE_X;
 	}
 	
 	private boolean isYInWindow(double y) {
-		return y > myCurrentYCoor & y < myCurrentYCoor + GamePlayer.SCENE_SIZE_Y * (1 - GamePlayer.TOP_HEIGHT - GamePlayer.BOTTOM_HEIGHT);
+		return y > myCurrentYCoor && y < myCurrentYCoor + GamePlayer.SCENE_SIZE_Y * (1 - GamePlayer.TOP_HEIGHT - GamePlayer.BOTTOM_HEIGHT);
 	}
 }
