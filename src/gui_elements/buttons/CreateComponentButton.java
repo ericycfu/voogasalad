@@ -21,8 +21,8 @@ public class CreateComponentButton extends MainButton {
 	private static final String ALERT_TITLE = "Component Created";
 	private static final String ALERT_MESSAGE = "You successfully created a new component!";
 	private static final int DEFAULT_TEAM = 1;
-	private AuthoringObject authoring_object;
 	private static final boolean EXPLICIT_SET_ACTION = false;
+	private AuthoringObject authoring_object;
 	private TextField name_tf, movement_speed_tf;
 	private ComboBox<String> tag_cb;
 	private Label image_text_label;
@@ -33,22 +33,36 @@ public class CreateComponentButton extends MainButton {
 	private Map<String, Double> resource_cost_map;
 	private GameEntity game_entity;
 		
-	public CreateComponentButton(AuthoringObject authoring_object, TextField name_tf, ComboBox<String> tag_cb, 
-			TagController tag_controller, Label image_text_label, TextField movement_speed_tf, ComboBox<String> building_cb, 
-			TextField build_time_tf, Map<String, Double> resource_cost_map, DesignTab design_tab,
-			GameEntity game_entity) {
+	public CreateComponentButton(TextField name_tf, ComboBox<String> tag_cb, Label image_text_label, 
+			TextField movement_speed_tf, ComboBox<String> building_cb, TextField build_time_tf, 
+			Map<String, Double> resource_cost_map) {
 		super(FILENAME, EXPLICIT_SET_ACTION);
-		this.authoring_object = authoring_object;
 		this.name_tf = name_tf;
 		this.tag_cb = tag_cb;
-		this.tag_controller = tag_controller;
 		this.image_text_label = image_text_label;
 		this.movement_speed_tf = movement_speed_tf;
-		this.design_tab = design_tab;
 		this.building_cb = building_cb;
 		this.build_time_tf = build_time_tf;
 		this.resource_cost_map = resource_cost_map;
+	}
+	
+	public void setAuthoringObject(AuthoringObject authoring_object) {
+		this.authoring_object = authoring_object;
+	}
+	
+	public void setTagController(TagController tag_controller) {
+		this.tag_controller = tag_controller;
+	}
+	
+	public void setDesignTab(DesignTab design_tab) {
+		this.design_tab = design_tab;
+	}
+	
+	public void setGameEntity(GameEntity game_entity) {
 		this.game_entity = game_entity;
+	}
+	
+	public void applyAction() {
 		setAction();
 	}
 
@@ -60,8 +74,9 @@ public class CreateComponentButton extends MainButton {
 			for(String tag : tag_text.split(SPACE)) {
 				authoring_object.addTag(tag);
 				tag_controller.addTag(tag, authoring_object);
-				if(!tag_cb.getItems().contains(tag))
+				if(!tag_cb.getItems().contains(tag)) {
 					tag_cb.getItems().add(tag);
+				}
 			}
 			authoring_object.setImage(IMAGE_PATH_HEADING + image_text_label.getText());
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));

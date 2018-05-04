@@ -133,17 +133,13 @@ public class DesignTab extends Tab implements AuthoringView{
 	
 	private void setButtons() {
 		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
-		create_component_button = new CreateComponentButton(authoring_object,
-															component_name_tf.getTextField(),
+		create_component_button = new CreateComponentButton(component_name_tf.getTextField(),
 															component_tag_cb.getComboBox(),
-															tag_controller,
 															component_image_choice_text_label.getLabel(),
 															component_movement_speed_tf.getTextField(),
 															building_cb.getComboBox(),
 															component_build_time_tf.getTextField(),
-															myBuildCosts,
-															this,
-															game_entity);
+															myBuildCosts);
 		
 		design_root.getChildren().addAll(
 										 component_image_chooser_button.getButton(),

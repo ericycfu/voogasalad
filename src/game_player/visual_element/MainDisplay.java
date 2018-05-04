@@ -255,6 +255,16 @@ public class MainDisplay implements VisualUpdate {
 		}	
 	}
 
+	private void updatePositionChanges(List<ImageView> imgvList) {
+		myDisplayGameObjects.forEach(go -> {
+			double xloc = translateX(go.getTransform().getPosition().getX());
+			double yloc = translateY(go.getTransform().getPosition().getY());
+			go.getRenderer().getDisp().setX(xloc);
+			go.getRenderer().getDisp().setY(yloc);
+			imgvList.add(go.getRenderer().getDisp());
+		});
+	}
+
 	@Override
 	/**
 	 * gets current javafx node objects in main display
