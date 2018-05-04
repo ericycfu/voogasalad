@@ -67,6 +67,13 @@ public class AuthoringObject {
 //		myMainComponentPropertyManager.setName("Final Boss");
 //	}
 	
+	public void setDragImage(String imagePath, double x, double y) {
+		Image image = new Image(getClass().getResourceAsStream(imagePath));
+		myDragImage = new DraggableImageView(this, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
+		myDragImage.setX(x);
+		myDragImage.setY(y);
+	}
+	
 	public Image getImage() {
 //		System.out.println("myDragImage: " + myDragImage);
 		System.out.println("DragImage's Image: " + myDragImage.getImage());
@@ -113,11 +120,13 @@ public class AuthoringObject {
 	}
 	
 	public double getX() {
-		return myDragImage.getX();
+//		return myDragImage.getX();
+		return myX;
 	}
 	
 	public double getY() {
-		return myDragImage.getY();
+//		return myDragImage.getY();
+		return myY;
 	}
 	
 	public void changeX(double newX) {
