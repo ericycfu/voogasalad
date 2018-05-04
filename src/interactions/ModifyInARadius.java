@@ -63,6 +63,7 @@ public class ModifyInARadius implements CustomFunction {
 				g.getRenderer().flashUnit();
 
 			}
+			
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{
 				e.printStackTrace();
@@ -116,7 +117,7 @@ public class ModifyInARadius implements CustomFunction {
 	@Override
 	public boolean isRepetitive() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

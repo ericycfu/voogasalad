@@ -225,14 +225,16 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	
 	private void executeValidatedInteraction()
 	{
-		if(interactionTarget.isDead())
+		if(interactionTarget == null  && emptyPosTarget == null) 
+			return;
+		
+		if(interactionTarget != null && interactionTarget.isDead())
 		{
 			isInteractionQueued = false;
 			interactionTarget = null;
 			isPreviousInteractionQueued = false;
 		}
-		if(interactionTarget == null  && emptyPosTarget == null) 
-			return;
+		
 		myObjectLogic.executeInteractions(this, interactionTarget, emptyPosTarget, manager);
 	}
 	
