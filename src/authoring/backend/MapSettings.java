@@ -91,5 +91,7 @@ public class MapSettings implements AuthoringView {
 	public List<EndCondition> getEndConditions() {
 		return endConditions;
 	}
-	
+	public void setNumPlayers(int players) {
+		numPlayers = players;
+	}
 }
