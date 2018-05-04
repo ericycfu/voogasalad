@@ -61,20 +61,14 @@ public class Reader {
 		List<Object> result = new ArrayList<>();
 		ObjectInputStream in = xstream.createObjectInputStream(reader);
 		
-		while(true) {
-			try {
+		while(in.available()>0) {
 				Object obj = in.readObject();
-				System.out.println(obj.getClass().getName());
+				//System.out.println(obj.getClass().getName());
 				setUpNonSerializable(obj);
-				System.out.println(obj.getClass().getName());
+				//System.out.println(obj.getClass().getName());
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
-			}
-			catch(EOFException e) {
-				//not real error, just signifies end of file
-				break;
-			}
 		}
 		return result;
 	}
