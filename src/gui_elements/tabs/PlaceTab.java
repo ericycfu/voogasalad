@@ -16,6 +16,7 @@ public class PlaceTab extends Tab {
 	public PlaceTab(AuthoringController ac, GameEntity game) {
 		this.ac = ac;
 		this.game = game;
+		this.getStyleClass().add("tab_title");
 		initialize();
 	}
 	

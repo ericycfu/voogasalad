@@ -22,7 +22,9 @@ public class SaveGameButton extends Button {
 		this.game_entity = game_entity;
 		this.setText("Save Game");
 		setAction();
+		this.getStyleClass().add("map_setting_buttons");
 	}
+	
 
 	private void setAction() {
 		this.setOnAction(value -> {
