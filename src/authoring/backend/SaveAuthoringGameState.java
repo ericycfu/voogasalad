@@ -39,7 +39,7 @@ public class SaveAuthoringGameState {
 			myWriter.write(Resources.getString("AUTHOR_LOCATION"), listForAuthor);
 			List<GameObject> possibleObjectsList = AuthoringToGameObject.convertList(game_entity.getCreatedObjects().getAuthoringObjects());
 			Set<GameObject> possibleObjects = new HashSet<>();
-			List<Team> teamList = AuthoringToGameObject.calculateTeams(map, game_entity.getResourceManager());
+			List<Team> teamList = AuthoringToGameObject.calculateTeams(map, game_entity.getResourceManager(), authoring_controller.getCurrentMap().getMapSettings());
 			GameObjectManager myGOM = AuthoringToGameObject.convertMap(map,teamList);
 			SceneManager scenemanager = new SceneManager(teamList, myGOM, authoring_controller.getCurrentMap().getMapSettings().getEndConditions());
 			possibleObjects.addAll(possibleObjectsList);
