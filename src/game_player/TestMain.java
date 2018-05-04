@@ -1,15 +1,11 @@
 package game_player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
-import game_data.Reader;
-import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.Renderer;

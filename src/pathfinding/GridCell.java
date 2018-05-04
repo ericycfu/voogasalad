@@ -1,7 +1,5 @@
 package pathfinding;
 
-import transform_library.Vector2;
-
 /**
  * 
  * @author Rayan

@@ -1,12 +1,7 @@
 package gui_elements.buttons;
 
-import conditions.ConditionManager;
-import gui_elements.factories.ButtonFactory;
-import gui_elements.panes.ConditionsPane;
-
-import java.awt.Button;
-
 import authoring.edit_object.ComponentAddConditionsScreen;
+import conditions.ConditionManager;
 public class CreateConditionsButton extends MainButton {
 
 	private static final String FILENAME = "create_conditions_button.properties";

@@ -92,7 +92,7 @@ public class TopPanel {
 						outstream.writeObject(PLAY);
 						outstream.flush();
 					} catch (IOException exception) {
-						new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+						AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 					}
 				}), 
 				ButtonFactory.makeButton(PAUSE, e -> { 
@@ -101,7 +101,7 @@ public class TopPanel {
 					outstream.writeObject(PAUSE);
 					outstream.flush();
 				} catch (IOException exception) {
-					new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+					AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 				}
 					
 				}), 
@@ -149,9 +149,9 @@ public class TopPanel {
 		try {
 			myWriter.write(file.getCanonicalPath(), listRepresentation);
 		} catch (IOException e) {
-			new AlertMaker(IOALERTHEAD, IOALERTBODY);
+			AlertMaker.makeAlert(IOALERTHEAD, IOALERTBODY);
 		} catch (NullPointerException e) {
-			new AlertMaker(NPALERTHEAD, NPALERTBODY);
+			AlertMaker.makeAlert(NPALERTHEAD, NPALERTBODY);
 		}
 	}
 	
@@ -172,9 +172,9 @@ public class TopPanel {
 			gom.getElements().stream().filter(go -> go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT));
 			gom.getElements().stream().filter(go -> !go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT));
 		} catch (ClassNotFoundException e) {
-			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
+			AlertMaker.makeAlert(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
-			new AlertMaker(IOALERTHEAD, IOALERTBODY);
+			AlertMaker.makeAlert(IOALERTHEAD, IOALERTBODY);
 		}
 	}
 	

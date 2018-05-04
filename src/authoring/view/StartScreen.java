@@ -2,8 +2,9 @@ package authoring.view;
 
 import java.io.File;
 import java.io.IOException;
-import gui_elements.texts.StartScreenText;
+
 import gui_elements.factories.ButtonFactory;
+import gui_elements.texts.StartScreenText;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

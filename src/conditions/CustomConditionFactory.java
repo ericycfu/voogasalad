@@ -1,7 +1,5 @@
 package conditions;
 
-import interactions.CustomFunction;
-
 /**
  * 
  * @author Rayan

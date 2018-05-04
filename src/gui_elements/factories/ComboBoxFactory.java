@@ -1,11 +1,12 @@
 package gui_elements.factories;
 
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
 
 public class ComboBoxFactory {
 	public static ComboBox makeComboBox(List<String> list) {

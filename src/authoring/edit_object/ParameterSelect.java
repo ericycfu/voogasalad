@@ -2,6 +2,7 @@ package authoring.edit_object;
 
 import java.util.Iterator;
 import java.util.List;
+
 import authoring.support.Extractor;
 import authoring.view.AuthoringView;
 import game_object.PropertyNotFoundException;

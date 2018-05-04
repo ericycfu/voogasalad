@@ -3,11 +3,9 @@ package authoring.view;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+
 import authoring.backend.AuthoringController;
-import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
-import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_engine.ResourceManager;
 import javafx.scene.Scene;

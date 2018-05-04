@@ -2,6 +2,7 @@ package authoring.edit_map;
 
 import java.util.Arrays;
 import java.util.List;
+
 import authoring.edit_object.ParameterSelect;
 import authoring.support.Extractor;
 import gui_elements.factories.ComboBoxFactory;

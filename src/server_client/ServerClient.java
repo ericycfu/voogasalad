@@ -60,7 +60,7 @@ public class ServerClient {
 			try {
 				clientSocket.close();
 			} catch (IOException e) {
-				new AlertMaker(DISCONNECT_TITLE,DISCONNECT_BODY);
+				AlertMaker.makeAlert(DISCONNECT_TITLE,DISCONNECT_BODY);
 			}
 		}).start();
 	}
