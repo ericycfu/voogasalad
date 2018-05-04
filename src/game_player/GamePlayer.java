@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import authoring.backend.MapSettings;
 import game_engine.EndStateWrapper;
 import game_engine.EndStateWrapper.EndState;
 import game_engine.EngineObject;
@@ -33,6 +34,8 @@ import game_player.visual_element.UnitActionDisplay;
 import game_player.visual_element.UnitDisplay;
 import interactions.Interaction;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
@@ -86,12 +89,13 @@ public class GamePlayer extends ClientScreen {
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	private Team myTeam;
+	private MapSettings myMapSettings;
 	private ImageView myMap;
 	private Socket mySocket;
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
-	private double myTime;
+	private DoubleProperty myTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null, null);
@@ -236,7 +240,8 @@ public class GamePlayer extends ClientScreen {
 	
 	private void initialize() {
 		myRoot = new Group();
-		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTime = new SimpleDoubleProperty();
+		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, myTime, myMapSettings, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(myTopPanel.getNodes());
 		
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
@@ -298,7 +303,7 @@ public class GamePlayer extends ClientScreen {
 		try {
 			myGameObjectManager = (GameObjectManager) inputstream.readObject();
 			myTeam = (Team) inputstream.readObject();
-			myTime = inputstream.readDouble();
+			myTime.setValue(inputstream.readDouble());
 			myChatBox.displayText(inputstream.readObject().toString());
 		} catch (ClassNotFoundException | IOException e) {
 			// do nothing

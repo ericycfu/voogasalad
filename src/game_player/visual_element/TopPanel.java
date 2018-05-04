@@ -7,18 +7,19 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
-import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.GamePlayer;
 import game_player.alert.AlertMaker;
 import gui_elements.factories.ButtonFactory;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -53,32 +54,38 @@ public class TopPanel {
 	public static final String NPALERTHEAD = "No File Selected";
 	public static final String NPALERTBODY = "Please choose a file to save to!";
 	public static final double SBWIDTH = 0.125;
+	public static final double BUTTONSWIDTH = 0.5;
 	public static final double TIMEWIDTH = 0.25;
 	public static final double RESOURCEWIDTH = 0.25;
+	public static final int GOMINDEX = 0;
+	public static final int PUINDEX = 1;
+	public static final int MSINDEX = 2;
 	
 	private GridPane myPane;
 	private TextArea time;
 	private ComboBox<String> resourceBoard;
 	private int menuSpan;
 	private int myTeamID;
+	private DoubleProperty myTime;
 	private ResourceManager myResourceManager;
 	private boolean isLoaded;
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
 	
-	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, DoubleProperty timeValue, MapSettings ms, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
 		myTeamID = teamID;
+		myTime = timeValue;
 		
-		setupButtons(socket, gom, possibleUnits, xsize, ysize);
+		setupButtons(socket, gom, possibleUnits, ms, xsize, ysize);
 		setupTime(xsize, ysize);
 		setupResources(xsize, ysize);
 		addToPane(time, resourceBoard);
 	}
 	
-	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, MapSettings ms, double xsize, double ysize) {
 		Button[] buttonArray = {
 				ButtonFactory.makeButton(START, e -> {
 					ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
@@ -93,12 +100,12 @@ public class TopPanel {
 					
 				}), 
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 
-				ButtonFactory.makeButton(LOAD, e -> load(gom, possibleUnits))
+				ButtonFactory.makeButton(LOAD, e -> load(ms, gom, possibleUnits))
 		};
 		List<Button> buttons = new ArrayList<>(Arrays.asList(buttonArray));
 		buttons.forEach(button -> {
 			button.setMinHeight(ysize);
-			button.setMinWidth(xsize / 2 / buttons.size());
+			button.setMinWidth(xsize * BUTTONSWIDTH / buttons.size());
 			addToPane(button);
 		});
 	}
@@ -142,7 +149,7 @@ public class TopPanel {
 		}
 	}
 	
-	private void load(GameObjectManager gom, Set<GameObject> possibleUnits) {
+	private void load(MapSettings mp, GameObjectManager gom, Set<GameObject> possibleUnits) {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
 		fc.setInitialDirectory(new File(FILEPATH));
@@ -152,37 +159,19 @@ public class TopPanel {
 			isLoaded = true;
 			List<Object> gameObjects = myReader.read(file.getCanonicalPath());
 			gom.clearManager();
-			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
+			gom.transferGameObjects((GameObjectManager) gameObjects.get(GOMINDEX));
 			possibleUnits.clear();
-			System.out.println(gameObjects.get(1));
-			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
-			int index = 0;
-			while(gom.getElements().get(index).getOwner().getID() != myTeamID) {
-				index++;
-			}
-			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
-			for (GameObject go : possibleUnits) {
-				go.getRenderer().setDisp(new ImageView(new Image(go.getRenderer().getImagePath())));
-			}
+			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
+			possibleUnits.forEach(pu -> pu.getRenderer().setDisp(new ImageView(new Image(pu.getRenderer().getImagePath()))));
+			myResourceManager = gom.getElements().stream().filter(o -> o.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
+			((MapSettings) gameObjects.get(MSINDEX)).
+			
+			//map.setImage(new Image(().getImagePath()));
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
 			new AlertMaker(IOALERTHEAD, IOALERTBODY);
 		}
-	}
-	
-	private void setResources() {
-		resourceBoard.getItems().clear();
-		List<Entry<String, Double>> entryList = myResourceManager.getResourceEntries();
-		String[] resources = new String[entryList.size()];
-		for(int i = 0; i < entryList.size(); i++) {
-			resources[i] = entryList.get(i).getKey() + GamePlayer.COLON + entryList.get(i).getValue();
-		}
-		resourceBoard.getItems().addAll(resources);
-	}
-	
-	private void setTime(double timeValue) {
-		time.setText(TIME + GamePlayer.COLON + timeValue);
 	}
 	
 	public boolean getIsLoaded() {
@@ -195,9 +184,10 @@ public class TopPanel {
 	
 	public void update() {
 		if(myResourceManager != null) {
-			setResources();
+			resourceBoard.getItems().clear();
+			myResourceManager.getResourceEntries().forEach(entry -> resourceBoard.getItems().add(entry.getKey() + GamePlayer.COLON + entry.getValue()));
 		}
-		setTime(0); // TODO: set time
+		time.setText(TIME + GamePlayer.COLON + myTime);
 	}
 	
 	public Node getNodes() {
