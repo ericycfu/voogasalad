@@ -18,14 +18,20 @@ import javafx.scene.shape.Rectangle;
 public class UnitInfoDisplay implements VisualUpdate {
 	private static final Paint STROKE_COLOR = Color.BLACK; 
 	private static final Image DEFAULT_IMAGE = new Image("default_unit.jpg");
-	private static final String DEFAULT_HEALTH_MANA = "0/0\n0/0";
+	private static final String NAME = "Name";
+	private static final String TEAM = "Team";
+	private static final String MOVE_SPEED = "Move Speed";
+	private static final String DEFAULT_Property_Status = "Name: N/A\nTeam: N/A";
 	private static final String DEFAULT_STATUS = "Damage: N/A\nArmor: N/A";
+	private static final double PROPERTY_RATIO = 0.25;
+	private static final double STATUS_RATIO = 0.75;
+	private static final double PROFILE_RATIO = 0.33333;
 	private double myHeight; 
 	private double myWidth; 
 	private GridPane myUnitInfoDisplay;
 	private ImageView myCurrentUnitImageView;
 	private Rectangle myDisplayFrame;
-	private TextArea myHealthManaInfo;
+	private TextArea myPropertyInfo;
 	private TextArea myStatusInfo; 
 	
 	public UnitInfoDisplay(double width, double height) {
@@ -39,58 +45,46 @@ public class UnitInfoDisplay implements VisualUpdate {
 	private void initializeDisplayStructure() {
 		myDisplayFrame = new Rectangle(myWidth, myHeight);
 		myDisplayFrame.setStroke(STROKE_COLOR);
+		myStatusInfo = new TextArea();
+		myPropertyInfo = new TextArea();
 		initializeProfilePic();
-		initializeHealthManaInfo();
-		initializeStatusInfo();
+		initializeDisplayComponent(myPropertyInfo, myHeight, myWidth, PROPERTY_RATIO, STATUS_RATIO);
+		initializeDisplayComponent(myStatusInfo, myHeight, myWidth, STATUS_RATIO, PROPERTY_RATIO);
+		myUnitInfoDisplay.add(myPropertyInfo, 1, 0, 1, 2);
+		myUnitInfoDisplay.add(myStatusInfo, 2, 0, 1, 2);
 		updateStatusInfo(null);
 	}
 	
 	private void initializeProfilePic() {
 		myCurrentUnitImageView = new ImageView(DEFAULT_IMAGE);
 		myCurrentUnitImageView.setFitHeight(myHeight);
-		myCurrentUnitImageView.setFitWidth(myWidth/3);
-		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
-		myCurrentUnitImageView.setY(myHeight/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
+		myCurrentUnitImageView.setFitWidth(myWidth*PROFILE_RATIO);
+		myCurrentUnitImageView.setX(myWidth*PROPERTY_RATIO - myCurrentUnitImageView.getBoundsInLocal().getWidth());
+		myCurrentUnitImageView.setY(myHeight*PROPERTY_RATIO - myCurrentUnitImageView.getBoundsInLocal().getWidth());
 		myUnitInfoDisplay.add(myCurrentUnitImageView, 0, 0, 1, 1);
 	}
 	
-	private void initializeHealthManaInfo() {
-		myHealthManaInfo = new TextArea();
-		myHealthManaInfo.setPrefHeight(myHeight);
-		myHealthManaInfo.setPrefWidth(myWidth/3);
-		myHealthManaInfo.setLayoutX(myWidth/4 - myHealthManaInfo.getWidth());
-		myHealthManaInfo.setLayoutY(myHeight*(3/4) - myHealthManaInfo.getHeight());
-		myHealthManaInfo.setEditable(false);
-		myUnitInfoDisplay.add(myHealthManaInfo, 1, 0, 1, 2);
-	}
-	
-	private void initializeStatusInfo() {
-		myStatusInfo = new TextArea();
-		myStatusInfo.setPrefHeight(myHeight);
-		myStatusInfo.setPrefWidth(myWidth/3);
-		myStatusInfo.setLayoutX(myWidth*(3/4) - myStatusInfo.getWidth());
-		myStatusInfo.setLayoutY(myWidth/4 - myStatusInfo.getHeight());
-		myStatusInfo.setEditable(false);
-		myUnitInfoDisplay.add(myStatusInfo, 2, 0, 1, 2);
+	private void initializeDisplayComponent(TextArea comp, double height, double width, double xcoorRatio, double ycoorRatio) {
+		comp.setPrefHeight(height);
+		comp.setPrefWidth(width*PROFILE_RATIO);
+		comp.setLayoutX(width*xcoorRatio - comp.getWidth());
+		comp.setLayoutY(width*ycoorRatio - comp.getHeight());
+		comp.setEditable(false);
 	}
 	
 	private void updateProfilePic(Image profile) {
 		myCurrentUnitImageView.setImage(profile);
 	}
 	
-	private void updateHealthManaInfo(GameObject currentUnit) {
+	private void updatePropertyInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
-			myHealthManaInfo.setText(DEFAULT_HEALTH_MANA);
+			myPropertyInfo.setText(DEFAULT_Property_Status);
 		}
 		else {
-			myHealthManaInfo.setText("");
-			try {
-				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
-					myHealthManaInfo.setText(myHealthManaInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
-				}
-			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
-				//DO NOTHING
-			}
+			myPropertyInfo.setText(GamePlayer.EMPTY);
+			myPropertyInfo.setText(myPropertyInfo.getText() + NAME + GamePlayer.COLON + currentUnit.getName() + GamePlayer.LINEBREAK);
+			myPropertyInfo.setText(myPropertyInfo.getText() + TEAM + GamePlayer.COLON + currentUnit.getOwner().getID() + GamePlayer.LINEBREAK);
+			myPropertyInfo.setText(myPropertyInfo.getText() + MOVE_SPEED + currentUnit.getMovementSpeed());
 		}
 	}
 	
@@ -114,12 +108,12 @@ public class UnitInfoDisplay implements VisualUpdate {
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) {
 			updateProfilePic(DEFAULT_IMAGE);
-			updateHealthManaInfo(null);
+			updatePropertyInfo(null);
 			updateStatusInfo(null);
 			return;
 		}
 		updateProfilePic(gameObjects.get(0).getRenderer().getDisp().getImage());
-		updateHealthManaInfo(gameObjects.get(0));
+		updatePropertyInfo(gameObjects.get(0));
 		updateStatusInfo(gameObjects.get(0));
 	}
 

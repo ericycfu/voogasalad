@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>145.0</x>
-              <y>71.0</y>
+              <x>384.0</x>
+              <y>87.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -18,52 +18,11 @@
               <attributes/>
               <maxAttributes/>
               <buildCosts/>
-              <buildTime>4.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags>
-                      <string>clicker</string>
-                    </targetTags>
-                    <name>BuildClicker</name>
-                    <imagePath>/images/mouse.png</imagePath>
-                    <description>makes a new clicker</description>
-                    <isBuild>true</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions>
-                      <interactions.BuildFunction>
-                        <NAME>BuildFunction</NAME>
-                        <format>
-                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                          <parameterFields/>
-                        </format>
-                      </interactions.BuildFunction>
-                    </customFunctions>
-                    <range>2.0</range>
-                    <rate>3.0</rate>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -71,7 +30,7 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/shop.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
@@ -81,15 +40,19 @@
             <resourceManager>
               <resourceMap>
                 <entry>
-                  <string>cookies</string>
-                  <double>100.0</double>
+                  <string>Gold</string>
+                  <double>1000.0</double>
+                </entry>
+                <entry>
+                  <string>Wood</string>
+                  <double>1000.0</double>
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>shop</name>
+          <name>GoldMine</name>
           <tags>
-            <string>shop</string>
+            <string>Mine</string>
           </tags>
           <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -109,8 +72,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>151.0</x>
-              <y>164.0</y>
+              <x>414.0</x>
+              <y>281.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -120,7 +83,7 @@
               <attributes/>
               <maxAttributes/>
               <buildCosts/>
-              <buildTime>1.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
@@ -132,16 +95,14 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/cookie.png</myImageLocation>
+            <myImageLocation>/images/ghoul.png</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>cookie</name>
-          <tags>
-            <string>cookie</string>
-          </tags>
-          <isBuilding>false</isBuilding>
+          <name>GoldMine</name>
+          <tags reference="../../../entry/game__object.GameObject/tags"/>
+          <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
           <movementSpeed>0.0</movementSpeed>
@@ -159,8 +120,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>263.0</x>
-              <y>132.0</y>
+              <x>165.0</x>
+              <y>292.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -170,7 +131,7 @@
               <attributes/>
               <maxAttributes/>
               <buildCosts/>
-              <buildTime>4.0</buildTime>
+              <buildTime>10.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -179,11 +140,11 @@
                   <interactions.Interaction>
                     <id>1</id>
                     <targetTags>
-                      <string>cookie</string>
+                      <string>Mine</string>
                     </targetTags>
                     <name>Gather</name>
-                    <imagePath>/images/mouse.png</imagePath>
-                    <description>Gather cookies</description>
+                    <imagePath>/images/arrow_down.png</imagePath>
+                    <description>Gather</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -211,11 +172,11 @@
                           <parameterFields>
                             <entry>
                               <string>Gather Rate</string>
-                              <string>10</string>
+                              <string>50</string>
                             </entry>
                             <entry>
                               <string>Resource</string>
-                              <string>cookies</string>
+                              <string>Gold</string>
                             </entry>
                           </parameterFields>
                         </format>
@@ -234,14 +195,14 @@
             </conditions>
           </myObjectLogic>
           <renderer>
-            <myImageLocation>/images/mouse.png</myImageLocation>
+            <myImageLocation>/images/robert.png</myImageLocation>
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>clicker</name>
+          <name>Farmer</name>
           <tags>
-            <string>clicker</string>
+            <string>Miner</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -255,8 +216,61 @@
           <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
         </game__object.GameObject>
       </entry>
+      <entry>
+        <int>10</int>
+        <game__object.GameObject>
+          <id>10</id>
+          <transform>
+            <position>
+              <x>128.0</x>
+              <y>95.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts/>
+              <buildTime>10.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction reference="../../../../../../../entry[3]/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/robert.png</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Farmer</name>
+          <tags reference="../../../entry[3]/game__object.GameObject/tags"/>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>5.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
     </elementMap>
-    <new__ID__val>10</new__ID__val>
+    <new__ID__val>13</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -274,53 +288,7 @@
           <attributes/>
           <maxAttributes/>
           <buildCosts/>
-          <buildTime>1.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </interactions>
-        <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </conditions>
-      </myObjectLogic>
-      <renderer>
-        <myImageLocation>/images/cookie.png</myImageLocation>
-        <isHit>false</isHit>
-        <elapsedTime>0.0</elapsedTime>
-      </renderer>
-      <name>cookie</name>
-      <tags>
-        <string>cookie</string>
-      </tags>
-      <isBuilding>false</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-    </game__object.GameObject>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
-      <myObjectLogic>
-        <fulfillsLossCondition>false</fulfillsLossCondition>
-        <attributes>
-          <attributes/>
-          <maxAttributes/>
-          <buildCosts/>
-          <buildTime>4.0</buildTime>
+          <buildTime>10.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -329,98 +297,11 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>clicker</string>
-                </targetTags>
-                <name>BuildClicker</name>
-                <imagePath>/images/mouse.png</imagePath>
-                <description>makes a new clicker</description>
-                <isBuild>true</isBuild>
-                <isInstantaneous>false</isInstantaneous>
-                <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                <targetTeamEnumMap>
-                  <entry>
-                    <string>OTHER</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>ALL</string>
-                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>OWN</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                </targetTeamEnumMap>
-                <customFunctions>
-                  <interactions.BuildFunction>
-                    <NAME>BuildFunction</NAME>
-                    <format>
-                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                      <parameterFields/>
-                    </format>
-                  </interactions.BuildFunction>
-                </customFunctions>
-                <range>2.0</range>
-                <rate>3.0</rate>
-              </interactions.Interaction>
-            </entry>
-          </elementMap>
-          <new__ID__val>7</new__ID__val>
-        </interactions>
-        <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </conditions>
-      </myObjectLogic>
-      <renderer>
-        <myImageLocation>/images/shop.png</myImageLocation>
-        <isHit>false</isHit>
-        <elapsedTime>0.0</elapsedTime>
-      </renderer>
-      <name>shop</name>
-      <tags>
-        <string>shop</string>
-      </tags>
-      <isBuilding>true</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-    </game__object.GameObject>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
-      <myObjectLogic>
-        <fulfillsLossCondition>false</fulfillsLossCondition>
-        <attributes>
-          <attributes/>
-          <maxAttributes/>
-          <buildCosts/>
-          <buildTime>4.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap>
-            <entry>
-              <int>1</int>
-              <interactions.Interaction>
-                <id>1</id>
-                <targetTags>
-                  <string>cookie</string>
+                  <string>Mine</string>
                 </targetTags>
                 <name>Gather</name>
-                <imagePath>/images/mouse.png</imagePath>
-                <description>Gather cookies</description>
+                <imagePath>/images/arrow_down.png</imagePath>
+                <description>Gather</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -448,11 +329,11 @@
                       <parameterFields>
                         <entry>
                           <string>Gather Rate</string>
-                          <string>10</string>
+                          <string>50</string>
                         </entry>
                         <entry>
                           <string>Resource</string>
-                          <string>cookies</string>
+                          <string>Gold</string>
                         </entry>
                       </parameterFields>
                     </format>
@@ -471,18 +352,64 @@
         </conditions>
       </myObjectLogic>
       <renderer>
-        <myImageLocation>/images/mouse.png</myImageLocation>
+        <myImageLocation>/images/robert.png</myImageLocation>
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>clicker</name>
+      <name>Farmer</name>
       <tags>
-        <string>clicker</string>
+        <string>Miner</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
       <movementSpeed>5.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts/>
+          <buildTime>10.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/ghoul.png</myImageLocation>
+        <isHit>false</isHit>
+        <elapsedTime>0.0</elapsedTime>
+      </renderer>
+      <name>GoldMine</name>
+      <tags>
+        <string>Mine</string>
+      </tags>
+      <isBuilding>true</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>0.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -497,7 +424,7 @@
     <endConditions/>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map4.jpg</imagePath>
+    <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -508,8 +435,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>145.0</x>
-                <y>71.0</y>
+                <x>384.0</x>
+                <y>87.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -519,52 +446,11 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>4.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
-                <elementMap>
-                  <entry>
-                    <int>1</int>
-                    <interactions.Interaction>
-                      <id>1</id>
-                      <targetTags>
-                        <string>clicker</string>
-                      </targetTags>
-                      <name>BuildClicker</name>
-                      <imagePath>/images/mouse.png</imagePath>
-                      <description>makes a new clicker</description>
-                      <isBuild>true</isBuild>
-                      <isInstantaneous>false</isInstantaneous>
-                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                      <targetTeamEnumMap>
-                        <entry>
-                          <string>OTHER</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>ALL</string>
-                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>OWN</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                      </targetTeamEnumMap>
-                      <customFunctions>
-                        <interactions.BuildFunction>
-                          <NAME>BuildFunction</NAME>
-                          <format>
-                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                            <parameterFields/>
-                          </format>
-                        </interactions.BuildFunction>
-                      </customFunctions>
-                      <range>2.0</range>
-                      <rate>3.0</rate>
-                    </interactions.Interaction>
-                  </entry>
-                </elementMap>
-                <new__ID__val>7</new__ID__val>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -572,7 +458,7 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/shop.png</myImageLocation>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
@@ -582,15 +468,19 @@
               <resourceManager>
                 <resourceMap>
                   <entry>
-                    <string>cookies</string>
-                    <double>100.0</double>
+                    <string>Gold</string>
+                    <double>1000.0</double>
+                  </entry>
+                  <entry>
+                    <string>Wood</string>
+                    <double>1000.0</double>
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>shop</name>
+            <name>GoldMine</name>
             <tags>
-              <string>shop</string>
+              <string>Mine</string>
             </tags>
             <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -610,8 +500,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>151.0</x>
-                <y>164.0</y>
+                <x>414.0</x>
+                <y>281.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -621,7 +511,7 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>1.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
@@ -633,16 +523,14 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/cookie.png</myImageLocation>
+              <myImageLocation>/images/ghoul.png</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>cookie</name>
-            <tags>
-              <string>cookie</string>
-            </tags>
-            <isBuilding>false</isBuilding>
+            <name>GoldMine</name>
+            <tags reference="../../../entry/game__object.GameObject/tags"/>
+            <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
             <movementSpeed>0.0</movementSpeed>
@@ -660,8 +548,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>263.0</x>
-                <y>132.0</y>
+                <x>165.0</x>
+                <y>292.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -671,7 +559,7 @@
                 <attributes/>
                 <maxAttributes/>
                 <buildCosts/>
-                <buildTime>4.0</buildTime>
+                <buildTime>10.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
@@ -680,11 +568,11 @@
                     <interactions.Interaction>
                       <id>1</id>
                       <targetTags>
-                        <string>cookie</string>
+                        <string>Mine</string>
                       </targetTags>
                       <name>Gather</name>
-                      <imagePath>/images/mouse.png</imagePath>
-                      <description>Gather cookies</description>
+                      <imagePath>/images/arrow_down.png</imagePath>
+                      <description>Gather</description>
                       <isBuild>false</isBuild>
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -712,11 +600,11 @@
                             <parameterFields>
                               <entry>
                                 <string>Gather Rate</string>
-                                <string>10</string>
+                                <string>50</string>
                               </entry>
                               <entry>
                                 <string>Resource</string>
-                                <string>cookies</string>
+                                <string>Gold</string>
                               </entry>
                             </parameterFields>
                           </format>
@@ -735,14 +623,14 @@
               </conditions>
             </myObjectLogic>
             <renderer>
-              <myImageLocation>/images/mouse.png</myImageLocation>
+              <myImageLocation>/images/robert.png</myImageLocation>
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>clicker</name>
+            <name>Farmer</name>
             <tags>
-              <string>clicker</string>
+              <string>Miner</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -756,8 +644,61 @@
             <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
           </game__object.GameObject>
         </entry>
+        <entry>
+          <int>10</int>
+          <game__object.GameObject>
+            <id>10</id>
+            <transform>
+              <position>
+                <x>128.0</x>
+                <y>95.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts/>
+                <buildTime>10.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <interactions.Interaction reference="../../../../../../../entry[3]/game__object.GameObject/myObjectLogic/interactions/elementMap/entry/interactions.Interaction"/>
+                  </entry>
+                </elementMap>
+                <new__ID__val>7</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/robert.png</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Farmer</name>
+            <tags reference="../../../entry[3]/game__object.GameObject/tags"/>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>5.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
       </elementMap>
-      <new__ID__val>10</new__ID__val>
+      <new__ID__val>13</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>
