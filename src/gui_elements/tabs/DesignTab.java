@@ -169,7 +169,7 @@ public class DesignTab extends Tab implements AuthoringView{
 	}
 	private void clearBuildCostMap() {
 		myBuildCosts.clear();
-		display_build_costs_tf.setText(buildCostsDisplayText);
+		updateBuildCostDisplayText();
 	}
 	
 	private void updateBuildCostDisplayText() {
@@ -216,6 +216,9 @@ public class DesignTab extends Tab implements AuthoringView{
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 		component_image_choice_text_label.setText(authoring_object.getImagePath());
+		updateBuildCost();
+		myBuildCosts = authoring_object.getBuildCosts();
+		updateBuildCostDisplayText();
 
 	}
 	
