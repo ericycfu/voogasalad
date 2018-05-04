@@ -17,6 +17,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public abstract class ParameterSelect implements AuthoringView {
+
+	private static final int GROUP_INSETS_TOP = 10;
+	private static final int GROUP_INSETS_RIGHT = 10;
+	private static final int GROUP_INSETS_BOTTOM = 10;
+	private static final int GROUP_INSETS_LEFT = 10;
 	protected Stage stage;
 	protected VBox root;
 
@@ -28,8 +33,8 @@ public abstract class ParameterSelect implements AuthoringView {
 	
 	protected void initializeScene() {
 		root = new VBox();
-		root.setPadding(new Insets(10, 10, 10, 10));
-		Scene scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT/2, DEFAULT_BACKGROUND);
+		root.setPadding(new Insets(GROUP_INSETS_TOP, GROUP_INSETS_RIGHT, GROUP_INSETS_BOTTOM, GROUP_INSETS_LEFT));
+		Scene scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT / 2, DEFAULT_BACKGROUND);
 		stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle("Edit Custom Conditions");
@@ -94,14 +99,14 @@ public abstract class ParameterSelect implements AuthoringView {
 	
 	protected void setParameters(HBox box, CustomComponentParameterFormat format) {
 		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
+		for (int i = 0; i<parameters.size(); i++) {
 			format.setFieldValue(parameters.get(i), Extractor.extractTextField(box.getChildren().get(i+1)));
 		}
 	}
 	
 	protected void setParameterFields(HBox line, CustomComponentParameterFormat format) {
 		List<String> parameters = format.getParameterList();
-		for (int i=0; i<parameters.size(); i++) {
+		for (int i = 0; i<parameters.size(); i++) {
 			line.getChildren().add(TextFieldFactory.makeTextFieldPrompt(parameters.get(i)));
 		}
 	}	

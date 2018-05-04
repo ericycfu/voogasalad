@@ -13,7 +13,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
 public class EditCustomConditionsScreen extends ParameterSelect implements AuthoringView {
-//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
+
+	//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
+	private static final int CUSTOM_CONDITION_SELECT_BOX_WIDTH = 120;
+	private static final int CUSTOM_CONDITION_SELECT_BOX_HEIGHT = 20;
 	private ConditionManager cm;
 	private Condition condition;
 	
@@ -67,13 +70,13 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 	
 	private ComboBox customConditionSelect(HBox line) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions());
-		box.setPrefSize(120, 20);
+		box.setPrefSize(CUSTOM_CONDITION_SELECT_BOX_WIDTH, CUSTOM_CONDITION_SELECT_BOX_HEIGHT);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	
 	private ComboBox customConditionSelect(HBox line, String text) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions(), text);
-		box.setPrefSize(120, 20);
+		box.setPrefSize(CUSTOM_CONDITION_SELECT_BOX_WIDTH, CUSTOM_CONDITION_SELECT_BOX_HEIGHT);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	

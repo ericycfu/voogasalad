@@ -18,15 +18,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class ComponentAddConditionsScreen implements AuthoringView {
 //	private final String PROPERTY_FILENAME = "data/component_add_conditions_screen.properties";
-	private final String TITLE = "Create Component Attributes";
-	private final int[] COLUMNS = {0, 2, 4, 10};
+	private static final String TITLE = "Create Component Attributes";
+	private static final int[] COLUMNS = {0, 2, 4, 10};
+	private static final int PANE_HGAP = 5;
+	private static final int PANE_VGAP = 10;
+	private static final int PANE_INSET_TOP = 100;
+	private static final int PANE_INSET_RIGHT = 50;
+	private static final int PANE_INSET_BOTTOM = 100;
+	private static final int PANE_INSET_LEFT = 50;
+	private static final int BOX_INSET_TOP = 10;
+	private static final int BOX_INSET_RIGHT = 10;
+	private static final int BOX_INSET_BOTTOM = 10;
+	private static final int BOX_INSET_LEFT = 10;
+	private static final int BOX_SPACING = 5;
 	private ConditionManager conditionManager;
 	private ComparatorManager comparatorManager;
 	private Group root;
@@ -69,9 +78,9 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	
 	private void newPane() {
 		grid = new GridPane();
-		grid.setHgap(5);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(100, 50, 100, 50));
+		grid.setHgap(PANE_HGAP);
+		grid.setVgap(PANE_VGAP);
+		grid.setPadding(new Insets(PANE_INSET_TOP, PANE_INSET_RIGHT, PANE_INSET_BOTTOM, PANE_INSET_LEFT));
 		root.getChildren().add(grid);
 		setTitles();
 	}
@@ -137,8 +146,8 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 //		Button saveButton = ButtonFactory.makeButton("Save", e -> saveConditions()); 
 		box.getChildren().add(addLineButton);
 //		box.getChildren().addAll(addLineButton, saveButton);
-		box.setPadding(new Insets(10, 10, 10, 10));
-		box.setSpacing(5);
+		box.setPadding(new Insets(BOX_INSET_TOP, BOX_INSET_RIGHT, BOX_INSET_BOTTOM, BOX_INSET_LEFT));
+		box.setSpacing(BOX_SPACING);
 		root.getChildren().add(box);
 		box.toFront();
 	}
@@ -175,11 +184,10 @@ public class ComponentAddConditionsScreen implements AuthoringView {
 	private Node findNode(int row, int col) {
 		Node result = null;
 		for (Node node : grid.getChildren()) {
-			if (node instanceof TextField || node instanceof ComboBox) {
-				if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == col) {
-		            result = node;
-		            break;
-		        }
+			if ((node instanceof TextField || node instanceof ComboBox) &&
+				(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == col)) {
+	            result = node;
+	            break;
 			}
 	    }
 	    return result;
