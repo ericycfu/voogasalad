@@ -78,8 +78,8 @@ public class MainDisplay implements VisualUpdate {
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
 			else if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
-				initializeMapClickInteraction(mouseX, mouseY);
 				int ID = this.myUnitActionDisp.getCurrentActionID();
+				initializeMapClickInteraction(ID, mouseX, mouseY);
 				try {
 					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
@@ -98,8 +98,7 @@ public class MainDisplay implements VisualUpdate {
 		myMap.toBack();
 	}
 	
-	private void initializeMapClickInteraction(double mouseX, double mouseY) {
-		int ID = this.myUnitActionDisp.getCurrentActionID();
+	private void initializeMapClickInteraction(int ID, double mouseX, double mouseY) {
 		try {
 			if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 				GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
@@ -281,7 +280,7 @@ public class MainDisplay implements VisualUpdate {
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
 		List<GameObject> ret = new ArrayList<>();
 		gameobjects.stream()
-			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY()))
+			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) && isYInWindow(go.getTransform().getPosition().getY()))
 			.forEach(go -> ret.add(go));
 		return ret;
 	}

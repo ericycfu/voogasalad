@@ -6,6 +6,7 @@ import server.GameLobby;
 public abstract class GridPaneDisplay extends GridPane {
 	public static final int DEFAULT_HEIGHT = 100;
 	public static final int DEFAULT_WIDTH = 700;
+	public static final int DEFAULT_POS = 50;
 	public static final int INSET_SIZE = 10;
 	public GridPaneDisplay() {
 		setPrefHeight(DEFAULT_HEIGHT);

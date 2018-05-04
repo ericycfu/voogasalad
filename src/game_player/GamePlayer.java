@@ -2,6 +2,7 @@ package game_player;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_object.UnmodifiableGameObjectException;
+import game_player.alert.AlertMaker;
 import game_player.selected_unit_manager.MultiPlayerSelectedUnitManager;
 import game_player.selected_unit_manager.SelectedUnitManager;
 import game_player.selected_unit_manager.SinglePlayerSelectedUnitManager;
@@ -32,6 +34,7 @@ import game_player.visual_element.UnitActionDisplay;
 import game_player.visual_element.UnitDisplay;
 import interactions.Interaction;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Cursor;
@@ -53,7 +56,7 @@ import server_client.screens.ClientScreen;
  *
  */
 public class GamePlayer extends ClientScreen {
-	
+	public static final String CLASS_REF = "GamePlayer";
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
 	public static final int SCENE_SIZE_X = 1200;
@@ -97,7 +100,10 @@ public class GamePlayer extends ClientScreen {
 	private DoubleProperty myTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
-		super(null, null);
+		super(null);
+		// public GamePlayer(GameObjectManager gom, Set<GameOjbect> allPossibleUnits) {
+		//Timeline: pause requests to server
+		//super(null, null);
 		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
@@ -110,27 +116,13 @@ public class GamePlayer extends ClientScreen {
 		initializeSingleUnitSelect();
 		unitSkillMapInitialize();
 	}
-	
+
 	// network constructor
-	public GamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
+	public GamePlayer(Stage stage, Socket socket) {
 		super(stage, socket);
-		myStage = stage;
 		
-		myMap = new ImageView(new Image("map4.jpg"));
-		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
-		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
-		
-		myGameObjectManager = gom;
-		myTeam = team;
-		myPossibleUnits = allPossibleUnits;
-		mySceneManager = scenemanager;
-		mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
-		mySocket = socket;
-		initialize();
-		initializeSingleUnitSelect();		
-		unitSkillMapInitialize();
 	}
-	
+
 	private void unitBuildsMapInitialize() {
 		myUnitBuilds = new HashMap<>();
 		for (GameObject go : myPossibleUnits) {
@@ -162,7 +154,7 @@ public class GamePlayer extends ClientScreen {
 		}
 	}
 
-	
+
 	private void unitSkillMapInitialize() {
 		unitBuildsMapInitialize();
 		myUnitSkills.clear();
@@ -208,7 +200,7 @@ public class GamePlayer extends ClientScreen {
 	
 	private void initializeSingleUnitSelect() {
 		for (GameObject go : myGameObjectManager.getElements()) {
-			go.getRenderer().getDisp().toFront();
+			go.getRenderer().getDisp().toFront(); 
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
@@ -226,50 +218,53 @@ public class GamePlayer extends ClientScreen {
 							myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 						}
 					} catch (UnmodifiableGameObjectException e1) {
-							// do nothing
+						// do nothing
 					}
 				}	
 			});
 		}
 	}
-	
+
 	private void initialize() {
 		myRoot = new Group();
 		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
 		myRoot.getChildren().add(myTopPanel.getNodes());
-		
+
 		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
 		Node minimap = myMiniMap.getNodes();
 		minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(minimap);
-		
+
 		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills);
 		Node unitDisp = myUnitDisplay.getNodes();
 		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
 		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
 		myRoot.getChildren().add(unitDisp);
-		
+
 		myMainDisplay = new MainDisplay(mySelectedUnitManager, myGameObjectManager, myUnitDisplay.getUnitActionDisp(), SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y, myMap);
 		Node mainDisp = myMainDisplay.getNodes();
 		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
 		myRoot.getChildren().add(mainDisp);
 		mainDisp.toBack();
-		
+
 		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
 		Node chatBox = myChatBox.getNodes();
 		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
 		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
 		myRoot.getChildren().add(chatBox);
-	
+		getStage().setResizable(true);
 		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
-		//myStage.setScene(myScene);
+		getStage().setScene(myScene);
+		getStage().setHeight(SCENE_SIZE_Y);
+		getStage().setWidth(SCENE_SIZE_X);
+		getStage().setResizable(false);
 	}
 
 	public Scene getScene() {
 		return myScene;
 	}
-	
+
 	public void update() {
 		List<GameObject> gameobject = myGameObjectManager.getElements();
 		if (myTopPanel.getIsLoaded()) {
@@ -291,20 +286,28 @@ public class GamePlayer extends ClientScreen {
 	}
 
 	private void receiveFromServer() {
-		/**
 		ObjectInputStream inputstream = getInputStream();
 		try {
-			myGameObjectManager = (GameObjectManager) inputstream.readObject();
+			
+			Object obj;
+			do {
+				obj = inputstream.readObject();
+				System.out.println(obj.getClass().getCanonicalName());
+			} while(!(obj instanceof GameObjectManager));
+			System.out.println("ASDASD");
+			synchronized (myGameObjectManager){
+				myGameObjectManager = (GameObjectManager) obj;
+				myGameObjectManager.setupImages();
+			}
 			myTeam = (Team) inputstream.readObject();
 			myTime.setValue(inputstream.readDouble());
 			myChatBox.displayText(inputstream.readObject().toString());
-		} catch (ClassNotFoundException | IOException e) {
-			// do nothing
+			mySceneManager = (SceneManager)inputstream.readObject();
+		} catch (Exception e) {
+			return;
 		}
-		//gom team time chat 
-		 **/
 	}
-	
+
 	private void end(String result) {
 		myRoot.getChildren().clear();
 		Text text = new Text(result);
@@ -315,22 +318,62 @@ public class GamePlayer extends ClientScreen {
 
 	@Override
 	protected void setUp() {
-		// TODO Auto-generated method stub
+		GameInstance gi = null;
+		int team_ID = -1;
+		ObjectInputStream in = getInputStream();
+		while(gi == null) {
+			try {
+				Object obj = in.readObject();
+				gi = (GameInstance)(obj);
+				team_ID = in.readInt();
+			}
+			catch (Exception e) {
+				
+			}
+		}
+		setUpBackend(gi, team_ID);
+	}
+
+	private void setUpBackend(GameInstance gi, int team_ID) {
+		try {
+			myMap = new ImageView(new Image(gi.getBackground()));
+			myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
+			myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
+
+			myGameObjectManager = gi.getGameObjects();
+			myGameObjectManager.setupImages();
+			myTeam = gi.getTeamManager().getTeam(team_ID);
+			myPossibleUnits = gi.getGameInfo().getPossibleGameObjects();
+			for(GameObject g: myPossibleUnits) {
+				g.setupImages();
+			}
+			mySceneManager = gi.getSceneManager();
+			mySelectedUnitManager = new MultiPlayerSelectedUnitManager(myTeam, mySocket);
+			myUnitSkills = new HashMap<>();
+			initialize();
+			initializeSingleUnitSelect();		
+			unitSkillMapInitialize();
+		}
+		catch(Exception e) {
+			new AlertMaker("Error","Unable to play game");
+		}
+		
 	}
 
 	@Override
 	public String updateSelf() {
 		receiveFromServer();
-		update();
+		Platform.runLater(() -> update());
 		return "GamePlayer";
 	}
 
 	public static ObjectOutputStream getObjectOutputStream(Socket socket) {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-		} catch (IOException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 }

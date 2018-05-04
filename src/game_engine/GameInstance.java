@@ -111,6 +111,7 @@ public class GameInstance implements Serializable{
 	}
 
 	public void loop() {
+		new Thread(() ->{
 		double startTime = 0;
 		double endTime = 0;
 		double diff = 0;
@@ -121,6 +122,7 @@ public class GameInstance implements Serializable{
 			endTime = System.nanoTime();
 			diff = endTime - startTime;
 		}
+		}).start();
 	}
 	public void play() {
 		running = true;
@@ -152,5 +154,8 @@ public class GameInstance implements Serializable{
 	}
 	public String getName() {
 		return mapName;
+	}
+	public SceneManager getSceneManager() {
+		return mySceneManager;
 	}
 }

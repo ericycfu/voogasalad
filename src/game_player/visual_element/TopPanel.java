@@ -95,7 +95,14 @@ public class TopPanel {
 						new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 					}
 				}), 
-				ButtonFactory.makeButton(PAUSE, e -> {
+				ButtonFactory.makeButton(PAUSE, e -> { 
+				ObjectOutputStream outstream  = GamePlayer.getObjectOutputStream(socket);
+				try {
+					outstream.writeObject(PAUSE);
+					outstream.flush();
+				} catch (IOException exception) {
+					new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+				}
 					
 				}), 
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 
@@ -160,24 +167,10 @@ public class TopPanel {
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager) gameObjects.get(GOMINDEX));
 			possibleUnits.clear();
-			
-			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
-			int index = 0;
-			while(gom.getElements().get(index).getOwner().getID() != myTeamID) {
-				index++;
-			}
-			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
-			gom.getElements().stream()
-				.filter(go -> go.isBuilding())
-				.forEach(go -> {
-					setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT);
-				});
-			gom.getElements().stream()
-				.filter(go -> !go.isBuilding())
-				.forEach(go -> {
-					setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT);
-				});
-			
+			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
+			myResourceManager = gom.getElements().stream().filter(go -> go.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
+			gom.getElements().stream().filter(go -> go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT));
+			gom.getElements().stream().filter(go -> !go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT));
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
