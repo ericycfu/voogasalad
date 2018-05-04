@@ -163,6 +163,10 @@ public class AuthoringObject {
 		myAttributes.setBuildTime(time);
 	}
 	
+	public Map<String, Double> getBuildCosts(){
+		return buildCosts;
+	}
+	
 	public List<String> getBuildCostResources() {
 		List<String> resources = new ArrayList<>();
 		for(String resource : buildCosts.keySet()) {
