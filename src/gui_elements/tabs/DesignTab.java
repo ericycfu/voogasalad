@@ -9,6 +9,7 @@ import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.GameEntity;
 import authoring.backend.TagController;
+import authoring.view.AuthoringView;
 import game_engine.ResourceManager;
 import gui_elements.buttons.CreateAttributesButton;
 import gui_elements.buttons.CreateConditionsButton;
@@ -44,7 +45,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.Tab;
 
-public class DesignTab extends Tab {
+public class DesignTab extends Tab implements AuthoringView{
 
 	private static final String TAB_TEXT = "Design";
 	private static final String CREATE_COMPONENT = "Create Component";
@@ -70,6 +71,7 @@ public class DesignTab extends Tab {
 		authoring_object = new AuthoringObject();
 		tag_controller = new TagController();
 		initialize();
+		this.getStyleClass().add("tab_title");
 	}
 	
 	private void initialize() {
@@ -88,7 +90,6 @@ public class DesignTab extends Tab {
 		
 	private void setText() {
 		this.setText(TAB_TEXT);
-		this.getStyleClass().add("tab_title");
 	}
 	
 	private void setLabels() {

@@ -59,7 +59,7 @@ public class MakeGameScreen implements AuthoringView {
 		VBox inner = new VBox();
 		inner.getChildren().addAll(
 				//need to populate the entries with the information from myGame
-				new DisplayMenu(authoringController, myGame),
+				new DisplayMenu(authoringController, myGame, myStage),
 				new CreatedObjectsTabs(authoringController, myGame));
 		box.getChildren().addAll(
 				new MakeGameTabs(authoringController, myGame),
@@ -70,6 +70,7 @@ public class MakeGameScreen implements AuthoringView {
 		Scene scene = new Scene(box);
 		scene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(scene);
+		box.setId("make_game_screen");
 	}
 	
 }
