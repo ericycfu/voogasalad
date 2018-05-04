@@ -1,5 +1,7 @@
 package game_object;
 
+import game_player.alert.AlertMaker;
+
 /**
  * 
  * @author Rayan

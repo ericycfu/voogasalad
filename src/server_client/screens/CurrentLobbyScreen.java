@@ -153,7 +153,7 @@ public class CurrentLobbyScreen extends ClientScreen {
 					teamList.getItems().get(x).update(lobby);
 			}
 			currentTeam.setText("Current Team: " + team);
-			playerID.setText("Player #: " + team);
+			playerID.setText("Player #: " + player);
 			});
 	}
 

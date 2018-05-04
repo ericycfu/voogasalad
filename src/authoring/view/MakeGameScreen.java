@@ -41,8 +41,8 @@ public class MakeGameScreen implements AuthoringView {
 //		MapSettings myMapSettings = (MapSettings) mapsettings.get(0);
 		List<Object> resourcemanager = myReader.read(myFile.getCanonicalPath(), "game_engine.ResourceManager"); //change category later
 		ResourceManager myResourceManager = (ResourceManager) resourcemanager.get(0);
-		System.out.println("Resource Manager size: " + myResourceManager.getResourceEntries().size());
-		System.out.println("First entry of reosurce manager: " + myResourceManager.getResourceEntries().get(0));
+		//System.out.println("Resource Manager size: " + myResourceManager.getResourceEntries().size());
+		//System.out.println("First entry of reosurce manager: " + myResourceManager.getResourceEntries().get(0));
 //		myGame = new GameEntity(myAuthoringObjects, maps, myMapSettings, myResourceManager);
 		myGame = new GameEntity(myAuthoringObjects, myMaps, myMapSettings, myResourceManager);
 		myStage = stage;
