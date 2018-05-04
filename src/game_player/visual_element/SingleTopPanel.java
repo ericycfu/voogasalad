@@ -29,12 +29,12 @@ public class SingleTopPanel extends TopPanel {
 
 	@Override
 	public void setTimeTA(int time) {
-		String temp = TIME + GamePlayer.COLON + time / StartScreen.FRAMES_PER_SECOND / SECPERMIN + time / StartScreen.FRAMES_PER_SECOND % SECPERMIN;
+		String temp = TIME + GamePlayer.COLON + GamePlayer.SPACE + time / StartScreen.FRAMES_PER_SECOND / SECPERMIN + GamePlayer.COLON + time / StartScreen.FRAMES_PER_SECOND % SECPERMIN;
 		getTimeTA().setText(temp);
 	}
 
 	@Override
-	public void resetTime() {
-		setTimeTA(0);
+	public void startTimeline() {
+		myTimeline.play();
 	}
 }
