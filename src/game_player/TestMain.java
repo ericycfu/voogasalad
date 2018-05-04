@@ -26,7 +26,7 @@ public class TestMain extends Application {
     private final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final String TITLE = "Gameplayer";
-	private GamePlayer myGP;
+	private SinglePlayerGamePlayer myGP;
 	private GameObjectManager myGOM;
 	
 	@Override
@@ -129,20 +129,22 @@ public class TestMain extends Application {
 		//possibleunits.add(go);
 		possibleunits.add(go2);
 		
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> step(SECOND_DELAY));
-        Timeline animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(frame);
-        animation.play();
+		Timeline animation = new Timeline();
         
-		myGP = new GamePlayer(animation, gom, null, possibleunits);
+        
+		myGP = new SinglePlayerGamePlayer(animation, gom, null, possibleunits);
+		System.out.println(myGP);
 		Scene scene = myGP.getScene();  
         gpStage.setScene(scene);
         gpStage.show();
         //myGP.update(myGOM.getElements());
 
-
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+                e -> step(SECOND_DELAY));
+        
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.getKeyFrames().add(frame);
+        animation.play();
 	}
 
 	public static void main(String[] args) {
