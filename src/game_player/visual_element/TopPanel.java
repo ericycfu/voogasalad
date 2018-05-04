@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
  * the interface that all top panel UI elements implement
  * @author Eddie
  */
-public class TopPanel {
+public abstract class TopPanel {
 	
 	public static final String START = "Start";
 	public static final String PLAY = "Play";
@@ -61,66 +62,52 @@ public class TopPanel {
 	public static final int MSINDEX = 2;
 	
 	private GridPane myPane;
-	private TextArea time;
+	private TextArea timeTA;
+	private int count;
 	private ComboBox<String> resourceBoard;
 	private int menuSpan;
 	private int myTeamID;
 	private DoubleProperty myTime;
 	private ResourceManager myResourceManager;
 	private boolean isLoaded;
+	private List<Button> myButtons;
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
 	
-	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	public TopPanel(int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
 		myTeamID = teamID;
+		count = 0;
 		//myTime = timeValue;
 		
-		setupButtons(socket, gom, possibleUnits, xsize, ysize);
+		setupButtons(gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
 		setupResources(xsize, ysize);
-		addToPane(time, resourceBoard);
+		addToPane(timeTA, resourceBoard);
 	}
 	
-	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
+	private void setupButtons(GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		Button[] buttonArray = {
-				ButtonFactory.makeButton(START, e -> {
-					ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
-					try {
-						outstream.writeObject(PLAY);
-						outstream.flush();
-					} catch (IOException exception) {
-						AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
-					}
-				}), 
-				ButtonFactory.makeButton(PAUSE, e -> { 
-				ObjectOutputStream outstream  = GamePlayer.getObjectOutputStream(socket);
-				try {
-					outstream.writeObject(PAUSE);
-					outstream.flush();
-				} catch (IOException exception) {
-					AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
-				}
-					
-				}), 
+				ButtonFactory.makeButton(START),
+				ButtonFactory.makeButton(PAUSE),
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 
 				ButtonFactory.makeButton(LOAD, e -> load(gom, possibleUnits))
 		};
-		List<Button> buttons = new ArrayList<>(Arrays.asList(buttonArray));
-		buttons.forEach(button -> {
+		myButtons = new ArrayList<>(Arrays.asList(buttonArray));
+		myButtons.forEach(button -> {
 			button.setMinHeight(ysize);
-			button.setMinWidth(xsize * BUTTONSWIDTH / buttons.size());
+			button.setMinWidth(xsize * BUTTONSWIDTH / myButtons.size());
 			addToPane(button);
 		});
 	}
 	
 	private void setupTime(double xsize, double ysize) {
-		time = new TextArea(TIME + GamePlayer.COLON + 0);
-		time.setEditable(false);
-		time.setPrefWidth(xsize * TIMEWIDTH);
-		time.setMaxHeight(ysize);
+		timeTA = new TextArea(TIME + GamePlayer.COLON + 0);
+		timeTA.setEditable(false);
+		timeTA.setPrefWidth(xsize * TIMEWIDTH);
+		timeTA.setMaxHeight(ysize);
 	}
 	
 	private void setupResources(double xsize, double ysize) {
@@ -169,8 +156,10 @@ public class TopPanel {
 			possibleUnits.clear();
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
 			myResourceManager = gom.getElements().stream().filter(go -> go.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
-			gom.getElements().stream().filter(go -> go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT));
-			gom.getElements().stream().filter(go -> !go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT));
+			resize(gom.getElements());
+			resize(possibleUnits);
+			count = 0;
+			startTimeline();
 		} catch (ClassNotFoundException e) {
 			AlertMaker.makeAlert(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -178,11 +167,20 @@ public class TopPanel {
 		}
 	}
 	
+	private void resize(Collection<GameObject> gameobject) {
+		gameobject.stream().filter(go -> go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT));
+		gameobject.stream().filter(go -> !go.isBuilding()).forEach(go -> setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT));
+	}
+	
 	private void setGameObjectRenderer(GameObject go, int x, int y) {
 		ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
 		go.getRenderer().setDisp(imgv);
 		go.getRenderer().resize(x, y);
 	}
+	
+	public abstract void setTimeTA(int time);
+	
+	public abstract void startTimeline();
 	
 	public boolean getIsLoaded() {
 		return isLoaded;
@@ -193,11 +191,20 @@ public class TopPanel {
 	}
 	
 	public void update() {
+		count++;
 		if(myResourceManager != null) {
 			resourceBoard.getItems().clear();
 			myResourceManager.getResourceEntries().forEach(entry -> resourceBoard.getItems().add(entry.getKey() + GamePlayer.COLON + entry.getValue()));
 		}
-		time.setText(TIME + GamePlayer.COLON + myTime);
+		setTimeTA(count);
+	}
+	
+	public List<Button> getButtons() {
+		return myButtons;
+	}
+	
+	public TextArea getTimeTA() {
+		return timeTA;
 	}
 	
 	public Node getNodes() {
