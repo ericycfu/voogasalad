@@ -34,9 +34,14 @@ public class StartScreen implements AuthoringView {
 	private Stage myStage;
 	private StackPane myPane;
 	private Scene myScene; 
+	private GameObjectManager myGOM;
+	private SinglePlayerGamePlayer myGP;
+	private Timeline myTimeline;
 
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
+		myGOM = new GameObjectManager();
+		myGP = new SinglePlayerGamePlayer(myGOM, new HashSet<>());
 		setupScreen();
 		setupContent();
 		setupStage();
@@ -84,21 +89,20 @@ public class StartScreen implements AuthoringView {
 	
 	private void singlePlayerGame() {
 		Stage mystage = new Stage();
-		GameObjectManager myGom = new GameObjectManager();
-		SinglePlayerGamePlayer myGP = new SinglePlayerGamePlayer(myGom, new HashSet<>());
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                act -> step(SECOND_DELAY, myGP, myGom));
-        Timeline animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(frame);
-		myGP.setTimeline(animation);
 		Scene scene = myGP.getScene();
 		mystage.setScene(scene);
 		mystage.show();
 	}
 	
-	private void step(double timeElapsed, SinglePlayerGamePlayer gp, GameObjectManager gom) {
-		gp.update();
-		gom.runGameObjectLoop(SECOND_DELAY);
+	public SinglePlayerGamePlayer getGP() {
+		return myGP;
+	}
+	
+	public GameObjectManager getGOM() {
+		return myGOM;
+	}
+
+	public void setTimeline(Timeline animation) {
+		myGP.setTimeline(animation);
 	}
 }

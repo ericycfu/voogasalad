@@ -288,7 +288,6 @@ public class SinglePlayerGamePlayer {
 		myRoot.getChildren().add(text);
 	}
 
-
 	public static ObjectOutputStream getObjectOutputStream(Socket socket) {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
