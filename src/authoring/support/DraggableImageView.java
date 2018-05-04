@@ -1,7 +1,11 @@
 package authoring.support;
 
+import java.util.List;
+import java.util.Map;
+
 import authoring.backend.AuthoringObject;
 import authoring.backend.MapEntity;
+import authoring.backend.MapSettings;
 import authoring.edit_map.ObjectTeamSelectionScreen;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -54,7 +58,12 @@ public class DraggableImageView extends ImageView {
 		this(image, map_entity, width, height);
 		this.objBase = objBase;
     }
-        
+    
+    public DraggableImageView(AuthoringObject objBase, Map<AuthoringObject, List<AuthoringObject>> locations, MapSettings map_settings, Image image, double width, double height) {
+		this(image, new MapEntity(locations, map_settings), width, height);
+		this.objBase = objBase;
+    }
+    
     public void setAction(AuthoringObject obj) {
 	    this.setOnMousePressed(e -> {
 	    	mouseX = e.getSceneX();
