@@ -48,8 +48,10 @@ public class GameHandler extends CommunicationsHandler {
 			}
 			return CLASS_REF;
 		}
+		catch(SocketException e1) {
+			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
+		}
 		catch(IOException | ClassCastException | ClassNotFoundException e) {
-			e.printStackTrace();
 			return CLASS_REF;}
 	}
 
@@ -58,10 +60,8 @@ public class GameHandler extends CommunicationsHandler {
 		if(runningGame.getIsRunning()) {
 		try {
 			ObjectOutputStream out = getOutputStream();
-			out.writeObject(runningGame.getGameObjects());
-			out.writeObject(runningGame.getTeamManager().get(team_ID));
-			out.writeDouble(runningGame.getGameTime());
-			out.writeObject(runningGame.getChat());
+			out.writeObject(runningGame);
+			out.writeInt(team_ID);
 			out.flush();
 		} catch (SocketException e) {
 			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
