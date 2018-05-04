@@ -61,7 +61,7 @@ public class ComponentAddInteractionsScreen {
     private InteractionManager interaction_manager;
     private TagController tag_controller;
     private MainPane all_selected_interaction_tags_pane, current_selected_interaction_components_pane, created_custom_functions_pane;
-    private MainComboBox interaction_component_tag_cb, interaction_name_cb, interaction_target_team_cb;
+    private MainComboBox interaction_component_tag_cb, interaction_name_cb, interaction_target_team_cb, component_tag_cb;
     private MainTextField interaction_vision_range_tf, interaction_description_tf, interaction_rate_tf;
     private MainLabel interaction_image_choice_text_label;
 	
@@ -69,8 +69,10 @@ public class ComponentAddInteractionsScreen {
     private Scene myScene;
     private Group root;
     
-    public ComponentAddInteractionsScreen(AuthoringObject authoring_object, TagController tag_controller) {
+    public ComponentAddInteractionsScreen(AuthoringObject authoring_object, TagController tag_controller,
+    		MainComboBox component_tag_cb) {
     	this.tag_controller = tag_controller;
+    	this.component_tag_cb = component_tag_cb;
     	interaction_manager = authoring_object.getInteractionsManagerInstance();
     	interaction_id = interaction_manager.createInteraction();
     	initialize();
@@ -182,22 +184,22 @@ public class ComponentAddInteractionsScreen {
     }
     
     private void setComboBoxes() {
-		interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane,
+    	interaction_target_team_cb = new InteractionTargetTeamComboBox();
+    	interaction_name_cb = new InteractionNameComboBox(all_selected_interaction_tags_pane,
 														  created_custom_functions_pane,
 														  interaction_manager,
 														  interaction_vision_range_tf,
 														  interaction_rate_tf,
 														  interaction_target_team_cb,
-														  interaction_description_tf);
+														  interaction_description_tf,
+														  interaction_image_choice_text_label);
     	interaction_component_tag_cb = new InteractionComponentTagComboBox(tag_controller, 
     																	   all_selected_interaction_tags_pane,
     																	   current_selected_interaction_components_pane);
-    	
-    	interaction_target_team_cb = new InteractionTargetTeamComboBox();
-		
-		root.getChildren().addAll(interaction_component_tag_cb.getComboBox(),
-								  interaction_name_cb.getComboBox(),
-								  interaction_target_team_cb.getComboBox());
+    			
+		root.getChildren().addAll(interaction_target_team_cb.getComboBox(),
+								  interaction_component_tag_cb.getComboBox(),
+								  interaction_name_cb.getComboBox());
     }
 
     private void setButtons() {
@@ -210,7 +212,10 @@ public class ComponentAddInteractionsScreen {
     													   interaction_target_team_cb,
     													   interaction_rate_tf,
     													   this,
-    													   interaction_id).getButton(),
+    													   interaction_id,
+    													   interaction_component_tag_cb,
+    													   component_tag_cb,
+    													   tag_controller).getButton(),
     							  new AddCustomFunctionsButton(interaction_manager,
     									  					   created_custom_functions_pane,
     									  					   this),
@@ -223,12 +228,13 @@ public class ComponentAddInteractionsScreen {
     	all_selected_interaction_tags_pane.getPane().getChildren().clear();
     	current_selected_interaction_components_pane.getPane().getChildren().clear();
     	created_custom_functions_pane.getPane().getChildren().clear();
+    	component_tag_cb.getEditor().clear();
     	interaction_name_cb.getEditor().clear();
     	interaction_component_tag_cb.getEditor().clear();
     	interaction_vision_range_tf.clear();
     	interaction_image_choice_text_label.setText(null);
     	interaction_description_tf.clear();
-    	interaction_target_team_cb.getEditor().clear();
+    	interaction_target_team_cb.getSelectionModel().clearSelection();
     	interaction_rate_tf.clear();
     }
     
