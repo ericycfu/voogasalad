@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import authoring.backend.MapSettings;
+import game_engine.EndStateWrapper;
+import game_engine.EndStateWrapper.EndState;
+import game_engine.EngineObject;
+import game_engine.GameInstance;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
@@ -27,6 +32,8 @@ import game_player.visual_element.UnitActionDisplay;
 import game_player.visual_element.UnitDisplay;
 import interactions.Interaction;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -81,12 +88,13 @@ public class GamePlayer extends ClientScreen {
 	private SelectedUnitManager mySelectedUnitManager;
 	private Scene myScene;
 	private Team myTeam;
+	private MapSettings myMapSettings;
 	private ImageView myMap;
 	private Socket mySocket;
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
-	private double myTime;
+	private DoubleProperty myTime;
 	
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null, null);
@@ -288,7 +296,7 @@ public class GamePlayer extends ClientScreen {
 		try {
 			myGameObjectManager = (GameObjectManager) inputstream.readObject();
 			myTeam = (Team) inputstream.readObject();
-			myTime = inputstream.readDouble();
+			myTime.setValue(inputstream.readDouble());
 			myChatBox.displayText(inputstream.readObject().toString());
 		} catch (ClassNotFoundException | IOException e) {
 			// do nothing
