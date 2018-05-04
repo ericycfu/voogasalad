@@ -38,19 +38,19 @@ public class GameEntity {
 //			myMapEntityMap.put(entry.getKey(), myDIVs);
 //		}
 //		MapEntity myMapEntity = new MapEntity(myMapSettings, myMapEntityMap);
-		MapEntity myMapEntity = new MapEntity(myMapSettings, myMap);
+//		MapEntity myMapEntity = new MapEntity(myMapSettings, myMap);
 
-		myMapSettings.setMap(myMapEntity);
+//		myMapSettings.setMap(myMapEntity);
 		createdmaps = new CreatedMaps();
-		createdmaps.addMap(myMapEntity);
+//		createdmaps.addMap(myMapEntity);
 		this.myResourceManager = myResourceManager;
 	}
 	
-	public GameEntity(List<Object> myAuthoringObjects, List<Object> myMaps, ResourceManager myResourceManager) {
+	public GameEntity(List<Object> myAuthoringObjects, List<Object> myMaps, List<Object> myMapSettings, ResourceManager myResourceManager) {
 		createdobjects = new CreatedObjects();
 		createdobjects.setAuthoringObjects(myAuthoringObjects);
 		createdmaps = new CreatedMaps();
-		createdmaps.setCreatedMaps(myMaps);
+		createdmaps.setCreatedMaps(myMaps, myMapSettings);
 		this.myResourceManager = myResourceManager;
 
 	}

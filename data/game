@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <object-stream>
   <game__object.GameObjectManager>
     <elementMap>
@@ -8,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>556.0</x>
-              <y>257.0</y>
+              <x>235.0</x>
+              <y>218.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -47,7 +46,7 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>Final boss</name>
+          <name>FinalBoss</name>
           <tags>
             <string>Prof</string>
           </tags>
@@ -69,8 +68,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>403.0</x>
-              <y>432.0</y>
+              <x>298.0</x>
+              <y>150.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -97,7 +96,7 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Final boss</name>
+          <name>FinalBoss</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -117,8 +116,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>355.0</x>
-              <y>394.0</y>
+              <x>166.0</x>
+              <y>289.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -145,55 +144,7 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Final boss</name>
-          <tags reference="../../../entry/game__object.GameObject/tags"/>
-          <isBuilding>false</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>10</int>
-        <game__object.GameObject>
-          <id>10</id>
-          <transform>
-            <position>
-              <x>469.0</x>
-              <y>303.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts/>
-              <buildTime>10.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/robert.png</myImageLocation>
-            <isHit>false</isHit>
-            <elapsedTime>0.0</elapsedTime>
-          </renderer>
-          <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>Final boss</name>
+          <name>FinalBoss</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
@@ -208,7 +159,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>13</new__ID__val>
+    <new__ID__val>10</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -242,7 +193,7 @@
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>Final boss</name>
+      <name>FinalBoss</name>
       <tags>
         <string>Prof</string>
       </tags>
@@ -262,13 +213,13 @@
     <mapName>Default map</mapName>
     <numPlayers>1</numPlayers>
     <endConditions>
-      <scenemanager.AllUnitsDead>
-        <NAME>AllUnitsDead</NAME>
+      <scenemanager.LastManStanding>
+        <NAME>LastManStanding</NAME>
         <format>
-          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <helpText>Victory is achieved through this condition when you are the last one standing</helpText>
           <parameterFields/>
         </format>
-      </scenemanager.AllUnitsDead>
+      </scenemanager.LastManStanding>
     </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
@@ -283,8 +234,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>556.0</x>
-                <y>257.0</y>
+                <x>235.0</x>
+                <y>218.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -322,7 +273,7 @@
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>Final boss</name>
+            <name>FinalBoss</name>
             <tags>
               <string>Prof</string>
             </tags>
@@ -344,8 +295,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>403.0</x>
-                <y>432.0</y>
+                <x>298.0</x>
+                <y>150.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -372,7 +323,7 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Final boss</name>
+            <name>FinalBoss</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -392,8 +343,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>355.0</x>
-                <y>394.0</y>
+                <x>166.0</x>
+                <y>289.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -420,55 +371,7 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Final boss</name>
-            <tags reference="../../../entry/game__object.GameObject/tags"/>
-            <isBuilding>false</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-          </game__object.GameObject>
-        </entry>
-        <entry>
-          <int>10</int>
-          <game__object.GameObject>
-            <id>10</id>
-            <transform>
-              <position>
-                <x>469.0</x>
-                <y>303.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes/>
-                <maxAttributes/>
-                <buildCosts/>
-                <buildTime>10.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/robert.png</myImageLocation>
-              <isHit>false</isHit>
-              <elapsedTime>0.0</elapsedTime>
-            </renderer>
-            <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>Final boss</name>
+            <name>FinalBoss</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
@@ -483,7 +386,7 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
-      <new__ID__val>13</new__ID__val>
+      <new__ID__val>10</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>
@@ -491,5 +394,3 @@
     </teams>
   </scenemanager.SceneManager>
 </object-stream>
-=======
->>>>>>> ad89d90e0025222ef2b34a4c440a32c5512d48d1

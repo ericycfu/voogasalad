@@ -2,6 +2,8 @@ package authoring.backend;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import observables.Listener;
 import observables.Speaker;
 /**
@@ -23,10 +25,14 @@ public class CreatedMaps implements Speaker {
 	 * Set list of created maps but input list
 	 * @param maps
 	 */
-	public void setCreatedMaps(List<Object> maps) {
+	public void setCreatedMaps(List<Object> mapLocations, List<Object> mapSettings) {
 		createdmaps.clear();
-		for(Object obj : maps) {
-			createdmaps.add((MapEntity) obj);
+		for(int i=0; i<mapLocations.size(); i++) {
+			@SuppressWarnings("unchecked")
+			Map<AuthoringObject, List<AuthoringObject>> location = (Map<AuthoringObject, List<AuthoringObject>>) mapLocations.get(i);
+			MapSettings settings = (MapSettings) mapSettings.get(i);
+			MapEntity map = new MapEntity(location, settings);
+			addMap(map);
 		}
 	}
 	/**
