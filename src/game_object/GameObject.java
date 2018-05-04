@@ -449,4 +449,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		renderer.setupImage();
 		myObjectLogic.setupImage();
 	}
+	public void setObjectLogic(ObjectLogic newOL) {
+		myObjectLogic.attributes = newOL.accessAttributes();
+	}
 }

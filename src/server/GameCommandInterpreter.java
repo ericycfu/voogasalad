@@ -17,6 +17,7 @@ public class GameCommandInterpreter {
 	public GameCommandInterpreter(GameInstance g, int player_ID) {
 		myGameInstance = g;
 		playerID = player_ID;
+		myCommandFactory = new CommandFactory();
 	}
 	/**
 	 * executes the input command on the Game

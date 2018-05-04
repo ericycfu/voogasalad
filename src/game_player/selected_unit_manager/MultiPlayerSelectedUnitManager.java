@@ -30,7 +30,9 @@ public class MultiPlayerSelectedUnitManager extends SelectedUnitManager {
 				try {
 					outstream.writeObject(msg);
 					outstream.flush();
+					System.out.println("Done");
 				} catch (IOException e) {
+					e.printStackTrace();
 					// do nothing
 				}
 			});

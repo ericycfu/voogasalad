@@ -212,7 +212,7 @@ public class MainDisplay implements VisualUpdate {
 	public void update(List<GameObject> gameObjects) {
 		myDisplayGameObjects = filterDisplayGameObjects(gameObjects);
 		List<ImageView> imgvList = new ArrayList<>();
-		updatePositionChanges(imgvList);			
+		updatePositionChanges(imgvList);
 		for (int i = myDisplayables.getChildren().size() - 1; i >= 0; i--) {
 			Node n = myDisplayables.getChildren().get(i);
 			if (!imgvList.contains(n)) {
@@ -223,6 +223,7 @@ public class MainDisplay implements VisualUpdate {
 		for (ImageView imgv : imgvList) {
 			myDisplayables.getChildren().add(imgv);
 		}
+		
 		updateCurrentXYCoor();
 		updateCurrentWindow();
 	}
