@@ -38,7 +38,7 @@ public abstract class SelectedUnitManager {
 		try {
 		    String interactionName = top.accessLogic().accessInteractions().getInteraction(interactionID).getName();
 			if (top.accessLogic().accessInteractions().getInteraction(interactionID).isBuild()) {
-				build(top, target, interactionID, gom, new GridMap(1000, 1000), position);
+				build(top, target, interactionID, gom, gridmap, position);
 			}
 			else {
 				selectedUnits.stream()
@@ -54,7 +54,7 @@ public abstract class SelectedUnitManager {
 						try {
 							int goSpecificID = o.accessLogic().accessInteractions().getElements().stream()
 													.filter(i -> i.getName().equals(interactionName)).findFirst().get().getID();
-							interact(o, target, goSpecificID, gom, new GridMap(1000, 1000), position);
+							interact(o, target, goSpecificID, gom, gridmap, position);
 						} catch (UnmodifiableGameObjectException e) {
 							// do nothing
 						}

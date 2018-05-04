@@ -49,8 +49,8 @@ public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 900;
-	public static final int SCENE_SIZE_Y = 600;
+	public static final int SCENE_SIZE_X = 1200;
+	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.49;
@@ -64,6 +64,10 @@ public class GamePlayer extends ClientScreen {
 	public static final String SPACE = " ";
 	public static final String SERVERALERTHEAD = "Communication Failed";
 	public static final String SERVERALERTBODY = "Please try again.";
+	public static final int UNIT_HEIGHT = 50;
+	public static final int UNIT_WIDTH = 50;
+	public static final int BUILDING_HEIGHT = 100;
+	public static final int BUILDING_WIDTH = 100;
 	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
@@ -124,6 +128,15 @@ public class GamePlayer extends ClientScreen {
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
+				/**
+				go.accessLogic().accessInteractions().getElements().stream()
+					.filter(i -> i.isBuild())
+					.forEach(i -> i.getTargetTags().stream()
+									.forEach(tag -> {
+										myPossibleUnits.stream()
+											.
+									}));
+				**/
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
 					if (i.isBuild()) {
 						List<String> tags = i.getTargetTags();
@@ -136,16 +149,14 @@ public class GamePlayer extends ClientScreen {
 									}
 								}
 								if (isTagMatch) {
-									BuildButton sb = new BuildButton(new Image(go2.getRenderer().getImagePath()),
-											i.getDescription() + " " + s, 
-											i.getID(), 
-											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, 
-											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, go2);
-									sb.setOnAction(e -> {
+									BuildButton bb = new BuildButton(new Image(go2.getRenderer().getImagePath()), i.getDescription() + SPACE + s, i.getID(), 
+											SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, 
+											SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8, go2);
+									bb.setOnAction(e -> {
 										myUnitDisplay.getUnitActionDisp().setCurrentActionID(i.getID());
 										myUnitDisplay.getUnitActionDisp().setBuildTarget(go2);
 									});
-									skillList.add(sb);
+									skillList.add(bb);
 								}
 							}
 						}
@@ -208,7 +219,7 @@ public class GamePlayer extends ClientScreen {
 					int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
 					try {
 						if (ID==-1) {
-							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(),myMap.getFitHeight()));
 						}
 						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));

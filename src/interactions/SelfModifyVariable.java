@@ -33,6 +33,7 @@ public class SelfModifyVariable implements CustomFunction {
 			
 			this.variable = format.getParameterValue(VARIABLE);
 			this.delta = format.getParameterValue(DELTA);
+			System.out.println("current delta value (self): " + delta);
 			ParameterParser p = new ParameterParser();
 			double deltaVal = p.assignValidatedValue(delta, current);
 			double prevVal = current.accessLogic().accessAttributes().getAttribute(variable);
@@ -40,6 +41,7 @@ public class SelfModifyVariable implements CustomFunction {
 			if(prevVal + deltaVal <= maxVal)
 			{
 				current.accessLogic().accessAttributes().setAttributeValue(variable, prevVal + deltaVal);
+				System.out.println(prevVal+deltaVal);
 			}
 			else
 			{
