@@ -153,23 +153,24 @@ public class TopPanel {
 			gom.clearManager();
 			gom.transferGameObjects((GameObjectManager)gameObjects.get(0)); // TODO: don't create new
 			possibleUnits.clear();
-			System.out.println(gameObjects.get(1));
+			
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(1));
 			int index = 0;
 			while(gom.getElements().get(index).getOwner().getID() != myTeamID) {
 				index++;
 			}
 			myResourceManager = gom.getElements().get(index).getOwner().getResourceManager();
-			possibleUnits.stream()
+			gom.getElements().stream()
 				.filter(go -> go.isBuilding())
 				.forEach(go -> {
 					setGameObjectRenderer(go, GamePlayer.BUILDING_WIDTH, GamePlayer.BUILDING_HEIGHT);
 				});
-			possibleUnits.stream()
+			gom.getElements().stream()
 				.filter(go -> !go.isBuilding())
 				.forEach(go -> {
 					setGameObjectRenderer(go, GamePlayer.UNIT_WIDTH, GamePlayer.UNIT_HEIGHT);
 				});
+			
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
@@ -179,9 +180,8 @@ public class TopPanel {
 	
 	private void setGameObjectRenderer(GameObject go, int x, int y) {
 		ImageView imgv = new ImageView(new Image(go.getRenderer().getImagePath()));
-		imgv.setFitWidth(x);
-		imgv.setFitHeight(y);
 		go.getRenderer().setDisp(imgv);
+		go.getRenderer().resize(x, y);
 	}
 	
 	private void setResources() {

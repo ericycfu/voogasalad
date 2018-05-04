@@ -160,7 +160,6 @@ public class GamePlayer extends ClientScreen {
 		myUnitSkills.clear();
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
-			skillList.add(makeCancelButton(go.getName()));
 			try {
 				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
 					skillList.add(makeInteractionButton(ia, go));
@@ -168,6 +167,7 @@ public class GamePlayer extends ClientScreen {
 			} catch (UnmodifiableGameObjectException e) {
 				// do nothing
 			}
+			skillList.add(makeCancelButton(go.getName()));
 			myUnitSkills.put(go.getName(), skillList);
 		}
 	}

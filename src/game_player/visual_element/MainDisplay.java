@@ -74,7 +74,6 @@ public class MainDisplay implements VisualUpdate {
 			double mouseX = e.getX();
 			double mouseY = e.getY();
 			if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() == -1) {
-				System.out.println("MAP FIT WIDTH: " + myMap.getFitWidth() + " HEIGHT: " + myMap.getFitHeight());
 				mySelectedUnitManager.move(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myGameObjectManager, 
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
