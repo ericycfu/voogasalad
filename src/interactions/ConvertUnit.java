@@ -23,6 +23,8 @@ public class ConvertUnit implements CustomFunction {
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) throws PropertyNotFoundException 
 	{	
 		other.setOwner(current.getOwner());
+		other.getRenderer().flashUnit();
+
 	}
 
 	@Override

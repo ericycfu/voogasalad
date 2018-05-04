@@ -65,18 +65,22 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 		root.getChildren().add(line);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private ComboBox customConditionSelect(HBox line) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions());
 		box.setPrefSize(120, 20);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private ComboBox customConditionSelect(HBox line, String text) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions(), text);
 		box.setPrefSize(120, 20);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	
+	
+	@SuppressWarnings("rawtypes")
 	private void newConditionParameters(ComboBox box, HBox line) {
 		super.clearConditionParameters(line);
 		String conditionName = (String) box.getValue();
@@ -98,6 +102,7 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 		condition.getCustomConditions().clear();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected void save(HBox line, ComboBox comboBox) {
 		String conditionName = (String) (comboBox.getValue());

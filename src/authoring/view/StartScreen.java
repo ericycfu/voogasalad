@@ -2,7 +2,6 @@ package authoring.view;
 
 import java.io.File;
 import java.io.IOException;
-import gui_elements.buttons.PlayGameButton;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
 import javafx.geometry.Insets;
@@ -48,12 +47,8 @@ public class StartScreen implements AuthoringView {
 															File myFile = myFC.showOpenDialog(new Stage());
 															try {
 																new MakeGameScreen(myStage, myFile);
-															} catch (ClassNotFoundException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
-															} catch (IOException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
+															} catch (ClassNotFoundException | IOException e2) {
+																
 															}
 															
 				}, "image_button"),

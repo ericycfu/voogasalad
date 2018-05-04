@@ -161,7 +161,7 @@ public class AuthoringObject {
 	}
 	
 	public void setBuildCost(String resource, double amount) {
-		buildCosts.put(resource, amount);
+		//buildCosts.put(resource, amount);
 	}
 	
 	public MainComponentPropertyManager getMainComponentPropertyManager() {

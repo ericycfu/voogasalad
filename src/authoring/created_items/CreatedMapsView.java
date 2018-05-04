@@ -63,6 +63,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 	public void update() {
 		rootBox.getChildren().clear();
 		setupBox();
+		
 	}
 
 }

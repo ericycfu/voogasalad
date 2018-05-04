@@ -1,5 +1,6 @@
 package authoring.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -24,6 +25,8 @@ public interface AuthoringView {
 	public static final int PANEL_HEIGHT = 580;
 	
 	public static final int SPACING_SMALL = 10;
+	public static final Insets LINE_INSETS = new Insets(10, 10, 10, 10);
+
 	
 	
 }
