@@ -31,7 +31,7 @@ public abstract class ParameterSelect implements AuthoringView {
 	
 	protected void initializeScene() {
 		root = new VBox();
-		scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT / 2, DEFAULT_BACKGROUND);
+		scene = new Scene (root, 1.2*PANEL_WIDTH, PANEL_HEIGHT / 2, DEFAULT_BACKGROUND);
 		root.setPadding(LINE_INSETS);
 	}
 	
