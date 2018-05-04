@@ -14,6 +14,8 @@ public class UnitActionDisplay implements VisualUpdate{
 	
 	public static final int ACTION_GRID_WIDTH = 4;
 	public static final int ACTION_GRID_HEIGHT = 3;
+	public static final double JAVAFX_IMAGEVIEW_SHRINK_RATIO = 0.8;
+	public static final int DEFAULT_CURRENT_ACTION_ID = -1;
 	private int myCurrentActionID;
 	private GridPane myGridPane;
 	private double myCellWidth;
@@ -30,9 +32,13 @@ public class UnitActionDisplay implements VisualUpdate{
 		myGridPane = new GridPane();
 		myGridPane.setPrefWidth(width);
 		myGridPane.setPrefHeight(height);
-		myGridPane.setStyle("-fx-background-color: #FFFFFF;");
-		setCurrentActionID(-1);
+		myGridPane.setStyle(UnitDisplay.WHITE_BACKGROUND_CSS);
+		defaultCurrentActionID();
 		initialize();
+	}
+	
+	public void defaultCurrentActionID() {
+		setCurrentActionID(DEFAULT_CURRENT_ACTION_ID);
 	}
 	
 	public void setBuildTarget(GameObject go) {
@@ -46,14 +52,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	private void initialize() {
 		for (int i = 0; i < ACTION_GRID_WIDTH; i++) {
 			for (int j = 0; j < ACTION_GRID_HEIGHT; j++) {
-				Image img = new Image("default_icon.png");
-				SkillButton cell = new SkillButton();
-				cell.setMaxSize(myCellWidth, myCellHeight);
-				ImageView imgv = new ImageView(img);
-				imgv.setFitHeight(myCellHeight*0.8);
-				imgv.setFitWidth(myCellWidth*0.8);
-				cell.setGraphic(imgv);
-				myGridPane.add(cell, i, j);
+				completeGridPaneWithDefaultButtons(i, j);
 			}
 		}
 	}
@@ -61,7 +60,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) {
-			myCurrentGameObject = new GameObject(new Vector2(-1,-1));
+			myCurrentGameObject = new GameObject(new Vector2(0,0));
 			myGridPane.getChildren().clear();
 			initialize();
 			return;
@@ -70,7 +69,6 @@ public class UnitActionDisplay implements VisualUpdate{
 		if (gameObject==myCurrentGameObject) {
 			return;
 		}
-		
 		myCurrentGameObject = gameObject;
 		List<SkillButton> unitSkills = myUnitSkills.get(gameObject.getName());
 		fill(unitSkills);
@@ -83,16 +81,19 @@ public class UnitActionDisplay implements VisualUpdate{
 				myGridPane.add(unitSkills.get(i), i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
 			}
 			else {
-				Image img = new Image("default_icon.png");
-				SkillButton cell = new SkillButton();
-				cell.setMaxSize(myCellWidth, myCellHeight);
-				ImageView imgv = new ImageView(img);
-				imgv.setFitHeight(myCellHeight*0.8);
-				imgv.setFitWidth(myCellWidth*0.8);
-				cell.setGraphic(imgv);
-				myGridPane.add(cell, i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
+				completeGridPaneWithDefaultButtons(i%ACTION_GRID_WIDTH, i/ACTION_GRID_WIDTH);
 			}
 		}
+	}
+	
+	private void completeGridPaneWithDefaultButtons(int row, int col) {
+		SkillButton cell = new SkillButton();
+		cell.setMaxSize(myCellWidth, myCellHeight);
+		ImageView imgv = new ImageView(new Image(SkillButton.DEFAULT_BUTTON_IMAGE_PATH));
+		imgv.setFitHeight(myCellHeight*JAVAFX_IMAGEVIEW_SHRINK_RATIO);
+		imgv.setFitWidth(myCellWidth*JAVAFX_IMAGEVIEW_SHRINK_RATIO);
+		cell.setGraphic(imgv);
+		myGridPane.add(cell, row, col);
 	}
 	
 	

@@ -1,27 +1,25 @@
 package game_player.visual_element;
 
 import java.util.List;
-import java.util.Map;
 
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import javafx.scene.Group;
+import game_player.GamePlayer;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class UnitInfoDisplay implements VisualUpdate {
-	private static final Paint StrokeColor = Color.BLACK; 
-	private static final Image DefaultImage = new Image("default_unit.jpg");
-	private static final String DefaultHealthMana = "0/0\n0/0";
-	private static final String DefaultStatus = "Damage: N/A\nArmor: N/A";
+	private static final Paint STROKE_COLOR = Color.BLACK; 
+	private static final Image DEFAULT_IMAGE = new Image("default_unit.jpg");
+	private static final String DEFAULT_HEALTH_MANA = "0/0\n0/0";
+	private static final String DEFAULT_STATUS = "Damage: N/A\nArmor: N/A";
 	private double myHeight; 
 	private double myWidth; 
 	private GridPane myUnitInfoDisplay;
@@ -32,7 +30,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	public UnitInfoDisplay(double width, double height) {
 		myUnitInfoDisplay = new GridPane();
-		myUnitInfoDisplay.setStyle("-fx-background-color: #FFFFFF;");
+		myUnitInfoDisplay.setStyle(UnitDisplay.WHITE_BACKGROUND_CSS);
 		myWidth = width;
 		myHeight = height;
 		initializeDisplayStructure();
@@ -40,7 +38,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void initializeDisplayStructure() {
 		myDisplayFrame = new Rectangle(myWidth, myHeight);
-		myDisplayFrame.setStroke(StrokeColor);
+		myDisplayFrame.setStroke(STROKE_COLOR);
 		initializeProfilePic();
 		initializeHealthManaInfo();
 		initializeStatusInfo();
@@ -48,7 +46,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	}
 	
 	private void initializeProfilePic() {
-		myCurrentUnitImageView = new ImageView(DefaultImage);
+		myCurrentUnitImageView = new ImageView(DEFAULT_IMAGE);
 		myCurrentUnitImageView.setFitHeight(myHeight);
 		myCurrentUnitImageView.setFitWidth(myWidth/3);
 		myCurrentUnitImageView.setX(myWidth/4 - myCurrentUnitImageView.getBoundsInLocal().getWidth());
@@ -82,7 +80,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	
 	private void updateHealthManaInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
-			myHealthManaInfo.setText(DefaultHealthMana);
+			myHealthManaInfo.setText(DEFAULT_HEALTH_MANA);
 		}
 		else {
 			myHealthManaInfo.setText("");
@@ -94,18 +92,17 @@ public class UnitInfoDisplay implements VisualUpdate {
 				//DO NOTHING
 			}
 		}
-		
 	}
 	
 	private void updateStatusInfo(GameObject currentUnit) {
 		if (currentUnit==null) {
-			myStatusInfo.setText(DefaultStatus);
+			myStatusInfo.setText(DEFAULT_STATUS);
 		}
 		else {
-			myStatusInfo.setText("");
+			myStatusInfo.setText(GamePlayer.EMPTY);
 			try {
 				for (String attri : currentUnit.accessLogic().accessAttributes().getAttributeNames()) {
-					myStatusInfo.setText(myStatusInfo.getText() + attri + ": " + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + "\n" );
+					myStatusInfo.setText(myStatusInfo.getText() + attri + GamePlayer.COLON + currentUnit.accessLogic().accessAttributes().getAttribute(attri) + GamePlayer.LINEBREAK);
 				}
 			} catch (PropertyNotFoundException | UnmodifiableGameObjectException | IndexOutOfBoundsException e) {
 				//DO NOTHING
@@ -116,7 +113,7 @@ public class UnitInfoDisplay implements VisualUpdate {
 	@Override
 	public void update(List<GameObject> gameObjects) {
 		if (gameObjects.isEmpty()) {
-			updateProfilePic(DefaultImage);
+			updateProfilePic(DEFAULT_IMAGE);
 			updateHealthManaInfo(null);
 			updateStatusInfo(null);
 			return;
