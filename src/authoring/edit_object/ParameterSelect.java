@@ -29,7 +29,7 @@ public abstract class ParameterSelect implements AuthoringView {
 	protected void initializeScene() {
 		root = new VBox();
 		root.setPadding(LINE_INSETS);
-		Scene scene = new Scene (root, PANEL_WIDTH, PANEL_HEIGHT/2, DEFAULT_BACKGROUND);
+		Scene scene = new Scene (root, 1.2*PANEL_WIDTH, PANEL_HEIGHT/2, DEFAULT_BACKGROUND);
 		stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle("Edit Custom Conditions");
