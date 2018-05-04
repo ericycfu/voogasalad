@@ -20,6 +20,16 @@ public class CreatedMaps implements Speaker {
 		listeners = new ArrayList<>();
 	}
 	/**
+	 * Set list of created maps but input list
+	 * @param maps
+	 */
+	public void setCreatedMaps(List<Object> maps) {
+		createdmaps.clear();
+		for(Object obj : maps) {
+			createdmaps.add((MapEntity) obj);
+		}
+	}
+	/**
 	 * Adds
 	 * @param myMap to list of created maps
 	 */

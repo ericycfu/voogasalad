@@ -44,8 +44,15 @@ public class GameEntity {
 		createdmaps = new CreatedMaps();
 		createdmaps.addMap(myMapEntity);
 		this.myResourceManager = myResourceManager;
-		
-		
+	}
+	
+	public GameEntity(List<Object> myAuthoringObjects, List<Object> myMaps, ResourceManager myResourceManager) {
+		createdobjects = new CreatedObjects();
+		createdobjects.setAuthoringObjects(myAuthoringObjects);
+		createdmaps = new CreatedMaps();
+		createdmaps.setCreatedMaps(myMaps);
+		this.myResourceManager = myResourceManager;
+
 	}
 
 	public CreatedObjects getCreatedObjects() {
