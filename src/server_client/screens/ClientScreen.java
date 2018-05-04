@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 public abstract class ClientScreen {
 	private Socket connection;
 	private Stage myStage;
+	public ClientScreen(Stage myStage) {
+		connection = null;
+		this.myStage = myStage;
+	}
 	public ClientScreen(Stage primaryStage, Socket clientSocket) {
 		connection = clientSocket;
 		myStage = primaryStage;

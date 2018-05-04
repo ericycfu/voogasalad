@@ -8,7 +8,7 @@ import game_engine.GameInstance;
 public class Chat extends Command{
 
 	public Chat(GameInstance g) {
-		super(1, g);
+		super(0, g);
 	}
 
 	@Override

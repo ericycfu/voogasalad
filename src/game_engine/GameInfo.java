@@ -2,7 +2,10 @@ package game_engine;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import game_object.GameObject;
 
@@ -16,7 +19,7 @@ public class GameInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public List<GameObject> ListOfGameObjs;
+	private List<GameObject> ListOfGameObjs;
 	public GameInfo() {
 		ListOfGameObjs = new ArrayList<GameObject>();
 	}
@@ -48,5 +51,12 @@ public class GameInfo implements Serializable {
 				return go;
 		}
 		throw new IllegalArgumentException("Unit does not exist");
+	}
+	public Set<GameObject> getPossibleGameObjects(){
+		Set<GameObject> possibleUnits = new HashSet<>();
+		for(GameObject g: ListOfGameObjs) {
+			possibleUnits.add(g);
+		}
+		return Collections.unmodifiableSet(possibleUnits);
 	}
 }

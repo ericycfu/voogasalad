@@ -10,10 +10,13 @@ import server.commands.CommandFactory;
  *
  */
 public class GameCommandInterpreter {
+	public static final String CHAT_OPTION = "Chat";
 	private CommandFactory myCommandFactory;
 	private GameInstance myGameInstance;
-	public GameCommandInterpreter(GameInstance g) {
+	private int playerID;
+	public GameCommandInterpreter(GameInstance g, int player_ID) {
 		myGameInstance = g;
+		playerID = player_ID;
 	}
 	/**
 	 * executes the input command on the Game
@@ -26,6 +29,7 @@ public class GameCommandInterpreter {
 			c.addArg(array[x]);
 		}
 		if(array[0].equals("Chat")) { 
+			c.addArg(Integer.toString(playerID));
 			c.addArg(s.substring(4).substring(s.indexOf(" ") + 1));	
 		}
 		c.act();

@@ -95,7 +95,14 @@ public class TopPanel {
 						new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 					}
 				}), 
-				ButtonFactory.makeButton(PAUSE, e -> {
+				ButtonFactory.makeButton(PAUSE, e -> { 
+				ObjectOutputStream outstream  = GamePlayer.getObjectOutputStream(socket);
+				try {
+					outstream.writeObject(PAUSE);
+					outstream.flush();
+				} catch (IOException exception) {
+					new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+				}
 					
 				}), 
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 

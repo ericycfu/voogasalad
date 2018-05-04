@@ -1,5 +1,7 @@
 package conditions;
 
+import java.io.Serializable;
+
 import game_object.GameObject;
 import interactions.CustomComponentParameterFormat;
 
@@ -12,7 +14,7 @@ import interactions.CustomComponentParameterFormat;
 
 //may combine with custom functions and allow conditions to act upon other objects
 
-public interface CustomCondition {
+public interface CustomCondition extends Serializable{
 	
 	public void Execute(GameObject current);
 	public CustomComponentParameterFormat getParameterFormat();

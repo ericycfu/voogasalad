@@ -29,5 +29,11 @@
 	-fx-border-width: 2px;
 	-fx-border-color: white;
 }
+#lobby_team_text {
+	-fx-font: 30px Verdana;
+    -fx-fill: White;
+    -fx-stroke: White;
+    -fx-stroke-width: 1;
+}
 
 

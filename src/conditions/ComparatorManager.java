@@ -1,13 +1,14 @@
 package conditions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-public class ComparatorManager {
+public class ComparatorManager implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Map<Integer, Comparator> comparatorMap;
 	
 	public ComparatorManager()

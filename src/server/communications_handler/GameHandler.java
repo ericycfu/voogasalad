@@ -6,14 +6,17 @@ package server.communications_handler;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Logger;
 
 import game_engine.GameInstance;
 import server.GameCommandInterpreter;
 import server.GameLobby;
 import server.RTSServer;
+import server.RTSServerException;
 
 public class GameHandler extends CommunicationsHandler {
+	public static final String CLASS_REF = "Game";
 	private GameCommandInterpreter myInterpreter;
 	private GameInstance runningGame;
 	private GameLobby runningGameLobby;
@@ -24,11 +27,10 @@ public class GameHandler extends CommunicationsHandler {
 		runningGameLobby = server.findPlayer(input);
 		runningGame = runningGameLobby.getCurrentGameInstance();
 		player_ID = runningGameLobby.getPlayerID(input);
-		myInterpreter = new GameCommandInterpreter(runningGame);
+		myInterpreter = new GameCommandInterpreter(runningGame,player_ID);
 		team_ID = runningGameLobby.getTeamID(input);
+		runningGame.play();
 	}
-
-	public static final String CLASS_REF = "GAME";
 	@Override
 	public String updateServer() {
 		try {
@@ -49,13 +51,16 @@ public class GameHandler extends CommunicationsHandler {
 	public void updateClient() {
 		if(runningGame.getIsRunning()) {
 		try {
-			ObjectOutputStream out =getOutputStream();
+			ObjectOutputStream out = getOutputStream();
 			out.writeObject(runningGame.getGameObjects());
 			out.writeObject(runningGame.getTeamManager().get(team_ID));
 			out.writeDouble(runningGame.getGameTime());
 			out.writeObject(runningGame.getChat());
 			out.flush();
+		} catch (SocketException e) {
+			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
 		} catch (IOException e) {
+			return;
 		}
 		}
 	}

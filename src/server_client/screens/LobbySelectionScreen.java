@@ -20,8 +20,10 @@ import game_object.GameObjectManager;
 import game_player.alert.AlertMaker;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -30,6 +32,7 @@ import server.GameLobby;
 import server.LobbyManager;
 import server_client.buttons.CreateLobbyButton;
 import server_client.buttons.JoinLobbyButton;
+import server_client.screens.display.GridPaneDisplay;
 import server_client.screens.display.LobbyDisplay;
 import server_client.screens.display.LobbyListView;
 
@@ -74,17 +77,19 @@ public class LobbySelectionScreen extends ClientScreen {
 	 */
 	private void setupContent() {
 		setUpLobbyDisplays();
-		setUpJoinButton();
-		setUpCreateButton();
+		HBox hbox = new HBox();
+		hbox.setLayoutX(150);
+		hbox.setLayoutY(520);
+		hbox.getChildren().add(setUpJoinButton());
+		hbox.getChildren().add(setUpCreateButton());
+		myPane.getChildren().add(hbox);
 	}
 	/**
 	 * Sets up the button that allows the user to create the new Lobby
 	 */
-	private void setUpCreateButton() {
+	private Button setUpCreateButton() {
 		CreateLobbyButton create = new CreateLobbyButton();
 		myPane.getChildren().add(create);
-		create.setLayoutX(280);
-		create.setLayoutY(520);
 		create.setOnAction(e -> {
 			File chosenGame = myGameChooser.showOpenDialog(getStage());
 			try {
@@ -102,14 +107,16 @@ public class LobbySelectionScreen extends ClientScreen {
 				out.writeObject(newGame);
 				out.flush();
 			} catch (Exception e2) {
+				e2.printStackTrace();
 				new AlertMaker(IOALERTHEAD, IOALERTBODY);
 			}
 		});
+		return create;
 	}
 	/**
 	 * Sets up the Join Lobby button 
 	 */
-	private void setUpJoinButton() {
+	private Button setUpJoinButton() {
 		JoinLobbyButton join = new JoinLobbyButton();
 		join.setOnAction(e -> {
 			LobbyDisplay current = currentLobbies.getSelectionModel().getSelectedItem();
@@ -121,9 +128,7 @@ public class LobbySelectionScreen extends ClientScreen {
 				} catch (IOException e1) {
 				}
 		});
-		myPane.getChildren().add(join);
-		join.setLayoutX(620);
-		join.setLayoutY(520);
+		return join;
 
 	}
 	/**
@@ -131,8 +136,8 @@ public class LobbySelectionScreen extends ClientScreen {
 	 */
 	private void setUpLobbyDisplays() {
 		currentLobbies = new LobbyListView();
-		currentLobbies.setLayoutX(200);
-		currentLobbies.setLayoutY(100);
+		currentLobbies.setLayoutX(GridPaneDisplay.DEFAULT_POS);
+		currentLobbies.setLayoutY(GridPaneDisplay.DEFAULT_POS);
 		myPane.getChildren().add(currentLobbies);
 
 	}
@@ -160,22 +165,22 @@ public class LobbySelectionScreen extends ClientScreen {
 			Object obj = in.readObject();
 			if(obj instanceof GameLobby)
 				return CurrentLobbyScreen.CLASS_REF;
-			LobbyManager lobbies = (LobbyManager) obj;
-			int numLobbies = lobbies.getElements().size();
-			
-			Platform.runLater(() -> { 
-			while(numLobbies < currentLobbies.getItems().size())
-				currentLobbies.remove();
-			while(numLobbies > currentLobbies.getItems().size())
-				currentLobbies.add();
-			for(int x = 0; x < lobbies.getElements().size(); x++)
-				currentLobbies.update(x, lobbies.getElements().get(x));
-			});
+			updateDisplay((LobbyManager) obj);
 			return CLASS_REF;
 		} catch (Exception e) {
 			return CLASS_REF;
 		}
-
-
 	}	
+	private void updateDisplay(LobbyManager lobbies) {
+		int numLobbies = lobbies.getElements().size();
+		
+		Platform.runLater(() -> { 
+		while(numLobbies < currentLobbies.getItems().size())
+			currentLobbies.remove();
+		while(numLobbies > currentLobbies.getItems().size())
+			currentLobbies.add();
+		for(int x = 0; x < lobbies.getElements().size(); x++)
+			currentLobbies.update(x, lobbies.getElements().get(x));
+		});
+	}
 }
