@@ -64,6 +64,10 @@ public class GamePlayer extends ClientScreen {
 	public static final String SPACE = " ";
 	public static final String SERVERALERTHEAD = "Communication Failed";
 	public static final String SERVERALERTBODY = "Please try again.";
+	public static final int UNIT_HEIGHT = 50;
+	public static final int UNIT_WIDTH = 50;
+	public static final int BUILDING_HEIGHT = 100;
+	public static final int BUILDING_WIDTH = 100;
 	
 	private GameObjectManager myGameObjectManager;
 	private TopPanel myTopPanel;
@@ -124,6 +128,15 @@ public class GamePlayer extends ClientScreen {
 		for (GameObject go : myPossibleUnits) {
 			List<SkillButton> skillList = new ArrayList<>();
 			try {
+				/**
+				go.accessLogic().accessInteractions().getElements().stream()
+					.filter(i -> i.isBuild())
+					.forEach(i -> i.getTargetTags().stream()
+									.forEach(tag -> {
+										myPossibleUnits.stream()
+											.
+									}));
+				**/
 				for (Interaction i : go.accessLogic().accessInteractions().getElements()) {
 					if (i.isBuild()) {
 						List<String> tags = i.getTargetTags();
