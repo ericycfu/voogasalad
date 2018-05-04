@@ -114,7 +114,7 @@ public class Interaction implements EngineObject, Serializable {
 		
 		if(!validatedInteractionTarget(current, other)) 
 			return;
-		if(matchesTags(other, targetTags)) 
+		if(!matchesTags(other, targetTags)) 
 			return;
 		try 
 		{

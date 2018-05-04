@@ -501,8 +501,8 @@
         </format>
       </scenemanager.AllUnitsDead>
     </endConditions>
-    <mapwidth>2000</mapwidth>
-    <mapheight>2000</mapheight>
+    <mapwidth>4000</mapwidth>
+    <mapheight>4000</mapheight>
     <imagePath>/images/map5.png</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>

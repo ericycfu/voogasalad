@@ -41,6 +41,7 @@ public class GameObjectManager extends ElementManager implements Serializable{
 	{
 		this.clearManager();
 		List<GameObject> objList = gameObjects.getElements();
+		this.changeBaseID(objList.size());
 		for(GameObject obj : objList)
 		{
 			this.addElement(obj);
