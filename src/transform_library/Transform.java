@@ -135,7 +135,8 @@ public class Transform implements Serializable {
 	 * @param stepDistance: the distance to be moved at every step
 	 * 
 	 * Moves the current object towards a new object. 
-	 * Returns false if the gameobject reaches the target
+	 * Returns
+	 *  false if the gameobject reaches the target
 	 */
 	public boolean MoveTowards(Transform target, double stepDistance)
 	{

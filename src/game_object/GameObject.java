@@ -198,9 +198,10 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 		}
 		
+		
 		if(this.isUninteractive) 
 			return;
-		
+				
 		moveUpdate();
 		
 		if(this.isPreviousInteractionQueued)
@@ -218,7 +219,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 			}
 			
 		}
-	
+
 		myObjectLogic.checkConditions(this);
 		renderer.updateRenderer();
 
@@ -241,6 +242,7 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 	{
 		if(isMovementQueued && !activeWaypoints.isEmpty())
 		{
+			
 			if(!transform.MoveTowards(new Transform(activeWaypoints.peek()), movementSpeed))
 			{
 				activeWaypoints.remove();
@@ -313,7 +315,14 @@ public class GameObject  implements InterfaceGameObject, EngineObject, Serializa
 		{
 			return;
 		}
-		this.isPreviousInteractionQueued = false;
+		
+		if(this.isPreviousInteractionQueued)
+		{
+			this.isPreviousInteractionQueued = false;
+			this.isInteractionQueued = false;
+			this.interactionTarget = null;
+		}
+		
 		this.manager = manager;
 		Pathfinder pathfinder = new Pathfinder(gridmap);
 		activeWaypoints = pathfinder.findPath(this, target, manager);
