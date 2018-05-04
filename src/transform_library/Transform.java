@@ -135,13 +135,14 @@ public class Transform implements Serializable {
 	 * @param stepDistance: the distance to be moved at every step
 	 * 
 	 * Moves the current object towards a new object. 
-	 * Returns false if the gameobject reaches the target
+	 * Returns
+	 *  false if the gameobject reaches the target
 	 */
 	public boolean MoveTowards(Transform target, double stepDistance)
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
 		position = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
-		System.out.println(getDisplacement(this,target));
+		//System.out.println(getDisplacement(this,target));
 		if(getDisplacement(this, target) <= stepDistance)
 		{
 			return false;
