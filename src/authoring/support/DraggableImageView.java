@@ -1,6 +1,7 @@
 package authoring.support;
 
 import authoring.backend.AuthoringObject;
+import authoring.backend.MapEntity;
 import authoring.edit_map.ObjectTeamSelectionScreen;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -12,6 +13,8 @@ public class DraggableImageView extends ImageView {
 //	private static final String CSS_STYLE = "image-border-team";
 	private double mouseX;
     private double mouseY;
+    private MapEntity map_entity;
+    private AuthoringObject objBase;
 
     public DraggableImageView(Image image) {
     		super();
@@ -30,14 +33,26 @@ public class DraggableImageView extends ImageView {
     }
         
     public DraggableImageView(Image image, double width, double height) {
-    		this(image);
-    		this.setFitWidth(width);
-    		this.setFitHeight(height);
+		this(image);
+		this.setFitWidth(width);
+		this.setFitHeight(height);
+    }
+
+    public DraggableImageView(Image image, MapEntity map_entity, double width, double height) {
+   		this(image);
+   		this.setFitWidth(width);
+   		this.setFitHeight(height);
+   		this.map_entity = map_entity;
     }
     
     public DraggableImageView(AuthoringObject obj, Image image, double width, double height) {
 		this(image, width, height);
 		setAction(obj);
+    }
+
+    public DraggableImageView(AuthoringObject objBase, MapEntity map_entity, Image image, double width, double height) {
+		this(image, map_entity, width, height);
+		this.objBase = objBase;
     }
         
     public void setAction(AuthoringObject obj) {
@@ -60,6 +75,10 @@ public class DraggableImageView extends ImageView {
 			if(ex.isShiftDown() && ex.getClickCount() == 1) {
 				new ObjectTeamSelectionScreen(this, obj);
 			}
+			else if(ex.isControlDown() && ex.getClickCount() == 1) {
+				map_entity.removeFromMap(objBase, obj);
+			}
+
 		});
 		
 		updateImageProperties(obj);
