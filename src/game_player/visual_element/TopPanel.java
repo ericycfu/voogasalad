@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import authoring.backend.MapSettings;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
@@ -72,12 +71,12 @@ public class TopPanel {
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
 	
-	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, DoubleProperty timeValue, double xsize, double ysize) {
+	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
 		myTeamID = teamID;
-		myTime = timeValue;
+		//myTime = timeValue;
 		
 		setupButtons(socket, gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
@@ -190,20 +189,6 @@ public class TopPanel {
 		imgv.setFitWidth(x);
 		imgv.setFitHeight(y);
 		go.getRenderer().setDisp(imgv);
-	}
-	
-	private void setResources() {
-		resourceBoard.getItems().clear();
-		List<Entry<String, Double>> entryList = myResourceManager.getResourceEntries();
-		String[] resources = new String[entryList.size()];
-		for(int i = 0; i < entryList.size(); i++) {
-			resources[i] = entryList.get(i).getKey() + GamePlayer.COLON + entryList.get(i).getValue();
-		}
-		resourceBoard.getItems().addAll(resources);
-	}
-	
-	private void setTime(double timeValue) {
-		time.setText(TIME + GamePlayer.COLON + timeValue);
 	}
 	
 	public boolean getIsLoaded() {
