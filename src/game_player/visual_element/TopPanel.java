@@ -72,20 +72,20 @@ public class TopPanel {
 	private Writer myWriter = new Writer();
 	private Reader myReader = new Reader();
 	
-	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, DoubleProperty timeValue, MapSettings ms, double xsize, double ysize) {
+	public TopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, DoubleProperty timeValue, double xsize, double ysize) {
 		myPane = new GridPane();
 		myPane.setStyle(DEFAULTBGSTYLE);
 		menuSpan = 0;
 		myTeamID = teamID;
 		myTime = timeValue;
 		
-		setupButtons(socket, gom, possibleUnits, ms, xsize, ysize);
+		setupButtons(socket, gom, possibleUnits, xsize, ysize);
 		setupTime(xsize, ysize);
 		setupResources(xsize, ysize);
 		addToPane(time, resourceBoard);
 	}
 	
-	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, MapSettings ms, double xsize, double ysize) {
+	private void setupButtons(Socket socket, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		Button[] buttonArray = {
 				ButtonFactory.makeButton(START, e -> {
 					ObjectOutputStream outstream = GamePlayer.getObjectOutputStream(socket);
@@ -100,7 +100,7 @@ public class TopPanel {
 					
 				}), 
 				ButtonFactory.makeButton(SAVE, e -> save(gom, possibleUnits)), 
-				ButtonFactory.makeButton(LOAD, e -> load(ms, gom, possibleUnits))
+				ButtonFactory.makeButton(LOAD, e -> load(gom, possibleUnits))
 		};
 		List<Button> buttons = new ArrayList<>(Arrays.asList(buttonArray));
 		buttons.forEach(button -> {
@@ -149,7 +149,7 @@ public class TopPanel {
 		}
 	}
 	
-	private void load(MapSettings mp, GameObjectManager gom, Set<GameObject> possibleUnits) {
+	private void load(GameObjectManager gom, Set<GameObject> possibleUnits) {
 		FileChooser fc = new FileChooser();
 		Stage stage = new Stage();
 		fc.setInitialDirectory(new File(FILEPATH));
@@ -164,9 +164,6 @@ public class TopPanel {
 			possibleUnits.addAll((Set<GameObject>) gameObjects.get(PUINDEX));
 			possibleUnits.forEach(pu -> pu.getRenderer().setDisp(new ImageView(new Image(pu.getRenderer().getImagePath()))));
 			myResourceManager = gom.getElements().stream().filter(o -> o.getOwner().getID() == myTeamID).collect(Collectors.toList()).get(0).getOwner().getResourceManager();
-			((MapSettings) gameObjects.get(MSINDEX)).
-			
-			//map.setImage(new Image(().getImagePath()));
 		} catch (ClassNotFoundException e) {
 			new AlertMaker(CLASSALERTHEAD, CLASSALERTBODY);
 		} catch (IOException e) {
