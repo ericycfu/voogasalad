@@ -35,7 +35,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		for (int i=0; i<size; i++) {
 			rootBox.getChildren().add(setupIndivBox(createdmaps.getObjectByIndex(i)));
 		}
-		if (size != 0) {
+		if (size > 1) {
 			this.setContent(rootBox);
 		}
 	}
@@ -49,8 +49,8 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 	}
 	
 	private MapSelectionImageView extractImage(MapEntity map) {
-		DraggableScrollPane scroll = authoringcontroller.getScroll();
-		MapSelectionImageView imgview = new MapSelectionImageView(map, scroll, authoringcontroller);
+		DraggableScrollPane dragscroll = authoringcontroller.getScroll();
+		MapSelectionImageView imgview = new MapSelectionImageView(map, dragscroll, authoringcontroller);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 		return imgview;

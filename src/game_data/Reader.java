@@ -66,6 +66,7 @@ public class Reader {
 				Object obj = in.readObject();
 				System.out.println(obj.getClass().getName());
 				setUpNonSerializable(obj);
+				System.out.println(obj.getClass().getName());
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}

@@ -13,7 +13,6 @@ import java.util.Set;
 import game_data.Reader;
 import game_data.Writer;
 import game_engine.ResourceManager;
-import game_engine.Team;
 import game_object.GameObject;
 import game_object.GameObjectManager;
 import game_player.GamePlayer;
@@ -45,7 +44,7 @@ public class TopPanel {
 	public static final String FILEPATH = "data/";
 	public static final String SAVETEXT = "Save Game";
 	public static final String LOADTEXT = "Load Game";
-	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF);";
+	public static final String DEFAULTBGSTYLE = "-fx-background-color: #FFFFFF;";
 	public static final String CLASSALERTHEAD = "ClassNotFoundException";
 	public static final String CLASSALERTBODY = "Incorrect class type!";
 	public static final String IOALERTHEAD = "FileNotFound";
