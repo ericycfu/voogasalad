@@ -78,7 +78,9 @@ public class CreateComponentButton extends MainButton {
 					tag_cb.getItems().add(tag);
 				}
 			}
-			authoring_object.setImage(IMAGE_PATH_HEADING + image_text_label.getText());
+			if(!image_text_label.getText().startsWith(IMAGE_PATH_HEADING)) {
+				authoring_object.setImage(IMAGE_PATH_HEADING + image_text_label.getText());
+			}
 			authoring_object.setMovementSpeed(Double.parseDouble(movement_speed_tf.getText()));
 			authoring_object.setBuilding(Boolean.parseBoolean(building_cb.getValue()));
 			authoring_object.setBuildTime(Double.parseDouble(build_time_tf.getText()));

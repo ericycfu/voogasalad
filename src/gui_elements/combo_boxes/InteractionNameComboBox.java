@@ -71,12 +71,11 @@ public class InteractionNameComboBox extends MainComboBox {
 	    		all_selected_interaction_tags_pane.setToOldInteractionMode();
 	    		interaction_vision_range_tf.setText(interaction.getRange() + BLANK_TEXT);
 	    		interaction_rate_tf.setText(Double.toString(interaction.getRate()));
-	    		System.out.println(interaction.getInteractionTargetTeam().toString());
-	    		System.out.println(interaction_target_team_cb.getItems().size());	    		
 	    		interaction_target_team_cb.getSelectionModel().select(interaction.getInteractionTargetTeam().toString());
 	    		interaction_description_tf.setText(interaction.getDescription());
 	    		interaction_image_choice_text_label.setText(interaction.getImagePath());
 	    		List<CustomFunction> custom_functions = interaction.getCustomFunctions();
+	    		created_custom_functions_pane.getPane().getChildren().clear();
 	    		for(CustomFunction custom_function : custom_functions) {
 	    			created_custom_functions_pane.addButton(custom_function.getName(), custom_function.getParameterFormat());
 	    		}
