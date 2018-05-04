@@ -42,8 +42,10 @@ import server_client.screens.ClientScreen;
 
 /**
  * 
- * @author Siyuan Chen
+ * @author Siyuan Chen, Frank Yin
  *
+ * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
+ * 
  */
 public class GamePlayer extends ClientScreen {
 	
