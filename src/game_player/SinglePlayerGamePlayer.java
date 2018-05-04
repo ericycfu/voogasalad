@@ -40,7 +40,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pathfinding.GridMap;
 import scenemanager.SceneManager;
-
 /**
  * 
  * @author Siyuan Chen, Frank Yin
@@ -90,16 +89,14 @@ public class SinglePlayerGamePlayer {
 	private Set<GameObject> myPossibleUnits;
 	private SceneManager mySceneManager;
 	private Stage myStage;
-	private DoubleProperty myTime;
+	private Timeline myTimeline;
 
-	public SinglePlayerGamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
-		//super(null, null);
+	public SinglePlayerGamePlayer(GameObjectManager gameManager,Set<GameObject> allPossibleUnits) {
 		myMap = new ImageView(new Image("map4.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
 		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
-		myTeam = team;
 		myUnitSkills = new HashMap<>();
 		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
 		initialize();
@@ -109,7 +106,6 @@ public class SinglePlayerGamePlayer {
 
 	// network constructor
 	public SinglePlayerGamePlayer(Stage stage, GameObjectManager gom, Set<GameObject> allPossibleUnits, Socket socket, Team team, SceneManager scenemanager) {
-		//super(stage, socket);
 		myStage = stage;
 
 		myMap = new ImageView(new Image("map4.jpg"));
@@ -317,5 +313,9 @@ public class SinglePlayerGamePlayer {
 		}
 	}
 
-	
+	public void setTimeline(Timeline animation) {
+		myTimeline = animation;
+	}
+
+
 }
