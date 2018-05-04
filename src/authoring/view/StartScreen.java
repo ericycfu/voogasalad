@@ -50,7 +50,7 @@ public class StartScreen implements AuthoringView {
 															try {
 																new MakeGameScreen(myStage, myFile);
 															} catch (ClassNotFoundException | IOException | NullPointerException e2) {
-																new AlertMaker("Error with Loading Game", "You have not selected a file or the file has an incorrect format");
+																AlertMaker.makeAlert("Error with Loading Game", "You have not selected a file or the file has an incorrect format");
 															}
 															
 				}, "image_button"),
