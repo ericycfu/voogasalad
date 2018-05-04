@@ -59,7 +59,6 @@ public class RTSServer {
 
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 	/**

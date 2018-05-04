@@ -31,7 +31,6 @@ public class MultiPlayerSelectedUnitManager extends SelectedUnitManager {
 					outstream.writeObject(msg);
 					outstream.flush();
 				} catch (IOException e) {
-					e.printStackTrace();
 					// do nothing
 				}
 			});
@@ -59,7 +58,6 @@ public class MultiPlayerSelectedUnitManager extends SelectedUnitManager {
 			outstream.writeObject(msg);
 			outstream.flush();
 		} catch (IOException e) {
-			// do nothing
 		}
 	}
 	

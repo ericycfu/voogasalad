@@ -111,7 +111,6 @@ public class LobbySelectionScreen extends ClientScreen {
 				out.writeObject(newGame);
 				out.flush();
 			} catch (Exception e2) {
-				e2.printStackTrace();
 				AlertMaker.makeAlert(IOALERTHEAD, IOALERTBODY);
 			}
 		});

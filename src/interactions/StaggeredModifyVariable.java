@@ -45,7 +45,6 @@ public class StaggeredModifyVariable implements CustomFunction {
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
-			e.printStackTrace();
 		}
 		
 	}

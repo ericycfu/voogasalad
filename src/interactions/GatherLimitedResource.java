@@ -44,7 +44,6 @@ public class GatherLimitedResource implements CustomFunction {
 		} 
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException | InvalidResourceValueException e) 
 		{
-			e.printStackTrace();
 		}
 	}
 

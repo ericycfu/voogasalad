@@ -60,7 +60,7 @@
           <attributes/>
           <maxAttributes/>
           <buildCosts reference="../../../buildCosts"/>
-          <buildTime>5.0</buildTime>
+          <buildTime>4.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -73,7 +73,7 @@
                 </targetTags>
                 <name>Gather</name>
                 <imagePath>/images/cookie.png</imagePath>
-                <description>Gather cookies</description>
+                <description>Gather cookie</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -111,12 +111,44 @@
                     </format>
                   </interactions.GatherUnlimitedResource>
                 </customFunctions>
-                <range>5.0</range>
+                <range>999.0</range>
+                <rate>1.0</rate>
+              </interactions.Interaction>
+            </entry>
+            <entry>
+              <int>5</int>
+              <interactions.Interaction>
+                <id>5</id>
+                <targetTags>
+                  <string>cookie</string>
+                </targetTags>
+                <name>Gather</name>
+                <imagePath>/images/cookie.png</imagePath>
+                <description>Gather cookie</description>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions/>
+                <range>999.0</range>
                 <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>7</new__ID__val>
+          <new__ID__val>9</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -153,7 +185,7 @@
           <attributes/>
           <maxAttributes/>
           <buildCosts reference="../../../buildCosts"/>
-          <buildTime>4.0</buildTime>
+          <buildTime>9.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -162,43 +194,11 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>clicker</string>
-                </targetTags>
-                <name>BuildClicker</name>
-                <imagePath>/images/mouse.png</imagePath>
-                <description>Builds a clicker</description>
-                <isBuild>false</isBuild>
-                <isInstantaneous>false</isInstantaneous>
-                <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                <targetTeamEnumMap>
-                  <entry>
-                    <string>OTHER</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>ALL</string>
-                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>OWN</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                </targetTeamEnumMap>
-                <customFunctions/>
-                <range>4.0</range>
-                <rate>4.0</rate>
-              </interactions.Interaction>
-            </entry>
-            <entry>
-              <int>4</int>
-              <interactions.Interaction>
-                <id>4</id>
-                <targetTags>
                   <string>cookie</string>
                 </targetTags>
-                <name>BuildCookie</name>
+                <name>Build Cookie</name>
                 <imagePath>/images/cookie.png</imagePath>
-                <description>Builds a cookie</description>
+                <description>build cookie</description>
                 <isBuild>true</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -225,12 +225,52 @@
                     </format>
                   </interactions.BuildFunction>
                 </customFunctions>
-                <range>4.0</range>
-                <rate>4.0</rate>
+                <range>999.0</range>
+                <rate>1.0</rate>
+              </interactions.Interaction>
+            </entry>
+            <entry>
+              <int>3</int>
+              <interactions.Interaction>
+                <id>3</id>
+                <targetTags>
+                  <string>clicker</string>
+                </targetTags>
+                <name>Build Clicker</name>
+                <imagePath>/images/mouse.png</imagePath>
+                <description>builds clicker</description>
+                <isBuild>true</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.BuildFunction>
+                    <NAME>BuildFunction</NAME>
+                    <format>
+                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                      <parameterFields/>
+                    </format>
+                  </interactions.BuildFunction>
+                </customFunctions>
+                <range>999.0</range>
+                <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>10</new__ID__val>
+          <new__ID__val>7</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -241,7 +281,7 @@
         <myImagePath>/images/shop.png</myImagePath>
         <myName>Shop</myName>
         <myTags reference="../../myTags"/>
-        <myMovementSpeed>1.0</myMovementSpeed>
+        <myMovementSpeed>0.0</myMovementSpeed>
         <isBuilding>true</isBuilding>
       </myMainComponentPropertyManager>
       <myAttributes reference="../myObjectLogic/attributes"/>
@@ -251,129 +291,6 @@
   </list>
   <list>
     <map>
-      <entry>
-        <authoring.backend.AuthoringObject>
-          <myX>0.0</myX>
-          <myY>0.0</myY>
-          <myTeam>1</myTeam>
-          <myTags>
-            <string>shop</string>
-          </myTags>
-          <buildCosts>
-            <entry>
-              <string>cookies</string>
-              <double>60.0</double>
-            </entry>
-          </buildCosts>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts reference="../../../buildCosts"/>
-              <buildTime>4.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags>
-                      <string>clicker</string>
-                    </targetTags>
-                    <name>BuildClicker</name>
-                    <imagePath>/images/mouse.png</imagePath>
-                    <description>Builds a clicker</description>
-                    <isBuild>false</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions/>
-                    <range>4.0</range>
-                    <rate>4.0</rate>
-                  </interactions.Interaction>
-                </entry>
-                <entry>
-                  <int>4</int>
-                  <interactions.Interaction>
-                    <id>4</id>
-                    <targetTags>
-                      <string>cookie</string>
-                    </targetTags>
-                    <name>BuildCookie</name>
-                    <imagePath>/images/cookie.png</imagePath>
-                    <description>Builds a cookie</description>
-                    <isBuild>true</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions>
-                      <interactions.BuildFunction>
-                        <NAME>BuildFunction</NAME>
-                        <format>
-                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                          <parameterFields/>
-                        </format>
-                      </interactions.BuildFunction>
-                    </customFunctions>
-                    <range>4.0</range>
-                    <rate>4.0</rate>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>10</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <myMainComponentPropertyManager>
-            <myImagePath>/images/shop.png</myImagePath>
-            <myName>Shop</myName>
-            <myTags reference="../../myTags"/>
-            <myMovementSpeed>1.0</myMovementSpeed>
-            <isBuilding>true</isBuilding>
-          </myMainComponentPropertyManager>
-          <myAttributes reference="../myObjectLogic/attributes"/>
-          <myInteractions reference="../myObjectLogic/interactions"/>
-          <myConditionManager reference="../myObjectLogic/conditions"/>
-        </authoring.backend.AuthoringObject>
-        <list>
-          <authoring.backend.AuthoringObject>
-            <myX>237.0</myX>
-            <myY>56.0</myY>
-            <myTeam>1</myTeam>
-          </authoring.backend.AuthoringObject>
-        </list>
-      </entry>
       <entry>
         <authoring.backend.AuthoringObject>
           <myX>0.0</myX>
@@ -418,8 +335,139 @@
         </authoring.backend.AuthoringObject>
         <list>
           <authoring.backend.AuthoringObject>
-            <myX>245.0</myX>
-            <myY>176.0</myY>
+            <myX>234.0</myX>
+            <myY>172.0</myY>
+            <myTeam>1</myTeam>
+          </authoring.backend.AuthoringObject>
+        </list>
+      </entry>
+      <entry>
+        <authoring.backend.AuthoringObject>
+          <myX>0.0</myX>
+          <myY>0.0</myY>
+          <myTeam>1</myTeam>
+          <myTags>
+            <string>shop</string>
+          </myTags>
+          <buildCosts>
+            <entry>
+              <string>cookies</string>
+              <double>60.0</double>
+            </entry>
+          </buildCosts>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts reference="../../../buildCosts"/>
+              <buildTime>9.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Build Cookie</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>build cookie</description>
+                    <isBuild>true</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+                <entry>
+                  <int>3</int>
+                  <interactions.Interaction>
+                    <id>3</id>
+                    <targetTags>
+                      <string>clicker</string>
+                    </targetTags>
+                    <name>Build Clicker</name>
+                    <imagePath>/images/mouse.png</imagePath>
+                    <description>builds clicker</description>
+                    <isBuild>true</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <myMainComponentPropertyManager>
+            <myImagePath>/images/shop.png</myImagePath>
+            <myName>Shop</myName>
+            <myTags reference="../../myTags"/>
+            <myMovementSpeed>0.0</myMovementSpeed>
+            <isBuilding>true</isBuilding>
+          </myMainComponentPropertyManager>
+          <myAttributes reference="../myObjectLogic/attributes"/>
+          <myInteractions reference="../myObjectLogic/interactions"/>
+          <myConditionManager reference="../myObjectLogic/conditions"/>
+        </authoring.backend.AuthoringObject>
+        <list>
+          <authoring.backend.AuthoringObject>
+            <myX>236.0</myX>
+            <myY>75.0</myY>
             <myTeam>1</myTeam>
           </authoring.backend.AuthoringObject>
         </list>
@@ -444,7 +492,7 @@
               <attributes/>
               <maxAttributes/>
               <buildCosts reference="../../../buildCosts"/>
-              <buildTime>5.0</buildTime>
+              <buildTime>4.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -457,7 +505,7 @@
                     </targetTags>
                     <name>Gather</name>
                     <imagePath>/images/cookie.png</imagePath>
-                    <description>Gather cookies</description>
+                    <description>Gather cookie</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -495,12 +543,44 @@
                         </format>
                       </interactions.GatherUnlimitedResource>
                     </customFunctions>
-                    <range>5.0</range>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+                <entry>
+                  <int>5</int>
+                  <interactions.Interaction>
+                    <id>5</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Gather</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>Gather cookie</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions/>
+                    <range>999.0</range>
                     <rate>1.0</rate>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <new__ID__val>9</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -520,8 +600,110 @@
         </authoring.backend.AuthoringObject>
         <list>
           <authoring.backend.AuthoringObject>
-            <myX>361.0</myX>
-            <myY>63.0</myY>
+            <myX>0.0</myX>
+            <myY>0.0</myY>
+            <myTeam>1</myTeam>
+          </authoring.backend.AuthoringObject>
+        </list>
+      </entry>
+      <entry>
+        <authoring.backend.AuthoringObject>
+          <myX>0.0</myX>
+          <myY>0.0</myY>
+          <myTeam>1</myTeam>
+          <myTags>
+            <string>clicker</string>
+          </myTags>
+          <buildCosts>
+            <entry>
+              <string>cookies</string>
+              <double>60.0</double>
+            </entry>
+          </buildCosts>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts reference="../../../buildCosts"/>
+              <buildTime>4.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Gather</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>Gather cookie</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.GatherUnlimitedResource>
+                        <NAME>GatherUnlimitedResource</NAME>
+                        <RESOURCE>Resource</RESOURCE>
+                        <GATHER__RATE>Gather Rate</GATHER__RATE>
+                        <format>
+                          <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Gather Rate</string>
+                              <string>10</string>
+                            </entry>
+                            <entry>
+                              <string>Resource</string>
+                              <string>1</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.GatherUnlimitedResource>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>5</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <myMainComponentPropertyManager>
+            <myImagePath>/images/mouse.png</myImagePath>
+            <myName>Clicker</myName>
+            <myTags reference="../../myTags"/>
+            <myMovementSpeed>5.0</myMovementSpeed>
+            <isBuilding>false</isBuilding>
+          </myMainComponentPropertyManager>
+          <myAttributes reference="../myObjectLogic/attributes"/>
+          <myInteractions reference="../myObjectLogic/interactions"/>
+          <myConditionManager reference="../myObjectLogic/conditions"/>
+        </authoring.backend.AuthoringObject>
+        <list>
+          <authoring.backend.AuthoringObject>
+            <myX>240.0</myX>
+            <myY>271.0</myY>
             <myTeam>1</myTeam>
           </authoring.backend.AuthoringObject>
         </list>
