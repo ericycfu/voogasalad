@@ -101,7 +101,8 @@ public class SinglePlayerGamePlayer {
 		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
+		myTeam = new Team(1, null);
+		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);
 		initialize();
 		initializeSingleUnitSelect();
 		unitSkillMapInitialize();
