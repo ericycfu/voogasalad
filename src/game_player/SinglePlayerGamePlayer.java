@@ -1,14 +1,14 @@
 package game_player;
 
 import java.io.BufferedOutputStream;
-	import java.io.IOException;
-	import java.io.ObjectOutputStream;
-	import java.net.Socket;
-	import java.util.ArrayList;
-	import java.util.HashMap;
-	import java.util.List;
-	import java.util.Map;
-	import java.util.Set;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 	import authoring.backend.MapSettings;
 	import game_engine.EndStateWrapper;
@@ -155,142 +155,147 @@ public class SinglePlayerGamePlayer {
 								});
 							myUnitBuilds.put(go.getName(), skillList);
 						});
-				} catch (UnmodifiableGameObjectException e) {
-					// do nothing
-				}
+					});
+					myUnitBuilds.put(go.getName(), skillList);
+				});
+			} catch (UnmodifiableGameObjectException e) {
+				// do nothing
 			}
 		}
+	}
 
-		
-		private void unitSkillMapInitialize() {
-			unitBuildsMapInitialize();
-			myUnitSkills.clear();
-			for (GameObject go : myPossibleUnits) {
-				List<SkillButton> skillList = new ArrayList<>();
-				try {
-					for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
-						skillList.add(makeInteractionButton(ia, go));
-					}
-				} catch (UnmodifiableGameObjectException e) {
-					// do nothing
+	private void unitSkillMapInitialize() {
+		unitBuildsMapInitialize();
+		myUnitSkills.clear();
+		for (GameObject go : myPossibleUnits) {
+			List<SkillButton> skillList = new ArrayList<>();
+			try {
+				for (Interaction ia : go.accessLogic().accessInteractions().getElements()) {
+					skillList.add(makeInteractionButton(ia, go));
 				}
-				skillList.add(makeCancelButton(go.getName()));
-				myUnitSkills.put(go.getName(), skillList);
+			} catch (UnmodifiableGameObjectException e) {
+				// do nothing
 			}
+			skillList.add(makeCancelButton(go.getName()));
+			myUnitSkills.put(go.getName(), skillList);
 		}
-		
-		private SkillButton makeCancelButton(String name) {
-			SkillButton cancel = new SkillButton(new Image(SkillButton.CANCEL_BUTTON_IMAGE_PATH), SkillButton.CANCEL_BUTTON_NAME, -1, SkillButton.CANCEL_BUTTON_DESCRIPTION, SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
-			cancel.setOnAction(e -> {
-				this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(name));
-				this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
+	}
+
+	private SkillButton makeCancelButton(String name) {
+		SkillButton cancel = new SkillButton(new Image(SkillButton.CANCEL_BUTTON_IMAGE_PATH), SkillButton.CANCEL_BUTTON_NAME, -1, SkillButton.CANCEL_BUTTON_DESCRIPTION, SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*0.8, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*0.8);
+		cancel.setOnAction(e -> {
+			this.myUnitDisplay.getUnitActionDisp().fill(myUnitSkills.get(name));
+			this.myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
+		});
+		return cancel;
+	}
+
+	private SkillButton makeInteractionButton(Interaction ia, GameObject go) {
+		SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO);
+		if (!ia.isBuild()) {
+			sb.setOnAction(e->{
+				myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
 			});
-			return cancel;
 		}
-		
-		private SkillButton makeInteractionButton(Interaction ia, GameObject go) {
-			SkillButton sb = new SkillButton(new Image(ia.getImagePath()), ia.getName(), ia.getID(), ia.getDescription(), SCENE_SIZE_X*ACTION_DISPLAY_WIDTH/UnitActionDisplay.ACTION_GRID_WIDTH*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO, SCENE_SIZE_Y*BOTTOM_HEIGHT/UnitActionDisplay.ACTION_GRID_HEIGHT*UnitActionDisplay.JAVAFX_IMAGEVIEW_SHRINK_RATIO);
-			if (!ia.isBuild()) {
-				sb.setOnAction(e->{
-					myUnitDisplay.getUnitActionDisp().setCurrentActionID(sb.getInteractionID());
-				});
-			}
-			else {
-				sb.setOnAction(e -> {
-					List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
-					sblist.add(makeCancelButton(go.getName()));
-					myUnitDisplay.getUnitActionDisp().fill(sblist);
-				});
-			}
-			return sb;
+		else {
+			sb.setOnAction(e -> {
+				List<SkillButton> sblist = new ArrayList<>(myUnitBuilds.get(go.getName()));
+				sblist.add(makeCancelButton(go.getName()));
+				myUnitDisplay.getUnitActionDisp().fill(sblist);
+			});
 		}
-		
-		private void initializeSingleUnitSelect() {
-			for (GameObject go : myGameObjectManager.getElements()) {
-				go.getRenderer().getDisp().toFront();
-				go.getRenderer().getDisp().setOnMouseClicked(e-> {
-					if (e.getButton()==MouseButton.PRIMARY) {
-						mySelectedUnitManager.clear();
-						mySelectedUnitManager.add(go);
-						myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
-					}
-					if (e.getButton()==MouseButton.SECONDARY) {
-						int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
-						try {
-							if (ID==-1) {
-								mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(),myMap.getFitHeight()));
-							}
-							else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
-								mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
-								myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
-							}
-						} catch (UnmodifiableGameObjectException e1) {
-								// do nothing
+		return sb;
+	}
+
+	private void initializeSingleUnitSelect() {
+		for (GameObject go : myGameObjectManager.getElements()) {
+			go.getRenderer().getDisp().toFront();
+			go.getRenderer().getDisp().setOnMouseClicked(e-> {
+				if (e.getButton()==MouseButton.PRIMARY) {
+					mySelectedUnitManager.clear();
+					mySelectedUnitManager.add(go);
+					myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
+				}
+				if (e.getButton()==MouseButton.SECONDARY) {
+					int ID = myUnitDisplay.getUnitActionDisp().getCurrentActionID();
+					try {
+						if (ID==-1) {
+							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(),myMap.getFitHeight()));
 						}
-					}	
-				});
-			}
+						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+							myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
+						}
+					} catch (UnmodifiableGameObjectException e1) {
+						// do nothing
+					}
+				}	
+			});
 		}
 		
 		private void initialize() {
 			myRoot = new Group();
 			myTopPanel = new SingleTopPanel(1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
-			myRoot.getChildren().add(myTopPanel.getNodes());
-			
-			myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
-			Node minimap = myMiniMap.getNodes();
-			minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
-			myRoot.getChildren().add(minimap);
-			
-			myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills);
-			Node unitDisp = myUnitDisplay.getNodes();
-			unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
-			unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
-			myRoot.getChildren().add(unitDisp);
-			
-			myMainDisplay = new MainDisplay(mySelectedUnitManager, myGameObjectManager, myUnitDisplay.getUnitActionDisp(), SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y, myMap);
-			Node mainDisp = myMainDisplay.getNodes();
-			mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
-			myRoot.getChildren().add(mainDisp);
-			mainDisp.toBack();
-			
-			myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
-			Node chatBox = myChatBox.getNodes();
-			chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
-			chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
-			myRoot.getChildren().add(chatBox);
-		
-			myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
-			//myStage.setScene(myScene);
-		}
+	private void initialize() {
+		myRoot = new Group();
+		myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
-		public Scene getScene() {
-			return myScene;
-		}
-		
-		public void update() {
-			List<GameObject> gameobject = myGameObjectManager.getElements();
-			if (myTopPanel.getIsLoaded()) {
-				unitSkillMapInitialize();
-				myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
-				myTopPanel.setIsLoaded(false);
-			}
-			initializeSingleUnitSelect();
-			myTopPanel.update();
-			myMiniMap.update(gameobject);
-			myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
-			myMainDisplay.update(gameobject);
-			if (myUnitDisplay.getUnitActionDisp().getCurrentActionID()!=-1) {
-				myScene.setCursor(Cursor.CROSSHAIR);
-			}
-			else {
-				myScene.setCursor(Cursor.DEFAULT);
-			}
-		}
+		myRoot.getChildren().add(myTopPanel.getNodes());
 
-		private void receiveFromServer() {
-			/**
+		myMiniMap = new MiniMap(MINIMAP_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y);
+		Node minimap = myMiniMap.getNodes();
+		minimap.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myRoot.getChildren().add(minimap);
+
+		myUnitDisplay = new UnitDisplay(INFO_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, ACTION_DISPLAY_WIDTH*SCENE_SIZE_X, BOTTOM_HEIGHT*SCENE_SIZE_Y, myUnitSkills);
+		Node unitDisp = myUnitDisplay.getNodes();
+		unitDisp.setLayoutX(MINIMAP_WIDTH*SCENE_SIZE_X);
+		unitDisp.setLayoutY((1-BOTTOM_HEIGHT)*SCENE_SIZE_Y);
+		myRoot.getChildren().add(unitDisp);
+
+		myMainDisplay = new MainDisplay(mySelectedUnitManager, myGameObjectManager, myUnitDisplay.getUnitActionDisp(), SCENE_SIZE_X, (1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y, myMap);
+		Node mainDisp = myMainDisplay.getNodes();
+		mainDisp.setLayoutY(TOP_HEIGHT*SCENE_SIZE_Y);
+		myRoot.getChildren().add(mainDisp);
+		mainDisp.toBack();
+
+		myChatBox = new ChatBox(mySocket, SCENE_SIZE_X * CHATBOX_WIDTH, SCENE_SIZE_Y * CHATBOX_HEIGHT);
+		Node chatBox = myChatBox.getNodes();
+		chatBox.setLayoutX(SCENE_SIZE_X * (1 - CHATBOX_WIDTH));
+		chatBox.setLayoutY(SCENE_SIZE_Y * (1 - BOTTOM_HEIGHT - CHATBOX_HEIGHT));
+		myRoot.getChildren().add(chatBox);
+
+		myScene = new Scene(myRoot, SCENE_SIZE_X, SCENE_SIZE_Y);
+		//myStage.setScene(myScene);
+	}
+
+	public Scene getScene() {
+		return myScene;
+	}
+
+	public void update() {
+		List<GameObject> gameobject = myGameObjectManager.getElements();
+		if (myTopPanel.getIsLoaded()) {
+			unitSkillMapInitialize();
+			myUnitDisplay.getUnitActionDisp().setUnitSkills(myUnitSkills);
+			myTopPanel.setIsLoaded(false);
+		}
+		initializeSingleUnitSelect();
+		myTopPanel.update();
+		myMiniMap.update(gameobject);
+		myUnitDisplay.update(mySelectedUnitManager.getSelectedUnits());
+		myMainDisplay.update(gameobject);
+		if (myUnitDisplay.getUnitActionDisp().getCurrentActionID()!=-1) {
+			myScene.setCursor(Cursor.CROSSHAIR);
+		}
+		else {
+			myScene.setCursor(Cursor.DEFAULT);
+		}
+	}
+
+	private void receiveFromServer() {
+		/**
 			ObjectInputStream inputstream = getInputStream();
 			try {
 				myGameObjectManager = (GameObjectManager) inputstream.readObject();
@@ -301,36 +306,25 @@ public class SinglePlayerGamePlayer {
 				// do nothing
 			}
 			//gom team time chat 
-			 **/
-		}
-		
-		private void end(String result) {
-			myRoot.getChildren().clear();
-			Text text = new Text(result);
-			text.setLayoutX(SCENE_SIZE_X/2-100);
-			text.setLayoutY(SCENE_SIZE_Y/2-100);
-			myRoot.getChildren().add(text);
-		}
+		 **/
+	}
 
-		@Override
-		protected void setUp() {
-			// TODO Auto-generated method stub
-		}
+	private void end(String result) {
+		myRoot.getChildren().clear();
+		Text text = new Text(result);
+		text.setLayoutX(SCENE_SIZE_X/2-100);
+		text.setLayoutY(SCENE_SIZE_Y/2-100);
+		myRoot.getChildren().add(text);
+	}
 
-		@Override
-		public String updateSelf() {
-			receiveFromServer();
-			update();
-			return "GamePlayer";
-		}
 
-		public static ObjectOutputStream getObjectOutputStream(Socket socket) {
-			try {
-				return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-			} catch (IOException e) {
-				return null;
-			}
+	public static ObjectOutputStream getObjectOutputStream(Socket socket) {
+		try {
+			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+		} catch (IOException e) {
+			return null;
 		}
+	}
 
 		public void setTimeline(Timeline animation) {
 			((SingleTopPanel) myTopPanel).setTimeline(animation);
@@ -338,3 +332,5 @@ public class SinglePlayerGamePlayer {
 		
 	}
 
+
+}
