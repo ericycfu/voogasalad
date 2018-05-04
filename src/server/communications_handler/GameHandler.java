@@ -48,8 +48,10 @@ public class GameHandler extends CommunicationsHandler {
 			}
 			return CLASS_REF;
 		}
+		catch(SocketException e1) {
+			throw new RTSServerException(CommunicationsHandler.DISCONNECT_MESSAGE);
+		}
 		catch(IOException | ClassCastException | ClassNotFoundException e) {
-			e.printStackTrace();
 			return CLASS_REF;}
 	}
 
