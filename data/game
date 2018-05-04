@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>235.0</x>
-              <y>218.0</y>
+              <x>122.0</x>
+              <y>220.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -41,19 +41,19 @@
               <resourceMap>
                 <entry>
                   <string>Gold</string>
-                  <double>500.0</double>
+                  <double>10.0</double>
                 </entry>
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>FinalBoss</name>
+          <name>Final boss</name>
           <tags>
             <string>Prof</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>20.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -68,8 +68,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>298.0</x>
-              <y>150.0</y>
+              <x>196.0</x>
+              <y>161.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -96,12 +96,12 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>FinalBoss</name>
+          <name>Final boss</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>20.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -116,8 +116,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>166.0</x>
-              <y>289.0</y>
+              <x>265.0</x>
+              <y>98.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -144,12 +144,12 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>FinalBoss</name>
+          <name>Final boss</name>
           <tags reference="../../../entry/game__object.GameObject/tags"/>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>50.0</movementSpeed>
+          <movementSpeed>20.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -193,14 +193,14 @@
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>FinalBoss</name>
+      <name>Final boss</name>
       <tags>
         <string>Prof</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>50.0</movementSpeed>
+      <movementSpeed>20.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -223,7 +223,7 @@
     </endConditions>
     <mapwidth>1000</mapwidth>
     <mapheight>1000</mapheight>
-    <imagePath>/images/map4.jpg</imagePath>
+    <imagePath>/images/tt.jpg</imagePath>
   </authoring.backend.MapSettings>
   <scenemanager.SceneManager>
     <objManager>
@@ -234,8 +234,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>235.0</x>
-                <y>218.0</y>
+                <x>122.0</x>
+                <y>220.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -268,19 +268,19 @@
                 <resourceMap>
                   <entry>
                     <string>Gold</string>
-                    <double>500.0</double>
+                    <double>10.0</double>
                   </entry>
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>FinalBoss</name>
+            <name>Final boss</name>
             <tags>
               <string>Prof</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>20.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -295,8 +295,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>298.0</x>
-                <y>150.0</y>
+                <x>196.0</x>
+                <y>161.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -323,12 +323,12 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>FinalBoss</name>
+            <name>Final boss</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>20.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -343,8 +343,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>166.0</x>
-                <y>289.0</y>
+                <x>265.0</x>
+                <y>98.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -371,12 +371,12 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>FinalBoss</name>
+            <name>Final boss</name>
             <tags reference="../../../entry/game__object.GameObject/tags"/>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>50.0</movementSpeed>
+            <movementSpeed>20.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
