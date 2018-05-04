@@ -93,8 +93,7 @@ public class StartScreen implements AuthoringView {
 	}
 	
 	private void singlePlayerGame() {
-		myGOM = new GameObjectManager();
-		myGP = new SinglePlayerGamePlayer(myGOM, new HashSet<>());
+		myGP.resetTime();
 		Stage mystage = new Stage();
 		Scene scene = myGP.getScene();
 		mystage.setScene(scene);
