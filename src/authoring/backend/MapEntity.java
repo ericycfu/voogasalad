@@ -43,7 +43,8 @@ public class MapEntity extends Pane implements AuthoringView {
 			List<AuthoringObject> objects = locations.get(key);
 			
 			for (AuthoringObject obj : objects) {
-				obj.setDragImage(key.getImagePath(), locations, myMapSettings, obj.getX(), obj.getY());
+				obj.setDragImage(key.getImagePath(), obj.getX(), obj.getY());
+//				obj.setDragImage(key.getImagePath(), locations, myMapSettings, obj.getX(), obj.getY());
 				this.getChildren().add(obj.getDragImage());
 			}
 		}
