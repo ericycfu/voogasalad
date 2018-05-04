@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import authoring.support.DraggableImageView;
 import authoring.view.AuthoringView;
 import javafx.scene.layout.Pane;
 

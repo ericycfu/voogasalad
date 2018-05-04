@@ -2,6 +2,7 @@ package authoring.edit_map;
 
 import java.util.List;
 import java.util.Map.Entry;
+
 import authoring.backend.AuthoringController;
 import authoring.backend.GameEntity;
 import authoring.backend.MapSettings;
@@ -14,8 +15,8 @@ import gui_elements.factories.LabelFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;

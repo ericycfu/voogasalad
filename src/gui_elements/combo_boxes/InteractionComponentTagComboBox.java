@@ -5,8 +5,6 @@ import gui_elements.panes.AllSelectedInteractionTagsPane;
 import gui_elements.panes.CurrentSelectedInteractionComponentsPane;
 import gui_elements.panes.MainPane;
 import javafx.event.ActionEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class InteractionComponentTagComboBox extends MainComboBox {
 

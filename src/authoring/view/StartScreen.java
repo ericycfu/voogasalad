@@ -2,6 +2,8 @@ package authoring.view;
 
 import java.io.File;
 import java.io.IOException;
+
+import game_player.alert.AlertMaker;
 import gui_elements.texts.StartScreenText;
 import gui_elements.factories.ButtonFactory;
 import javafx.geometry.Insets;
@@ -47,13 +49,18 @@ public class StartScreen implements AuthoringView {
 															File myFile = myFC.showOpenDialog(new Stage());
 															try {
 																new MakeGameScreen(myStage, myFile);
-															} catch (ClassNotFoundException | IOException e2) {
-																
+															} catch (ClassNotFoundException | IOException | NullPointerException e2) {
+																new AlertMaker("Error with Loading Game", "You have not selected a file or the file has an incorrect format");
 															}
 															
 				}, "image_button"),
 				ButtonFactory.makeButton("Play Game", e -> {new ServerClient(new Stage());}, "image_button")
 				);
+				ButtonFactory.makeButton("Test Game", e -> {
+					FileChooser myFC = new FileChooser();
+					File myFile = myFC.showOpenDialog(new Stage());
+					
+				});
 		box.setAlignment(Pos.CENTER_LEFT);
 		box.setPadding(new Insets(0, 0, 0, 30));
 		box.setSpacing(SPACING_SMALL);

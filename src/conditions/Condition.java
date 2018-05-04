@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 import game_engine.EngineObject;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
-import interactions.CustomComponentParameterFormat;
 import interactions.ParameterParser;
 
 

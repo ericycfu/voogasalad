@@ -62,7 +62,7 @@ public class ChatBox {
 			try {
 				outstream.writeObject(msg);
 				outstream.flush();
-			} catch (IOException e) { new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);}
+			} catch (IOException e) { AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);}
 			myInputBox.clear();
     		}
 	}
@@ -71,7 +71,7 @@ public class ChatBox {
 		myChatHistory.appendText(text + GamePlayer.LINEBREAK);
 	}
 	
-	public Node getGroup() {
+	public Node getNodes() {
 		return myGroup;
 	}
 }

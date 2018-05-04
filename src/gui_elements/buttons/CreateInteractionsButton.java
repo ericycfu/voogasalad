@@ -2,10 +2,7 @@ package gui_elements.buttons;
 
 import authoring.backend.AuthoringObject;
 import authoring.backend.TagController;
-import authoring.edit_object.ComponentAddAttributesScreen;
 import authoring.edit_object.ComponentAddInteractionsScreen;
-import game_object.ObjectAttributes;
-import interactions.InteractionManager;
 
 public class CreateInteractionsButton extends MainButton {
 

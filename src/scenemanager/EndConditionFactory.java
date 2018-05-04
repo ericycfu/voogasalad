@@ -1,7 +1,5 @@
 package scenemanager;
 
-import interactions.CustomFunction;
-
 /**
  * 
  * @author Rayan

@@ -7,8 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>145.0</x>
-              <y>71.0</y>
+              <x>237.0</x>
+              <y>56.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -17,7 +17,12 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
-              <buildCosts/>
+              <buildCosts>
+                <entry>
+                  <string>cookies</string>
+                  <double>60.0</double>
+                </entry>
+              </buildCosts>
               <buildTime>4.0</buildTime>
             </attributes>
             <interactions>
@@ -31,7 +36,39 @@
                     </targetTags>
                     <name>BuildClicker</name>
                     <imagePath>/images/mouse.png</imagePath>
-                    <description>makes a new clicker</description>
+                    <description>Builds a clicker</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions/>
+                    <range>4.0</range>
+                    <rate>4.0</rate>
+                  </interactions.Interaction>
+                </entry>
+                <entry>
+                  <int>4</int>
+                  <interactions.Interaction>
+                    <id>4</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>BuildCookie</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>Builds a cookie</description>
                     <isBuild>true</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -58,12 +95,12 @@
                         </format>
                       </interactions.BuildFunction>
                     </customFunctions>
-                    <range>2.0</range>
-                    <rate>3.0</rate>
+                    <range>4.0</range>
+                    <rate>4.0</rate>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <new__ID__val>10</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -87,14 +124,14 @@
               </resourceMap>
             </resourceManager>
           </owner>
-          <name>shop</name>
+          <name>Shop</name>
           <tags>
             <string>shop</string>
           </tags>
           <isBuilding>true</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>0.0</movementSpeed>
+          <movementSpeed>1.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -109,8 +146,8 @@
           <id>4</id>
           <transform>
             <position>
-              <x>151.0</x>
-              <y>164.0</y>
+              <x>245.0</x>
+              <y>176.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -119,8 +156,13 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
-              <buildCosts/>
-              <buildTime>1.0</buildTime>
+              <buildCosts>
+                <entry>
+                  <string>cookies</string>
+                  <double>50.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>3.0</buildTime>
             </attributes>
             <interactions>
               <elementMap/>
@@ -137,14 +179,14 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>cookie</name>
+          <name>Cookie</name>
           <tags>
             <string>cookie</string>
           </tags>
           <isBuilding>false</isBuilding>
           <isInteractionQueued>false</isInteractionQueued>
           <isDead>false</isDead>
-          <movementSpeed>0.0</movementSpeed>
+          <movementSpeed>1.0</movementSpeed>
           <isMovementQueued>false</isMovementQueued>
           <activeWaypoints class="linked-list"/>
           <isUninteractive>false</isUninteractive>
@@ -159,8 +201,8 @@
           <id>7</id>
           <transform>
             <position>
-              <x>263.0</x>
-              <y>132.0</y>
+              <x>361.0</x>
+              <y>63.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -169,8 +211,13 @@
             <attributes>
               <attributes/>
               <maxAttributes/>
-              <buildCosts/>
-              <buildTime>4.0</buildTime>
+              <buildCosts>
+                <entry>
+                  <string>cookies</string>
+                  <double>60.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>5.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -182,7 +229,7 @@
                       <string>cookie</string>
                     </targetTags>
                     <name>Gather</name>
-                    <imagePath>/images/mouse.png</imagePath>
+                    <imagePath>/images/cookie.png</imagePath>
                     <description>Gather cookies</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
@@ -239,7 +286,7 @@
             <elapsedTime>0.0</elapsedTime>
           </renderer>
           <owner reference="../../../entry/game__object.GameObject/owner"/>
-          <name>clicker</name>
+          <name>Clicker</name>
           <tags>
             <string>clicker</string>
           </tags>
@@ -273,8 +320,13 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
-          <buildCosts/>
-          <buildTime>1.0</buildTime>
+          <buildCosts>
+            <entry>
+              <string>cookies</string>
+              <double>50.0</double>
+            </entry>
+          </buildCosts>
+          <buildTime>3.0</buildTime>
         </attributes>
         <interactions>
           <elementMap/>
@@ -290,14 +342,14 @@
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>cookie</name>
+      <name>Cookie</name>
       <tags>
         <string>cookie</string>
       </tags>
       <isBuilding>false</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
+      <movementSpeed>1.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -319,95 +371,13 @@
         <attributes>
           <attributes/>
           <maxAttributes/>
-          <buildCosts/>
-          <buildTime>4.0</buildTime>
-        </attributes>
-        <interactions>
-          <elementMap>
+          <buildCosts>
             <entry>
-              <int>1</int>
-              <interactions.Interaction>
-                <id>1</id>
-                <targetTags>
-                  <string>clicker</string>
-                </targetTags>
-                <name>BuildClicker</name>
-                <imagePath>/images/mouse.png</imagePath>
-                <description>makes a new clicker</description>
-                <isBuild>true</isBuild>
-                <isInstantaneous>false</isInstantaneous>
-                <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                <targetTeamEnumMap>
-                  <entry>
-                    <string>OTHER</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>ALL</string>
-                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>OWN</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                </targetTeamEnumMap>
-                <customFunctions>
-                  <interactions.BuildFunction>
-                    <NAME>BuildFunction</NAME>
-                    <format>
-                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                      <parameterFields/>
-                    </format>
-                  </interactions.BuildFunction>
-                </customFunctions>
-                <range>2.0</range>
-                <rate>3.0</rate>
-              </interactions.Interaction>
+              <string>cookies</string>
+              <double>60.0</double>
             </entry>
-          </elementMap>
-          <new__ID__val>7</new__ID__val>
-        </interactions>
-        <conditions>
-          <elementMap/>
-          <new__ID__val>1</new__ID__val>
-        </conditions>
-      </myObjectLogic>
-      <renderer>
-        <myImageLocation>/images/shop.png</myImageLocation>
-        <isHit>false</isHit>
-        <elapsedTime>0.0</elapsedTime>
-      </renderer>
-      <name>shop</name>
-      <tags>
-        <string>shop</string>
-      </tags>
-      <isBuilding>true</isBuilding>
-      <isInteractionQueued>false</isInteractionQueued>
-      <isDead>false</isDead>
-      <movementSpeed>0.0</movementSpeed>
-      <isMovementQueued>false</isMovementQueued>
-      <activeWaypoints class="linked-list"/>
-      <isUninteractive>false</isUninteractive>
-      <isBeingConstructed>false</isBeingConstructed>
-      <elapsedTime>0.0</elapsedTime>
-      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-    </game__object.GameObject>
-    <game__object.GameObject>
-      <id>0</id>
-      <transform>
-        <position>
-          <x>0.0</x>
-          <y>0.0</y>
-        </position>
-        <rotation>0.0</rotation>
-      </transform>
-      <myObjectLogic>
-        <fulfillsLossCondition>false</fulfillsLossCondition>
-        <attributes>
-          <attributes/>
-          <maxAttributes/>
-          <buildCosts/>
-          <buildTime>4.0</buildTime>
+          </buildCosts>
+          <buildTime>5.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -419,7 +389,7 @@
                   <string>cookie</string>
                 </targetTags>
                 <name>Gather</name>
-                <imagePath>/images/mouse.png</imagePath>
+                <imagePath>/images/cookie.png</imagePath>
                 <description>Gather cookies</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
@@ -475,7 +445,7 @@
         <isHit>false</isHit>
         <elapsedTime>0.0</elapsedTime>
       </renderer>
-      <name>clicker</name>
+      <name>Clicker</name>
       <tags>
         <string>clicker</string>
       </tags>
@@ -483,6 +453,130 @@
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
       <movementSpeed>5.0</movementSpeed>
+      <isMovementQueued>false</isMovementQueued>
+      <activeWaypoints class="linked-list"/>
+      <isUninteractive>false</isUninteractive>
+      <isBeingConstructed>false</isBeingConstructed>
+      <elapsedTime>0.0</elapsedTime>
+      <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+    </game__object.GameObject>
+    <game__object.GameObject>
+      <id>0</id>
+      <transform>
+        <position>
+          <x>0.0</x>
+          <y>0.0</y>
+        </position>
+        <rotation>0.0</rotation>
+      </transform>
+      <myObjectLogic>
+        <fulfillsLossCondition>false</fulfillsLossCondition>
+        <attributes>
+          <attributes/>
+          <maxAttributes/>
+          <buildCosts>
+            <entry>
+              <string>cookies</string>
+              <double>60.0</double>
+            </entry>
+          </buildCosts>
+          <buildTime>4.0</buildTime>
+        </attributes>
+        <interactions>
+          <elementMap>
+            <entry>
+              <int>1</int>
+              <interactions.Interaction>
+                <id>1</id>
+                <targetTags>
+                  <string>clicker</string>
+                </targetTags>
+                <name>BuildClicker</name>
+                <imagePath>/images/mouse.png</imagePath>
+                <description>Builds a clicker</description>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions/>
+                <range>4.0</range>
+                <rate>4.0</rate>
+              </interactions.Interaction>
+            </entry>
+            <entry>
+              <int>4</int>
+              <interactions.Interaction>
+                <id>4</id>
+                <targetTags>
+                  <string>cookie</string>
+                </targetTags>
+                <name>BuildCookie</name>
+                <imagePath>/images/cookie.png</imagePath>
+                <description>Builds a cookie</description>
+                <isBuild>true</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.BuildFunction>
+                    <NAME>BuildFunction</NAME>
+                    <format>
+                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                      <parameterFields/>
+                    </format>
+                  </interactions.BuildFunction>
+                </customFunctions>
+                <range>4.0</range>
+                <rate>4.0</rate>
+              </interactions.Interaction>
+            </entry>
+          </elementMap>
+          <new__ID__val>10</new__ID__val>
+        </interactions>
+        <conditions>
+          <elementMap/>
+          <new__ID__val>1</new__ID__val>
+        </conditions>
+      </myObjectLogic>
+      <renderer>
+        <myImageLocation>/images/shop.png</myImageLocation>
+        <isHit>false</isHit>
+        <elapsedTime>0.0</elapsedTime>
+      </renderer>
+      <name>Shop</name>
+      <tags>
+        <string>shop</string>
+      </tags>
+      <isBuilding>true</isBuilding>
+      <isInteractionQueued>false</isInteractionQueued>
+      <isDead>false</isDead>
+      <movementSpeed>1.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -508,8 +602,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>145.0</x>
-                <y>71.0</y>
+                <x>237.0</x>
+                <y>56.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -518,7 +612,12 @@
               <attributes>
                 <attributes/>
                 <maxAttributes/>
-                <buildCosts/>
+                <buildCosts>
+                  <entry>
+                    <string>cookies</string>
+                    <double>60.0</double>
+                  </entry>
+                </buildCosts>
                 <buildTime>4.0</buildTime>
               </attributes>
               <interactions>
@@ -532,7 +631,39 @@
                       </targetTags>
                       <name>BuildClicker</name>
                       <imagePath>/images/mouse.png</imagePath>
-                      <description>makes a new clicker</description>
+                      <description>Builds a clicker</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions/>
+                      <range>4.0</range>
+                      <rate>4.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                  <entry>
+                    <int>4</int>
+                    <interactions.Interaction>
+                      <id>4</id>
+                      <targetTags>
+                        <string>cookie</string>
+                      </targetTags>
+                      <name>BuildCookie</name>
+                      <imagePath>/images/cookie.png</imagePath>
+                      <description>Builds a cookie</description>
                       <isBuild>true</isBuild>
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -559,12 +690,12 @@
                           </format>
                         </interactions.BuildFunction>
                       </customFunctions>
-                      <range>2.0</range>
-                      <rate>3.0</rate>
+                      <range>4.0</range>
+                      <rate>4.0</rate>
                     </interactions.Interaction>
                   </entry>
                 </elementMap>
-                <new__ID__val>7</new__ID__val>
+                <new__ID__val>10</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -588,14 +719,14 @@
                 </resourceMap>
               </resourceManager>
             </owner>
-            <name>shop</name>
+            <name>Shop</name>
             <tags>
               <string>shop</string>
             </tags>
             <isBuilding>true</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>0.0</movementSpeed>
+            <movementSpeed>1.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -610,8 +741,8 @@
             <id>4</id>
             <transform>
               <position>
-                <x>151.0</x>
-                <y>164.0</y>
+                <x>245.0</x>
+                <y>176.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -620,8 +751,13 @@
               <attributes>
                 <attributes/>
                 <maxAttributes/>
-                <buildCosts/>
-                <buildTime>1.0</buildTime>
+                <buildCosts>
+                  <entry>
+                    <string>cookies</string>
+                    <double>50.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>3.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap/>
@@ -638,14 +774,14 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>cookie</name>
+            <name>Cookie</name>
             <tags>
               <string>cookie</string>
             </tags>
             <isBuilding>false</isBuilding>
             <isInteractionQueued>false</isInteractionQueued>
             <isDead>false</isDead>
-            <movementSpeed>0.0</movementSpeed>
+            <movementSpeed>1.0</movementSpeed>
             <isMovementQueued>false</isMovementQueued>
             <activeWaypoints class="linked-list"/>
             <isUninteractive>false</isUninteractive>
@@ -660,8 +796,8 @@
             <id>7</id>
             <transform>
               <position>
-                <x>263.0</x>
-                <y>132.0</y>
+                <x>361.0</x>
+                <y>63.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -670,8 +806,13 @@
               <attributes>
                 <attributes/>
                 <maxAttributes/>
-                <buildCosts/>
-                <buildTime>4.0</buildTime>
+                <buildCosts>
+                  <entry>
+                    <string>cookies</string>
+                    <double>60.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>5.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
@@ -683,7 +824,7 @@
                         <string>cookie</string>
                       </targetTags>
                       <name>Gather</name>
-                      <imagePath>/images/mouse.png</imagePath>
+                      <imagePath>/images/cookie.png</imagePath>
                       <description>Gather cookies</description>
                       <isBuild>false</isBuild>
                       <isInstantaneous>false</isInstantaneous>
@@ -740,7 +881,7 @@
               <elapsedTime>0.0</elapsedTime>
             </renderer>
             <owner reference="../../../entry/game__object.GameObject/owner"/>
-            <name>clicker</name>
+            <name>Clicker</name>
             <tags>
               <string>clicker</string>
             </tags>

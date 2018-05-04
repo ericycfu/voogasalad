@@ -9,7 +9,6 @@ import java.util.Properties;
 import authoring.backend.AuthoringObject;
 import authoring.backend.TagController;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 

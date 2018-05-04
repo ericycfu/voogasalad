@@ -46,7 +46,21 @@ public class Pathfinder {
 				
 		//converted coordinates from JavaFX to MapGrid
 		GridCell current = gridMap.convertToGrid(originPos);
+		
 		GridCell target = gridMap.convertToGrid(targetPos);
+		if(target.isObstacle())
+		{
+			GridCell resolvedTarget = target;
+			while(resolvedTarget.isObstacle())
+			{
+				for(GridCell cell : getValidNeighbors(resolvedTarget))
+				{
+					resolvedTarget = cell;
+				}
+				resolvedTarget = getRandomNeighbor(resolvedTarget);
+			}
+			target = resolvedTarget;
+		}
 		
 		//Setting the scores and adding the current node to the open list
 		current.setGVal(0);
@@ -60,14 +74,14 @@ public class Pathfinder {
 			//System.out.println("Current: " + current.getRow() + ", " + current.getColumn());
 			//System.out.println("Target: " + target.getRow() + ", " + target.getColumn());
 
-			if(current.matches(target))
+			if(current.matches(target) || current.isObstacle())
 			{
 				return getPath(target);
 			}
 			
 			current = openSet.remove();
 			closedSet.add(current);
-			
+						
 			for(GridCell nbr : getValidNeighbors(current))
 			{
 				if(closedSet.contains(nbr))
@@ -154,6 +168,7 @@ public class Pathfinder {
 	private List<GridCell> getValidNeighbors(GridCell cell)
 	{
 		List<GridCell> neighbors = new ArrayList<>();
+		//System.out.println("cel column" + cell.getColumn());
 		for(int i = -1; i < 2; i++)
 		{
 			for(int j = -1; j < 2; j++)
@@ -167,6 +182,25 @@ public class Pathfinder {
 			}
 		}
 		return neighbors;
+	}
+	
+	private GridCell getRandomNeighbor(GridCell cell)
+	{
+		List<GridCell> neighbors = new ArrayList<>();
+		for(int i = -1; i < 2; i++)
+		{
+			for(int j = -1; j < 2; j++)
+			{
+				if(i == 0 && j == 0) continue;
+				GridCell temp = gridMap.getCell(cell.getRow() + i, cell.getColumn() + j);
+				if(inBounds(temp))
+				{
+					neighbors.add(temp);
+				}
+			}
+		}
+		
+		return neighbors.get(1);
 	}
 	
 	private final Comparator<GridCell> cellComparator = new Comparator<GridCell>() {

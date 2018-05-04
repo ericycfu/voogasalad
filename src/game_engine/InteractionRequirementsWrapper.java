@@ -1,7 +1,6 @@
 package game_engine;
 
 import game_object.GameObjectManager;
-import pathfinding.GridMap;
 
 /**
  * 

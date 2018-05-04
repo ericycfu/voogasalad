@@ -14,7 +14,7 @@ import interactions.ParameterParser;
 public class Upgrade implements CustomCondition {
 
 	public static final String VARIABLE = "Attribute";
-	public static final String PARAMETER = "New Maximum Value";
+	public static final String PARAMETER = "Delta";
 	public static final String UPGRADE_VARIABLE = "Upgrade Variable";
 	public static final String UPGRADE_VARIABLE_DELTA = "Upgrade Variable Delta";
 	
@@ -51,6 +51,7 @@ public class Upgrade implements CustomCondition {
 			double prevDelta = current.accessLogic().accessAttributes().getMaxAttributeVal(upgradeVar);
 			current.accessLogic().accessAttributes().setAttributeValue(upgradeVar, prevDelta + upgradeDelta);
 			current.accessLogic().accessAttributes().setMaximumAttributeValue(upgradeVar, prevDelta + upgradeDelta);
+			current.getRenderer().flashUnit();
 			
 			
 		} 

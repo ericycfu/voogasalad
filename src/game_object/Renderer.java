@@ -33,9 +33,10 @@ public class Renderer implements Serializable{
 	private Timer invisTimer;
 	private boolean isHit;
 	private double elapsedTime;
-
-	private ImageView litImg;
-	private ImageView unLitImg;
+	@XStreamOmitField
+	private transient ImageView litImg;
+	@XStreamOmitField
+	private transient ImageView unLitImg;
 	
 	public Renderer(String imageLocation)
 	{
@@ -59,6 +60,15 @@ public class Renderer implements Serializable{
 		unLitImg = new ImageView(new Image(myImageLocation));
 		myDisp = unLitImg;
 		setUpLitImg();
+	}
+	
+	public void resize(int x, int y) {
+		litImg.setFitWidth(x);
+		litImg.setFitHeight(y);
+		unLitImg.setFitWidth(x);
+		unLitImg.setFitHeight(y);
+		myDisp.setFitWidth(x);
+		myDisp.setFitHeight(y);
 	}
 	
 	public String getImagePath() {
@@ -99,8 +109,6 @@ public class Renderer implements Serializable{
 	public void setDisp(ImageView disp) {
 		myDisp = disp;
 	}
-	
-	
 	
 	public void flashUnit()
 	{
