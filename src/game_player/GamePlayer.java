@@ -189,7 +189,7 @@ public class GamePlayer extends ClientScreen {
 
 	private void initializeSingleUnitSelect() {
 		for (GameObject go : myGameObjectManager.getElements()) {
-			go.getRenderer().getDisp().toFront();
+			go.getRenderer().getDisp().toFront(); 
 			go.getRenderer().getDisp().setOnMouseClicked(e-> {
 				if (e.getButton()==MouseButton.PRIMARY) {
 					mySelectedUnitManager.clear();
