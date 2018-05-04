@@ -9,7 +9,6 @@ public class ComponentTagComboBox extends MainComboBox {
 
 	private static final String FILENAME = "component_tag_cb.properties";
 	private static final String SPACE = " ";
-	private String current_tag_string = "";
 	private TagController tag_controller;
 	String a = "";
 
