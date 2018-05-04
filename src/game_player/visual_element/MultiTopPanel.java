@@ -17,7 +17,7 @@ public class MultiTopPanel extends TopPanel {
 	
 	public MultiTopPanel(Socket socket, int teamID, GameObjectManager gom, Set<GameObject> possibleUnits, double xsize, double ysize) {
 		super(teamID, gom, possibleUnits, ysize, ysize);
-		getButtons().get(0).setOnAction(e -> startorpause(socket, START));
+		getButtons().get(0).setOnAction(e -> startorpause(socket, PLAY));
 		getButtons().get(1).setOnAction(e -> startorpause(socket, PAUSE));
 	}
 
@@ -33,11 +33,6 @@ public class MultiTopPanel extends TopPanel {
 
 	@Override
 	public void setTimeTA(int time) {
-		
-	}
-
-	@Override
-	public void startTimeline() {
 		
 	}
 
