@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <object-stream>
   <game__object.GameObjectManager>
     <elementMap>
@@ -490,3 +491,5 @@
     </teams>
   </scenemanager.SceneManager>
 </object-stream>
+=======
+>>>>>>> ad89d90e0025222ef2b34a4c440a32c5512d48d1
