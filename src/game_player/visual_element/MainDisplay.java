@@ -280,7 +280,7 @@ public class MainDisplay implements VisualUpdate {
 	private List<GameObject> filterDisplayGameObjects(List<GameObject> gameobjects) {
 		List<GameObject> ret = new ArrayList<>();
 		gameobjects.stream()
-			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) && isYInWindow(go.getTransform().getPosition().getY()))
+			.filter(go -> isXInWindow(go.getTransform().getPosition().getX()) & isYInWindow(go.getTransform().getPosition().getY()))
 			.forEach(go -> ret.add(go));
 		return ret;
 	}
