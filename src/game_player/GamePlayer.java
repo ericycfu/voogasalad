@@ -278,12 +278,22 @@ public class GamePlayer extends ClientScreen {
 	private void receiveFromServer() {
 		ObjectInputStream inputstream = getInputStream();
 		try {
-			myGameObjectManager = (GameObjectManager) inputstream.readObject();
+			
+			Object obj;
+			do {
+				obj = inputstream.readObject();
+				System.out.println(obj.getClass().getCanonicalName());
+			} while(!(obj instanceof GameObjectManager));
+			System.out.println("ASDASD");
+			synchronized (myGameObjectManager){
+				myGameObjectManager = (GameObjectManager) obj;
+				myGameObjectManager.setupImages();
+			}
 			myTeam = (Team) inputstream.readObject();
 			myTime = inputstream.readDouble();
 			myChatBox.displayText(inputstream.readObject().toString());
 			mySceneManager = (SceneManager)inputstream.readObject();
-		} catch (ClassNotFoundException | IOException | NullPointerException e) {
+		} catch (Exception e) {
 			return;
 		}
 	}
@@ -300,14 +310,16 @@ public class GamePlayer extends ClientScreen {
 	protected void setUp() {
 		GameInstance gi = null;
 		int team_ID = -1;
+		ObjectInputStream in = getInputStream();
 		while(gi == null) {
 			try {
-				ObjectInputStream in = getInputStream();
 				Object obj = in.readObject();
 				gi = (GameInstance)(obj);
 				team_ID = in.readInt();
 			}
-			catch(ClassCastException | ClassNotFoundException | IOException e) {}
+			catch (Exception e) {
+				
+			}
 		}
 		setUpBackend(gi, team_ID);
 	}
@@ -348,7 +360,7 @@ public class GamePlayer extends ClientScreen {
 	public static ObjectOutputStream getObjectOutputStream(Socket socket) {
 		try {
 			return new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}

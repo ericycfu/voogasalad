@@ -33,9 +33,10 @@ public class Renderer implements Serializable{
 	private Timer invisTimer;
 	private boolean isHit;
 	private double elapsedTime;
-
-	private ImageView litImg;
-	private ImageView unLitImg;
+	@XStreamOmitField
+	private transient ImageView litImg;
+	@XStreamOmitField
+	private transient ImageView unLitImg;
 	
 	public Renderer(String imageLocation)
 	{

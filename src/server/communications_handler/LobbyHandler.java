@@ -43,19 +43,17 @@ public class LobbyHandler extends CommunicationsHandler {
 									log(" changed their team");
 									return CLASS_REF;
 				case START_GAME:
-					if(getSocket().equals(currentLobby.getHost())) {
 						currentLobby.setIsRunning(true);
 						ObjectOutputStream out = getOutputStream();
 						out.writeObject(START_GAME);
 						out.flush();
-					}
-					return CLASS_REF;
+						return CLASS_REF;
 				case ENTER_GAME:
 					if(currentLobby.isRunning()) {
-						ObjectOutputStream out = getOutputStream();
-						out.writeObject(currentLobby.getCurrentGameInstance());
-						out.writeInt(currentLobby.getTeamID(getSocket()));
-						out.flush();
+						ObjectOutputStream output = getOutputStream();
+						output.writeObject(currentLobby.getCurrentGameInstance());
+						output.writeInt(currentLobby.getTeamID(getSocket()));
+						output.flush();
 						return GameHandler.CLASS_REF;
 					}
 					return CLASS_REF;

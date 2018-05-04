@@ -29,7 +29,6 @@ public class CommunicationsHandlerFactory {
 			Class<?> clazz = Class.forName(PACKAGE_NAME + className + "Handler");
 			return (CommunicationsHandler) clazz.getConstructor(Socket.class,RTSServer.class,Logger.class).newInstance(connectionSocket,hostServer,logger);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RTSServerException("Unable to correctly handle input");
 		}
 	}

@@ -676,6 +676,20 @@
           <parameterFields/>
         </format>
       </scenemanager.AllUnitsDead>
+      <scenemanager.AllUnitsDead>
+        <NAME>AllUnitsDead</NAME>
+        <format>
+          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <parameterFields/>
+        </format>
+      </scenemanager.AllUnitsDead>
+      <scenemanager.AllUnitsDead>
+        <NAME>AllUnitsDead</NAME>
+        <format>
+          <helpText>You lose when all your units and buildings are dead..</helpText>
+          <parameterFields/>
+        </format>
+      </scenemanager.AllUnitsDead>
     </endConditions>
     <mapwidth>2000</mapwidth>
     <mapheight>2000</mapheight>
