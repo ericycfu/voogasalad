@@ -38,8 +38,10 @@ public class GridMap {
 	{
 		for(GameObject obj : objList)
 		{
-			if(!obj.isBuilding()) break;
-			if(obj.isDead()) break;
+			if(!obj.isBuilding()) 
+				continue;
+			if(obj.isDead()) 
+				continue;
 			for(GridCell cell : getOccupiedCells(obj))
 			{
 				cell.setObstacle(true);

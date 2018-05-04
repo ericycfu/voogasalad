@@ -36,7 +36,6 @@ public class ModifyInARadius implements CustomFunction {
 	@Override
 	public void Execute(GameObject current, GameObject other, GameObjectManager manager) {
 		
-		
 		Transform curTrans = current.getTransform();
 		ParameterParser p = new ParameterParser();
 		for(GameObject g : manager.getElements())
@@ -48,7 +47,7 @@ public class ModifyInARadius implements CustomFunction {
 				this.variable = format.getParameterValue(VARIABLE);
 				this.delta = format.getParameterValue(DELTA);
 				this.radius = format.getParameterValue(RADIUS);
-				if(distance >= p.assignValidatedValue(radius, current)) return;
+				if(distance >= p.assignValidatedValue(radius, current)) continue;
 				double deltaVal = p.assignValidatedValue(delta, current);
 				double prevVal = other.accessLogic().accessAttributes().getAttribute(variable);
 				double maxVal = other.accessLogic().accessAttributes().getMaxAttributeVal(variable);
@@ -61,9 +60,10 @@ public class ModifyInARadius implements CustomFunction {
 					double finalDelta = (prevVal + deltaVal) - maxVal;
 					other.accessLogic().accessAttributes().setAttributeValue(variable, finalDelta);
 				}
-				other.getRenderer().flashUnit();
+				g.getRenderer().flashUnit();
 
 			}
+			
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{
 				e.printStackTrace();
@@ -80,7 +80,7 @@ public class ModifyInARadius implements CustomFunction {
 	@Override
 	public void setParameterFormatFields() {
 		
-		format.addHelpText("This function allows you to change a variable in another object when the "
+		format.addHelpText("This function allows you to change a variable in another object inside a radius when the "
 				+ "interaction occurs. Variable = Variable you can change. Delta = The change that must take place.");
 		format.addStringField(VARIABLE);
 		format.addStringField(DELTA);
@@ -117,7 +117,7 @@ public class ModifyInARadius implements CustomFunction {
 	@Override
 	public boolean isRepetitive() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
