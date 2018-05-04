@@ -90,6 +90,7 @@ public abstract class ElementManager implements Serializable {
 	 */
 	public void addElement(EngineObject obj)
 	{
+		new_ID_val++;
 		elementMap.put(obj.getID(), obj);
 	}
 	
@@ -99,6 +100,11 @@ public abstract class ElementManager implements Serializable {
 	public void clearManager()
 	{
 		elementMap.clear();
+	}
+	
+	public void changeBaseID(int size)
+	{
+		new_ID_val += size;
 	}
 	
 	

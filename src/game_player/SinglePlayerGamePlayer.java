@@ -300,4 +300,9 @@ public class SinglePlayerGamePlayer {
 		((SingleTopPanel) myTopPanel).setTimeline(animation);
 	}
 	
+	public void reset() {
+		myGameObjectManager.clearManager();
+		myTopPanel.resetTime();
+	}
+	
 }

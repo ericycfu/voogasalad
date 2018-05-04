@@ -24,6 +24,7 @@ import game_player.visual_element.BuildButton;
 import game_player.visual_element.ChatBox;
 import game_player.visual_element.MainDisplay;
 import game_player.visual_element.MiniMap;
+import game_player.visual_element.MultiTopPanel;
 import game_player.visual_element.SkillButton;
 import game_player.visual_element.TopPanel;
 import game_player.visual_element.UnitActionDisplay;
@@ -31,7 +32,6 @@ import game_player.visual_element.UnitDisplay;
 import interactions.Interaction;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -60,7 +60,7 @@ import server_client.screens.ClientScreen;
  * Single-player mode and multi-player mode are supported for testing purposes and gaming purposes, respectively. 
  * 
  */
-public abstract class GamePlayer extends ClientScreen {
+public class GamePlayer extends ClientScreen {
 	
 	public static final String CLASS_REF = "GamePlayer";
 	public static final double WINDOW_STEP_SIZE = 10;
@@ -229,7 +229,7 @@ public abstract class GamePlayer extends ClientScreen {
 
 	private void initialize() {
 		myRoot = new Group();
-		myTopPanel = new TopPanel(getSocket(), 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+		myTopPanel = new MultiTopPanel(getSocket(), 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
 		myRoot.getChildren().add(myTopPanel.getNodes());
 
@@ -302,7 +302,6 @@ public abstract class GamePlayer extends ClientScreen {
 				updateGameObjectManager(gom);
 			}
 			myTeam = (Team) inputstream.readObject();
-			myTime.setValue(inputstream.readDouble());
 			myChatBox.displayText(inputstream.readObject().toString());
 			mySceneManager = (SceneManager)inputstream.readObject();
 		} catch (Exception e) {
@@ -326,9 +325,10 @@ public abstract class GamePlayer extends ClientScreen {
 		}
 		GameInstance gi = null;
 		int team_ID = -1;
-		ObjectInputStream in = getInputStream();
+		ObjectInputStream in; 
 		while(gi == null) {
 			try {
+				in = getInputStream();
 				Object obj = in.readObject();
 				gi = (GameInstance)(obj);
 				team_ID = in.readInt();
@@ -378,6 +378,10 @@ public abstract class GamePlayer extends ClientScreen {
 		}
 	}
 
+	public void resetTime() {
+		myTopPanel.resetTime();
+	}
+	
 	@Override
 	public String updateSelf() {
 		receiveFromServer();
