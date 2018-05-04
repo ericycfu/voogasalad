@@ -26,7 +26,8 @@ import java.io.BufferedOutputStream;
 	import game_player.visual_element.ChatBox;
 	import game_player.visual_element.MainDisplay;
 	import game_player.visual_element.MiniMap;
-	import game_player.visual_element.SkillButton;
+import game_player.visual_element.SingleTopPanel;
+import game_player.visual_element.SkillButton;
 	import game_player.visual_element.TopPanel;
 	import game_player.visual_element.UnitActionDisplay;
 	import game_player.visual_element.UnitDisplay;
@@ -58,8 +59,8 @@ public class SinglePlayerGamePlayer {
 		
 		public static final double WINDOW_STEP_SIZE = 10;
 		public static final double MAP_DISPLAY_RATIO = 4;
-		public static final int SCENE_SIZE_X = 1200;
-		public static final int SCENE_SIZE_Y = 800;
+		public static final int SCENE_SIZE_X = 900;
+		public static final int SCENE_SIZE_Y = 600;
 		public static final double BOTTOM_HEIGHT = 0.25;
 		public static final double MINIMAP_WIDTH = 0.25;
 		public static final double INFO_DISPLAY_WIDTH = 0.49;
@@ -96,7 +97,6 @@ public class SinglePlayerGamePlayer {
 		private Set<GameObject> myPossibleUnits;
 		private SceneManager mySceneManager;
 		private Stage myStage;
-		private Timeline myTimeline;
 		
 		public SinglePlayerGamePlayer(GameObjectManager gameManager,Set<GameObject> allPossibleUnits) {
 			myMap = new ImageView(new Image("map4.jpg"));
@@ -234,7 +234,7 @@ public class SinglePlayerGamePlayer {
 		
 		private void initialize() {
 			myRoot = new Group();
-			myTopPanel = new TopPanel(mySocket, 1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
+			myTopPanel = new SingleTopPanel(1, myGameObjectManager, myPossibleUnits, SCENE_SIZE_X, TOP_HEIGHT*SCENE_SIZE_Y);
 
 			myRoot.getChildren().add(myTopPanel.getNodes());
 			
@@ -333,7 +333,7 @@ public class SinglePlayerGamePlayer {
 		}
 
 		public void setTimeline(Timeline animation) {
-			myTimeline = animation;
+			((SingleTopPanel) myTopPanel).setTimeline(animation);
 		}
 		
 	}

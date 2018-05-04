@@ -27,9 +27,9 @@ public class StartScreen implements AuthoringView {
 	
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
 	public static final String TITLE = "Rap Tilt Swagger";
-    private final int FRAMES_PER_SECOND = 60;
-    private final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public static final int FRAMES_PER_SECOND = 60;
+    public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     
 	private Stage myStage;
 	private StackPane myPane;
@@ -91,7 +91,6 @@ public class StartScreen implements AuthoringView {
         Timeline animation = new Timeline();
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
-        animation.play();
 		myGP.setTimeline(animation);
 		Scene scene = myGP.getScene();
 		mystage.setScene(scene);
