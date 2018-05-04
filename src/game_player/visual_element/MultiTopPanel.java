@@ -27,17 +27,17 @@ public class MultiTopPanel extends TopPanel {
 			outstream.writeObject(text);
 			outstream.flush();
 		} catch (IOException exception) {
-			new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
+			AlertMaker.makeAlert(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 		}
 	}
 
 	@Override
-	public void resetTime() {
+	public void setTimeTA(int time) {
 		
 	}
 
 	@Override
-	public void setTimeTA(int time) {
+	public void startTimeline() {
 		
 	}
 }
