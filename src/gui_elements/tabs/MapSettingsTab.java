@@ -5,6 +5,11 @@ import authoring.backend.GameEntity;
 import authoring.edit_map.MapSettingsView;
 import javafx.scene.control.Tab;
 import observables.Listener;
+/**
+ * 
+ * @author Eric Fu
+ * @author Xiaolan You
+ */
 
 public class MapSettingsTab extends Tab implements Listener {
 	AuthoringController ac;
