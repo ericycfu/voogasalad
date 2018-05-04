@@ -90,10 +90,11 @@ public class StartScreen implements AuthoringView {
 	
 	private void singlePlayerGame() {
 		myGP.reset();
-		Stage mystage = new Stage();
+		Stage newstage = new Stage();
 		Scene scene = myGP.getScene();
-		mystage.setScene(scene);
-		mystage.show();
+		newstage.setScene(scene);
+		newstage.setResizable(false);
+		newstage.show();
 	}
 	
 	public SinglePlayerGamePlayer getGP() {
