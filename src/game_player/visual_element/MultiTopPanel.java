@@ -30,4 +30,14 @@ public class MultiTopPanel extends TopPanel {
 			new AlertMaker(GamePlayer.SERVERALERTHEAD, GamePlayer.SERVERALERTBODY);
 		}
 	}
+
+	@Override
+	public void resetTime() {
+		
+	}
+
+	@Override
+	public void setTimeTA(int time) {
+		
+	}
 }
