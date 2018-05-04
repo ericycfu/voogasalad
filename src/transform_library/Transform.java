@@ -141,7 +141,7 @@ public class Transform implements Serializable {
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
 		position = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
-		System.out.println(getDisplacement(this,target));
+		//System.out.println(getDisplacement(this,target));
 		if(getDisplacement(this, target) <= stepDistance)
 		{
 			return false;
