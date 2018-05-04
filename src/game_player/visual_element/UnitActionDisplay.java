@@ -16,8 +16,6 @@ public class UnitActionDisplay implements VisualUpdate{
 	public static final int ACTION_GRID_HEIGHT = 3;
 	public static final double JAVAFX_IMAGEVIEW_SHRINK_RATIO = 0.8;
 	public static final int DEFAULT_CURRENT_ACTION_ID = -1;
-	public static final String DEFAULT_BUTTON_IMAGE_PATH = "default_icon.png";
-	public static final String CANCEL_BUTTON_IMAGE_PATH = "cancel_icon.png";
 	private int myCurrentActionID;
 	private GridPane myGridPane;
 	private double myCellWidth;
@@ -91,7 +89,7 @@ public class UnitActionDisplay implements VisualUpdate{
 	private void completeGridPaneWithDefaultButtons(int row, int col) {
 		SkillButton cell = new SkillButton();
 		cell.setMaxSize(myCellWidth, myCellHeight);
-		ImageView imgv = new ImageView(new Image(DEFAULT_BUTTON_IMAGE_PATH));
+		ImageView imgv = new ImageView(new Image(SkillButton.DEFAULT_BUTTON_IMAGE_PATH));
 		imgv.setFitHeight(myCellHeight*JAVAFX_IMAGEVIEW_SHRINK_RATIO);
 		imgv.setFitWidth(myCellWidth*JAVAFX_IMAGEVIEW_SHRINK_RATIO);
 		cell.setGraphic(imgv);
