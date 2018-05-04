@@ -49,8 +49,8 @@ public class GamePlayer extends ClientScreen {
 	
 	public static final double WINDOW_STEP_SIZE = 10;
 	public static final double MAP_DISPLAY_RATIO = 4;
-	public static final int SCENE_SIZE_X = 900;
-	public static final int SCENE_SIZE_Y = 600;
+	public static final int SCENE_SIZE_X = 1200;
+	public static final int SCENE_SIZE_Y = 800;
 	public static final double BOTTOM_HEIGHT = 0.25;
 	public static final double MINIMAP_WIDTH = 0.25;
 	public static final double INFO_DISPLAY_WIDTH = 0.49;
