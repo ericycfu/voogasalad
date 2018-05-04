@@ -76,6 +76,14 @@ public class AuthoringObject {
 		myDragImage.setY(y);
 	}
 	
+	public void setDragImage(String imagePath, Map<AuthoringObject, List<AuthoringObject>> locations, MapSettings map_settings, double x, double y) {
+		Image image = new Image(getClass().getResourceAsStream(imagePath));
+		myDragImage = new DraggableImageView(this, locations, map_settings, image, ICON_PREF_WIDTH, ICON_PREF_HEIGHT);
+		myDragImage.setX(x);
+		myDragImage.setY(y);
+	}
+
+	
 	public Image getImage() {
 //		System.out.println("myDragImage: " + myDragImage);
 		System.out.println("DragImage's Image: " + myDragImage.getImage());
@@ -153,6 +161,10 @@ public class AuthoringObject {
 	
 	public void setBuildTime(double time) {
 		myAttributes.setBuildTime(time);
+	}
+	
+	public Map<String, Double> getBuildCosts(){
+		return buildCosts;
 	}
 	
 	public List<String> getBuildCostResources() {

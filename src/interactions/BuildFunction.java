@@ -46,7 +46,6 @@ public class BuildFunction implements CustomFunction {
 			}
 		} 
 		catch (UnmodifiableGameObjectException | InvalidResourceValueException e) {
-			e.printStackTrace();
 		}
 		
 		int newObjId = manager.copyGameObject(other);

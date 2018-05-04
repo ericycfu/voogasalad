@@ -133,17 +133,13 @@ public class DesignTab extends Tab implements AuthoringView{
 	
 	private void setButtons() {
 		component_image_chooser_button = new ComponentImageChooserButton(component_image_choice_text_label);
-		create_component_button = new CreateComponentButton(authoring_object,
-															component_name_tf.getTextField(),
+		create_component_button = new CreateComponentButton(component_name_tf.getTextField(),
 															component_tag_cb.getComboBox(),
-															tag_controller,
 															component_image_choice_text_label.getLabel(),
 															component_movement_speed_tf.getTextField(),
 															building_cb.getComboBox(),
 															component_build_time_tf.getTextField(),
-															myBuildCosts,
-															this,
-															game_entity);
+															myBuildCosts);
 		
 		design_root.getChildren().addAll(
 										 component_image_chooser_button.getButton(),
@@ -169,7 +165,7 @@ public class DesignTab extends Tab implements AuthoringView{
 	}
 	private void clearBuildCostMap() {
 		myBuildCosts.clear();
-		display_build_costs_tf.setText(buildCostsDisplayText);
+		updateBuildCostDisplayText();
 	}
 	
 	private void updateBuildCostDisplayText() {
@@ -216,6 +212,9 @@ public class DesignTab extends Tab implements AuthoringView{
 		building_cb.getSelectionModel().select(String.valueOf(authoring_object.isBuilding()));
 		component_build_time_tf.setText(authoring_object.getBuildTime() + "");
 		component_image_choice_text_label.setText(authoring_object.getImagePath());
+		updateBuildCost();
+		myBuildCosts = authoring_object.getBuildCosts();
+		updateBuildCostDisplayText();
 
 	}
 	
