@@ -20,7 +20,7 @@ public class DraggableScrollPane extends ScrollPane {
 	
 	private void initializeDefault() {
 		MapEntity initialMap;
-		if (createdmaps.getSize() == 0) {
+		if (createdmaps.getSize() < 1) {
 			initialMap = createdmaps.makeNewMap();
 		}
 		else {
