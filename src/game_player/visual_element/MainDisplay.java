@@ -78,14 +78,27 @@ public class MainDisplay implements VisualUpdate {
 						new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 			}
 			else if (e.getButton() == MouseButton.SECONDARY && this.myUnitActionDisp.getCurrentActionID() != -1) {
-				initializeMapClickInteraction(mouseX, mouseY);
+				int ID = this.myUnitActionDisp.getCurrentActionID();
+				initializeMapClickInteraction(ID, mouseX, mouseY);
+				try {
+					if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
+						unitToBeBuilt.getTransform().setPosition(new Vector2(detranslateX(mouseX), detranslateY(mouseY)));
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), myUnitActionDisp.getBuildTarget(), ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+					}
+					else {
+						mySelectedUnitManager.takeInteraction(new Vector2(detranslateX(mouseX), detranslateY(mouseY)), null, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
+					}
+					myUnitActionDisp.setCurrentActionID(-1);
+				} catch (UnmodifiableGameObjectException e1) {
+					// do nothing
+				}	
 			}
 		});
 		myMap.toBack();
 	}
 	
-	private void initializeMapClickInteraction(double mouseX, double mouseY) {
-		int ID = this.myUnitActionDisp.getCurrentActionID();
+	private void initializeMapClickInteraction(int ID, double mouseX, double mouseY) {
 		try {
 			if (mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 				GameObject unitToBeBuilt = myUnitActionDisp.getBuildTarget(); 
@@ -273,10 +286,10 @@ public class MainDisplay implements VisualUpdate {
 	}
 	
 	private boolean isXInWindow(double x) {
-		return x > myCurrentXCoor & x < myCurrentXCoor + GamePlayer.SCENE_SIZE_X;
+		return x > myCurrentXCoor && x < myCurrentXCoor + GamePlayer.SCENE_SIZE_X;
 	}
 	
 	private boolean isYInWindow(double y) {
-		return y > myCurrentYCoor & y < myCurrentYCoor + GamePlayer.SCENE_SIZE_Y * (1 - GamePlayer.TOP_HEIGHT - GamePlayer.BOTTOM_HEIGHT);
+		return y > myCurrentYCoor && y < myCurrentYCoor + GamePlayer.SCENE_SIZE_Y * (1 - GamePlayer.TOP_HEIGHT - GamePlayer.BOTTOM_HEIGHT);
 	}
 }

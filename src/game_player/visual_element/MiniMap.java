@@ -26,7 +26,6 @@ public class MiniMap implements VisualUpdate {
 	public static final double MINIMAPDISPLAYXRATIO = 1.0 / 4 / GamePlayer.MAP_DISPLAY_RATIO;
 	public static final double MINIMAPDISPLAYYRATIO = 1.0 / 3 / GamePlayer.MAP_DISPLAY_RATIO;
 	private Group myMiniMap;
-	private Rectangle myMiniMapDisplay;
 	private Group myVisibleUnits;
 	private List<GameObject> currentVisibleUnits;
 	private double myWidth;
@@ -37,16 +36,16 @@ public class MiniMap implements VisualUpdate {
 		myHeight = height;
 		myMiniMap = new Group();
 		myVisibleUnits = new Group();
-		currentVisibleUnits = new ArrayList<GameObject>();
+		currentVisibleUnits = new ArrayList<>();
 		initializeMiniMapBackground();
 		myMiniMap.getChildren().add(myVisibleUnits);
 	}
 	
 	private void initializeMiniMapBackground() {
-		myMiniMapDisplay = new Rectangle(myWidth, myHeight);
-		myMiniMapDisplay.setFill(DEFAULTMINIMAPBGCOLOR);
-		myMiniMapDisplay.setStroke(DEFAULTMINIMAPSIDECOLOR);
-		myMiniMap.getChildren().add(myMiniMapDisplay);
+		Rectangle miniMapDisplay = new Rectangle(myWidth, myHeight);
+		miniMapDisplay.setFill(DEFAULTMINIMAPBGCOLOR);
+		miniMapDisplay.setStroke(DEFAULTMINIMAPSIDECOLOR);
+		myMiniMap.getChildren().add(miniMapDisplay);
 	}
 	
 	@Override
@@ -57,7 +56,7 @@ public class MiniMap implements VisualUpdate {
 	}
 	
 	private List<GameObject> filter(List<GameObject> gameObjects) {
-		List<GameObject> minimapObjects = new ArrayList<GameObject>();
+		List<GameObject> minimapObjects = new ArrayList<>();
 		gameObjects.forEach(go -> minimapObjects.add(go));
 		return minimapObjects;
 	}
