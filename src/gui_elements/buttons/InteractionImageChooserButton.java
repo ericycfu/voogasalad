@@ -31,7 +31,7 @@ public class InteractionImageChooserButton extends MainButton {
 	protected void setAction() {
 		filechooser = new FileChooser();
 		filechooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.JPEG"));
 		getButton().setOnAction(e -> {
 			file = filechooser.showOpenDialog(new Stage());
 			if(file != null) {

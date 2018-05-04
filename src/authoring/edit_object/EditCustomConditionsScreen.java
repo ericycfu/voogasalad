@@ -13,7 +13,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
 public class EditCustomConditionsScreen extends ParameterSelect implements AuthoringView {
-//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
+
+	//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";
+	private static final int CUSTOM_CONDITION_SELECT_BOX_WIDTH = 120;
+	private static final int CUSTOM_CONDITION_SELECT_BOX_HEIGHT = 20;
 	private ConditionManager cm;
 	private Condition condition;
 	
@@ -65,18 +68,22 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 		root.getChildren().add(line);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private ComboBox customConditionSelect(HBox line) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions());
-		box.setPrefSize(120, 20);
+		box.setPrefSize(CUSTOM_CONDITION_SELECT_BOX_WIDTH, CUSTOM_CONDITION_SELECT_BOX_HEIGHT);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private ComboBox customConditionSelect(HBox line, String text) {
 		ComboBox box = ComboBoxFactory.makeComboBox(availableCustomConditions(), text);
-		box.setPrefSize(120, 20);
+		box.setPrefSize(CUSTOM_CONDITION_SELECT_BOX_WIDTH, CUSTOM_CONDITION_SELECT_BOX_HEIGHT);
 		return ComboBoxFactory.makeComboBox(box, e -> newConditionParameters(box, line));
 	}
 	
+	
+	@SuppressWarnings("rawtypes")
 	private void newConditionParameters(ComboBox box, HBox line) {
 		super.clearConditionParameters(line);
 		String conditionName = (String) box.getValue();
@@ -98,6 +105,7 @@ public class EditCustomConditionsScreen extends ParameterSelect implements Autho
 		condition.getCustomConditions().clear();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected void save(HBox line, ComboBox comboBox) {
 		String conditionName = (String) (comboBox.getValue());

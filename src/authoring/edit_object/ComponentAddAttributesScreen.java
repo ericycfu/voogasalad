@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import authoring.view.AuthoringView;
 import game_object.ObjectAttributes;
 import gui_elements.buttons.AddAttributeButton;
@@ -16,21 +19,19 @@ import gui_elements.panes.AttributeValuesPane;
 import gui_elements.panes.MainPane;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ComponentAddAttributesScreen implements AuthoringView {
-	private final Paint BACKGROUND = Color.BLACK;
-    private final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
-    private final String TITLE_PROPERTY = "title";
-    private final String WIDTH_PROPERTY = "width";
-    private final String HEIGHT_PROPERTY = "height";
+	private static final Paint BACKGROUND = Color.BLACK;
+    private static final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";
+    private static final String TITLE_PROPERTY = "title";
+    private static final String WIDTH_PROPERTY = "width";
+    private static final String HEIGHT_PROPERTY = "height";
+    private static final String CATCH_IO_EXCEPTION_STRING = "Display file input does not exist!";
+	private static final String CATCH_GENERAL_EXCEPTION_STRING = "The properties for the display could not be retrieved completely.";
+	private static final String FINALLY_IO_EXCEPTION_STRING = "Display file input cannot close!";
     private String title;
     private int screen_width, screen_height;
     private Stage stage;
@@ -39,7 +40,7 @@ public class ComponentAddAttributesScreen implements AuthoringView {
 
 	// Additional setup for the add-attributes screen.
     private Scene myScene;
-    private static Group root;
+    private Group root;
     
     public ComponentAddAttributesScreen(ObjectAttributes objAttributesInstance) {
     	this.objAttributesInstance = objAttributesInstance;
@@ -85,26 +86,29 @@ public class ComponentAddAttributesScreen implements AuthoringView {
 			screen_width = Integer.parseInt(menu_properties.getProperty(WIDTH_PROPERTY));
 			screen_height = Integer.parseInt(menu_properties.getProperty(HEIGHT_PROPERTY));
 		} catch (IOException ex) {
-			System.err.println("Display file input does not exist!");
+			logError(ex, Level.SEVERE, CATCH_IO_EXCEPTION_STRING);
 		} catch (Exception ey) {
-			System.err.println("The properties for the display could not be retrieved completely.");
-
+			logError(ey, Level.SEVERE, CATCH_GENERAL_EXCEPTION_STRING);
     	} finally {
     		if (input != null) {
     			try {
     				input.close();
     			} catch (IOException e) {
-    				System.err.println("Display file input cannot close!");
+    				logError(e, Level.SEVERE, FINALLY_IO_EXCEPTION_STRING);
     			}
     		}
     	}
     }
+	
+	private void logError(Exception e, Level level, String error) {
+		Logger logger = Logger.getAnonymousLogger();
+		Exception ex = new Exception(e);
+		logger.log(level, error, ex);
+	}
     
     private void setGUIComponents() {
     	setLabels();
     	setPanes();
-    	setComboBoxes();
-    	setRadioButtons();
     	setButtons();
     }
     
@@ -121,13 +125,7 @@ public class ComponentAddAttributesScreen implements AuthoringView {
     	root.getChildren().addAll(attribute_names_pane.getPane(),
     							  attribute_values_pane.getPane());
     }
-    
-    private void setComboBoxes() {
-    }
-    
-    private void setRadioButtons() {
-    }
-        
+            
     private void setButtons() {
     	root.getChildren().addAll(new AddAttributeButton(attribute_names_pane.getPane(), 
     												     attribute_values_pane.getPane()),

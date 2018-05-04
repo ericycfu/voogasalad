@@ -11,7 +11,11 @@ import javafx.scene.image.ImageView;
  *
  */
 public class SkillButton extends Button {
-
+	public static final String DEFAULT_BUTTON_IMAGE_PATH = "default_icon.png";
+	public static final String CANCEL_BUTTON_IMAGE_PATH = "cancel_icon.png";
+	public static final String CANCEL_BUTTON_NAME = "Cancel";
+	public static final String CANCEL_BUTTON_DESCRIPTION = "Restore the interaction to default";
+	
 	private String mySkillName;
 	private Image mySkillImage;
 	private String mySkillDescription;

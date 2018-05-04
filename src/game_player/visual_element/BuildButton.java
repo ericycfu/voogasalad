@@ -2,11 +2,11 @@ package game_player.visual_element;
 
 import game_object.GameObject;
 import game_object.UnmodifiableGameObjectException;
+import game_player.GamePlayer;
 import javafx.scene.image.Image;
 
 public class BuildButton extends SkillButton {
 	private static final String buildtime = "Build Time: ";
-	private static final String linebreak = "\n";
 	private GameObject myTarget;
 	private String myDescription;
 	private String myBuildCost;
@@ -18,7 +18,7 @@ public class BuildButton extends SkillButton {
 		try {
 			System.out.println("tried to get into map");
 			for (String key : target.accessLogic().accessAttributes().getCosts().keySet()) {
-				myBuildCost = myBuildCost + key + ": " + target.accessLogic().accessAttributes().getCosts().get(key);
+				myBuildCost = myBuildCost + key + GamePlayer.COLON + target.accessLogic().accessAttributes().getCosts().get(key);
 				System.out.println(key);
 			}
 		} catch (UnmodifiableGameObjectException e) {
@@ -31,7 +31,7 @@ public class BuildButton extends SkillButton {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		myDescription = myBuildTime + myBuildCost;
+		myDescription = target.getName() + GamePlayer.LINEBREAK + myBuildTime + GamePlayer.LINEBREAK + myBuildCost;
 		setDescription(myDescription);
 	}
 	
