@@ -71,7 +71,7 @@ public class ChatBox {
 		myChatHistory.appendText(text + GamePlayer.LINEBREAK);
 	}
 	
-	public Node getGroup() {
+	public Node getNodes() {
 		return myGroup;
 	}
 }

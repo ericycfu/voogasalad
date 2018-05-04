@@ -23,6 +23,8 @@ public class PlayGameButton extends Button {
 		this.game_entity = game_entity;
 		setupText();
 		setAction();
+		this.getStyleClass().add("map_setting_buttons");
+
 	}
 	
 	public PlayGameButton(Stage stage) {

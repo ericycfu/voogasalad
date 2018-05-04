@@ -62,6 +62,15 @@ public class Renderer implements Serializable{
 		setUpLitImg();
 	}
 	
+	public void resize(int x, int y) {
+		litImg.setFitWidth(x);
+		litImg.setFitHeight(y);
+		unLitImg.setFitWidth(x);
+		unLitImg.setFitHeight(y);
+		myDisp.setFitWidth(x);
+		myDisp.setFitHeight(y);
+	}
+	
 	public String getImagePath() {
 		return myImageLocation;
 	}
@@ -100,8 +109,6 @@ public class Renderer implements Serializable{
 	public void setDisp(ImageView disp) {
 		myDisp = disp;
 	}
-	
-	
 	
 	public void flashUnit()
 	{

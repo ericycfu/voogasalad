@@ -97,6 +97,9 @@ public class Condition implements EngineObject, Serializable{
 		{
 			if(comparatorManager.getComparatorResult(comparatorID, getVariableVal(var1, current), getVariableVal(var2, current)))
 			{
+				System.out.println("comparator ID: " + comparatorManager.getSymbolById(comparatorID));
+				System.out.println("Var1 value: "+getVariableVal(var1, current));
+				System.out.println("Var2 value: "+getVariableVal(var2, current));
 				for(CustomCondition c : customConditions)
 				{
 					c.Execute(current);

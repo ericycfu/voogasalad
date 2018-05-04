@@ -35,7 +35,7 @@ public class CreatedMapsView extends ScrollPane implements Listener {
 		for (int i=0; i<size; i++) {
 			rootBox.getChildren().add(setupIndivBox(createdmaps.getObjectByIndex(i)));
 		}
-		if (size > 1) {
+		if (size > 0) {
 			this.setContent(rootBox);
 		}
 	}
