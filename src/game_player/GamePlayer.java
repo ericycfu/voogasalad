@@ -378,6 +378,10 @@ public abstract class GamePlayer extends ClientScreen {
 		}
 	}
 
+	public void resetTime() {
+		myTopPanel.resetTime();
+	}
+	
 	@Override
 	public String updateSelf() {
 		receiveFromServer();
