@@ -16,7 +16,7 @@ public class CustomConditionComboBox extends ComboBox {
 	}
 	
 	private void newConditionParameters() {
-		parameterScreen = new EditCustomConditionsScreen(cm, (String)this.getValue());
+		parameterScreen = new EditCustomConditionsScreen(cm, (String) this.getValue());
 	}
 	
 	private void getAvailableCustomConditions() {
