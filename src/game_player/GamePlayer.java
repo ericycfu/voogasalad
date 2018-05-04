@@ -325,9 +325,10 @@ public class GamePlayer extends ClientScreen {
 		}
 		GameInstance gi = null;
 		int team_ID = -1;
-		ObjectInputStream in = getInputStream();
+		ObjectInputStream in; 
 		while(gi == null) {
 			try {
+				in = getInputStream();
 				Object obj = in.readObject();
 				gi = (GameInstance)(obj);
 				team_ID = in.readInt();
