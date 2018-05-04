@@ -49,6 +49,7 @@ public class InteractionNameComboBox extends MainComboBox {
 	private void addElements() {
 //		System.out.println("Number of interactions just as interaction screen pops up: " + interaction_manager.getElements().size());
 		for(int i = 0; i < interaction_manager.getElements().size() - 1; i++) {
+			System.out.println("Number " + (i + 1) + ": " + interaction_manager.getElements().get(i).getID());
 			getComboBox().getItems().add(interaction_manager.getElements().get(i).getName());
 		}
 	}
@@ -79,7 +80,7 @@ public class InteractionNameComboBox extends MainComboBox {
 				created_custom_functions_pane.getPane().getChildren().clear();
 				interaction_vision_range_tf.setText(BLANK_TEXT);
 	    		interaction_rate_tf.setText(BLANK_TEXT);
-	    		interaction_target_team_cb.getEditor().setText(BLANK_TEXT);
+	    		interaction_target_team_cb.getSelectionModel().clearSelection();
 	    		interaction_description_tf.setText(BLANK_TEXT);
 	    		interaction_image_choice_text_label.setText(BLANK_TEXT);
 			}
