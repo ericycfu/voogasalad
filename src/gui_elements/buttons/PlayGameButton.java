@@ -6,7 +6,6 @@ import authoring.backend.SaveAuthoringGameState;
 import game_data.Writer;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import server_client.ServerClient;
 /**
  * saves the current environment locally and remotely for continued use of both the authoring environment and the rest of the project
  * @author shichengrao

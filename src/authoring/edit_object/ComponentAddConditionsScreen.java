@@ -1,7 +1,7 @@
 package authoring.edit_object;
 
-import javafx.geometry.Insets;
 import java.util.List;
+
 import authoring.view.AuthoringView;
 import conditions.Comparator;
 import conditions.ComparatorManager;
@@ -10,7 +10,9 @@ import conditions.ConditionManager;
 import gui_elements.factories.ButtonFactory;
 import gui_elements.factories.ComboBoxFactory;
 import gui_elements.factories.TextFieldFactory;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -18,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 
 public class ComponentAddConditionsScreen implements AuthoringView {
 //	private final String PROPERTY_FILENAME = "data/component_add_conditions_screen.properties";

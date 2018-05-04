@@ -1,8 +1,8 @@
 package gui_elements.factories;
 
-import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 public class ButtonFactory {
 	public static Button makeButton(String text) {
 		Button b = new Button();

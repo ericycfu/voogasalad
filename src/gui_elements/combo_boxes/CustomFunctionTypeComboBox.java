@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import authoring.edit_object.InteractionAddCustomFunctionsScreen;
 import game_object.PropertyNotFoundException;
 import gui_elements.panes.CustomFunctionNamesPane;
 import gui_elements.panes.CustomFunctionsPane;

@@ -2,7 +2,6 @@ package gui_elements.buttons;
 
 import authoring.support.AnimationHandler;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 public class PauseButton extends Button {
 	private AnimationHandler animationhandler;

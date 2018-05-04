@@ -4,16 +4,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import authoring.backend.AuthoringObject;
-import authoring.backend.CreatedObjects;
 import authoring.backend.GameEntity;
 import authoring.backend.TagController;
-import gui_elements.combo_boxes.MainComboBox;
 import gui_elements.tabs.DesignTab;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 
 public class CreateComponentButton extends MainButton {
 

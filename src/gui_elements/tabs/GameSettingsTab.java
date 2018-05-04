@@ -24,7 +24,6 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class GameSettingsTab extends Tab {
 

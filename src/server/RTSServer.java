@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import game_engine.GameInstance;
-import game_player.alert.AlertMaker;
 
 public class RTSServer {
 	public static final String DEFAULT_SERVER_IP = "10.197.116.66";
