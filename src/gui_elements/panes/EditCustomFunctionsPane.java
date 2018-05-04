@@ -2,17 +2,14 @@ package gui_elements.panes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import game_object.ObjectAttributes;
 import game_object.PropertyNotFoundException;
 import interactions.CustomComponentParameterFormat;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -21,7 +18,9 @@ public class EditCustomFunctionsPane extends MainPane {
 
 	private FlowPane flow_pane;
 	private String full_directory_name = DIRECTORY_STRING + "edit_custom_functions_pane.properties";
-	private final String PANE_STYLE = "-fx-background-color: #000000";
+	private static final String PANE_STYLE = "-fx-background-color: #000000";
+    private static final String CATCH_IO_EXCEPTION_STRING = "Edit custom functions pane file input does not exist!";
+	private static final String FINALLY_IO_EXCEPTION_STRING = "Edit custom functions pane file input cannot close!";
 	private int x, y, width, height;
 	private static final int TEXTFIELD_SIZE = 10;
 	private static final Pos TEXTFIELD_POSITION = Pos.CENTER;
@@ -49,17 +48,23 @@ public class EditCustomFunctionsPane extends MainPane {
 	  		y = Integer.parseInt(properties.getProperty(Y_LOC_STRING));
 	  		width = Integer.parseInt(properties.getProperty(WIDTH));
 	  		height = Integer.parseInt(properties.getProperty(HEIGHT));
-	   	} catch (IOException ex) {
-//	   		E
-	  	} finally {
-	  		if (input != null) {
-	  			try {
-	  				input.close();
-	  			} catch (IOException e) {
-//	  				E
-	  			}
-	  		}
-	  	}
+		} catch (IOException ex) {
+			logError(ex, Level.SEVERE, CATCH_IO_EXCEPTION_STRING);
+    	} finally {
+    		if (input != null) {
+    			try {
+    				input.close();
+    			} catch (IOException e) {
+    				logError(e, Level.SEVERE, FINALLY_IO_EXCEPTION_STRING);
+    			}
+    		}
+    	}
+    }
+	
+	private void logError(Exception e, Level level, String error) {
+		Logger logger = Logger.getAnonymousLogger();
+		Exception ex = new Exception(e);
+		logger.log(level, error, ex);
 	}
 
 	@Override

@@ -30,8 +30,6 @@ public class MakeGameSelect implements AuthoringView {
 		myPane = new BorderPane();
 		myPane.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 		myPane.setId("game_select_screen");
-		// # -> setId
-		// . -> getStyleClass.add
 		Scene scene = new Scene(myPane);
 		scene.getStylesheets().add(STYLE_PATH);
 		myStage.setScene(scene);

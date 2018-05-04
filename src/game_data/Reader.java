@@ -70,7 +70,7 @@ public class Reader {
 				if(obj.getClass().getName().equals(category)) {
 					result.add(obj);
 				}
-				}
+			}
 			catch(EOFException e) {
 				//not real error, just signifies end of file
 				break;
