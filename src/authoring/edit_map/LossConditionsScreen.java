@@ -17,7 +17,7 @@ public class LossConditionsScreen extends ParameterSelect {
 	
 	public LossConditionsScreen(List<EndCondition> ec) {
 		super();
-		this.endConditions = ec;
+		endConditions = ec;
 		factory = new EndConditionFactory();
 		loadSaved();
 		addLine();

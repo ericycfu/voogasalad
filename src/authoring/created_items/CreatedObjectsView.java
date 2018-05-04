@@ -3,10 +3,8 @@ package authoring.created_items;
 import authoring.backend.AuthoringController;
 import authoring.backend.AuthoringObject;
 import authoring.backend.CreatedObjects;
-import authoring.backend.MapEntity;
 import authoring.support.ObjectSelectionImageView;
 import authoring.view.AuthoringView;
-import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -43,7 +41,7 @@ public class CreatedObjectsView extends ScrollPane implements AuthoringView, Lis
 		VBox box = new VBox();
 		box.getChildren().add(extractImage(obj));
 		box.getChildren().add(new Text(extractName(obj)));
-		box.setPadding(new Insets(10, 10, 0, 10));
+		box.setPadding(CreatedMapsView.CREATED_VIEW_INSETS);
 		return box;
 	}
 	
