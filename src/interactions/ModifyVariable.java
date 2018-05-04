@@ -1,10 +1,7 @@
 package interactions;
 
-import java.util.regex.Pattern;
-
 import game_object.GameObject;
 import game_object.GameObjectManager;
-import game_object.ObjectLogic;
 import game_object.PropertyNotFoundException;
 import game_object.UnmodifiableGameObjectException;
 

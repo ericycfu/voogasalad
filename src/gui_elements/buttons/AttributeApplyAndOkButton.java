@@ -1,9 +1,6 @@
 package gui_elements.buttons;
 
-import java.util.Map;
-
 import game_object.ObjectAttributes;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;

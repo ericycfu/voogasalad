@@ -1,14 +1,9 @@
 package authoring.backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import authoring.support.DraggableImageView;
 import game_engine.ResourceManager;
-import transform_library.Vector2;
 
 public class GameEntity {
 	private CreatedObjects createdobjects;

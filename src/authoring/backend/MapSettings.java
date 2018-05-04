@@ -2,7 +2,9 @@ package authoring.backend;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import authoring.view.AuthoringView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

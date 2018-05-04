@@ -2,6 +2,7 @@ package authoring.support;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import conditions.CustomCondition;
 import gui_elements.buttons.ImageChooserButton;
 import javafx.scene.Node;

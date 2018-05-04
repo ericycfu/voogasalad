@@ -6,7 +6,6 @@ import java.util.Set;
 
 import game_engine.EndStateWrapper;
 import game_engine.InvalidResourceValueException;
-import game_engine.ResourceManager;
 import game_engine.Team;
 import game_object.GameObject;
 import game_object.PropertyNotFoundException;

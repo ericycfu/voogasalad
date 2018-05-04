@@ -1,7 +1,6 @@
 package conditions;
 
 import game_object.GameObject;
-import game_object.Renderer;
 import interactions.CustomComponentParameterFormat;
 
 /**

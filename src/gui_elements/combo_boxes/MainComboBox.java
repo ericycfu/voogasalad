@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
 public class MainComboBox extends ComboBox<String> {
