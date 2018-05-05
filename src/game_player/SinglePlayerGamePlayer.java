@@ -46,7 +46,7 @@ import scenemanager.SceneManager;
 
 /**
  * 
- * @author Siyuan Chen, Frank Yin
+ * @author Siyuan Chen, Frank Yin, Eddie Yang
  *
  * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
  * 
