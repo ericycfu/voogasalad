@@ -27,7 +27,7 @@ import transform_library.Vector2;
  * 
  * Group selection is implemented in this class so that the user is allowed 
  * 
- * @author Frank Yin, Siyuan Chen
+ * @author Frank Yin, Siyuan Chen, Eddie Yang
  *
  */
 public class MainDisplay implements VisualUpdate {
