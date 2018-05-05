@@ -45,6 +45,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class ComponentAddInteractionsScreen {
 
 	private static final Paint BACKGROUND = Color.BLACK;

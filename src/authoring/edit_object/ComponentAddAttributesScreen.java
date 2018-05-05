@@ -23,6 +23,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class ComponentAddAttributesScreen implements AuthoringView {
 	private static final Paint BACKGROUND = Color.BLACK;
     private static final String PROPERTY_FILENAME = "data/component_add_attributes_screen.properties";

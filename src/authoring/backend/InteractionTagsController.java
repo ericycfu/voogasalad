@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controls/manages the tags involved in specific interactions for a component.
+ * 
+ * @author Aditya Sridhar
+ *
+ */
+
 public class InteractionTagsController {
 	
 	private Map<AuthoringObject, Map<Integer, List<String>>> interactionTagsMap;

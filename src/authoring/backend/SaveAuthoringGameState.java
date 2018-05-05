@@ -15,6 +15,14 @@ import game_object.GameObjectManager;
 import resources.Resources;
 import scenemanager.SceneManager;
 
+/**
+ * This class saves the game state of the authoring environment by storing it 
+ * in data.
+ * 
+ * @author Aditya Sridhar
+ *
+ */
+
 public class SaveAuthoringGameState {
 
 	private Writer myWriter = new Writer();

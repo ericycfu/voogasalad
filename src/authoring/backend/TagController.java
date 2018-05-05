@@ -5,6 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class controls the tags used in a specific game. As an instance, 
+ * the tag controller can be accessed by all components at any point of 
+ * time; thus, it is universal. It can be updated in live design when new 
+ * tags are created. 
+ * 
+ * @author Aditya Sridhar
+ *
+ */
+
 public class TagController {
 	
 	private List<String> tags;

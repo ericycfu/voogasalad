@@ -7,6 +7,11 @@ import java.util.Properties;
 
 import javafx.scene.control.Label;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class MainLabel extends Label {
 
 	private final String X_LOC_STRING = "x_loc";

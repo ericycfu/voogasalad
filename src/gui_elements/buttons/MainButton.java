@@ -9,6 +9,11 @@ import java.util.logging.Logger;
 
 import javafx.scene.control.Button;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public abstract class MainButton extends Button {
 
 	private static final String X_LOC_STRING = "x_loc";
