@@ -31,7 +31,7 @@ public class GameCommandInterpreter {
 		}
 		if(array[0].equals("Chat")) { 
 			c.addArg(Integer.toString(playerID));
-			c.addArg(s.substring(4).substring(s.indexOf(" ") + 1));	
+			c.addArg(s.substring(4).substring(s.substring(4).indexOf(" ") + 1));	
 		}
 		c.act();
 	}

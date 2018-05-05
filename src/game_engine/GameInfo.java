@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import game_object.GameObject;
+import game_object.GameObjectManager;
 
 /**
  * The GameInfo is responsible for storing information about the Game
@@ -47,8 +48,10 @@ public class GameInfo implements Serializable {
 	}
 	public GameObject get(String objectName) {
 		for(GameObject go: ListOfGameObjs) {
-			if(go.getName().equals(objectName))
-				return go;
+			if(go.getName().equals(objectName)) {
+				GameObjectManager gom = new GameObjectManager();
+				return gom.getGameObject(gom.copyGameObject(go));
+			}
 		}
 		throw new IllegalArgumentException("Unit does not exist");
 	}
