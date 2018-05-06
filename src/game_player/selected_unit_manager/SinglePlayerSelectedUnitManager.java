@@ -14,21 +14,21 @@ public class SinglePlayerSelectedUnitManager extends SelectedUnitManager {
 
 	@Override
 	public void move(Vector2 target, GameObjectManager gom, GridMap gridmap) {
-		selectedUnits.stream()
+		mySelectedUnits.stream()
 		.filter(o -> !o.getTransform().getPosition().matches(target))
 		.forEach(o -> o.queueMovement(target, gom, gridmap));
 	}
 
 	@Override
 	public void interact(GameObject source, GameObject target, int interactionID, GameObjectManager gom,
-			GridMap gridmap, Vector2 position) {
-		source.queueInteraction(target, interactionID, gom, gridmap, position);
+			GridMap gridmap, Vector2 location) {
+		source.queueInteraction(target, interactionID, gom, gridmap, location);
 	}
 
 	@Override
 	public void build(GameObject source, GameObject target, int interactionID, GameObjectManager gom, GridMap gridmap,
-			Vector2 position) {
-		source.queueInteraction(target, interactionID, gom, gridmap, position);	
+			Vector2 location) {
+		source.queueInteraction(target, interactionID, gom, gridmap, location);	
 	}
 	
 }

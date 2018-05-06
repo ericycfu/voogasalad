@@ -107,7 +107,7 @@ public class GamePlayer extends ClientScreen {
 	public GamePlayer(Timeline timeline, GameObjectManager gameManager, Team team, Set<GameObject> allPossibleUnits) { 
 		super(null);
 
-		myMap = new ImageView(new Image("map4.jpg"));
+		myMap = new ImageView(new Image("basketballcourt.jpg"));
 		myMap.setFitWidth(SCENE_SIZE_X*MAP_DISPLAY_RATIO);
 		myMap.setFitHeight((1-TOP_HEIGHT-BOTTOM_HEIGHT)*SCENE_SIZE_Y*MAP_DISPLAY_RATIO);
 		myPossibleUnits = allPossibleUnits;
@@ -216,7 +216,7 @@ public class GamePlayer extends ClientScreen {
 						if (ID==-1) {
 							mySelectedUnitManager.move(go.getTransform().getPosition(), myGameObjectManager, new GridMap(myMap.getFitWidth(),myMap.getFitHeight()));
 						}
-						else if (!mySelectedUnitManager.getSelectedUnits().isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
+						else if (!mySelectedUnitManager.isEmpty() && !mySelectedUnitManager.getSelectedUnits().get(0).accessLogic().accessInteractions().getInteraction(ID).isBuild()) {
 							mySelectedUnitManager.takeInteraction(null, go, ID, myGameObjectManager, new GridMap(myMap.getFitWidth(), myMap.getFitHeight()));
 							myUnitDisplay.getUnitActionDisp().defaultCurrentActionID();
 						}
