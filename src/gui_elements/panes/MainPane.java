@@ -5,6 +5,11 @@ import java.util.Properties;
 
 import javafx.scene.layout.Pane;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public abstract class MainPane {
 
 	protected static final String X_LOC_STRING = "x_loc";

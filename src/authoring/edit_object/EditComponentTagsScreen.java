@@ -19,6 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class EditComponentTagsScreen {
 	
 	private static final Paint BACKGROUND = Color.BLACK;
@@ -62,7 +67,7 @@ public class EditComponentTagsScreen {
 	}
 
 	/**
-	 * Sets the stage for the add-interactions screen.
+	 * Sets the stage for the edit-component-tags screen.
 	 */
 	private void setStage() {
 		stage = new Stage();

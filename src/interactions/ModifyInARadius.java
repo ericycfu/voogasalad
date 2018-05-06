@@ -66,7 +66,6 @@ public class ModifyInARadius implements CustomFunction {
 			
 			catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 			{
-				e.printStackTrace();
 			}
 		}
 	}

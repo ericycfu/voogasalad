@@ -13,6 +13,11 @@ import interactions.CustomComponentParameterFormat;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class EditCustomConditionsScreen extends ParameterSelect implements AuthoringView {
 
 	//	private static final String PROPERTIES_PATH = "/data/CustomConditions.properties";

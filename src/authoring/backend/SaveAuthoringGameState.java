@@ -15,10 +15,23 @@ import game_object.GameObjectManager;
 import resources.Resources;
 import scenemanager.SceneManager;
 
+/**
+ * This class saves the game state of the authoring environment by storing it 
+ * in data.
+ * 
+ * @author Aditya Sridhar
+ * @author shichengrao
+ *
+ */
+
 public class SaveAuthoringGameState {
 
 	private Writer myWriter = new Writer();
-	
+	/**
+	 * saves the current state both as author readable (to author) and player readable (to game)
+	 * @param authoring_controller
+	 * @param game_entity
+	 */
 	public SaveAuthoringGameState(AuthoringController authoring_controller, GameEntity game_entity) {
 		List<MapEntity> allMapEntities = game_entity.getCreatedMaps().getCreatedMaps();
 		List<Map<AuthoringObject, List<AuthoringObject>>> allMaps = new ArrayList<>();

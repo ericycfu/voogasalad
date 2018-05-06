@@ -46,7 +46,7 @@ import scenemanager.SceneManager;
 
 /**
  * 
- * @author Siyuan Chen, Frank Yin
+ * @author Siyuan Chen, Frank Yin, Eddie Yang
  *
  * This class initializes and controls all of the sub-components necessary for game-playing visualization and UIs (MainDisplay, UnitDisplay, 
  * 
@@ -101,7 +101,8 @@ public class SinglePlayerGamePlayer {
 		myPossibleUnits = allPossibleUnits;
 		myGameObjectManager = gameManager;
 		myUnitSkills = new HashMap<>();
-		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);		
+		myTeam = new Team(1, null);
+		mySelectedUnitManager = new SinglePlayerSelectedUnitManager(myTeam);
 		initialize();
 		initializeSingleUnitSelect();
 		unitSkillMapInitialize();

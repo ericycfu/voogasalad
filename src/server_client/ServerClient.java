@@ -53,7 +53,7 @@ public class ServerClient {
 				if(!currentScreen.getClass().getSimpleName().startsWith(newClass)) {
 					Platform.runLater(() -> {currentScreen = myScreenFactory.get(newClass);});
 					try {
-						Thread.sleep(2500);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					}
 				}

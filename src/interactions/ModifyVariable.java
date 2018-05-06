@@ -82,7 +82,6 @@ public class ModifyVariable implements CustomFunction {
 		catch (PropertyNotFoundException | UnmodifiableGameObjectException e) 
 		{
 			
-			e.printStackTrace();
 		}
 	}
 	

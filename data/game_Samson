@@ -7,147 +7,8 @@
           <id>1</id>
           <transform>
             <position>
-              <x>237.0</x>
-              <y>56.0</y>
-            </position>
-            <rotation>0.0</rotation>
-          </transform>
-          <myObjectLogic>
-            <fulfillsLossCondition>false</fulfillsLossCondition>
-            <attributes>
-              <attributes/>
-              <maxAttributes/>
-              <buildCosts>
-                <entry>
-                  <string>cookies</string>
-                  <double>60.0</double>
-                </entry>
-              </buildCosts>
-              <buildTime>4.0</buildTime>
-            </attributes>
-            <interactions>
-              <elementMap>
-                <entry>
-                  <int>1</int>
-                  <interactions.Interaction>
-                    <id>1</id>
-                    <targetTags>
-                      <string>clicker</string>
-                    </targetTags>
-                    <name>BuildClicker</name>
-                    <imagePath>/images/mouse.png</imagePath>
-                    <description>Builds a clicker</description>
-                    <isBuild>false</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions/>
-                    <range>4.0</range>
-                    <rate>4.0</rate>
-                  </interactions.Interaction>
-                </entry>
-                <entry>
-                  <int>4</int>
-                  <interactions.Interaction>
-                    <id>4</id>
-                    <targetTags>
-                      <string>cookie</string>
-                    </targetTags>
-                    <name>BuildCookie</name>
-                    <imagePath>/images/cookie.png</imagePath>
-                    <description>Builds a cookie</description>
-                    <isBuild>true</isBuild>
-                    <isInstantaneous>false</isInstantaneous>
-                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                    <targetTeamEnumMap>
-                      <entry>
-                        <string>OTHER</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>ALL</string>
-                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                      <entry>
-                        <string>OWN</string>
-                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                      </entry>
-                    </targetTeamEnumMap>
-                    <customFunctions>
-                      <interactions.BuildFunction>
-                        <NAME>BuildFunction</NAME>
-                        <format>
-                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                          <parameterFields/>
-                        </format>
-                      </interactions.BuildFunction>
-                    </customFunctions>
-                    <range>4.0</range>
-                    <rate>4.0</rate>
-                  </interactions.Interaction>
-                </entry>
-              </elementMap>
-              <new__ID__val>10</new__ID__val>
-            </interactions>
-            <conditions>
-              <elementMap/>
-              <new__ID__val>1</new__ID__val>
-            </conditions>
-          </myObjectLogic>
-          <renderer>
-            <myImageLocation>/images/shop.png</myImageLocation>
-            <isHit>false</isHit>
-            <elapsedTime>0.0</elapsedTime>
-          </renderer>
-          <owner>
-            <id>1</id>
-            <teamName>Team 1</teamName>
-            <resourceManager>
-              <resourceMap>
-                <entry>
-                  <string>cookies</string>
-                  <double>100.0</double>
-                </entry>
-              </resourceMap>
-            </resourceManager>
-          </owner>
-          <name>Shop</name>
-          <tags>
-            <string>shop</string>
-          </tags>
-          <isBuilding>true</isBuilding>
-          <isInteractionQueued>false</isInteractionQueued>
-          <isDead>false</isDead>
-          <movementSpeed>1.0</movementSpeed>
-          <isMovementQueued>false</isMovementQueued>
-          <activeWaypoints class="linked-list"/>
-          <isUninteractive>false</isUninteractive>
-          <isBeingConstructed>false</isBeingConstructed>
-          <elapsedTime>0.0</elapsedTime>
-          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-        </game__object.GameObject>
-      </entry>
-      <entry>
-        <int>4</int>
-        <game__object.GameObject>
-          <id>4</id>
-          <transform>
-            <position>
-              <x>245.0</x>
-              <y>176.0</y>
+              <x>234.0</x>
+              <y>172.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -178,7 +39,18 @@
             <isHit>false</isHit>
             <elapsedTime>0.0</elapsedTime>
           </renderer>
-          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <owner>
+            <id>1</id>
+            <teamName>Team 1</teamName>
+            <resourceManager>
+              <resourceMap>
+                <entry>
+                  <string>cookies</string>
+                  <double>100.0</double>
+                </entry>
+              </resourceMap>
+            </resourceManager>
+          </owner>
           <name>Cookie</name>
           <tags>
             <string>cookie</string>
@@ -196,13 +68,13 @@
         </game__object.GameObject>
       </entry>
       <entry>
-        <int>7</int>
+        <int>3</int>
         <game__object.GameObject>
-          <id>7</id>
+          <id>3</id>
           <transform>
             <position>
-              <x>361.0</x>
-              <y>63.0</y>
+              <x>236.0</x>
+              <y>75.0</y>
             </position>
             <rotation>0.0</rotation>
           </transform>
@@ -217,7 +89,143 @@
                   <double>60.0</double>
                 </entry>
               </buildCosts>
-              <buildTime>5.0</buildTime>
+              <buildTime>9.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Build Cookie</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>build cookie</description>
+                    <isBuild>true</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+                <entry>
+                  <int>3</int>
+                  <interactions.Interaction>
+                    <id>3</id>
+                    <targetTags>
+                      <string>clicker</string>
+                    </targetTags>
+                    <name>Build Clicker</name>
+                    <imagePath>/images/mouse.png</imagePath>
+                    <description>builds clicker</description>
+                    <isBuild>true</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.BuildFunction>
+                        <NAME>BuildFunction</NAME>
+                        <format>
+                          <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                          <parameterFields/>
+                        </format>
+                      </interactions.BuildFunction>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>7</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/shop.png</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Shop</name>
+          <tags>
+            <string>shop</string>
+          </tags>
+          <isBuilding>true</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>0.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>5</int>
+        <game__object.GameObject>
+          <id>5</id>
+          <transform>
+            <position>
+              <x>0.0</x>
+              <y>0.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts>
+                <entry>
+                  <string>cookies</string>
+                  <double>60.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>4.0</buildTime>
             </attributes>
             <interactions>
               <elementMap>
@@ -230,7 +238,7 @@
                     </targetTags>
                     <name>Gather</name>
                     <imagePath>/images/cookie.png</imagePath>
-                    <description>Gather cookies</description>
+                    <description>Gather cookie</description>
                     <isBuild>false</isBuild>
                     <isInstantaneous>false</isInstantaneous>
                     <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -268,12 +276,151 @@
                         </format>
                       </interactions.GatherUnlimitedResource>
                     </customFunctions>
-                    <range>5.0</range>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+                <entry>
+                  <int>5</int>
+                  <interactions.Interaction>
+                    <id>5</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Gather</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>Gather cookie</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions/>
+                    <range>999.0</range>
                     <rate>1.0</rate>
                   </interactions.Interaction>
                 </entry>
               </elementMap>
-              <new__ID__val>7</new__ID__val>
+              <new__ID__val>9</new__ID__val>
+            </interactions>
+            <conditions>
+              <elementMap/>
+              <new__ID__val>1</new__ID__val>
+            </conditions>
+          </myObjectLogic>
+          <renderer>
+            <myImageLocation>/images/mouse.png</myImageLocation>
+            <isHit>false</isHit>
+            <elapsedTime>0.0</elapsedTime>
+          </renderer>
+          <owner reference="../../../entry/game__object.GameObject/owner"/>
+          <name>Clicker</name>
+          <tags>
+            <string>clicker</string>
+          </tags>
+          <isBuilding>false</isBuilding>
+          <isInteractionQueued>false</isInteractionQueued>
+          <isDead>false</isDead>
+          <movementSpeed>5.0</movementSpeed>
+          <isMovementQueued>false</isMovementQueued>
+          <activeWaypoints class="linked-list"/>
+          <isUninteractive>false</isUninteractive>
+          <isBeingConstructed>false</isBeingConstructed>
+          <elapsedTime>0.0</elapsedTime>
+          <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+        </game__object.GameObject>
+      </entry>
+      <entry>
+        <int>7</int>
+        <game__object.GameObject>
+          <id>7</id>
+          <transform>
+            <position>
+              <x>240.0</x>
+              <y>271.0</y>
+            </position>
+            <rotation>0.0</rotation>
+          </transform>
+          <myObjectLogic>
+            <fulfillsLossCondition>false</fulfillsLossCondition>
+            <attributes>
+              <attributes/>
+              <maxAttributes/>
+              <buildCosts>
+                <entry>
+                  <string>cookies</string>
+                  <double>60.0</double>
+                </entry>
+              </buildCosts>
+              <buildTime>4.0</buildTime>
+            </attributes>
+            <interactions>
+              <elementMap>
+                <entry>
+                  <int>1</int>
+                  <interactions.Interaction>
+                    <id>1</id>
+                    <targetTags>
+                      <string>cookie</string>
+                    </targetTags>
+                    <name>Gather</name>
+                    <imagePath>/images/cookie.png</imagePath>
+                    <description>Gather cookie</description>
+                    <isBuild>false</isBuild>
+                    <isInstantaneous>false</isInstantaneous>
+                    <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                    <targetTeamEnumMap>
+                      <entry>
+                        <string>OTHER</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>ALL</string>
+                        <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                      <entry>
+                        <string>OWN</string>
+                        <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                      </entry>
+                    </targetTeamEnumMap>
+                    <customFunctions>
+                      <interactions.GatherUnlimitedResource>
+                        <NAME>GatherUnlimitedResource</NAME>
+                        <RESOURCE>Resource</RESOURCE>
+                        <GATHER__RATE>Gather Rate</GATHER__RATE>
+                        <format>
+                          <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                          <parameterFields>
+                            <entry>
+                              <string>Gather Rate</string>
+                              <string>10</string>
+                            </entry>
+                            <entry>
+                              <string>Resource</string>
+                              <string>1</string>
+                            </entry>
+                          </parameterFields>
+                        </format>
+                      </interactions.GatherUnlimitedResource>
+                    </customFunctions>
+                    <range>999.0</range>
+                    <rate>1.0</rate>
+                  </interactions.Interaction>
+                </entry>
+              </elementMap>
+              <new__ID__val>5</new__ID__val>
             </interactions>
             <conditions>
               <elementMap/>
@@ -303,7 +450,7 @@
         </game__object.GameObject>
       </entry>
     </elementMap>
-    <new__ID__val>10</new__ID__val>
+    <new__ID__val>9</new__ID__val>
   </game__object.GameObjectManager>
   <set>
     <game__object.GameObject>
@@ -377,7 +524,7 @@
               <double>60.0</double>
             </entry>
           </buildCosts>
-          <buildTime>5.0</buildTime>
+          <buildTime>4.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -390,7 +537,7 @@
                 </targetTags>
                 <name>Gather</name>
                 <imagePath>/images/cookie.png</imagePath>
-                <description>Gather cookies</description>
+                <description>Gather cookie</description>
                 <isBuild>false</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -428,12 +575,44 @@
                     </format>
                   </interactions.GatherUnlimitedResource>
                 </customFunctions>
-                <range>5.0</range>
+                <range>999.0</range>
+                <rate>1.0</rate>
+              </interactions.Interaction>
+            </entry>
+            <entry>
+              <int>5</int>
+              <interactions.Interaction>
+                <id>5</id>
+                <targetTags>
+                  <string>cookie</string>
+                </targetTags>
+                <name>Gather</name>
+                <imagePath>/images/cookie.png</imagePath>
+                <description>Gather cookie</description>
+                <isBuild>false</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions/>
+                <range>999.0</range>
                 <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>7</new__ID__val>
+          <new__ID__val>9</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -480,7 +659,7 @@
               <double>60.0</double>
             </entry>
           </buildCosts>
-          <buildTime>4.0</buildTime>
+          <buildTime>9.0</buildTime>
         </attributes>
         <interactions>
           <elementMap>
@@ -489,43 +668,11 @@
               <interactions.Interaction>
                 <id>1</id>
                 <targetTags>
-                  <string>clicker</string>
-                </targetTags>
-                <name>BuildClicker</name>
-                <imagePath>/images/mouse.png</imagePath>
-                <description>Builds a clicker</description>
-                <isBuild>false</isBuild>
-                <isInstantaneous>false</isInstantaneous>
-                <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                <targetTeamEnumMap>
-                  <entry>
-                    <string>OTHER</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>ALL</string>
-                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                  <entry>
-                    <string>OWN</string>
-                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                  </entry>
-                </targetTeamEnumMap>
-                <customFunctions/>
-                <range>4.0</range>
-                <rate>4.0</rate>
-              </interactions.Interaction>
-            </entry>
-            <entry>
-              <int>4</int>
-              <interactions.Interaction>
-                <id>4</id>
-                <targetTags>
                   <string>cookie</string>
                 </targetTags>
-                <name>BuildCookie</name>
+                <name>Build Cookie</name>
                 <imagePath>/images/cookie.png</imagePath>
-                <description>Builds a cookie</description>
+                <description>build cookie</description>
                 <isBuild>true</isBuild>
                 <isInstantaneous>false</isInstantaneous>
                 <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -552,12 +699,52 @@
                     </format>
                   </interactions.BuildFunction>
                 </customFunctions>
-                <range>4.0</range>
-                <rate>4.0</rate>
+                <range>999.0</range>
+                <rate>1.0</rate>
+              </interactions.Interaction>
+            </entry>
+            <entry>
+              <int>3</int>
+              <interactions.Interaction>
+                <id>3</id>
+                <targetTags>
+                  <string>clicker</string>
+                </targetTags>
+                <name>Build Clicker</name>
+                <imagePath>/images/mouse.png</imagePath>
+                <description>builds clicker</description>
+                <isBuild>true</isBuild>
+                <isInstantaneous>false</isInstantaneous>
+                <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                <targetTeamEnumMap>
+                  <entry>
+                    <string>OTHER</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>ALL</string>
+                    <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                  <entry>
+                    <string>OWN</string>
+                    <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                  </entry>
+                </targetTeamEnumMap>
+                <customFunctions>
+                  <interactions.BuildFunction>
+                    <NAME>BuildFunction</NAME>
+                    <format>
+                      <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                      <parameterFields/>
+                    </format>
+                  </interactions.BuildFunction>
+                </customFunctions>
+                <range>999.0</range>
+                <rate>1.0</rate>
               </interactions.Interaction>
             </entry>
           </elementMap>
-          <new__ID__val>10</new__ID__val>
+          <new__ID__val>7</new__ID__val>
         </interactions>
         <conditions>
           <elementMap/>
@@ -576,7 +763,7 @@
       <isBuilding>true</isBuilding>
       <isInteractionQueued>false</isInteractionQueued>
       <isDead>false</isDead>
-      <movementSpeed>1.0</movementSpeed>
+      <movementSpeed>0.0</movementSpeed>
       <isMovementQueued>false</isMovementQueued>
       <activeWaypoints class="linked-list"/>
       <isUninteractive>false</isUninteractive>
@@ -602,147 +789,8 @@
             <id>1</id>
             <transform>
               <position>
-                <x>237.0</x>
-                <y>56.0</y>
-              </position>
-              <rotation>0.0</rotation>
-            </transform>
-            <myObjectLogic>
-              <fulfillsLossCondition>false</fulfillsLossCondition>
-              <attributes>
-                <attributes/>
-                <maxAttributes/>
-                <buildCosts>
-                  <entry>
-                    <string>cookies</string>
-                    <double>60.0</double>
-                  </entry>
-                </buildCosts>
-                <buildTime>4.0</buildTime>
-              </attributes>
-              <interactions>
-                <elementMap>
-                  <entry>
-                    <int>1</int>
-                    <interactions.Interaction>
-                      <id>1</id>
-                      <targetTags>
-                        <string>clicker</string>
-                      </targetTags>
-                      <name>BuildClicker</name>
-                      <imagePath>/images/mouse.png</imagePath>
-                      <description>Builds a clicker</description>
-                      <isBuild>false</isBuild>
-                      <isInstantaneous>false</isInstantaneous>
-                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                      <targetTeamEnumMap>
-                        <entry>
-                          <string>OTHER</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>ALL</string>
-                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>OWN</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                      </targetTeamEnumMap>
-                      <customFunctions/>
-                      <range>4.0</range>
-                      <rate>4.0</rate>
-                    </interactions.Interaction>
-                  </entry>
-                  <entry>
-                    <int>4</int>
-                    <interactions.Interaction>
-                      <id>4</id>
-                      <targetTags>
-                        <string>cookie</string>
-                      </targetTags>
-                      <name>BuildCookie</name>
-                      <imagePath>/images/cookie.png</imagePath>
-                      <description>Builds a cookie</description>
-                      <isBuild>true</isBuild>
-                      <isInstantaneous>false</isInstantaneous>
-                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
-                      <targetTeamEnumMap>
-                        <entry>
-                          <string>OTHER</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>ALL</string>
-                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                        <entry>
-                          <string>OWN</string>
-                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
-                        </entry>
-                      </targetTeamEnumMap>
-                      <customFunctions>
-                        <interactions.BuildFunction>
-                          <NAME>BuildFunction</NAME>
-                          <format>
-                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
-                            <parameterFields/>
-                          </format>
-                        </interactions.BuildFunction>
-                      </customFunctions>
-                      <range>4.0</range>
-                      <rate>4.0</rate>
-                    </interactions.Interaction>
-                  </entry>
-                </elementMap>
-                <new__ID__val>10</new__ID__val>
-              </interactions>
-              <conditions>
-                <elementMap/>
-                <new__ID__val>1</new__ID__val>
-              </conditions>
-            </myObjectLogic>
-            <renderer>
-              <myImageLocation>/images/shop.png</myImageLocation>
-              <isHit>false</isHit>
-              <elapsedTime>0.0</elapsedTime>
-            </renderer>
-            <owner>
-              <id>1</id>
-              <teamName>Team 1</teamName>
-              <resourceManager>
-                <resourceMap>
-                  <entry>
-                    <string>cookies</string>
-                    <double>100.0</double>
-                  </entry>
-                </resourceMap>
-              </resourceManager>
-            </owner>
-            <name>Shop</name>
-            <tags>
-              <string>shop</string>
-            </tags>
-            <isBuilding>true</isBuilding>
-            <isInteractionQueued>false</isInteractionQueued>
-            <isDead>false</isDead>
-            <movementSpeed>1.0</movementSpeed>
-            <isMovementQueued>false</isMovementQueued>
-            <activeWaypoints class="linked-list"/>
-            <isUninteractive>false</isUninteractive>
-            <isBeingConstructed>false</isBeingConstructed>
-            <elapsedTime>0.0</elapsedTime>
-            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
-          </game__object.GameObject>
-        </entry>
-        <entry>
-          <int>4</int>
-          <game__object.GameObject>
-            <id>4</id>
-            <transform>
-              <position>
-                <x>245.0</x>
-                <y>176.0</y>
+                <x>234.0</x>
+                <y>172.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -773,7 +821,18 @@
               <isHit>false</isHit>
               <elapsedTime>0.0</elapsedTime>
             </renderer>
-            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <owner>
+              <id>1</id>
+              <teamName>Team 1</teamName>
+              <resourceManager>
+                <resourceMap>
+                  <entry>
+                    <string>cookies</string>
+                    <double>100.0</double>
+                  </entry>
+                </resourceMap>
+              </resourceManager>
+            </owner>
             <name>Cookie</name>
             <tags>
               <string>cookie</string>
@@ -791,13 +850,13 @@
           </game__object.GameObject>
         </entry>
         <entry>
-          <int>7</int>
+          <int>3</int>
           <game__object.GameObject>
-            <id>7</id>
+            <id>3</id>
             <transform>
               <position>
-                <x>361.0</x>
-                <y>63.0</y>
+                <x>236.0</x>
+                <y>75.0</y>
               </position>
               <rotation>0.0</rotation>
             </transform>
@@ -812,7 +871,143 @@
                     <double>60.0</double>
                   </entry>
                 </buildCosts>
-                <buildTime>5.0</buildTime>
+                <buildTime>9.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <interactions.Interaction>
+                      <id>1</id>
+                      <targetTags>
+                        <string>cookie</string>
+                      </targetTags>
+                      <name>Build Cookie</name>
+                      <imagePath>/images/cookie.png</imagePath>
+                      <description>build cookie</description>
+                      <isBuild>true</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.BuildFunction>
+                          <NAME>BuildFunction</NAME>
+                          <format>
+                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                            <parameterFields/>
+                          </format>
+                        </interactions.BuildFunction>
+                      </customFunctions>
+                      <range>999.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                  <entry>
+                    <int>3</int>
+                    <interactions.Interaction>
+                      <id>3</id>
+                      <targetTags>
+                        <string>clicker</string>
+                      </targetTags>
+                      <name>Build Clicker</name>
+                      <imagePath>/images/mouse.png</imagePath>
+                      <description>builds clicker</description>
+                      <isBuild>true</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.BuildFunction>
+                          <NAME>BuildFunction</NAME>
+                          <format>
+                            <helpText>This function allows you to build a unit. Enter the tags for all the possibleunits that this object can create.</helpText>
+                            <parameterFields/>
+                          </format>
+                        </interactions.BuildFunction>
+                      </customFunctions>
+                      <range>999.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>7</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/shop.png</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Shop</name>
+            <tags>
+              <string>shop</string>
+            </tags>
+            <isBuilding>true</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>0.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>5</int>
+          <game__object.GameObject>
+            <id>5</id>
+            <transform>
+              <position>
+                <x>0.0</x>
+                <y>0.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts>
+                  <entry>
+                    <string>cookies</string>
+                    <double>60.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>4.0</buildTime>
               </attributes>
               <interactions>
                 <elementMap>
@@ -825,7 +1020,7 @@
                       </targetTags>
                       <name>Gather</name>
                       <imagePath>/images/cookie.png</imagePath>
-                      <description>Gather cookies</description>
+                      <description>Gather cookie</description>
                       <isBuild>false</isBuild>
                       <isInstantaneous>false</isInstantaneous>
                       <InteractionTargetTeam>ALL</InteractionTargetTeam>
@@ -863,12 +1058,151 @@
                           </format>
                         </interactions.GatherUnlimitedResource>
                       </customFunctions>
-                      <range>5.0</range>
+                      <range>999.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                  <entry>
+                    <int>5</int>
+                    <interactions.Interaction>
+                      <id>5</id>
+                      <targetTags>
+                        <string>cookie</string>
+                      </targetTags>
+                      <name>Gather</name>
+                      <imagePath>/images/cookie.png</imagePath>
+                      <description>Gather cookie</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions/>
+                      <range>999.0</range>
                       <rate>1.0</rate>
                     </interactions.Interaction>
                   </entry>
                 </elementMap>
-                <new__ID__val>7</new__ID__val>
+                <new__ID__val>9</new__ID__val>
+              </interactions>
+              <conditions>
+                <elementMap/>
+                <new__ID__val>1</new__ID__val>
+              </conditions>
+            </myObjectLogic>
+            <renderer>
+              <myImageLocation>/images/mouse.png</myImageLocation>
+              <isHit>false</isHit>
+              <elapsedTime>0.0</elapsedTime>
+            </renderer>
+            <owner reference="../../../entry/game__object.GameObject/owner"/>
+            <name>Clicker</name>
+            <tags>
+              <string>clicker</string>
+            </tags>
+            <isBuilding>false</isBuilding>
+            <isInteractionQueued>false</isInteractionQueued>
+            <isDead>false</isDead>
+            <movementSpeed>5.0</movementSpeed>
+            <isMovementQueued>false</isMovementQueued>
+            <activeWaypoints class="linked-list"/>
+            <isUninteractive>false</isUninteractive>
+            <isBeingConstructed>false</isBeingConstructed>
+            <elapsedTime>0.0</elapsedTime>
+            <isPreviousInteractionQueued>false</isPreviousInteractionQueued>
+          </game__object.GameObject>
+        </entry>
+        <entry>
+          <int>7</int>
+          <game__object.GameObject>
+            <id>7</id>
+            <transform>
+              <position>
+                <x>240.0</x>
+                <y>271.0</y>
+              </position>
+              <rotation>0.0</rotation>
+            </transform>
+            <myObjectLogic>
+              <fulfillsLossCondition>false</fulfillsLossCondition>
+              <attributes>
+                <attributes/>
+                <maxAttributes/>
+                <buildCosts>
+                  <entry>
+                    <string>cookies</string>
+                    <double>60.0</double>
+                  </entry>
+                </buildCosts>
+                <buildTime>4.0</buildTime>
+              </attributes>
+              <interactions>
+                <elementMap>
+                  <entry>
+                    <int>1</int>
+                    <interactions.Interaction>
+                      <id>1</id>
+                      <targetTags>
+                        <string>cookie</string>
+                      </targetTags>
+                      <name>Gather</name>
+                      <imagePath>/images/cookie.png</imagePath>
+                      <description>Gather cookie</description>
+                      <isBuild>false</isBuild>
+                      <isInstantaneous>false</isInstantaneous>
+                      <InteractionTargetTeam>ALL</InteractionTargetTeam>
+                      <targetTeamEnumMap>
+                        <entry>
+                          <string>OTHER</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OTHER</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>ALL</string>
+                          <interactions.Interaction_-InteractionTargetTeam>ALL</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                        <entry>
+                          <string>OWN</string>
+                          <interactions.Interaction_-InteractionTargetTeam>OWN</interactions.Interaction_-InteractionTargetTeam>
+                        </entry>
+                      </targetTeamEnumMap>
+                      <customFunctions>
+                        <interactions.GatherUnlimitedResource>
+                          <NAME>GatherUnlimitedResource</NAME>
+                          <RESOURCE>Resource</RESOURCE>
+                          <GATHER__RATE>Gather Rate</GATHER__RATE>
+                          <format>
+                            <helpText>This function modifies the resource stockpile upon interaction witb another unit</helpText>
+                            <parameterFields>
+                              <entry>
+                                <string>Gather Rate</string>
+                                <string>10</string>
+                              </entry>
+                              <entry>
+                                <string>Resource</string>
+                                <string>1</string>
+                              </entry>
+                            </parameterFields>
+                          </format>
+                        </interactions.GatherUnlimitedResource>
+                      </customFunctions>
+                      <range>999.0</range>
+                      <rate>1.0</rate>
+                    </interactions.Interaction>
+                  </entry>
+                </elementMap>
+                <new__ID__val>5</new__ID__val>
               </interactions>
               <conditions>
                 <elementMap/>
@@ -898,7 +1232,7 @@
           </game__object.GameObject>
         </entry>
       </elementMap>
-      <new__ID__val>10</new__ID__val>
+      <new__ID__val>9</new__ID__val>
     </objManager>
     <endConditions/>
     <teams>

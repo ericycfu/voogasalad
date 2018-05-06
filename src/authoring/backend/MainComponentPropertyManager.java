@@ -3,6 +3,14 @@ package authoring.backend;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds the primary properties of a user-created component on the authoring
+ * end. An instance is created in AuthoringObject.
+ * 
+ * @author Aditya Sridhar
+ *
+ */
+
 public class MainComponentPropertyManager {
 	
 	private String myImagePath;

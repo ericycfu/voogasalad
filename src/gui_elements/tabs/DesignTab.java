@@ -50,7 +50,7 @@ import javafx.scene.control.Tab;
  *
  */
 
-public class DesignTab extends Tab implements AuthoringView{
+public class DesignTab extends Tab implements AuthoringView {
 
 	private static final String TAB_TEXT = "Design";
 	private static final String CREATE_COMPONENT = "Create Component";

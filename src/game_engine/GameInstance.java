@@ -47,6 +47,10 @@ public class GameInstance implements Serializable{
 	public GameInstance(GameInfo g, GameObjectManager gom, MapSettings mapset, SceneManager sm) {
 
 		myGameInfo = g;
+		for(GameObject go: myGameInfo.getPossibleGameObjects())
+		{
+			go.setupImages();
+		}
 		myObjectManager = gom;
 		myTeamManager = new TeamManager();
 		chat = new ArrayList<ChatEntry>();

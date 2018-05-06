@@ -13,8 +13,17 @@ import game_object.ObjectLogic;
 import interactions.InteractionManager;
 import javafx.scene.image.Image;
 
+/**
+ * AuthoringObject holds the properties of a specific user-created component 
+ * on the authoring end. Properties include attributes, interactions, conditions, 
+ * name, image, tags, and build functionality. This is converted by game data to
+ * GameObjects that will be used by game player.
+ * 
+ * @author Aditya Sridhar
+ *
+ */
+
 public class AuthoringObject {
-	//extends group?
 	public static final String TEST_IMAGE = "/images/station.png";
 	public static final String TEST_IMAGE_DUVALL= "/images/rcd.png";
 	public static final int ICON_PREF_WIDTH = 70;

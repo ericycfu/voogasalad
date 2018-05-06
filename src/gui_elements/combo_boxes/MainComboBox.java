@@ -9,6 +9,12 @@ import java.util.logging.Logger;
 
 import javafx.scene.control.ComboBox;
 
+
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class MainComboBox extends ComboBox<String> {
 
 	private static final String X_LOC_STRING = "x_loc";

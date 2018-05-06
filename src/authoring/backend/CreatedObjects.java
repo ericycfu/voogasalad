@@ -7,9 +7,12 @@ import observables.Listener;
 import observables.Speaker;
 /**
  * Holds all created AuthoringObjects
+ * 
+ * @author Aditya Sridhar
  * @author xlany
  *
  */
+
 public class CreatedObjects implements Speaker {
 	
 	private List<AuthoringObject> myAuthoringObjects;

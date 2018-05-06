@@ -27,7 +27,7 @@ import transform_library.Vector2;
  * 
  * Group selection is implemented in this class so that the user is allowed 
  * 
- * @author Frank Yin, Siyuan Chen
+ * @author Frank Yin, Siyuan Chen, Eddie Yang
  *
  */
 public class MainDisplay implements VisualUpdate {
@@ -255,6 +255,15 @@ public class MainDisplay implements VisualUpdate {
 		}	
 	}
 
+	private void updatePositionChanges(List<ImageView> imgvList) {
+		myDisplayGameObjects.forEach(go -> {
+			double xloc = translateX(go.getTransform().getPosition().getX());
+			double yloc = translateY(go.getTransform().getPosition().getY());
+			go.getRenderer().getDisp().setX(xloc);
+			go.getRenderer().getDisp().setY(yloc);
+			imgvList.add(go.getRenderer().getDisp());
+		});
+	}
 
 	@Override
 	/**

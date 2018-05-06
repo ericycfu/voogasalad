@@ -24,6 +24,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class InteractionAddCustomFunctionsScreen {
 	
 	private static final Paint BACKGROUND = Color.BLACK;
@@ -42,7 +47,7 @@ public class InteractionAddCustomFunctionsScreen {
     private MainComboBox custom_function_type_cb;
     private CustomFunction custom_function;
     
-	// Additional setup for the add-interactions screen.
+	// Additional setup for the add-custom-functions screen.
     private Scene myScene;
     private Group root;
     
@@ -70,7 +75,7 @@ public class InteractionAddCustomFunctionsScreen {
 	}
 
 	/**
-	 * Sets the stage for the add-interactions screen.
+	 * Sets the stage for the add-custom_functions screen.
 	 */
 	private void setStage() {
 		stage = new Stage();

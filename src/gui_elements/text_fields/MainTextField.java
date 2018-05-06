@@ -7,6 +7,11 @@ import java.util.Properties;
 
 import javafx.scene.control.TextField;
 
+/**
+ * @author Aditya Sridhar
+ *
+ */
+
 public class MainTextField extends TextField {
 
 	private final String X_LOC_STRING = "x_loc";
