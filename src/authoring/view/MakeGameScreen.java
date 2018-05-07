@@ -14,8 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 /**
- * The screen of the authoring environment that 
- * @author Eric Fu
+ * The screen of the authoring environment where make the game
  *
  */
 public class MakeGameScreen implements AuthoringView {
@@ -26,12 +25,23 @@ public class MakeGameScreen implements AuthoringView {
 	private GameEntity myGame;
 //	private AuthoringController myAuthoringController;
 	private Reader myReader = new Reader();
+	/**
+	 * makes a new screen
+	 * @param stage
+	 */
 	public MakeGameScreen (Stage stage) {
 		myGame = new GameEntity();
 		myStage = stage;
 		setupScreen();
 	}
 	
+	/**
+	 * makes a new screen to make the game when loading from a file
+	 * @param stage
+	 * @param myFile the file from which you are reading from
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	@SuppressWarnings("unchecked")
 	public MakeGameScreen(Stage stage, File myFile) throws ClassNotFoundException, IOException {
 		//get list of items from the 

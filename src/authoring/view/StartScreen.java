@@ -22,6 +22,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import server_client.ServerClient;
 
+/**
+ * 
+ * @author Eric Fu
+ * @author Xiaolan You
+ * Makes the initial game screen where you select what do: make, load, multiplayer, singler player
+ *
+ */
 public class StartScreen implements AuthoringView {
 	
 	public static final String STYLE_PATH = "gui_elements/css/AuthoringView.css";
@@ -35,7 +42,10 @@ public class StartScreen implements AuthoringView {
 	private Scene myScene; 
 	private GameObjectManager myGOM;
 	private SinglePlayerGamePlayer myGP;
-
+/**
+ * makes a new screen displayed initially
+ * @param primaryStage
+ */
 	public StartScreen(Stage primaryStage) {
 		myStage = primaryStage;
 		myGOM = new GameObjectManager();
@@ -97,14 +107,23 @@ public class StartScreen implements AuthoringView {
 		newstage.show();
 	}
 	
+/**
+ * returns the game player for the single player mode
+ * @return the game palyer
+ */
 	public SinglePlayerGamePlayer getGP() {
 		return myGP;
 	}
-	
+	/**
+	 * @return returns the game object manager
+	 */
 	public GameObjectManager getGOM() {
 		return myGOM;
 	}
-
+	/**
+	 * sets the timeline for the animation
+	 * @param animation 
+	 */
 	public void setTimeline(Timeline animation) {
 		myGP.setTimeline(animation);
 	}
